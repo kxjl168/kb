@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zteict.web.translog.dao.RouteCompletelogDao">
+	<resultMap id="RouteCompletelogMap" type="com.zteict.web.translog.model.RouteCompletelog">
+	
+	</resultMap>
+	
+	
+	<select id="getRouteCompletelogPageList" parameterType="com.zteict.web.translog.model.RouteCompletelog" resultMap="RouteCompletelogMap">
+		select * from server_complete_route sr left join proxyserver_info pi on sr.proxyserver_id=pi.id
+		where 1=1
+		<if test='proxyserver_id != null and proxyserver_id != "" '>
+			and sr.proxyserver_id like CONCAT('%',#{proxyserver_id},'%')
+		</if>
+		<if test='proxyserver_ip != null and proxyserver_ip != "" '>
+			and pi.ip like CONCAT('%',#{proxyserver_ip},'%')
+		</if>
+		<if test='routeid != null and routeid != "" '>
+			and sr.routeid like CONCAT('%',#{routeid},'%')
+		</if>
+
+		limit #{start},#{pageCount}
+	</select>
+	
+	<select id="getRouteCompletelogPageListCount" parameterType="com.zteict.web.translog.model.RouteCompletelog" resultType="java.lang.Integer">
+		select count(*) from server_complete_route sr left join proxyserver_info pi on sr.proxyserver_id=pi.id
+		where 1=1
+		<if test='proxyserver_id != null and proxyserver_id != "" '>
+			and sr.proxyserver_id like CONCAT('%',#{proxyserver_id},'%')
+		</if>
+		<if test='proxyserver_ip != null and proxyserver_ip != "" '>
+			and pi.ip like CONCAT('%',#{proxyserver_ip},'%')
+		</if>
+		<if test='routeid != null and routeid != "" '>
+			and sr.routeid like CONCAT('%',#{routeid},'%')
+		</if>
+
+	</select>
+	
+
+	
+	
+</mapper>
+  
+
+
+
+
+
