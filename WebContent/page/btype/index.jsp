@@ -1,13 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-	>
+	
 	<%@include file="/common/tag.jsp"%>
 
-		<html lang="en">
-
+	<html>	
 		<head>
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<title>概览</title>
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
 				<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css">
@@ -309,18 +309,7 @@
 									</div>
 								</div>
 							</div>
-							<!-- <div class="row" ng-show="selType==3">
-                    <div class="form-group col-xs-12">
-                        <div class="control-label col-xs-4">部门</div>
-                        <div class="col-xs-8 text-center">
-                            <div class="info_value">
-                                <div id="menuContent" class="menuContent">
-                                    <ul id="depTree" class="ztree" style="margin-top:0; width:160px;"></ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+						
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-warning" data-dismiss="modal">取消
@@ -522,7 +511,7 @@
 			
 	
 		
-				<div class="modal-body container margin-top-10 " ">
+				<div class="modal-body container margin-top-10 " >
 				
 					<form method="post" id="fileform" name="fileform"
 			target="fileUploadFrame" enctype="multipart/form-data">
@@ -573,7 +562,7 @@
 
 
 
-				<div class="modal-body container margin-top-10 " ">
+				<div class="modal-body container margin-top-10 " >
 							<div class="row ">
 
 								<p class="col-xs-10">确认执行操作吗？</p>
@@ -589,26 +578,29 @@
 				</div>
 			</div>
 
-			</script>
+			
+			
+				
+			
 
-			<script type="text/javascript " src="../../js/plugin/jquery/jquery.v1.11.3.js "></script>
+			<script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
 
-			<script type="text/javascript " src="../../js/plugin/bootstrap/js/bootstrap.min.js "></script>
-
-			<script type="text/javascript " src="../../js/plugin/jquery/jquery-ui.js "></script>
-
-
-
-			<script type="text/javascript " src="../../js/plugin/angular/angular.min.js "></script>
-			<script type="text/javascript " src="../../js/plugin/angular/angular-resource.min.js "></script>
-
-<script type="text/javascript " src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js "></script>
+			
 
 
+			<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
+			<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
 
-			<script type="text/javascript " src="../../js/plugin/jquery/jquery.noty.min.js "></script>
-			<script type="text/javascript " src="../../js/plugin/jquery/noty.layout.center.js "></script>
-			<script type="text/javascript " src="../../js/plugin/jquery/noty.themes.bootstrap.js "></script>
+<script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
+
+
+
+			<script type="text/javascript" src="../../js/plugin/jquery/jquery.noty.min.js"></script>
+			<script type="text/javascript" src="../../js/plugin/jquery/noty.layout.center.js"></script>
+			<script type="text/javascript" src="../../js/plugin/jquery/noty.themes.bootstrap.js"></script>
+<script type="text/javascript" src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
+
+			<script type="text/javascript" src="../../js/plugin/jquery/jquery-ui.js"></script>
 
 
 			    <script type="text/javascript"
@@ -618,23 +610,23 @@
 	src="${basePath}/js/kvalidate.js"></script>
 	
 
-			<script type="text/javascript " src="../../js/plugin/swiper/idangerous.swiper.min.js "></script>
-			<script src="../../js/menu.js "></script>
+			<script type="text/javascript" src="../../js/plugin/swiper/idangerous.swiper.min.js"></script>
+			<script src="../../js/menu.js"></script>
 
 
-			<script src="../../js/loading.js "></script>
+			<script src="../../js/loading.js"></script>
 
-			<script type="text/javascript " src="../../js/plugin/select2/select2.full.min.js "></script>
-			<script type="text/javascript " src="index.js "></script>
-	<script type="text/javascript " src="upload.js "></script>
+			<script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>
+			<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript" src="upload.js"></script>
 
 			<script>
-				$(function () {
-					$('#myModal').modal({
-						keyboard: true
-					})
-				});
+				//$(function () {
+				//	$('#myModal').modal({
+				//		keyboard: true
+				//	})
+				//});
+</script>
 
-
-</body >
-</html >
+</body>
+</html>

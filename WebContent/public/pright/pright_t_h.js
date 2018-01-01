@@ -1,4 +1,10 @@
+
+
 $(function() {
+	
+	
+	
+	
 
 var $scope = angular.element(ngSection).scope();
 	$scope.$apply(function() {
@@ -9,7 +15,11 @@ var $scope = angular.element(ngSection).scope();
 			
 			if(window.location.href.indexOf('index')>0)
 			{
-			window.history.pushState({},0,basePath+'/public/index/');
+				//msg(1);
+				History.replaceState(null,null,basePath+'/public/index/'); // logs {}, '', "?state=4"
+				//msg(2);
+			//	History.replaceState(null, null, '?q='+1);
+			//history.pushState({},0,basePath+'/public/index/');
 			$scope.clean();
 			$scope.blog_type=x.blog_type;
 			
@@ -23,7 +33,8 @@ var $scope = angular.element(ngSection).scope();
 	  $scope.showh=function(x){
 		if(window.location.href.indexOf('index')>0)
 		{
-		window.history.pushState({},0,basePath+'/public/index/');
+		//window.history.pushState({},0,basePath+'/public/index/');
+			History.pushState(null, null,basePath+'/public/index/'); // logs {}, '', "?state=4"
 		  $scope.clean();
 			$scope.month=x.month;
 			
@@ -34,18 +45,23 @@ var $scope = angular.element(ngSection).scope();
 		}	
 		}
 	  $scope.showtg=function(x){
-		if(window.location.href.indexOf('index')>0)
-		{
-		window.history.pushState({},0,basePath+'/public/index/');
-		  $scope.clean();
-			$scope.blog_tag=x.tags;
-			
-			$scope.getList();
+		  $scope.showtgs(x.tags);
 		}
-		else{
-			window.location.href=basePath+"/public/index?tg="+encodeURI( x.tags);
-		}
-		}
+	  
+	  $scope.showtgs=function(x){
+			if(window.location.href.indexOf('index')>0)
+			{
+			//window.history.pushState({},0,basePath+'/public/index/');
+				History.pushState({state:1}, "",basePath+'/'); // logs {}, '', "?state=4"
+			  $scope.clean();
+				$scope.blog_tag=x;
+				
+				$scope.getList();
+			}
+			else{
+				window.location.href=basePath+"/public/index?tg="+encodeURI( x);
+			}
+			}
 		
 		$scope.getTpList=function(){
 		

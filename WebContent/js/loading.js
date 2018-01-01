@@ -20,14 +20,28 @@ function error(data) {
 
 function GetQueryString(name) {
 
-	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	
+	 var index=window.location.href.lastIndexOf("/");
+	 var indexj=window.location.href.lastIndexOf("#");
 
-	var r = window.location.search.substr(1).match(reg);
+	 //最后一个/开始 截取#前面的，兼容history.js html4 url
+		var searchpath= window.location.href.substr(index+1);
+		if(indexj>0)
+			searchpath= window.location.href.substr(index+1,indexj-index-1);
 
-	if (r != null)
-		return decodeURI(r[2]);
-	return null;
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$|#)", "i");
 
+
+
+		var r = searchpath.substr(1).match(reg);
+
+
+
+		if (r != null)
+
+			return decodeURI(r[2]);
+
+		return null;
 }
 
 

@@ -72,7 +72,7 @@ function changerows(option) {
 
 function init() {
 
-	initmenu_p($("#menuul"), "pulbic/index/");
+	initmenu_p($("#menuul"), "pulbic/bx/");
 
 
 	$('.modal').on('show.bs.modal', function() {

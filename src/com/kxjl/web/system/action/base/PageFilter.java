@@ -95,7 +95,7 @@ public class PageFilter implements Filter {
 
 			//*匹配
 			if (urls[i].contains("*")) {
-				String pattern = urls[i];
+				String pattern = urls[i].trim();
 
 				boolean isMatch = Pattern.matches(pattern,
 						request.getRequestURI());

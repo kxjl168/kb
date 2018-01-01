@@ -6,11 +6,14 @@
 <c:set var="webctx" value="${pageContext.request.contextPath}" />
 
 
+<script type="text/javascript"
+	src="${basePath}/js/plugin/ie8/check.js"></script>
 
 <script type="text/javascript"
 	src="${basePath}/js/plugin/jquery/jquery.v1.11.3.js"></script>
 
-
+<script type="text/javascript"
+	src="${basePath}/js/plugin/jquery/jquery.history.js"></script>
 
 	
 
@@ -20,7 +23,7 @@
 <script language="javascript" type="text/javascript"
 	src="${basePath}/js/plugin/date/My97DatePicker/WdatePicker.js"></script>
 	
-	
+
 	
 	
 

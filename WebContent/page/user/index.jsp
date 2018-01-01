@@ -498,24 +498,24 @@
 
 			</script>
 
-			<script type="text/javascript " src="../../js/plugin/jquery/jquery.v1.11.3.js "></script>
+			<script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
 
-			<script type="text/javascript " src="../../js/plugin/bootstrap/js/bootstrap.min.js "></script>
+			<script type="text/javascript" src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
-			<script type="text/javascript " src="../../js/plugin/jquery/jquery-ui.js "></script>
-
-
-
-			<script type="text/javascript " src="../../js/plugin/angular/angular.min.js "></script>
-			<script type="text/javascript " src="../../js/plugin/angular/angular-resource.min.js "></script>
-
-<script type="text/javascript " src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js "></script>
+			<script type="text/javascript" src="../../js/plugin/jquery/jquery-ui.js"></script>
 
 
 
-			<script type="text/javascript " src="../../js/plugin/jquery/jquery.noty.min.js "></script>
-			<script type="text/javascript " src="../../js/plugin/jquery/noty.layout.center.js "></script>
-			<script type="text/javascript " src="../../js/plugin/jquery/noty.themes.bootstrap.js "></script>
+			<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
+			<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
+
+<script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
+
+
+
+			<script type="text/javascript" src="../../js/plugin/jquery/jquery.noty.min.js"></script>
+			<script type="text/javascript" src="../../js/plugin/jquery/noty.layout.center.js"></script>
+			<script type="text/javascript" src="../../js/plugin/jquery/noty.themes.bootstrap.js"></script>
 
 
 			    <script type="text/javascript"
@@ -525,14 +525,14 @@
 	src="${basePath}/js/kvalidate.js"></script>
 	
 
-			<script type="text/javascript " src="../../js/plugin/swiper/idangerous.swiper.min.js "></script>
-			<script src="../../js/menu.js "></script>
+			<script type="text/javascript" src="../../js/plugin/swiper/idangerous.swiper.min.js"></script>
+			<script src="../../js/menu.js"></script>
 
 
-			<script src="../../js/loading.js "></script>
+			<script src="../../js/loading.js"></script>
 
-			<script type="text/javascript " src="../../js/plugin/select2/select2.full.min.js "></script>
-			<script type="text/javascript " src="index.js "></script>
+			<script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>
+			<script type="text/javascript" src="index.js"></script>
 
 
 			<script>

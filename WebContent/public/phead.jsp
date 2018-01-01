@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <div class="navbar-fixed-top ">
-<nav class="top3 navbar navbar-default navbar-inverse" role="navigation">
+<nav class="top3 navbar  navbar-kindex" role="navigation">
 		
 					<div class="navbar-header">
 						<button type="button" id="menuBtn" class="navbar-toggle" data-toggle="collapse" data-target="#menuItem">
@@ -10,7 +10,8 @@
 						</button>
 						<a class="navbar-brand" href="#" ng-cloak>{{title}}</a>
 					</div>
-					<div class="collapse navbar-collapse  pull-right-k" id="menuItem">
+					<div>
+					<div class="collapse navbar-collapse  " id="menuItem">
 						<ul class="hide nav navbar-nav ">
 							<li class=" bg-success">
 								<a href="javascript:void(0)" ng-click="btnP()"> test</a>
@@ -39,6 +40,7 @@
 						</ul>
 
 
+					</div>
 					</div>
 				</nav>
 				

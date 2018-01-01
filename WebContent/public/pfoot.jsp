@@ -4,9 +4,9 @@
 		style="">
 		
 		
-		<div class="col-lg-12 row kfoot">
+		<div class="col-xs-12 row kfoot hide">
 		
-		<div class="col-lg-2 col-lg-offset-2 row leftline">
+		<div class="col-xs-2 row col-xs-offset-2  leftline">
 		 <div class="pull-left  ">
 		  <ul>
 		    <li>1111</li>
@@ -15,7 +15,7 @@
 		  </ul>
 		 </div>
 		</div>
-		<div class="col-lg-2 row leftline">
+		<div class="col-xs-2 row   leftline">
 		 <div class="pull-left ">
 		  <ul>
 		    <li>1111</li>
@@ -24,7 +24,7 @@
 		  </ul>
 		 </div>
 		</div>
-		<div class="col-lg-2 row leftline ">
+		<div class="col-xs-2 row  leftline ">
 		 <div class="pull-left ">
 		  <ul>
 		    <li>1111</li>
@@ -33,7 +33,7 @@
 		  </ul>
 		 </div>
 		</div>
-		<div class="col-lg-2 row leftline rightline">
+		<div class="col-xs-2 row leftline rightline">
 				<div class="pull-left ">
 				 <ul>
 					 <li>1111</li>
@@ -46,6 +46,6 @@
 		
 	
 		
-		<div  class="col-lg-12 row kfootend" >
-			@Copyright 2017</div>
+		<div  class="col-xs-12 row kfootend" >
+		KxのBook@Copyright 2017  All Rights Reserved </div>
 	</div>

@@ -27,7 +27,7 @@
 		<select id="getBlogTypeGroups"  resultMap="BlogMap">
 		<![CDATA[
 		 select d.val1 blog_type_url, d.dict_key blog_type ,d.dict_name blog_type_name,count(*) view_nums from (select * from dict_info where dict_type="blog_type") d
-LEFT JOIN blog_info b on d.dict_key=b.blog_type group by d.dict_key
+LEFT JOIN blog_info b on d.dict_key=b.blog_type group by d.dict_key,d.dict_name,d.val1
 	]]>
 	</select>
 	

@@ -8,7 +8,7 @@
 		<head>
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
-			<title>概览</title>
+			<title id="title">详细</title>
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css">
 
@@ -19,15 +19,15 @@
 			<link rel="stylesheet" href="../../css/swiper_zcfg.css">
 			<link rel="stylesheet" href="../../js/plugin/swiper/idangerous.swiper.css">
 
-			<script type="text/javascript " src="../../js/plugin/jquery/jquery.v1.11.3.js "></script>
+			<script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
 
-			<script type="text/javascript " src="../../js/plugin/bootstrap/js/bootstrap.min.js "></script>
+			<script type="text/javascript" src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
-			<script type="text/javascript " src="../../js/plugin/jquery/jquery-ui.js "></script>
+			<script type="text/javascript" src="../../js/plugin/jquery/jquery-ui.js"></script>
 
-	<script type="text/javascript " src="../../js/plugin/angular/angular.min.js "></script>
-			<script type="text/javascript " src="../../js/plugin/angular/angular-resource.min.js "></script>
-				<script type="text/javascript " src="../../js/plugin/angular/angular-sanitize.min.js "></script>
+	<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
+			<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
+				<script type="text/javascript" src="../../js/plugin/angular/angular-sanitize.min.js"></script>
 				
 					
 				<!-- <link rel="stylesheet" href="../../js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/default.css"> -->
@@ -72,7 +72,7 @@
 					<div class="col-xs-12  ">
 					
 					
-						<div class="col-xs-9">
+						<div class="col-xs-9 rightline pleft">
 					
 							<div ng-cloak>
 								<div>
@@ -86,7 +86,7 @@
 					
 											<div class="col-xs-3 text-right">
 					
-												<a ng-repeat="t in x.tagStrs" ng-click=showtag(t)>{{t}},</a>
+												<a ng-repeat="t in x.tagStrs" ng-click="showtgs(t)">{{t}},</a>
 											</div>
 										</div>
 									</div>
@@ -367,37 +367,37 @@
 			<%@include file="../pfoot.jsp" %>
 			
 
-<script type="text/javascript " src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js "></script>
+<script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
 
 
 
-			<script type="text/javascript " src="../../js/plugin/jquery/jquery.noty.min.js "></script>
-			<script type="text/javascript " src="../../js/plugin/jquery/noty.layout.center.js "></script>
-			<script type="text/javascript " src="../../js/plugin/jquery/noty.themes.bootstrap.js "></script>
+			<script type="text/javascript" src="../../js/plugin/jquery/jquery.noty.min.js"></script>
+			<script type="text/javascript" src="../../js/plugin/jquery/noty.layout.center.js"></script>
+			<script type="text/javascript" src="../../js/plugin/jquery/noty.themes.bootstrap.js"></script>
 
 
-			    <script type="text/javascript "
-	src="../../js/plugin/jquery/jquery.validate.js "></script> 
+			    <script type="text/javascript"
+	src="../../js/plugin/jquery/jquery.validate.js"></script> 
 
-		<script type="text/javascript "
-	src="${basePath}/js/kvalidate.js "></script>
+		<script type="text/javascript"
+	src="${basePath}/js/kvalidate.js"></script>
 	
 
-			<script type="text/javascript " src="../../js/plugin/swiper/idangerous.swiper.min.js "></script>
-			<script src="../../js/menu.js "></script>
+			<script type="text/javascript" src="../../js/plugin/swiper/idangerous.swiper.min.js"></script>
+			<script src="../../js/menu.js"></script>
 
 
 
-<script type="text/javascript "
-	src="<c:out value="${basePath}" />/js/plugin/ckeditor4.5.11/ckeditor.js"></script>
-						<script type="text/javascript" src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.5.11/adapters/jquery.js"></script>
+<script type="text/javascript"
+	src="<c:out value="${basePath}" />/js/plugin/ckeditor4.8/ckeditor.js"></script>
+						<script type="text/javascript" src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/adapters/jquery.js"></script>
 
 
-						<script src="../../js/loading.js "></script>
+						<script src="../../js/loading.js"></script>
 
-						<script type="text/javascript " src="../../js/plugin/select2/select2.full.min.js "></script>
-						<script type="text/javascript " src="index.js "></script>
-				<script type="text/javascript " src="../pright/pright_t_h.js "></script>
+						<script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>
+						<script type="text/javascript" src="index.js"></script>
+				<script type="text/javascript" src="../pright/pright_t_h.js"></script>
 
 
 						<script>

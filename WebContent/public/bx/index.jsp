@@ -258,7 +258,7 @@
 
 						<div class="col-xs-3">
 
-							<%@include file="pright.jsp"%> 
+							<%@include file="../pright.jsp"%> 
 
 							
 						</div>

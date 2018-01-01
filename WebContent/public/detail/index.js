@@ -407,7 +407,7 @@ function init() {
 				}
 				//$scope.getdictList();
 
-				$scope.title = "文章管理";
+				$scope.title = "KxのBOOK";
 				// $scope.curpage=1;
 				$scope.page = 1;
 				$scope.rows = 10;
@@ -471,6 +471,7 @@ function init() {
 										$scope.x=$scope.datalist[0];
 										
 											$scope.x.context= unescape($scope.x.content);
+											$("#title").html($scope.x.title);
 										
 										}
 									
