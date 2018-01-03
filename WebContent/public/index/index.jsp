@@ -9,7 +9,6 @@
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
 			
-
 			<title>KxのBook,Welcome~</title>
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css">
@@ -43,7 +42,9 @@
 			
 	<script type="text/javascript" src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
 		
-
+		<script type="text/javascript" src="<c:out value="${basePath}" />/js/plugin/jquery/jquery-ui-data-zh-cn.js"></script>
+	<link rel="stylesheet" href="<c:out value="${basePath}"/>/js/plugin/jquery/jquery-ui.css">
+			
 	
 		
 
@@ -256,10 +257,11 @@
 						</div>
 
 
-						<div class="col-xs-3">
+						<div class="col-xs-3" >
 
+<div style="min-width: 293px;">
 							<%@include file="pright.jsp"%> 
-
+</div>
 							
 						</div>
 
@@ -317,6 +319,10 @@
 
 <script type="text/javascript"
 	src="<c:out value="${basePath}" />/js/plugin/ckeditor4.8/ckeditor.js"></script>
+	
+	
+	
+	
 						 <script type="text/javascript" src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/adapters/jquery.js"></script>
 
 
