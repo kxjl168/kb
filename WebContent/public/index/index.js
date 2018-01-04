@@ -30,11 +30,13 @@ $(function() {
          hljs.highlightBlock(block);
      });
 	 
-	 //setTimeFormat("nDate", null, null);
+	 //setTimeFormat("effectDate", null, null);
 	
-	 WdatePicker({eCont:'nDate'});
+	 $("#div1").datepicker();
+	 // WdatePicker({eCont:'nDate2'});
+	  //WdatePicker({eCont:'div1',onpicked:function(dp){alert('你选择的日期是:'+dp.cal.getDateStr())}})
 	 
-	$('#s_context').ckeditor();
+	//$('#s_context').ckeditor();
 
 
 	var $scope = angular.element(ngSection).scope();
