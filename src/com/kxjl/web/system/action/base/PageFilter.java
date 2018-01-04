@@ -81,6 +81,9 @@ public class PageFilter implements Filter {
 				return;
 			}
 		}
+		
+		
+					
 
 		// 配置文件中读取
 		excludedUrls = ConfigReader.getInstance().getProperty("excludedUrls");
@@ -111,8 +114,21 @@ public class PageFilter implements Filter {
 		SysUserBean user = (SysUserBean) session
 				.getAttribute(Constant.SESSION_USER);
 
+		
+		
+		
 		// System.out.println("pageFilter:" + request.getRequestURI());
 		if (user == null) {
+			
+			//跟目录，放
+			if(request.getContextPath().equals(""))
+			{
+				chain.doFilter(request, response);
+				return;
+			}
+			
+			logger.debug("request.getContextPath():"+request.getContextPath());//, redirect to login page!");
+			logger.debug("request.getRequestURI(): "+request.getRequestURI());
 			String loginPath = request.getContextPath() + "/login.jsp";
 			logger.debug("no userinfo, redirect to login page!");
 			wrapper.sendRedirect(loginPath);
