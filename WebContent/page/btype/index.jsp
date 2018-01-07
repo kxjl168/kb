@@ -394,7 +394,7 @@
 						<input required  readonly="readonly"
 							 class=" form-control"
 									
-							  type="text " name="oldname" id="oldname" ng-model="oldname" placeholder=" ">
+							  type="text" name="oldname" id="oldname" ng-model="oldname" placeholder=" ">
 							  <span class="hide glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
 							 </div>
 							 <div class="col-xs-2 text-right ">
@@ -607,15 +607,14 @@
 	src="../../js/plugin/jquery/jquery.validate.js"></script> 
 
 		<script type="text/javascript"
-	src="${basePath}/js/kvalidate.js"></script>
+	src="${basePath}/js/own/kvalidate.js"></script>
 	
 
 			<script type="text/javascript" src="../../js/plugin/swiper/idangerous.swiper.min.js"></script>
-			<script src="../../js/menu.js"></script>
+				<script src="../../js/own/menu.js"></script>
+<script src="../../js/own/loading.js"></script>
 
-
-			<script src="../../js/loading.js"></script>
-
+			
 			<script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>
 			<script type="text/javascript" src="index.js"></script>
 	<script type="text/javascript" src="upload.js"></script>

@@ -55,11 +55,14 @@ public class IPUtils {
 	
 	
 	public static void main(String[] args) {
+		
+		System.out.println(getCityByIP("183.206.15.135"));
+		/*
 		System.out.println(getNetMask("255.255.255.0"));
 
 		System.out.println(getPoolMax(getNetMask("255.255.255.128")));
 
-		generatIPList("192.168.0.1", "192.168.1.20", "255.255.254.0");
+		generatIPList("192.168.0.1", "192.168.1.20", "255.255.254.0");*/
 
 		// System.out.println(getEndIP("10.229.0.1", 24).getStartIP());
 

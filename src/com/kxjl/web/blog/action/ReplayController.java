@@ -103,22 +103,31 @@ public class ReplayController extends BaseController {
 			query.setBlogimei(imei);// (replay_title);// (id);
 			// query.setReplay_type(replay_type);// (replay_name);
 
-			List<Replay> infos = replayService.getReplayPageList(query);
+			String key = "replay_getInfoList" + "_" + imei;
+			List<Replay> binfos = Kdata.getInstance().getReplayList(key);
+			List<Replay> infos = new ArrayList<Replay>();
+			if (binfos == null || binfos.size() == 0) {
 
-			List<Replay> binfos = new ArrayList<Replay>();
-			for (Replay replay : infos) {
-				if (replay.getReplay_recordid() == 0) {
-					List<Replay> childs = new ArrayList<Replay>();
-					for (Replay replay2 : infos) {
-						if (replay2.getPpid() != 0
-								&& replay2.getPpid() == replay.getRecordid()) {
-							childs.add(replay2);
+				infos = replayService.getReplayPageList(query);
+				binfos=new ArrayList<Replay>();
+				
+				for (Replay replay : infos) {
+					if (replay.getReplay_recordid() == 0) {
+						List<Replay> childs = new ArrayList<Replay>();
+						for (Replay replay2 : infos) {
+							if (replay2.getPpid() != 0
+									&& replay2.getPpid() == replay
+											.getRecordid()) {
+								childs.add(replay2);
+							}
 						}
+						replay.setReback(childs);
+						binfos.add(replay);
 					}
-					replay.setReback(childs);
-					binfos.add(replay);
-				}
 
+				}
+				
+				Kdata.getInstance().SavedReplayList(key, binfos);
 			}
 
 			int total = 0;// replayService.getReplayPageListCount(query);
@@ -248,6 +257,14 @@ public class ReplayController extends BaseController {
 			rst = replayService.addReplay(replay);
 
 			if (rst > 0) {
+
+				Kdata.getInstance().cleanrBLogList("");
+				
+				String key = "replay_getInfoList" + "_" + imei;
+				Kdata.getInstance().cleanrReplayList(key);
+				
+				
+
 				jsonOut.put("ResponseCode", 200);
 				jsonOut.put("ResponseMsg", "OK");
 
@@ -258,9 +275,8 @@ public class ReplayController extends BaseController {
 				Replay rqq = new Replay();
 				rqq.setBlogimei(imei);
 				int replay_nums = replayService.getReplayPageListCount(rqq);
-				blog.setReplay_nums(replay_nums+1);
+				blog.setReplay_nums(replay_nums + 1);
 				blogService.updateBlog(blog);
-				
 
 			} else {
 				jsonOut.put("ResponseCode", 201);

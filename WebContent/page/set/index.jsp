@@ -17,8 +17,8 @@
 <link rel="stylesheet" href="../../css/zcfg.css">
 <link rel="stylesheet" href="../../css/common.css">
 <link rel="stylesheet" href="../../css/swiper_zcfg.css">
-<link rel="stylesheet" href="../../js/plugin/swiper/idangerous.swiper.css">
-
+<!-- <link rel="stylesheet" href="../../js/plugin/swiper/idangerous.swiper.css">
+ -->
 
 
 </head>
@@ -39,9 +39,7 @@
 			<div class="collapse navbar-collapse  pull-right-k"
 				id="menuItem">
 				<ul class="hide nav navbar-nav ">
-					<li class=" bg-success"><a href="javascript:void(0)" ng-click="btnP()"> 行政许可</a></li>
-					<li class="  bg-warning"><a href="javascript:void(0)" ng-click="btnF()">行政处罚</a></li>
-
+					
 				</ul>
 				<form class="hide navbar-form navbar-left " role="search">
 
@@ -69,74 +67,102 @@
 
 		<div class="col-xs-12 row row-margin-top-70">
 
-			<div class="menu hide">
-				<div id="slides">
-					<ul class="swiper-container" id="swiper_menu">
-						<div class="swiper-wrapper"
-							style="padding-top: 0px; padding-bottom: 0px; width: 320px; height: 50px; transform: translate3d(0px, 0px, 0px);">
-
-						</div>
-					</ul>
-				</div>
-			</div>
-
-
-
-<div class="col-xs-12 row ">
-				<div class="table-responsive">
-					<table class="table">
-						<caption class="">
-								
-								  <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal2" > 修 改 </button>
-						</caption>
-						<thead class="hide">
-							<tr>
-								<th>账号ID</th>
-								<th>手机IP</th>
-								<th>出口IP刷新周期</th>
-								<th>出口位置</th>
-								<th>所属公司</th>
-									<th>操作</th>
-							</tr>
-
-						</thead>
-						<tbody>
-
-
-<tr> 
-<td>账号ID</td>
-<td>{{detail.accountid}}</td> 
- </tr>
- 
- <tr> 
-<td>名称 </td>
-<td>{{detail.company_name}}</td> 
- </tr>
- 
- <tr> 
-<td>描述</td>
-<td>{{detail.desc_info}}</td> 
- </tr>
-
- <tr> 
-<td>IP段</td>
-<td>{{detail.ip_desc}}</td> 
- </tr>
- 
-  <tr> 
-<td>出口IP刷新周期 </td>
-<td>{{detail.ip_refresh_interval}}</td> 
- </tr>
-
-
-
+<div class="col-xs-12 ">
+						<div class="panel panel-success">
+							<div class="panel-heading" title="点击显示/隐藏查询条件" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+								<div class="row">
+									<h3 class="panel-title col-xs-4 col-lg-4 col-md-4 ">查询条件</h3>
+					
+					
+					
+									<span id="titlepic" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="glyphicon glyphicon-chevron-up pull-right "></span>
+								</div>
+							</div>
+							<div id="collapseOne" class="panel-collapse collapse ">
+								<div class="panel-body">
+					
+									<div class="container">
+					
+					
+					
+										<div class="row  form-group margin-bottom-5">
+											<div class=" col-md-6  col-xs-12 ">
+												<div class="control-label padding-top-0 col-xs-4 col-sm-3  ">清除缓存类型：</div>
+												<div class="  col-sm-5 col-xs-8 text-right ">
+													<select class="form-control " id="q_type" ng-model="q_type" onchange="changetype();">
+														<option ng-repeat="x in dicts " num="{{x.num}}" value="{{x.value}}">{{x.desc}}</option>
+													</select>
+													
+												</div>
+												<div class="  col-sm-2 col-xs-2 text-right ">
+													<label id="num">0</label>
+												</div>
+												
+												
+												<div class="  col-sm-2 col-xs-2 text-right ">
+													<button type="button" ng-click="cleanData()" class="btn btn-primary btn-block   ">清除</button>
+												</div>
+											</div>
+					
+											<div class="hide col-md-6  col-xs-12  ">
+												<div class="control-label padding-top-0 col-xs-4 col-md-4 col-lg-4 ">时间维度：</div>
+												<div class="col-md-6 col-xs-8 text-right ">
+													<select class="form-control " id="dateType" ng-model="dateType">
+														<option ng-repeat="x in date_type2 " value="{{x.value}}">{{x.name}}</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="row  form-group margin-bottom-5">
+											<div class="hide col-md-6  col-xs-12  ">
+												<div class="control-label padding-top-0 col-xs-4 col-md-4 col-lg-4">开始时间：</div>
+												<div class=" col-md-6  col-xs-8 text-right">
+													<div class="input-group text-right  " style="">
+					
+														<input id="effectDate" readonly="readonly" name="effectDate" ng-model="effectDate" type="text" class=" form-control">
+														<span class="input-group-addon " style="padding:0px 10px 0px 10px;">
+															<button id="effectDate_img" title="选择时间" class="glyphicon glyphicon-calendar   "></button>
+														</span>
+														</input>
+					
+													</div>
+												</div>
+											</div>
+					
+											<div class="hide col-md-6  col-xs-12  ">
+													<div class="control-label padding-top-0 col-xs-4 col-md-4 col-lg-4">结束时间：</div>
+													<div class="col-md-6 col-xs-8 text-right ">
+														<div class="input-group text-right  " style="">
+					
+															<input id="effectDate2" readonly="readonly" name="effectDate2" ng-model="effectDate2" type="text" class=" form-control">
+															<span class="input-group-addon " style="padding:0px 10px 0px 10px;">
+																<button id="effectDate_img2" title="选择时间" class="glyphicon glyphicon-calendar   "></button>
+															</span>
+															</input>
+					
+														</div>
+													</div>
+											</div>
+					
+					
+										</div>
+					
+					
+					
+					
+					
+									</div>
+					
+					
+					
+								</div>
 							
+							</div>
+						</div>
+					</div>			
 
 
-						</tbody>
-					</table>
-				</div>
-			</div>
+
 
 			
 
@@ -278,9 +304,9 @@
 
 	<script type="text/javascript"
 		src="../../js/plugin/angular/angular.min.js"></script>
-	<script type="text/javascript"
+<!-- 	<script type="text/javascript"
 		src="../../js/plugin/angular/angular-resource.min.js"></script>
-
+ -->
 
 
 
@@ -296,24 +322,20 @@
 		src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
 
-	<script type="text/javascript"
+<!-- 	<script type="text/javascript"
 		src="../../js/plugin/swiper/idangerous.swiper.min.js"></script>
-
-	<script src="../../js/menu.js "></script>
+ -->
+	<script src="../../js/own/menu.js "></script>
 	
-	<script src="../../js/loading.js"></script>
+	<script src="../../js/own/loading.js"></script>
 
-	<script type="text/javascript"
-		src="../../js/plugin/select2/select2.full.min.js"></script>
+	<!-- <script type="text/javascript"
+		src="../../js/plugin/select2/select2.full.min.js"></script> -->
 	<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript" src="m.js"></script>
 
 
-<script>
-$(function() {
-    $('#myModal').modal({
-        keyboard: true
-    })
-});
+
 
 
 </body>

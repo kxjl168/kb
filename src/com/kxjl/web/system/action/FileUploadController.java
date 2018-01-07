@@ -32,6 +32,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.google.gson.JsonObject;
 import com.kxjl.tool.common.Md5EncryptFile;
 import com.kxjl.tool.config.ConfigReader;
+import com.kxjl.tool.utils.ImageUtil;
 import com.kxjl.tool.utils.JsonUtil;
 import com.kxjl.tool.utils.StringUtil;
 import com.kxjl.web.system.model.SvrFileInfo;
@@ -250,9 +251,22 @@ public class FileUploadController {
 					// 没有，则上传
 					// 上传文件（服务器指定地址）
 					File uploaderFile = new File(absoluteURL);
+					
+					
+					
 					logger.info("文件存放的绝对路径:" + absoluteURL);
 					// 保存文件
-					mfile.transferTo(uploaderFile);
+					//mfile.transferTo(uploaderFile);
+					
+					//压缩文件 zj 180107
+					String orginFile =uploadPath+relativePath + uuid.toString()+"_orign" + extension;; // 文件存放原始图片
+					File orginFileData = new File(orginFile);
+					//保持源文件
+					mfile.transferTo(orginFileData);
+					//使用压缩后的图片
+					ImageUtil.resize(orginFileData, uploaderFile);
+					//end
+					
 
 					logger.info("uploaderFile值:  " + uploaderFile);
 

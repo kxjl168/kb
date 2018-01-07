@@ -15,9 +15,9 @@
 
 			<link rel="stylesheet" href="../../css/zcfg.css">
 			<link rel="stylesheet" href="../../css/common.css">
-			<link rel="stylesheet" href="../../css/swiper_zcfg.css">
+		<!-- 	<link rel="stylesheet" href="../../css/swiper_zcfg.css">
 			<link rel="stylesheet" href="../../js/plugin/swiper/idangerous.swiper.css">
-
+ -->
 
 
 		</head>
@@ -403,8 +403,8 @@
 
 
 				<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
-				<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
-
+				<!-- <script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
+ -->
 
 
 
@@ -416,14 +416,14 @@
 				<script type="text/javascript" src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
 
-				<script type="text/javascript" src="../../js/plugin/swiper/idangerous.swiper.min.js"></script>
+				<!-- <script type="text/javascript" src="../../js/plugin/swiper/idangerous.swiper.min.js"></script> -->
 
-				<script src="../../js/menu.js "></script>
-
-				<script src="../../js/loading.js"></script>
-<script src="<c:out value="${basePath}"/>/js/plugin/echart/echarts.js"></script>
-
-				<script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>
+				<script src="../../js/own/menu.js"></script>
+<script src="../../js/own/loading.js"></script>
+<%-- <script src="<c:out value="${basePath}"/>/js/plugin/echart/echarts.js"></script> --%> 
+ <script src="<c:out value="${basePath}"/>/js/plugin/echart/echarts.js"></script>
+ 
+				<!-- <script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script> -->
 				<script type="text/javascript" src="index.js"></script>
 				<script type="text/javascript" src="time.js"></script>
 				<script type="text/javascript" src="chart.js"></script>

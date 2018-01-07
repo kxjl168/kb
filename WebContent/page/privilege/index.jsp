@@ -478,8 +478,7 @@
 
 
 			<script type="text/javascript" src="../../js/plugin/swiper/idangerous.swiper.min.js"></script>
-			<script src="../../js/menu.js"></script>
-
+		
 			<script type="text/javascript" src="../../js/plugin/ztree/jquery.ztree.all.min.js"></script>
 
 	
@@ -487,11 +486,11 @@
 	src="../../js/plugin/jquery/jquery.validate.js"></script> 
 
 		<script type="text/javascript"
-	src="${basePath}/js/kvalidate.js"></script>
+	src="${basePath}/js/own/kvalidate.js"></script>
 	
 
-			<script src="../../js/loading.js"></script>
-
+				<script src="../../js/own/menu.js"></script>
+<script src="../../js/own/loading.js"></script>
 			<script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>
 			<script type="text/javascript" src="index.js"></script>
 

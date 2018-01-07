@@ -110,8 +110,8 @@ function setchartdata(jdata) {
 
 		if (jdata.length != 0) {
 
-			$.each(jdata, function() {
-				var i = $(this)[0];
+			$.each(jdata, function(index,data) {
+				var i = data;
 
 				option.xAxis.data.push(i.typeName);
 				option.series[0].data.push(i.pv);

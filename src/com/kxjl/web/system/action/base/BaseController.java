@@ -69,23 +69,39 @@ public class BaseController {
 
 		try {
 
-			ActionLog log = new ActionLog();
+			final HttpServletRequest rt=request;
+			final String t1=type1;
+			final String t2=type2;
+			
+			new Thread(new Runnable() {
 
-			// 计算ip
-			String ip = "";
-			try {
-				ip = request.getRemoteAddr();
-			} catch (Exception e) {
+				@Override
+				public void run() {
 
-			}
+					ActionLog log = new ActionLog();
 
-			log.setUserid(ip);
-			log.setType_first(type1);
-			log.setType_second(type2);
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			String time = sdf.format(new Date());
-			log.setAction_date(time);
-			stasticService.addActionLog(log);
+					// 计算ip
+					String ip = "";
+					try {
+						ip = rt.getRemoteAddr();
+					} catch (Exception e) {
+
+					}
+
+					log.setUserid(ip);
+
+					String city = IPUtils.getCityByIP(ip);
+
+					log.setCity(city);
+					log.setType_first(t1);
+					log.setType_second(t2);
+					SimpleDateFormat sdf = new SimpleDateFormat(
+							"yyyy-MM-dd HH:mm:ss");
+					String time = sdf.format(new Date());
+					log.setAction_date(time);
+					stasticService.addActionLog(log);
+				}
+			}).run();
 
 		} catch (Exception e) {
 			// TODO: handle exception

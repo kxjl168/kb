@@ -211,6 +211,7 @@ function init() {
 						
 						$scope.desc_info=item.desc_info;
 						$scope.url = item.val1;
+						$scope.oldname = item.val1;
 						
 						$("#s_dict_key").attr('disabled','');
 					

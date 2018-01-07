@@ -18,7 +18,7 @@
 							</li>
 
 						</ul>
-						<form class=" navbar-form navbar-left " role="search">
+						<form class="hide navbar-form navbar-left " role="search">
 
 
 						</form>

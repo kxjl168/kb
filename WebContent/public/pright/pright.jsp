@@ -66,7 +66,7 @@
 		<div class=" panel panel-success">
 			<div class="panel-heading " title="" data-toggle="collapse" data-parent="#accordion" href="#collapseOner3">
 				<div class="row">
-					<h3 class="panel-title col-xs-10">标签</h3>
+					<h3 class="panel-title col-xs-10  ">标签</h3>
 	
 	
 	

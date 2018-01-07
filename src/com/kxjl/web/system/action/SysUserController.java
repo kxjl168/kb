@@ -145,6 +145,13 @@ public class SysUserController extends BaseController {
 
 			session.setAttribute(Constant.SESSION_USER, usr);
 		}
+		
+		
+		if(request.getContextPath().contains("/kb"))
+			map.put("url", "/kb");
+		else
+		map.put("url", "/");
+		
 		map.put("sucess", Integer.valueOf(sucess));
 		
 		map.put("msg", msg);

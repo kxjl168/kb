@@ -2,6 +2,7 @@ package com.kxjl.web.system.action;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,17 +26,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.common.Md5Encrypt;
 import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.tool.utils.AESEncrypt;
 import com.kxjl.tool.utils.JsonUtil;
 import com.kxjl.tool.utils.StringUtil;
+import com.kxjl.web.blog.action.Kdata;
+import com.kxjl.web.blog.action.Kdata.DataType;
+import com.kxjl.web.blog.model.Blog;
 import com.kxjl.web.system.action.base.BaseController;
 import com.kxjl.web.system.model.DictInfo;
 import com.kxjl.web.system.model.SysParameter;
 import com.kxjl.web.system.service.SystemParamService;
-
 
 /**
  * 系统公用基础相关
@@ -54,6 +58,103 @@ public class SysBaseInfoController extends BaseController {
 
 	// 日志记录对象
 	private Logger log = Logger.getLogger(SysBaseInfoController.class);
+
+	@RequestMapping(value = "/getKdataList")
+	public void getKdataList(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		String data = request.getParameter("data");
+		JSONObject jsonIN;
+		JSONObject jsonOut = new JSONObject();
+
+		String rst = "";
+		try {
+
+			jsonIN = new JSONObject(data);
+
+			List<String> types = new ArrayList<String>();
+			for (DataType item : Kdata.DataType.values()) {
+				Kdata.DataType ci=item;
+				ci.setNum(Kdata.getInstance().GetNumOfType(item));
+				types.add(ci.toString());
+			}
+
+			Gson gs = new Gson();
+			String jsStr = gs.toJson(types);
+
+			jsonOut.put("ResponseCode", "200");
+			jsonOut.put("ResponseMsg", "");
+			jsonOut.put("total", types.size());
+			jsonOut.put("datalist", jsStr);
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			try {
+				jsonOut.put("ResponseCode", "201");
+				jsonOut.put("ResponseMsg", "");
+
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+
+		}
+		rst = jsonOut.toString();
+		JsonUtil.responseOutWithJson(response, rst);
+
+	}
+
+	/**
+	 * 清楚缓存
+	 * 
+	 * @param map
+	 * @return
+	 * @author zj
+	 * @date 2018-1-6
+	 */
+	@RequestMapping(value = "/cleanKdata")
+	public void cleanKdata(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		String data = request.getParameter("data");
+		JSONObject jsonIN;
+		JSONObject jsonOut = new JSONObject();
+
+		String rst = "";
+		try {
+
+			jsonIN = new JSONObject(data);
+
+			String type = jsonIN.optString("type");
+			DataType t = DataType.parse(type);
+			if (t == DataType.Blog)
+				Kdata.getInstance().cleanrBLogList("");
+			else if (t == DataType.Menu)
+				Kdata.getInstance().cleanrMenuInfoList("");
+			else if (t == DataType.Replay)
+				Kdata.getInstance().cleanrReplayList("");
+
+			jsonOut.put("ResponseCode", "200");
+			jsonOut.put("ResponseMsg", "");
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			try {
+				jsonOut.put("ResponseCode", "201");
+				jsonOut.put("ResponseMsg", "");
+
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+
+		}
+		rst = jsonOut.toString();
+		JsonUtil.responseOutWithJson(response, rst);
+
+	}
 
 	/**
 	 * 初始化图标上传页面，填充文件服务器地址

@@ -9,7 +9,9 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.http.HttpException;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
@@ -30,8 +32,31 @@ public class test {
 
 		//testcity();
 		
-		replaytest();
+		//replaytest();
+		
+		testGzip();
 	}
+	
+	public static void testGzip() {  
+        HttpClient httpClient = new HttpClient();  
+        GetMethod getMethod = new GetMethod("http://www.256kb.cn/js/plugin/jquery/jquery.v1.11.3.js");  
+        try {  
+                getMethod.addRequestHeader("accept-encoding", "gzip,deflate");  
+                getMethod.addRequestHeader("user-agent","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; Alexa Toolbar; Maxthon 2.0)");  
+                int result = httpClient.executeMethod(getMethod); 
+                
+                if (result == 200) {  
+                        System.out.println(getMethod.getResponseContentLength());  
+                        String html = getMethod.getResponseBodyAsString();  
+                        System.out.println(html);  
+                        System.out.println(html.getBytes().length);  
+                }  
+        } catch (Exception e) {  
+                e.printStackTrace();  
+        }  finally {  
+                getMethod.releaseConnection();  
+        }  
+}  
 	
 	private static void replaytest() {
 

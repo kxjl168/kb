@@ -10,28 +10,28 @@
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
 			<title id="title">详细</title>
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
-			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css">
-
+			<!-- <link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css">
+ -->
 			<link rel="stylesheet" href="../../css/kCommon.css">
 
-			<link rel="stylesheet" href="../../css/zcfg.css">
+			<!-- <link rel="stylesheet" href="../../css/zcfg.css"> -->
 			<link rel="stylesheet" href="../../css/common.css">
-			<link rel="stylesheet" href="../../css/swiper_zcfg.css">
-			<link rel="stylesheet" href="../../js/plugin/swiper/idangerous.swiper.css">
+<!-- 			<link rel="stylesheet" href="../../css/swiper_zcfg.css">
+			<link rel="stylesheet" href="../../js/plugin/swiper/idangerous.swiper.css"> -->
 
 			<script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
 
 			<script type="text/javascript" src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
-			<script type="text/javascript" src="../../js/plugin/jquery/jquery-ui.js"></script>
+			<!-- <script type="text/javascript" src="../../js/plugin/jquery/jquery-ui.js"></script> -->
 
 	<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
 			<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
 				<script type="text/javascript" src="../../js/plugin/angular/angular-sanitize.min.js"></script>
 				
 					
-				<!-- <link rel="stylesheet" href="../../js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/default.css"> -->
-				<link rel="stylesheet" href="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/obsidian.css">
+				<link rel="stylesheet" href="../../js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/default.css">
+			<link rel="stylesheet" href="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/obsidian.css">
 			
 	<script type="text/javascript" src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
 
@@ -51,15 +51,7 @@
 
 				<div class=" row row-margin-top-70">
 
-					<div class="menu hide">
-						<div id="slides">
-							<ul class="swiper-container" id="swiper_menu">
-								<div class="swiper-wrapper" style="padding-top: 0px; padding-bottom: 0px; width: 320px; height: 50px; transform: translate3d(0px, 0px, 0px);">
-
-								</div>
-							</ul>
-						</div>
-					</div>
+					
 
 
 
@@ -69,10 +61,10 @@
 					
 
 
-					<div class="col-xs-12  ">
+					<div class="c ">
 					
 					
-						<div class="col-xs-9 rightline pleft">
+						<div class="col-sm-9 col-xs-12 rightline pleft">
 					
 							<div ng-cloak>
 								<div>
@@ -81,10 +73,10 @@
 					
 										<div class="nopadding-left">
 											<img class="nopaddding img-responsive col-xs-2" style="width:25px; height:25px;" title="{{x.blog_type_name}}" src="{{x.blog_type_url}}">
-											<div class="col-xs-8  ptitle  ">{{x.title}}</div>
+											<div class="col-sm-8 col-xs-11 ptitle  ">{{x.title}}</div>
 					
 					
-											<div class="col-xs-3 text-right">
+											<div class="col-sm-3 col-xs-12 text-right">
 					
 												<a ng-repeat="t in x.tagStrs" ng-click="showtgs(t)">{{t}},</a>
 											</div>
@@ -210,16 +202,16 @@
 					
 					
 							<div id="rdivc"></div>
-							<div class="row replay col-lg-12 margin-bottom-10" id="rpdiv">
+							<div class="row replay col-xs-12 margin-bottom-10" id="rpdiv">
 								<div class="row">
-									<form name="fm" id="fm" class=" padding-left-0 col-xs-12 col-lg-12 " style="min-width: 150px; ">
+									<form name="fm" id="fm" class=" padding-left-0 col-xs-12" style="min-width: 150px; ">
 					
 					
 					
 					
 										<div class="form-group col-xs-12 row ">
 											<div class="control-label padding-top-0 padding-left-0 text-left col-xs-12 ">您的大名：</div>
-											<div class="col-xs-7 text-right padding-left-0">
+											<div class="col-sm-7 col-xs-12 text-right nopaddding">
 												<input required type="text" class="form-control " name="s_uid" id="s_uid" ng-model="s_uid" placeholder=" ">
 											</div>
 											<div class="col-xs-12 col-xs-offset-4 row ">
@@ -229,7 +221,7 @@
 
 										<div class="form-group col-xs-12 row ">
 												<div class="control-label padding-top-0 padding-left-0 text-left col-xs-12 ">您的Blog地址(欢迎互访)：</div>
-												<div class="col-xs-7 text-right padding-left-0">
+												<div class="col-sm-7 col-xs-12 text-right nopaddding">
 													<input required type="text" class="form-control " name="s_ublog" id="s_ublog" ng-model="s_ublog" placeholder=" ">
 												</div>
 												<div class="col-xs-12 col-xs-offset-4 row ">
@@ -239,8 +231,8 @@
 					
 										<div class="form-group col-xs-12 row ">
 											<div class="control-label padding-left-0 padding-top-0 col-xs-12 ">留言：</div>
-											<div class="col-xs-7 text-right padding-left-0 ">
-												<textarea required type="text" class="form-control " name="s_text" id="s_text" ng-model="s_text" placeholder=" ">
+											<div class="col-sm-7 col-xs-12 text-right nopaddding ">
+												<textarea required type="text" rows="3" class="form-control " name="s_text" id="s_text" ng-model="s_text" placeholder=" ">
 															 </textarea>
 											</div>
 											<div class="col-xs-12 col-xs-offset-4 row ">
@@ -251,7 +243,7 @@
 					
 										<div class="hide form-group col-xs-12 row ">
 											<div class="control-label padding-top-0 col-xs-4 ">：</div>
-											<div class="col-xs-7 text-right ">
+											<div class="col-sm-7 col-xs-12 text-right ">
 												<input required type="text" class="form-control " name="s_tags" id="s_tags" ng-model="s_tags" placeholder=" ">
 											</div>
 											<div class="col-xs-12 col-xs-offset-4 row ">
@@ -273,9 +265,9 @@
 						</div>
 					
 					
-						<div class="col-xs-3">
+						<div class="col-sm-3 col-xs-12">
 					
-							<%@include file="/public/pright/pright.jsp" %>
+						 <%@include file="/public/pright/pright.jsp" %> 
 	
 					
 					
@@ -367,8 +359,8 @@
 			<%@include file="../pfoot.jsp" %>
 			
 
-<script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
-
+<!-- <script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
+ -->
 
 
 			<script type="text/javascript" src="../../js/plugin/jquery/jquery.noty.min.js"></script>
@@ -380,33 +372,27 @@
 	src="../../js/plugin/jquery/jquery.validate.js"></script> 
 
 		<script type="text/javascript"
-	src="${basePath}/js/kvalidate.js"></script>
+	src="${basePath}/js/own/kvalidate.js"></script>
 	
 
-			<script type="text/javascript" src="../../js/plugin/swiper/idangerous.swiper.min.js"></script>
-			<script src="../../js/menu.js"></script>
+			<!-- <script type="text/javascript" src="../../js/plugin/swiper/idangerous.swiper.min.js"></script> -->
+			<script src="../../js/own/menu.js"></script>
+<script src="../../js/own/loading.js"></script>
 
-
-
+<%-- 
 <script type="text/javascript"
 	src="<c:out value="${basePath}" />/js/plugin/ckeditor4.8/ckeditor.js"></script>
 						<script type="text/javascript" src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/adapters/jquery.js"></script>
 
-
-						<script src="../../js/loading.js"></script>
-
-						<script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>
+ --%>
+						
+						<!-- <script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script> -->
 						<script type="text/javascript" src="index.js"></script>
 				<script type="text/javascript" src="../pright/pright_t_h.js"></script>
 
 
-						<script>
-							$(function () {
-								$('#myModal').modal({
-									keyboard: true
-								})
-							});
+					
 
 
-</body >
-</html >
+</body>
+</html>

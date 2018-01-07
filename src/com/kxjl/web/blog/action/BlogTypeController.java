@@ -195,6 +195,11 @@ public class BlogTypeController extends BaseController {
 			}
 
 			if (rst > 0) {
+				
+				
+	Kdata.getInstance().cleanrBLogList("");
+				
+	
 				jsonOut.put("ResponseCode", 200);
 				jsonOut.put("ResponseMsg", "OK");
 			} else {

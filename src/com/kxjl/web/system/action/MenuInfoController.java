@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.utils.JsonUtil;
+import com.kxjl.web.blog.action.Kdata;
+import com.kxjl.web.blog.model.Blog;
 import com.kxjl.web.privilege.model.Role;
 import com.kxjl.web.privilege.service.PrivilegeService;
 import com.kxjl.web.system.action.base.BaseController;
@@ -71,7 +73,15 @@ public class MenuInfoController extends BaseController {
 			session.setAttribute(Constant.SESSION_USER, user);
 		}
 
-		List<MenuInfo> rst = menuService.updateUserMenus(user);
+		String key = user.getUtype().toString();
+		List<MenuInfo> rst = Kdata.getInstance().getMenuList(key);
+
+		if (rst == null || rst.size() == 0) {
+			rst = menuService.updateUserMenus(user);
+
+			Kdata.getInstance().SavedMenuList(key, rst);// list)
+
+		}
 
 		Gson gs = new Gson();
 		String jsStr = gs.toJson(rst);

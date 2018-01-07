@@ -269,13 +269,15 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 		userid,
 		action_date,
 		type_first,
-		type_second
+		type_second,
+		city
 		)
 		values(
 		#{userid},
 		date_format(now(), '%Y-%m-%d %H:%i:%s'),
 		#{type_first},
-		#{type_second}
+		#{type_second},
+		#{city}
 
 		)
 	</insert>

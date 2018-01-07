@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,7 +42,6 @@ public class BlogController extends BaseController {
 
 	@Autowired
 	BlogService blogService;
-	
 
 	@RequestMapping(value = "/")
 	public ModelAndView GroupList() {
@@ -82,7 +83,7 @@ public class BlogController extends BaseController {
 			for (Blog blog : detail) {
 				blog.setBlog_type_url(prepath + blog.getBlog_type_url());
 			}
-			
+
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(detail);
 
@@ -90,8 +91,14 @@ public class BlogController extends BaseController {
 			jsonOut.put("ResponseMsg", "");
 			jsonOut.put("total", detail.size());
 			jsonOut.put("datalist", jsStr);
+
+			saveStaticInfo(request, StasticTypeOne.DetailPage.toString(),
+					detail.get(0).getBlog_type_name());
 			
-			saveStaticInfo(request,StasticTypeOne.DetailPage.toString(),detail.get(0).getBlog_type_name());
+			
+			Kdata.getInstance().cleanrBLogList("");
+			
+			
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -109,9 +116,69 @@ public class BlogController extends BaseController {
 		}
 		rst = jsonOut.toString();
 		JsonUtil.responseOutWithJson(response, rst);
-		
-		
+
 	}
+	
+	/**
+	 * 后台详情
+	 * 
+	 * @param map
+	 * @return
+	 * @author zj
+	 * @date 2017-12-26
+	 */
+	@RequestMapping(value = "/getDetailInfo")
+	public void getDetailInfo(HttpServletRequest request,
+			HttpServletResponse response) {
+		String data = request.getParameter("data");
+
+		JSONObject jsonIN;
+		JSONObject jsonOut = new JSONObject();
+
+		String rst = "";
+		try {
+
+			jsonIN = new JSONObject(data);
+
+			String imei = jsonIN.optString("i");
+			Blog query = new Blog();
+			query.setImei(imei);
+
+			// cur ,next, pre
+			Blog detail = blogService.getBlogInfoById(query);
+
+		
+
+			Gson gs = new Gson();
+			String jsStr = gs.toJson(detail);
+
+			jsonOut.put("ResponseCode", "200");
+			jsonOut.put("ResponseMsg", "");
+			jsonOut.put("total", 1);
+			jsonOut.put("datalist", jsStr);
+
+		
+			
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			try {
+				jsonOut.put("ResponseCode", "201");
+				jsonOut.put("ResponseMsg", "");
+				jsonOut.put("total", 0);
+				jsonOut.put("datalist", "");
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+
+		}
+		rst = jsonOut.toString();
+		JsonUtil.responseOutWithJson(response, rst);
+
+	}
+	
 
 	/**
 	 * 页面-获取blog列表
@@ -152,10 +219,14 @@ public class BlogController extends BaseController {
 			int pageCount = jsonIN.optInt("rows");// request.getParameter("pageCount");
 			int curPage = jsonIN.optInt("page");
 
+			String key = "blog_getInfoList" + "_" + month + "_" + blog_type + "_"
+					+ blog_tag + "_" + pageCount + "_" + curPage;
+			List<Blog> infos = Kdata.getInstance().getBlogList(key);
+
 			Blog query = new Blog();
 			query.setPage(curPage);
 			query.setPageCount(pageCount);
-			
+
 			query.setTags(blog_tag);
 
 			// query.setIp(ip);
@@ -163,14 +234,43 @@ public class BlogController extends BaseController {
 			query.setTitle(blog_title);// (id);
 			query.setBlog_type(blog_type);// (blog_name);
 			query.setMonth(month);
+			if (infos == null || infos.size() == 0) {
 
-			List<Blog> infos = blogService.getBlogPageList(query);
+				infos = blogService.getBlogPageList(query);
+				String prepath = getImgHttpOutPath();
+				for (Blog blog : infos) {
+					blog.setBlog_type_url(prepath + blog.getBlog_type_url());
+					
+					
+					//剔除文章中的图片img内容，截取长度
+					Pattern p=Pattern.compile("(%3Cimg.*%3E)"); //%3Cimg  %3E
+					Matcher ms= p.matcher(blog.getContent());
+
+					//截取超出部分、减少页面返回数据
+					if(ms.find())
+					{
+						for (int i = 0; i < ms.groupCount(); i++) {
+							String img=ms.group(i);
+							System.out.println(img);
+							blog.setContent(blog.getContent().replace(img,""));
+							
+							String c= JEscape.unescape(blog.getContent());
+							if(c.length()>1000)
+								blog.setContent(JEscape.escape( c.substring(0,1000)));
+						}
+					
+					}
+				
+					
+					
+				}
+				Kdata.getInstance().SavedBlogList(key, infos);
+
+			}
+
 			int total = blogService.getBlogPageListCount(query);
 
-			String prepath = getImgHttpOutPath();
-			for (Blog blog : infos) {
-				blog.setBlog_type_url(prepath + blog.getBlog_type_url());
-			}
+		
 
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(infos);
@@ -179,8 +279,8 @@ public class BlogController extends BaseController {
 			jsonOut.put("ResponseMsg", "");
 			jsonOut.put("total", total);
 			jsonOut.put("datalist", jsStr);
-			
-			saveStaticInfo(request,StasticTypeOne.HomePage.toString(),"index");
+
+			saveStaticInfo(request, StasticTypeOne.HomePage.toString(), "index");
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -200,13 +300,10 @@ public class BlogController extends BaseController {
 		JsonUtil.responseOutWithJson(response, rst);
 
 	}
-	
-	
-	
+
 	@RequestMapping(value = "/getTgList")
 	public void getTgList(HttpServletRequest request,
 			HttpServletResponse response) {
-	
 
 		String data = request.getParameter("data");
 		JSONObject jsonIN;
@@ -215,16 +312,19 @@ public class BlogController extends BaseController {
 		String rst = "";
 		try {
 
-		
-
 			Blog query = new Blog();
 			query.setPage(1);
 			query.setPageCount(10000);
 
+			String key = "getTgList";
+			List<Blog> infos = Kdata.getInstance().getBlogList(key);
 
-			List<Blog> infos = blogService.getBlogTags();
-			
+			if (infos == null || infos.size() == 0) {
+				infos = blogService.getBlogTags();
 
+				Kdata.getInstance().SavedBlogList(key, infos);
+
+			}
 
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(infos);
@@ -233,8 +333,6 @@ public class BlogController extends BaseController {
 			jsonOut.put("ResponseMsg", "");
 			jsonOut.put("total", infos.size());
 			jsonOut.put("datalist", jsStr);
-			
-			
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -254,7 +352,7 @@ public class BlogController extends BaseController {
 		JsonUtil.responseOutWithJson(response, rst);
 
 	}
-	
+
 	/**
 	 * 页面-获取month列表
 	 * 
@@ -269,7 +367,6 @@ public class BlogController extends BaseController {
 	@RequestMapping(value = "/getHList")
 	public void getHList(HttpServletRequest request,
 			HttpServletResponse response) {
-	
 
 		String data = request.getParameter("data");
 		JSONObject jsonIN;
@@ -278,17 +375,19 @@ public class BlogController extends BaseController {
 		String rst = "";
 		try {
 
-		
-
 			Blog query = new Blog();
 			query.setPage(1);
 			query.setPageCount(10000);
 
+			String key = "getHList";
+			List<Blog> infos = Kdata.getInstance().getBlogList(key);
 
-			List<Blog> infos = blogService.getBlogMonthGroup();
-			
+			if (infos == null || infos.size() == 0) {
+				infos = blogService.getBlogMonthGroup();
 
+				Kdata.getInstance().SavedBlogList(key, infos);
 
+			}
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(infos);
 
@@ -296,8 +395,6 @@ public class BlogController extends BaseController {
 			jsonOut.put("ResponseMsg", "");
 			jsonOut.put("total", infos.size());
 			jsonOut.put("datalist", jsStr);
-			
-			
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -317,7 +414,7 @@ public class BlogController extends BaseController {
 		JsonUtil.responseOutWithJson(response, rst);
 
 	}
-	
+
 	/**
 	 * 分类列表
 	 * 
@@ -329,7 +426,6 @@ public class BlogController extends BaseController {
 	@RequestMapping(value = "/getTpList")
 	public void getTpList(HttpServletRequest request,
 			HttpServletResponse response) {
-	
 
 		String data = request.getParameter("data");
 		JSONObject jsonIN;
@@ -338,19 +434,22 @@ public class BlogController extends BaseController {
 		String rst = "";
 		try {
 
-		
-
 			Blog query = new Blog();
 			query.setPage(1);
 			query.setPageCount(10000);
 
+			String key = "getTpList";
+			List<Blog> infos = Kdata.getInstance().getBlogList(key);
 
-			List<Blog> infos = blogService.getBlogTypeGroups();
-			String prepath = getImgHttpOutPath();
-			for (Blog blog : infos) {
-				blog.setBlog_type_url(prepath + blog.getBlog_type_url());
+			if (infos == null || infos.size() == 0) {
+				infos = blogService.getBlogTypeGroups();
+				String prepath = getImgHttpOutPath();
+				for (Blog blog : infos) {
+					blog.setBlog_type_url(prepath + blog.getBlog_type_url());
+				}
+
+				Kdata.getInstance().SavedBlogList(key, infos);
 			}
-
 
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(infos);
@@ -359,8 +458,6 @@ public class BlogController extends BaseController {
 			jsonOut.put("ResponseMsg", "");
 			jsonOut.put("total", infos.size());
 			jsonOut.put("datalist", jsStr);
-			
-			
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -433,6 +530,7 @@ public class BlogController extends BaseController {
 			int rst = -1;
 
 			if (recordid != 0) {
+				blog.setUpdate_date(time);
 				rst = blogService.updateBlog(blog);
 
 			} else {
@@ -445,6 +543,9 @@ public class BlogController extends BaseController {
 			}
 
 			if (rst > 0) {
+				
+				Kdata.getInstance().cleanrBLogList("");
+				
 				jsonOut.put("ResponseCode", 200);
 				jsonOut.put("ResponseMsg", "OK");
 			} else {
