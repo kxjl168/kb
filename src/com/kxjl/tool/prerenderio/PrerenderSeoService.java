@@ -109,18 +109,18 @@ public class PrerenderSeoService {
 					@Override
 					public void run() {
 
-						Spiderlog log = new Spiderlog();
+						Spiderlog slog = new Spiderlog();
 						try {
 							String ip = rt.getRemoteAddr();
-							log.setRequest_ip(ip);
+							slog.setRequest_ip(ip);
 							String city = IPUtils.getCityByIP(ip);
-							log.setRequest_city(city);
-							log.setRequest_url(rt.getRequestURI());
-							log.setTime(DateUtil.getNowStr(""));
-							log.setSpider_head(rt.getHeader("User-Agent"));
-							spdierlogDao.addSpiderlog(log);
+							slog.setRequest_city(city);
+							slog.setRequest_url(rt.getRequestURI());
+							slog.setTime(DateUtil.getNowStr(""));
+							slog.setSpider_head(rt.getHeader("User-Agent"));
+							spdierlogDao.addSpiderlog(slog);
 						} catch (Exception e) {
-
+							log.error("save spider error"+e.getMessage());
 						}
 
 					}
