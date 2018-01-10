@@ -19,7 +19,8 @@ import com.kxjl.web.system.action.base.BaseController;
 import com.kxjl.web.translog.model.RouteCompletelog;
 import com.kxjl.web.translog.model.RouteUselog;
 import com.kxjl.web.translog.model.Routelog;
-import com.kxjl.web.translog.model.Translog;
+import com.kxjl.web.translog.model.Spiderlog;
+
 import com.kxjl.web.translog.service.TranslogService;
 
 
@@ -266,27 +267,29 @@ public class TranslogController extends BaseController {
 
 			jsonIN = new JSONObject(data);
 
-			String phone_account_use_id = jsonIN
-					.optString("phone_account_use_id");
-			String device_id = jsonIN.optString("device_id");
-			String city = jsonIN.optString("city");
+			String head = jsonIN
+					.optString("head");
+			String url = jsonIN.optString("url");
+			String starttime = jsonIN.optString("starttime");
+			String date_type = jsonIN.optString("date_type");
 
-			String device_ip = jsonIN.optString("device_ip");
+			String endtime = jsonIN.optString("endtime");
 
 			int pageCount = jsonIN.optInt("rows");// request.getParameter("pageCount");
 			int curPage = jsonIN.optInt("page");
 
-			Translog query = new Translog();
+			Spiderlog query = new Spiderlog();
 			query.setPage(curPage);
 			query.setPageCount(pageCount);
 
-			query.setPhone_account_use_id(phone_account_use_id);// (translogid);
-			query.setRoute_id(device_id);// (ip);
-			query.setCity(city);
-			query.setRoute_ip(device_ip);// (showall);
+			query.setDateFormat(date_type);
+			query.setSpider_head(head);//(phone_account_use_id);// (translogid);
+			query.setRequest_url(url);//(device_id);// (ip);
+			query.setStarttime(starttime);//(city);
+			query.setEndtime(endtime);//(device_ip);// (showall);
 
-			List<Translog> infos = translogService.getTranslogPageList(query);
-			int total = translogService.getTranslogPageListCount(query);
+			List<Spiderlog> infos = translogService.getSpiderlogPageList(query);
+			int total = translogService.getSpiderlogPageListCount(query);
 
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(infos);

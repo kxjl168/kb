@@ -7,25 +7,33 @@ import java.util.List;
 import com.kxjl.web.translog.model.RouteCompletelog;
 import com.kxjl.web.translog.model.RouteUselog;
 import com.kxjl.web.translog.model.Routelog;
-import com.kxjl.web.translog.model.Translog;
+import com.kxjl.web.translog.model.Spiderlog;
+
 
 
 public interface TranslogService {
 	/**
-	 * 分页获取Translog列表
+	 * 分页获取banner列表
 	 * @param query
 	 * @return
 	 * @date 2016-8-4
 	 */
-	public List<Translog> getTranslogPageList(Translog query);
+	public List<Spiderlog> getSpiderlogPageList(Spiderlog query);
 
 	/**
-	 * 获取Translog总条数
+	 * 获取banner总条数
 	 * @param query
 	 * @return
 	 * @date 2016-8-4
 	 */
-	public int getTranslogPageListCount(Translog query);
+	public int getSpiderlogPageListCount(Spiderlog query);
+	
+	/**
+	 * 添加Spiderlog
+	 * @param Spiderlog
+	 * @return
+	 */
+	public int addSpiderlog(Spiderlog Spiderlog);
 	
 	
 	

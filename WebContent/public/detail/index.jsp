@@ -100,7 +100,7 @@
 									<br>
 									<div ng-cloak class="row col-xs-10 margin-top-5 ">post@{{x.create_date}}&nbsp;
 										<span>阅读({{x.view_nums}})&nbsp;</span>
-										<span>评论(){{x.replay_nums}})&nbsp;</span>
+										<span>评论({{x.replay_nums}})&nbsp;</span>
 									</div>
 					
 					

@@ -9,18 +9,20 @@ import com.kxjl.web.system.dao.SystemParamsDao;
 import com.kxjl.web.translog.dao.RouteCompletelogDao;
 import com.kxjl.web.translog.dao.RouteUselogDao;
 import com.kxjl.web.translog.dao.RoutelogDao;
-import com.kxjl.web.translog.dao.TranslogDao;
+import com.kxjl.web.translog.dao.SpiderlogDao;
+
 import com.kxjl.web.translog.model.RouteCompletelog;
 import com.kxjl.web.translog.model.RouteUselog;
 import com.kxjl.web.translog.model.Routelog;
-import com.kxjl.web.translog.model.Translog;
+import com.kxjl.web.translog.model.Spiderlog;
+
 import com.kxjl.web.translog.service.TranslogService;
 
 @Service(value = "TranslogService")
 public class TranslogServiceImpl implements TranslogService {
 
 	@Autowired
-	TranslogDao bannerDao;
+	SpiderlogDao spiderlogDao;
 
 	@Autowired
 	RouteUselogDao routeuselogDao;
@@ -34,28 +36,46 @@ public class TranslogServiceImpl implements TranslogService {
 
 	/**
 	 * 分页获取banner列表
-	 * 
 	 * @param query
 	 * @return
 	 * @date 2016-8-4
 	 */
-	@Override
-	public List<Translog> getTranslogPageList(Translog query) {
-		return bannerDao.getTranslogPageList(query);
+	public List<Spiderlog> getSpiderlogPageList(Spiderlog query){
+		String time_type=query.getDateFormat();
+		String dateFormat="%Y-%m-%d %H";
+		if(time_type.equals("HOUR"))
+			 dateFormat="%Y-%m-%d %H";
+		else if(time_type.equals("DAY"))
+			 dateFormat="%Y-%m-%d";
+		else  if(time_type.equals("MONTH"))
+			 dateFormat="%Y-%m";
+		
+		query.setDateFormat(dateFormat);
+		
+		return spiderlogDao.getSpiderlogPageList(query);
 	}
 
 	/**
 	 * 获取banner总条数
-	 * 
 	 * @param query
 	 * @return
 	 * @date 2016-8-4
 	 */
-	@Override
-	public int getTranslogPageListCount(Translog query) {
-		return bannerDao.getTranslogPageListCount(query);
+	public int getSpiderlogPageListCount(Spiderlog query){
+		return spiderlogDao.getSpiderlogPageListCount(query);
 	}
-
+	
+	/**
+	 * 添加Spiderlog
+	 * @param Spiderlog
+	 * @return
+	 */
+	public int addSpiderlog(Spiderlog Spiderlog){
+		return spiderlogDao.addSpiderlog(Spiderlog);
+				
+	}
+	
+	
 	/**
 	 * 分页获取RouteCompletelog列表
 	 * 

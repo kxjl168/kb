@@ -41,11 +41,11 @@
 <!-- 			
 				 -->
 			
-		<%-- 	<link rel="stylesheet" href="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/obsidian.css">
+			<link rel="stylesheet" href="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/obsidian.css">
 			
 	<script type="text/javascript" src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
 		
-  --%>
+  
 	
 		
 
@@ -109,6 +109,7 @@
 											<div>
 												
 												<a href="#" class="detailbtn h5 text-right pull-right text-info margin-right-20" ng-click="detail(x)">详情</a>
+												<a href="${basePath}/public/detail/?i={{x.imei}}" style="display: none;" class="for spider" ></a>
 
 											</div>
 									
@@ -132,11 +133,12 @@
 						<ul class="pagination pull-right">
 							<li>
 								<a href="#" ng-click="getList(page-1)">&laquo;</a>
+								<a href="${basePath}/public/index/?i={{page-1}}"  style="display: none;"  style="" class="for spider" ></a>
 							</li>
 							<li ng-repeat="x in pageDataPre">
 
 								<a href="#" ng-click="getList(x)">{{x}}</a>
-
+<a href="${basePath}/public/index/?i={{x}}" style="display: none;" class="for spider" ></a>
 							</li>
 							<li class="active">
 								<a href="#" ng-click="getList(page)">{{page}}</a>
@@ -144,10 +146,11 @@
 							<li ng-repeat="x in pageDataAft">
 
 								<a href="#" ng-click="getList(x)">{{x}}</a>
-
+<a href="${basePath}/public/index/?i={{x}}" style="display: none;" class="for spider" ></a>
 							</li>
 							<li>
 								<a href="#" ng-click="getList(page+1)">&raquo;</a>
+								<a href="${basePath}/public/index/?i={{page+1}}" style="display: none;" class="for spider" ></a>
 							</li>
 
 							<!-- li>

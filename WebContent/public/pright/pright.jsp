@@ -22,6 +22,8 @@
 					 <img class="nopaddding img-responsive col-xs-2" style="width:20px; height:20px;" title="{{x.blog_type_name}}"   src="{{x.blog_type_url}}">
 					 {{x.blog_type_name}}&nbsp;<span>({{x.view_nums}})</span>
 					 </a>
+					 
+					 	<a href="${basePath}/public/index/?bt={{x.blog_type}}"  style="display: none;"  style="" class="for spider" ></a>
 					</div>
 				  </div>
 				</div>
@@ -52,6 +54,7 @@
 							<a 					 ng-click="showh(x)"> 
 					 {{x.month}}&nbsp;<span>({{x.view_nums}})</span>
 					 </a>
+					 	<a href="${basePath}/public/index/?h={{x.month}}"  style="display: none;"  style="" class="for spider" ></a>
 					</div>
 					</div>
 					</div>
@@ -83,7 +86,7 @@
 							<a 	ng-cloak	ng-repeat="x in tglist"			 ng-click="showtg(x)"> 
 					 {{x.tags}}&nbsp;,
 					 </a>
-					
+					<a ng-cloak	ng-repeat="x in tglist"	 href="${basePath}/public/index/?tg={{x.tags}}"  style="display: none;"  style="" class="for spider" ></a>
 					
 					</div>
 	

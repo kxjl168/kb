@@ -46,6 +46,21 @@ function initQuery() {
 
 					var obj = new Object();
 
+					var index = GetQueryString("i");
+					if (index != null) {
+						$scope.clean();
+						
+						$scope.page = index;
+						if ($scope.page > $scope.pageNum)
+							$scope.page = $scope.page - 1;
+
+						if ($scope.page <= 0)
+							$scope.page = 1;
+						
+					
+					}
+					
+					
 					var blog_type = GetQueryString("bt");
 					if (blog_type != null) {
 						$scope.clean();
@@ -116,6 +131,16 @@ function initQuery() {
 								
 
 									$scope.$apply();
+									
+									setTimeout(function(){
+										//hljs.initHighlightingOnLoad();
+										 $('pre code').each(function(i, block) {
+									         hljs.highlightBlock(block);
+									     });
+										 
+									},100);
+									  
+										
 
 									console.log('-----guideList -OK= ');
 
