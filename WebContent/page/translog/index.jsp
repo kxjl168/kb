@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-	>
+	
 	<%@include file="/common/tag.jsp"%>
 
 		<html lang="en">
@@ -8,16 +8,14 @@
 		<head>
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
-			<title>转发日志</title>
+			<title>SEO日志</title>
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
 
 			<link rel="stylesheet" href="../../css/kCommon.css">
 
 			<link rel="stylesheet" href="../../css/zcfg.css">
 			<link rel="stylesheet" href="../../css/common.css">
-			<link rel="stylesheet" href="../../css/swiper_zcfg.css">
-			<link rel="stylesheet" href="../../js/plugin/swiper/idangerous.swiper.css">
-
+	
 
 
 		</head>
@@ -34,29 +32,11 @@
 							<span class="glyphicon glyphicon-th-list  "></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="#">流量日志</a>
+						<a class="navbar-brand" href="#">SEO日志</a>
 					</div>
 					<div class="collapse navbar-collapse pull-right-k " id="menuItem">
-						<ul class="hide nav navbar-nav ">
-							<li class=" bg-success">
-								<a href="javascript:void(0)" ng-click="btnP()"> 行政许可</a>
-							</li>
-							<li class="  bg-warning">
-								<a href="javascript:void(0)" ng-click="btnF()">行政处罚</a>
-							</li>
-
-						</ul>
-						<form class=" hide navbar-form navbar-left " role="search">
-
-							<div class="input-group  ">
-								<span class="input-group-addon">
-									<i class="glyphicon glyphicon-search   "></i>
-								</span>
-								<input id="key" type="text" class="form-control" placeholder="过滤账号">
-								<span class="input-group-btn">
-									<input type="button" class="btn btn-primary" ng-click="Search()" value="搜索"> </span>
-							</div>
-						</form>
+						
+						
 
 						<ul class="nav navbar-nav " id="menuul">
 							<!-- 	<li ><a href="#" ng-click="load('device')">设备状态</a></li>
@@ -99,37 +79,63 @@
 
 										<div class="row  form-group margin-bottom-5">
 											<div class=" col-md-6  col-xs-12 ">
-												<div class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3 ">手机账号：</div>
+												<div class="control-label padding-top-0 col-xs-4  col-md-4 col-lg-4 ">爬虫标示：</div>
 												<div class="  col-md-6 col-xs-8 text-right ">
-													<input type="text" class="form-control" id="city" ng-model="phone_account_use_id" placeholder="">
+													<input type="text" class="form-control" id="head" ng-model="head" placeholder="">
 
 												</div>
 											</div>
 
 											<div class=" col-md-6  col-xs-12  ">
-												<div class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3 ">路由器ID：</div>
+												<div class="control-label padding-top-0 col-xs-4  col-md-4 col-lg-4 ">URL：</div>
 												<div class="col-md-6 col-xs-8 text-right ">
-													<input type="text" class="form-control" id="deviceid" ng-model="device_id" placeholder="">
+													<input type="text" class="form-control" id="url" ng-model="url" placeholder="">
 
 												</div>
 											</div>
 										</div>
-										<div class="row  form-group margin-bottom-5">
-											<div class=" col-md-6  col-xs-12 ">
-												<div class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3 ">路由器IP：</div>
+											<div class="row  form-group margin-bottom-5">
+										<div class=" col-md-6  col-xs-12  ">
+												<div class="control-label padding-top-0 col-xs-4 col-md-4 col-lg-4 ">时间维度：</div>
 												<div class="col-md-6 col-xs-8 text-right ">
-													<input type="text" class="form-control" id="ip" ng-model="device_ip" placeholder="">
-
+													<select class="form-control " id="dateType" ng-model="dateType">
+														<option ng-repeat="x in date_type2 " value="{{x.value}}">{{x.name}}</option>
+													</select>
 												</div>
 											</div>
-
-
+										</div>
+										<div class="row  form-group margin-bottom-5">
+										
+										
+											
 											<div class=" col-md-6  col-xs-12  ">
-												<div class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">出口城市：</div>
-												<div class="col-md-6 col-xs-8 text-right ">
-													<input type="text" class="form-control" id="name" ng-model="city" placeholder="">
-
+												<div class="control-label padding-top-0 col-xs-4 col-md-4 col-lg-4">开始时间：</div>
+												<div class=" col-md-6  col-xs-8 text-right">
+													<div class="input-group text-right  " style="">
+					
+														<input id="effectDate" readonly="readonly" name="effectDate" ng-model="effectDate" type="text" class=" form-control">
+														<span class="input-group-addon " style="padding:0px 10px 0px 10px;">
+															<button id="effectDate_img" title="选择时间" class="glyphicon glyphicon-calendar   "></button>
+														</span>
+														</input>
+					
+													</div>
 												</div>
+											</div>
+					
+											<div class=" col-md-6  col-xs-12  ">
+													<div class="control-label padding-top-0 col-xs-4 col-md-4 col-lg-4">结束时间：</div>
+													<div class="col-md-6 col-xs-8 text-right ">
+														<div class="input-group text-right  " style="">
+					
+															<input id="effectDate2" readonly="readonly" name="effectDate2" ng-model="effectDate2" type="text" class=" form-control">
+															<span class="input-group-addon " style="padding:0px 10px 0px 10px;">
+																<button id="effectDate_img2" title="选择时间" class="glyphicon glyphicon-calendar   "></button>
+															</span>
+															</input>
+					
+														</div>
+													</div>
 											</div>
 
 
@@ -160,22 +166,22 @@
 								</caption>
 								<thead>
 									<tr>
-										<th>手机账号</th>
-										<th>手机IP</th>
-										<th>路由器IP</th>
-										<th>路由器ID</th>
-										<th>出口位置</th>
+										<th>爬虫标示</th>
+										<th>爬取URL</th>
+										<th>请求IP</th>
+										<th>所属地市</th>
 										<th>时间</th>
+										
 
 									</tr>
 								</thead>
 								<tbody>
 
 									<tr ng-repeat="x in datalist">
-										<td>{{ x.phone_account_use_id }}</td>
-										<td>{{ x.phone_ip }}</td>
-										<td>{{ x.route_ip }}</td>
-										<td>{{ x.route_id }}</td>
+										<td>{{ x.spider_head }}</td>
+										<td>{{ x.request_url }}</td>
+										<td>{{ x.request_ip }}</td>
+										<td>{{ x.request_city }}</td>
 										<td>{{ x.city }}</td>
 										<td>{{ x.time }}</td>
 
@@ -257,9 +263,7 @@
 
 
 				<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
-				<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
-
-
+			
 
 
 				<script type="text/javascript" src="../../js/plugin/jquery/jquery.noty.min.js"></script>
@@ -270,22 +274,13 @@
 				<script type="text/javascript" src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
 
-				<script type="text/javascript" src="../../js/plugin/swiper/idangerous.swiper.min.js"></script>
-
-				<script src="../../js/menu.js "></script>
-
-				<script src="../../js/loading.js"></script>
-
-				<script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>
+			
+			<script src="../../js/own/menu.js"></script>
+<script src="../../js/own/loading.js"></script>
+				
 				<script type="text/javascript" src="index.js"></script>
+				<script type="text/javascript" src="../stastic/time.js"></script>
 
-
-				<script>
-					$(function () {
-						$('#myModal').modal({
-							keyboard: true
-						})
-					});
 
 
 </body >

@@ -67,6 +67,54 @@ function initQuery() {
 					);
 				}
 				
+				$scope.setpswd=function(){
+					var http = getImUrl();// "";
+
+					var obj = new Object();
+				
+						obj.opwd=$scope.opwd;
+					 obj.npwd=$scope.npwd;
+					
+					obj.page = 1;// 1;// "12345678";
+					obj.rows = 40;// 10;// "12345678";
+
+					SZUMWS(http + "adminPwdSet.action", JSON
+							.stringify(obj), function succsess(json) {
+
+						var code = json.ResponseCode;
+						var message = json.ResponseMsg;
+						console.log('-----return -code= ' + code + ';message= '
+								+ message);
+						if (json == 200) {
+
+
+							$scope.opwd="";
+						 $scope.npwd="";
+						 msg("修改完成！");
+						  window.location.href=basePath+"/login.jsp";
+							
+
+							$scope.$apply();
+							
+							
+
+							console.log('-----guideList -OK= ');
+
+						} else {
+							msg(message);
+						}
+
+
+					}, function error(data) {
+						msg("网络异常!");
+
+				
+
+					}, false, "json"
+
+					);
+				}
+				
 
 				$scope.getdictList = function(id, fucOnFinished, clear) {
 
@@ -96,6 +144,10 @@ function initQuery() {
 								$scope.dicts[index]=JSON.parse(item);
 							});
 							
+							
+
+							$scope.$apply();
+							
 							setTimeout(function() {
 
 								// $('#p_proxyserver_id').find("option:selected").attr("selected",
@@ -103,10 +155,9 @@ function initQuery() {
 								$('#q_type').get(0).selectedIndex = 1;
 								// alert($("#p_proxyserver_id").val());
 								$scope.q_type = $("#q_type").val();
+								changetype();
 								// $scope.apply();
 							}, 30);
-
-							$scope.$apply();
 
 							console.log('-----guideList -OK= ');
 

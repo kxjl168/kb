@@ -126,7 +126,7 @@
 
 					<div class="col-xs-12 row ">
 						<div class="table-responsive ">
-							<table class="table" style="table-layout:fixed">
+							<table class="table" >
 								<caption>
 									{{title}}
 									<div class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
@@ -138,7 +138,7 @@
 								</caption>
 								<thead>
 									<tr>
-										<th width="10%">文章标题</th>
+										<!-- <th width="10%">文章标题</th>
 											<th width="20%"  class="" >标题</th>
 										<th width="10%" class="" >文章类型</th>
 										<th width="10%" class="">标签</th>
@@ -147,7 +147,18 @@
 										<th width="9%" class="">评论次数</th>
 										<th width="15%" class="">发布日期</th>
 										
-										<th width="15%">操作</th>
+										<th width="15%">操作</th> -->
+										
+										<th >文章标题</th>
+											<!--  <th   >标题</th> -->
+										<th  >文章类型</th>
+										<th  >标签</th>
+									
+										<th  >点击次数</th>
+										<th  >评论次数</th>
+										<th  >发布日期</th>
+										
+										<th >操作</th>
 									</tr>
 
 								</thead>
@@ -156,7 +167,7 @@
 
 									<tr ng-repeat="x in datalist">
 											<th>{{x.title}}</th>
-											<th style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" >{{x.context}}</script> </th>
+											<!-- <th style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" >{{x.context}}</script> </th> -->
 										<th class="" >{{x.blog_type_name}}</th>
 										<th class="">{{x.tags}}</th>
 									
@@ -242,7 +253,7 @@
 
 
 
-			<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal fade" id="myModal2" data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog" style="width:900px;">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -376,7 +387,7 @@
 
 
 
-<div class="modal fade " id="myModal3" tabindex="-1 " role="dialog " aria-labelledby="myModalLabel " aria-hidden="true ">
+<div class="modal fade " id="myModal3" data-backdrop="static"  tabindex="-1 " role="dialog " aria-labelledby="myModalLabel " aria-hidden="true ">
 		<div class="modal-dialog " style="width: 250px; ">
 			<div class="modal-content ">
 				<div class="modal-header ">
