@@ -13,10 +13,7 @@
 					<div>
 					<div class="collapse navbar-collapse  " id="menuItem">
 						<ul class="hide nav navbar-nav ">
-							<li class=" bg-success">
-								<a href="javascript:void(0)" ng-click="btnP()"> test</a>
-							</li>
-
+							
 						</ul>
 						<form class="hide navbar-form navbar-left " role="search">
 

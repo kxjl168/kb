@@ -6,7 +6,7 @@
 		
 		<div class="col-xs-12 row kfoot hide">
 		
-		<div class="col-xs-2 row col-xs-offset-2  leftline">
+		<!-- <div class="col-xs-2 row col-xs-offset-2  leftline">
 		 <div class="pull-left  ">
 		  <ul>
 		    <li>1111</li>
@@ -42,7 +42,7 @@
 				 </ul>
 				</div>
 			 </div>
-		</div>
+		</div> -->
 		
 	
 		

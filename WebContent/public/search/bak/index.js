@@ -193,7 +193,7 @@ function init() {
 						msg("已经无法后退啦~");
 						}
 					
-				}
+				};
 				
 				$scope.search = function(url) {
 
