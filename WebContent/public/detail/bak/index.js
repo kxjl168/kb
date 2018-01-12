@@ -209,7 +209,13 @@ function init() {
 										
 											$scope.x.context= unescape($scope.x.content);
 											$("#title").html($scope.x.title);
-										
+
+											document.title=$scope.x.title+"-"+$scope.title;
+											
+											
+											
+											var meta = document.getElementsByTagName('meta');
+											meta["keywords"].setAttribute('content',$scope.x.tags);
 										}
 									
 									if($scope.datalist.length>1)

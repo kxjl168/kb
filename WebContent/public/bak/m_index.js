@@ -10,6 +10,9 @@ function initQuery() {
 					window.location.href = basePath + "/public/detail/?i="
 							+ x.imei + "#" + id;
 				};
+				
+				//for spider
+				$scope.preurl="http://256kb.cn";
 
 				var http = getImUrl();
 

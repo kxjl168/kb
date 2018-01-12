@@ -92,20 +92,26 @@ public class ConfigReader {
 					Node extNode = configItem.item(i);
 					NodeList exts = extNode.getChildNodes();
 					for (int j = 0; j < exts.getLength(); j++) {
-						Node e = exts.item(j);
-						String ename = e.getNodeName();
-						if ("ConfigName".equals(ename)) {
-							// System.out.println(e.getChildNodes().item(0).getNodeValue().toString());
-							key = e.getChildNodes().item(0).getNodeValue()
-									.toString();
-						}
-						if ("ConfigValue".equals(ename)) {
-							// System.out.println(e.getChildNodes().item(0).getNodeValue());
-							value = e.getChildNodes().item(0).getNodeValue()
-									.toString();
-						}
+						try {
 
-						innerDatas.put(key, value);
+							Node e = exts.item(j);
+							String ename = e.getNodeName();
+							if ("ConfigName".equals(ename)) {
+								// System.out.println(e.getChildNodes().item(0).getNodeValue().toString());
+								key = e.getChildNodes().item(0).getNodeValue()
+										.toString();
+							}
+							if ("ConfigValue".equals(ename)) {
+								// System.out.println(e.getChildNodes().item(0).getNodeValue());
+								value = e.getChildNodes().item(0)
+										.getNodeValue().toString();
+							}
+
+							// logger.info("key："+key+"/value:"+value);
+							innerDatas.put(key, value);
+						} catch (Exception e) {
+							continue;
+						}
 
 					}
 
@@ -116,6 +122,18 @@ public class ConfigReader {
 		}
 	}
 
+	public String getProperty(String name, String defaultValue) {
+		String value = "";
+		try {
+			value = this.innerDatas.getProperty(name);
+		} catch (Exception e) {
+			value = defaultValue;
+		}
+		if (value == null || value.equals(""))
+			value = defaultValue;
+
+		return StringUtil.getString(value);
+	}
 	// 解析xml
 	public String getProperty(String name) {
 		String value = "";

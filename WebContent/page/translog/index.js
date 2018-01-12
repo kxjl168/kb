@@ -77,6 +77,8 @@ function init() {
 		  setTimeout(function(){
 			   $("#dateType").get(0).selectedIndex=1;
 			   $("#dateType").trigger('change');
+			   
+				$scope.getList();
 		   }, 50);
 	
 
@@ -198,7 +200,7 @@ function init() {
 		}
 		//$scope.apply();
 		
-		$scope.getList();
+	
 		
 		
 		return;

@@ -8,7 +8,7 @@
 		<head>
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
-			<title>{{title}}</title>
+			<title>访问统计</title>
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
 
 			<link rel="stylesheet" href="../../css/kCommon.css">
@@ -38,13 +38,7 @@
 					</div>
 					<div class="collapse navbar-collapse pull-right-k " id="menuItem">
 						<ul class="hide nav navbar-nav ">
-							<li class=" bg-success">
-								<a href="javascript:void(0)" ng-click="btnP()"> 行政许可</a>
-							</li>
-							<li class="  bg-warning">
-								<a href="javascript:void(0)" ng-click="btnF()">行政处罚</a>
-							</li>
-
+						
 						</ul>
 						<form class=" hide navbar-form navbar-left " role="search">
 
@@ -429,12 +423,6 @@
 				<script type="text/javascript" src="chart.js"></script>
 
 
-				<script>
-					$(function () {
-						$('#myModal').modal({
-							keyboard: true
-						})
-					});
 
 
 </body >

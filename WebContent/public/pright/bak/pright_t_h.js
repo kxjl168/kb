@@ -11,6 +11,10 @@ var $scope = angular.element(ngSection).scope();
 	
 		var http = getImUrl();// "";
 		
+		//for spider
+		$scope.preurl="http://256kb.cn";
+
+		
 		$scope.showtp=function(x){
 			
 			if(window.location.href.indexOf('index')>0)

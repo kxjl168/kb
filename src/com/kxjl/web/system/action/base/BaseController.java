@@ -57,6 +57,43 @@ public class BaseController {
 	public StasticService stasticService;
 
 	/**
+	 * 兼容兩種输入参数
+	 * 
+	 * @param map
+	 * @return
+	 * @author zj
+	 * @date 2018-1-4
+	 */
+	public int parseIntegerParam(HttpServletRequest request, String paramname) {
+		int rst = 0;
+		String rst_s = "";
+
+		try {
+
+			rst_s = request.getParameter(paramname);
+			if (!rst_s.equals("")) {
+				try {
+					rst = Integer.parseInt(rst_s);
+				} catch (Exception e) {
+
+				}
+
+			} else if (rst_s.equals("")) {
+				String data = request.getParameter("data");
+				JSONObject jsonIN = new JSONObject(data);
+				if (jsonIN != null)
+					rst = jsonIN.optInt(paramname);
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		return rst;
+
+	}
+	
+	/**
 	 * 记录访问统计原始数据
 	 * 
 	 * @param map

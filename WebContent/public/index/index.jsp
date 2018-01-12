@@ -9,6 +9,9 @@
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
 			
+<meta name="keywords" content="KxのBook">
+<meta name="description" content="KxのBook 的个人BLOG" />
+<meta name="author" content="Kx"> 
 
 			<title>KxのBook,Welcome~</title>
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
@@ -109,7 +112,7 @@
 											<div>
 												
 												<a href="#" class="detailbtn h5 text-right pull-right text-info margin-right-20" ng-click="detail(x)">详情</a>
-												<a href="${basePath}/public/detail/?i={{x.imei}}" style="display: none;" class="for spider" ></a>
+												<a href="{{preurl}}/public/detail/?i={{x.imei}}" style="display: none;" class="for spider" ></a>
 
 											</div>
 									
@@ -133,12 +136,12 @@
 						<ul class="pagination pull-right">
 							<li>
 								<a href="#" ng-click="getList(page-1)">&laquo;</a>
-								<a href="${basePath}/public/index/?i={{page-1}}"  style="display: none;"  style="" class="for spider" ></a>
+								<a href="{{preurl}}/public/index/?i={{page-1}}"  style="display: none;"  style="" class="for spider" ></a>
 							</li>
 							<li ng-repeat="x in pageDataPre">
 
 								<a href="#" ng-click="getList(x)">{{x}}</a>
-<a href="${basePath}/public/index/?i={{x}}" style="display: none;" class="for spider" ></a>
+<a href="{{preurl}}/public/index/?i={{x}}" style="display: none;" class="for spider" ></a>
 							</li>
 							<li class="active">
 								<a href="#" ng-click="getList(page)">{{page}}</a>
@@ -146,11 +149,11 @@
 							<li ng-repeat="x in pageDataAft">
 
 								<a href="#" ng-click="getList(x)">{{x}}</a>
-<a href="${basePath}/public/index/?i={{x}}" style="display: none;" class="for spider" ></a>
+<a href="{{preurl}}/public/index/?i={{x}}" style="display: none;" class="for spider" ></a>
 							</li>
 							<li>
 								<a href="#" ng-click="getList(page+1)">&raquo;</a>
-								<a href="${basePath}/public/index/?i={{page+1}}" style="display: none;" class="for spider" ></a>
+								<a href="{{preurl}}/public/index/?i={{page+1}}" style="display: none;" class="for spider" ></a>
 							</li>
 
 							<!-- li>

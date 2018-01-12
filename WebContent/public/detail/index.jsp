@@ -9,6 +9,9 @@
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
 			<title id="title">详细</title>
+			<meta name="keywords" content="KxのBook">
+<meta name="description" content="KxのBook 的个人BLOG" />
+<meta name="author" content="Kx"> 
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
 			<!-- <link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css">
  -->
