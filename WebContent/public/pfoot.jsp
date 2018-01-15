@@ -4,45 +4,40 @@
 		style="">
 		
 		
-		<div class="col-xs-12 row kfoot hide">
+		<div class="col-xs-12 row kfoot ">
 		
-		<!-- <div class="col-xs-2 row col-xs-offset-2  leftline">
+		 <div class="col-xs-2 nopaddding  row col-xs-offset-2  leftline">
 		 <div class="pull-left  ">
-		  <ul>
-		    <li>1111</li>
-		    <li>2222</li>
-		    <li>3333</li>
+		  <ul class="nopaddding">
+		    <li><a href="http://www.256kb.cn">首页</a></li>
+		 
 		  </ul>
 		 </div>
 		</div>
-		<div class="col-xs-2 row   leftline">
+		<div class="col-xs-2 row nopaddding  leftline">
+		 <div class="pull-left  ">
+		  <ul class="nopaddding">
+		     <li><a href="http://www.256kb.cn/public/search/">G搜索</a></li>
+		  </ul>
+		 </div>
+		</div>
+		<div class="col-xs-2 row nopaddding  leftline ">
 		 <div class="pull-left ">
-		  <ul>
-		    <li>1111</li>
-		    <li>2222</li>
-		    <li>3333</li>
+		  <ul class="nopaddding">
+		      <li><a href="http://www.256kb.cn/public/bx/">保险</a></li>
+		
 		  </ul>
 		 </div>
 		</div>
-		<div class="col-xs-2 row  leftline ">
-		 <div class="pull-left ">
-		  <ul>
-		    <li>1111</li>
-		    <li>2222</li>
-		    <li>3333</li>
-		  </ul>
-		 </div>
-		</div>
-		<div class="col-xs-2 row leftline rightline">
+		<div class="col-xs-2 row nopaddding leftline rightline">
 				<div class="pull-left ">
-				 <ul>
-					 <li>1111</li>
-					 <li>2222</li>
-					 <li>3333</li>
+				 <ul class="nopaddding">
+				   <li><a href="http://www.256kb.cn/public/about/">关于</a></li>
+
 				 </ul>
 				</div>
 			 </div>
-		</div> -->
+		</div> 
 		
 	
 		

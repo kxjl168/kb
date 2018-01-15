@@ -3,34 +3,33 @@ package com.kxjl.web.blog.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kxjl.tool.utils.DateUtil;
 import com.kxjl.web.system.model.base.BaseModel;
 
 public class Replay extends BaseModel {
 	private Integer recordid; // id
 
 	/*
-	  `recordid` int(11) NOT NULL AUTO_INCREMENT COMMENT '序列号',
-  `blogimei` varchar(256) DEFAULT NULL,
-  `replay_recordid` int(11) DEFAULT '0' COMMENT '回复id号',
-  `content` text,
-  `userid` varchar(1000) DEFAULT NULL COMMENT 'yonghuid 串或者email',
-  `create_date` datetime DEFAULT NULL,
+	 * `recordid` int(11) NOT NULL AUTO_INCREMENT COMMENT '序列号', `blogimei`
+	 * varchar(256) DEFAULT NULL, `replay_recordid` int(11) DEFAULT '0' COMMENT
+	 * '回复id号', `content` text, `userid` varchar(1000) DEFAULT NULL COMMENT
+	 * 'yonghuid 串或者email', `create_date` datetime DEFAULT NULL,
 	 */
 	private String blogimei;
 	private int replay_recordid;
 
 	private String content;
-	private String userid; //  'yonghuid 串或者email',
-	private String user_blog; //  'yonghuid 串或者email',
+	private String userid; // 'yonghuid 串或者email',
+	private String user_blog; // 'yonghuid 串或者email',
 	private String create_date;
-	
-	
-	//query 回复
-	private List<Replay> reback=new ArrayList<Replay>();
-	private int ppid; //实际子分组
-	private String tuid; //真实回复的uid
-	private String tuser_blog; //真实回复的ublog
-	
+	private int ppid; // 实际子分组 ,输入的时候直接揭露
+
+	// query 回复
+	private List<Replay> reback = new ArrayList<Replay>();
+	private int o_ppid; // 老子分组，只能计算2组、无法计算完全
+
+	private String tuid; // 真实回复的uid
+	private String tuser_blog; // 真实回复的ublog
 
 	public Integer getRecordid() {
 		return recordid;
@@ -77,7 +76,8 @@ public class Replay extends BaseModel {
 	}
 
 	public void setCreate_date(String create_date) {
-		this.create_date = create_date;
+		
+		this.create_date =  DateUtil.getDateStr(DateUtil.getDate(create_date,DateUtil.defaultFormat),DateUtil.defaultFormat);
 	}
 
 	public List<Replay> getReback() {
@@ -88,7 +88,6 @@ public class Replay extends BaseModel {
 		this.reback = reback;
 	}
 
-
 	public String getTuid() {
 		return tuid;
 	}
@@ -98,7 +97,11 @@ public class Replay extends BaseModel {
 	}
 
 	public int getPpid() {
-		return ppid;
+		//兼容已有数据
+		if (ppid == 0)
+			return o_ppid;
+		else
+			return ppid;
 	}
 
 	public void setPpid(int ppid) {
@@ -121,11 +124,14 @@ public class Replay extends BaseModel {
 		this.tuser_blog = tuser_blog;
 	}
 
+	public int getO_ppid() {
+		return o_ppid;
+	}
 
-	
-	
-	//query
-	
+	public void setO_ppid(int o_ppid) {
+		this.o_ppid = o_ppid;
+	}
 
-	
+	// query
+
 }

@@ -8,9 +8,9 @@
 		<head>
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
-			
-<meta name="keywords" content="保险专题">
-<meta name="description" content="KxのBook 的个人BLOG-保险（Insurance或缩写为insur），本意是稳妥可靠保障；后延伸成一种保障机制，是用来规划人生财务的一种工具，是市场经济条件下风险管理的基本手段，是金融体系和社会保障体系的重要的支柱" />
+			<meta name="robots" content="noindex,nofollow" />
+<meta name="keywords" content="关于我">
+<meta name="description" content="KxのBook 的个人BLOG-关于我" />
 <meta name="author" content="Kx"> 
 
 			<title>KxのBook,Welcome~</title>
@@ -84,128 +84,85 @@
 		<div class="panel panel-top panel-default row " >
 
 
- 				<div class="panel-heading">Kx说：</div>
+ 				<div class="panel-heading">关于我</div>
 			 <div class="panel-body">
 		
 					<div id="div1" style="margin: 0 auto">
-						<p>百度:保险（Insurance或缩写为insur），本意是稳妥可靠保障；后延伸成一种保障机制，是用来规划人生财务的一种工具，是市场经济条件下风险管理的基本手段，是金融体系和社会保障体系的重要的支柱<p>
+					<p>张杰,男,86年人士,07年武汉大学信息安全专业毕业,歌手同名,但是歌唱的五音不全<p>	&nbsp;
+						<p>是从小就要成为科学家的男人！(俺は海贼王になる男だ！...)...<p>	&nbsp;
+						<p>自从上了贼船,一路就这么跌跌撞撞,转眼已10多年...<p>	&nbsp;
+						<p>技术没啥精通的,啥都会一点,但是依然感觉没有抓住编程的核心.<p>	&nbsp;
+					
+						<img ></img>
+						<p>养有一只叫做平凡的中华田园猫(土猫>.<)<p>	&nbsp;
+						<p>业余时间爱好篮球、吉他,然鹅我真的有业余时间吗...?<p>	&nbsp;
+						<p class="hide">历程详细<a href="#">猛击</a><p>	&nbsp;
 					</div>
-					&nbsp;
-					<div  style="margin: 0 auto">
-						<p>作为一个IT人,一家之主、一个父亲及一个儿子,强烈推荐大家给自己来一份保险,上上下下都需要自己的庇护,自己无论如何都不能倒呢.<p>
-					</div>
+				
     			</div>
 
 				
 
 		</div>
-			<div class="row col-xs-12">
+	</div>
+	
+	<div class=" row col-xs-12">
 										<hr></hr>
+	</div>
+			
+	<div class="col-xs-12 row" >
+			
+			<div class="panel panel-top panel-default row " >	
+				<div class="panel-heading">小站历程</div>
+			 	<div class="panel-body">
+		
+					<div id="div1" style="margin: 0 auto">
+					 <p>2018-01-12	依赖香港服务器上线Google搜索转发页面,(终于可以上google了啊...)<p>	&nbsp;
+						<p>2018-01-01	 建站,属于一拍脑袋就开干,IT人士怎么能没有自己的一份空间,寄托于QQ、微博是什么情况!?<p>	&nbsp;
+					</div>
+    			</div>
 			</div>
 	</div>
-
-
-
-
-							<div ng-cloak>
-								<div ng-repeat="x in datalist" class="pgdiv">
-
-									<div class="row col-xs-12 ">
-
-										<div class="nopadding-left">
-											<img class="nopaddding img-responsive col-xs-2" style="width:25px; height:25px;" title="{{x.blog_type_name}}"   src="{{x.blog_type_url}}">
-											<div class="col-sm-8 col-xs-11  ptitle  "><a class="ptitle" ng-click="detail(x)">{{x.title}}</a></div>
-
-
-											<div class="col-sm-3 col-xs-12  text-right">
-										
-											
-											<a ng-repeat="t in x.tagStrs"  ng-click="showtgs(t)">{{t}},</a>
-											</div>
-										</div>
-									</div>
-
-									<div class="margin-top-10 row col-sm-10 col-xs-12"></div>
-									<div class="hide row col-xs-12">
-										<hr></hr>
-									</div>
-
-
-									<div class="col-xs-12 row">
-										<div class="alldot">
-											<div ng-cloak class=" pageText " ng-bind-html="x.context">
-											</div>
-										</div>
-											<div>
-												
-												<a href="#" class="detailbtn h5 text-right pull-right text-info margin-right-20" ng-click="detail(x)">详情</a>
-												<a href="{{preurl}}/public/detail/?i={{x.imei}}" style="display: none;" class="for spider" ></a>
-
-											</div>
-									
-									</div>
-									<br>
-									<div ng-cloak class="row  col-sm-10 col-xs-12 margin-top-5 ">post@{{x.create_date}}&nbsp;
-										<span ><a ng-click="detail(x)">阅读</a>({{x.view_nums}})&nbsp;</span>
-										<span ><a ng-click="detail(x,'rpdiv')">评论</a>({{x.replay_nums}})&nbsp;</span>
-									</div>
-
-
-									<div class="row col-xs-12">
-										<hr></hr>
-									</div>
-								</div>
-
-
-<div class="  col-xs-12 row tablefoot" ng-show="total">
-
-
-						<ul class="pagination pull-right">
-							<li>
-								<a href="#" ng-click="getList(page-1)">&laquo;</a>
-								<a href="{{preurl}}/public/index/?i={{page-1}}"  style="display: none;"  style="" class="for spider" ></a>
-							</li>
-							<li ng-repeat="x in pageDataPre">
-
-								<a href="#" ng-click="getList(x)">{{x}}</a>
-<a href="{{preurl}}/public/index/?i={{x}}" style="display: none;" class="for spider" ></a>
-							</li>
-							<li class="active">
-								<a href="#" ng-click="getList(page)">{{page}}</a>
-							</li>
-							<li ng-repeat="x in pageDataAft">
-
-								<a href="#" ng-click="getList(x)">{{x}}</a>
-<a href="{{preurl}}/public/index/?i={{x}}" style="display: none;" class="for spider" ></a>
-							</li>
-							<li>
-								<a href="#" ng-click="getList(page+1)">&raquo;</a>
-								<a href="{{preurl}}/public/index/?i={{page+1}}" style="display: none;" class="for spider" ></a>
-							</li>
-
-							<!-- li>
-									<a href="#">&laquo;</a>
-								</li>
-								<li class="active">
-									<a href="#">1</a>
-								</li>
-								<li class="disabled">
-									<a href="#">2</a>
-								</li>
-								<li>
-									<a href="#">3</a>
-								</li>
-								<li>
-									<a href="#">&raquo;</a>
-								</li> -->
-						</ul>
-
-						<select onchange="changerows(this)" class="hide pull-right">
-							<option ng-repeat="x in rows_select">{{x}}</option>
-						</select>
+			
+	<div class="col-xs-12 row hide" >
+			<div class="panel panel-top panel-default row " >	
+			 	<div class="panel-body">
+		
+					<div id="div1" style="margin: 0 auto">
+						<p><p>	&nbsp;
 					</div>
+    			</div>
+			</div>
+			
+			<div class="panel panel-top panel-default row " >	
+			 	<div class="panel-body">
+		
+					<div id="div1" style="margin: 0 auto">
+						<p><p>	&nbsp;
+					</div>
+    			</div>
+			</div>
+	</div>
+	
+	<div class=" row col-xs-12">
+										<hr></hr>
+	</div>
+	
+	<div class="col-xs-12 row " >
+			<div class="panel panel-top panel-default row " >
+				<div class="panel-heading">FAQ - 您有任何建议意见都可以留言,我会在第一时间答复您！</div>	
+			 
+			</div>
+	</div>
+	
+		<%@include file="../detail/comment.jsp" %>
+					
+					
+			
 
-							</div>
+
+
+							
 
 
 						</div>
@@ -279,12 +236,13 @@
 						
 
 				 		<!-- <script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>  -->
-						<script type="text/javascript" src="index.js"></script>
+					
+					
 							<script type="text/javascript" src="../m_index.js"></script>
 						<script type="text/javascript" src="../pright/pright_t_h.js"></script>
 
-
-				
+	<script type="text/javascript" src="index.js"></script>
+					<script type="text/javascript" src="../detail/replay.js"></script>
 
 
 </body>

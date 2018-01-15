@@ -1,6 +1,7 @@
 package com.kxjl.web.blog.action;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -66,7 +67,7 @@ public class BlogController extends BaseController {
 
 		JSONObject jsonIN;
 		JSONObject jsonOut = new JSONObject();
-
+		List<Blog> detail =new ArrayList<Blog>();
 		String rst = "";
 		try {
 
@@ -77,7 +78,7 @@ public class BlogController extends BaseController {
 			query.setImei(imei);
 
 			// cur ,next, pre
-			List<Blog> detail = blogService.getBlogDetailPageList(query);
+			 detail = blogService.getBlogDetailPageList(query);
 
 			String prepath = getImgHttpOutPath();
 			for (Blog blog : detail) {
@@ -92,12 +93,7 @@ public class BlogController extends BaseController {
 			jsonOut.put("total", detail.size());
 			jsonOut.put("datalist", jsStr);
 
-			saveStaticInfo(request, StasticTypeOne.DetailPage.toString(),
-					detail.get(0).getBlog_type_name());
-			
-			
-			Kdata.getInstance().cleanrBLogList("");
-			
+		
 			
 
 		} catch (JSONException e) {
@@ -116,6 +112,13 @@ public class BlogController extends BaseController {
 		}
 		rst = jsonOut.toString();
 		JsonUtil.responseOutWithJson(response, rst);
+		
+		saveStaticInfo(request, StasticTypeOne.DetailPage.toString(),
+				detail.get(0).getBlog_type_name());
+		
+		
+		Kdata.getInstance().cleanrBLogList("");
+		
 
 	}
 	
@@ -211,8 +214,8 @@ public class BlogController extends BaseController {
 
 			jsonIN = new JSONObject(data);
 
-			String blog_title = jsonIN.optString("blog_title");
-			int blog_type = jsonIN.optInt("blog_type");
+		String blog_title = jsonIN.optString("blog_title");
+		String blog_type = jsonIN.optString("blog_type");
 			String blog_tag = jsonIN.optString("blog_tag");
 			String month = jsonIN.optString("month");
 
@@ -280,8 +283,7 @@ public class BlogController extends BaseController {
 			jsonOut.put("total", total);
 			jsonOut.put("datalist", jsStr);
 
-			saveStaticInfo(request, StasticTypeOne.HomePage.toString(), "index");
-
+		
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -298,6 +300,8 @@ public class BlogController extends BaseController {
 		}
 		rst = jsonOut.toString();
 		JsonUtil.responseOutWithJson(response, rst);
+
+		saveStaticInfo(request, StasticTypeOne.HomePage.toString(), "index");
 
 	}
 
@@ -499,7 +503,7 @@ public class BlogController extends BaseController {
 
 			int recordid = jsonIN.optInt("recordid");
 			String title = jsonIN.optString("title");
-			int blog_type = jsonIN.optInt("blog_type");
+			String blog_type = jsonIN.optString("blog_type");
 
 			String content = jsonIN.optString("context");
 
@@ -515,6 +519,13 @@ public class BlogController extends BaseController {
 			blog.setTags(tags);
 
 			blog.setBlog_type(blog_type);// (blog_name);
+			
+			
+			//过滤img 增加 class="img-responsive"
+			
+			
+			
+			
 			blog.setContent(content);// (desc);
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

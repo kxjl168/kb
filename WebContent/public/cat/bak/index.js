@@ -56,7 +56,7 @@ function changerows(option) {
 
 function init() {
 
-	initmenu_p($("#menuul"), "public/bx/");
+	initmenu_p($("#menuul"), "public/cat/");
 
 
 	$('.modal').on('show.bs.modal', function() {
@@ -66,7 +66,7 @@ function init() {
 	
 	var $scope = angular.element(ngSection).scope();
 	$scope.$apply(function() {
-		$scope.blog_type = 'bx';
+		$scope.blog_type = 'cat';
 		
 	});
 

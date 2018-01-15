@@ -10,9 +10,6 @@ app.controller('eduCtrl', function($scope) {
 
 $(function() {
 	
-	
-
-	
 
 	init();
 	 $('pre code').each(function(i, block) {
@@ -22,25 +19,14 @@ $(function() {
 	
 	 WdatePicker({eCont:'nDate'});
 	 
+	 var $scope = angular.element(ngSection).scope();
+	 $scope.x={};
+	 $scope.x.imei="about";
+	 
+		setTimeout(function() {
+			 $scope.getReplayList();
+		}, 300);
 	
-
-	var $scope = angular.element(ngSection).scope();
-	kvalidate.init($("#fm"), {
-		s_title : {
-			required : true,
-		
-		},
-		s_context : "required",
-		
-	}, {
-		s_title : {
-			required : "标题必须填写",
-	
-		},
-
-		s_context : "请输入内容",
-		
-	}, $scope.doupdate, "");
 
 });
 

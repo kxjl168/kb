@@ -9,8 +9,8 @@
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
 			
-<meta name="keywords" content="保险专题">
-<meta name="description" content="KxのBook 的个人BLOG-保险（Insurance或缩写为insur），本意是稳妥可靠保障；后延伸成一种保障机制，是用来规划人生财务的一种工具，是市场经济条件下风险管理的基本手段，是金融体系和社会保障体系的重要的支柱" />
+<meta name="keywords" content="喵星人专题">
+<meta name="description" content="KxのBook 的个人BLOG-逗逼喵星人" />
 <meta name="author" content="Kx"> 
 
 			<title>KxのBook,Welcome~</title>
@@ -84,15 +84,15 @@
 		<div class="panel panel-top panel-default row " >
 
 
- 				<div class="panel-heading">Kx说：</div>
+ 				<div class="panel-heading">喵喵喵：</div>
 			 <div class="panel-body">
 		
 					<div id="div1" style="margin: 0 auto">
-						<p>百度:保险（Insurance或缩写为insur），本意是稳妥可靠保障；后延伸成一种保障机制，是用来规划人生财务的一种工具，是市场经济条件下风险管理的基本手段，是金融体系和社会保障体系的重要的支柱<p>
+						<p><p>
 					</div>
 					&nbsp;
 					<div  style="margin: 0 auto">
-						<p>作为一个IT人,一家之主、一个父亲及一个儿子,强烈推荐大家给自己来一份保险,上上下下都需要自己的庇护,自己无论如何都不能倒呢.<p>
+						<p>.<p>
 					</div>
     			</div>
 

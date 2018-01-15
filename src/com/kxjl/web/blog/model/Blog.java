@@ -2,6 +2,7 @@ package com.kxjl.web.blog.model;
 
 import java.util.List;
 
+import com.kxjl.tool.utils.DateUtil;
 import com.kxjl.web.system.model.base.BaseModel;
 
 public class Blog extends BaseModel {
@@ -15,7 +16,7 @@ public class Blog extends BaseModel {
 	 * DEFAULT NULL, `update_date` datetime DEFAULT NULL,
 	 */
 	private String title;
-	private int blog_type;
+	private String blog_type;
 
 	private String content;
 	private Integer view_nums; // 链接url
@@ -52,11 +53,11 @@ public class Blog extends BaseModel {
 		this.title = title;
 	}
 
-	public int getBlog_type() {
+	public String getBlog_type() {
 		return blog_type;
 	}
 
-	public void setBlog_type(int blog_type) {
+	public void setBlog_type(String blog_type) {
 		this.blog_type = blog_type;
 	}
 
@@ -89,7 +90,7 @@ public class Blog extends BaseModel {
 	}
 
 	public void setCreate_date(String create_date) {
-		this.create_date = create_date;
+		this.create_date =   DateUtil.getDateStr(DateUtil.getDate(create_date,DateUtil.defaultFormat),DateUtil.defaultFormat);
 	}
 
 	public String getUpdate_date() {

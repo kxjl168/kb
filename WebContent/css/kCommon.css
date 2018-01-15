@@ -1,6 +1,21 @@
 @CHARSET "UTF-8";
 
 .pageText{
+	color:#333!important;
+}
+
+.panel-top>.panel-heading {
+    color: #ffb840!important;
+    background-color: #1F7A68!important;
+    border-color: #BF8A30!important;
+}
+.panel-top>.panel-body{
+	color:#bf8a30;
+}
+
+
+
+.pageText{
 	line-height: 2.2;
 	font-size: 11pt;
 }

@@ -223,20 +223,25 @@ public class ReplayController extends BaseController {
 
 			String imei = jsonIN.optString("imei");
 			int pid = jsonIN.optInt("pid");
+			int ppid = jsonIN.optInt("ppid");
 			String userid = jsonIN.optString("userid");
 			String ublog = jsonIN.optString("ublog");
 
 			String content = jsonIN.optString("context");
 
-			//
+			
+			//评论文章
 			Blog bq = new Blog();
 			bq.setImei(imei);
 			Blog blog = blogService.getBlogInfoById(bq);
-			if (blog == null) {
+			if(!imei.equals("about"))
+			{
+			if (blog == null ) {
 				jsonOut.put("ResponseCode", 201);
 				jsonOut.put("ResponseMsg", "文章不存在！");
 				JsonUtil.responseOutWithJson(response, jsonOut.toString());
 				return;
+			}
 			}
 
 			Replay replay = new Replay();
@@ -244,8 +249,17 @@ public class ReplayController extends BaseController {
 			replay.setReplay_recordid(pid);
 			replay.setUser_blog(ublog);
 			replay.setUserid(userid);
+			replay.setPpid(ppid);
 
 			replay.setContent(content);// (desc);
+			
+			if (user != null && ( user.getUtype() == UserType.Root|| user.getUtype() == UserType.Admin)) 
+			{
+				replay.setUser_blog("http://256kb.cn");
+				replay.setUserid("KxのBOOK");
+			}
+			
+			
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String time = sdf.format(new Date());
@@ -271,12 +285,14 @@ public class ReplayController extends BaseController {
 				saveRequestInfo(request, actiontype);
 
 				// 更新文章评论数
-
+				if(!imei.equals("about"))
+				{
 				Replay rqq = new Replay();
 				rqq.setBlogimei(imei);
 				int replay_nums = replayService.getReplayPageListCount(rqq);
 				blog.setReplay_nums(replay_nums + 1);
 				blogService.updateBlog(blog);
+				}
 
 			} else {
 				jsonOut.put("ResponseCode", 201);
