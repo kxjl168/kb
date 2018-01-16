@@ -55,6 +55,7 @@ public class BaseController {
 
 	@Autowired
 	public StasticService stasticService;
+
 	/**
 	 * 兼容兩種输入参数
 	 * 
@@ -100,14 +101,14 @@ public class BaseController {
 		try {
 
 			rst_s = request.getParameter(paramname);
-			if (rst_s!=null&&!rst_s.equals("")) {
+			if (rst_s != null && !rst_s.equals("")) {
 				try {
 					rst = Integer.parseInt(rst_s);
 				} catch (Exception e) {
 
 				}
 
-			} else  {
+			} else {
 				String data = request.getParameter("data");
 				JSONObject jsonIN = new JSONObject(data);
 				if (jsonIN != null)
@@ -121,7 +122,7 @@ public class BaseController {
 		return rst;
 
 	}
-	
+
 	/**
 	 * 记录访问统计原始数据
 	 * 
@@ -133,17 +134,15 @@ public class BaseController {
 	public void saveStaticInfo(HttpServletRequest request, String type1,
 			String type2) {
 
-		try {
+		final HttpServletRequest rt = request;
+		final String t1 = type1;
+		final String t2 = type2;
 
-			final HttpServletRequest rt=request;
-			final String t1=type1;
-			final String t2=type2;
-			
-			new Thread(new Runnable() {
+		new Thread(new Runnable() {
 
-				@Override
-				public void run() {
-
+			@Override
+			public void run() {
+				try {
 					ActionLog log = new ActionLog();
 
 					// 计算ip
@@ -166,12 +165,11 @@ public class BaseController {
 					String time = sdf.format(new Date());
 					log.setAction_date(time);
 					stasticService.addActionLog(log);
+				} catch (Exception e) {
+					// TODO: handle exception
 				}
-			}).run();
-
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+			}
+		}).run();
 
 	}
 
@@ -184,25 +182,40 @@ public class BaseController {
 	 * @date 2017-12-27
 	 */
 	public void saveRequestInfo(HttpServletRequest request, String type) {
-		RequestInfo rinfo = new RequestInfo();
-		rinfo.setAction_type(type);
 
-		// 计算ip
-		String ip = "";
-		try {
-			ip = request.getRemoteAddr();
-		} catch (Exception e) {
+		final HttpServletRequest rt = request;
+		final String t = type;
 
-		}
-		rinfo.setIp(ip);
-		String city = IPUtils.getCityByIP(ip);
-		rinfo.setCity(city);
-		rinfo.setUri(request.getRequestURI());
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String time = sdf.format(new Date());
-		rinfo.setCreateTime(time);
+		new Thread(new Runnable() {
 
-		requestInfoService.addRequestInfo(rinfo);
+			@Override
+			public void run() {
+				try {
+					RequestInfo rinfo = new RequestInfo();
+					rinfo.setAction_type(t);
+
+					// 计算ip
+					String ip = "";
+					try {
+						ip = rt.getRemoteAddr();
+					} catch (Exception e) {
+
+					}
+					rinfo.setIp(ip);
+					String city = IPUtils.getCityByIP(ip);
+					rinfo.setCity(city);
+					rinfo.setUri(rt.getRequestURI());
+					SimpleDateFormat sdf = new SimpleDateFormat(
+							"yyyy-MM-dd HH:mm:ss");
+					String time = sdf.format(new Date());
+					rinfo.setCreateTime(time);
+
+					requestInfoService.addRequestInfo(rinfo);
+				} catch (Exception e) {
+
+				}
+			}
+		}).start();
 
 	}
 
