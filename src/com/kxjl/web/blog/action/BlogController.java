@@ -63,17 +63,17 @@ public class BlogController extends BaseController {
 	@RequestMapping(value = "/getDetailList")
 	public void getDetailList(HttpServletRequest request,
 			HttpServletResponse response) {
-		String data = request.getParameter("data");
+		//String data = request.getParameter("data");
 
-		JSONObject jsonIN;
+		//JSONObject jsonIN;
 		JSONObject jsonOut = new JSONObject();
 		List<Blog> detail =new ArrayList<Blog>();
 		String rst = "";
 		try {
 
-			jsonIN = new JSONObject(data);
+			//jsonIN = new JSONObject(data);
 
-			String imei = jsonIN.optString("i");
+			String imei = parseStringParam(request, "i");
 			Blog query = new Blog();
 			query.setImei(imei);
 

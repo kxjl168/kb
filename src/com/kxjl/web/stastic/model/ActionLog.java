@@ -20,6 +20,7 @@ public class ActionLog extends BaseModel {
 	public enum StasticTypeOne {
 		NIL("",""),
 		HomePage("homepage","首页"),
+		GSearch("gsearch","G搜索"),
 		DetailPage("detailpag","详情页");
 		
 
@@ -44,6 +45,14 @@ public class ActionLog extends BaseModel {
 					return item;
 			}
 			return StasticTypeOne.NIL;
+		}
+
+		public String getDesc() {
+			return desc;
+		}
+
+		public void setDesc(String desc) {
+			this.desc = desc;
 		}
 
 	}

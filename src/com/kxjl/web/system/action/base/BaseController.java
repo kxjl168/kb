@@ -55,6 +55,35 @@ public class BaseController {
 
 	@Autowired
 	public StasticService stasticService;
+	/**
+	 * 兼容兩種输入参数
+	 * 
+	 * @param map
+	 * @return
+	 * @author zj
+	 * @date 2018-1-4
+	 */
+	public String parseStringParam(HttpServletRequest request, String paramname) {
+		String rst = "";
+
+		try {
+
+			rst = request.getParameter(paramname);
+
+			if (rst == null || rst.equals("")) {
+				String data = request.getParameter("data");
+				JSONObject jsonIN = new JSONObject(data);
+				if (jsonIN != null)
+					rst = jsonIN.optString(paramname);
+			}
+
+		} catch (Exception e) {
+			rst = "";
+		}
+
+		return rst;
+
+	}
 
 	/**
 	 * 兼容兩種输入参数
@@ -71,14 +100,14 @@ public class BaseController {
 		try {
 
 			rst_s = request.getParameter(paramname);
-			if (!rst_s.equals("")) {
+			if (rst_s!=null&&!rst_s.equals("")) {
 				try {
 					rst = Integer.parseInt(rst_s);
 				} catch (Exception e) {
 
 				}
 
-			} else if (rst_s.equals("")) {
+			} else  {
 				String data = request.getParameter("data");
 				JSONObject jsonIN = new JSONObject(data);
 				if (jsonIN != null)

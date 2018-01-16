@@ -117,11 +117,13 @@
 									<ul class="pagination pull-left">
 										<li>
 											<a href="#" ng-show="pre" ng-click="getList(pre.imei)">&laquo;上一篇</a>
+												<a href="{{preurl}}/public/detail/{{pre.imei}}.html" style="display: none;" class="for spider" ></a>
 										</li>
 									</ul>
 									<ul class="pagination pull-right">
 										<li>
 											<a href="#" ng-show="next" ng-click="getList(next.imei)">下一篇&raquo;</a>
+											<a href="{{preurl}}/public/detail/{{next.imei}}.html" style="display: none;" class="for spider" ></a>
 										</li>
 									</ul>
 					

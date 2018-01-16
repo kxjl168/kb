@@ -16,7 +16,7 @@ select r.*,
  when r2.replay_recordid =0  then r2.recordid
  when r2.replay_recordid is null then 0
  else r2.replay_recordid 
- end ppid
+ end o_ppid
   from replay_info r LEFT JOIN replay_info r2 on r.replay_recordid=r2.recordid
 ) t left join replay_info r3 on t.replay_recordid=r3.recordid
 	    
@@ -54,9 +54,9 @@ select r.*,
 	    
 		insert into replay_info 
 		(blogimei,replay_recordid,content,userid,
-		create_date,user_blog )
+		create_date,user_blog,ppid )
 		values(#{blogimei},#{replay_recordid},#{content},#{userid}
-			,#{create_date},#{user_blog})
+			,#{create_date},#{user_blog},#{ppid})
 	</insert>
 	
 	

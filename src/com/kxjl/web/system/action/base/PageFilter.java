@@ -45,9 +45,6 @@ public class PageFilter implements Filter {
 	public void doFilter(ServletRequest orequest, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 
-	
-		
-		
 		HttpServletResponseWrapper wrapper = new HttpServletResponseWrapper(
 				(HttpServletResponse) response);
 
@@ -55,12 +52,70 @@ public class PageFilter implements Filter {
 
 		HttpSession session = request.getSession();
 
-		
-	/*	chain.doFilter(request, response);
-		if(true)
-		return;*/
-		
-		
+		/*
+		 * chain.doFilter(request, response); if(true) return;
+		 */
+
+		// 伪静态页面。解析url
+		if (request.getRequestURI().endsWith(".htm")||request.getRequestURI().endsWith(".html")) {
+			try {
+
+				String cpath = request.getContextPath();
+				String curl = request.getRequestURI();
+				logger.debug("request.getContextPath():" + cpath);// ,
+																	// redirect//
+																	// page!");
+				logger.debug("request.getRequestURI(): " + curl);
+
+				if (curl.contains("public/detail/")) {
+					int xindex = curl.lastIndexOf("/");
+					int dotindex = curl.lastIndexOf(".");
+					int jindex = curl.lastIndexOf("#");
+
+					// request.get
+
+					String imei = curl.substring(xindex + 1, dotindex);
+					String nurl = "?i=" + imei;
+				if(imei.equals(""))
+					nurl = "../../" + imei;
+					
+					wrapper.sendRedirect(nurl);
+					return;
+				} else if (curl.contains("public/index/")) {
+
+					String pretag = "i";
+					int iindex = curl.indexOf("/i/");
+					if (iindex > 0)
+						pretag = "i";
+					int tpindex = curl.indexOf("/tg/");
+					if (tpindex > 0)
+						pretag = "tg";
+					int hpindex = curl.indexOf("/h/");
+					if (hpindex > 0)
+						pretag = "h";
+					int btpindex = curl.indexOf("/bt/");
+					if (btpindex > 0)
+						pretag = "bt";
+
+					int xindex = curl.lastIndexOf("/");
+					int dotindex = curl.lastIndexOf(".");
+					// int jindex = curl.lastIndexOf("#");
+
+					// request.get
+
+					String imei = curl.substring(xindex + 1, dotindex);
+
+					String nurl = "../?" + pretag + "=" + imei;
+
+					wrapper.sendRedirect(nurl);
+					return;
+				}
+
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			}
+		}
+
 		// web.xml中读取
 		String excludedUrls = config.getInitParameter("excludedUrls");
 		String[] urls = excludedUrls.split(",");
@@ -70,7 +125,7 @@ public class PageFilter implements Filter {
 				continue;
 			if (request.getRequestURI().endsWith(urls[i])
 					|| request.getRequestURI().endsWith(".css")
-						|| request.getRequestURI().endsWith(".map")
+					|| request.getRequestURI().endsWith(".map")
 					|| request.getRequestURI().endsWith(".js")
 					|| request.getRequestURI().endsWith(".woff2")
 					|| request.getRequestURI().endsWith(".woff")
@@ -81,9 +136,6 @@ public class PageFilter implements Filter {
 				return;
 			}
 		}
-		
-		
-					
 
 		// 配置文件中读取
 		excludedUrls = ConfigReader.getInstance().getProperty("excludedUrls");
@@ -96,16 +148,15 @@ public class PageFilter implements Filter {
 				return;
 			}
 
-			//*匹配
+			// *匹配
 			if (urls[i].contains("*")) {
 				String pattern = urls[i].trim();
 
 				boolean isMatch = Pattern.matches(pattern,
 						request.getRequestURI());
-				if(isMatch)
-				{
+				if (isMatch) {
 					chain.doFilter(request, response);
-					return;	
+					return;
 				}
 			}
 
@@ -114,25 +165,25 @@ public class PageFilter implements Filter {
 		SysUserBean user = (SysUserBean) session
 				.getAttribute(Constant.SESSION_USER);
 
-		
-		
-		
 		// System.out.println("pageFilter:" + request.getRequestURI());
 		if (user == null) {
-			
-			//跟目录，放
-			if(request.getContextPath().equals(""))
-			{
-				if(request.getRequestURI().equals("/"))
-				{
-				logger.debug("pass:user is null but is / && request.getContextPath():"+request.getContextPath());
-				chain.doFilter(request, response);
-				return;
+
+			// 跟目录，放
+			if (request.getContextPath().equals("")) {
+				if (request.getRequestURI().equals("/")) {
+					logger.debug("pass:user is null but is / && request.getContextPath():"
+							+ request.getContextPath());
+					chain.doFilter(request, response);
+					return;
 				}
 			}
-			
-			logger.debug("request.getContextPath():"+request.getContextPath());//, redirect to login page!");
-			logger.debug("request.getRequestURI(): "+request.getRequestURI());
+
+			logger.debug("request.getContextPath():" + request.getContextPath());// ,
+																					// redirect
+																					// to
+																					// login
+																					// page!");
+			logger.debug("request.getRequestURI(): " + request.getRequestURI());
 			String loginPath = request.getContextPath() + "/login.jsp";
 			logger.debug("no userinfo, redirect to login page!");
 			wrapper.sendRedirect(loginPath);
