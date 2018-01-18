@@ -20,6 +20,56 @@ import com.kxjl.web.system.model.MenuInfo;
  * @date 2018-1-6
  */
 public class Kdata {
+	
+	
+	/**
+	 * 是否启用/可见
+	 * 
+	 * @param map
+	 * @return
+	 * @author zj
+	 * @date 2017-12-13
+	 */
+	public enum Enable {
+
+		NIL("-1",""),Enable("1","可见"),	Disable("0","不可见");
+
+		public String value = "";
+		public String desc = "";
+
+		private Enable(String val,String desc) {
+			this.value = val;
+			this.desc=desc;
+		}
+
+		@Override
+		public String toString() {
+			// TODO Auto-generated method stub
+			JSONObject j = new JSONObject();
+			try {
+				j.put("value", value);
+				j.put("desc", desc);
+		
+
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+			return j.toString();
+		}
+		
+		public  static Enable parse(String val)
+		{
+			for (Enable item : Enable.values()) {
+				if(item.value.equals(val))
+					return item;
+			}
+			return Enable.NIL;
+		}
+
+	}
+	
+	
 	/**
 	 * 缓存类型
 	 * 

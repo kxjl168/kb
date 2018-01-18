@@ -17,7 +17,9 @@
 	
 		<select id="getBlogMonthGroup"  resultMap="BlogMap">
 	<![CDATA[ 
-		select DATE_FORMAT(create_date,"%Y-%m") month ,count(*) view_nums from blog_info group by DATE_FORMAT(create_date,"%Y-%m")
+		select DATE_FORMAT(create_date,"%Y-%m") month ,count(*) view_nums from blog_info a
+		where a.showflag='1'
+		 group by DATE_FORMAT(create_date,"%Y-%m")
 		]]>
 		
 	</select>
@@ -27,18 +29,20 @@
 		<select id="getBlogTypeGroups"  resultMap="BlogMap">
 		<![CDATA[
 			 select d.val1 blog_type_url, d.dict_key blog_type ,d.dict_name blog_type_name,count(*) view_nums from blog_info b
-LEFT JOIN (select * from dict_info where dict_type="blog_type") d  on d.dict_key=b.blog_type group by d.dict_key,d.dict_name,d.val1
+LEFT JOIN (select * from dict_info where dict_type="blog_type") d  on d.dict_key=b.blog_type 
+where b.showflag='1'
+group by d.dict_key,d.dict_name,d.val1
 	]]>
 	</select>
 	
 	
 	<select id="getBlogDetailPageList" parameterType="com.kxjl.web.blog.model.Blog" resultMap="BlogMap">
 	<![CDATA[ 	select a.*,d.dict_name blog_type_name,d.val1 blog_type_url  from (
-	(select '1cur' t, a.* from blog_info a where recordid=#{recordid})  
+	(select '1cur' t, a.* from blog_info a where  a.showflag='1' and  recordid=#{recordid})  
 union
-(select '2next' t, a.* from blog_info a where recordid>#{recordid}  order by recordid asc limit 1)
+(select '2next' t, a.* from blog_info a where a.showflag='1' and  recordid>#{recordid}  order by recordid asc limit 1)
 union
-(select '3pre' t, a.* from blog_info a where recordid<#{recordid} order by recordid desc limit 1)
+(select '3pre' t, a.* from blog_info a where a.showflag='1' and  recordid<#{recordid} order by recordid desc limit 1)
 ) a  left join dict_info d on (d.dict_type='blog_type' and a.blog_type=d.dict_key)
 order by t asc
 
@@ -56,9 +60,12 @@ order by t asc
 	<select id="getBlogPageList" parameterType="com.kxjl.web.blog.model.Blog" resultMap="BlogMap">
 		select a.*,d.dict_name blog_type_name,d.val1 blog_type_url  from blog_info a left join dict_info d on (d.dict_type='blog_type' and a.blog_type=d.dict_key)
 	
-		where 1=1
+		where 1=1 
 		<if test='title != null and title != "" '>
 				and a.title like CONCAT('%',#{title},'%')
+		</if>
+		<if test='showflag != null and showflag != "" '>
+				and a.showflag=#{showflag} 
 		</if>
 		<if test='content != null and content != "" '>
 			and a.content like CONCAT('%',#{content},'%')
@@ -82,9 +89,12 @@ order by t asc
 	
 	<select id="getBlogPageListCount" parameterType="com.kxjl.web.blog.model.Blog" resultType="java.lang.Integer">
 		select count(*) from blog_info a 
-		where 1=1
+		where 1=1  
 		<if test='title != null and title != "" '>
 				and a.title like CONCAT('%',#{title},'%')
+		</if>
+			<if test='showflag != null and showflag != "" '>
+				and a.showflag=#{showflag} 
 		</if>
 		<if test='content != null and content != "" '>
 			and a.content like CONCAT('%',#{content},'%')
@@ -125,9 +135,9 @@ order by t asc
 	    
 		insert into blog_info 
 		(title,blog_type,content,tags,
-		create_date ,imei)
+		create_date ,imei,showflag)
 		values(#{title},#{blog_type},#{content},#{tags}
-			,#{create_date},#{imei})
+			,#{create_date},#{imei},#{showflag})
 	</insert>
 	
 	<update id="updateBlog" parameterType="com.kxjl.web.blog.model.Blog">
@@ -137,7 +147,9 @@ order by t asc
 		<if test='title != null'>
 			title=#{title},
 		</if>
-		
+			<if test='showflag != null'>
+			showflag=#{showflag},
+		</if>
 		<if test='view_nums != null'>
 			view_nums=#{view_nums},
 		</if>

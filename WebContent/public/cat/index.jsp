@@ -9,41 +9,26 @@
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
 			
-<meta name="keywords" content="喵星人专题">
-<meta name="description" content="KxのBook 的个人BLOG-逗逼喵星人" />
-<meta name="author" content="Kx"> 
+<meta name="keywords" content="中华田园猫-小平凡">
+<meta name="description" content="中华田园猫-小平凡 - Kx的个人站点" />
 
-			<title>KxのBook,Welcome~</title>
+<meta name="author" content="ZHANG JIE"> 
+			<title>中华田园猫-小平凡 KxのBook,Welcome~ Kx的个人站点</title>
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
 			 <link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css">
 
 			<link rel="stylesheet" href="../../css/kCommon.css">
 	<link rel="stylesheet" href="../../css/common.css">
-		<!-- 	<link rel="stylesheet" href="../../css/zcfg.css">
-		
-			<link rel="stylesheet" href="../../css/swiper_zcfg.css"> -->
-			<!-- <link rel="stylesheet" href="../../js/plugin/swiper/idangerous.swiper.css"> -->
 
-
-
-<!-- 
-			<script type="text/javascript" src="../../js/plugin/ie8/html5shiv.js"></script>
-			<script type="text/javascript" src="../../js/plugin/ie8/respond.min.js"></script>
- 
- -->
 
 			<script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
 
 			<script type="text/javascript" src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
-			<!-- <script type="text/javascript" src="../../js/plugin/jquery/jquery-ui.js"></script> -->
-
 	<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
  <!-- <script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script> -->
 	<script type="text/javascript" src="../../js/plugin/angular/angular-sanitize.min.js"></script>
-<!-- 			
-				 -->
-			
+
 			<link rel="stylesheet" href="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/obsidian.css">
 			
 	<script type="text/javascript" src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
@@ -70,11 +55,6 @@
 					
 
 
-
-
-
-				
-
 					<div class="  ">
 
 
@@ -84,16 +64,28 @@
 		<div class="panel panel-top panel-default row " >
 
 
- 				<div class="panel-heading">喵喵喵：</div>
-			 <div class="panel-body">
+ 				<div class="panel-heading">Kx说：人人都爱小平凡</div>
+			 <div class="panel-body nopadding">
 		
 					<div id="div1" style="margin: 0 auto">
-						<p><p>
+					
+						
+						<div class="row col-xs-12 nopadding">
+						<div class="col-xs-6 nopadding">
+						<p>本大人睡觉呢~~~<p>&nbsp;
+							<img   class=" img-responsive" src="c2.png" alt="miao miao miao -_-"></img>
+								
+						</div>
+						<div class="col-xs-6 nopadding" >
+							<p>喵喵喵!?<p>&nbsp;
+						<img class="col-xs-11 img-responsive" src="c1.png" alt="miao miao miao -_-"></img>
+						</div>
+						
+						</div>
+						
 					</div>
-					&nbsp;
-					<div  style="margin: 0 auto">
-						<p>.<p>
-					</div>
+					
+				
     			</div>
 
 				
@@ -114,7 +106,9 @@
 
 										<div class="nopadding-left">
 											<img class="nopaddding img-responsive col-xs-2" style="width:25px; height:25px;" title="{{x.blog_type_name}}"   ng-src="{{x.blog_type_url}}">
-											<div class="col-sm-8 col-xs-11  ptitle  "><a class="ptitle" ng-click="detail(x)">{{x.title}}</a></div>
+											<div class="col-sm-8 col-xs-11  ptitle  "><a class="ptitle" ng-click="detail(x)">{{x.title}}</a>
+												<a ng-href="{{preurl}}/public/detail/?i={{x.imei}}" style="display: none;" class="for spider" >{{x.title}}</a>
+											</div>
 
 
 											<div class="col-sm-3 col-xs-12  text-right">
@@ -139,7 +133,7 @@
 											<div>
 												
 												<a href="#" class="detailbtn h5 text-right pull-right text-info margin-right-20" ng-click="detail(x)">详情</a>
-												<a href="{{preurl}}/public/detail/?i={{x.imei}}" style="display: none;" class="for spider" ></a>
+												<a ng-href="{{preurl}}/public/detail/?i={{x.imei}}" style="display: none;" class="for spider" >{{x.title}}</a>
 
 											</div>
 									
@@ -163,12 +157,12 @@
 						<ul class="pagination pull-right">
 							<li>
 								<a href="#" ng-click="getList(page-1)">&laquo;</a>
-								<a href="{{preurl}}/public/index/?i={{page-1}}"  style="display: none;"  style="" class="for spider" ></a>
+								<a ng-href="{{preurl}}/public/index/?i={{page-1}}"  style="display: none;"  style="" class="for spider" >上一頁</a>
 							</li>
 							<li ng-repeat="x in pageDataPre">
 
 								<a href="#" ng-click="getList(x)">{{x}}</a>
-<a href="{{preurl}}/public/index/?i={{x}}" style="display: none;" class="for spider" ></a>
+<a ng-href="{{preurl}}/public/index/?i={{x}}" style="display: none;" class="for spider" >第{{x}}页</a>
 							</li>
 							<li class="active">
 								<a href="#" ng-click="getList(page)">{{page}}</a>
@@ -176,28 +170,13 @@
 							<li ng-repeat="x in pageDataAft">
 
 								<a href="#" ng-click="getList(x)">{{x}}</a>
-<a href="{{preurl}}/public/index/?i={{x}}" style="display: none;" class="for spider" ></a>
+<a ng-href="{{preurl}}/public/index/?i={{x}}" style="display: none;" class="for spider" >第{{x}}页</a>
 							</li>
 							<li>
 								<a href="#" ng-click="getList(page+1)">&raquo;</a>
-								<a href="{{preurl}}/public/index/?i={{page+1}}" style="display: none;" class="for spider" ></a>
+								<a ng-href="{{preurl}}/public/index/?i={{page+1}}" style="display: none;" class="for spider" >下一頁</a>
 							</li>
 
-							<!-- li>
-									<a href="#">&laquo;</a>
-								</li>
-								<li class="active">
-									<a href="#">1</a>
-								</li>
-								<li class="disabled">
-									<a href="#">2</a>
-								</li>
-								<li>
-									<a href="#">3</a>
-								</li>
-								<li>
-									<a href="#">&raquo;</a>
-								</li> -->
 						</ul>
 
 						<select onchange="changerows(this)" class="hide pull-right">
@@ -223,36 +202,15 @@
 
 
 
-
-
-					
-
-
-
-					
-
-
 				</div>
 
 			</div>
 
 
 
-
-
-
-
-			
-
 <%@include file="../pfoot.jsp" %>
 
 	
-
-
-
-<!-- <script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
-
- -->
 
 			<script type="text/javascript" src="../../js/plugin/jquery/jquery.noty.min.js"></script>
 			<script type="text/javascript" src="../../js/plugin/jquery/noty.layout.center.js"></script>
@@ -268,18 +226,7 @@
 	<script src="../../js/own/menu.js"></script>
 <script src="../../js/own/loading.js"></script>
 
-			<!-- <script type="text/javascript" src="../../js/plugin/swiper/idangerous.swiper.min.js"></script> -->
-		
-
-<%--  <script type="text/javascript"
-	src="<c:out value="${basePath}" />/js/plugin/ckeditor4.8/ckeditor.js"></script>
-						 <script type="text/javascript" src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/adapters/jquery.js"></script>
-  --%>
-
-						
-
-				 		<!-- <script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>  -->
-						<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript" src="index.js"></script>
 							<script type="text/javascript" src="../m_index.js"></script>
 						<script type="text/javascript" src="../pright/pright_t_h.js"></script>
 

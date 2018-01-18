@@ -8,10 +8,10 @@
 		<head>
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
-			<title id="title">KxのGOOGLE 搜索代理转发</title>
+			<title id="title">GOOGLE搜索,KxのBook </title>
 			<meta name="keywords" content="GOOGLE 搜索代理转发 KxのBook">
-<meta name="description" content="KxのBook 的个人BLOG-GOOGLE 搜索代理转发" />
-<meta name="author" content="Kx"> 
+<meta name="description" content="GOOGLE搜索 代理转发- KxのBook Kx的个人站点" />
+<meta name="author" content="ZHANGJIE"> 
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
 
 			<link rel="stylesheet" href="../../css/kCommon.css">

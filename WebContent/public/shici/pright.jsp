@@ -34,9 +34,12 @@
 
 		
 
-					<p>保险专栏<p>
+					<p>诗:<p>
 
 					<div id="div1" style="margin: 0 auto">
+					<blockquote>
+					
+					</blockquote>
 					</div>
 
 <!-- <div id="nDate"> </div> -->

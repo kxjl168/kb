@@ -93,10 +93,18 @@ public class BlogTypeController extends BaseController {
 
 			List<DictInfo> infos = blogService.getDictInfoPageList(query);
 			int total = blogService.getDictInfoPageListCount(query);
-
+			String prepath = getImgHttpOutPath();
+			for (int i = 0; i < infos.size(); i++) {
+				DictInfo d=infos.get(i);
+				d.setVal2(prepath);
+				
+			}
+		
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(infos);
 
+		
+			jsonOut.put("val2", prepath);
 			jsonOut.put("ResponseCode", "200");
 			jsonOut.put("ResponseMsg", "");
 			jsonOut.put("total", total);

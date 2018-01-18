@@ -10,10 +10,9 @@
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
 			<meta name="robots" content="noindex,nofollow" />
 <meta name="keywords" content="关于我">
-<meta name="description" content="KxのBook 的个人BLOG-关于我" />
-<meta name="author" content="Kx"> 
-
-			<title>KxのBook,Welcome~</title>
+<meta name="description" content="关于- Kx的个人站点" />
+<meta name="author" content="ZHANG JIE"> 
+			<title>关于 - KxのBook,Welcome~  Kx的个人站点</title>
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
 			 <link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css">
 
@@ -88,14 +87,22 @@
 			 <div class="panel-body">
 		
 					<div id="div1" style="margin: 0 auto">
-					<p>张杰,男,86年人士,07年武汉大学信息安全专业毕业,歌手同名,但是歌唱的五音不全<p>	&nbsp;
-						<p>是从小就要成为科学家的男人！(俺は海贼王になる男だ！...)...<p>	&nbsp;
-						<p>自从上了贼船,一路就这么跌跌撞撞,转眼已10多年...<p>	&nbsp;
+					<p>张杰,男,86年人士,歌手同名,但是歌唱的五音不全<p>	&nbsp;
+						<p>是从小就要成为科学家的男人！但是...(俺は海贼王になる男だ！...)...<p>	&nbsp;
+						<p>自从上了贼船,一路就这么跌跌撞撞,转眼已过去10多年,<p>	&nbsp;
+						<div class="shiju"><blockquote >
+						<p>少年不识愁滋味,爱上层楼.</p>
+						<p>爱上层楼,为赋新词强说愁.</p>
+						<p>而今识尽愁滋味,欲说还休.</p>
+						<p>	欲说还休,却道天凉好个秋.</p>
+					
+						</blockquote>
+						</div> &nbsp;
 						<p>技术没啥精通的,啥都会一点,但是依然感觉没有抓住编程的核心.<p>	&nbsp;
 					
 						<img ></img>
 						<p>养有一只叫做平凡的中华田园猫(土猫>.<)<p>	&nbsp;
-						<p>业余时间爱好篮球、吉他,然鹅我真的有业余时间吗...?<p>	&nbsp;
+						<p>业余时间爱好篮球、吉他等等...?<p>	&nbsp;
 						<p class="hide">历程详细<a href="#">猛击</a><p>	&nbsp;
 					</div>
 				
@@ -118,7 +125,7 @@
 		
 					<div id="div1" style="margin: 0 auto">
 					 <p>2018-01-12	依赖香港服务器上线Google搜索转发页面,(终于可以上google了啊...)<p>	&nbsp;
-						<p>2018-01-01	 建站,属于一拍脑袋就开干,IT人士怎么能没有自己的一份空间,寄托于QQ、微博是什么情况!?<p>	&nbsp;
+						<p>2018-01-03	 建站,属于一拍脑袋就开干,IT人士怎么能没有自己的一个站点;好吧,这是第二个站点,多年前第一个asp.net空间怎么没的都没太关注-_-!<p>	&nbsp;
 					</div>
     			</div>
 			</div>

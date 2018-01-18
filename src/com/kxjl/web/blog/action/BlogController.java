@@ -34,6 +34,8 @@ import com.kxjl.web.stastic.model.ActionLog.StasticTypeOne;
 import com.kxjl.web.stastic.service.StasticService;
 import com.kxjl.web.system.action.base.BaseController;
 import com.kxjl.web.system.model.SysUserBean;
+import com.kxjl.web.blog.action.Kdata.DataType;
+import com.kxjl.web.blog.action.Kdata.Enable;
 import com.kxjl.web.blog.model.Blog;
 import com.kxjl.web.blog.service.BlogService;
 
@@ -184,6 +186,62 @@ public class BlogController extends BaseController {
 	
 
 	/**
+	 * 是否可见类型
+	 * 
+	 * @param map
+	 * @return
+	 * @author zj
+	 * @date 2018-1-18
+	 */
+	@RequestMapping(value = "/getEnableList")
+	public void getKdataList(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		String data = request.getParameter("data");
+		JSONObject jsonIN;
+		JSONObject jsonOut = new JSONObject();
+
+		String rst = "";
+		try {
+
+			jsonIN = new JSONObject(data);
+
+			List<String> types = new ArrayList<String>();
+			for (Enable item : Kdata.Enable.values()) {
+				Kdata.Enable ci=item;
+				
+				types.add(ci.toString());
+			}
+
+			Gson gs = new Gson();
+			String jsStr = gs.toJson(types);
+
+			jsonOut.put("ResponseCode", "200");
+			jsonOut.put("ResponseMsg", "");
+			jsonOut.put("total", types.size());
+			jsonOut.put("datalist", jsStr);
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			try {
+				jsonOut.put("ResponseCode", "201");
+				jsonOut.put("ResponseMsg", "");
+
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+
+		}
+		rst = jsonOut.toString();
+		JsonUtil.responseOutWithJson(response, rst);
+
+	}
+	
+	
+
+	/**
 	 * 页面-获取blog列表
 	 * 
 	 * @param clientType
@@ -218,12 +276,23 @@ public class BlogController extends BaseController {
 		String blog_type = jsonIN.optString("blog_type");
 			String blog_tag = jsonIN.optString("blog_tag");
 			String month = jsonIN.optString("month");
+			
+			String show = jsonIN.optString("show");
+			
+			//页面查询，为空，则默认查可见的
+			if(show.equals(""))
+				show=Kdata.Enable.Enable.value;
+			
+			//后台管理传ni -1,查询全部
+			if(show.equals(Kdata.Enable.NIL.value))
+				show="";
+		 
 
 			int pageCount = jsonIN.optInt("rows");// request.getParameter("pageCount");
 			int curPage = jsonIN.optInt("page");
 
 			String key = "blog_getInfoList" + "_" + month + "_" + blog_type + "_"
-					+ blog_tag + "_" + pageCount + "_" + curPage;
+					+ blog_tag + "_" + pageCount + "_" + curPage+"_"+show;
 			List<Blog> infos = Kdata.getInstance().getBlogList(key);
 
 			Blog query = new Blog();
@@ -231,6 +300,7 @@ public class BlogController extends BaseController {
 			query.setPageCount(pageCount);
 
 			query.setTags(blog_tag);
+			query.setShowflag(show);
 
 			// query.setIp(ip);
 			// query.setCity(city);
@@ -508,6 +578,7 @@ public class BlogController extends BaseController {
 			String content = jsonIN.optString("context");
 
 			String tags = jsonIN.optString("tags");
+			String show = jsonIN.optString("show");
 
 			Blog blog = new Blog();
 			blog.setRecordid(recordid);// (accountid);
@@ -517,6 +588,7 @@ public class BlogController extends BaseController {
 
 			blog.setTitle(title);// (pass);
 			blog.setTags(tags);
+			blog.setShowflag(show);
 
 			blog.setBlog_type(blog_type);// (blog_name);
 			

@@ -60,7 +60,7 @@ function init() {
 			
 
 				
-				$scope.title = "KxのBOOK";
+				$scope.title = "KxのBOOK Kx的个人站点";
 				
 				$scope.page = 1;
 				$scope.rows = 10;

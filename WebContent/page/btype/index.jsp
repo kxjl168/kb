@@ -401,7 +401,8 @@
 							   <button type="button" class="btn btn-primary" ng-click="selectfile()"> 选择 </button>
 							 </div>
 							
-							 <div class="col-xs-12 col-xs-offset-4 row ">
+							 <div class="col-xs-12 col-xs-offset-4 row margin-top-5">
+							 <img id="fullurl" ng-src="{{fullurl}}" class="col-xs-2"></img>
 							<!--  <span ng-show="fm.s_pass.$error.required ">
 							<span style="color:red " title="密码必须填写 ">
 							*密码必须填写&nbsp;
@@ -501,9 +502,9 @@
 			
 	 <input id="url" name="url"
 						ng-model="url" type="hidden" /> 
-
-	
-				
+						 <input id="val2" value="{{val2}}" name="val2"
+						type="hidden" /> 
+			
 
 			<iframe id="fileUploadFrame" name="fileUploadFrame" src=""
 			frameborder="0" hspace="0" height="0" width="0"></iframe>

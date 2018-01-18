@@ -4,6 +4,16 @@
 	color:#333!important;
 }
 
+.shiju p{
+	line-height: 2;
+	color:#7673d9;
+}
+
+blockquote
+{
+	font-size: 15px!important;
+}
+
 .panel-top>.panel-heading {
     color: #ffb840!important;
     background-color: #1F7A68!important;

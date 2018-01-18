@@ -9,29 +9,26 @@
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
 			
-<meta name="keywords" content="KxのBook 个人站点  个人BLOG">
-<meta name="description" content="首页- Kx的个人站点" />
-<meta name="author" content="ZHANG JIE"> 
+<meta name="keywords" content="生物学">
+<meta name="description" content="生物学 - KxのBook - Kx的个人站点" />
 
-			<title>KxのBook,Welcome~</title>
+<meta name="author" content="ZHANG JIE"> 
+			<title>生物学- KxのBook,Welcome~ Kx的个人站点</title>
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
 			 <link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css">
 
 			<link rel="stylesheet" href="../../css/kCommon.css">
 	<link rel="stylesheet" href="../../css/common.css">
 
+
 			<script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
 
 			<script type="text/javascript" src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
-			<!-- <script type="text/javascript" src="../../js/plugin/jquery/jquery-ui.js"></script> -->
-
 	<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
  <!-- <script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script> -->
 	<script type="text/javascript" src="../../js/plugin/angular/angular-sanitize.min.js"></script>
-<!-- 			
-				 -->
-			
+
 			<link rel="stylesheet" href="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/obsidian.css">
 			
 	<script type="text/javascript" src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
@@ -50,12 +47,44 @@
 
 					<%@include file="../phead.jsp"%>
 
+
+
+
 				<div class=" row row-margin-top-70">
+
+					
+
 
 					<div class="  ">
 
 
 						<div id="pgdiv" name="pgdiv" class="col-sm-9 col-xs-12 pleft rightline">
+
+	<div class="col-xs-12 margin-bottom-5" ng-cloak>
+		<div class="panel panel-top panel-default row " >
+
+
+ 				<div class="panel-heading">Kx说：博物学专题-博物学是人类与大自然打交道的一门古老学问.</div>
+			 <div class="panel-body">
+		
+					<div id="div1" style="margin: 0 auto">
+						<p>这里都是生物、化学、物理相关的东西<p>&nbsp;
+						<p>大概这些是世界上最神奇的东西了吧<p>&nbsp;
+					</div>
+					&nbsp;
+					
+    			</div>
+
+				
+
+		</div>
+			<div class="row col-xs-12">
+										<hr></hr>
+			</div>
+	</div>
+
+
+
 
 							<div ng-cloak>
 								<div ng-repeat="x in datalist" class="pgdiv">
@@ -65,7 +94,7 @@
 										<div class="nopadding-left">
 											<img class="nopaddding img-responsive col-xs-2" style="width:25px; height:25px;" title="{{x.blog_type_name}}"   ng-src="{{x.blog_type_url}}">
 											<div class="col-sm-8 col-xs-11  ptitle  "><a class="ptitle" ng-click="detail(x)">{{x.title}}</a>
-											<a ng-href="{{preurl}}/public/detail/{{x.imei}}.html" style="display: none;" class="for spider" >{{x.title}}</a>
+												<a ng-href="{{preurl}}/public/detail/?i={{x.imei}}" style="display: none;" class="for spider" >{{x.title}}</a>
 											</div>
 
 
@@ -115,12 +144,12 @@
 						<ul class="pagination pull-right">
 							<li>
 								<a href="#" ng-click="getList(page-1)">&laquo;</a>
-								<a ng-href="{{preurl}}/public/index/i/{{page-1}}.html"  style="display: none;"  style="" class="for spider" >下一页</a>
+								<a ng-href="{{preurl}}/public/index/?i={{page-1}}"  style="display: none;"  style="" class="for spider" >上一頁</a>
 							</li>
 							<li ng-repeat="x in pageDataPre">
 
 								<a href="#" ng-click="getList(x)">{{x}}</a>
-<a ng-href="{{preurl}}/public/index/i/{{x}}.html" style="display: none;" class="for spider" >第{{x}}页</a>
+<a ng-href="{{preurl}}/public/index/?i={{x}}" style="display: none;" class="for spider" >第{{x}}页</a>
 							</li>
 							<li class="active">
 								<a href="#" ng-click="getList(page)">{{page}}</a>
@@ -128,28 +157,13 @@
 							<li ng-repeat="x in pageDataAft">
 
 								<a href="#" ng-click="getList(x)">{{x}}</a>
-<a ng-href="{{preurl}}/public/index/i/{{x}}.html" style="display: none;" class="for spider" >第{{x}}页</a>
+<a ng-href="{{preurl}}/public/index/?i={{x}}" style="display: none;" class="for spider" >第{{x}}页</a>
 							</li>
 							<li>
 								<a href="#" ng-click="getList(page+1)">&raquo;</a>
-								<a ng-href="{{preurl}}/public/index/i/{{page+1}}.html" style="display: none;" class="for spider" >下一页</a>
+								<a ng-href="{{preurl}}/public/index/?i={{page+1}}" style="display: none;" class="for spider" >下一頁</a>
 							</li>
 
-							<!-- li>
-									<a href="#">&laquo;</a>
-								</li>
-								<li class="active">
-									<a href="#">1</a>
-								</li>
-								<li class="disabled">
-									<a href="#">2</a>
-								</li>
-								<li>
-									<a href="#">3</a>
-								</li>
-								<li>
-									<a href="#">&raquo;</a>
-								</li> -->
 						</ul>
 
 						<select onchange="changerows(this)" class="hide pull-right">
@@ -175,36 +189,15 @@
 
 
 
-
-
-					
-
-
-
-					
-
-
 				</div>
 
 			</div>
 
 
 
-
-
-
-
-			
-
 <%@include file="../pfoot.jsp" %>
 
 	
-
-
-
-<!-- <script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
-
- -->
 
 			<script type="text/javascript" src="../../js/plugin/jquery/jquery.noty.min.js"></script>
 			<script type="text/javascript" src="../../js/plugin/jquery/noty.layout.center.js"></script>
@@ -220,18 +213,7 @@
 	<script src="../../js/own/menu.js"></script>
 <script src="../../js/own/loading.js"></script>
 
-			<!-- <script type="text/javascript" src="../../js/plugin/swiper/idangerous.swiper.min.js"></script> -->
-		
-
-<%--  <script type="text/javascript"
-	src="<c:out value="${basePath}" />/js/plugin/ckeditor4.8/ckeditor.js"></script>
-						 <script type="text/javascript" src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/adapters/jquery.js"></script>
-  --%>
-
-						
-
-				 		<!-- <script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>  -->
-						<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript" src="index.js"></script>
 							<script type="text/javascript" src="../m_index.js"></script>
 						<script type="text/javascript" src="../pright/pright_t_h.js"></script>
 

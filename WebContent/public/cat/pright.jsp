@@ -34,11 +34,13 @@
 
 		
 
-					<p>小站新开，欢迎访问>.<<p>
+					<p>中华田园猫<p>
+					
 
-					<div id="div1" style="margin: 0 auto"></div>
+					<div id="div1" style="margin: 0 auto">
+					</div>
 
-<div id="nDate"> </div>
+<!-- <div id="nDate"> </div> -->
 					<!-- <input id="effectDate" readonly="readonly" name="effectDate" ng-model="effectDate" type="text" class=" form-control"> -->
 
 				</div>
@@ -61,7 +63,7 @@
 
 	
 
-	<%@include file="../pright/pright.jsp"%> 
+	 <%@include file="../pright/pright.jsp"%>
 
 
 

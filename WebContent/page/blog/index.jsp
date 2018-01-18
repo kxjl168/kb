@@ -150,6 +150,7 @@
 										<th width="15%">操作</th> -->
 										
 										<th >文章标题</th>
+											<th >可见</th>
 											<!--  <th   >标题</th> -->
 										<th  >文章类型</th>
 										<th  >标签</th>
@@ -167,6 +168,7 @@
 
 									<tr ng-repeat="x in datalist">
 											<th>{{x.title}}</th>
+												<th>{{x.showdesc}}</th>
 											<!-- <th style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" >{{x.context}}</script> </th> -->
 										<th class="" >{{x.blog_type_name}}</th>
 										<th class="">{{x.tags}}</th>
@@ -290,6 +292,22 @@
 							<div class="col-xs-8 text-right ">
 							<select class="form-control " id="s_type" ng-model="s_type">
 								<option  ng-repeat="x in dicts " value="{{x.dict_key}}">{{x.dict_name}}</option>
+								</select>
+							 </div>
+							 <div class="col-xs-12 col-xs-offset-4 row ">
+							<!--  <span ng-show="fm.s_account.$error.required ">
+							<span style="color:red " title="用户ID必须填写 ">
+							*用户ID必须填写&nbsp;
+							</span> 
+							 </span> -->
+							</div>
+						</div>
+						
+						<div class="form-group  row ">
+							<div class="control-label padding-top-0 col-xs-3 ">是否可见：</div>
+							<div class="col-xs-8 text-right ">
+							<select class="form-control " id="en_type" ng-model="en_type">
+								<option  ng-repeat="x in enables " value="{{x.value}}">{{x.desc}}</option>
 								</select>
 							 </div>
 							 <div class="col-xs-12 col-xs-offset-4 row ">

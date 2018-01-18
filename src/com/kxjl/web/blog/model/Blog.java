@@ -3,9 +3,17 @@ package com.kxjl.web.blog.model;
 import java.util.List;
 
 import com.kxjl.tool.utils.DateUtil;
+import com.kxjl.web.blog.action.Kdata;
+import com.kxjl.web.device.model.Device.RouteFlag;
 import com.kxjl.web.system.model.base.BaseModel;
 
 public class Blog extends BaseModel {
+	
+	
+	
+	
+	
+	
 	private Integer recordid; // id
 
 	/*
@@ -27,6 +35,8 @@ public class Blog extends BaseModel {
 	private String tags;
 	private String imei;
 	
+	private String showflag; //
+	
 	private String[] tagStrs;
 	
 	//query
@@ -34,6 +44,7 @@ public class Blog extends BaseModel {
 	private String blog_type_name;
 	private String blog_type_url;
 	private String month;
+	private String showdesc;
 	
 	
 
@@ -151,6 +162,26 @@ public class Blog extends BaseModel {
 
 	public void setMonth(String month) {
 		this.month = month;
+	}
+
+
+
+	public String getShowdesc() {
+		return showdesc;
+	}
+
+	public void setShowdesc(String showdesc) {
+		this.showdesc = showdesc;
+		
+	}
+
+	public String getShowflag() {
+		return showflag;
+	}
+
+	public void setShowflag(String showflag) {
+		this.showflag = showflag;
+		this. showdesc=Kdata.Enable.parse(showflag).desc;
 	}
 
 	

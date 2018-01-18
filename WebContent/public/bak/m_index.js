@@ -113,7 +113,7 @@ function initQuery() {
 									$scope.pageNum = Math.ceil($scope.total
 											/ $scope.rows);
 									
-									if($scope.pageNum<$scope.page)
+									if($scope.pageNum>0 && $scope.pageNum<$scope.page)
 										{
 										$scope.page=$scope.pageNum;
 										History.replaceState(null,null,basePath+'/public/index/'); 

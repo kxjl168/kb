@@ -22,6 +22,10 @@ public class DictInfo extends BaseModel {
 	private String desc_info;
 	private String val1;
 	
+	
+	//query
+	private String val2;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -66,6 +70,12 @@ public class DictInfo extends BaseModel {
 	}
 	public void setDesc_info(String desc_info) {
 		this.desc_info = desc_info;
+	}
+	public String getVal2() {
+		return val2;
+	}
+	public void setVal2(String val2) {
+		this.val2 = val2;
 	}
 	
 	

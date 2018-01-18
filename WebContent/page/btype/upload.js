@@ -94,6 +94,7 @@ function lookupUploadUrl() {
 			$("#md5").val(fileMd5);
 			$("#oldname").val(obj.document.getElementById("oldName").value);
 			$("#url").val(uploadUrl);
+			$("#fullurl").attr("src", $("#val2").val()+uploadUrl);
 			
 			//重新验证
 			//kvalidate.validate("#fm");

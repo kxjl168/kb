@@ -59,6 +59,8 @@ public class SysBaseInfoController extends BaseController {
 	// 日志记录对象
 	private Logger log = Logger.getLogger(SysBaseInfoController.class);
 
+	
+	
 	@RequestMapping(value = "/getKdataList")
 	public void getKdataList(HttpServletRequest request,
 			HttpServletResponse response) {

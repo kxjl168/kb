@@ -212,6 +212,8 @@ function init() {
 						$scope.desc_info=item.desc_info;
 						$scope.url = item.val1;
 						$scope.oldname = item.val1;
+						$scope.fullurl = item.val2+item.val1;
+						$scope.val2 = item.val2;
 						
 						$("#s_dict_key").attr('disabled','');
 					
@@ -225,12 +227,12 @@ function init() {
 						
 						$scope.url = "";
 						$scope.desc_info="";
-						
+						$scope.oldname="";						
 						$scope.s_sort = "";
-
+						$scope.fullurl = "";
 					}
 
-				//	$scope.getcompayList();
+				
 					$("#myModal2").modal('show');
 				}
 				var http = getImUrl();// "";
@@ -341,6 +343,7 @@ function init() {
 
 							$scope.compays_select = eval(json.datalist);
 
+						
 							setTimeout(function() {
 
 								// $('#p_proxyserver_id').find("option:selected").attr("selected",
@@ -425,7 +428,8 @@ function init() {
 								if (code == 200) {
 
 									$scope.datalist = eval(json.datalist);
-
+									$scope.val2 = json.val2;
+									
 									$scope.total = json.total;
 									$scope.pageDataPre = [];
 									$scope.pageDataAft = [];
