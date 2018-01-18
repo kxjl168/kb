@@ -13,21 +13,17 @@
 <meta name="description" content="KxのBook 的个人BLOG-GOOGLE 搜索代理转发" />
 <meta name="author" content="Kx"> 
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
-			<!-- <link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css">
- -->
+
 			<link rel="stylesheet" href="../../css/kCommon.css">
 
-			<!-- <link rel="stylesheet" href="../../css/zcfg.css"> -->
+	
 			<link rel="stylesheet" href="../../css/common.css">
-<!-- 			<link rel="stylesheet" href="../../css/swiper_zcfg.css">
-			<link rel="stylesheet" href="../../js/plugin/swiper/idangerous.swiper.css"> -->
 
 			<script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
 
 			<script type="text/javascript" src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
-			<!-- <script type="text/javascript" src="../../js/plugin/jquery/jquery-ui.js"></script> -->
-
+	
 	<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
 			<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
 				<script type="text/javascript" src="../../js/plugin/angular/angular-sanitize.min.js"></script>
@@ -217,8 +213,6 @@
 			<%@include file="../pfoot.jsp" %>
 			
 
-<!-- <script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
- -->
 
 
 			<script type="text/javascript" src="../../js/plugin/jquery/jquery.noty.min.js"></script>
@@ -237,15 +231,7 @@
 			<script src="../../js/own/menu.js"></script>
 <script src="../../js/own/loading.js"></script>
 
-<%-- 
-<script type="text/javascript"
-	src="<c:out value="${basePath}" />/js/plugin/ckeditor4.8/ckeditor.js"></script>
-						<script type="text/javascript" src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/adapters/jquery.js"></script>
-
- --%>
-						
-						<!-- <script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script> -->
-						<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript" src="index.js"></script>
 				<script type="text/javascript" src="../pright/pright_t_h.js"></script>
 
 

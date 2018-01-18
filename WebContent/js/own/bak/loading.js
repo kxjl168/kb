@@ -118,6 +118,8 @@ function getNowFormatDate() {
     return currentdate;
 } 
 
+var preurl="http://www.256kb.cn";
+
 
 function getImUrl() {
 	var http =basePath+"/";// "${pageContext.request.contextPath}";
@@ -139,10 +141,10 @@ function getImUrl() {
  */
 function SZUMWS(url, sendData, onsuccess, onfail, showProgress ,datatype         ) {
 
-	console.log("sendData: " + sendData);
+	//console.log("sendData: " + sendData);
 	var ecStr = sendData;// window.HMClient.AESEncrypt(sendData);
 	// console.log("ecCrypt result: " + ecStr);
-	console.log("url: " + url);
+	//console.log("url: " + url);
 
 	var sdata={data:sendData};
 	

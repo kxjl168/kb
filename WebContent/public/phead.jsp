@@ -21,18 +21,7 @@
 						</form>
 
 						<ul class="nav navbar-nav " id="menuul">
-							<!-- <li>
-						<a href="#" ng-click="load('company')">公司账号管理</a>
-					</li>
-					<li class="active">
-						<a href="#">{{title}}</a>
-					</li>
-					<li>
-						<a href="#" ng-click="load('set')">设置</a>
-					</li>
-					<li class="">
-						<a href="">登出</a>
-					</li> -->
+					
 
 						</ul>
 
@@ -45,5 +34,5 @@
 </div>
 <nav class="hide top2 navbar navbar-default margin-bottom-0 " role="navigation">
 <div style=" background-color: red;border: 1px solid #777;"></div>
-<div>11121</div>
+
 </nav>

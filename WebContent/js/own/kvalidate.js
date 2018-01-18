@@ -1,1 +1,477 @@
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)d[e(c)]=k[c]||e(c);k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1;};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p;}('(e(){m 1z=e(){m Y={3k:{g:e(b,f){c/^[\\1q-\\1s]+$/.j(b)},h:\'2i\'},2j:{g:e(b){c/^[A-2g-z]+$/i.j(b)},h:\'1r\'},2h:{g:e(b){c/\\d+\\.\\d+\\.\\d+\\.\\d+/.j(b)},h:\'2m\'},2n:{g:e(b,f){c/^[0-9]\\d{5}$/.j(b)},h:\'2k\'},2l:{g:e(b,f){c/^[1-9]\\d{4,10}$/.j(b)},h:\'2a\'},2b:{g:e(b,f){c/^(?:13\\d|15\\d|18\\d)-?\\d{5}(\\d{3}|\\*{3})$/.j(b)},h:\'28\'},29:{g:e(b,f){c/^(\\d{3}-|\\d{4}-)?(\\d{8}|\\d{7})?(-\\d{1,6})?$/.j(b)},h:\'2e\'},2f:{g:e(b,f){c/(^([0\\+]\\d{2,3})\\d{3,4}\\-\\d{3,8}$)|(^([0\\+]\\d{2,3})\\d{3,4}\\d{3,8}$)|(^([0\\+]\\d{2,3}){0,1}13\\d{9}$)|(^\\d{3,4}\\d{3,8}$)|(^\\d{3,4}\\-\\d{3,8}$)/.j(b)},h:\'2c\'},2d:{g:e(b,f){c/^[0-9]+.?[0-9]*$/.j(b)},h:\'2o\'},2z:{g:e(b,f){c(/^(([1-9]\\d*)|\\d)(\\.\\d{1,2})?$/).j(b)},h:\'2A\'},2x:{g:e(b,f){c(/^(([1-9]\\d*)|\\d)(\\.\\d{1,2})?$/).j(b)},h:\'2y\'},2D:{g:e(b,f){c/^[+]?[1-9]\\d*$/.j(b)},h:\'2E\'},2B:{g:e(b,f){c/^[+]?[0-9]\\d*$/.j(b)},h:\'2C\'},2r:{g:e(b,f){k(/^[1-9]\\d*$/.j(b)){c b>=f[0]&&b<=f[1]}v{c l}},h:\'2s{0}2p{1}2q\'},2v:{g:e(b,f){c b.1k>=f[0]},h:\'2w{0}1g\'},2t:{g:e(b,f){c b.1k<=f[0]},h:\'2u{0}1g\'},1P:{g:e(b,f){k(b==f[0]){c l}v{c K}},h:\'1K\'},1Q:{g:e(b,f){c/(^\\d{15}$)|(^\\d{18}$)|(^\\d{17}(\\d|X|x)$)/.j(b)},h:\'1N\'},1O:{g:e(b,f){c/^[\\1q-\\1s\\w]+$/.j(b)},h:\'1L、1R、23。\'},22:{g:e(b,f){c b==$(f[0]).21()},h:\'24\'},27:{g:e(b){c/^[a-I-P-26 ]{1,}$/.j(b)},h:\'1r、1Z、1U\'},1T:{g:e(b){c/^(([1-9]+)|([0-9]+\\.[0-9]{1,2}))$/.j(b)},h:\'1S！\'},1V:{g:e(b,f){k(/^[1-9]\\d*$/.j(b)){c b>=f[0]&&b<=f[1]}v{c l}},h:\'1Y\'},1X:{g:e(b,f){k(/^[0-9]+.?[0-9]*$/.j(b)){c b>=f[0]&&b<=f[1]}v{c l}},h:\'1W\'},1J:{g:e(b,f){k(/^[0-9]+.?[0-9]*$/.j(b)){c b>=f[0]&&b<=f[1]}v{c l}},h:\'2F\'},2Y:{g:e(b,f){k(/^[0-9]+([.]{1}[0-9]{1,2})?$/.j(b)){c u(b)>u(f[0])&&u(b)<=u(f[1])}v{c l}},h:\'3h\'},3i:{g:e(b,f){k(/^[0-9]+([.]{1}[0-9]{1,2})?$/.j(b)){c u(b)>u(f[0])&&u(b)<=u(f[1])}v{c l}},h:\'3l\'},3o:{g:e(b,q){m E=/^\\d+\\.\\d+\\.\\d+\\.\\d+-\\d+\\.\\d+\\.\\d+\\.\\d+$/;c r.1h(q)||E.j(b);},h:"3n,3b:1m.1i.1.1-1m.1i.1.20"},39:{g:e(b,q){m E=/^\\d+\\.\\d+\\.\\d+\\.\\d+$/;c r.1h(q)||E.j(b);},h:"3g *.*.*.* "},3d:{g:e(1j){m E=/^(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})$/;k(E.38(1j)!=19){k(F.$1<0||F.$1>1c)c l;k(F.$2<0||F.$2>1c)c l;k(F.$3<0||F.$3>1c)c l;}v{c l}c K},h:\'3e“x.x.x”3a！\'},3m:{g:e(L){m 11=/^.*\\d+.*$/;m 1p=/^.*[a-z]+.*$/;m 1n=/^.*[A-Z]+.*$/;m 1o=/^.*[~!@#$%^&*H+()?]+.*$/;m 1l=/^.{6,18}$/;k(!11.j(L)){c l}k(!1p.j(L)){c l}k(!1n.j(L)){c l}k(!1o.j(L)){c l}k(!1l.j(L)){c l}c K},h:\'2O、2N、 2Q~!@#$%^&*()H?,2T 2S-2R\'},2I:{g:e(b){m 11=/^([a-I-P-9]+[H|\\H|\\.]?)*[a-I-P-9]+@([a-I-P-9]+[H|\\H|\\.]?)*[a-I-P-9]+\\.[a-I-Z]{2,3}$/;k(!11.j(b)){c l}c K},h:\'2M\'},2L:{g:e(b,f){c l;},h:\'2K.\'}};33(m W 32 Y){1y.g.31(W,Y[W].g,Y[W].h)}};y.M={};y.M.s={};m 1v=e(n,O,Q,14,S,1d){m C=$(n).1E({S:S,35:\'T\',2W:\'2V-2U\',O:O,Q:Q,2X:e(o,q){k(o[0].30!=""){m 1b="1t-1u-2Z-4";k(36(1d)!="37")1b=1d;q.G(\'.p-D\').J(".o").B();q.1C(\'<T 1f="o U U-B p-1F-R" 1D-1I="K"></T>\');q.G(\'.p-D\').34("<1A 1f=\\" 1e 1t-1u-12 2J "+1b+" \\">"+o[0].2G+"</1A>");}},2H:e(q){$(q).G(\'.p-D\').1w(\'t-o t-R\')},1a:e(N){m 16=N.G(\'.p-D\').J(".o");16.1C(\'<T 1f="o U U-2P p-1F-R" 1D-1I="K"></T>\');16.B();N.G(\'.p-D\').1H(\'t-o\').1w("t-R t-1a");N.G(\'.p-D\').J(".1e").B();N.B()},1x:14});y.M.s[n.n]=C};1y.g.3f({3j:l});1z();y.M.3c=e(n,O,Q,14,S,1B){1v(n,O,Q,14,S,1B)};y.M.1E=e(n){k(r.s[n]!=19){k(r.s[n].p())r.s[n].25.1x.1M(r.s[n],r.s[n].V)}};y.M.1G=e(n){k(r.s[n]!=19)C=r.s[n];C.1G();$(C.V).J(".o").B();$(C.V).J(".1e").B();$(C.V).J(\'.p-D\').1H("t-o t-R t-1a")}})(y);',62,211,'|||||||||||value|return||function|param|validator|message||test|if|false|var|selector|error|form|element|this|validators|has|parseFloat|else|||window|||remove|jqueryValidator|group|reg|RegExp|closest|_|zA|find|true|pass|kvalidate|label|rules|Z0|messages|feedback|debug|span|glyphicon|currentForm|rule||vrules|||reg1|||submithanlder||el|||null|success|ofstclass|255|offsetclass|errormsg|class|个字|optional|168|versionNum|length|reg5|192|reg3|reg4|reg2|u0391|请输入英文|uFFE5|col|xs|initFormValidate|addClass|submitHandler|jQuery|initValidate|div|cls|after|aria|validate|control|resetForm|removeClass|hidden|portPhysicla|请选择|登录名称只允许汉字|call|请输入正确的身份证号|loginName|selectValid|idCode|英文字母|最多保留两位小数|xiaoshu|下划线或者空格|ddPrice|请输入1000到65280整数|portPrice|请输入1到100之间正整数|数字||val|equalTo|数字及下划线|两次输入的字符不一至|settings|9_|englishOrNum|手机号码不正确|tel|QQ号码不正确|mobile|请正确输入电话号码|number|电话号码不正确|mobileAndTel|Za|ip|请输入汉字|english|邮政编码不存在|QQ|IP地址格式不正确|ZIP|请输入数字|到|之间|range|输入的数字在|maxLength|最多|minLength|至少输入|mone|请输入整数或小数|money|请输入正确的金额|integ|请输入整数|integer|请输入最小为1的整数|请输入9500到9999整数|outerHTML|highlight|email|row|请选择配置参数|selectValueRequired|邮箱格式错误|大小写字母|密码需要包含数字|ok|以下特殊符号|18位|长度在6|并且|block|help|errorClass|errorPlacement|jretailUpperLimit|offset|innerHTML|addMethod|in|for|append|errorElement|typeof|undefined|exec|version4|格式|格式示例|init|version3|版本号应为|setDefaults|版本号格式|请输入0到100之间的最多俩位小数的数字|rateCheck|onsubmit|CHS|请输入0到1000之间的最多俩位小数的数字|strongpass|IP段格式错误|ipdesc'.split('|'),0,{}))
+(function () {
+
+	var initValidate = function () {
+
+		var vrules =
+			{
+
+
+				CHS: {
+					validator: function (value, param) {
+						return /^[\u0391-\uFFE5]+$/.test(value);
+					},
+					message: '请输入汉字'
+				},
+				english: {// 验证英语
+					validator: function (value) {
+						return /^[A-Za-z]+$/i.test(value);
+					},
+					message: '请输入英文'
+				},
+				ip: {// 验证IP地址
+					validator: function (value) {
+						return /\d+\.\d+\.\d+\.\d+/.test(value);
+					},
+					message: 'IP地址格式不正确'
+				},
+				ZIP: {
+					validator: function (value, param) {
+						return /^[0-9]\d{5}$/.test(value);
+					},
+					message: '邮政编码不存在'
+				},
+				QQ: {
+					validator: function (value, param) {
+						return /^[1-9]\d{4,10}$/.test(value);
+					},
+					message: 'QQ号码不正确'
+				},
+				mobile: {
+					validator: function (value, param) {
+						return /^(?:13\d|15\d|18\d)-?\d{5}(\d{3}|\*{3})$/
+							.test(value);
+					},
+					message: '手机号码不正确'
+				},
+				tel: {
+					validator: function (value, param) {
+						return /^(\d{3}-|\d{4}-)?(\d{8}|\d{7})?(-\d{1,6})?$/
+							.test(value);
+					},
+					message: '电话号码不正确'
+				},
+				mobileAndTel: {
+					validator: function (value, param) {
+						return /(^([0\+]\d{2,3})\d{3,4}\-\d{3,8}$)|(^([0\+]\d{2,3})\d{3,4}\d{3,8}$)|(^([0\+]\d{2,3}){0,1}13\d{9}$)|(^\d{3,4}\d{3,8}$)|(^\d{3,4}\-\d{3,8}$)/
+							.test(value);
+					},
+					message: '请正确输入电话号码'
+				},
+				number: {
+					validator: function (value, param) {
+						return /^[0-9]+.?[0-9]*$/.test(value);
+					},
+					message: '请输入数字'
+				},
+				money: {
+					validator: function (value, param) {
+						return (/^(([1-9]\d*)|\d)(\.\d{1,2})?$/)
+							.test(value);
+					},
+					message: '请输入正确的金额'
+
+				},
+				mone: {
+					validator: function (value, param) {
+						return (/^(([1-9]\d*)|\d)(\.\d{1,2})?$/)
+							.test(value);
+					},
+					message: '请输入整数或小数'
+
+				},
+				integer: {
+					validator: function (value, param) {
+						return /^[+]?[1-9]\d*$/.test(value);
+					},
+					message: '请输入最小为1的整数'
+				},
+				integ: {
+					validator: function (value, param) {
+						return /^[+]?[0-9]\d*$/.test(value);
+					},
+					message: '请输入整数'
+				},
+				range: {
+					validator: function (value, param) {
+						if (/^[1-9]\d*$/.test(value)) {
+							return value >= param[0] && value <= param[1]
+						} else {
+							return false;
+						}
+					},
+					message: '输入的数字在{0}到{1}之间'
+				},
+				minLength: {
+					validator: function (value, param) {
+						return value.length >= param[0]
+					},
+					message: '至少输入{0}个字'
+				},
+			
+				maxLength: {
+					validator: function (value, param) {
+						return value.length <= param[0]
+					},
+					message: '最多{0}个字'
+				},
+				// select即选择框的验证
+				selectValid: {
+					validator: function (value, param) {
+						if (value == param[0]) {
+							return false;
+						} else {
+							return true;
+						}
+					},
+					message: '请选择'
+				},
+				idCode: {
+					validator: function (value, param) {
+						return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
+							.test(value);
+					},
+					message: '请输入正确的身份证号'
+				},
+				loginName: {
+					validator: function (value, param) {
+						return /^[\u0391-\uFFE5\w]+$/.test(value);
+					},
+					message: '登录名称只允许汉字、英文字母、数字及下划线。'
+				},
+				equalTo: {
+					validator: function (value, param) {
+						return value == $(param[0]).val();
+					},
+					message: '两次输入的字符不一至'
+				},
+				englishOrNum: {// 只能输入英文和数字
+					validator: function (value) {
+						return /^[a-zA-Z0-9_ ]{1,}$/.test(value);
+					},
+					message: '请输入英文、数字、下划线或者空格'
+				},
+				xiaoshu: {
+					validator: function (value) {
+						return /^(([1-9]+)|([0-9]+\.[0-9]{1,2}))$/
+							.test(value);
+					},
+					message: '最多保留两位小数！'
+				},
+				ddPrice: {
+					validator: function (value, param) {
+						if (/^[1-9]\d*$/.test(value)) {
+							return value >= param[0] && value <= param[1];
+						} else {
+							return false;
+						}
+					},
+					message: '请输入1到100之间正整数'
+				},
+				portPrice: {
+					validator: function (value, param) {
+						if (/^[0-9]+.?[0-9]*$/.test(value)) {
+							return value >= param[0] && value <= param[1];
+						} else {
+							return false;
+						}
+					},
+					message: '请输入1000到65280整数'
+				},
+				portPhysicla: {
+					validator: function (value, param) {
+						if (/^[0-9]+.?[0-9]*$/.test(value)) {
+							return value >= param[0] && value <= param[1];
+						} else {
+							return false;
+						}
+					},
+					message: '请输入9500到9999整数'
+				},
+				jretailUpperLimit: {
+					validator: function (value, param) {
+						if (/^[0-9]+([.]{1}[0-9]{1,2})?$/.test(value)) {
+							return parseFloat(value) > parseFloat(param[0])
+								&& parseFloat(value) <= parseFloat(param[1]);
+						} else {
+							return false;
+						}
+					},
+					message: '请输入0到100之间的最多俩位小数的数字'
+				},
+				rateCheck: {
+					validator: function (value, param) {
+						if (/^[0-9]+([.]{1}[0-9]{1,2})?$/.test(value)) {
+							return parseFloat(value) > parseFloat(param[0])
+								&& parseFloat(value) <= parseFloat(param[1]);
+						} else {
+							return false;
+						}
+					},
+					message: '请输入0到1000之间的最多俩位小数的数字'
+				},
+				ipdesc: {
+					validator: function (value, element) {
+						var reg = /^\d+\.\d+\.\d+\.\d+-\d+\.\d+\.\d+\.\d+$/;
+
+						return this.optional(element) || reg.test(value);
+						//return reg.test(value);
+
+					},
+					message: "IP段格式错误,格式示例:192.168.1.1-192.168.1.20"
+				},
+				version4: {
+					validator: function (value, element) {
+						var reg = /^\d+\.\d+\.\d+\.\d+$/;
+
+						return this.optional(element) || reg.test(value);
+						//return reg.test(value);
+
+					},
+					message: "版本号格式 *.*.*.* "
+				},
+				// 判断版本号格式是否为1.1.1格式
+				version3: {
+					validator: function (versionNum) {
+						// var reg =
+						// /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
+						var reg = /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
+						if (reg.exec(versionNum) != null) {
+							if (RegExp.$1 < 0 || RegExp.$1 > 255)
+								return false;
+							if (RegExp.$2 < 0 || RegExp.$2 > 255)
+								return false;
+							if (RegExp.$3 < 0 || RegExp.$3 > 255)
+								return false;
+							// if(RegExp.$4<0 || RegExp.$4>255) return
+							// false;
+						} else {
+							return false;
+						}
+						return true;
+					},
+					message: '版本号应为“x.x.x”格式！'
+				},
+				// 判断强密码格式，数字、大小写，符号，6-18位
+				// ja.put(".*\\d+.*");
+				// ja.put(".*[a-z]+.*");
+				// ja.put(".*[A-Z]+.*");
+				// ja.put(".*[~!@#$%^&*_+()?]+.*");
+				// ja.put(".{6,18}");
+				strongpass: {
+					validator: function (pass) {
+						// var reg =
+						// /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
+						var reg1 = /^.*\d+.*$/;
+						var reg2 = /^.*[a-z]+.*$/;
+						var reg3 = /^.*[A-Z]+.*$/;
+						var reg4 = /^.*[~!@#$%^&*_+()?]+.*$/;
+						var reg5 = /^.{6,18}$/;
+						if (!reg1.test(pass)) {
+							return false;
+						}
+						if (!reg2.test(pass)) {
+							return false;
+						}
+						if (!reg3.test(pass)) {
+							return false;
+						}
+						if (!reg4.test(pass)) {
+							return false;
+						}
+						if (!reg5.test(pass)) {
+							return false;
+						}
+
+
+						return true;
+					},
+					message: '密码需要包含数字、大小写字母、 以下特殊符号~!@#$%^&*()_?,并且 长度在6-18位'
+				},
+				email: {
+					validator: function (value) {
+						// var reg =
+						// /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
+						var reg1 = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+
+						if (!reg1.test(value)) {
+							return false;
+						}
+
+						return true;
+					},
+					message: '邮箱格式错误'
+
+
+				},
+				selectValueRequired: {
+					validator: function (value, param) {
+						return false;
+						// if(param.length<0)
+						// return fase;
+						// else
+						// {
+						// console.info($(param[0]).find("option:contains('"+value+"')").val());
+						// return
+						// $(param[0]).find("option:contains('"+value+"')").val()
+						// != '';
+						// }
+					},
+					message: '请选择配置参数.'
+				}
+			};
+
+		for (var rule in vrules) {
+
+			jQuery.validator.addMethod(
+				rule,
+				vrules[rule].validator,
+				vrules[rule].message
+			);
+
+		}
+
+		/* jQuery.validator.addMethod("isPhone", function (value, element) {
+			var length = value.length;
+			return this.optional(element) || (length == 11 && /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(value));
+		}, "请正确填写您的手机号码。"); */
+	};
+
+
+	window.kvalidate={};
+	window.kvalidate.validators = {};
+
+	var initFormValidate = function (selector, rules, messages, submithanlder,debug,offsetclass) {
+		var jqueryValidator = $(selector)
+			.validate(
+			{
+				debug: debug,
+				errorElement: 'span',
+				errorClass: 'help-block',
+
+				rules: rules
+				/*
+				 * { firstname : "required", email : { required :
+				 * true, email : true }, password : { required :
+				 * true, isPwd : true }, confirm_password : {
+				 * required : true, isPwd : true, equalTo :
+				 * "#password" }, phone : { required : true, isPhone :
+				 * true }, tel : { isTel : true }, address : {
+				 * minlength : 10 } }
+				 */
+				,
+				messages: messages
+				/*
+				 * { firstname : "请输入姓名", email : { required :
+				 * "请输入Email地址", email : "请输入正确的email地址" }, password : {
+				 * required : "请输入密码", minlength :
+				 * jQuery.format("密码不能小于{0}个字 符") },
+				 * confirm_password : { required : "请输入确认密码",
+				 * minlength : "确认密码不能小于5个字符", equalTo :
+				 * "两次输入密码不一致不一致" }, phone : { required : "请输入手机号码" },
+				 * tel : { required : "请输入座机号码" }, address : {
+				 * required : "请输入家庭地址", minlength :
+				 * jQuery.format("家庭地址不能少于{0}个字符") } }
+				 */
+				,
+				// 自定义错误消息放到哪里
+				errorPlacement: function (error, element) {
+					//	element.next().remove();// 删除显示图标
+
+					if (error[0].innerHTML != "") {
+
+						var ofstclass="col-xs-offset-4";
+						if(typeof(offsetclass)!="undefined")
+							ofstclass=offsetclass;
+
+						element.closest('.form-group').find(
+							".error").remove();
+						element
+							.after('<span class="error glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>');
+						element.closest('.form-group').append(
+							"<div class=\" errormsg col-xs-12 row "+ofstclass+" \">"
+
+							+ error[0].outerHTML
+
+							+ "</div>"
+						);// 显示错误消息提示
+					}
+				},
+				// 给未通过验证的元素进行处理
+				highlight: function (element) {
+					$(element).closest('.form-group').addClass(
+						'has-error has-feedback');
+				},
+				// 验证通过的处理
+				success: function (label) {
+					var el = label.closest('.form-group').find(
+						".error");
+
+					el
+						.after('<span class="error glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>');
+
+					el.remove();// 与errorPlacement相似
+
+
+					label.closest('.form-group').removeClass(
+						'has-error').addClass(
+						"has-feedback has-success");
+
+					label.closest('.form-group').find(
+						".errormsg").remove();
+
+					label.remove();
+				},
+				submitHandler:submithanlder
+
+			});
+
+
+		
+			window.kvalidate.validators[selector.selector] = jqueryValidator;
+		
+
+	};
+	
+	
+	jQuery.validator.setDefaults({
+		onsubmit:false
+	}) ;
+	
+
+	initValidate();
+
+	window.kvalidate
+		.init = function (selector, rules, messages, submithanlder,debug,cls) {
+			initFormValidate(selector, rules, messages, submithanlder,debug,cls);
+		};
+	window.kvalidate
+		.validate = function (selector) {
+			//if(typeof(selector)=="undefined")
+		//	this.validators[selector].form();
+			if (this.validators[selector] != null)
+				{
+				if(this.validators[selector].form())
+				this.validators[selector].settings.submitHandler.call(this.validators[selector], this.validators[selector].currentForm );
+				}
+		};
+	window.kvalidate
+		.resetForm = function (selector) {
+			if (this.validators[selector] != null)
+	
+				jqueryValidator = this.validators[selector];
+				jqueryValidator.resetForm();
+				$(jqueryValidator.currentForm).find(
+					".error").remove();
+				$(jqueryValidator.currentForm).find(
+					".errormsg").remove();
+
+				$(jqueryValidator.currentForm).find('.form-group').removeClass(
+					"has-error has-feedback has-success");
+			};
+
+		
+
+
+
+
+})(window);

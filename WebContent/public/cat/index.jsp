@@ -113,7 +113,7 @@
 									<div class="row col-xs-12 ">
 
 										<div class="nopadding-left">
-											<img class="nopaddding img-responsive col-xs-2" style="width:25px; height:25px;" title="{{x.blog_type_name}}"   src="{{x.blog_type_url}}">
+											<img class="nopaddding img-responsive col-xs-2" style="width:25px; height:25px;" title="{{x.blog_type_name}}"   ng-src="{{x.blog_type_url}}">
 											<div class="col-sm-8 col-xs-11  ptitle  "><a class="ptitle" ng-click="detail(x)">{{x.title}}</a></div>
 
 

@@ -57,7 +57,8 @@ public class PageFilter implements Filter {
 		 */
 
 		// 伪静态页面。解析url
-		if (request.getRequestURI().endsWith(".htm")||request.getRequestURI().endsWith(".html")) {
+		if (request.getRequestURI().endsWith(".htm")
+				|| request.getRequestURI().endsWith(".html")) {
 			try {
 
 				String cpath = request.getContextPath();
@@ -75,10 +76,10 @@ public class PageFilter implements Filter {
 					// request.get
 
 					String imei = curl.substring(xindex + 1, dotindex);
-					String nurl = "?i=" + imei;
-				if(imei.equals(""))
-					nurl = "../../" + imei;
-					
+					String nurl = "./?i=" + imei;
+					if (imei.equals(""))
+						nurl = "../../" + imei;
+				
 					wrapper.sendRedirect(nurl);
 					return;
 				} else if (curl.contains("public/index/")) {

@@ -90,7 +90,9 @@ function initmenu_p(ul,curmenu){
 							if (!menus[i].menuParentid) {
 
 
-								html += "<li {{active}} class=\"dropdown\"><a href=\"#\" " ;
+								html += "<li {{active}} class=\"dropdown\">" +
+										"<a style=\"display:none;\" href=\""+preurl+"/"+menus[i].menuUrl+"\"   >"+menus[i].menuName+"</a>" +
+										"<a href=\"#\" " ;
 								
 								if(menus[i].menuUrl){
 									html +=" onclick=\"javascript:loadmenu('"

@@ -75,7 +75,7 @@
 									<div class="row col-xs-12 ">
 					
 										<div class="nopadding-left">
-											<img class="nopaddding img-responsive col-xs-2" style="width:25px; height:25px;" title="{{x.blog_type_name}}" src="{{x.blog_type_url}}">
+											<img class="nopaddding img-responsive col-xs-2" style="width:25px; height:25px;" title="{{x.blog_type_name}}" ng-src="{{x.blog_type_url}}">
 											<div class="col-sm-8 col-xs-11 ptitle  ">{{x.title}}</div>
 					
 					
@@ -117,55 +117,19 @@
 									<ul class="pagination pull-left">
 										<li>
 											<a href="#" ng-show="pre" ng-click="getList(pre.imei)">&laquo;上一篇</a>
-												<a href="{{preurl}}/public/detail/{{pre.imei}}.html" style="display: none;" class="for spider" ></a>
+												<a ng-href="{{preurl}}/public/detail/{{pre.imei}}.html" style="display: none;" class="for spider" >{{pre.title}}</a>
 										</li>
 									</ul>
 									<ul class="pagination pull-right">
 										<li>
 											<a href="#" ng-show="next" ng-click="getList(next.imei)">下一篇&raquo;</a>
-											<a href="{{preurl}}/public/detail/{{next.imei}}.html" style="display: none;" class="for spider" ></a>
+											<a ng-href="{{preurl}}/public/detail/{{next.imei}}.html" style="display: none;" class="for spider" >{{next.title}}</a>
 										</li>
 									</ul>
 					
 					
 					
-									<ul class="hide pagination pull-right">
-										<li>
-											<a href="#" ng-click="getList(page-1)">&laquo;</a>
-										</li>
-										<li ng-repeat="x in pageDataPre">
-					
-											<a href="#" ng-click="getList(x)">{{x}}</a>
-					
-										</li>
-										<li class="active">
-											<a href="#" ng-click="getList(page)">{{page}}</a>
-										</li>
-										<li ng-repeat="x in pageDataAft">
-					
-											<a href="#" ng-click="getList(x)">{{x}}</a>
-					
-										</li>
-										<li>
-											<a href="#" ng-click="getList(page+1)">&raquo;</a>
-										</li>
-					
-										<!-- li>
-														<a href="#">&laquo;</a>
-													</li>
-													<li class="active">
-														<a href="#">1</a>
-													</li>
-													<li class="disabled">
-														<a href="#">2</a>
-													</li>
-													<li>
-														<a href="#">3</a>
-													</li>
-													<li>
-														<a href="#">&raquo;</a>
-													</li> -->
-									</ul>
+									
 					
 									<select onchange="changerows(this)" class="hide pull-right">
 										<option ng-repeat="x in rows_select">{{x}}</option>

@@ -16,10 +16,15 @@
 	</resultMap>
 
 
-	<select id="GetDetailList" statementType="STATEMENT"  parameterType="com.kxjl.web.stastic.model.ActionLog"
+	<select id="GetDetailList"  parameterType="com.kxjl.web.stastic.model.ActionLog"
 		 resultMap="ActionLogMap">
 		
-select city,userid,count(*) total_uv from user_action_log where type_first='${type_first}' and type_second='${type_second}'
+select city,userid,count(*) total_uv from user_action_log where
+ type_first='${type_first}' 
+	<if test='type_second!=null and type_second!= "" '>
+ and type_second='${type_second}'
+ </if>
+
 and 
 str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}')
 		
@@ -28,11 +33,16 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 	</select>
 	
 	
-	<select id="GetDetailListCount" statementType="STATEMENT" parameterType="com.kxjl.web.stastic.model.ActionLog"
+	<select id="GetDetailListCount"  parameterType="com.kxjl.web.stastic.model.ActionLog"
 		 resultType="java.lang.Integer">
 	
 	    select count(*) from (
-select city,userid,count(*) total_uv from user_action_log where type_first='${type_first}' and type_second='${type_second}'
+select city,userid,count(*) total_uv from user_action_log where 
+type_first='${type_first}' 
+	<if test='type_second!=null and type_second!= "" '>
+ and type_second='${type_second}'
+ </if>
+ 
 and 
 
 str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}')

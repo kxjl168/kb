@@ -2,6 +2,7 @@ package com.kxjl.tool.prerenderio;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.tool.utils.DateUtil;
 import com.kxjl.tool.utils.IPUtils;
 import com.kxjl.web.translog.dao.SpiderlogDao;
@@ -96,39 +97,76 @@ public class PrerenderSeoService {
 		return false;
 	}
 
+	/**
+	 * 记录爬虫日志
+	 */
+	private void saveSpiderLog(HttpServletRequest servletRequest) {
+		final HttpServletRequest rt = servletRequest;
+		// kxjl SAVE LOG
+		try {
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+
+					// 配置文件中读取
+					String seologUrls = ConfigReader.getInstance().getProperty(
+							"seologUrls", "/public");
+					String[] urls = seologUrls.split(",");
+					boolean usefullrequest = false;
+					if (rt.getRequestURI().equals("/")) {
+						usefullrequest = true;
+
+					} else {
+						for (int i = 0; i < urls.length; i++) {
+
+							String url = urls[i];
+							if (url.trim().equals(""))
+								continue;
+
+							if (rt.getRequestURI().contains(url)) {
+								usefullrequest = true;
+								break;
+							}
+
+						}
+					}
+
+					if (!usefullrequest)
+						return;
+
+					Spiderlog slog = new Spiderlog();
+					try {
+						String ip = rt.getRemoteAddr();
+						slog.setRequest_ip(ip);
+						String city = IPUtils.getCityByIP(ip);
+						slog.setRequest_city(city);
+						boolean hasqstr = (rt.getQueryString() == null)
+								|| (rt.getQueryString().trim().equals(""));
+						slog.setRequest_url(rt.getRequestURI()
+								+ (hasqstr ? "" : ("?" + rt.getQueryString())) );
+						slog.setTime(DateUtil.getNowStr(""));
+						slog.setSpider_head(rt.getHeader("User-Agent"));
+						spdierlogDao.addSpiderlog(slog);
+					} catch (Exception e) {
+						log.error("save spider error" + e.getMessage());
+					}
+
+				}
+			}).run();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
 	private boolean handlePrerender(HttpServletRequest servletRequest,
 			HttpServletResponse servletResponse) throws URISyntaxException,
 			IOException {
 		if (shouldShowPrerenderedPage(servletRequest)) {
 
-			final HttpServletRequest rt = servletRequest;
-			// kxjl SAVE LOG
-			try {
-				new Thread(new Runnable() {
-
-					@Override
-					public void run() {
-
-						Spiderlog slog = new Spiderlog();
-						try {
-							String ip = rt.getRemoteAddr();
-							slog.setRequest_ip(ip);
-							String city = IPUtils.getCityByIP(ip);
-							slog.setRequest_city(city);
-							slog.setRequest_url(rt.getRequestURI());
-							slog.setTime(DateUtil.getNowStr(""));
-							slog.setSpider_head(rt.getHeader("User-Agent"));
-							spdierlogDao.addSpiderlog(slog);
-						} catch (Exception e) {
-							log.error("save spider error"+e.getMessage());
-						}
-
-					}
-				}).run();
-
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+			// 记录有转化过的爬虫请求
+			saveSpiderLog(servletRequest);
 
 			this.preRenderEventHandler = prerenderConfig.getEventHandler();
 			if (beforeRender(servletRequest, servletResponse)
@@ -137,6 +175,11 @@ public class PrerenderSeoService {
 				return true;
 			}
 		}
+		String userAgent = servletRequest.getHeader("User-Agent");
+		if (userAgent != null && userAgent.toLowerCase().contains("googlebot"))
+			// 记录google的爬虫请求
+			saveSpiderLog(servletRequest);
+
 		return false;
 	}
 

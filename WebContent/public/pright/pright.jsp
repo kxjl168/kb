@@ -2,16 +2,16 @@
 
 	
 	<div class=" panel panel-success">
-		<div class="panel-heading" title="" data-toggle="collapse" data-parent="#accordion" href="#collapseOner1">
+		<div class="panel-heading" title="" data-toggle="collapse" data-parent="#accordion" href="#collapseOner11">
 			<div class="row">
 				<h3 class="panel-title  col-xs-10">文章分类</h3>
 
 
 
-				<span id="titlepic" data-toggle="collapse" data-parent="#accordion" href="#collapseOner1" class="glyphicon glyphicon-chevron-up pull-right "></span>
+				<span id="titlepic" data-toggle="collapse" data-parent="#accordion" href="#collapseOner11" class="glyphicon glyphicon-chevron-up pull-right "></span>
 			</div>
 		</div>
-		<div id="collapseOner1" class="panel-collapse collapse in ">
+		<div id="collapseOner11" class="panel-collapse collapse in ">
 			<div class="panel-body">
 
 				<div class="container">
@@ -19,11 +19,11 @@
 					<div ng-cloak ng-repeat="x in tplist">
 					 <div class="row" >
 						 <a 					 ng-click="showtp(x)">
-					 <img class="nopaddding img-responsive col-xs-2" style="width:20px; height:20px;" title="{{x.blog_type_name}}"   src="{{x.blog_type_url}}">
+					 <img class="nopaddding img-responsive col-xs-2" style="width:20px; height:20px;" title="{{x.blog_type_name}}"   ng-src="{{x.blog_type_url}}">
 					 {{x.blog_type_name}}&nbsp;<span>({{x.view_nums}})</span>
 					 </a>
 					 
-					 	<a href="{{preurl}}/public/index/bt/{{x.blog_type}}.html"  style="display: none;"  style="" class="for spider" ></a>
+					 	<a ng-href="{{preurl}}/public/index/bt/{{x.blog_type}}.html"  style="display: none;"  style="" class="for spider" > {{x.blog_type_name}}</a>
 					</div>
 				  </div>
 				</div>
@@ -54,7 +54,7 @@
 							<a 					 ng-click="showh(x)"> 
 					 {{x.month}}&nbsp;<span>({{x.view_nums}})</span>
 					 </a>
-					 	<a href="{{preurl}}/public/index/h/{{x.month}}.html"  style="display: none;"  style="" class="for spider" ></a>
+					 	<a ng-href="{{preurl}}/public/index/h/{{x.month}}.html"  style="display: none;"  style="" class="for spider" >{{x.month}}</a>
 					</div>
 					</div>
 					</div>
@@ -86,7 +86,7 @@
 							<a 	ng-cloak	ng-repeat="x in tglist"			 ng-click="showtg(x)"> 
 					 {{x.tags}}&nbsp;,
 					 </a>
-					<a ng-cloak	ng-repeat="x in tglist"	 href="{{preurl}}/public/index/tg/{{x.tags}}.html"  style="display: none;"  style="" class="for spider" ></a>
+					<a ng-cloak	ng-repeat="x in tglist"	 ng-href="{{preurl}}/public/index/tg/{{x.tags}}.html"  style="display: none;"  style="" class="for spider" >{{x.tags}}</a>
 					
 					</div>
 	

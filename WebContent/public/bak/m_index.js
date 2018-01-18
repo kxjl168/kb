@@ -12,7 +12,7 @@ function initQuery() {
 				};
 				
 				//for spider
-				$scope.preurl="http://256kb.cn";
+				$scope.preurl="http://www.256kb.cn";
 
 				var http = getImUrl();
 
@@ -107,6 +107,21 @@ function initQuery() {
 									if (typeof (document.body.scrollTop) != 'undefined')
 										document.body.scrollTop = 0;
 
+									$scope.total = json.total;
+									$scope.pageDataPre = [];
+									$scope.pageDataAft = [];
+									$scope.pageNum = Math.ceil($scope.total
+											/ $scope.rows);
+									
+									if($scope.pageNum<$scope.page)
+										{
+										$scope.page=$scope.pageNum;
+										History.replaceState(null,null,basePath+'/public/index/'); 
+										$scope.getList($scope.page);
+										return;
+										}
+									
+									
 									$scope.datalist = eval(json.datalist);
 
 									$
@@ -116,12 +131,9 @@ function initQuery() {
 														$scope.datalist[index].context = unescape(item.content);
 
 													});
+									
 
-									$scope.total = json.total;
-									$scope.pageDataPre = [];
-									$scope.pageDataAft = [];
-									$scope.pageNum = Math.ceil($scope.total
-											/ $scope.rows);
+								
 									
 									for ( var i = $scope.page - 3; i < $scope.page; i++) {
 										if (i > 0)

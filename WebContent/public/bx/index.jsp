@@ -113,7 +113,7 @@
 									<div class="row col-xs-12 ">
 
 										<div class="nopadding-left">
-											<img class="nopaddding img-responsive col-xs-2" style="width:25px; height:25px;" title="{{x.blog_type_name}}"   src="{{x.blog_type_url}}">
+											<img class="nopaddding img-responsive col-xs-2" style="width:25px; height:25px;" title="{{x.blog_type_name}}"   ng-src="{{x.blog_type_url}}">
 											<div class="col-sm-8 col-xs-11  ptitle  "><a class="ptitle" ng-click="detail(x)">{{x.title}}</a></div>
 
 
@@ -139,7 +139,7 @@
 											<div>
 												
 												<a href="#" class="detailbtn h5 text-right pull-right text-info margin-right-20" ng-click="detail(x)">详情</a>
-												<a href="{{preurl}}/public/detail/?i={{x.imei}}" style="display: none;" class="for spider" ></a>
+												<a ng-href="{{preurl}}/public/detail/?i={{x.imei}}" style="display: none;" class="for spider" >{{x.title}}</a>
 
 											</div>
 									
@@ -163,12 +163,12 @@
 						<ul class="pagination pull-right">
 							<li>
 								<a href="#" ng-click="getList(page-1)">&laquo;</a>
-								<a href="{{preurl}}/public/index/?i={{page-1}}"  style="display: none;"  style="" class="for spider" ></a>
+								<a ng-href="{{preurl}}/public/index/?i={{page-1}}"  style="display: none;"  style="" class="for spider" >上一頁</a>
 							</li>
 							<li ng-repeat="x in pageDataPre">
 
 								<a href="#" ng-click="getList(x)">{{x}}</a>
-<a href="{{preurl}}/public/index/?i={{x}}" style="display: none;" class="for spider" ></a>
+<a ng-href="{{preurl}}/public/index/?i={{x}}" style="display: none;" class="for spider" >第{{x}}页</a>
 							</li>
 							<li class="active">
 								<a href="#" ng-click="getList(page)">{{page}}</a>
@@ -176,11 +176,11 @@
 							<li ng-repeat="x in pageDataAft">
 
 								<a href="#" ng-click="getList(x)">{{x}}</a>
-<a href="{{preurl}}/public/index/?i={{x}}" style="display: none;" class="for spider" ></a>
+<a ng-href="{{preurl}}/public/index/?i={{x}}" style="display: none;" class="for spider" >第{{x}}页</a>
 							</li>
 							<li>
 								<a href="#" ng-click="getList(page+1)">&raquo;</a>
-								<a href="{{preurl}}/public/index/?i={{page+1}}" style="display: none;" class="for spider" ></a>
+								<a ng-href="{{preurl}}/public/index/?i={{page+1}}" style="display: none;" class="for spider" >下一頁</a>
 							</li>
 
 							<!-- li>
