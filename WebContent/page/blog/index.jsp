@@ -20,6 +20,11 @@
 			<link rel="stylesheet" href="../../js/plugin/swiper/idangerous.swiper.css">
 
   
+  <style >
+/*宽度全屏*/
+ .modal-dialog{position:absolute;width:auto;margin:2.5vh auto;left:0;right:0;}
+
+  </style>
 
 		</head>
 
@@ -256,137 +261,89 @@
 
 
 			<div class="modal fade" id="myModal2" data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog" style="width:900px;">
-					<div class="modal-content">
-						<div class="modal-header">
+				<div class="modal-dialog " >
+					<div class="modal-content ">
+						<div class="modal-header nopadding row">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 							<h4 class="modal-title" id="myModalLabel">{{edit}}文章</h4>
 						</div>
 
 
 
-						<div class="modal-body container margin-top-10  ">
-				<div class="row " style=" height:400px;"  >
-					<form name="fm" id="fm" class="form-horizontal " style="min-width: 350px; ">
+						<div class="modal-body  nopadding row">
+				<div class="row  col-xs-12 nopadding"  >
+					<form name="fm" id="fm" class="form-horizontal " >
 				
 
 					<input   type="text " class="hide form-control " name="s_recordid" id="s_recordid" ng-model="s_recordid" placeholder=" ">
 					
 					
-					<div class="form-group  row ">
-							<div class="control-label padding-top-0 col-xs-3 ">标题：</div>
-							<div class="col-xs-8 text-right ">
+					<div class="form-group   ">
+							<div class="control-label padding-top-0 col-sm-3 col-xs-12 ">标题：</div>
+							<div class="col-sm-9 col-xs-12 text-right ">
 							 <input required  type="text" class="form-control " name="s_title" id="s_title" ng-model="s_title" placeholder=" ">
 							 </div>
 							 <div class="col-xs-12 col-xs-offset-4 row ">
-							<!--  <span ng-show="fm.s_account.$error.required ">
-							<span style="color:red " title="用户ID必须填写 ">
-							*用户ID必须填写&nbsp;
-							</span> 
-							 </span> -->
+						
 							</div>
 						</div>
 						
-						<div class="form-group  row ">
-							<div class="control-label padding-top-0 col-xs-3 ">文章类型：</div>
-							<div class="col-xs-8 text-right ">
+						<div class="form-group   ">
+						
+						<div class=" nopadding">
+							 <div class="control-label padding-top-0 col-sm-3 col-xs-12 ">文章类型：</div>
+							<div class="col-sm-9 col-xs-12 text-right ">
 							<select class="form-control " id="s_type" ng-model="s_type">
 								<option  ng-repeat="x in dicts " value="{{x.dict_key}}">{{x.dict_name}}</option>
 								</select>
 							 </div>
 							 <div class="col-xs-12 col-xs-offset-4 row ">
-							<!--  <span ng-show="fm.s_account.$error.required ">
-							<span style="color:red " title="用户ID必须填写 ">
-							*用户ID必须填写&nbsp;
-							</span> 
-							 </span> -->
+							
 							</div>
 						</div>
 						
-						<div class="form-group  row ">
-							<div class="control-label padding-top-0 col-xs-3 ">是否可见：</div>
-							<div class="col-xs-8 text-right ">
+						</div>
+					<div class="form-group   ">
+						
+						<div class=" nopadding">
+						   	<div class="control-label padding-top-0 col-sm-3 col-xs-12  ">是否可见：</div>
+							<div class="col-sm-9 col-xs-12  text-right ">
 							<select class="form-control " id="en_type" ng-model="en_type">
 								<option  ng-repeat="x in enables " value="{{x.value}}">{{x.desc}}</option>
 								</select>
 							 </div>
 							 <div class="col-xs-12 col-xs-offset-4 row ">
-							<!--  <span ng-show="fm.s_account.$error.required ">
-							<span style="color:red " title="用户ID必须填写 ">
-							*用户ID必须填写&nbsp;
-							</span> 
-							 </span> -->
+					
 							</div>
 						</div>
 						
+							
+						</div>
 					
-					<div class="form-group  row ">
-							<div class="control-label padding-top-0 col-xs-3 ">文章标签：</div>
-							<div class="col-xs-8 text-right ">
+					
+					<div class="form-group   ">
+							<div class="control-label padding-top-0 col-sm-3 col-xs-12 ">文章标签：</div>
+							<div class="col-sm-9 col-xs-12 text-right ">
 						 <input required  type="text" class="form-control " name="s_tags" id="s_tags" ng-model="s_tags" placeholder=" ">
 							</div>
 							 <div class="col-xs-12 col-xs-offset-4 row ">
-							<!--  <span ng-show="fm.s_pass.$error.required ">
-							<span style="color:red " title="密码必须填写 ">
-							*密码必须填写&nbsp;
-							</span> 
-							 </span> -->
+					
 							</div>
 						</div>
 
-						<div class=" form-group  row ">
-								<div class="control-label padding-top-0 col-xs-3 ">内容：</div>
-								<div class="col-xs-8 text-right ">
-								 <textarea    class="form-control"  id="s_context" name= "s_context" ng-model="s_context"  placeholder=" "></textarea>
+						<div class=" form-group   ">
+								<div class="control-label padding-top-0 col-sm-3 col-xs-12 ">内容：</div>
+								<div class="col-sm-9 col-xs-12 text-right ">
+								 <textarea   id="s_context" name= "s_context" ng-model="s_context"  placeholder=" ">{{s_context}}</textarea>
 							</div>
 							 <div class="col-xs-12 col-xs-offset-4 row ">
-							<!--  <span ng-show="fm.s_ip_refresh.$error.required ">
-							<span style="color:red " title="刷新周期必须填写 ">
-							<span class="glyphicon glyphicon-remove "></span>
-							</span> 
-							 </span> -->
-							 
-							<!--   <span ng-show=" fm.s_ip_refresh.$invalid ">
-							<span style="color:red " title="刷新周期为大于9的数字 ">
-								*刷新周期为1-1000的数字&nbsp;
-							</span> 
-							 </span> -->
+							
 							</div>
 							</div>
 					
 
 
-						<div class="form-group  row  hide">
-							<div class="control-label padding-top-0 col-xs-4 ">选择位置：</div>
 						
-							<div class="col-xs-7 text-right ">
-						
-								<select class="form-control " id="s_city" ng-model="s_city">
-									<option  ng-repeat="x in citys_select ">{{x}}</option>
-								</select>
-							</div>
-							
-							
-							
-						</div>
-						
-						<div class="form-group  row  hide">
-							<div class="control-label padding-top-0 col-xs-4 ">所属公司：</div>
-							<div class="col-xs-7 text-right ">
-								<select class="form-control "  id="s_company" name="s_company" ng-model="s_company">
-									<option  ng-repeat="x in compays_select " value="{{x.accountid}} ">{{x.company_name}}</option>
-								</select>
-							</div>
-							
-							<div class="col-xs-12 col-xs-offset-4 row hide">
-							<!--  <span ng-show="fm.s_company.$error.required ">
-							<span style="color:red " title="公司必选填写 ">
-							*公司必选填写&nbsp;
-							</span> 
-							 </span> -->
-							</div>
-							
-						</div>
 					
 
 					
@@ -394,7 +351,7 @@
 					</div>
 					
 				</div>
-				<div class="modal-footer ">
+				<div class="modal-footer row nopadding">
 					<button type="button " class="btn btn-default btn-warning " data-dismiss="modal">取消
 					</button>
 					                 <button type="button " class="btn btn-primary " ng-click="update() "> 确定 </button>

@@ -246,7 +246,7 @@ function init() {
 						obj.key = $scope.s_dict_key;
 						obj.name = $scope.s_dict_name;
 
-						obj.sort = $scope.s_sort;
+						obj.sort =1;// $scope.s_sort;
 						obj.desc_info = $scope.desc_info;
 						
 						obj.val1 = $("#url").val();

@@ -13,7 +13,7 @@
 <meta name="description" content="首页- Kx的个人站点" />
 <meta name="author" content="ZHANG JIE"> 
 
-			<title>KxのBook,Welcome~</title>
+			<title>KxのBook,Welcome~欢迎访问Kx的个人站点</title>
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
 			 <link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css">
 
@@ -58,104 +58,8 @@
 						<div id="pgdiv" name="pgdiv" class="col-sm-9 col-xs-12 pleft rightline">
 
 							<div ng-cloak>
-								<div ng-repeat="x in datalist" class="pgdiv">
-
-									<div class="row col-xs-12 ">
-
-										<div class="nopadding-left">
-											<img class="nopaddding img-responsive col-xs-2" style="width:25px; height:25px;" title="{{x.blog_type_name}}"   ng-src="{{x.blog_type_url}}">
-											<div class="col-sm-8 col-xs-11  ptitle  "><a class="ptitle" ng-click="detail(x)">{{x.title}}</a>
-											<a ng-href="{{preurl}}/public/detail/{{x.imei}}.html" style="display: none;" class="for spider" >{{x.title}}</a>
-											</div>
-
-
-											<div class="col-sm-3 col-xs-12  text-right">
-										
-											
-											<a ng-repeat="t in x.tagStrs"  ng-click="showtgs(t)">{{t}},</a>
-											</div>
-										</div>
-									</div>
-
-									<div class="margin-top-10 row col-sm-10 col-xs-12"></div>
-									<div class="hide row col-xs-12">
-										<hr></hr>
-									</div>
-
-
-									<div class="col-xs-12 row">
-										<div class="alldot">
-											<div ng-cloak class=" pageText " ng-bind-html="x.context">
-											</div>
-										</div>
-											<div>
-												
-												<a href="#" class="detailbtn h5 text-right pull-right text-info margin-right-20" ng-click="detail(x)">详情</a>
-												<a ng-href="{{preurl}}/public/detail/?i={{x.imei}}" style="display: none;" class="for spider" >{{x.title}}</a>
-
-											</div>
-									
-									</div>
-									<br>
-									<div ng-cloak class="row  col-sm-10 col-xs-12 margin-top-5 ">post@{{x.create_date}}&nbsp;
-										<span ><a ng-click="detail(x)">阅读</a>({{x.view_nums}})&nbsp;</span>
-										<span ><a ng-click="detail(x,'rpdiv')">评论</a>({{x.replay_nums}})&nbsp;</span>
-									</div>
-
-
-									<div class="row col-xs-12">
-										<hr></hr>
-									</div>
-								</div>
-
-
-<div class="  col-xs-12 row tablefoot" ng-show="total">
-
-
-						<ul class="pagination pull-right">
-							<li>
-								<a href="#" ng-click="getList(page-1)">&laquo;</a>
-								<a ng-href="{{preurl}}/public/index/i/{{page-1}}.html"  style="display: none;"  style="" class="for spider" >下一页</a>
-							</li>
-							<li ng-repeat="x in pageDataPre">
-
-								<a href="#" ng-click="getList(x)">{{x}}</a>
-<a ng-href="{{preurl}}/public/index/i/{{x}}.html" style="display: none;" class="for spider" >第{{x}}页</a>
-							</li>
-							<li class="active">
-								<a href="#" ng-click="getList(page)">{{page}}</a>
-							</li>
-							<li ng-repeat="x in pageDataAft">
-
-								<a href="#" ng-click="getList(x)">{{x}}</a>
-<a ng-href="{{preurl}}/public/index/i/{{x}}.html" style="display: none;" class="for spider" >第{{x}}页</a>
-							</li>
-							<li>
-								<a href="#" ng-click="getList(page+1)">&raquo;</a>
-								<a ng-href="{{preurl}}/public/index/i/{{page+1}}.html" style="display: none;" class="for spider" >下一页</a>
-							</li>
-
-							<!-- li>
-									<a href="#">&laquo;</a>
-								</li>
-								<li class="active">
-									<a href="#">1</a>
-								</li>
-								<li class="disabled">
-									<a href="#">2</a>
-								</li>
-								<li>
-									<a href="#">3</a>
-								</li>
-								<li>
-									<a href="#">&raquo;</a>
-								</li> -->
-						</ul>
-
-						<select onchange="changerows(this)" class="hide pull-right">
-							<option ng-repeat="x in rows_select">{{x}}</option>
-						</select>
-					</div>
+								
+									<%@include file="../list.jsp"%> 
 
 							</div>
 

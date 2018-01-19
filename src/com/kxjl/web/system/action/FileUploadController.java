@@ -313,6 +313,7 @@ public class FileUploadController {
 			try {
 				jsonOut.put("ResponseCode", "201");
 				jsonOut.put("ResponseMsg", "FAILED:" + e.getMessage());
+				e.printStackTrace();
 			} catch (JSONException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

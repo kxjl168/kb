@@ -12,10 +12,9 @@ app.controller('eduCtrl', function($scope) {
 
 $(function() {
 
-
+	initCKPlugin();
+	
 	init();
-
-		$("#s_context").ckeditor();
 
 
 	var $scope = angular.element(ngSection).scope();
@@ -35,8 +34,58 @@ $(function() {
 		s_context : "请输入内容",
 		
 	}, $scope.doupdate, "");
+	
+
 
 });
+
+
+function initCKPlugin()
+{
+	var pluginname="savedata";
+	var cmd_name="cmd_savedata";
+	CKEDITOR.plugins.add( pluginname, {
+	 
+	    init: function( editor ) {
+	        editor.addCommand( cmd_name, {
+	            exec: function( editor ) {
+	            	
+	          	var $scope = angular.element(ngSection).scope();
+	          	
+	            	$scope.$apply(function() {
+	            	
+	            	$scope.save(null,null,function(){
+						
+						$scope.getList();
+						msg("保存成功！");
+					});
+	            	});
+
+	            	
+	            }
+	        });
+	        editor.ui.addButton( 'btn_savedata', {
+	            label: '保存数据',
+	            command:cmd_name,
+	            toolbar: 'insert',
+	            icon: basePath+'/images/save.jpg',
+	        });
+	    }
+	});
+	
+
+	
+	CKEDITOR.morePluginnames=pluginname;
+	$("#s_context").ckeditor();
+	//CKEDITOR.config.extraPlugins= pluginname+',codesnippet,colorbutton,font,liststyle,copyformatting';
+	/*CKEDITOR.replace( 's_context', {
+		extraPlugins: pluginname+',codesnippet,colorbutton,font,liststyle,copyformatting',
+	});*/
+	
+	
+};
+	
+	
 
 function changerows(option) {
 	var num = $(option).val();
@@ -279,6 +328,8 @@ function init() {
 									
 										
 										$scope.$apply();
+										
+									
 
 										$("#myModal2").modal('show');
 
@@ -330,16 +381,39 @@ function init() {
 
 				$scope.doupdate = function(fm, value) {
 
+					$scope.save(fm,value,function(){
+						$("#myModal2").modal('hide');
+
+						$scope.getList();
+						setTimeout(function() {
+							$scope.s_recordid = "";
+							$scope.s_dict_key = "";
+							$scope.s_dict_name = "";
+
+							$scope.s_sort = "";
+
+							$scope.$apply();
+						}, 10);
+					});
+
+				};
+				
+				$scope.save=function(fm, value,callback){
 					var obj = {};
 
-					if (typeof (value) == "undefined") {
+					if (value==null||typeof (value) == "undefined") {
 						obj.recordid = $scope.s_recordid;
 						obj.title = $scope.s_title;
 						obj.blog_type =$("#s_type").val();
 						obj.tags =$scope.s_tags;
 						obj.show =$("#en_type").val();
 						
+						var num=$($("#s_context"  ).val()).find(".pct").length;
 						var ct=$("<div class='pct'>"+$("#s_context"  ).val() +"</div>");
+						if(num>0)
+							ct=$($("#s_context"  ).val());
+						
+						
 						$.each(ct.find("img"),function(index,item){
 							$(item).removeAttr("style");
 							$(item).removeAttr("class");
@@ -363,18 +437,7 @@ function init() {
 								+ message);
 						if (code == 200) {
 
-							$("#myModal2").modal('hide');
-
-							$scope.getList();
-							setTimeout(function() {
-								$scope.s_recordid = "";
-								$scope.s_dict_key = "";
-								$scope.s_dict_name = "";
-
-								$scope.s_sort = "";
-
-								$scope.$apply();
-							}, 10);
+							callback();
 
 						} else {
 							msg(message);
@@ -388,7 +451,6 @@ function init() {
 					}, false, false
 
 					);
-
 				};
 
 				$scope.update = function() {

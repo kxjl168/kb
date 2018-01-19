@@ -178,7 +178,7 @@
 									<tr>
 										<th>类型KEY</th>
 											<th class="" >类型值</th>
-										<th class="" >排序</th>
+										<th class="hide" >排序</th>
 										
 									
 										<th class="hide">手机IP</th>
@@ -195,7 +195,7 @@
 									<tr ng-repeat="x in datalist">
 										<td>{{ x.dict_key }}</td>
 											<td class="">{{ x.dict_name }}</td>
-											<td >{{ x.sort}}</td>
+											<td class="hide">{{ x.sort}}</td>
 											
 										<td class="hide">{{ x.ip_refresh_interval }}</td>
 										<td  class="hide">
@@ -369,7 +369,7 @@
 						</div>
 						
 					
-					<div class="form-group col-xs-12 row ">
+					<div class="form-group col-xs-12 row hide">
 							<div class="control-label padding-top-0 col-xs-4 ">排序：</div>
 							<div class="col-xs-7 text-right ">
 						
@@ -501,7 +501,7 @@
 						ng-model="md5" type="hidden" /> 
 			
 	 <input id="url" name="url"
-						ng-model="url" type="hidden" /> 
+					value="{{url}}" type="hidden" /> 
 						 <input id="val2" value="{{val2}}" name="val2"
 						type="hidden" /> 
 			
