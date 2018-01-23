@@ -1,8 +1,42 @@
 @CHARSET "UTF-8";
 
 .pageText{
-	color:#333!important;
+	color:#333!important; /* 为较旧的或者不支持的浏览器设置备用属性 */
+	
+	/* height: 200px; */
+
 }
+.more{
+	height:90px;
+	background: -moz-linear-gradient(bottom,rgba(255,255,255,.1),rgba(255,255,255,0));
+background: -webkit-gradient(linear,0 top,0 bottom,from(rgba(255,255,255,0)),to(#fff));
+background: -o-linear-gradient(bottom,rgba(255,255,255,.1),rgba(255,255,255,0));
+}
+
+
+.alldot {
+	position:relative;
+	line-height: 24px;
+	font-size: 15px;
+	/* 3 times the line-height to show 3 lines */
+	height:130px;
+	overflow:hidden;
+	
+	margin-bottom: -90px;
+	
+	
+}
+alldot::after {
+	content:"...";
+	font-weight:bold;
+	position:absolute;
+	bottom:0;
+	right:0;
+	padding:0 20px 1px 45px;
+	/* background:url(http://newimg88.b0.upaiyun.com/newimg88/2014/09/ellipsis_bg.png) repeat-y; */
+}
+
+
 
 .shiju p{
 	line-height: 2;
@@ -28,6 +62,9 @@ blockquote
 .pageText{
 	line-height: 2.2;
 	font-size: 11pt;
+	
+	
+	
 }
 .ui-datepicker
 {
@@ -207,24 +244,6 @@ pre>code{
 	font-size: 110%;
 }
 
-
-.alldot {
-	position:relative;
-	line-height: 24px;
-	font-size: 15px;
-	/* 3 times the line-height to show 3 lines */
-	height:120px;
-	overflow:hidden;
-}
-alldot::after {
-	content:"...";
-	font-weight:bold;
-	position:absolute;
-	bottom:0;
-	right:0;
-	padding:0 20px 1px 45px;
-	background:url(http://newimg88.b0.upaiyun.com/newimg88/2014/09/ellipsis_bg.png) repeat-y;
-}
 
 .boxdot{
 	 overflow: hidden; /*自动隐藏文字*/

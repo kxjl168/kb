@@ -18,6 +18,10 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.poi.xslf.model.geom.Guide;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.kxjl.tool.common.Constant;
+import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.tool.utils.JEscape;
 import com.kxjl.tool.utils.JsonUtil;
 import com.kxjl.web.stastic.model.ActionLog.StasticTypeOne;
@@ -65,22 +70,22 @@ public class BlogController extends BaseController {
 	@RequestMapping(value = "/getDetailList")
 	public void getDetailList(HttpServletRequest request,
 			HttpServletResponse response) {
-		//String data = request.getParameter("data");
+		// String data = request.getParameter("data");
 
-		//JSONObject jsonIN;
+		// JSONObject jsonIN;
 		JSONObject jsonOut = new JSONObject();
-		List<Blog> detail =new ArrayList<Blog>();
+		List<Blog> detail = new ArrayList<Blog>();
 		String rst = "";
 		try {
 
-			//jsonIN = new JSONObject(data);
+			// jsonIN = new JSONObject(data);
 
 			String imei = parseStringParam(request, "i");
 			Blog query = new Blog();
 			query.setImei(imei);
 
 			// cur ,next, pre
-			 detail = blogService.getBlogDetailPageList(query);
+			detail = blogService.getBlogDetailPageList(query);
 
 			String prepath = getImgHttpOutPath();
 			for (Blog blog : detail) {
@@ -94,9 +99,6 @@ public class BlogController extends BaseController {
 			jsonOut.put("ResponseMsg", "");
 			jsonOut.put("total", detail.size());
 			jsonOut.put("datalist", jsStr);
-
-		
-			
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -114,16 +116,14 @@ public class BlogController extends BaseController {
 		}
 		rst = jsonOut.toString();
 		JsonUtil.responseOutWithJson(response, rst);
-		
-		saveStaticInfo(request, StasticTypeOne.DetailPage.toString(),
-				detail.get(0).getBlog_type_name());
-		
-		
+
+		saveStaticInfo(request, StasticTypeOne.DetailPage.toString(), detail
+				.get(0).getBlog_type_name());
+
 		Kdata.getInstance().cleanrBLogList("");
-		
 
 	}
-	
+
 	/**
 	 * 后台详情
 	 * 
@@ -152,8 +152,6 @@ public class BlogController extends BaseController {
 			// cur ,next, pre
 			Blog detail = blogService.getBlogInfoById(query);
 
-		
-
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(detail);
 
@@ -161,9 +159,6 @@ public class BlogController extends BaseController {
 			jsonOut.put("ResponseMsg", "");
 			jsonOut.put("total", 1);
 			jsonOut.put("datalist", jsStr);
-
-		
-			
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -183,7 +178,6 @@ public class BlogController extends BaseController {
 		JsonUtil.responseOutWithJson(response, rst);
 
 	}
-	
 
 	/**
 	 * 是否可见类型
@@ -208,8 +202,8 @@ public class BlogController extends BaseController {
 
 			List<String> types = new ArrayList<String>();
 			for (Enable item : Kdata.Enable.values()) {
-				Kdata.Enable ci=item;
-				
+				Kdata.Enable ci = item;
+
 				types.add(ci.toString());
 			}
 
@@ -238,8 +232,6 @@ public class BlogController extends BaseController {
 		JsonUtil.responseOutWithJson(response, rst);
 
 	}
-	
-	
 
 	/**
 	 * 页面-获取blog列表
@@ -272,27 +264,27 @@ public class BlogController extends BaseController {
 
 			jsonIN = new JSONObject(data);
 
-		String blog_title = jsonIN.optString("blog_title");
-		String blog_type = jsonIN.optString("blog_type");
+			String blog_title = jsonIN.optString("blog_title");
+			String blog_type = jsonIN.optString("blog_type");
 			String blog_tag = jsonIN.optString("blog_tag");
 			String month = jsonIN.optString("month");
-			
+
 			String show = jsonIN.optString("show");
-			
-			//页面查询，为空，则默认查可见的
-			if(show.equals(""))
-				show=Kdata.Enable.Enable.value;
-			
-			//后台管理传ni -1,查询全部
-			if(show.equals(Kdata.Enable.NIL.value))
-				show="";
-		 
+
+			// 页面查询，为空，则默认查可见的
+			if (show.equals(""))
+				show = Kdata.Enable.Enable.value;
+
+			// 后台管理传ni -1,查询全部
+			if (show.equals(Kdata.Enable.NIL.value))
+				show = "";
 
 			int pageCount = jsonIN.optInt("rows");// request.getParameter("pageCount");
 			int curPage = jsonIN.optInt("page");
 
-			String key = "blog_getInfoList" + "_" + month + "_" + blog_type + "_"
-					+ blog_tag + "_" + pageCount + "_" + curPage+"_"+show;
+			String key = "blog_getInfoList" + "_" + month + "_" + blog_type
+					+ "_" + blog_tag + "_" + pageCount + "_" + curPage + "_"
+					+ show;
 			List<Blog> infos = Kdata.getInstance().getBlogList(key);
 
 			Blog query = new Blog();
@@ -307,43 +299,60 @@ public class BlogController extends BaseController {
 			query.setTitle(blog_title);// (id);
 			query.setBlog_type(blog_type);// (blog_name);
 			query.setMonth(month);
+			
+			
+			Integer maxshownum=ConfigReader.getInstance().getIntProperty("maxshownum", 1000);
+			
 			if (infos == null || infos.size() == 0) {
 
 				infos = blogService.getBlogPageList(query);
 				String prepath = getImgHttpOutPath();
 				for (Blog blog : infos) {
 					blog.setBlog_type_url(prepath + blog.getBlog_type_url());
-					
-					
-					//剔除文章中的图片img内容，截取长度
-					Pattern p=Pattern.compile("(%3Cimg.*%3E)"); //%3Cimg  %3E
-					Matcher ms= p.matcher(blog.getContent());
 
-					//截取超出部分、减少页面返回数据
-					if(ms.find())
-					{
-						for (int i = 0; i < ms.groupCount(); i++) {
-							String img=ms.group(i);
-							System.out.println(img);
-							blog.setContent(blog.getContent().replace(img,""));
-							
-							String c= JEscape.unescape(blog.getContent());
-							if(c.length()>1000)
-								blog.setContent(JEscape.escape( c.substring(0,1000)));
-						}
-					
+					// 剔除文章中的图片img内容，截取长度
+					Pattern p = Pattern.compile("%3Cimg.*?%3E"); // %3Cimg %3E
+																	// .*?最小匹配
+																	// .*最大匹配
+					Matcher ms = p.matcher(blog.getContent());
+
+					String c = blog.getContent();
+					// 截取超出部分、减少页面返回数据
+					while (ms.find()) {
+
+						String img = ms.group();
+						String t = JEscape.unescape(img);
+					//	System.out.println(t);
+						JEscape.unescape(blog.getContent());
+						c = c.replace(img, "");
+
 					}
-				
+					c = JEscape.unescape(c);
+
 					
-					
+					if (c.length() > maxshownum) {
+						try {
+							String rc = c.substring(0, maxshownum);
+							//System.out.println(rc);
+
+							// jsoup 自动补全标签
+							Document jd = Jsoup.parseBodyFragment(rc);
+
+							c = jd.body().html();
+
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+					}
+
+					blog.setContent(c);
+
 				}
 				Kdata.getInstance().SavedBlogList(key, infos);
 
 			}
 
 			int total = blogService.getBlogPageListCount(query);
-
-		
 
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(infos);
@@ -353,7 +362,6 @@ public class BlogController extends BaseController {
 			jsonOut.put("total", total);
 			jsonOut.put("datalist", jsStr);
 
-		
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -591,13 +599,9 @@ public class BlogController extends BaseController {
 			blog.setShowflag(show);
 
 			blog.setBlog_type(blog_type);// (blog_name);
-			
-			
-			//过滤img 增加 class="img-responsive"
-			
-			
-			
-			
+
+			// 过滤img 增加 class="img-responsive"
+
 			blog.setContent(content);// (desc);
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -626,9 +630,9 @@ public class BlogController extends BaseController {
 			}
 
 			if (rst > 0) {
-				
+
 				Kdata.getInstance().cleanrBLogList("");
-				
+
 				jsonOut.put("ResponseCode", 200);
 				jsonOut.put("ResponseMsg", "OK");
 			} else {

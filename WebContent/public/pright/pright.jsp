@@ -8,7 +8,7 @@
 
 
 
-				<span id="titlepic" data-toggle="collapse" data-parent="#accordion" href="#collapseOner11" class="glyphicon glyphicon-chevron-up pull-right "></span>
+				<span id="titlepic" class="hide" data-toggle="collapse" data-parent="#accordion" href="#collapseOner11" class="glyphicon glyphicon-chevron-up pull-right "></span>
 			</div>
 		</div>
 		<div id="collapseOner11" class="panel-collapse collapse in ">
@@ -41,7 +41,7 @@
 	
 	
 	
-					<span id="titlepic" data-toggle="collapse" data-parent="#accordion" href="#collapseOner2" class="glyphicon glyphicon-chevron-up pull-right "></span>
+					<span id="titlepic" class="hide" data-toggle="collapse" data-parent="#accordion" href="#collapseOner2" class="glyphicon glyphicon-chevron-up pull-right "></span>
 				</div>
 			</div>
 			<div id="collapseOner2" class="panel-collapse collapse in ">
@@ -73,7 +73,7 @@
 	
 	
 	
-					<span id="titlepic" data-toggle="collapse" data-parent="#accordion" href="#collapseOner3" class="glyphicon glyphicon-chevron-up pull-right "></span>
+					<span id="titlepic" class="hide" data-toggle="collapse" data-parent="#accordion" href="#collapseOner3" class="glyphicon glyphicon-chevron-up pull-right "></span>
 				</div>
 			</div>
 			<div id="collapseOner3" class=" panel-collapse collapse in ">

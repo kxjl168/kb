@@ -39,7 +39,16 @@
 									<form name="fm" id="fm" class=" padding-left-0 col-xs-12" style="min-width: 150px; ">
 					
 					
+						<div class="form-group col-xs-12 row ">
+											<div class="control-label padding-left-0 padding-top-0 col-xs-12 ">留言：</div>
+											<div class="col-sm-7 col-xs-12 text-right nopaddding ">
+												<textarea required type="text" rows="3" class="form-control " name="s_text" id="s_text" ng-model="s_text" placeholder=" ">
+															 </textarea>
+											</div>
+											<div class="col-xs-12 col-xs-offset-4 row ">
 					
+											</div>
+										</div>
 					
 										<div class="form-group col-xs-12 row ">
 											<div class="control-label padding-top-0 padding-left-0 text-left col-xs-12 ">您的大名：</div>
@@ -61,16 +70,7 @@
 												</div>
 											</div>
 					
-										<div class="form-group col-xs-12 row ">
-											<div class="control-label padding-left-0 padding-top-0 col-xs-12 ">留言：</div>
-											<div class="col-sm-7 col-xs-12 text-right nopaddding ">
-												<textarea required type="text" rows="3" class="form-control " name="s_text" id="s_text" ng-model="s_text" placeholder=" ">
-															 </textarea>
-											</div>
-											<div class="col-xs-12 col-xs-offset-4 row ">
-					
-											</div>
-										</div>
+										
 					
 					
 										<div class="hide form-group col-xs-12 row ">

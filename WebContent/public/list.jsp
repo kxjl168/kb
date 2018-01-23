@@ -30,7 +30,9 @@
 										<div class="alldot">
 											<div ng-cloak class=" pageText " ng-bind-html="x.context">
 											</div>
+										
 										</div>
+											<div class="more row col-xs-12"></div>
 											<div>
 												
 												<a href="#" class="detailbtn h5 text-right pull-right text-info margin-right-20" ng-click="detail(x)">详情</a>
@@ -85,3 +87,13 @@
 							<option ng-repeat="x in rows_select">{{x}}</option>
 						</select>
 					</div>
+					
+				<div class=" col-xs-12 row panel panel-default pageText" >
+					<div> 我有几张阿里云幸运券分享给你，用券购买或者升级阿里云相应产品会有特惠惊喜哦！
+					<br>
+					 把想要买的产品的幸运券都领走吧！快下手，马上就要抢光了。 <a href="https://promotion.aliyun.com/ntms/act/ambassador/sharetouser.html?userCode=2pgttaay&productCode=vm&utm_source=2pgttaay">点击领取</a>
+					 </div>
+					
+					
+				</div>
+					

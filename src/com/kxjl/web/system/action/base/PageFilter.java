@@ -238,8 +238,15 @@ public class PageFilter implements Filter {
 					wrapper.sendRedirect(loginPath);
 
 				}
+				
+				logger.debug("inaccess:" + inaccess);// ,
 
 			}
+			
+			
+		
+			logger.debug("request.getContextPath():" + request.getContextPath());// ,
+logger.debug("request.getRequestURI(): " + request.getRequestURI());
 
 			chain.doFilter(request, response);
 			return;

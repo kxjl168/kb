@@ -78,9 +78,11 @@ public class MenuInfoController extends BaseController {
 
 		if (rst == null || rst.size() == 0) {
 			rst = menuService.updateUserMenus(user);
-
 			Kdata.getInstance().SavedMenuList(key, rst);// list)
-
+		} else {
+			if (user.getMenus() == null || user.getMenus().size() == 0) {
+				user.setMenus(rst);
+			}
 		}
 
 		Gson gs = new Gson();

@@ -10,7 +10,7 @@
 	
 		<select id="getBlogTags"  resultMap="BlogMap">
 	<![CDATA[ 
-		select  group_concat(tags) tags from blog_info
+		select  group_concat(tags) tags from blog_info where showflag='1'
 		]]>
 		
 	</select>
@@ -38,7 +38,7 @@ group by d.dict_key,d.dict_name,d.val1
 	
 	<select id="getBlogDetailPageList" parameterType="com.kxjl.web.blog.model.Blog" resultMap="BlogMap">
 	<![CDATA[ 	select a.*,d.dict_name blog_type_name,d.val1 blog_type_url  from (
-	(select '1cur' t, a.* from blog_info a where  a.showflag='1' and  recordid=#{recordid})  
+	(select '1cur' t, a.* from blog_info a where   recordid=#{recordid})  
 union
 (select '2next' t, a.* from blog_info a where a.showflag='1' and  recordid>#{recordid}  order by recordid asc limit 1)
 union

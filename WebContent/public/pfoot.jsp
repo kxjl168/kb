@@ -17,14 +17,14 @@
 		<div class="col-xs-2 row nopaddding  leftline">
 		 <div class="pull-left  ">
 		  <ul class="nopaddding">
-		     <li><a href="http://www.256kb.cn/public/search/">G搜索</a></li>
+		     <li><a href="http://www.256kb.cn/public/search/">Google</a></li>
 		  </ul>
 		 </div>
 		</div>
 		<div class="col-xs-2 row nopaddding  leftline ">
 		 <div class="pull-left ">
 		  <ul class="nopaddding">
-		      <li><a href="http://www.256kb.cn/public/bx/">保险</a></li>
+		      <li><a href="http://www.256kb.cn/public/bx/">未雨绸缪</a></li>
 		
 		  </ul>
 		 </div>

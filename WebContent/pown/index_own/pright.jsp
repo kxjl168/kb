@@ -18,7 +18,7 @@
 
 
 
-				<span id="titlepic" class="hide" data-toggle="collapse" data-parent="#accordion" href="#collapseOner1" class="glyphicon glyphicon-chevron-up pull-right "></span>
+				<span id="titlepic" data-toggle="collapse" data-parent="#accordion" href="#collapseOner1" class="glyphicon glyphicon-chevron-up pull-right "></span>
 
 			</div>
 
@@ -61,7 +61,7 @@
 
 	
 
-	<%@include file="../pright/pright.jsp"%> 
+	<%@include file="../../public/pright/pright.jsp"%> 
 
 
 
