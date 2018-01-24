@@ -1,6 +1,8 @@
 package com.kxjl.web.system.action.base;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -21,6 +23,9 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.config.ConfigReader;
+import com.kxjl.tool.utils.IPUtils;
+import com.kxjl.web.stastic.model.ActionLog;
+import com.kxjl.web.stastic.service.StasticService;
 import com.kxjl.web.system.model.MenuInfo;
 import com.kxjl.web.system.model.SysUserBean;
 import com.kxjl.web.system.model.SysUserBean.UserType;
@@ -33,6 +38,10 @@ public class PageFilter implements Filter {
 	@Autowired
 	MenuInfoService menuService;
 
+	@Autowired
+	public StasticService stasticService;
+
+	
 	private static Logger logger = Logger.getLogger(PageFilter.class);
 
 	public void init(FilterConfig config) throws ServletException {
@@ -180,14 +189,22 @@ public class PageFilter implements Filter {
 			}
 
 			logger.debug("request.getContextPath():" + request.getContextPath());// ,
-																					// redirect
-																					// to
-																					// login
-																					// page!");
+																	// page!");
 			logger.debug("request.getRequestURI(): " + request.getRequestURI());
 			String loginPath = request.getContextPath() + "/login.jsp";
 			logger.debug("no userinfo, redirect to login page!");
 			wrapper.sendRedirect(loginPath);
+			
+			
+			if(!(request.getRequestURI().startsWith("/public")
+					||				request.getRequestURI().startsWith("/page")
+					||				request.getRequestURI().startsWith("/pown")
+					))
+			{
+			saveStaticInfo(request,"attack","");
+			}
+			
+			
 			return;
 		} else {
 
@@ -251,6 +268,56 @@ logger.debug("request.getRequestURI(): " + request.getRequestURI());
 			chain.doFilter(request, response);
 			return;
 		}
+
+	}
+	
+	/**
+	 * 记录访问统计原始数据
+	 * 
+	 * @param map
+	 * @return
+	 * @author zj
+	 * @date 2017-12-28
+	 */
+	public void saveStaticInfo(HttpServletRequest request, String type1,
+			String type2) {
+
+		final HttpServletRequest rt = request;
+		final String t1 = type1;
+		final String t2 = type2;
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					ActionLog log = new ActionLog();
+
+					// 计算ip
+					String ip = "";
+					try {
+						ip = rt.getRemoteAddr();
+					} catch (Exception e) {
+
+					}
+
+					log.setUserid(ip);
+
+					String city = IPUtils.getCityByIP(ip);
+
+					log.setCity(city);
+					log.setType_first(t1);
+					log.setType_second(t2);
+					SimpleDateFormat sdf = new SimpleDateFormat(
+							"yyyy-MM-dd HH:mm:ss");
+					String time = sdf.format(new Date());
+					log.setAction_date(time);
+					stasticService.addActionLog(log);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+		}).run();
 
 	}
 
