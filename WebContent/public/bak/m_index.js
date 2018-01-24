@@ -17,6 +17,8 @@ function initQuery() {
 				var http = getImUrl();
 
 				$scope.title = "KxのBOOK";
+				$scope.titletop = "KxのBOOK  Kx的个人站点";
+				
 			
 				$scope.page = 1;
 				$scope.rows = 10;
@@ -96,10 +98,14 @@ function initQuery() {
 							
 								var code = json.ResponseCode;
 								var message = json.ResponseMsg;
-								console.log('-----return -code= ' + code
-										+ ';message= ' + message);
+							
 								if (code == 200) {
 
+									
+														
+									
+									
+									
 									if (typeof (window.pageYOffset) != 'undefined')
 										window.pageYOffset = 0;
 									if (typeof (document.documentElement.scrollTop) != 'undefined')
@@ -143,21 +149,30 @@ function initQuery() {
 										if (i <= $scope.pageNum)
 											$scope.pageDataAft.push(i);
 									}
+									
+									var blog_type_name="";
+									if(obj.blog_type!=''&&$scope.total!=0)
+										{
+										blog_type_name=$scope.datalist[0].blog_type_name;
+										}
+									
+									
+									document.title=
+										"文章分类-"+blog_type_name+"-"+obj.month+"-"+obj.blog_tag+"-"+$scope.titletop;
+									
 								
 
 									$scope.$apply();
 									
 									setTimeout(function(){
-										//hljs.initHighlightingOnLoad();
+									
 										 $('pre code').each(function(i, block) {
 									         hljs.highlightBlock(block);
 									     });
 										 
 									},100);
 									  
-										
-
-									console.log('-----guideList -OK= ');
+								
 
 								} else {
 									msg(message);

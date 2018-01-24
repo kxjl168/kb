@@ -100,8 +100,9 @@ public class PrerenderSeoService {
 	/**
 	 * 记录爬虫日志
 	 */
-	private void saveSpiderLog(HttpServletRequest servletRequest) {
+	private void saveSpiderLog(HttpServletRequest servletRequest,String flg) {
 		final HttpServletRequest rt = servletRequest;
+		final String flag=flg;
 		// kxjl SAVE LOG
 		try {
 			new Thread(new Runnable() {
@@ -112,7 +113,11 @@ public class PrerenderSeoService {
 					// 配置文件中读取
 					String seologUrls = ConfigReader.getInstance().getProperty(
 							"seologUrls", "/public");
+					// 配置文件中读取
+					String seoexlogUrls = ConfigReader.getInstance()
+							.getProperty("seoexlogUrls", ".js,.css");
 					String[] urls = seologUrls.split(",");
+					String[] exurls = seoexlogUrls.split(",");
 					boolean usefullrequest = false;
 					if (rt.getRequestURI().equals("/")) {
 						usefullrequest = true;
@@ -123,6 +128,18 @@ public class PrerenderSeoService {
 							String url = urls[i];
 							if (url.trim().equals(""))
 								continue;
+
+							//排除
+							boolean isex = false;
+							for (int j = 0; j < exurls.length; j++) {
+								if (rt.getRequestURI().contains(exurls[j])) {
+									isex = true;
+									break;
+								}
+							}
+							if (isex)
+								continue;
+							//
 
 							if (rt.getRequestURI().contains(url)) {
 								usefullrequest = true;
@@ -144,9 +161,9 @@ public class PrerenderSeoService {
 						boolean hasqstr = (rt.getQueryString() == null)
 								|| (rt.getQueryString().trim().equals(""));
 						slog.setRequest_url(rt.getRequestURI()
-								+ (hasqstr ? "" : ("?" + rt.getQueryString())) );
+								+ (hasqstr ? "" : ("?" + rt.getQueryString())));
 						slog.setTime(DateUtil.getNowStr(""));
-						slog.setSpider_head(rt.getHeader("User-Agent"));
+						slog.setSpider_head(flag+"/"+rt.getHeader("User-Agent"));
 						spdierlogDao.addSpiderlog(slog);
 					} catch (Exception e) {
 						log.error("save spider error" + e.getMessage());
@@ -166,7 +183,7 @@ public class PrerenderSeoService {
 		if (shouldShowPrerenderedPage(servletRequest)) {
 
 			// 记录有转化过的爬虫请求
-			saveSpiderLog(servletRequest);
+			saveSpiderLog(servletRequest,"prerender:");
 
 			this.preRenderEventHandler = prerenderConfig.getEventHandler();
 			if (beforeRender(servletRequest, servletResponse)
@@ -175,10 +192,11 @@ public class PrerenderSeoService {
 				return true;
 			}
 		}
+		
 		String userAgent = servletRequest.getHeader("User-Agent");
 		if (userAgent != null && userAgent.toLowerCase().contains("googlebot"))
 			// 记录google的爬虫请求
-			saveSpiderLog(servletRequest);
+			saveSpiderLog(servletRequest,"noprerender:");
 
 		return false;
 	}

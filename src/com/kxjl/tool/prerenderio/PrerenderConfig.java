@@ -2,6 +2,8 @@ package com.kxjl.tool.prerenderio;
 
 
 import com.google.common.collect.Lists;
+import com.kxjl.tool.config.ConfigReader;
+
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -88,6 +90,12 @@ public class PrerenderConfig {
         final String crawlerUserAgentsFromConfig = config.get("crawlerUserAgents");
         if (isNotBlank(crawlerUserAgentsFromConfig)) {
             crawlerUserAgents.addAll(Arrays.asList(crawlerUserAgentsFromConfig.trim().split(",")));
+        }
+        
+        //kxjl
+        final String moreAgents = ConfigReader.getInstance().getProperty("crawlerUserAgents");
+        if (isNotBlank(moreAgents)) {
+            crawlerUserAgents.addAll(Arrays.asList(moreAgents.trim().split(",")));
         }
 
         return crawlerUserAgents;
