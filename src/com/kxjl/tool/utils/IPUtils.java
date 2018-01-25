@@ -40,6 +40,10 @@ public class IPUtils {
 			JSONObject js = new JSONObject(rst);
 			if (js.optString("code").equals("0")) {
 				 city = js.optJSONObject("data").optString("city");
+				 if(city.equals("")) //国外取国家
+				 city = js.optJSONObject("data").optString("country")
+				 +"_"+js.optJSONObject("data").optString("area")
+				 +"_"+js.optJSONObject("data").optString("region");
 			//	System.out.println(city);
 			}
 		//	System.out.println(rst);

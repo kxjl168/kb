@@ -1,10 +1,15 @@
 package com.kxjl.web.stastic.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.annotations.Param;
 
+import com.kxjl.tool.utils.IPUtils;
 import com.kxjl.web.stastic.model.ActionLog;
 
 import com.kxjl.web.system.model.DictInfo;
@@ -12,6 +17,17 @@ import com.kxjl.web.system.model.DictInfo;
 public interface StasticService {
 
 	
+	
+	/**
+	 * 记录访问统计原始数据
+	 * 
+	 * @param map
+	 * @return
+	 * @author zj
+	 * @date 2017-12-28
+	 */
+	public void saveStaticInfo(HttpServletRequest request, String type1,
+			String type2) ;
 	
 	/**
 	 * 用户关注APP情况，根据传入的APP名称及ID列表，动态返回字段

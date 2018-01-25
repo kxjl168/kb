@@ -25,6 +25,9 @@
 		<if test='request_url != null and request_url != "" '>
 			and request_url like CONCAT('%',#{request_url},'%')
 		</if>
+		<if test='request_ip != null and request_ip != "" '>
+			and request_ip like CONCAT('%',#{request_ip},'%')
+		</if>
 		   
 		    and str_to_date(time,'${dateFormat}') BETWEEN
 		str_to_date('${starttime}','${dateFormat}')
@@ -44,6 +47,10 @@
 		<if test='request_url != null and request_url != "" '>
 			and request_url like CONCAT('%',#{request_url},'%')
 		</if>
+		<if test='request_ip != null and request_ip != "" '>
+			and request_ip like CONCAT('%',#{request_ip},'%')
+		</if>
+		
 			    and str_to_date(time,'${dateFormat}') BETWEEN
 		str_to_date('${starttime}','${dateFormat}')
 		and str_to_date('${endtime}','${dateFormat}')

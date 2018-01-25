@@ -39,6 +39,7 @@ import com.kxjl.web.blog.model.Blog;
 import com.kxjl.web.system.action.base.BaseController;
 import com.kxjl.web.system.model.DictInfo;
 import com.kxjl.web.system.model.SysParameter;
+import com.kxjl.web.system.service.CommonService;
 import com.kxjl.web.system.service.SystemParamService;
 
 /**
@@ -56,11 +57,12 @@ public class SysBaseInfoController extends BaseController {
 	@Autowired
 	private SystemParamService systemService;
 
+	@Autowired
+	private CommonService commonService;
+
 	// 日志记录对象
 	private Logger log = Logger.getLogger(SysBaseInfoController.class);
 
-	
-	
 	@RequestMapping(value = "/getKdataList")
 	public void getKdataList(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -76,7 +78,7 @@ public class SysBaseInfoController extends BaseController {
 
 			List<String> types = new ArrayList<String>();
 			for (DataType item : Kdata.DataType.values()) {
-				Kdata.DataType ci=item;
+				Kdata.DataType ci = item;
 				ci.setNum(Kdata.getInstance().GetNumOfType(item));
 				types.add(ci.toString());
 			}
@@ -136,6 +138,10 @@ public class SysBaseInfoController extends BaseController {
 				Kdata.getInstance().cleanrMenuInfoList("");
 			else if (t == DataType.Replay)
 				Kdata.getInstance().cleanrReplayList("");
+			else if (t == DataType.BlackIPList)
+			{
+				commonService.resetBlackIPList();
+			}
 
 			jsonOut.put("ResponseCode", "200");
 			jsonOut.put("ResponseMsg", "");

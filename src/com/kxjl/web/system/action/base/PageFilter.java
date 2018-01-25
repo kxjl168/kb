@@ -29,6 +29,7 @@ import com.kxjl.web.stastic.service.StasticService;
 import com.kxjl.web.system.model.MenuInfo;
 import com.kxjl.web.system.model.SysUserBean;
 import com.kxjl.web.system.model.SysUserBean.UserType;
+import com.kxjl.web.system.service.CommonService;
 import com.kxjl.web.system.service.MenuInfoService;
 
 public class PageFilter implements Filter {
@@ -37,6 +38,9 @@ public class PageFilter implements Filter {
 
 	@Autowired
 	MenuInfoService menuService;
+	
+	@Autowired
+	CommonService commonService;
 
 	@Autowired
 	public StasticService stasticService;
@@ -61,6 +65,10 @@ public class PageFilter implements Filter {
 
 		HttpSession session = request.getSession();
 
+		//黑名单过滤
+		if(commonService.isInBlackIPList(request))
+			return;
+		
 		/*
 		 * chain.doFilter(request, response); if(true) return;
 		 */
@@ -201,7 +209,7 @@ public class PageFilter implements Filter {
 					||				request.getRequestURI().startsWith("/pown")
 					))
 			{
-			saveStaticInfo(request,"attack","");
+			stasticService. saveStaticInfo(request,"attack","");
 			}
 			
 			
@@ -271,55 +279,7 @@ logger.debug("request.getRequestURI(): " + request.getRequestURI());
 
 	}
 	
-	/**
-	 * 记录访问统计原始数据
-	 * 
-	 * @param map
-	 * @return
-	 * @author zj
-	 * @date 2017-12-28
-	 */
-	public void saveStaticInfo(HttpServletRequest request, String type1,
-			String type2) {
-
-		final HttpServletRequest rt = request;
-		final String t1 = type1;
-		final String t2 = type2;
-
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				try {
-					ActionLog log = new ActionLog();
-
-					// 计算ip
-					String ip = "";
-					try {
-						ip = rt.getRemoteAddr();
-					} catch (Exception e) {
-
-					}
-
-					log.setUserid(ip);
-
-					String city = IPUtils.getCityByIP(ip);
-
-					log.setCity(city);
-					log.setType_first(t1);
-					log.setType_second(t2);
-					SimpleDateFormat sdf = new SimpleDateFormat(
-							"yyyy-MM-dd HH:mm:ss");
-					String time = sdf.format(new Date());
-					log.setAction_date(time);
-					stasticService.addActionLog(log);
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-			}
-		}).run();
-
-	}
+	
 
 	public void destroy() {
 	}

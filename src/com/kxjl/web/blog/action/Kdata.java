@@ -81,7 +81,7 @@ public class Kdata {
 	public enum DataType {
 
 		NIL("", ""), Blog("-1", "blog"), Replay("0", "Replay"), Menu("1",
-				"Menu");
+				"Menu"),BlackIPList("2","BlackipList");
 
 		private String value = "";
 		private String desc = "";
@@ -143,6 +143,12 @@ public class Kdata {
 
 	}
 
+	
+	
+	
+	// 其他通用缓存
+		private static ConcurrentHashMap<String, Object> savedCommonList = new ConcurrentHashMap<String,Object>();
+	
 	// 日志缓存
 	private static ConcurrentHashMap<String, List<Blog>> savedBlogList = new ConcurrentHashMap<String, List<Blog>>();
 
@@ -174,13 +180,30 @@ public class Kdata {
 		return instance;
 
 	}
+	
+	public Object getCommonList(String key) {
+		return savedCommonList.get(key);
+	}
+
+	public void SavedCommonList(String key, Object list) {
+		savedCommonList.put(key, list);// = savedBlogList;
+	}
+
+	public void cleanrCommonList(String key) {
+		if (key != null && !key.equals("")) {
+			if (savedCommonList.containsKey(key))
+				savedCommonList.remove(key);
+		} else
+			savedCommonList.clear();
+	}
+	
 
 	public List<Blog> getBlogList(String key) {
 		return savedBlogList.get(key);
 	}
 
 	public void SavedBlogList(String key, List<Blog> list) {
-		this.savedBlogList.put(key, list);// = savedBlogList;
+		savedBlogList.put(key, list);// = savedBlogList;
 	}
 
 	public void cleanrBLogList(String key) {
@@ -196,7 +219,7 @@ public class Kdata {
 	}
 
 	public void SavedReplayList(String key, List<Replay> list) {
-		this.savedReplayList.put(key, list);// = savedReplayList;
+		savedReplayList.put(key, list);// = savedReplayList;
 	}
 
 	public void cleanrReplayList(String key) {
@@ -212,7 +235,7 @@ public class Kdata {
 	}
 
 	public void SavedMenuList(String key, List<MenuInfo> list) {
-		this.savedMenuList.put(key, list);// = savedMenuList;
+		savedMenuList.put(key, list);// = savedMenuList;
 	}
 
 	public void cleanrMenuInfoList(String key) {

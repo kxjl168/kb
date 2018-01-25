@@ -272,6 +272,7 @@ public class TranslogController extends BaseController {
 			String url = jsonIN.optString("url");
 			String starttime = jsonIN.optString("starttime");
 			String date_type = jsonIN.optString("date_type");
+			String ip = jsonIN.optString("ip");
 
 			String endtime = jsonIN.optString("endtime");
 
@@ -280,8 +281,10 @@ public class TranslogController extends BaseController {
 
 			Spiderlog query = new Spiderlog();
 			query.setPage(curPage);
+
 			query.setPageCount(pageCount);
 
+			query.setRequest_ip(ip);
 			query.setDateFormat(date_type);
 			query.setSpider_head(head);//(phone_account_use_id);// (translogid);
 			query.setRequest_url(url);//(device_id);// (ip);
