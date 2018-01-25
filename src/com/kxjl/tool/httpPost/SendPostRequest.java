@@ -115,7 +115,7 @@ public class SendPostRequest {
 	public static String sendHttpData(String url, String str, String proxyIP,
 			int proPort) throws Exception {
 
-		logger.info("HTTP Request URL:" + url + ",HTTP Request PARAM:" + str);
+		//logger.info("HTTP Request URL:" + url + ",HTTP Request PARAM:" + str);
 		HttpClient client = new HttpClient();
 		// client.getHostConfiguration().setProxy("10.41.70.8", 80);
 		// client.getParams().setAuthenticationPreemptive(true);
@@ -147,7 +147,7 @@ public class SendPostRequest {
 			if (resStatusCode == HttpStatus.SC_OK) {
 				BufferedReader br = new BufferedReader(new InputStreamReader(
 						httpPost.getResponseBodyAsStream(), "utf-8"));
-				logger.info("HTTP Request CHARSET:"
+				logger.debug("HTTP Request CHARSET:"
 						+ httpPost.getResponseCharSet());
 				String res = null;
 				StringBuffer sb = new StringBuffer();
@@ -190,7 +190,7 @@ public class SendPostRequest {
 
 		}
 
-		logger.info("HTTP Request Result:" + responseData);
+		logger.debug("HTTP Request Result:" + responseData);
 		return responseData;
 	}
 

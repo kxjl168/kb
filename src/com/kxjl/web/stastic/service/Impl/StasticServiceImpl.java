@@ -76,7 +76,7 @@ public class StasticServiceImpl implements StasticService {
 					log.setAction_date(time);
 					addActionLog(log);
 				} catch (Exception e) {
-					// TODO: handle exception
+					logger.error(e.getMessage());
 				}
 			}
 		}).run();
