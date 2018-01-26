@@ -7,11 +7,12 @@
 <html>
 <head>
 
-<title>注册登录界面</title>
+<title>管理后台</title>
 
 <meta name="viewport"
 	content="width=device-width, initial-sclae=1.0, maximun-scale=1.0, minimum-scale=1.0, user0scalable=yes">
-
+<meta name="description" content="登录-欢迎访问-Kx的个人站点" />
+<meta name="author" content="ZHANG JIE"> 
 <link rel="stylesheet" type="text/css" media="screen"
 	href="${basePath}/js/plugin/bootstrap/css/bootstrap.min.css">
 
@@ -24,9 +25,15 @@
 <script type="text/javascript" src="${basePath}/js/login.js"></script>
 <script type="text/javascript" src="${basePath}/js/code.js"></script>
 <script type="text/javascript" src="${basePath}/js/loading.js"></script>
-<script type="text/javascript">
+
+
+<script type="text/javascript" src="${basePath}/js/plugin/unlock/S2Unlock.js"></script>
+	<link rel="stylesheet" href="${basePath}/js/plugin/unlock/S2Unlock.css">
 	
-</script>
+	<script type="text/javascript" src="${basePath}/js/plugin/nc/nc.js"></script>
+	<link rel="stylesheet" href="${basePath}/js/plugin/nc/nc1.css">
+		<%-- <link rel="stylesheet" href="${basePath}/js/plugin/nc/nc.css"> --%>
+
 </head>
 <body>
 
@@ -135,8 +142,56 @@
 						<div class="input-group col-xs-offset-0 col-xs-12 pull-left">
 							<button type="button" onclick="checkLogin();"
 								class="btn btn-primary btn-block  ">登录</button>
+								
+								
+								
+							
+								
 						
 						</div>
+						
+						<div class="col-xs-12 row">
+							<div class="unlock-wrap ul1">
+							<div id="nc_1__bg" class="nc_bg" style="width: 0px;"></div>
+			<div class="slide-btn"></div>
+			<p class="hint">slide to unlock</p>
+		</div>	
+						</div>
+						
+						<div class="col-xs-12 row">
+					<div id="dom_id" style="margin-bottom: 20px;" class="nc-container" data-nc-idx="1">
+<div id="nc_1_wrapper" class="nc_wrapper">
+<div id="nc_1_n1t" class="nc_scale">
+<div id="nc_1__bg" class="nc_bg"></div>
+<span id="nc_1_n1z" class="nc_iconfont btn_slide"></span>
+<div id="nc_1__scale_text" class="scale_text slidetounlock"><span class="nc-lang-cnt" data-nc-lang="_startTEXT">请按住滑块，拖动到最右边</span></div>
+<div id="nc_1_clickCaptcha" class="clickCaptcha">
+<div class="clickCaptcha_text">
+<b id="nc_1__captcha_text" class="nc_captch_text"></b>
+<i id="nc_1__btn_2" class="nc_iconfont nc_btn_2 btn_refresh"></i>
+</div>
+<div class="clickCaptcha_img"></div>
+<div class="clickCaptcha_btn"></div>
+</div>
+<div id="nc_1_imgCaptcha" class="imgCaptcha">
+<div class="imgCaptcha_text"><input id="nc_1_captcha_input" maxlength="6" type="text" style="ime-mode:disabled"></div>
+<div class="imgCaptcha_img" id="nc_1__imgCaptcha_img"></div>
+<i id="nc_1__btn_1" class="nc_iconfont nc_btn_1 btn_refresh" onclick="document.getElementById('nc_1__imgCaptcha_img').children[0].click()"></i>
+<div class="imgCaptcha_btn">
+<div id="nc_1__captcha_img_text" class="nc_captcha_img_text"></div>
+<div id="nc_1_scale_submit" class="nc_scale_submit"></div>
+</div>
+</div>
+<div id="nc_1_cc" class="nc-cc"></div>
+<i id="nc_1__voicebtn" tabindex="0" role="button" class="nc_voicebtn nc_iconfont" style="display:none"></i>
+<b id="nc_1__helpbtn" class="nc_helpbtn"><span class="nc-lang-cnt" data-nc-lang="_learning">了解新功能</span></b>
+</div>
+<div id="nc_1__voice" class="nc_voice"></div>
+</div>
+</div>
+</div>
+						
+						
 							<div class=" hide input-group  col-xs-4  col-lg-4  ">
 
 								<a class=" control-label " href="reg.jsp">
@@ -188,6 +243,60 @@
 
 	<script src="${basePath}/js/loading.js"></script>
 
+
+<script type="text/javascript">
+	
+	
+		var s2u1 = new S2Unlock('.ul1', {
+			slideButton: '.slide-btn',
+			slideImgSrc: basePath+'/images/arrow.png',
+		
+		wrapImgSrc: basePath+'/images/bg.png',
+			callback:function(){
+			msg("done");
+			},
+		
+		});
+		
+	
+		
+		
+		
+		var nc = new noCaptcha();
+	var nc_appkey = 'FFFF00000000016E5A77';  // 应用标识,不可更改
+	var nc_scene = 'message';  //场景,不可更改
+	var nc_token = [nc_appkey, (new Date()).getTime(), Math.random()].join(':');
+	var nc_option = {
+		renderTo: '#dom_id',//渲染到该DOM ID指定的Div位置
+		appkey: nc_appkey,
+	    scene: nc_scene,
+		//token: nc_token,
+		callback: function (data) {// 校验成功回调
+			//$('#a_session').val(data.csessionid);
+			//$('#a_sig').val(data.sig);
+			//$('#a_token').val(nc_token);
+			//$('#a_scene').val(nc_scene);
+			//$('#a_from').val(3);
+		//	if(ncSuccessCb && typeof(ncSuccessCb) == 'function'){
+			//	ncSuccessCb()
+			//}
+			msg("22");
+		}
+	};
+	nc.init(nc_option);	
+	
+	
+	
+		var s2u1 = new S2Unlock('.nc-container', {
+			slideButton: '.btn_slide',
+			//slideImgSrc: basePath+'/images/arrow.png',
+			//wrapImgSrc: basePath+'/images/bg.png',
+			callback:function(){
+			msg("done");
+			},
+		
+		});
+</script>
 
 </body>
 </html>

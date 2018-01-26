@@ -92,7 +92,7 @@
 											<div ng-repeat="x in items.val" class="pgdiv" ng-cloak >
 										
 												<div class="col-xs-3 durl">
-		 										<a ng-src={{x.url_val}}>{{x.url_name}}</a>
+		 										<a ng-href={{x.url_val}}>{{x.url_name}}</a>
 		 										</div> 
 											</div>
 										</div>
