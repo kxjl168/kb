@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * @license Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md or http://ckeditor.com/license
+ */
+
+( function() {
+	&#39;use strict&#39;;
+
+	var matchingFunctionName = getElementMatchFunctionName();
+
+<span id='CKEDITOR-ui-balloonToolbarView-method-constructor'><span id='CKEDITOR-ui-balloonToolbarView'>	/**
+</span></span>	 * Class representing a view of Balloon Toolbar, used by {@link CKEDITOR.ui.balloonToolbar}.
+	 *
+	 * @class
+	 * @private
+	 * @extends CKEDITOR.ui.balloonPanel
+	 * @constructor Creates a Balloon Toolbar view instance.
+	 * @since 4.8
+	 * @param {CKEDITOR.editor} editor The editor instance for which the toolbar is created.
+	 * @param {Object} definition An object containing the toolbar definition. See {@link CKEDITOR.ui.balloonPanel}
+	 * docs for an example definition.
+	 */
+	CKEDITOR.ui.balloonToolbarView = function( editor, definition ) {
+		definition = CKEDITOR.tools.extend( definition || {}, {
+			width: &#39;auto&#39;,
+			triangleWidth: 7,
+			triangleHeight: 7
+		} );
+		CKEDITOR.ui.balloonPanel.call( this, editor, definition );
+
+<span id='CKEDITOR-ui-balloonToolbarView-property-_listeners'>		/**
+</span>		 * Listeners registered by this toolbar view.
+		 *
+		 * @private
+		 */
+		this._listeners = [];
+	};
+
+<span id='CKEDITOR-ui-balloonToolbar-method-constructor'><span id='CKEDITOR-ui-balloonToolbar'>	/**
+</span></span>	 * Class representing instance of Balloon Toolbar.
+	 *
+	 * The easiest way to create a Balloon Toolbar is by using {@link CKEDITOR.editor#balloonToolbars} `create` method.
+	 *
+	 * However it&#39;s possible to maintain it manually, like below:
+	 *
+	 *		// Following example will show a Balloon Toolbar on any selection change. The toolbar is anchored to the
+	 *		// last element in selection, assuming that editor variable is an instance of CKEDITOR.editor.
+	 *		editor.on( &#39;instanceReady&#39;, function() {
+	 *			var toolbar = new CKEDITOR.ui.balloonToolbar( editor );
+	 *
+	 *			toolbar.addItems( {
+	 *				link: new CKEDITOR.ui.button( {
+	 *					command: &#39;link&#39;
+	 *				} ),
+	 *				unlink: new CKEDITOR.ui.button( {
+	 *					command: &#39;unlink&#39;
+	 *				} )
+	 *			} );
+	 *
+	 *			editor.on( &#39;selectionChange&#39;, function( evt ) {
+	 *				var lastElement = evt.data.path.lastElement;
+	 *
+	 *				if ( lastElement ) {
+	 *					toolbar.attach( lastElement );
+	 *				}
+	 *			} );
+	 *		} );
+	 *
+	 * @class
+	 * @constructor Creates a Balloon Toolbar instance.
+	 * @since 4.8
+	 * @param {CKEDITOR.editor} editor The editor instance for which the toolbar is created.
+	 * @param {Object} definition An object containing the panel definition. See {@link CKEDITOR.ui.balloonPanel}
+	 * docs for an example definition.
+	 */
+	CKEDITOR.ui.balloonToolbar = function( editor, definition ) {
+<span id='CKEDITOR-ui-balloonToolbar-property-_view'>		/**
+</span>		 * View instance of Balloon Toolbar.
+		 *
+		 * @private
+		 * @property {CKEDITOR.ui.balloonToolbarView}
+		 */
+		this._view = new CKEDITOR.ui.balloonToolbarView( editor, definition );
+
+<span id='CKEDITOR-ui-balloonToolbar-property-_items'>		/**
+</span>		 * Menu items added to Balloon Toolbar.
+		 *
+		 * @private
+		 * @property {Object.&lt;String, CKEDITOR.ui.button/CKEDITOR.ui.richCombo&gt;}
+		 */
+		this._items = {};
+	};
+
+<span id='CKEDITOR-ui-balloonToolbar-method-attach'>	/**
+</span>	 * Displays the Balloon Toolbar, pointing it to the `element`.
+	 *
+	 * @param {CKEDITOR.dom.element} element The element to which the panel is attached.
+	 * @param {Boolean} [hidden=false] Do not show Balloon Toolbar after attach.
+	 * @member CKEDITOR.ui.balloonToolbar
+	 */
+	CKEDITOR.ui.balloonToolbar.prototype.attach = function( element, hidden ) {
+		this._view.renderItems( this._items );
+		this._view.attach( element, {
+			focusElement: false,
+			show: !hidden
+		} );
+	};
+
+<span id='CKEDITOR-ui-balloonToolbar-method-show'>	/**
+</span>	 * Shows the Balloon Toolbar.
+	 *
+	 * @member CKEDITOR.ui.balloonToolbar
+	 */
+	CKEDITOR.ui.balloonToolbar.prototype.show = function() {
+		this._view.show();
+	};
+
+<span id='CKEDITOR-ui-balloonToolbar-method-hide'>	/**
+</span>	 * Hides the Balloon Toolbar.
+	 *
+	 * @member CKEDITOR.ui.balloonToolbar
+	 */
+	CKEDITOR.ui.balloonToolbar.prototype.hide = function() {
+		this._view.hide();
+	};
+
+<span id='CKEDITOR-ui-balloonToolbar-method-addItem'>	/**
+</span>	 * Adds an item to the Balloon Toolbar.
+	 *
+	 * @param {String} name The menu item name.
+	 * @param {CKEDITOR.ui.button/CKEDITOR.ui.richCombo} element Instance of ui element.
+	 */
+	CKEDITOR.ui.balloonToolbar.prototype.addItem = function( name, element ) {
+		this._items[ name ] = element;
+	};
+
+<span id='CKEDITOR-ui-balloonToolbar-method-addItems'>	/**
+</span>	 * Adds one or more items to the Balloon Toolbar.
+	 *
+	 * @param {Object} elements Object where keys are used as itemName and corresponding values as definition for a {@link #addItem} call.
+	 */
+	CKEDITOR.ui.balloonToolbar.prototype.addItems = function( elements ) {
+		for ( var itemName in elements ) {
+			this.addItem( itemName, elements[ itemName ] );
+		}
+	};
+
+<span id='CKEDITOR-ui-balloonToolbar-method-getItem'>	/**
+</span>	 * Retrieves a particular menu item from the Balloon Toolbar.
+	 *
+	 * @param {String} name The name of the desired menu item.
+	 * @returns {CKEDITOR.ui.button/CKEDITOR.ui.richCombo}
+	 */
+	CKEDITOR.ui.balloonToolbar.prototype.getItem = function( name ) {
+		return this._items[ name ];
+	};
+
+<span id='CKEDITOR-ui-balloonToolbar-method-deleteItem'>	/**
+</span>	 * Removes a particular menu item from the Balloon Toolbar.
+	 *
+	 * @param {String} name The name of the item menu to be deleted.
+	 */
+	CKEDITOR.ui.balloonToolbar.prototype.deleteItem = function( name ) {
+		if ( this._items[ name ] ) {
+			delete this._items[ name ];
+		}
+	};
+
+<span id='CKEDITOR-ui-balloonToolbar-method-destroy'>	/**
+</span>	 * Hides the toolbar and removes it from the DOM.
+	 */
+	CKEDITOR.ui.balloonToolbar.prototype.destroy = function() {
+		this._pointedElement = null;
+		this._view.destroy();
+	};
+
+<span id='CKEDITOR-plugins-balloontoolbar-context-method-constructor'><span id='CKEDITOR-plugins-balloontoolbar-context'>	/**
+</span></span>	 * Class representing a single Balloon Toolbar context in the editor.
+	 *
+	 * It can be configured with a various of conditions for showing up the toolbar using `options` parameter.
+	 *
+	 * Multiple contexts are handled by the {@link CKEDITOR.plugins.balloontoolbar.contextManager Context Manager}.
+	 *
+	 * @class CKEDITOR.plugins.balloontoolbar.context
+	 * @constructor Creates a Balloon Toolbar context instance.
+	 * @since 4.8
+	 * @param {CKEDITOR.editor} editor The editor instance for which the toolbar is created.
+	 * @param {CKEDITOR.plugins.balloontoolbar.contextDefinition} options A set of options, defining context behavior.
+	 */
+	function Context( editor, options ) {
+<span id='CKEDITOR-plugins-balloontoolbar-context-property-editor'>		/**
+</span>		 * Editor instance.
+		 *
+		 * @property {CKEDITOR.editor}
+		 */
+		this.editor = editor;
+
+<span id='CKEDITOR-plugins-balloontoolbar-context-property-options'>		/**
+</span>		 * Options passed to the constructor.
+		 *
+		 * @property {CKEDITOR.plugins.balloontoolbar.contextDefinition}
+		 */
+		this.options = options;
+
+<span id='CKEDITOR-plugins-balloontoolbar-context-property-toolbar'>		/**
+</span>		 * Toolbar instance pointed by context.
+		 *
+		 * @property {CKEDITOR.ui.balloonToolbar}
+		 */
+		this.toolbar = new CKEDITOR.ui.balloonToolbar( editor );
+
+		if ( this.options &amp;&amp; typeof this.options.priority === &#39;undefined&#39; ) {
+			this.options.priority = CKEDITOR.plugins.balloontoolbar.PRIORITY.MEDIUM;
+		}
+
+		this._loadButtons();
+	}
+
+	Context.prototype = {
+<span id='CKEDITOR-plugins-balloontoolbar-context-method-destroy'>		/**
+</span>		 * Destroys the toolbar maintained by this context.
+		 */
+		destroy: function() {
+			if ( this.toolbar ) {
+				this.toolbar.destroy();
+			}
+		},
+
+<span id='CKEDITOR-plugins-balloontoolbar-context-method-show'>		/**
+</span>		 * Shows the toolbar controlled by this context.
+		 *
+		 * @param {CKEDITOR.dom.element} [pointedElement] Element that should be pointed by the Balloon Toolbar.
+		 */
+		show: function( pointedElement ) {
+			if ( pointedElement ) {
+				this.toolbar.attach( pointedElement );
+			}
+
+			this.toolbar.show();
+		},
+
+<span id='CKEDITOR-plugins-balloontoolbar-context-method-hide'>		/**
+</span>		 * Hides the toolbar controlled by this context.
+		 */
+		hide: function() {
+			this.toolbar.hide();
+		},
+
+<span id='CKEDITOR-plugins-balloontoolbar-context-method-_matchRefresh'>		/**
+</span>		 * Performs matching against `options.refresh`.
+		 *
+		 * @private
+		 * @param {CKEDITOR.dom.elementPath} path Element path to be checked.
+		 * @param {CKEDITOR.dom.selection} selection Selection object to be passed to the `refresh` function.
+		 * @returns {CKEDITOR.dom.element/null} Returns a {@link CKEDITOR.dom.element} if matched by `options.refresh`, `null` otherwise.
+		 */
+		_matchRefresh: function( path, selection ) {
+			var ret = null;
+
+			if ( this.options.refresh ) {
+				ret = this.options.refresh( this.editor, path, selection ) || null;
+
+				if ( ret &amp;&amp; ret instanceof CKEDITOR.dom.element === false ) {
+					ret = ( path &amp;&amp; path.lastElement ) || this.editor.editable();
+				}
+			}
+
+			return ret;
+		},
+
+<span id='CKEDITOR-plugins-balloontoolbar-context-method-_matchWidget'>		/**
+</span>		 * Checks if any of `options.widgets` widgets is currently focused.
+		 *
+		 * @private
+		 * @returns {CKEDITOR.dom.element/null} Returns {@link CKEDITOR.dom.element} instance that toolbar should
+		 * point to, if any matched widget is focused. `false` otherwise, meaning no tracked widget was matched.
+		 */
+		_matchWidget: function() {
+			var widgetNames = this.options.widgets,
+				ret = null;
+
+			if ( widgetNames ) {
+				var curWidgetName = this.editor.widgets &amp;&amp; this.editor.widgets.focused &amp;&amp; this.editor.widgets.focused.name;
+
+				if ( typeof widgetNames === &#39;string&#39; ) {
+					widgetNames = widgetNames.split( &#39;,&#39; );
+				}
+
+				if ( CKEDITOR.tools.array.indexOf( widgetNames, curWidgetName ) !== -1 ) {
+					ret = this.editor.widgets.focused.element;
+				}
+			}
+
+			return ret;
+		},
+
+<span id='CKEDITOR-plugins-balloontoolbar-context-method-_matchElement'>		/**
+</span>		 * Checks if given `element` matches `options.cssSelector` selector.
+		 *
+		 * @private
+		 * @param {CKEDITOR.dom.element} elem Element to be tested.
+		 * @returns {CKEDITOR.dom.element/null} {@link CKEDITOR.dom.element} instance if an element was matched,
+		 * `null` otherwise.
+		 */
+		_matchElement: function( elem ) {
+			// Note that IE8 doesn&#39;t have matching function at all.
+			return this.options.cssSelector &amp;&amp; matchingFunctionName &amp;&amp; !!elem.$[ matchingFunctionName ]( this.options.cssSelector ) ?
+				elem : null;
+		},
+
+<span id='CKEDITOR-plugins-balloontoolbar-context-method-_loadButtons'>		/**
+</span>		 * Loads button from `options.buttons`.
+		 *
+		 * @private
+		 */
+		_loadButtons: function() {
+			var buttons = this.options.buttons;
+
+			if ( buttons ) {
+				buttons = buttons.split( &#39;,&#39; );
+				CKEDITOR.tools.array.forEach( buttons, function( name ) {
+					var newUiItem = this.editor.ui.create( name );
+
+					if ( newUiItem ) {
+						this.toolbar.addItem( name, newUiItem );
+					}
+				}, this );
+			}
+		}
+	};
+
+
+<span id='CKEDITOR-plugins-balloontoolbar-contextManager-method-constructor'><span id='CKEDITOR-plugins-balloontoolbar-contextManager'>	/**
+</span></span>	 * Class for managers that take care of handling multiple contexts.
+	 *
+	 * Manager also make sure that only one toolbar is active (per manager) at a time and implement the logic used to
+	 * determine the best fitting context for a given selection. Default priorities are as follows:
+	 *
+	 * 1. Callback - `options.refresh`
+	 * 1. Widgets matching - `options.widgets`
+	 * 1. CSS matching - `options.cssSelector`
+	 *
+	 * It&#39;s worth noting that priorities could be further customized by explicitly providing {@link CKEDITOR.plugins.balloontoolbar.contextDefinition#priority},
+	 * so that it&#39;s possible to match a widget over a refresh callback.
+	 *
+	 * @class CKEDITOR.plugins.balloontoolbar.contextManager
+	 * @constructor
+	 * @since 4.8
+	 * @param {CKEDITOR.editor} editor The editor instance which the toolbar is created for.
+	 */
+	function ContextManager( editor ) {
+<span id='CKEDITOR-plugins-balloontoolbar-contextManager-property-editor'>		/**
+</span>		 * Editor for which the manager was created for.
+		 *
+		 * @property {CKEDITOR.editor}
+		 */
+		this.editor = editor;
+
+<span id='CKEDITOR-plugins-balloontoolbar-contextManager-property-_contexts'>		/**
+</span>		 * List of contexts controlled by this manager.
+		 *
+		 * @private
+		 * @property {CKEDITOR.plugins.balloontoolbar.context[]}
+		 */
+		this._contexts = [];
+
+<span id='CKEDITOR-plugins-balloontoolbar-contextManager-property-_listeners'>		/**
+</span>		 * Array of event listener references, created by the manager.
+		 *
+		 * @private
+		 * @property {Object[]} _listeners An array of objects returned by {@link CKEDITOR.event#on} method.
+		 */
+		this._listeners = [];
+
+		this._attachListeners();
+	}
+
+	ContextManager.prototype = {
+<span id='CKEDITOR-plugins-balloontoolbar-contextManager-method-create'>		/**
+</span>		 * Creates a toolbar context based on provided `options`, registers it in the manager and returns.
+		 *
+		 *		// Shows bold and underline button for any selection.
+		 *		var context = contextManager.create( {
+		 *			buttons: &#39;Bold,Underline&#39;,
+		 *			refresh: function() {
+		 *			 	return true;
+		 *			}
+		 *		} );
+		 *
+		 * @param {CKEDITOR.plugins.balloontoolbar.contextDefinition} options Config object that determines the conditions used to display the toolbar.
+		 * @returns {CKEDITOR.plugins.balloontoolbar.context} A context object created for this Balloon Toolbar configuration.
+		 */
+		create: function( options ) {
+			var context = new CKEDITOR.plugins.balloontoolbar.context( this.editor, options );
+
+			this.add( context );
+
+			return context;
+		},
+
+<span id='CKEDITOR-plugins-balloontoolbar-contextManager-method-add'>		/**
+</span>		 * Adds a `context` to the tracked contexts list.
+		 *
+		 * @param {CKEDITOR.plugins.balloontoolbar.context} context
+		 */
+		add: function( context ) {
+			this._contexts.push( context );
+		},
+
+<span id='CKEDITOR-plugins-balloontoolbar-contextManager-method-check'>		/**
+</span>		 * Check each registered context against `selection` to find the best match. By default only one
+		 * toolbar per manager will be shown.
+		 *
+		 * @param {CKEDITOR.dom.selection/null} [selection=null] Selection to be used for probing toolbar. If none provided, a
+		 * _shrunk_ selection of current editor will be used.
+		 */
+		check: function( selection ) {
+			if ( !selection ) {
+				selection = this.editor.getSelection();
+
+				// Shrink the selection so that we&#39;re ensured innermost elements are available.
+				CKEDITOR.tools.array.forEach( selection.getRanges(), function( range ) {
+					range.shrink( CKEDITOR.SHRINK_ELEMENT, true );
+				} );
+			}
+
+			if ( !selection ) {
+				return;
+			}
+
+			var forEach = CKEDITOR.tools.array.forEach,
+				mainRange = selection.getRanges()[ 0 ],
+				path = mainRange &amp;&amp; mainRange.startPath(),
+				highlightElement,
+				contextMatched;
+
+			// This function encapsulates matching algorithm.
+			function matchEachContext( contexts, matchingFunction, matchingArg1 ) {
+				forEach( contexts, function( curContext ) {
+					// Execute only if there&#39;s no picked context yet, or if probed context has a higher priority than
+					// currently matched one.
+					if ( !contextMatched || contextMatched.options.priority &gt; curContext.options.priority ) {
+						var result = matchingFunction( curContext, matchingArg1 );
+
+						if ( result instanceof CKEDITOR.dom.element ) {
+							highlightElement = result;
+							contextMatched = curContext;
+						}
+					}
+				} );
+			}
+
+			function elementsMatcher( curContext, curElement ) {
+				return curContext._matchElement( curElement );
+			}
+
+			// Match callbacks.
+			matchEachContext( this._contexts, function( curContext ) {
+				return curContext._matchRefresh( path, selection );
+			} );
+
+			// Match widgets.
+			matchEachContext( this._contexts, function( curContext ) {
+				return curContext._matchWidget();
+			} );
+
+			// Match element selectors.
+			if ( path ) {
+				for ( var i = 0; i &lt; path.elements.length; i++ ) {
+					var curElement = path.elements[ i ];
+					// Skip non-editable elements (e.g. widget internal structure).
+					if ( !curElement.isReadOnly() ) {
+						matchEachContext( this._contexts, elementsMatcher, curElement );
+					}
+				}
+			}
+
+			this.hide();
+
+			if ( contextMatched ) {
+				contextMatched.show( highlightElement );
+			}
+		},
+
+<span id='CKEDITOR-plugins-balloontoolbar-contextManager-method-hide'>		/**
+</span>		 * Hides every visible context controlled by manager.
+		 */
+		hide: function() {
+			CKEDITOR.tools.array.forEach( this._contexts, function( curContext ) {
+				curContext.hide();
+			} );
+		},
+
+<span id='CKEDITOR-plugins-balloontoolbar-contextManager-method-destroy'>		/**
+</span>		 * Destroys every context controlled by the manager and clears the context list.
+		 */
+		destroy: function() {
+			CKEDITOR.tools.array.forEach( this._listeners, function( listener ) {
+				listener.removeListener();
+			} );
+
+			this._listeners.splice( 0, this._listeners.length );
+
+			this._clear();
+		},
+
+<span id='CKEDITOR-plugins-balloontoolbar-contextManager-method-_clear'>		/**
+</span>		 * Destroys any context in {@link #_contexts} and empties the managed contexts list.
+		 *
+		 * @private
+		 */
+		_clear: function() {
+			CKEDITOR.tools.array.forEach( this._contexts, function( curContext ) {
+				curContext.destroy();
+			} );
+
+			this._contexts.splice( 0, this._contexts.length );
+		},
+
+<span id='CKEDITOR-plugins-balloontoolbar-contextManager-method-_attachListeners'>		/**
+</span>		 * Adds a set of listeners integrating manager with the {@link #editor}, like {@link CKEDITOR.editor#event-selectionChange} listener.
+		 *
+		 * @private
+		 */
+		_attachListeners: function() {
+			this._listeners.push(
+				this.editor.on( &#39;destroy&#39;, function() {
+					this.destroy();
+				}, this ),
+				this.editor.on( &#39;selectionChange&#39;, function() {
+					this.check();
+				}, this ),
+				this.editor.on( &#39;mode&#39;, function() {
+					this.hide();
+				}, this, null, 9999 ),
+				this.editor.on( &#39;blur&#39;, function() {
+					this.hide();
+				}, this, null, 9999 )
+			);
+		}
+	};
+
+	var pluginInit = false,
+		cssLoaded = false;
+
+	CKEDITOR.plugins.add( &#39;balloontoolbar&#39;, {
+		requires: &#39;balloonpanel&#39;,
+
+		beforeInit: function() {
+			if ( !cssLoaded ) {
+				// Load fallback styles.
+				CKEDITOR.document.appendStyleSheet( this.path + &#39;skins/default.css&#39; );
+				CKEDITOR.document.appendStyleSheet( this.path + &#39;skins/&#39; + CKEDITOR.skin.name + &#39;/balloontoolbar.css&#39; );
+				cssLoaded = true;
+			}
+		},
+
+		init: function( editor ) {
+<span id='CKEDITOR-editor-property-balloonToolbars'>			/**
+</span>			 * Balloon Toolbar manager for a given editor instance. It ensures that there&#39;s only one toolbar visible at a time.
+			 *
+			 * Use {@link CKEDITOR.plugins.balloontoolbar.contextManager#create} method to register a new toolbar context.
+			 *
+			 * Following example will add a toolbar containing link and unlink buttons for any anchor or image:
+			 *
+			 *		editor.balloonToolbars.create( {
+			 *			buttons: &#39;Link,Unlink&#39;,
+			 *			cssSelector: &#39;a[href], img&#39;
+			 *		} );
+			 *
+			 * @since 4.8
+			 * @readonly
+			 * @property {CKEDITOR.plugins.balloontoolbar.contextManager} balloonToolbars
+			 * @member CKEDITOR.editor
+			 */
+			editor.balloonToolbars = new CKEDITOR.plugins.balloontoolbar.contextManager( editor );
+
+			// Awful hack for overwriting prototypes of balloonToolbarView (#1142).
+			if ( pluginInit ) {
+				return;
+			}
+			pluginInit = true;
+			CKEDITOR.ui.balloonToolbarView.prototype = CKEDITOR.tools.extend( {}, CKEDITOR.ui.balloonPanel.prototype );
+
+<span id='CKEDITOR-ui-balloonToolbarView-method-build'>			/**
+</span>			 * Builds Balloon Toolbar DOM representation.
+			 *
+			 * @member CKEDITOR.ui.balloonToolbarView
+			 */
+			CKEDITOR.ui.balloonToolbarView.prototype.build = function() {
+				CKEDITOR.ui.balloonPanel.prototype.build.call( this );
+				this.parts.panel.addClass( &#39;cke_balloontoolbar&#39; );
+				this.parts.title.remove();
+				this.parts.close.remove();
+			};
+
+			CKEDITOR.ui.balloonToolbarView.prototype.show = function() {
+				if ( this.rect.visible ) {
+					return;
+				}
+				var editable = this.editor.editable();
+				this._detachListeners();
+
+				this._listeners.push( this.editor.on( &#39;resize&#39;, function() {
+					this.attach( this._pointedElement, {
+						focusElement: false
+					} );
+				}, this ) );
+				this._listeners.push( editable.attachListener( editable.getDocument(), &#39;scroll&#39;, function() {
+					this.attach( this._pointedElement, {
+						focusElement: false
+					} );
+				}, this ) );
+				this._listeners.push( CKEDITOR.document.getWindow().on( &#39;resize&#39;, function() {
+					this.attach( this._pointedElement, {
+						focusElement: false
+					} );
+				}, this ) );
+
+				CKEDITOR.ui.balloonPanel.prototype.show.call( this );
+			};
+
+			CKEDITOR.ui.balloonToolbarView.prototype.hide = function() {
+				this._detachListeners();
+				CKEDITOR.ui.balloonPanel.prototype.hide.call( this );
+			};
+
+<span id='CKEDITOR-ui-balloonToolbarView-method-blur'>			/**
+</span>			 * @inheritdoc CKEDITOR.ui.balloonPanel#blur
+			 * @param {Boolean} [focusEditor=false] Whether the editor should be focused after blurring.
+			 * @member CKEDITOR.ui.balloonToolbarView
+			 */
+			CKEDITOR.ui.balloonToolbarView.prototype.blur = function( focusEditor ) {
+				if ( !!focusEditor ) {
+					// This is actually different behavior from standard balloonpanel, where it always puts the focus back to editor.
+					// We don&#39;t want to do it here, as e.g. we hide the toolbar as user leaves the editor (tabs out). Forcing focus
+					// back to the editor would trap end user inside of the editor, and show the toolbar... again.
+					this.editor.focus();
+				}
+			};
+
+			CKEDITOR.ui.balloonToolbarView.prototype._getAlignments = function( elementRect, panelWidth, panelHeight ) {
+				var alignments = CKEDITOR.ui.balloonPanel.prototype._getAlignments.call( this, elementRect, panelWidth, panelHeight );
+
+				return {
+					&#39;bottom hcenter&#39;: alignments[ &#39;bottom hcenter&#39; ],
+					&#39;top hcenter&#39;: alignments[ &#39;top hcenter&#39; ]
+				};
+			};
+
+<span id='CKEDITOR-ui-balloonToolbarView-method-_detachListeners'>			/**
+</span>			 * Detaches all listeners.
+			 *
+			 * @private
+			 * @member CKEDITOR.ui.balloonToolbarView
+			 */
+			CKEDITOR.ui.balloonToolbarView.prototype._detachListeners = function() {
+				if ( this._listeners.length ) {
+					CKEDITOR.tools.array.forEach( this._listeners, function( listener ) {
+						listener.removeListener();
+					} );
+					this._listeners = [];
+				}
+			};
+
+			CKEDITOR.ui.balloonToolbarView.prototype.destroy = function() {
+				CKEDITOR.ui.balloonPanel.prototype.destroy.call( this );
+				this._detachListeners();
+			};
+
+<span id='CKEDITOR-ui-balloonToolbarView-method-renderItems'>			/**
+</span>			 * Renders provided UI elements inside of the view.
+			 *
+			 * @param {CKEDITOR.ui.button[]/CKEDITOR.ui.richCombo[]} items Array of UI elements objects.
+			 * @member CKEDITOR.ui.balloonToolbarView
+			 */
+			CKEDITOR.ui.balloonToolbarView.prototype.renderItems = function( items ) {
+				var output = [],
+					keys = CKEDITOR.tools.objectKeys( items ),
+					groupStarted = false;
+
+				CKEDITOR.tools.array.forEach( keys, function( itemKey ) {
+
+					// If next element to render is richCombo and we have already opened group we have to close it.
+					if ( CKEDITOR.ui.richCombo &amp;&amp; items[ itemKey ] instanceof CKEDITOR.ui.richCombo &amp;&amp; groupStarted ) {
+						groupStarted = false;
+						output.push( &#39;&lt;/span&gt;&#39; );
+					} else if ( !( CKEDITOR.ui.richCombo &amp;&amp; items[ itemKey ] instanceof CKEDITOR.ui.richCombo ) &amp;&amp; !groupStarted ) {
+						// If we have closed group and element that is not richBox we have to open group.
+						groupStarted = true;
+						output.push( &#39;&lt;span class=&quot;cke_toolgroup&quot;&gt;&#39; );
+					}
+
+					// Now we can render element.
+					items[ itemKey ].render( this.editor, output );
+				}, this );
+
+				// We have to check if last group is closed.
+				if ( groupStarted ) {
+					output.push( &#39;&lt;/span&gt;&#39; );
+				}
+
+				this.parts.content.setHtml( output.join( &#39;&#39; ) );
+				this.parts.content.unselectable();
+				CKEDITOR.tools.array.forEach( this.parts.content.find( &#39;a&#39; ).toArray(), function( element ) {
+					element.setAttribute( &#39;draggable&#39;, &#39;false&#39; );
+				} );
+			};
+
+<span id='CKEDITOR-ui-balloonToolbarView-method-attach'>			/**
+</span>			 * @inheritdoc CKEDITOR.ui.balloonPanel#attach
+			 * @member CKEDITOR.ui.balloonToolbarView
+			 */
+			CKEDITOR.ui.balloonToolbarView.prototype.attach = function( element, options ) {
+
+<span id='CKEDITOR-ui-balloonToolbarView-property-_pointedElement'>				/**
+</span>				 * DOM element used by Balloon Toolbar to attach to.
+				 *
+				 * @private
+				 * @member CKEDITOR.ui.balloonToolbarView
+				 */
+				this._pointedElement = element;
+
+				CKEDITOR.ui.balloonPanel.prototype.attach.call( this, element, options );
+			};
+		}
+	} );
+
+<span id='CKEDITOR-plugins-balloontoolbar'>	/**
+</span>	 * Static API exposed by the [Balloon Toolbar](https://ckeditor.com/cke4/addon/balloontoolbar) plugin.
+	 *
+	 * @class
+	 * @singleton
+	 */
+	CKEDITOR.plugins.balloontoolbar = {
+		context: Context,
+		contextManager: ContextManager,
+
+<span id='CKEDITOR-plugins-balloontoolbar-property-PRIORITY'>		/**
+</span>		 * Context priority enumeration. `HIGH` priority context are checked first.
+		 *
+		 * @readonly
+		 * @property
+		 */
+		PRIORITY: {
+			LOW: 999,
+			MEDIUM: 500,
+			HIGH: 10
+		}
+	};
+
+	function getElementMatchFunctionName() {
+		// Temporary here, until #1205 is not resolved.
+		return CKEDITOR.tools.array.filter( [ &#39;matches&#39;, &#39;msMatchesSelector&#39;, &#39;webkitMatchesSelector&#39;, &#39;mozMatchesSelector&#39;, &#39;oMatchesSelector&#39; ], function( fnName ) {
+			// Note that only IE8 doesn&#39;t know HTMLElement,  nor it has msMatchesSelector so we can return false.
+			return window.HTMLElement ? fnName in HTMLElement.prototype : false;
+		} )[ 0 ];
+	}
+
+<span id='CKEDITOR-plugins-balloontoolbar-contextDefinition'>	/**
+</span>	 * This is an abstract class that describes the definition of a {@link CKEDITOR.plugins.balloontoolbar.context Balloon Toolbar Context}.
+	 *
+	 * **Note that context matching options have a different priority by default**, see more details in {@link CKEDITOR.plugins.balloontoolbar.contextManager}.
+	 *
+	 * @class CKEDITOR.plugins.balloontoolbar.contextDefinition
+	 * @abstract
+	 */
+
+<span id='CKEDITOR-plugins-balloontoolbar-contextDefinition-property-cssSelector'>	/**
+</span>	 * A CSS selector. If any element in the path matches against it, the toolbar will be shown.
+	 *
+	 * @property {String/null} [cssSelector=null]
+	 */
+
+<span id='CKEDITOR-plugins-balloontoolbar-contextDefinition-property-widgets'>	/**
+</span>	 * An array of widget names that should show related toolbar. Alternatively can be passed as a comma-separated string.
+	 *
+	 * @property {String[]/String/null} [widgets=null]
+	 */
+
+<span id='CKEDITOR-plugins-balloontoolbar-contextDefinition-method-refresh'>	/**
+</span>	 * An **optional** function that determines whether the toolbar should be visible for a given `path`.
+	 *
+	 * An example below will show the toolbar only for paths containing `&lt;strong&gt;` elements.
+	 *
+	 *		// Assuming that editor is an CKEDITOR.editor instance.
+	 *		// Show the toolbar only if there&#39;s a strong in the path.
+	 *		editor.balloontoolbar.create( {
+	 *			buttons: &#39;Bold,Underline&#39;,
+	 *			refresh: function( editor, path ) {
+	 *				return path.contains( &#39;strong&#39; );
+	 *			}
+	 *		} );
+	 *
+	 *		// In this case toolbar will be always visible, pointing at the editable, despite the selection.
+	 *		editor.balloontoolbar.create( {
+	 *			buttons: &#39;Bold,Underline&#39;,
+	 *			refresh: function( editor, path ) {
+	 *				return editor.editable();
+	 *			}
+	 *		} );
+	 *
+	 * @method refresh
+	 * @param {CKEDITOR.editor} editor An editor that controls this context.
+	 * @param {CKEDITOR.dom.elementPath} path Path for a currently probed selection.
+	 * @param {CKEDITOR.dom.selection} selection Selection object used for probing.
+	 * @returns {Boolean/CKEDITOR.dom.element} Returning `true` means that the Balloon Toolbar should be shown, pointing
+	 * at the last element in the selection. `false` means no toolbar should be shown.
+	 * It may also return a {@link CKEDITOR.dom.element} instance, in that case toolbar will be shown and point at given
+	 * element.
+	 */
+
+<span id='CKEDITOR-plugins-balloontoolbar-contextDefinition-property-priority'>	/**
+</span>	 * A number based on {@link CKEDITOR.plugins.balloontoolbar#PRIORITY}.
+	 *
+	 *		var defA = {
+	 *			buttons: &#39;Bold&#39;,
+	 *			refresh: function() { return true; }
+	 *		};
+	 *
+	 *		// Even though previous definition uses refresh function, it will not take priority
+	 *		// over this definition, as it explicitly states high priority.
+	 *		var defB = {
+	 *			buttons: &#39;NumberedList,BulletedList&#39;,
+	 *			cssSelector: &#39;li&#39;,
+	 *			priority: CKEDITOR.plugins.balloontoolbar.PRIORITY.HIGH
+	 *		};
+	 *
+	 *
+	 * @property {Number} [priority=CKEDITOR.plugins.balloontoolbar.PRIORITY.MEDIUM]
+	 */
+}() );
+</pre>
+</body>
+</html>

@@ -103,6 +103,13 @@
 													</select>
 												</div>
 											</div>
+											
+											<div class=" col-md-6  col-xs-12  ">
+												<div class="control-label padding-top-0 col-xs-4 col-md-4 col-lg-4 ">IP：</div>
+												<div class="col-md-6 col-xs-8 text-right ">
+														<input type="text" class="form-control" id="ip" ng-model="ip" placeholder="">
+												</div>
+											</div>
 										</div>
 										<div class="row  form-group margin-bottom-5">
 										
@@ -180,7 +187,8 @@
 									<tr ng-repeat="x in datalist">
 										<td>{{ x.spider_head }}</td>
 										<td>{{ x.request_url }}</td>
-										<td>{{ x.request_ip }}</td>
+										<td ><span ng-show="x.cool" class="background:green;">❤</span> <span ng-show="x.bad" class="background:red;">↓↓</span>  {{ x.request_ip }}</td>
+										
 										<td>{{ x.request_city }}</td>
 										<td>{{ x.city }}</td>
 										<td>{{ x.time }}</td>

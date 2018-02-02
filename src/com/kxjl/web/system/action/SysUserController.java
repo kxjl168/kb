@@ -24,8 +24,10 @@ import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.common.Md5Encrypt;
 import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.tool.utils.AESEncrtptZteimweb;
+import com.kxjl.tool.utils.JsonUtil;
 import com.kxjl.tool.utils.MsgSvrCall;
 import com.kxjl.web.system.action.base.BaseController;
+import com.kxjl.web.system.model.RequestInfo;
 import com.kxjl.web.system.model.SysUserBean;
 import com.kxjl.web.system.model.TokenBean;
 import com.kxjl.web.system.model.SysUserBean.UserType;
@@ -102,6 +104,50 @@ public class SysUserController extends BaseController {
 			@RequestParam("password") String password) {
 		String msg = "";
 		int sucess = 0;
+		HashMap<String, Object> map = new HashMap();
+		
+		String actiontype="admin_login";
+		
+		// 计算ip
+		String ip = "";
+		try {
+			ip = request.getRemoteAddr();
+		} catch (Exception e) {
+
+		}
+
+		// 提交次数/单位时间限制
+		RequestInfo rquery = new RequestInfo();
+		rquery.setAction_type(actiontype);
+		rquery.setIp(ip);
+
+		// 可以再次评论的时间间隔
+		int sec = ConfigReader.getInstance().getIntProperty(
+				"login_cando_sec", 60);
+		rquery.setSec(sec);
+
+		int rqstnum = requestInfoService
+				.getRequestCountByCondition(rquery);
+		// 单位时间内允许评论的次数
+		int maxnum = ConfigReader.getInstance().getIntProperty(
+				"login_maxnum_p_sec", 10);
+		if (rqstnum >= maxnum) {
+			
+			map.put("url", "/");
+			
+			map.put("sucess",0);
+			
+			map.put("msg", "非法操作!");
+			saveRequestInfo(request, actiontype,"登陆次数过多");
+			return map;
+		}
+		
+		
+		
+		
+		
+		
+		
 		String md5password = Md5Encrypt.MD5(password);
 		// 用户名不区分大小写
 		userid = userid.toLowerCase();
@@ -112,7 +158,7 @@ public class SysUserController extends BaseController {
 
 		SysUserBean usr = sysUserService.getUserInfoByUseridAndPwd(userInfo);
 
-		HashMap<String, Object> map = new HashMap();
+	
 		if (usr == null) {
 
 			//
@@ -155,6 +201,11 @@ public class SysUserController extends BaseController {
 		map.put("sucess", Integer.valueOf(sucess));
 		
 		map.put("msg", msg);
+	
+		String info= sucess==1?"登录成功":"登录失败";
+		
+		saveRequestInfo(request, actiontype,info);
+		
 		return map;
 	}
 	

@@ -9,6 +9,7 @@
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
 			<meta name="robots" content="noindex,nofollow" />
+			<meta name="fragment" content="!">
 <meta name="keywords" content="关于我">
 <meta name="description" content="关于- Kx的个人站点" />
 <meta name="author" content="ZHANG JIE"> 

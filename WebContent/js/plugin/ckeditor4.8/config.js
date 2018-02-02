@@ -10,12 +10,12 @@ CKEDITOR.editorConfig = function( config ) {
 	// http://docs.ckeditor.com/#!/api/CKEDITOR.config
 	
 	
-	//config.filebrowserImageUploadUrl = '/UploadCKFile.action';
+	
 	
     // var now = new Date();
     //   editor.insertHtml( 'The current date and time is: <em>' + now.toString() + '</em>' );
    
-	
+	//config.filebrowserImageUploadUrl = '/UploadCKFile.action';
 	config.filebrowserImageUploadUrl = '/kb/UploadCKFile.action';
    
 	//config.extraPlugins= 'codesnippet,colorbutton,font,justify,print,tableresize,pastefromword,liststyle',

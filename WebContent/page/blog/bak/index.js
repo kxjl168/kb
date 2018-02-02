@@ -59,9 +59,7 @@ function initCKPlugin()
 						$scope.getList();
 						msg("保存成功！");
 					});
-	            	});
-
-	            	
+	            	});	
 	            }
 	        });
 	        editor.ui.addButton( 'btn_savedata', {
@@ -72,9 +70,7 @@ function initCKPlugin()
 	        });
 	    }
 	});
-	
 
-	
 	CKEDITOR.morePluginnames=pluginname;
 	$("#s_context").ckeditor();
 	//CKEDITOR.config.extraPlugins= pluginname+',codesnippet,colorbutton,font,liststyle,copyformatting';

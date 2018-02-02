@@ -59,8 +59,8 @@
 
 						<ul class="pagination pull-right">
 							<li>
-								<a href="#" ng-click="getList(page-1)">&laquo;</a>
-								<a ng-href="{{preurl}}/public/index/i/{{page-1}}.html"  style="display: none;"  style="" class="for spider" >下一页</a>
+								<a href="#" ng-click="getList(1)">&laquo;</a>
+								<a ng-href="{{preurl}}/public/index/i/1.html"  style="display: none;"  style="" class="for spider" >第一页</a>
 							</li>
 							<li ng-repeat="x in pageDataPre">
 
@@ -76,8 +76,8 @@
 <a ng-href="{{preurl}}/public/index/i/{{x}}.html" style="display: none;" class="for spider" >第{{x}}页</a>
 							</li>
 							<li>
-								<a href="#" ng-click="getList(page+1)">&raquo;</a>
-								<a ng-href="{{preurl}}/public/index/i/{{page+1}}.html" style="display: none;" class="for spider" >下一页</a>
+								<a href="#" ng-click="getList(pageNum)">&raquo;</a>
+								<a ng-href="{{preurl}}/public/index/i/{{pageNum}}.html" style="display: none;" class="for spider" >最后一页</a>
 							</li>
 
 						

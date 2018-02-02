@@ -8,7 +8,7 @@
 		<head>
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
-			
+			<meta name="fragment" content="!">
 <meta name="keywords" content="诗词歌赋">
 <meta name="description" content="诗词歌赋 - KxのBook - Kx的个人站点" />
 

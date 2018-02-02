@@ -126,6 +126,8 @@ function init() {
 			obj.url = $scope.url;// "12345678";
 			obj.head = $scope.head;// "12345678";
 			
+			obj.ip = $scope.ip;
+			
 			obj.date_type = $("#dateType").val();
 			obj.starttime = $("#effectDate").val();
 			obj.endtime = $("#effectDate2").val();
@@ -147,6 +149,17 @@ function init() {
 
 			
 					$scope.datalist =eval(json.datalist);
+					
+				$.each(	$scope.datalist ,function(index,item){
+					if(item.request_ip.indexOf("220.181.108")>-1)
+						item.cool=true;
+					if(item.request_ip.indexOf("123.125")>-1)
+						item.bad=true;
+					
+					$scope.datalist[index]=item;
+				});
+					
+					
 
 					$scope.total = json.total;
 					$scope.pageDataPre=[];

@@ -9,6 +9,7 @@
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
 			<title id="title">GOOGLE搜索,KxのBook </title>
+			<meta name="fragment" content="!">
 			<meta name="keywords" content="GOOGLE 搜索代理转发 KxのBook">
 <meta name="description" content="GOOGLE搜索 代理转发- KxのBook Kx的个人站点" />
 <meta name="author" content="ZHANGJIE"> 

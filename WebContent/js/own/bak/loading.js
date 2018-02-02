@@ -124,10 +124,10 @@ var preurl="http://www.256kb.cn";
 function getImUrl() {
 	var http =basePath+"/";// "${pageContext.request.contextPath}";
 	
-	if (window.location.href.indexOf('58.67.201.8') > 0)
+	/*if (window.location.href.indexOf('58.67.201.8') > 0)
 		http = "http://58.67.201.8:8083/gserver/";
 	else if(window.location.href.indexOf('127.0.0.1') > 0)
-		http='http://127.0.0.1:8080/kb/';
+		http='http://127.0.0.1:8080/kb/';*/
 	return http;
 }
 

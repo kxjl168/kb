@@ -25,6 +25,7 @@ public class RequestInfo extends BaseModel {
 	private String uri;// varchar(50) DEFAULT NULL COMMENT '字典key',
 	private String createTime;// varchar(100) DEFAULT NULL COMMENT '字典value',
 	private String action_type;
+	private String val1; //
 	
 	
 	//query 查询时间间隔 秒
@@ -92,6 +93,14 @@ public class RequestInfo extends BaseModel {
 
 	public void setSec(Integer sec) {
 		this.sec = sec;
+	}
+
+	public String getVal1() {
+		return val1;
+	}
+
+	public void setVal1(String val1) {
+		this.val1 = val1;
 	}
 
 }

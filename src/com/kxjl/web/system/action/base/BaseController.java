@@ -147,10 +147,11 @@ public class BaseController {
 	 * @author zj
 	 * @date 2017-12-27
 	 */
-	public void saveRequestInfo(HttpServletRequest request, String type) {
+	public void saveRequestInfo(HttpServletRequest request, String type,String extras) {
 
 		final HttpServletRequest rt = request;
 		final String t = type;
+		final String val1 = extras;
 
 		new Thread(new Runnable() {
 
@@ -160,6 +161,7 @@ public class BaseController {
 					RequestInfo rinfo = new RequestInfo();
 					rinfo.setAction_type(t);
 
+					
 					// 计算ip
 					String ip = "";
 					try {
@@ -170,6 +172,7 @@ public class BaseController {
 					rinfo.setIp(ip);
 					String city = IPUtils.getCityByIP(ip);
 					rinfo.setCity(city);
+					rinfo.setVal1(val1);
 					rinfo.setUri(rt.getRequestURI());
 					SimpleDateFormat sdf = new SimpleDateFormat(
 							"yyyy-MM-dd HH:mm:ss");

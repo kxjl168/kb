@@ -24,9 +24,9 @@ and createTime>DATE_SUB(now(),INTERVAL #{sec} SECOND)
 	    
 		insert into request_info 
 		(ip,city,action_type,sessionid,
-		uri,createTime )
+		uri,createTime,val1 )
 		values(#{ip},#{city},#{action_type},#{sessionid}
-		,		#{uri},#{createTime})
+		,		#{uri},#{createTime},#{val1})
 	</insert>
 	
 	

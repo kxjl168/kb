@@ -8,7 +8,7 @@
 		<head>
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
-			
+			<meta name="fragment" content="!">
 <meta name="keywords" content="KxのBook 个人站点  个人BLOG">
 <meta name="description" content="首页- Kx的个人站点" />
 <meta name="author" content="ZHANG JIE"> 

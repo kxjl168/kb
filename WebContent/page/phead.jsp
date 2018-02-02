@@ -8,16 +8,8 @@
 						<a class="navbar-brand" href="#" ng-cloak>{{title}}</a>
 					</div>
 					<div class="collapse navbar-collapse  pull-right-k" id="menuItem">
-						<ul class="hide nav navbar-nav ">
-							<li class=" bg-success">
-								<a href="javascript:void(0)" ng-click="btnP()"> test</a>
-							</li>
-
-						</ul>
-						<form class=" navbar-form navbar-left " role="search">
-
-
-						</form>
+						
+						
 
 						<ul class="nav navbar-nav " id="menuul">
 							<!-- <li>

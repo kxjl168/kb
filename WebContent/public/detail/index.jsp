@@ -8,6 +8,7 @@
 		<head>
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+			<meta name="fragment" content="!">
 			<title id="title">详细</title>
 			<meta name="keywords" content="KxのBook">
 <meta name="description" content="Kx 的个人站点" />
@@ -116,13 +117,13 @@
 								<div class="  col-xs-12 row tablefoot">
 									<ul class="pagination pull-left">
 										<li>
-											<a href="#" ng-show="pre" ng-click="getList(pre.imei)">&laquo;上一篇</a>
+											<a href="#" ng-show="pre" ng-click="getList(pre.imei)" title="上一篇:{{pre.title}}">&laquo;{{pre.title}}</a>
 												<a ng-href="{{preurl}}/public/detail/{{pre.imei}}.html" style="display: none;" class="for spider" >{{pre.title}}</a>
 										</li>
 									</ul>
 									<ul class="pagination pull-right">
 										<li>
-											<a href="#" ng-show="next" ng-click="getList(next.imei)">下一篇&raquo;</a>
+											<a href="#" ng-show="next" ng-click="getList(next.imei)" title="下一篇:{{next.title}}">{{next.title}} &raquo;</a>
 											<a ng-href="{{preurl}}/public/detail/{{next.imei}}.html" style="display: none;" class="for spider" >{{next.title}}</a>
 										</li>
 									</ul>
@@ -155,7 +156,7 @@
 	
 					
 					
-							<div class=" panel panel-success">
+							<div class="hide panel panel-success">
 								<div class="panel-heading" title="点击显示/隐藏查询条件" data-toggle="collapse" data-parent="#accordion" href="#collapseOne2">
 									<div class="row">
 										<h3 class="panel-title col-xs-4 col-lg-4 col-md-4 ">面板2</h3>

@@ -104,17 +104,8 @@ function init() {
 									if($scope.datalist.length>0)
 										{
 										$scope.x=$scope.datalist[0];
-										
-											$scope.x.context= unescape($scope.x.content);
-											$("#title").html($scope.x.title);
-
-											document.title=$scope.x.title+"-"+$scope.title;
-											
-											
-											
-											var meta = document.getElementsByTagName('meta');
-											meta["keywords"].setAttribute('content',$scope.x.tags);
-										}
+										$scope.x.context= unescape($scope.x.content);
+											}
 									
 									if($scope.datalist.length>1)
 										{
@@ -157,6 +148,18 @@ function init() {
 									 $('pre code').each(function(i, block) {
 							                hljs.highlightBlock(block);
 							            });
+									 
+									 
+									
+										$("#title").html($scope.x.title);
+
+										document.title=$scope.x.title+"-"+$scope.title;
+										
+				
+										var meta = document.getElementsByTagName('meta');
+										meta["keywords"].setAttribute('content',$scope.x.tags);
+								
+									 
 									 
 									
 									console.log('-----guideList -OK= ');

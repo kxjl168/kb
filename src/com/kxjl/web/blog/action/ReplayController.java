@@ -282,7 +282,7 @@ public class ReplayController extends BaseController {
 				jsonOut.put("ResponseCode", 200);
 				jsonOut.put("ResponseMsg", "OK");
 
-				saveRequestInfo(request, actiontype);
+				saveRequestInfo(request, actiontype,"");
 
 				// 更新文章评论数
 				if(!imei.equals("about"))
