@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- 基本配置 -->
+
+<ConfigItem>
+		<ConfigName>taobaoip</ConfigName>
+		<ConfigValue>true</ConfigValue>
+		<ConfigDesc>请求淘宝获取ip对应地市		</ConfigDesc>
+	</ConfigItem>
+	
+     <ConfigItem>
+		<ConfigName>excludedUrls</ConfigName>
+		<ConfigValue>.*/public/.*,.*/blog.*/get.*, UploadCKFile.action,.html,UploadFile.action,login.jsp,exlogin.action,phonereg/,phonereg,.do,done.jsp,getVersionInfo.action</ConfigValue>
+		<ConfigDesc>不需要鉴权也可访问的url后缀		</ConfigDesc>
+	</ConfigItem> 
+            
+	<ConfigItem>
+		<ConfigName>HTTP_PATH</ConfigName>
+		<ConfigValue>http://www.256kb.cn/kb/file/</ConfigValue>
+		<ConfigDesc>作为文件服务器时，外网下载目录地址-拼接图片url的地址
+		</ConfigDesc>
+	</ConfigItem>
+	
+		<ConfigItem>
+		<ConfigName>FILE_SAVE_PATH</ConfigName>
+		<ConfigValue>/usr/local/apache-tomcat-8.5.23/WebContent/file</ConfigValue>
+		<ConfigDesc>作为文件服务器时，本地存储路径	</ConfigDesc>
+	</ConfigItem>
+	
+	
+	<ConfigItem>
+		<ConfigName>FILE_SVR_PATH</ConfigName>
+		<ConfigValue>http://www.256kb.cn/kb/</ConfigValue>
+		<ConfigDesc>本地使用的文件服务器地址-上传调用的action地址	</ConfigDesc>
+	</ConfigItem>
+	
+	<ConfigItem>
+		<ConfigName>FILE_SVR_HTTP_PATH</ConfigName>
+		<ConfigValue>http://www.256kb.cn/kb/file/</ConfigValue>
+		<ConfigDesc>本地使用的文件服务器地址-拼接图片url链接前缀
+		</ConfigDesc>
+	</ConfigItem>
+	
+	
+	<ConfigItem>
+		<ConfigName>FILE_SVR_HTTP_OUTER_PATH</ConfigName>
+		<ConfigValue>http://www.256kb.cn/kb/file/</ConfigValue>
+		<ConfigDesc>本地使用的文件服务器外网地址-拼接图片url链接前缀		</ConfigDesc>
+	</ConfigItem>
+	
+	
+	
+	
+
+	<ConfigItem>
+		<ConfigName>PRENUM</ConfigName>
+		<ConfigValue>3</ConfigValue>
+		<ConfigDesc>手机路由器比例</ConfigDesc>
+	</ConfigItem>
+	
+	<ConfigItem>
+		<ConfigName>ROUTE_SK_PORT</ConfigName>
+		<ConfigValue>18000</ConfigValue>
+		<ConfigDesc>服务端路由器socket监听端口</ConfigDesc>
+	</ConfigItem>
+	
+	<ConfigItem>
+		<ConfigName>ROUTE_TIME_OUT_MIN</ConfigName>
+		<ConfigValue>2</ConfigValue>
+		<ConfigDesc>路由器连接中转服务器超时时间（分钟）</ConfigDesc>
+	</ConfigItem>
+	
+	<ConfigItem>
+		<ConfigName>ENABLE_ADJUST_PLAN</ConfigName>
+		<ConfigValue>false</ConfigValue>
+		<ConfigDesc>是否启用动态调整路由计划数</ConfigDesc>
+	</ConfigItem>
+	
+	<ConfigItem>
+		<ConfigName>ENABLE_CHECK_TIMEOUT</ConfigName>
+		<ConfigValue>false</ConfigValue>
+		<ConfigDesc>是否启用检查路由分配超时</ConfigDesc>
+	</ConfigItem>
+	
+	<ConfigItem>
+		<ConfigName>ENABLE_CHECK_FREE</ConfigName>
+		<ConfigValue>false</ConfigValue>
+		<ConfigDesc>是否启用检查空闲路由器</ConfigDesc>
+	</ConfigItem>
+			
+	
+	
+</Config>

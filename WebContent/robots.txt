@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /public/about/
+Disallow: /public/about
+Disallow: /page/
+Disallow: /js/
+Disallow: /css/
+Disallow: /file/
+Disallow: /images/
