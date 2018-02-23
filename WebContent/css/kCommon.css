@@ -1,3 +1,8 @@
+.modal-open{
+	position: relative;
+	overflow: hidden;
+}
+
 .pageText {
   color: #333!important;
   /* 为较旧的或者不支持的浏览器设置备用属性 */
@@ -14,7 +19,7 @@
   height: 29px;
 }
 .login_back {
-  background: #29477f!important;
+  background: #26527c!important;
 }
 .more {
   height: 90px;

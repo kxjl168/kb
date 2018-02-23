@@ -61,7 +61,7 @@
 					
 							
 					
-				<div class="panel panel-success">
+				<div class="panel panel-top panel-success">
 							<div class="panel-heading" title="" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
 								<div class="row">
 									<h3 class="panel-title col-xs-10 ">搜索</h3>

@@ -7,7 +7,11 @@
 		<ConfigDesc>公司名称</ConfigDesc>
 	</ConfigItem>
 	
-	
+	<ConfigItem>
+		<ConfigName>blackiplist</ConfigName>
+		<ConfigValue>127.0.0.2,</ConfigValue>
+		<ConfigDesc>访问IP黑名单	</ConfigDesc>
+	</ConfigItem>
 	
 <ConfigItem>
 		<ConfigName>taobaoip</ConfigName>
@@ -17,7 +21,7 @@
 	
      <ConfigItem>
 		<ConfigName>excludedUrls</ConfigName>
-		<ConfigValue>.*/public/.*,.*/blog.*/get.*, UploadCKFile.action,.html,UploadFile.action,login.jsp,exlogin.action,phonereg/,phonereg,.do,done.jsp,getVersionInfo.action</ConfigValue>
+		<ConfigValue>.jpg,.png,.ico,.jpeg,.gif,kb/,kb,.*/public/.*,.*/blog.*/get.*, UploadCKFile.action,.html,UploadFile.action,login.jsp,exlogin.action,phonereg/,phonereg,.do,done.jsp,getVersionInfo.action</ConfigValue>
 		<ConfigDesc>不需要鉴权也可访问的url后缀		</ConfigDesc>
 	</ConfigItem> 
             
@@ -94,7 +98,62 @@
 		<ConfigValue>false</ConfigValue>
 		<ConfigDesc>是否启用检查空闲路由器</ConfigDesc>
 	</ConfigItem>
-			
 	
+		<ConfigItem>
+		<ConfigName>searchEngin</ConfigName>
+		<ConfigValue>https://www.baidu.com</ConfigValue>
+		<ConfigDesc></ConfigDesc>
+	</ConfigItem>
+			
+		
+			<ConfigItem>
+		<ConfigName>preurl</ConfigName>
+		<ConfigValue>http://256kb.cn:13333/</ConfigValue>
+		<ConfigDesc></ConfigDesc>
+	</ConfigItem>
+					
+			
+			<ConfigItem>
+		<ConfigName>MAILHOSTSERVER</ConfigName>
+		<ConfigValue>smtp.163.com</ConfigValue>
+		<ConfigDesc>SMTP发送服务器名称</ConfigDesc>
+	</ConfigItem>
+	
+	<ConfigItem>
+		<ConfigName>MAILSENDER</ConfigName>
+		<ConfigValue>13815429446@163.com</ConfigValue>
+		<ConfigDesc>发件人的邮箱</ConfigDesc>
+	</ConfigItem>
+	
+	<ConfigItem>
+		<ConfigName>MAILSENDERPASSWORD</ConfigName>
+		<ConfigValue>123456a</ConfigValue>
+		<ConfigDesc>发件人的邮箱密码-授权码</ConfigDesc>
+	</ConfigItem>
+	
+	<ConfigItem>
+		<ConfigName>AdminMail</ConfigName>
+		<ConfigValue>kxjl168@foxmail.com</ConfigValue>
+		<ConfigDesc>admin的邮箱</ConfigDesc>
+	</ConfigItem>
+		<ConfigItem>
+		<ConfigName>EnableMail</ConfigName>
+		<ConfigValue>true</ConfigValue>
+		<ConfigDesc>启用回复内容邮箱发送消息</ConfigDesc>
+	</ConfigItem>
+	
+	
+		<ConfigItem>
+		<ConfigName>SSL_SMTP</ConfigName>
+		<ConfigValue>true</ConfigValue>
+		<ConfigDesc>SSL</ConfigDesc>
+	</ConfigItem>
+	
+	
+		<ConfigItem>
+		<ConfigName>SSL_SMTP_PORT</ConfigName>
+		<ConfigValue>465</ConfigValue>
+		<ConfigDesc>SSL端口</ConfigDesc>
+	</ConfigItem>
 	
 </Config>

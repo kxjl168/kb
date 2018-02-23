@@ -88,6 +88,7 @@
 						</select>
 					</div>
 					
+			<div class=" col-xs-12">
 				<div class=" col-xs-12 row panel panel-default pageText" >
 					<div> 我有几张阿里云幸运券分享给你，用券购买或者升级阿里云相应产品会有特惠惊喜哦！
 					<br>
@@ -96,4 +97,5 @@
 					
 					
 				</div>
-					
+			</div>
+				

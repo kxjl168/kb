@@ -97,7 +97,7 @@ $("#cpType2").select2({
 		
 		
 
-		$scope.title="路由器服务完成日志";
+		$scope.title="今日路由器服务完成日志";
 		//$scope.curpage=1;
 		$scope.page=1;
 		$scope.rows=10;

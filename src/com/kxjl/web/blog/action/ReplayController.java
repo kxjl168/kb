@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.log4j.Logger;
 import org.apache.poi.xslf.model.geom.Guide;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +28,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.config.ConfigReader;
+import com.kxjl.tool.config.configWarthDog;
+import com.kxjl.tool.sendmail.MailUtil;
 import com.kxjl.tool.utils.IPUtils;
 import com.kxjl.tool.utils.JEscape;
 import com.kxjl.tool.utils.JsonUtil;
@@ -44,6 +47,7 @@ import com.kxjl.web.blog.service.ReplayService;
 @RequestMapping(value = "/replay")
 public class ReplayController extends BaseController {
 
+	private static Logger logger = Logger.getLogger(ReplayController.class);
 	@Autowired
 	ReplayService replayService;
 
@@ -109,8 +113,8 @@ public class ReplayController extends BaseController {
 			if (binfos == null || binfos.size() == 0) {
 
 				infos = replayService.getReplayPageList(query);
-				binfos=new ArrayList<Replay>();
-				
+				binfos = new ArrayList<Replay>();
+
 				for (Replay replay : infos) {
 					if (replay.getReplay_recordid() == 0) {
 						List<Replay> childs = new ArrayList<Replay>();
@@ -126,7 +130,7 @@ public class ReplayController extends BaseController {
 					}
 
 				}
-				
+
 				Kdata.getInstance().SavedReplayList(key, binfos);
 			}
 
@@ -186,7 +190,12 @@ public class ReplayController extends BaseController {
 			SysUserBean user = (SysUserBean) session
 					.getAttribute(Constant.SESSION_USER);
 
-			if (user == null || user.getUtype() != UserType.Root) {
+			boolean isRoot = false;
+			if (user != null
+					&& (user.getUtype() == UserType.Root || user.getUtype() == UserType.Admin))
+				isRoot = true;
+
+			if (!isRoot) {
 
 				// 计算ip
 				String ip = "";
@@ -229,19 +238,17 @@ public class ReplayController extends BaseController {
 
 			String content = jsonIN.optString("context");
 
-			
-			//评论文章
+			// 评论文章
 			Blog bq = new Blog();
 			bq.setImei(imei);
 			Blog blog = blogService.getBlogInfoById(bq);
-			if(!imei.equals("about"))
-			{
-			if (blog == null ) {
-				jsonOut.put("ResponseCode", 201);
-				jsonOut.put("ResponseMsg", "文章不存在！");
-				JsonUtil.responseOutWithJson(response, jsonOut.toString());
-				return;
-			}
+			if (!imei.equals("about")) {
+				if (blog == null) {
+					jsonOut.put("ResponseCode", 201);
+					jsonOut.put("ResponseMsg", "文章不存在！");
+					JsonUtil.responseOutWithJson(response, jsonOut.toString());
+					return;
+				}
 			}
 
 			Replay replay = new Replay();
@@ -252,14 +259,11 @@ public class ReplayController extends BaseController {
 			replay.setPpid(ppid);
 
 			replay.setContent(content);// (desc);
-			
-			if (user != null && ( user.getUtype() == UserType.Root|| user.getUtype() == UserType.Admin)) 
-			{
+
+			if (isRoot) {
 				replay.setUser_blog("http://256kb.cn");
 				replay.setUserid("KxのBOOK");
 			}
-			
-			
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String time = sdf.format(new Date());
@@ -273,25 +277,46 @@ public class ReplayController extends BaseController {
 			if (rst > 0) {
 
 				Kdata.getInstance().cleanrBLogList("");
-				
+
 				String key = "replay_getInfoList" + "_" + imei;
 				Kdata.getInstance().cleanrReplayList(key);
-				
-				
 
 				jsonOut.put("ResponseCode", 200);
 				jsonOut.put("ResponseMsg", "OK");
 
-				saveRequestInfo(request, actiontype,"");
+				saveRequestInfo(request, actiontype, "");
 
 				// 更新文章评论数
-				if(!imei.equals("about"))
-				{
-				Replay rqq = new Replay();
-				rqq.setBlogimei(imei);
-				int replay_nums = replayService.getReplayPageListCount(rqq);
-				blog.setReplay_nums(replay_nums + 1);
-				blogService.updateBlog(blog);
+				if (!imei.equals("about")) {
+					Replay rqq = new Replay();
+					rqq.setBlogimei(imei);
+					int replay_nums = replayService.getReplayPageListCount(rqq);
+					blog.setReplay_nums(replay_nums + 1);
+					blogService.updateBlog(blog);
+				}
+
+				String enableMail = ConfigReader.getInstance().getProperty(
+						"EnableMail", "false");
+				if (enableMail.equalsIgnoreCase("true") && !isRoot) {
+					String rtitle = "about";
+					if (!imei.equals("about"))
+						rtitle = blog.getTitle();
+					final String title = "256kb.cn-新消息-" + rtitle;
+					String uid =  xssEncode(JEscape.unescape(userid));
+					String ucontent = xssEncode(JEscape.unescape(content));
+					final String message = "From " + uid + ":\r\n<br>" + ucontent+"";
+					final String recvmail = ConfigReader.getInstance()
+							.getProperty("AdminMail");
+
+					new Thread(new Runnable() {
+
+						@Override
+						public void run() {
+							 logger.debug("mail send to "+recvmail+"/"+message);
+							MailUtil.sendMail(recvmail, title, message);
+						}
+					}).start();
+
 				}
 
 			} else {
@@ -313,6 +338,43 @@ public class ReplayController extends BaseController {
 
 		JsonUtil.responseOutWithJson(response, jsonOut.toString());
 
+	}
+	
+	private  String xssEncode(String s) {
+		if (s == null || s.isEmpty()) {
+			return s;
+		}
+		StringBuilder sb = new StringBuilder(s.length() + 16);
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			switch (c) {
+			case '>':
+				sb.append('＞');// 全角大于号
+				break;
+			case '<':
+				sb.append('＜');// 全角小于号
+				break;
+			/*case '\'':
+				sb.append('‘');// 全角单引号
+				break;
+			case '\"':
+				sb.append('“');// 全角双引号
+				break;
+			case '&':
+				sb.append('＆');// 全角
+				break;
+			case '\\':
+				sb.append('＼');// 全角斜线
+				break;
+			case '#':
+				sb.append('＃');// 全角井号
+				break;*/
+			default:
+				sb.append(c);
+				break;
+			}
+		}
+		return sb.toString();
 	}
 
 	/**

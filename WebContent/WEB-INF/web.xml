@@ -14,7 +14,7 @@
 	<!-- 配置为实际的zteimPhoneSafe.xml位置 -->
 	<context-param>
 		<param-name>CONFIG_FILE_PATH</param-name>
-		<param-value>F:\w3\kb\etc\kb.xml</param-value>
+		<param-value>G:\github\kb\etc\kb.xml</param-value>
 	</context-param>
 	
 	
@@ -57,7 +57,7 @@
 	</session-config>
 
 	<welcome-file-list>
-		<welcome-file>login.jsp</welcome-file>
+	<!-- 	<welcome-file>public/index/</welcome-file> -->
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
@@ -163,7 +163,7 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping> 
     
-       
+      
       <!-- prerender.io -java -->
    <filter>
         <filter-name>prerender</filter-name>

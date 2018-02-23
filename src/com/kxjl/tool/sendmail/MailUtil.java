@@ -30,8 +30,6 @@ public class MailUtil {
 		mail.setMessage(message);
 		return new MailUtil().send(mail);
 	}
-	
-	
 
 	public boolean send(Mail mail) {
 		// 发送email
@@ -39,6 +37,19 @@ public class MailUtil {
 		try {
 			// 这里是SMTP发送服务器的名字：163的如下："smtp.163.com"
 			email.setHostName(mail.getHost());
+
+			String SSL_SMTP = ConfigReader.getInstance().getProperty(
+					"SSL_SMTP", "false");
+			if (SSL_SMTP.equalsIgnoreCase("true")) {
+
+				email.setSSLOnConnect(true); // 是否启用SSL
+				System.setProperty("mail.smtp.ssl.enable","true");
+
+				String SSL_SMTP_PORT = ConfigReader.getInstance().getProperty(
+						"SSL_SMTP_PORT", "465");
+				email.setSslSmtpPort(SSL_SMTP_PORT); // 若启用，设置smtp协议的SSL端口号
+			}
+
 			// 字符编码集的设置
 			email.setCharset(Mail.ENCODEING);
 			// 收件人的邮箱
@@ -50,21 +61,24 @@ public class MailUtil {
 			// 要发送的邮件主题
 			email.setSubject(mail.getSubject());
 			// 要发送的信息，由于使用了HtmlEmail，可以在邮件内容中使用HTML标签
-			//email.setMsg(mail.getMessage());
+			// email.setMsg(mail.getMessage());
 
-		  String msg=mail.getMessage();
-			
+			String msg = mail.getMessage();
+
 			// embed the image and get the content id
 			URL url;
 			try {
-			/*	url = new URL("http://www.apache.org/images/asf_logo_wide.gif");
-				String cid = email.embed(url, "Apache logo.gif");
+				/*
+				 * url = new
+				 * URL("http://www.apache.org/images/asf_logo_wide.gif"); String
+				 * cid = email.embed(url, "Apache logo.gif");
+				 * 
+				 * // set the html message
+				 * email.setHtmlMsg("<html>The apache logo - <img src=\"cid:" +
+				 * cid + "\">  "+msg+" <script>alert(1);<script> </html>");
+				 */
 
-				// set the html message
-				email.setHtmlMsg("<html>The apache logo - <img src=\"cid:"
-						+ cid + "\">  "+msg+" <script>alert(1);<script> </html>");*/
-				
-				email.setHtmlMsg("<html> "+msg+"</html>");
+				email.setHtmlMsg("<html> " + msg + "</html>");
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -72,7 +86,8 @@ public class MailUtil {
 			}
 
 			// set the alternative message
-			email.setTextMsg("Your email client does not support HTML messages:" +msg);
+			email.setTextMsg("Your email client does not support HTML messages:"
+					+ msg);
 
 			// 发送
 			email.send();

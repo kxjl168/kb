@@ -155,10 +155,12 @@ function initQuery() {
 										{
 										blog_type_name=$scope.datalist[0].blog_type_name;
 										}
+									var m=obj.month==null?"":obj.month;
+									var tg=obj.blog_tag==null?"":obj.blog_tag;
 									
 									
 									document.title=
-										"文章分类-"+blog_type_name+"-"+obj.month+"-"+obj.blog_tag+"-"+$scope.titletop;
+										"文章分类-"+blog_type_name+"-"+m+"-"+tg+"-"+$scope.titletop;
 									
 								
 

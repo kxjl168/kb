@@ -22,7 +22,7 @@ $(function() {
 	 var $scope = angular.element(ngSection).scope();
 	 $scope.x={};
 	 $scope.x.imei="about";
-	 
+		$scope.title = "KxのBook";
 		setTimeout(function() {
 			 $scope.getReplayList();
 		}, 300);
@@ -42,7 +42,7 @@ function changerows(option) {
 
 function init() {
 
-	initmenu_p($("#menuul"), "public/bx/");
+	initmenu_p($("#menuul"), "public/about/");
 
 
 	$('.modal').on('show.bs.modal', function() {
@@ -52,8 +52,8 @@ function init() {
 	
 	var $scope = angular.element(ngSection).scope();
 	$scope.$apply(function() {
-		$scope.blog_type = 'bx';
-		
+		$scope.blog_type = 'about';
+	
 	});
 
 	initQuery();

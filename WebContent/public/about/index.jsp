@@ -11,7 +11,7 @@
 			<meta name="robots" content="noindex,nofollow" />
 			<meta name="fragment" content="!">
 <meta name="keywords" content="关于我">
-<meta name="description" content="关于- Kx的个人站点" />
+<meta name="description" content="关于- KxのBook - Kx的个人站点" />
 <meta name="author" content="ZHANG JIE"> 
 			<title>关于 - KxのBook,Welcome~  Kx的个人站点</title>
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
@@ -105,6 +105,10 @@
 						<p>养有一只叫做平凡的中华田园猫(土猫>.<)<p>	&nbsp;
 						<p>业余时间爱好篮球、吉他等等...?<p>	&nbsp;
 						<p class="hide">历程详细<a href="#">猛击</a><p>	&nbsp;
+						
+							<hr></hr>
+							<p>本站内容主要记录工作中遇到的各种编程问题、小平凡相关、老婆大人保险相关及其他随感杂谈等.<p>	&nbsp;
+							<p>欢迎拍砖！ 联系 kxjl168#foxmail.com (#->@)<p>	&nbsp;
 					</div>
 				
     			</div>

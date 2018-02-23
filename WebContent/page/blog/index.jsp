@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-	>
+	
 	<%@include file="/common/tag.jsp"%>
 
 		<html lang="en">
@@ -134,10 +134,10 @@
 							<table class="table" >
 								<caption>
 									{{title}}
-									<div class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
+									<div class=" col-lg-2 col-md-2 col-xs-2 pull-right margin-bottom-10 padding-right-0 ">
 										<button type="button" ng-click="addOrModify()" class="btn btn-primary btn-block   ">新增文章</button>
 									</div>
-									<div class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
+									<div class=" col-lg-2 col-md-2 col-xs-2 pull-right margin-bottom-10 padding-right-0 ">
 										<button type="button" ng-click="getList()" class="btn btn-primary btn-block   ">查询</button>
 									</div>
 								</caption>
@@ -260,7 +260,7 @@
 
 
 
-			<div class="modal fade" id="myModal2" data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal fade active" id="myModal2" data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog " >
 					<div class="modal-content ">
 						<div class="modal-header nopadding row">
@@ -441,6 +441,36 @@
 						keyboard: true
 					})
 				});
+				
+				$(".modal-dialog").find("input").on('blur',function(){
+				   $('.modal-dialog').css({margin:"2.5vh auto"});
+				 //  msg("onblur");
+				});
+				
+				$('#identifier').on('shown.bs.modal', function () {
+  // 执行一些动作...
+ // stopBodyScrolling(true);
+});
+
+				  $('#myModal2').on('hide.bs.modal',
+    function() {
+  //stopBodyScrolling(false);
+    });
+		
+		function stopBodyScrolling (bool) {
+    if (bool === true) {
+        document.body.addEventListener("touchmove", freezeVp, false);
+    } else {
+        document.body.removeEventListener("touchmove", freezeVp, false);
+    }
+};
+var freezeVp = function(e) {
+    e.preventDefault();
+};
+
+		
+		
+		</script>
 
 
 </body >

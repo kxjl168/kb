@@ -84,7 +84,7 @@
 									<span id="titlepic" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="glyphicon glyphicon-chevron-up pull-right "></span>
 								</div>
 							</div>
-							<div id="collapseOne" class="panel-collapse collapse ">
+							<div id="collapseOne" class="panel-collapse collapse in">
 								<div class="panel-body">
 					
 									<div class="container">
