@@ -12,7 +12,7 @@ function initQuery() {
 				};
 				
 				//for spider
-				$scope.preurl="http://www.256kb.cn";
+				$scope.preurl="https://www.256kb.cn";
 
 				var http = getImUrl();
 
@@ -158,7 +158,11 @@ function initQuery() {
 									var m=obj.month==null?"":obj.month;
 									var tg=obj.blog_tag==null?"":obj.blog_tag;
 									
-									
+								
+									if( 
+											(obj.month!=null)||
+											(obj.blog_tag!=null)
+									)
 									document.title=
 										"文章分类-"+blog_type_name+"-"+m+"-"+tg+"-"+$scope.titletop;
 									

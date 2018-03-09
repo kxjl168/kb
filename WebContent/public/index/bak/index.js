@@ -1,12 +1,20 @@
 
 
 var app = angular.module('myApp', [  "ngSanitize"]);
-
-app.controller('eduCtrl', function($scope) {
+//var app = angular.module('myApp', [ ]);	
+app.controller('eduCtrl', function($window,$scope) {
 	
-});
-		
 
+});
+	
+
+function a(){
+	var $scope = angular.element(ngSection).scope();
+	// $scope.$digest();
+	 
+	// msg($w.scrollTop());
+	//alert($(window).scrollTop()+'/'+$('html').scrollTop()+'/'+window.pageYOffset+'/'+ document.documentElement.scrollTop);
+}
 
 $(function() {
 	

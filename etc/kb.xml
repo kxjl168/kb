@@ -21,7 +21,7 @@
 	
      <ConfigItem>
 		<ConfigName>excludedUrls</ConfigName>
-		<ConfigValue>.jpg,.png,.ico,.jpeg,.gif,kb/,kb,.*/public/.*,.*/blog.*/get.*, UploadCKFile.action,.html,UploadFile.action,login.jsp,exlogin.action,phonereg/,phonereg,.do,done.jsp,getVersionInfo.action</ConfigValue>
+		<ConfigValue>.*/pown/url/.*,ie8.jsp,null.jsp,404.jsp,noaccess.jsp,.jpg,.png,.ico,.jpeg,.gif,kb/,kb,.*/public/.*,.*/blog.*/get.*, UploadCKFile.action,.html,UploadFile.action,login.jsp,exlogin.action,phonereg/,phonereg,.do,done.jsp,getVersionInfo.action</ConfigValue>
 		<ConfigDesc>不需要鉴权也可访问的url后缀		</ConfigDesc>
 	</ConfigItem> 
             
@@ -34,7 +34,7 @@
 	
 		<ConfigItem>
 		<ConfigName>FILE_SAVE_PATH</ConfigName>
-		<ConfigValue>F:\w3\kb\WebContent\file\</ConfigValue>
+		<ConfigValue>G:\github\kb\WebContent\file\</ConfigValue>
 		<ConfigDesc>作为文件服务器时，本地存储路径	</ConfigDesc>
 	</ConfigItem>
 	

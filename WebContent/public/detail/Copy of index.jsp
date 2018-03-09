@@ -8,24 +8,27 @@
 		<head>
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
-			<title id="title">常用链接,KxのBook </title>
-			<meta name="keywords" content="常用链接 KxのBook">
-            <meta name="robots" content="noindex,nofollow">
-
-<meta name="description" content="常用链接- KxのBook Kx的个人站点" />
-<meta name="author" content="ZHANGJIE"> 
+			<meta name="fragment" content="!">
+			<title id="title">详细</title>
+			<meta name="keywords" content="KxのBook">
+<meta name="description" content="Kx 的个人站点" />
+<meta name="author" content="ZHANG JIE"> 
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
-
+			<!-- <link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css">
+ -->
 			<link rel="stylesheet" href="../../css/kCommon.css">
 
-	
+			<!-- <link rel="stylesheet" href="../../css/zcfg.css"> -->
 			<link rel="stylesheet" href="../../css/common.css">
+<!-- 			<link rel="stylesheet" href="../../css/swiper_zcfg.css">
+			<link rel="stylesheet" href="../../js/plugin/swiper/idangerous.swiper.css"> -->
 
 			<script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
 
 			<script type="text/javascript" src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
-	
+			<!-- <script type="text/javascript" src="../../js/plugin/jquery/jquery-ui.js"></script> -->
+
 	<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
 			<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
 				<script type="text/javascript" src="../../js/plugin/angular/angular-sanitize.min.js"></script>
@@ -45,7 +48,7 @@
 
 			<div class="" id="content" style="">
 
-			<%@include file="../../public/phead.jsp"%>
+			<%@include file="../phead.jsp"%>
 
 
 
@@ -55,74 +58,105 @@
 					
 
 
+
+
+
+
+					
+
+
 					<div class="c ">
 					
 					
-						<div class="col-sm-12 col-xs-12 nopadding pleft">
+						<div id="pleft" class="col-sm-9 col-xs-12 rightline pleft">
+					       	<img ng-click="ff" class="nopaddding img-responsive col-xs-2" style="width:25px; height:25px;" title="{{x.blog_type_name}}" ng-src="{{x.blog_type_url}}">
+							<div ng-cloak>
+								<div>
 					
-							
+									<div class="row col-xs-12 ">
 					
-				
-					
-					
-					<div class="col-xs-12" id="srzt" style="min-height: 400px;">
-					
+										<div class="nopadding-left">
+											<img class="nopaddding img-responsive col-xs-2" style="width:25px; height:25px;" title="{{x.blog_type_name}}" ng-src="{{x.blog_type_url}}">
+											<div class="col-sm-8 col-xs-11 ptitle  ">{{x.title}}</div>
 					
 					
+											<div class="col-sm-3 col-xs-12 text-right">
 					
-
-					<div ng-repeat="items in datalist" class="pgdiv" ng-cloak >	
-					<div class="panel panel-success">
-							<div class="panel-heading" title="" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-								<div class="row">
-									<h3 class="panel-title col-xs-10 ">{{items.name}}</h3>
+												<a ng-repeat="t in x.tagStrs" ng-click="showtgs(t)">{{t}},</a>
+											</div>
+										</div>
+									</div>
+					
+									<div class="margin-top-10 row col-xs-12"></div>
+									<div class="hide row col-xs-12">
+										<hr></hr>
+									</div>
+					
+									<div class="col-xs-12 row">
+										<div class="">
+											<div ng-cloak class=" pageText " ng-bind-html="x.context|sanitize">
+											</div>
+										</div>
+					
+					
+									</div>
+					
+									<br>
+									<div ng-cloak class="row col-xs-10 margin-top-5 ">post@{{x.create_date}}&nbsp;
+										<span>阅读({{x.view_nums}})&nbsp;</span>
+										<span>评论({{x.replay_nums}})&nbsp;</span>
+									</div>
+					
+					
+									<div class="row col-xs-12">
+										<hr></hr>
+									</div>
+								</div>
+					
+					
+								<div class="  col-xs-12 row tablefoot">
+									<ul class="pagination pull-left">
+										<li>
+											<a href="#" ng-show="pre" ng-click="getList(pre.imei)" title="上一篇:{{pre.title}}">&laquo;{{pre.title}}</a>
+												<a ng-href="{{preurl}}/public/detail/{{pre.imei}}.html" style="display: none;" class="for spider" >{{pre.title}}</a>
+										</li>
+									</ul>
+									<ul class="pagination pull-right">
+										<li>
+											<a href="#" ng-show="next" ng-click="getList(next.imei)" title="下一篇:{{next.title}}">{{next.title}} &raquo;</a>
+											<a ng-href="{{preurl}}/public/detail/{{next.imei}}.html" style="display: none;" class="for spider" >{{next.title}}</a>
+										</li>
+									</ul>
 					
 					
 					
 									
+					
+									<select onchange="changerows(this)" class="hide pull-right">
+										<option ng-repeat="x in rows_select">{{x}}</option>
+									</select>
 								</div>
+					
 							</div>
-							<div id="collapseOne" class="panel-collapse collapse in ">
-								<div class="panel-body">
-					
-									<div class="container">
 					
 					
-					
-										<div class="row  form-group margin-bottom-5">
-										
-											<div ng-repeat="x in items.val" class="pgdiv" ng-cloak >
-										
-												<div class="col-sm-3 col-xs-10 durl">
-		 										<a ng-href={{x.url_val}}>{{x.url_name}}</a>
-		 										</div> 
-											</div>
-										</div>
-									</div>
-
-							</div>
-							</div>
-						</div>	
-					</div>
-					
-					
-			
+							
+							
+							<%@include file="comment.jsp" %>
 					
 					
 					
-					</div>								
-				
 					
 						</div>
 					
 					
-						<div class="hide col-sm-3 col-xs-12">
+						<div id="pright"  class="col-sm-3 col-xs-12">
 					
-						 
+						 <%@include file="/public/pright/pright.jsp" %> 
 	
 					
 					
-							<div class=" panel panel-success">
+							<div class="hide panel panel-success">
 								<div class="panel-heading" title="点击显示/隐藏查询条件" data-toggle="collapse" data-parent="#accordion" href="#collapseOne2">
 									<div class="row">
 										<h3 class="panel-title col-xs-4 col-lg-4 col-md-4 ">面板2</h3>
@@ -207,9 +241,11 @@
 
 		
 
-			<%@include file="../../public/pfoot.jsp" %>
+			<%@include file="../pfoot.jsp" %>
 			
 
+<!-- <script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
+ -->
 
 
 			<script type="text/javascript" src="../../js/plugin/jquery/jquery.noty.min.js"></script>
@@ -228,8 +264,18 @@
 			<script src="../../js/own/menu.js"></script>
 <script src="../../js/own/loading.js"></script>
 
-	<script type="text/javascript" src="index.js"></script>
-		
+<%-- 
+<script type="text/javascript"
+	src="<c:out value="${basePath}" />/js/plugin/ckeditor4.8/ckeditor.js"></script>
+						<script type="text/javascript" src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/adapters/jquery.js"></script>
+
+ --%>
+						
+						<!-- <script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script> -->
+						<script type="text/javascript" src="index.js"></script>
+						<script type="text/javascript" src="replay.js"></script>
+				<script type="text/javascript" src="../pright/pright_t_h.js"></script>
+
 
 					
 

@@ -44,16 +44,16 @@
 		</head>
 		
 		
-		<body id="ngSection" ng-app="myApp" ng-controller="eduCtrl">
+		<body onclick="msg($(window).scrollTop()+'/'+$('html').scrollTop());" id="ngSection" ng-app="myApp" ng-controller="eduCtrl">
 
 
 
 
- 			<div id="d1" style="border: 1px solid red;">111</div>
+ 			<div id="d1" onclick="msg($(window).scrollTop()+'/'+$('html').scrollTop());" style="border: 1px solid red;height: 1500px">111</div>
  			
  		
  		
-			<div class="" id="content" style="">
+			<div class="hide" id="content" style="">
 
 				 	<%@include file="../phead.jsp"%> 
 
@@ -113,6 +113,10 @@
 
 
 
+<!-- <script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
+
+ -->
+
 			<script type="text/javascript" src="../../js/plugin/jquery/jquery.noty.min.js"></script>
 			<script type="text/javascript" src="../../js/plugin/jquery/noty.layout.center.js"></script>
 			<script type="text/javascript" src="../../js/plugin/jquery/noty.themes.bootstrap.js"></script>
@@ -127,7 +131,14 @@
 	<script src="../../js/own/menu.js"></script>
 <script src="../../js/own/loading.js"></script>
 
+			<!-- <script type="text/javascript" src="../../js/plugin/swiper/idangerous.swiper.min.js"></script> -->
 		
+
+<%--  <script type="text/javascript"
+	src="<c:out value="${basePath}" />/js/plugin/ckeditor4.8/ckeditor.js"></script>
+						 <script type="text/javascript" src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/adapters/jquery.js"></script>
+  --%>
+
 						
 
 				 		<!-- <script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>  -->
