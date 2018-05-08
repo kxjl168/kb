@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URLEncoder;
+import java.util.Date;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.httpclient.HttpClient;
@@ -12,6 +14,7 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.http.HttpException;
+import org.apache.http.client.params.ClientPNames;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
@@ -34,7 +37,41 @@ public class test {
 		
 		//replaytest();
 		
-		testGzip();
+		//testGzip();
+		
+		testhtml();
+		
+		
+	}
+	
+	public static void testhtml() {
+		// http://127.0.0.1:8080/kb/public/detail/344f5834-fe93-49e8-835d-b07e1a1def96.html
+		// http://127.0.0.1:8080/kb/html/detail/344f5834-fe93-49e8-835d-b07e1a1def96.html
+		  HttpClient httpClient = new HttpClient();  
+		 // httpClient.getParams().setParameter(ClientPNames.ALLOW_CIRCULAR_REDIRECTS, true);
+		  
+				  String u1="http://256kb.cn//public/html/2018/05/f00c6b4e-8c17-4dbe-aa85-901aca96bb3b.html";
+		  String u2="http://256kb.cn/public/detail/?i=f00c6b4e-8c17-4dbe-aa85-901aca96bb3b";
+	        GetMethod getMethod = new GetMethod(u1);  
+	        try {  
+	                getMethod.addRequestHeader("accept-encoding", "gzip,deflate");  
+	                getMethod.addRequestHeader("user-agent","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; Alexa Toolbar; Maxthon 2.0)");
+	                Date d1=new Date();
+	                int result = httpClient.executeMethod(getMethod); 
+	                Date d2=new Date();
+	                if (result == 200) {
+	                	
+	                        System.out.println(getMethod.getResponseContentLength());  
+	                        String html = getMethod.getResponseBodyAsString();  
+	                        System.out.println(html);
+	                        System.out.println("ms:"+(d2.getTime()-d1.getTime()));
+	                        System.out.println(html.getBytes().length);  
+	                }  
+	        } catch (Exception e) {  
+	                e.printStackTrace();  
+	        }  finally {  
+	                getMethod.releaseConnection();  
+	        } 
 	}
 	
 	public static void testGzip() {  
@@ -142,8 +179,29 @@ public class test {
 	private static void testPatter() {
 		String pattern = ".*/public/.*";
 
-		boolean isMatch = Pattern.matches(pattern, "/kb/public/index");
-		System.out.println(isMatch);
+//		boolean isMatch = Pattern.matches(pattern, "/kb/public/index");
+//		System.out.println(isMatch);
+		
+		
+		
+		String pattern2 = ".*/public/html/(\\d+/\\d+)/.*.html";
+		String curl="/kb/public/html/2018/04/86b49ac4-8616-41b9-862e-e022c111915e.html";
+		
+		Pattern p= Pattern.compile(pattern2);
+		Matcher m=p.matcher(curl);
+		if(m.matches())
+		{
+			try {
+				String d=m.group(1);
+				System.out.println(d);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
+		}
+		
+		
+		
 	}
 
 	private static void update() {

@@ -27,6 +27,9 @@ import com.kxjl.tool.config.ConfigReader;
  * @date 2015-12-23 上午9:53:07
  */
 public class FileUtil {
+	
+
+	
 
 	/**
 	 * 获取方便识别的文件大小 byte-->1.2M

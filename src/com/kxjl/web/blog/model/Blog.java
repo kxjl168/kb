@@ -41,6 +41,10 @@ public class Blog extends BaseModel {
 	
 	//query
 	
+	//静态链接日期前缀url
+	private String showdate;// /2018/01/   .html
+
+
 	private String blog_type_name;
 	private String blog_type_url;
 	private String month;
@@ -102,6 +106,8 @@ public class Blog extends BaseModel {
 
 	public void setCreate_date(String create_date) {
 		this.create_date =   DateUtil.getDateStr(DateUtil.getDate(create_date,DateUtil.defaultFormat),DateUtil.defaultFormat);
+		String month=DateUtil.getDateStr(DateUtil.getDate(this.getCreate_date(), "yyyy-MM-dd") ,"yyyy/MM");
+		showdate=month;
 	}
 
 	public String getUpdate_date() {
@@ -146,6 +152,9 @@ public class Blog extends BaseModel {
 
 	public void setImei(String imei) {
 		this.imei = imei;
+		
+
+		
 	}
 
 	public String getBlog_type_url() {
@@ -182,6 +191,14 @@ public class Blog extends BaseModel {
 	public void setShowflag(String showflag) {
 		this.showflag = showflag;
 		this. showdesc=Kdata.Enable.parse(showflag).desc;
+	}
+
+	public String getShowdate() {
+		return showdate;
+	}
+
+	public void setShowdate(String showdate) {
+		this.showdate = showdate;
 	}
 
 	

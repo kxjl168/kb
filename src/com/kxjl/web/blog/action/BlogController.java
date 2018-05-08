@@ -33,6 +33,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.config.ConfigReader;
+import com.kxjl.tool.html.FileProcessor;
+import com.kxjl.tool.utils.DateUtil;
 import com.kxjl.tool.utils.JEscape;
 import com.kxjl.tool.utils.JsonUtil;
 import com.kxjl.web.stastic.model.ActionLog.StasticTypeOne;
@@ -81,6 +83,19 @@ public class BlogController extends BaseController {
 			// jsonIN = new JSONObject(data);
 
 			String imei = parseStringParam(request, "i");
+			if(imei.equals("null")||imei.equals(""))
+			{
+				String url=request.getHeader("Referer");
+				try {
+					imei=url.substring(url.lastIndexOf("/")+1,url.lastIndexOf("."));
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				
+				//http://127.0.0.1:8080/kb/public/detail/i/344f5834-fe93-49e8-835d-b07e1a1def96.html
+			}
+			
+			
 			Blog query = new Blog();
 			query.setImei(imei);
 
@@ -90,6 +105,8 @@ public class BlogController extends BaseController {
 			String prepath = getImgHttpOutPath();
 			for (Blog blog : detail) {
 				blog.setBlog_type_url(prepath + blog.getBlog_type_url());
+				
+
 			}
 
 			Gson gs = new Gson();
@@ -283,10 +300,13 @@ public class BlogController extends BaseController {
 			int curPage = jsonIN.optInt("page");
 
 			String key = "blog_getInfoList" + "_" + month + "_" + blog_type
-					+ "_" + blog_tag + "_" + pageCount + "_" + curPage + "_"
+					+ "_" + blog_tag + "_" + pageCount + "_" + curPage + "_"+blog_title
 					+ show;
 			List<Blog> infos = Kdata.getInstance().getBlogList(key);
 
+			
+			
+			
 			Blog query = new Blog();
 			query.setPage(curPage);
 			query.setPageCount(pageCount);
@@ -630,6 +650,14 @@ public class BlogController extends BaseController {
 			}
 
 			if (rst > 0) {
+				
+				//本地缓存html文件删除
+				String localPath = ConfigReader.getInstance().getProperty("LOCAL_HTML_PATH");
+				String localFilePath = localPath +  blog.getShowdate() + "/";
+				
+				String htmlName = imei + ".html";
+				FileProcessor.deleteFile(localFilePath+htmlName);
+				
 
 				Kdata.getInstance().cleanrBLogList("");
 

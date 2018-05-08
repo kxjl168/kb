@@ -2,6 +2,7 @@ package com.kxjl.tool.prerenderio;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.web.translog.dao.SpiderlogDao;
 
 import javax.servlet.*;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+import org.springframework.web.servlet.view.jasperreports.ConfigurableJasperReportsView;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -53,6 +55,11 @@ public class PreRenderSEOFilter implements Filter {
         for (String parameterName : PARAMETER_NAMES) {
             config.put(parameterName, filterConfig.getInitParameter(parameterName));
         }
+        
+        String prerenderServiceUrl= ConfigReader.getInstance().getProperty("preurl",filterConfig.getInitParameter("prerenderServiceUrl"));
+        config.put("prerenderServiceUrl",prerenderServiceUrl);
+        
+        
         return config;
     }
 }
