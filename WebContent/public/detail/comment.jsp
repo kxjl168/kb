@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 
+    <div class="row col-xs-12">
+                                            <hr></hr>
+                                 </div>
     <div ng-cloak>
+    
         <div ng-repeat="x in rdatalist">
 
             <div class="row col-xs-12 ">

@@ -14,7 +14,7 @@
 	<!-- 配置为实际的zteimPhoneSafe.xml位置 -->
 	<context-param>
 		<param-name>CONFIG_FILE_PATH</param-name>
-		<param-value>G:\github\kb\etc\kb.xml</param-value>
+		<param-value>F:\kxjl\code\kb\etc\kb.xml</param-value>
 	</context-param>
 	
 	
@@ -145,7 +145,6 @@
 	
 	
 	
-	
 	<filter>
         <filter-name>PageFilter</filter-name>
         <filter-class>com.kxjl.web.system.action.base.PageFilter</filter-class>
@@ -163,8 +162,9 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping> 
     
-      
-      <!-- prerender.io -java -->
+    
+    
+	     <!-- prerender.io -java -->
    <filter>
         <filter-name>prerender</filter-name>
         <filter-class>com.kxjl.tool.prerenderio.PreRenderSEOFilter</filter-class>
@@ -185,5 +185,10 @@
         <filter-name>prerender</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    
+    
+    
+      
+ 
     
 </web-app>

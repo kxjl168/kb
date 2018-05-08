@@ -2,6 +2,8 @@
 <%@taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
+
+
 <c:set var="basePath" value="${pageContext.request.contextPath}" />
 <c:set var="webctx" value="${pageContext.request.contextPath}" />
 
@@ -35,6 +37,8 @@
     	var webctx="${basePath}";
     	
     	var lstheight=700;
+    	var siteurl="http://127.0.0.1:8080/kb";
+    	//var siteurl="https://256kb.cn/";
     	
     	//var path="${HTTP_PATH}";
     

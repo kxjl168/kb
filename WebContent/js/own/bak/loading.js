@@ -134,7 +134,7 @@ function getNowFormatDate() {
     return currentdate;
 }
 
-var preurl = "https://www.256kb.cn";
+var preurl =siteurl;// "https://www.256kb.cn";
 
 function getImUrl() {
     var http = basePath + "/"; // "${pageContext.request.contextPath}";

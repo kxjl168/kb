@@ -7,8 +7,8 @@
 
 										<div class="nopadding-left">
 											<img class="nopaddding img-responsive col-xs-2" style="width:25px; height:25px;" title="{{x.blog_type_name}}"   ng-src="{{x.blog_type_url}}">
-											<div class="col-sm-8 col-xs-11  ptitle  "><a class="ptitle" ng-click="detail(x)">{{x.title}}</a>
-											<a ng-href="{{preurl}}/public/detail/{{x.imei}}.html" style="display: none;" class="for spider" >{{x.title}}</a>
+											<div class="col-sm-8 col-xs-11  ptitle  "><a class="ptitle"ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html" >{{x.title}}</a>
+											<a ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html" style="display: none;" class="for spider" >{{x.title}}</a>
 											</div>
 
 
@@ -35,16 +35,16 @@
 											<div class="more row col-xs-12"></div>
 											<div>
 												
-												<a href="#" class="detailbtn h5 text-right pull-right text-info margin-right-20" ng-click="detail(x)">详情</a>
-												<a ng-href="{{preurl}}/public/detail/?i={{x.imei}}" style="display: none;" class="for spider" >{{x.title}}</a>
+												<a  class="detailbtn h5 text-right pull-right text-info margin-right-20"  ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html"  >详情</a>
+												<a ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html" style="display: none;" class="for spider" >{{x.title}}</a>
 
 											</div>
 									
 									</div>
 									<br>
 									<div ng-cloak class="row  col-sm-10 col-xs-12 margin-top-5 ">post@{{x.create_date}}&nbsp;
-										<span ><a ng-click="detail(x)">阅读</a>({{x.view_nums}})&nbsp;</span>
-										<span ><a ng-click="detail(x,'rpdiv')">评论</a>({{x.replay_nums}})&nbsp;</span>
+										<span ><a ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html">阅读</a>({{x.view_nums}})&nbsp;</span>
+										<span ><a ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html#rpdiv">评论</a>({{x.replay_nums}})&nbsp;</span>
 									</div>
 
 

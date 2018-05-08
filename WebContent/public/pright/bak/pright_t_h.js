@@ -12,7 +12,7 @@ var $scope = angular.element(ngSection).scope();
 		var http = getImUrl();// "";
 		
 		//for spider
-		$scope.preurl="https://www.256kb.cn";
+		$scope.preurl=siteurl;//"https://www.256kb.cn";
 
 		
 		$scope.showtp=function(x){

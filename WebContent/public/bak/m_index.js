@@ -12,7 +12,7 @@ function initQuery() {
 				};
 				
 				//for spider
-				$scope.preurl="https://www.256kb.cn";
+				$scope.preurl=siteurl;//"https://www.256kb.cn";
 
 				var http = getImUrl();
 

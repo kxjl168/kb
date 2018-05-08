@@ -305,11 +305,16 @@
             " <div id=\"mumu\" class=\"mumu\" style=\"opacity: 1;\"></div> " +
             " </div> ";
 
-        $("body").append(dom);
-
+        var spig=$("#spig");
+        if(spig.length<=0)
+        	{
+     
+        	$("body").append(dom);
+        	}
         this.default.scontainer = $("body").find(this.default.scontainer);
         this.default.smsg = $("body").find(this.default.smsg);
         this.default.mumu = $("body").find(this.default.mumu);
+        	
 
     };
 

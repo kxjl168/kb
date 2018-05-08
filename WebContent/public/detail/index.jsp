@@ -13,28 +13,28 @@
             <meta name="keywords" content="KxのBook">
             <meta name="description" content="Kx 的个人站点" />
             <meta name="author" content="ZHANG JIE">
-            <link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
-            <!-- <link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css">
+            <link rel="stylesheet" type="text/css" media="screen" href="${basePath}/js/plugin/bootstrap/css/bootstrap.min.css">
+            <!-- <link rel="stylesheet" type="text/css" media="screen" href="${basePath}/js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css">
  -->
-            <link rel="stylesheet" href="../../css/kCommon.css">
+            <link rel="stylesheet" href="${basePath}/css/kCommon.css">
 
-            <!-- <link rel="stylesheet" href="../../css/zcfg.css"> -->
-            <link rel="stylesheet" href="../../css/common.css">
-            <!-- 			<link rel="stylesheet" href="../../css/swiper_zcfg.css">
-			<link rel="stylesheet" href="../../js/plugin/swiper/idangerous.swiper.css"> -->
+            <!-- <link rel="stylesheet" href="${basePath}/css/zcfg.css"> -->
+            <link rel="stylesheet" href="${basePath}/css/common.css">
+            <!-- 			<link rel="stylesheet" href="${basePath}/css/swiper_zcfg.css">
+			<link rel="stylesheet" href="${basePath}/js/plugin/swiper/idangerous.swiper.css"> -->
 
-            <script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
+            <script type="text/javascript" src="${basePath}/js/plugin/jquery/jquery.v1.11.3.js"></script>
 
-            <script type="text/javascript" src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="${basePath}/js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
-            <!-- <script type="text/javascript" src="../../js/plugin/jquery/jquery-ui.js"></script> -->
+            <!-- <script type="text/javascript" src="${basePath}/js/plugin/jquery/jquery-ui.js"></script> -->
 
-            <script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
-            <script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
-            <script type="text/javascript" src="../../js/plugin/angular/angular-sanitize.min.js"></script>
+            <script type="text/javascript" src="${basePath}/js/plugin/angular/angular.min.js"></script>
+            <script type="text/javascript" src="${basePath}/js/plugin/angular/angular-resource.min.js"></script>
+            <script type="text/javascript" src="${basePath}/js/plugin/angular/angular-sanitize.min.js"></script>
 
 
-            <link rel="stylesheet" href="../../js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/default.css">
+            <link rel="stylesheet" href="${basePath}/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/default.css">
             <link rel="stylesheet" href="<c:out value='${basePath}'/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/obsidian.css">
 
             <script type="text/javascript" src="<c:out value='${basePath}'/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
@@ -96,8 +96,8 @@
 
                                         <br>
                                         <div ng-cloak class="row col-xs-10 margin-top-5 ">post@{{x.create_date}}&nbsp;
-                                            <span>阅读({{x.view_nums}})&nbsp;</span>
-                                            <span>评论({{x.replay_nums}})&nbsp;</span>
+                                            <span>阅读(<span id="rdnum">{{x.view_nums}}</span>)&nbsp;</span>
+                                            <span>评论(<span id="rpnum">{{x.replay_nums}}</span> )&nbsp;</span>
                                         </div>
 
 
@@ -110,14 +110,14 @@
                                     <div class="  col-xs-12 row tablefoot">
                                         <ul class="pagination pull-left">
                                             <li>
-                                                <a href="#" ng-show="pre" ng-click="getList(pre.imei)" title="上一篇:{{pre.title}}">&laquo;{{pre.title}}</a>
-                                                <a ng-href="{{preurl}}/public/detail/{{pre.imei}}.html" style="display: none;" class="for spider">{{pre.title}}</a>
+                                                <a ng-href="{{preurl}}/public/html/{{pre.showdate}}/{{pre.imei}}.html" ng-show="pre" ng-click="" title="上一篇:{{pre.title}}">&laquo;{{pre.title}}</a>
+                                                <a ng-href="{{preurl}}/public/html/{{pre.showdate}}/{{pre.imei}}.html" style="display: none;" class="for spider">{{pre.title}}</a>
                                             </li>
                                         </ul>
                                         <ul class="pagination pull-right">
                                             <li>
-                                                <a href="#" ng-show="next" ng-click="getList(next.imei)" title="下一篇:{{next.title}}">{{next.title}} &raquo;</a>
-                                                <a ng-href="{{preurl}}/public/detail/{{next.imei}}.html" style="display: none;" class="for spider">{{next.title}}</a>
+                                                <a ng-href="{{preurl}}/public/html/{{next.showdate}}/{{next.imei}}.html" ng-show="next" ng-click="" title="下一篇:{{next.title}}">{{next.title}} &raquo;</a>
+                                                <a ng-href="{{preurl}}/public/html/{{next.showdate}}/{{next.imei}}.html" style="display: none;" class="for spider">{{next.title}}</a>
                                             </li>
                                         </ul>
 
@@ -129,6 +129,48 @@
 										<option ng-repeat="x in rows_select">{{x}}</option>
 									</select>
                                     </div>
+                                    
+                                    
+                                    
+                                    
+                                       <div class="row col-xs-12 ">
+
+                                            <div class="pageText lincense">
+                                            
+                                            <div id="license_information">
+                                           
+                                            <p>本文 [{{x.title}}]基于<a href="https://mit-license.org/" title="MIT License " target="_blank">MIT License </a>
+                                            	许可协议发布,作者：KxのBook<a href="http://www.256kb.cn/">http://www.256kb.cn/</a>
+                                            	</p></div>
+                                            
+                                            
+                                          <p>文章固定链接： <a ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html">{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html</a> 转载请注明</p>
+                                          <p></p>
+                                              
+                                              
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        
+                                        <div class="row col-xs-12">
+                                            <hr></hr>
+                                        </div>
+                                           <div class="row col-xs-12 more">
+                                           <p>相关文章：</p>
+                                            <div class="nopadding-left">
+                                               
+                                               <ul class="pagination pull-right">
+                                           			 <li>
+                                              <!--   <a ng-href="{{preurl}}/public/html/{{next.showdate}}/{{next.imei}}.html" ng-show="next" ng-click="" title="下一篇:{{next.title}}">{{next.title}} &raquo;</a> -->
+                                                
+                                            		</li>
+                                       		 </ul>
+                                              
+                                              
+                                            </div>
+                                        </div>
+                                        
 
                                 </div>
 
@@ -241,23 +283,23 @@
             <%@include file="../pfoot.jsp" %>
 
 
-                <!-- <script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
+                <!-- <script type="text/javascript" src="${basePath}/js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
  -->
 
 
-                <script type="text/javascript" src="../../js/plugin/jquery/jquery.noty.min.js"></script>
-                <script type="text/javascript" src="../../js/plugin/jquery/noty.layout.center.js"></script>
-                <script type="text/javascript" src="../../js/plugin/jquery/noty.themes.bootstrap.js"></script>
+                <script type="text/javascript" src="${basePath}/js/plugin/jquery/jquery.noty.min.js"></script>
+                <script type="text/javascript" src="${basePath}/js/plugin/jquery/noty.layout.center.js"></script>
+                <script type="text/javascript" src="${basePath}/js/plugin/jquery/noty.themes.bootstrap.js"></script>
 
 
-                <script type="text/javascript" src="../../js/plugin/jquery/jquery.validate.js"></script>
+                <script type="text/javascript" src="${basePath}/js/plugin/jquery/jquery.validate.js"></script>
 
                 <script type="text/javascript" src="${basePath}/js/own/kvalidate.js"></script>
 
 
-                <!-- <script type="text/javascript" src="../../js/plugin/swiper/idangerous.swiper.min.js"></script> -->
-                <script src="../../js/own/menu.js"></script>
-                <script src="../../js/own/loading.js"></script>
+                <!-- <script type="text/javascript" src="${basePath}/js/plugin/swiper/idangerous.swiper.min.js"></script> -->
+                <script src="${basePath}/js/own/menu.js"></script>
+                <script src="${basePath}/js/own/loading.js"></script>
 
                 <%-- 
 <script type="text/javascript"
@@ -266,10 +308,10 @@
 
  --%>
 
-                    <!-- <script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script> -->
-                    <script type="text/javascript" src="index.js"></script>
-                    <script type="text/javascript" src="replay.js"></script>
-                    <script type="text/javascript" src="../pright/pright_t_h.js"></script>
+                    <!-- <script type="text/javascript" src="${basePath}/js/plugin/select2/select2.full.min.js"></script> -->
+                    <script type="text/javascript" src="${basePath}/public/detail/index.js"></script>
+                    <script type="text/javascript" src="${basePath}/public/detail/replay.js"></script>
+                    <script type="text/javascript" src="${basePath}/public/pright/pright_t_h.js"></script>
 
 
 

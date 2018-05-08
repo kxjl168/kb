@@ -188,6 +188,12 @@ function init() {
                             if ($scope.datalist.length > 0) {
                                 $scope.x = $scope.datalist[0];
                                 $scope.x.context = unescape($scope.x.content);
+                                
+                                
+                                 $("#rdnum").html($scope.x.view_nums);
+                                 $("#rpnum").html($scope.x.replay_nums);
+                                
+                                
                             }
 
                             if ($scope.datalist.length > 1) {
