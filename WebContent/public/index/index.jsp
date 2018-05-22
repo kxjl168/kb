@@ -16,7 +16,7 @@
 <meta name="description" content="首页- Kx的个人站点" />
 <meta name="author" content="ZHANG JIE"> 
 
-			<title>KxのBook | kxjl168的个人站点  </title>
+			<title>KxのBook -256kb.cn | 野生的喵喵 的个人站点  </title>
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
 			 <link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css">
 

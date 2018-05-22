@@ -23,7 +23,9 @@ $(function() {
 	 WdatePicker({eCont:'nDate'});
 	 
 	
-
+		$scope.title = sitetitle;
+		  document.title = + $scope.title;
+		  
 	var $scope = angular.element(ngSection).scope();
 	kvalidate.init($("#fm"), {
 		s_title : {

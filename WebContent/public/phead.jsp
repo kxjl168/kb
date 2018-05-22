@@ -8,7 +8,7 @@
 							<span class="glyphicon glyphicon-tasks  "></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="#" ng-cloak>{{title}}</a>
+						<a class="navbar-brand" href="#" ng-cloak>KxのBook</a>
 					</div>
 					<div>
 					<div class="collapse navbar-collapse  " id="menuItem">

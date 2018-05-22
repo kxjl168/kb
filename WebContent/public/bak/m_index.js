@@ -17,7 +17,7 @@ function initQuery() {
 				var http = getImUrl();
 
 				$scope.title = "KxのBOOK";
-				$scope.titletop = "KxのBOOK  Kx的个人站点";
+				$scope.titletop = sitetitle;
 				
 			
 				$scope.page = 1;

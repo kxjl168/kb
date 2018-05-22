@@ -207,6 +207,21 @@ var $scope = angular.element(ngSection).scope();
 
 							$scope.yqlist = eval(json.datalist);
 
+							
+							var html="";
+							$.each($scope.yqlist,function(index,item){
+								html+=' <a   href="'+item.url_val+'"   onclick="return gourl(this)" >  '
+								 +'    <div class="row col-xs-6"> '
+								 +' <span class="glyphicon glyphicon-hand-right"></span>'+item.url_name+' &nbsp; '
+								 +' </div> '
+								 +' </a> ';
+							});
+							
+							$("yqdiv").html(html);
+							
+							 
+							
+							
 						
 
 							$scope.$apply();

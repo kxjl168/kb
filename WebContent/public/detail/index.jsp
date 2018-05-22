@@ -140,7 +140,7 @@
                                             <div id="license_information">
                                            
                                             <p>本文 [{{x.title}}]基于<a href="https://mit-license.org/" title="MIT License " target="_blank">MIT License </a>
-                                            	许可协议发布,作者：KxのBook<a href="http://www.256kb.cn/">http://www.256kb.cn/</a>
+                                            	许可协议发布,作者：野生的喵喵<a href="http://www.256kb.cn/">http://www.256kb.cn/</a>
                                             	</p></div>
                                             
                                             

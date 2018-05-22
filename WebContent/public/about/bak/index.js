@@ -22,7 +22,8 @@ $(function() {
 	 var $scope = angular.element(ngSection).scope();
 	 $scope.x={};
 	 $scope.x.imei="about";
-		$scope.title = "KxのBook";
+		$scope.title = sitetitle;
+		  document.title = + $scope.title;
 		setTimeout(function() {
 			 $scope.getReplayList();
 		}, 300);

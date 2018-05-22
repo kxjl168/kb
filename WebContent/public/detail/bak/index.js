@@ -144,7 +144,7 @@ function init() {
 
 
 
-            $scope.title = "KxのBOOK";
+            $scope.title =sitetitle;
 
             $scope.page = 1;
             $scope.rows = 10;
