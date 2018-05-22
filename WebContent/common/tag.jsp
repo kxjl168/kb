@@ -1,6 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 
 
 
@@ -38,6 +39,7 @@
     	
     	var lstheight=700;
     	var siteurl="http://127.0.0.1:8080/kb";
+    	var  sitetitle="KxのBook -256kb.cn | 野生的喵喵 的个人站点  ";
     	//var siteurl="https://256kb.cn/";
     	
     	//var path="${HTTP_PATH}";
