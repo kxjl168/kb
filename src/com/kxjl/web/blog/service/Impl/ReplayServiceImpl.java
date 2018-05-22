@@ -21,6 +21,26 @@ public class ReplayServiceImpl implements ReplayService{
 	@Autowired
 	SystemParamsDao sysDao;
 
+	/**
+	 * 获取
+	 * @param query
+	 * @return
+	 * @date 2016-8-4
+	 */
+	public Replay getReplay(Replay query) {
+		return blogDao.getReplay(query);
+	}
+	
+	/**
+	 * 更新状态/审核
+	 * @param Replay
+	 * @return
+	 * @author zj
+	 * @date 2018年5月21日
+	 */
+	public int updateReplay(Replay Replay) {
+	return 	blogDao.updateReplay(Replay);
+	}
 	
 	
 	

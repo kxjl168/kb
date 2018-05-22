@@ -19,7 +19,7 @@ public class Kurl extends BaseModel {
 	private String sort;// int(11) DEFAULT NULL COMMENT '字典排序',
 
 	private String desc_info;
-	private String val1;
+	private String val1;   //val1=1;普通 // val1=2 友情链接
 	
 	//query
 	private String val2;

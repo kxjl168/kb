@@ -132,6 +132,8 @@ public class SysBaseInfoController extends BaseController {
 
 			String type = jsonIN.optString("type");
 			DataType t = DataType.parse(type);
+			if (t == DataType.Common)
+				Kdata.getInstance().cleanrCommonList("");
 			if (t == DataType.Blog)
 				Kdata.getInstance().cleanrBLogList("");
 			else if (t == DataType.Menu)

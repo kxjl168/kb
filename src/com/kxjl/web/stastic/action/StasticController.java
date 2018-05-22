@@ -13,6 +13,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.json.JSONArray;
@@ -26,6 +27,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.kxjl.web.autodata.dao.VisitDataMapper;
+import com.kxjl.web.autodata.model.VisitData;
 import com.kxjl.web.stastic.model.ActionLog;
 import com.kxjl.web.stastic.service.StasticService;
 import com.kxjl.tool.common.Constant;
@@ -51,6 +54,9 @@ import com.kxjl.web.system.model.DictInfo;
 public class StasticController extends BaseController {
 	@Autowired
 	private StasticService stasticService;
+	
+	@Autowired
+	private VisitDataMapper visitDao;
 
 /*	@Autowired
 	private ConsultingAppealingService complaintService;
@@ -224,6 +230,44 @@ public class StasticController extends BaseController {
 		JsonUtil.responseOutWithJson(response, rst);
 
 	}
+	
+	
+	/**
+	 * 获取用户使用全局统计情况
+	 * 
+	 * @param request
+	 * @return
+	 * @date 2016-10-13
+	 * @author zj
+	 */
+	@RequestMapping(value = "/GetRecentVisitData")
+	public void GetRecentVisitData(
+			HttpServletRequest request,HttpServletResponse response ) {
+	
+		try {
+
+			 Date now=new Date();
+			 Date y= DateUtils.addDays(now,-1);
+			// 返回输出报文
+			String dateY=DateUtil.getDateStr(y, "yyyy-MM-dd");
+			String dateN=DateUtil.getDateStr(now, "yyyy-MM-dd");
+			VisitData vY= visitDao.selectByPrimaryKey(dateY);
+			VisitData vN= visitDao.selectByPrimaryKey(dateN);
+			
+			Gson g=new Gson();
+			String rst = "{\"ResponseCode\":200, \"y\":" +g.toJson(vY) + ",\"n\":" + g.toJson(vN)
+					+ "}";
+
+			JsonUtil.responseOutWithJson(response, rst);
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+
+	
+	}
+	
+	
 	
 	/**
 	 * 获取用户使用全局统计情况

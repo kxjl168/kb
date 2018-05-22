@@ -93,7 +93,7 @@ public class PageFilter implements Filter {
 				logger.debug("request.getRequestURI(): " + curl);
 
 				if (curl.contains("public/detail/")) {
-					int xindex = curl.lastIndexOf("/");
+					/*int xindex = curl.lastIndexOf("/");
 					int dotindex = curl.lastIndexOf(".");
 					int jindex = curl.lastIndexOf("#");
 
@@ -108,7 +108,7 @@ public class PageFilter implements Filter {
 					dispathcer.forward(request, response);
 
 					// wrapper.sendRedirect(nurl);
-					isDone = true;
+					isDone = true;*/
 				} else if (curl.contains("public/index/")) {
 
 					String pretag = "i";
@@ -328,11 +328,13 @@ public class PageFilter implements Filter {
 			}
 		}
 
-		// if (WeiStaticFilter(request, response2, chain))
-		// return;
-
+	
 		if (StaticFilter(request, response2, chain))
 			return;
+		
+		 if (WeiStaticFilter(request, response2, chain))
+		 return;
+
 
 		// 配置文件中读取
 		excludedUrls = ConfigReader.getInstance().getProperty("excludedUrls");

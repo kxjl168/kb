@@ -51,7 +51,13 @@
 		<property name="dataSource" ref="dataSource" />
 		<property  name="configLocation"  value="classpath:sqlMapConfig.xml"/>
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
-		<property name="mapperLocations" value="classpath*:com/kxjl/web/xml/*.xml" />
+		<!-- <property name="mapperLocations" value="classpath*:com/kxjl/web/xml/*.xml" /> -->
+		<property name="mapperLocations" >
+            <list>
+                <value>classpath*:com/kxjl/web/xml/*.xml</value>
+                <value>classpath*:com/kxjl/web/autodata/xml/*.xml</value>
+            </list>
+        </property>
 	</bean>
 	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">   

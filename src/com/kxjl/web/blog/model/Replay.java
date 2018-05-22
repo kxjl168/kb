@@ -23,6 +23,11 @@ public class Replay extends BaseModel {
 	private String user_blog; // 'yonghuid 串或者email',
 	private String create_date;
 	private int ppid; // 实际子分组 ,输入的时候直接揭露
+	
+	private String state;//0 不可见 ，1通过可见
+	
+	private String email;//
+	
 
 	// query 回复
 	private List<Replay> reback = new ArrayList<Replay>();
@@ -130,6 +135,22 @@ public class Replay extends BaseModel {
 
 	public void setO_ppid(int o_ppid) {
 		this.o_ppid = o_ppid;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	// query

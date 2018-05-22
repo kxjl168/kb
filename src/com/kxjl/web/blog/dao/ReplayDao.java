@@ -12,6 +12,16 @@ public interface ReplayDao {
 
 	
 
+
+	/**
+	 * 获取
+	 * @param query
+	 * @return
+	 * @date 2016-8-4
+	 */
+	public Replay getReplay(Replay query);
+	
+	
 	/**
 	 * 分页获取banner列表
 	 * @param query
@@ -34,6 +44,18 @@ public interface ReplayDao {
 	 * @return
 	 */
 	public int addReplay(Replay Replay);
+	
+	/**
+	 * 更新状态/审核
+	 * @param Replay
+	 * @return
+	 * @author zj
+	 * @date 2018年5月21日
+	 */
+	public int updateReplay(Replay Replay);
+	
+	
+	
 	
 	/**
 	 * 删除Replay

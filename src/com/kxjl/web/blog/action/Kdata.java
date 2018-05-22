@@ -80,7 +80,7 @@ public class Kdata {
 	 */
 	public enum DataType {
 
-		NIL("", ""), Blog("-1", "blog"), Replay("0", "Replay"), Menu("1",
+		NIL("", ""), Common("0","common"), Blog("-1", "blog"), Replay("0", "Replay"), Menu("1",
 				"Menu"),BlackIPList("2","BlackipList");
 
 		private String value = "";

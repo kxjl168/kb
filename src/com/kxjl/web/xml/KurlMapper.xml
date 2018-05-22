@@ -19,6 +19,10 @@
 		<if test='url_name != null and url_name != "" '>
 			and a.url_name like contact('%', #{url_name},'%')
 		</if>
+		<if test='val1 != null and val1 != "" '>
+			and a.val1= #{val1}
+		</if>
+		
 		order by a.sort asc
 
 		limit #{start},#{pageCount}

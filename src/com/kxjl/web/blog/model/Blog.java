@@ -106,8 +106,11 @@ public class Blog extends BaseModel {
 
 	public void setCreate_date(String create_date) {
 		this.create_date =   DateUtil.getDateStr(DateUtil.getDate(create_date,DateUtil.defaultFormat),DateUtil.defaultFormat);
-		String month=DateUtil.getDateStr(DateUtil.getDate(this.getCreate_date(), "yyyy-MM-dd") ,"yyyy/MM");
-		showdate=month;
+		String showdate=DateUtil.getDateStr(DateUtil.getDate(this.getCreate_date(), "yyyy-MM-dd") ,"yyyy/MM");
+		this.showdate=showdate;
+		
+		String month=DateUtil.getDateStr(DateUtil.getDate(this.getCreate_date(), "yyyy-MM-dd") ,"yyyy-MM");
+		this.month=month;
 	}
 
 	public String getUpdate_date() {

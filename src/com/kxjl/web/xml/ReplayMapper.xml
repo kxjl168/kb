@@ -21,11 +21,15 @@ select r.*,
 ) t left join replay_info r3 on t.replay_recordid=r3.recordid
 	    
 		where 1=1
+		and  t.isvalid="0"
 		<if test='blogimei != null and blogimei != "" '>
 				and t.blogimei =#{blogimei}
 				
 		</if>
-		
+			<if test='state != null and state != "" '>
+				and t.state =#{state}
+				
+		</if>
 		order by t.create_date desc
 
 		
@@ -35,7 +39,7 @@ select r.*,
 	
 	    
 	    select count(*)  from replay_info t
-	    where 1=1
+	    where 1=1 and isvalid="0" and state="1"
 		<if test='blogimei != null and blogimei != "" '>
 				and t.blogimei =#{blogimei}
 				
@@ -47,6 +51,24 @@ select r.*,
 
 
 
+  <select id="getReplay" parameterType="com.kxjl.web.blog.model.Replay"  resultType="com.kxjl.web.blog.model.Replay" >
+  	    
+	    select *  from replay_info t
+	    where 1=1
+		<if test='recordid != null and recordid != "" '>
+				and t.recordid =#{recordid}
+				
+		</if>
+		<if test='blogimei != null and blogimei != "" '>
+				and t.blogimei =#{blogimei}
+				
+		</if>
+		
+		
+  
+  </select>
+
+
 	
 	<insert id="addReplay" parameterType="com.kxjl.web.blog.model.Replay">
 	    
@@ -54,16 +76,29 @@ select r.*,
 	    
 		insert into replay_info 
 		(blogimei,replay_recordid,content,userid,
-		create_date,user_blog,ppid )
+		create_date,user_blog,ppid,email,state )
 		values(#{blogimei},#{replay_recordid},#{content},#{userid}
-			,#{create_date},#{user_blog},#{ppid})
+			,#{create_date},#{user_blog},#{ppid},#{email},#{state})
 	</insert>
 	
 	
 	
-	<delete id="deleteReplay"  parameterType="java.lang.Integer">
-		delete from replay_info where recordid = #{recordid}
-	</delete>
+	<insert id="updateReplay" parameterType="com.kxjl.web.blog.model.Replay">
+	    
+
+	    
+		update replay_info
+		set  state=#{state}
+		where recordid=#{recordid}
+	</insert>
+	
+	
+	
+	
+	
+	<update id="deleteReplay"  parameterType="java.lang.Integer">
+		update  replay_info set isvalid=1 where recordid = #{id}
+	</update>
 	
 	
 </mapper>
