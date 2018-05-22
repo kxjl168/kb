@@ -119,4 +119,12 @@
 			
 	
 	
+	
+		<ConfigItem>
+		<ConfigName>domain</ConfigName>
+		<ConfigValue>http://www.256kb.cn/</ConfigValue>
+		<ConfigDesc>域名</ConfigDesc>
+	</ConfigItem>
+	
+	
 </Config>
