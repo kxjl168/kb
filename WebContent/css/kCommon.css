@@ -290,16 +290,24 @@ blockquote {
   background-color: #534ed9;
   border-color: #006e4a;
 }
+
+.panel-success
+{
+	 border:0px;
+}
+
 .panel-success > .panel-heading {
   /*	color:#333086;
 	background: #7673d9;
 	border-color: #534ed9;
 	*/
   color: #333086;
-  background-color: #7673d9;
-  background-size: 25px 25px ;
-  background-repeat: no-repeat;
-  border-color: #534ed9;
+  background-color: #708afd2d; 
+ 
+  /* background-size: 25px 25px ;*/
+  /* background-repeat: no-repeat; */
+
+  border-left:5px solid  #324fadc0;
 }
 /* .panel-success>.panel-heading{
 	color:#1f1ab2;
@@ -354,7 +362,7 @@ hr {
   position: relative;
   text-align: center;
   background: #fff;
-  z-index: 999999;
+  /* z-index: 999999; */
 }
 .kfoot {
   padding-top: 5px;
