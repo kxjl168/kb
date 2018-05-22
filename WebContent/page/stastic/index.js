@@ -112,6 +112,51 @@ function init() {
 		$scope.pageData=[];
 		
 	
+		
+		$scope.getsdata = function () {
+
+			var http = getImUrl();// "";
+
+			var obj = new Object();
+
+
+			SZUMWS(http + "statistics/GetRecentVisitData.action", JSON
+				.stringify(obj), function succsess(json) {
+
+					var code = json.ResponseCode;
+					var message = json.ResponseMsg;
+					console.log('-----return -code= ' + code + ';message= '
+						+ message);
+					if (code == 200) {
+						
+						var ydata=eval(json.y);
+						var ndata=eval(json.n);
+
+var data= "昨日独立访问："+ ydata.userVisitNum+ " 页面访问："+ ydata.pageVisitNum ;
+data+= " / 今日独立访问："+ ndata.userVisitNum+ " 页面访问："+ ndata.pageVisitNum ;
+
+$("#sdata").html(data);
+
+					} else {
+						msg(message);
+					}
+
+					
+
+
+				}, function error(data) {
+					msg("网络异常!");
+
+				
+
+				}, false, false
+
+			);
+
+		}
+		$scope.getsdata();
+		
+		
 		$scope.getTypeList = function (id, fucOnFinished, clear) {
 
 			var http = getImUrl();// "";

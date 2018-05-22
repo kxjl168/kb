@@ -159,6 +159,9 @@
 					</div>
 
 <div class="col-xs-12 row ">
+
+<div id="sdata" class=" col-xs-4  margin-bottom-10 padding-right-0 ">
+</div>
 <div class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
 										<button type="button" ng-click="getList()" class="btn btn-primary btn-block   ">查询</button>
 									</div>

@@ -82,12 +82,45 @@
                     <div class="container ">
 
 
-
-                        <a ng-cloak ng-repeat="x in tglist" ng-click="showtg(x)"> 
+       <a ng-cloak ng-repeat="x in tglist" ng-click="showyq(x)"> 
 					 {{x.tags}}&nbsp;,
 					 </a>
-                        <a ng-cloak ng-repeat="x in tglist" ng-href="{{preurl}}/public/index/tg/{{x.tags}}.html" style="display: none;" style="" class="for spider">{{x.tags}}</a>
+                        <a ng-cloak ng-repeat="x in tglist" ng-href="{{preurl}}/public/index/yq/{{x.tags}}.html" style="display: none;" style="" class="for spider">{{x.tags}}</a>
 
+                      
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class=" panel panel-success">
+            <div class="panel-heading " title="" data-toggle="collapse" data-parent="#accordion" href="#collapseOner3">
+                <div class="row">
+                    <h3 class="panel-title col-xs-10  ">友情链接</h3>
+
+
+
+                    <span id="titlepic" class="hide" data-toggle="collapse" data-parent="#accordion" href="#collapseOner3" class="glyphicon glyphicon-chevron-up pull-right "></span>
+                </div>
+            </div>
+            <div id="collapseOner3" class=" panel-collapse collapse in ">
+                <div class="panel-body ">
+
+                    <div class="container ">
+
+
+  <a ng-cloak ng-repeat="x in yqlist"  ng-href="{{x.url_val}}"   onclick="return gourl(this)" > 
+     <div class="row col-xs-6">
+					 <span class="glyphicon glyphicon-hand-right"></span> {{x.url_name}}&nbsp;
+					 </div>
+					 </a>
+                       
+                 
                     </div>
 
 

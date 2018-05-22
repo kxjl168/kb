@@ -289,8 +289,8 @@
 				},
 				email: {
 					validator: function (value) {
-						// var reg =
-						// /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
+						if(value==null||value.trim()=="")
+							return true;
 						var reg1 = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
 
 						if (!reg1.test(value)) {

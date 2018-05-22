@@ -8,7 +8,7 @@
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
-			<title>URL管理</title>
+			<title>友情链接管理</title>
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
 				<!-- <link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css"> -->
 
@@ -603,7 +603,7 @@
 
 			
 			
-			<script type="text/javascript" src="index.js"></script>
+			<script type="text/javascript" src="index_list.js"></script>
 	<script type="text/javascript" src="upload.js"></script>
 
 		

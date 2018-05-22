@@ -18,6 +18,37 @@ function error(data) {
     });
 }
 
+
+gourl = function(e) {
+	
+	var url=$(e).attr("href");
+	
+	var row = $("#rpdiv");
+
+	if(url.indexOf("http")>-1)
+	{
+	$("#myModal_outurl").modal("show");
+	$("#btnconfirm_outurl").one(
+			"click",
+			function(){
+				
+				window.open(url,'new',"");		
+			}
+			);
+	return false;
+	}
+	else
+		{
+		//window.location.hash = "";
+		return false;
+
+		}
+	
+	
+};
+
+
+
 /**kwindow*/
 (function(window) {
 

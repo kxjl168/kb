@@ -188,6 +188,51 @@ var $scope = angular.element(ngSection).scope();
 		$scope.getTgList();
 		
 		
+		
+		$scope.getYqList=function(){
+			
+			
+
+			var obj = new Object();
+			SZUMWS(
+					http + "kurl/getYQList.action",
+					JSON.stringify(obj),
+					function succsess(json) {
+						// var json = JSON.parse(decryData);
+						var code = json.ResponseCode;
+						var message = json.ResponseMsg;
+						console.log('-----return -code= ' + code
+								+ ';message= ' + message);
+						if (code == 200) {
+
+							$scope.yqlist = eval(json.datalist);
+
+						
+
+							$scope.$apply();
+
+						
+
+						} else {
+							msg(message);
+						}
+
+					
+					
+
+					}, function error(data) {
+						msg("网络异常!");
+
+					
+
+					}, false, false
+
+			);
+		};
+		$scope.getYqList();
+		
+		
+		
 	});
 	
 });

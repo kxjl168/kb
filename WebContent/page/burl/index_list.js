@@ -66,7 +66,7 @@ function changerows(option) {
 
 function init() {
 
-	initmenu($("#menuul"), "page/burl/");
+	initmenu($("#menuul"), "page/burl/index_list.jsp");
 
 	$('#collapseOne').on(
 			'shown.bs.collapse',
@@ -243,6 +243,10 @@ function init() {
 					} else {
 						obj = value;
 					}
+					
+					
+					obj.val1="2";//友情
+					
 
 					SZUMWS(http + "kurl/addOrUpdate.action", JSON
 							.stringify(obj), function succsess(json) {
@@ -311,7 +315,7 @@ function init() {
 				
 				// $scope.getcompayList();
 
-				$scope.title = "URL管理";
+				$scope.title = "友情链接管理";
 				// $scope.curpage=1;
 				$scope.page = 1;
 				$scope.rows = 10;
@@ -341,8 +345,10 @@ function init() {
 
 					obj.page = $scope.page;// 1;// "12345678";
 					obj.rows = $scope.rows;// 10;// "12345678";
+					
+					
 					SZUMWS(
-							http + "kurl/getInfoList.action",
+							http + "kurl/getYQList.action",
 							JSON.stringify(obj),
 							function succsess(json) {
 								// var json = JSON.parse(decryData);

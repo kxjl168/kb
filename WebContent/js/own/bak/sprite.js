@@ -428,11 +428,11 @@
         $(me.default.scontainer).on('mousedown', null, startMove);
         $(me.default.scontainer).on('touchstart', null, startMove);
 
-        $(document).on('mousemove', null, Move);
+        $(me.default.scontainer).on('mousemove', null, Move);
         $(me.default.scontainer).on('touchmove', null, Move);
 
 
-        $(document).on('mouseup', null, endMove);
+        $(me.default.scontainer).on('mouseup', null, endMove);
         $(me.default.scontainer).on('touchend', null, endMove);
     };
 

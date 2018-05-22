@@ -16,7 +16,7 @@
 <meta name="description" content="首页- Kx的个人站点" />
 <meta name="author" content="ZHANG JIE"> 
 
-			<title>KxのBook,Welcome~欢迎访问Kx的个人站点</title>
+			<title>KxのBook | kxjl168的个人站点  </title>
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
 			 <link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css">
 
@@ -128,6 +128,7 @@
 <script src="../../js/own/loading.js"></script>
 
 		
+							<script type="text/javascript" src="${basePath}/js/plugin/jquery/jquery-ui.js"></script>
 						
 
 				 		<!-- <script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>  -->

@@ -129,7 +129,7 @@
 			 	<div class="panel-body">
 		
 					<div id="div1" style="margin: 0 auto">
-					 <p>2018-01-12	依赖香港服务器上线Google搜索转发页面,(终于可以上google了啊...)<p>	&nbsp;
+					 <p>2018-01-12	依赖香港服务器上线<a href="http://www.256kb.cn/public/search/">Google搜索转发页面</a>,(终于可以上google了啊...)<p>	&nbsp;
 						<p>2018-01-03	 建站,属于一拍脑袋就开干,IT人士怎么能没有自己的一个站点;好吧,这是第二个站点,多年前第一个asp.net空间怎么没的都没太关注-_-!<p>	&nbsp;
 					</div>
     			</div>
