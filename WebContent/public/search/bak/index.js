@@ -121,16 +121,16 @@ function init() {
 				};
 				
 				
-				$scope.title = "KxのBOOK";
+				$scope.title = siteurl;
 				
 				$scope.page = 1;
 				$scope.rows = 10;
 
 				
-				var title="GOOGLE SEARCH"+"-"+$scope.title;
+				var title="GOOGLE SEARCH";
 				$("#title").html(title);
 
-				document.title=title;
+			//	document.title=title;*/
 				
 
 			/*	var meta = document.getElementsByTagName('meta');

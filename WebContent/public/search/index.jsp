@@ -8,7 +8,7 @@
 		<head>
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
-			<title id="title">GOOGLE搜索,KxのBook </title>
+			<title >GOOGLE搜索,google镜像,google反向代理,翻墙,google-256kb.cn | 野生的喵喵 的个人站点 </title>
 			<meta name="fragment" content="!">
 			<meta name="keywords" content="GOOGLE 搜索代理转发 KxのBook">
 <meta name="description" content="GOOGLE搜索 代理转发- KxのBook Kx的个人站点" />
