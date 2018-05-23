@@ -35,6 +35,8 @@ import com.kxjl.web.system.action.base.BaseController;
 import com.kxjl.web.system.model.DictInfo;
 import com.kxjl.web.system.model.SysUserBean;
 
+import sun.util.logging.resources.logging;
+
 @Controller
 @RequestMapping(value = "/kurl")
 public class KurlController extends BaseController {
@@ -78,6 +80,7 @@ public class KurlController extends BaseController {
 			Kurl query = new Kurl();
 			query.setPage(curPage);
 			query.setPageCount(100);
+			query.setVal1("1");
 
 			// query.setIp(ip);
 			// query.setCity(city);
@@ -161,33 +164,38 @@ public class KurlController extends BaseController {
 		String rst = "";
 		try {
 
-			jsonIN = new JSONObject(data);
+		//	jsonIN = new JSONObject(data);
 
-			String url_type = jsonIN.optString("name");
+			//String url_type = jsonIN.optString("name");
 			// String dict_type = "url_type";
 
-			int pageCount = jsonIN.optInt("rows");// request.getParameter("pageCount");
-			int curPage = jsonIN.optInt("page");
+			int pageCount =0 ;//jsonIN.optInt("rows");// request.getParameter("pageCount");
+			int curPage =100;// jsonIN.optInt("page");
 
 			Kurl query = new Kurl();
-			query.setPage(curPage);
-			query.setPageCount(pageCount);
+			query.setPage(1);
+			query.setPageCount(100);
 			query.setVal1("2");
 
 			// query.setIp(ip);
 			// query.setCity(city);
 			// query.setUrl_type(dict_type);// (url_title);// (id);
-			query.setUrl_name(url_type);// (url_name);
+			//query.setUrl_name(url_type);// (url_name);
 
 			
 			String key = "getYQList";
 			List<Kurl> infos =(List<Kurl>)Kdata.getInstance().getCommonList(key);
 
 			if (infos == null || infos.size() == 0) {
+				try {
+					
 				infos = kurlService.getKurlPageList(query);
 
 				Kdata.getInstance().SavedCommonList(key, infos);
 
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 			
 			
