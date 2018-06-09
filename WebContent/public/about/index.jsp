@@ -6,6 +6,9 @@
 		<html lang="en">
 
 		<head>
+		 <link rel="bookmark" type="image/x-icon" href="/favicon.ico" /> 
+<link rel="shortcut icon" href="/favicon.ico" />
+		
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
 			<meta name="robots" content="noindex,nofollow" />
@@ -244,6 +247,8 @@
 	src="<c:out value="${basePath}" />/js/plugin/ckeditor4.8/ckeditor.js"></script>
 						 <script type="text/javascript" src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/adapters/jquery.js"></script>
   --%>
+
+				<script type="text/javascript" src="${basePath}/js/plugin/jquery/jquery-ui.js"></script>
 
 						
 

@@ -115,19 +115,23 @@
 			
 			<ConfigItem>
 		<ConfigName>MAILHOSTSERVER</ConfigName>
-		<ConfigValue>smtp.163.com</ConfigValue>
+	<!-- 	<ConfigValue>smtp.163.com</ConfigValue> -->
+		<ConfigValue>smtp.qq.com</ConfigValue>
 		<ConfigDesc>SMTP发送服务器名称</ConfigDesc>
 	</ConfigItem>
 	
 	<ConfigItem>
 		<ConfigName>MAILSENDER</ConfigName>
-		<ConfigValue>13815429446@163.com</ConfigValue>
+		<!-- <ConfigValue>13815429446@163.com</ConfigValue> -->
+		<ConfigValue>kxjl168@foxmail.com</ConfigValue>
 		<ConfigDesc>发件人的邮箱</ConfigDesc>
 	</ConfigItem>
 	
 	<ConfigItem>
 		<ConfigName>MAILSENDERPASSWORD</ConfigName>
-		<ConfigValue>123456a</ConfigValue>
+	<!-- 	<ConfigValue>123456a</ConfigValue> -->
+		<ConfigValue>ubxwbdzqynqlbggi</ConfigValue>
+		
 		<ConfigDesc>发件人的邮箱密码-授权码</ConfigDesc>
 	</ConfigItem>
 	

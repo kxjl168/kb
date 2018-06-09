@@ -256,6 +256,10 @@ public class ReplayController extends BaseController {
 			Replay replay = new Replay();
 			replay.setBlogimei(imei);// (recordid);// (accountid);
 			replay.setReplay_recordid(pid);
+			
+			if(!ublog.startsWith("http"))
+				ublog="http://"+ublog;
+			
 			replay.setUser_blog(ublog);
 			replay.setUserid(userid);
 			replay.setPpid(ppid);
@@ -319,8 +323,13 @@ public class ReplayController extends BaseController {
 					//	final String message = "From " + uid + ":\r\n<br>" + ucontent + "";
 						final String recvmail = ConfigReader.getInstance().getProperty("AdminMail");
 
-						String url=ConfigReader.getInstance().getProperty("domain","http://www.256kb.cn")+ "/public/html/"+blog.getShowdate()+"/"+blog.getImei()+".html#commet";
-						final String message =  " 《 " + blog.getTitle() + "》收到了来至"+uid+"(email:"+replay.getEmail()+"/blog:"+replay.getUser_blog()+")的新回复.\r\n<br>"
+						String url="";
+						if (!imei.equals("about"))
+						url=ConfigReader.getInstance().getProperty("domain","http://www.256kb.cn")+ "/public/html/"+blog.getShowdate()+"/"+blog.getImei()+".html#commet";
+						else
+							url=ConfigReader.getInstance().getProperty("domain","http://www.256kb.cn")+ "/public/about/";
+						
+						final String message =  " 《 " + rtitle + "》收到了来至"+uid+"(email:"+replay.getEmail()+"/blog:"+replay.getUser_blog()+")的新回复.\r\n<br>"
 								+ ucontent
 								+ "<a href=\""+url+"\">点击这里查看</a>"
 								+ "+\r\n<br><div>若上述链接无法打开,请将该地址复制到浏览器地址栏中访问<a href=\""+url+"\">"+url+"</a></div>";
@@ -352,8 +361,15 @@ public class ReplayController extends BaseController {
 									rtitle = blog.getTitle();
 								final String title = "你在KxのBook的评论有了新的回复";
 							
-								String url=ConfigReader.getInstance().getProperty("domain","http://www.256kb.cn")+ "/public/html/"+blog.getShowdate()+"/"+blog.getImei()+".html#commet";
-								final String message =  uid +"你好! 你在《 " + blog.getTitle() + "》中的评论收到了来至 KxのBook的新回复.<a href=\""+url+"\">点击这里查看</a>"
+								
+								String url="";
+								if (!imei.equals("about"))
+									url=ConfigReader.getInstance().getProperty("domain","http://www.256kb.cn")+ "/public/html/"+blog.getShowdate()+"/"+blog.getImei()+".html#commet";
+									else
+										url=ConfigReader.getInstance().getProperty("domain","http://www.256kb.cn")+ "/public/about/";
+									
+								
+								final String message =  uid +"你好! 你在《 " + rtitle + "》中的评论收到了来至 KxのBook[野生的喵喵]的新回复.<a href=\""+url+"\">点击这里查看</a>"
 										+ "+\r\n<br><div>若上述链接无法打开,请将该地址复制到浏览器地址栏中访问<a href=\""+url+"\">"+url+"</a></div>";
 								final String recvmail =toReplay.getEmail();
 

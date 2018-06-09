@@ -23,7 +23,7 @@ $(function() {
 	 $scope.x={};
 	 $scope.x.imei="about";
 		$scope.title = sitetitle;
-		  document.title = + $scope.title;
+		  document.title = "关于-"+ $scope.title;
 		setTimeout(function() {
 			 $scope.getReplayList();
 		}, 300);
