@@ -34,7 +34,9 @@
 	
 		<ConfigItem>
 		<ConfigName>FILE_SAVE_PATH</ConfigName>
-		<ConfigValue>F:\kxjl\code\kb\src\main\webapp\file\</ConfigValue>
+		<!-- <ConfigValue>F:\kxjl\code\kb\src\main\webapp\file\</ConfigValue> -->
+		<ConfigValue>H:\git\kb\src\main\webapp\file\</ConfigValue>
+		
 		<ConfigDesc>作为文件服务器时，本地存储路径	</ConfigDesc>
 	</ConfigItem>
 	
@@ -163,7 +165,10 @@
 	
 		<ConfigItem>
 		<ConfigName>LOCAL_HTML_PATH</ConfigName>
-		<ConfigValue>F:\kxjl\code\kb\src\main\webapp\public\html\</ConfigValue>
+		
+		
+		<!-- <ConfigValue>F:\kxjl\code\kb\src\main\webapp\public\html\</ConfigValue> -->
+		<ConfigValue>H:\git\kb\src\main\webapp\public\html\</ConfigValue>
 		<ConfigDesc>html静态目录</ConfigDesc>
 	</ConfigItem>
 	

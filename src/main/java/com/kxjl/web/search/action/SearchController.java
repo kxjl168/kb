@@ -39,7 +39,7 @@ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.HeaderGroup;
 import org.apache.http.util.EntityUtils;
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
