@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kxjl.web.blog.dao.KurlDao">
+	<resultMap id="kMap" type="com.kxjl.web.blog.model.Kurl">
+	
+	</resultMap>
+	
+	
+	<select id="getKurlPageList" parameterType="com.kxjl.web.blog.model.Kurl" resultMap="kMap">
+		select a.*  from kurl_info a 
+		where 1=1
+		<if test='url_type != null and url_type != "" '>
+			and a.url_type = #{url_type}
+		</if>
+		<if test='url_val != null and url_val != "" '>
+			and a.url_val =#{url_val}
+		</if>
+		
+		<if test='url_name != null and url_name != "" '>
+			and a.url_name like contact('%', #{url_name},'%')
+		</if>
+		order by a.sort asc
+
+		limit #{start},#{pageCount}
+	</select>
+	
+	<select id="getKurlPageListCount" parameterType="com.kxjl.web.blog.model.Kurl" resultType="java.lang.Integer">
+		select count(*) from kurl_info a 
+		where 1=1
+			<if test='url_type != null and url_type != "" '>
+			and a.url_type = #{url_type}
+		</if>
+		<if test='url_val != null and url_val != "" '>
+			and a.url_val =#{url_val}
+		</if>
+		
+		<if test='url_name != null and url_name != "" '>
+		and a.url_name like contact('%', #{url_name},'%')
+		</if>
+		
+		
+	</select>
+	
+<select id="getKurlInfoById" parameterType="java.lang.Integer" resultType="com.kxjl.web.blog.model.Kurl">
+		select * from kurl_info where id = #{id}
+	</select>
+
+
+
+
+	
+	<insert id="addKurl" parameterType="com.kxjl.web.blog.model.Kurl">
+	    
+
+	    
+		insert into kurl_info 
+		(url_val,url_name,sort,url_type,
+		create_date,val1,desc_info )
+		values(#{url_val},#{url_name},#{sort},#{url_type}
+		,		now(),#{val1},#{desc_info})
+	</insert>
+	
+	<update id="updateKurl" parameterType="com.kxjl.web.blog.model.Kurl">
+		update kurl_info 
+			<trim prefix=" set " suffixOverrides=",">
+		update_date=now(),
+		<if test='url_val != null'>
+			url_val=#{url_val},
+		</if>
+		<if test='val1 != null'>
+			val1=#{val1},
+		</if>
+			<if test='desc_info != null'>
+			desc_info=#{desc_info},
+		</if>
+		
+		<if test='url_name != null'>
+			url_name=#{url_name},
+		</if>
+		<if test='sort != null'>
+			sort=#{sort},
+		</if>
+		<if test='url_type != null'>
+			url_type=#{url_type},
+		</if>
+		
+		
+		</trim>
+		
+		where id=#{id}
+	</update>
+	
+	<delete id="deleteKurl"  parameterType="java.lang.Integer">
+		delete from kurl_info where id = #{id}
+	</delete>
+	
+	
+</mapper>
+  
+
+
+
+
+

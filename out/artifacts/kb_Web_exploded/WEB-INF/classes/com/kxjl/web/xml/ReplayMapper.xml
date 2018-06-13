@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kxjl.web.blog.dao.ReplayDao">
+	<resultMap id="ReplayMap" type="com.kxjl.web.blog.model.Replay">
+	
+	</resultMap>
+	
+	
+	
+	<select id="getReplayPageList" parameterType="com.kxjl.web.blog.model.Replay" resultMap="ReplayMap">
+	
+	    
+	    select t.*,r3.userid tuid,r3.user_blog tuser_blog from (
+select r.*,
+ case 
+ when r2.replay_recordid =0  then r2.recordid
+ when r2.replay_recordid is null then 0
+ else r2.replay_recordid 
+ end o_ppid
+  from replay_info r LEFT JOIN replay_info r2 on r.replay_recordid=r2.recordid
+) t left join replay_info r3 on t.replay_recordid=r3.recordid
+	    
+		where 1=1
+		<if test='blogimei != null and blogimei != "" '>
+				and t.blogimei =#{blogimei}
+				
+		</if>
+		
+		order by t.create_date desc
+
+		
+	</select>
+	
+	<select id="getReplayPageListCount" parameterType="com.kxjl.web.blog.model.Replay" resultType="java.lang.Integer">
+	
+	    
+	    select count(*)  from replay_info t
+	    where 1=1
+		<if test='blogimei != null and blogimei != "" '>
+				and t.blogimei =#{blogimei}
+				
+		</if>
+		
+		
+	</select>
+	
+
+
+
+	
+	<insert id="addReplay" parameterType="com.kxjl.web.blog.model.Replay">
+	    
+
+	    
+		insert into replay_info 
+		(blogimei,replay_recordid,content,userid,
+		create_date,user_blog,ppid )
+		values(#{blogimei},#{replay_recordid},#{content},#{userid}
+			,#{create_date},#{user_blog},#{ppid})
+	</insert>
+	
+	
+	
+	<delete id="deleteReplay"  parameterType="java.lang.Integer">
+		delete from replay_info where recordid = #{recordid}
+	</delete>
+	
+	
+</mapper>
+  
+
+
+
+
+
