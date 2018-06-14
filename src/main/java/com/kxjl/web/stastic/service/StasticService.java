@@ -17,6 +17,16 @@ import com.kxjl.web.system.model.DictInfo;
 public interface StasticService {
 
 	
+	/**
+	 * 记录访问统计原始数据
+	 * 
+	 * @param map
+	 * @return
+	 * @author zj
+	 * @date 2017-12-28
+	 */
+	public void saveStaticInfo(HttpServletRequest request, String type1,
+			String type2,String arctileId ) ;
 	
 	/**
 	 * 记录访问统计原始数据
@@ -135,13 +145,38 @@ public interface StasticService {
 	public int GetDetailListCount(ActionLog query);
 	
 	/**
-	 * 获取具体点击数据
+	 * 获取分类的统计点击数据
 	 * @param query
 	 * @return
 	 * @date 2016-7-14
 	 * @author zj
 	 */
 	public List<ActionLog> GetDetailList(ActionLog query);
+	
+	/**
+	 * 获取指定分类的具体数据
+	 * @param query
+	 * @return
+	 * @author zj
+	 * @date 2018年6月14日
+	 */
+	public List<ActionLog> GetActionList(ActionLog query);
+	
+	
+	
+
+	/**
+	 * 获取指定分类的具体数据
+	 * @param query
+	 * @return
+	 * @author zj
+	 * @date 2018年6月14日
+	 */
+	public int GetActionListCount(ActionLog query);
+	
+	
+	
+	
 	/**
 	 * 获取统计项
 	 * 

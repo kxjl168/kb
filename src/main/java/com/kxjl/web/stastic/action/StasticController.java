@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.kxjl.web.autodata.dao.VisitDataMapper;
 import com.kxjl.web.autodata.model.VisitData;
 import com.kxjl.web.stastic.model.ActionLog;
@@ -835,6 +836,107 @@ public class StasticController extends BaseController {
 
 	}
 	
+	
+	/**
+	 * 获取分类下的具体点击数据-链接文章
+	 * @param request
+	 * @param response
+	 * @author zj
+	 * @date 2018年6月14日
+	 */
+	@RequestMapping(value = "/GetActionList")
+	public void  GetActionList(HttpServletRequest request,
+			HttpServletResponse response) {
+		// String blogid = request.getParameter("blogid");
+
+		/*
+		 * int pageCount = Integer.parseInt(request.getParameter("rows"));//
+		 * request.getParameter("pageCount"); int curPage =
+		 * Integer.parseInt(request.getParameter("page"));
+		 */
+
+		
+		JSONObject jsonIN;
+		JSONObject jsonOut = new JSONObject();
+
+		String rst = "";
+		try {
+
+			
+
+			String time_type = request.getParameter("date_type");
+			String date1 = request.getParameter("date");
+			//String date2 = request.getParameter("date2");
+
+			String qName = request.getParameter("qName");
+			String qType = request.getParameter("qType");
+			String userid=request.getParameter("userid");
+
+			String type1 = qType.substring(0, qType.lastIndexOf("_"));
+			String type2 = qType.substring(qType.lastIndexOf("_") + 1,
+					qType.length());
+
+			int pageCount = Integer.parseInt(request.getParameter("rows"));// request.getParameter("pageCount");
+			int curPage = Integer.parseInt(request.getParameter("page"));
+	
+			
+			String dateFormat="%Y-%m-%d %H";
+			if(time_type.equals("HOUR"))
+				 dateFormat="%Y-%m-%d %H";
+			else if(time_type.equals("DAY"))
+				 dateFormat="%Y-%m-%d";
+			else  if(time_type.equals("MONTH"))
+				 dateFormat="%Y-%m";
+			
+			ActionLog aquery=new ActionLog();
+			aquery.setTime1(date1);
+			//aquery.setTime2(date2);
+			aquery.setDateFormat(dateFormat);
+			aquery.setType_first(type1);
+			aquery.setType_second(type2);
+			aquery.setPage(curPage);
+			aquery.setPageCount(pageCount);
+			aquery.setUserid(userid);
+			
+			
+			List<ActionLog> infos =new ArrayList<>();
+			int total=0;
+			if(!date1.equals(""))
+			{
+			 infos = stasticService.GetActionList(aquery);
+			 total = stasticService.GetActionListCount(aquery);
+			}
+			
+			
+
+			Gson gs = new Gson();
+			String jsStr = gs.toJson(infos);
+
+			jsonOut.put("ResponseCode", "200");
+			jsonOut.put("ResponseMsg", "");
+			jsonOut.put("total", total);
+			jsonOut.put("rows",  new JSONArray(jsStr));
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+
+			try {
+				jsonOut.put("ResponseCode", "201");
+				jsonOut.put("ResponseMsg", "");
+				jsonOut.put("total", 0);
+				jsonOut.put("rows", "");
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+
+		}
+		rst = jsonOut.toString();
+		JsonUtil.responseOutWithJson(response, rst);
+		
+		//return rst;
+
+	}
 	
 	/**
 	 * 时间段、点击详细（地市分布、数量）

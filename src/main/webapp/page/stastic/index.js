@@ -23,8 +23,9 @@ $(function() {
 
 });
 
+var cdate="";
 function getDetailList(page,date){
-	
+	cdate=date;
 	 var $scope = angular.element(ngSection).scope();
 		$scope.$apply(function() {
 			$scope.rows2=10;
@@ -58,12 +59,119 @@ function changerows(option)
 		});
 }
 
+function showaction(userid){
+	cuserid=userid;
+	 var $scope = angular.element(ngSection).scope();
+	$scope.$apply(function() {
+		$scope.showaction();
+	});
+}
+
+
+var cuserid='';
+function initDetailTable() {
+	
+	var http = getImUrl();// "";
+
+	
+	
+
+    // 初始化Table
+    $('#table_detail').bootstrapTable({
+        url:http + "statistics/GetActionList.action", // 请求后台的URL（*）
+        method: 'post', // 请求方式（*）
+        contentType: 'application/x-www-form-urlencoded',
+        toolbar: '#toolbar', // 工具按钮用哪个容器
+    
+        showHeader: true,
+        searchAlign: 'left',
+        buttonsAlign: 'left',
+        searchOnEnterKey: true,
+        striped: true, // 是否显示行间隔色
+        cache: false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        pagination: true, // 是否显示分页（*）
+        sidePagination: "server", // 分页方式：client客户端分页，server服务端分页（*）
+        pageNumber: 1, // 初始化加载第一页，默认第一页
+        pageSize: 10, // 每页的记录行数（*）
+        pageList: [10, 25], // 可供选择的每页的行数（*）
+        search: false, // 是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+        detailView: false,
+        // showColumns: true, //是否显示所有的列
+        uniqueId: "id", // 每一行的唯一标识，一般为主键列
+        // queryParamsType : "limit",
+        queryParams: function queryParams(params) { // 设置查询参数
+        	
+        	var rows= params.limit; // 每页要显示的数据条数
+           var offset= params.offset; // 每页显示数据的开始行号
+           
+           
+        	var page=1+ offset/rows;
+     
+            var param = {
+            		rows: params.limit, // 每页要显示的数据条数
+                offset: params.offset, // 每页显示数据的开始行号
+                page:page,
+                sort: params.sort, // 要排序的字段
+             
+                qType :$("#s_type").val(),
+                date_type : $("#dateType").val(),
+                qName : $("#s_type ").find("option:selected").text(),
+                date:cdate,
+                userid:cuserid,
+            };
+            return param;
+        },
+        columns: [
+        	{
+                field: 'id',
+                title: '订单编号',
+                align: 'center',
+                valign: 'middle',
+                visible:false
+            }, 
+        	{
+            field: 'action_date',
+            title: '时间',
+            align: 'center',
+            valign: 'middle'
+        },
+        {
+            field: 'type_first',
+            title: '分类一',
+            align: 'center',
+            valign: 'middle'
+        }, {
+            field: 'type_second',
+            title: '分类二',
+            align: 'center',
+            valign: 'middle'
+        },  {
+            field: 'blogname',
+            title: '文章',
+            align: 'center',
+            valign: 'middle',
+            formatter: function (value, row, index) {
+                return "<a href='"+row.blog_id+"'>"+value+"</a>";
+            }
+        },
+        /*{
+            title: '操作',
+            field: 'vehicleno',
+            align: 'center',
+            formatter: modifyAndDeleteButton,
+            events: PersonnelInformationEvents
+        }*/
+        ],
+    });
+}
+
 
 
 function init() {
 	
 	initmenu($("#menuul"),"page/stastic/");
 	
+	initDetailTable();
 	
 	var $scope = angular.element(ngSection).scope();
 	$scope.$apply(function() {
@@ -129,11 +237,12 @@ function init() {
 						+ message);
 					if (code == 200) {
 						
-						var ydata=eval(json.y);
-						var ndata=eval(json.n);
+						var ydata=eval(json.y)||{};
+						var ndata=eval(json.n)||{};
+						
 
-var data= "昨日独立访问："+ ydata.userVisitNum+ " 页面访问："+ ydata.pageVisitNum ;
-data+= " / 今日独立访问："+ ndata.userVisitNum+ " 页面访问："+ ndata.pageVisitNum ;
+var data= "昨日独立访问："+ ydata.userVisitNum||"0"+ " 页面访问："+ ydata.pageVisitNum||0 ;
+data+= " / 今日独立访问："+ ndata.userVisitNum||0+ " 页面访问："+ ndata.pageVisitNum||0 ;
 
 $("#sdata").html(data);
 
@@ -218,6 +327,17 @@ $("#sdata").html(data);
 		$scope.getTypeList();
 		//$scope.getcompayList();
 		
+	$scope.showaction=function(id,date){
+			
+			$("#myModal_detail").modal('show');
+			var http = getImUrl();// "";
+			 var opt = {
+				        url:http+ "statistics/GetActionList.action",
+				    };
+				    $("#table_detail").bootstrapTable('refresh', opt);
+	};
+		
+		
 		
 		
 		$scope.getDetailList=function(id,date){
@@ -269,6 +389,15 @@ $("#sdata").html(data);
 
 			
 					$scope.detaillist =eval(json.datalist);
+					
+					
+					
+					$.each($scope.detaillist,function(index,item){
+						if(obj.qType.indexOf('detailpag')>-1)
+							{
+							$scope.detaillist[index].total_uv="<a href='#' onclick='showaction(\""+$scope.detaillist[index].userid+"\")'>"+$scope.detaillist[index].total_uv+"</a>";
+							}
+					})
 					
 					//setchartdata(json.datalist);
 

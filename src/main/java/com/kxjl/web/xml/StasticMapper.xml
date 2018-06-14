@@ -16,6 +16,49 @@
 	</resultMap>
 
 
+<select id="GetActionListCount"  parameterType="com.kxjl.web.stastic.model.ActionLog"
+		resultType="java.lang.Integer">
+	
+	select count(*) from (	
+select log.*,b.title blogname  from user_action_log log left join blog_info b on log.blog_id=b.imei
+ where
+ type_first='${type_first}' 
+	<if test='type_second!=null and type_second!= "" '>
+ and type_second='${type_second}'
+ </if>
+ 
+ <if test='userid !=null and userid != "" '>
+ and userid=#{userid}
+ </if>
+
+and 
+str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}')
+	)	 t
+ 
+ 	
+	</select>
+	
+<select id="GetActionList"  parameterType="com.kxjl.web.stastic.model.ActionLog"
+		 resultMap="ActionLogMap">
+		
+select log.*,b.title blogname  from user_action_log log left join blog_info b on log.blog_id=b.imei
+ where
+ type_first='${type_first}' 
+	<if test='type_second!=null and type_second!= "" '>
+ and type_second='${type_second}'
+ </if>
+ <if test='userid !=null and userid != "" '>
+ and userid=#{userid}
+ </if>
+and 
+str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}')
+		
+ 
+ 	limit ${start},${pageCount}
+	</select>
+
+
+
 	<select id="GetDetailList"  parameterType="com.kxjl.web.stastic.model.ActionLog"
 		 resultMap="ActionLogMap">
 		
@@ -280,14 +323,16 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 		action_date,
 		type_first,
 		type_second,
-		city
+		city,
+		blog_id
 		)
 		values(
 		#{userid},
 		date_format(now(), '%Y-%m-%d %H:%i:%s'),
 		#{type_first},
 		#{type_second},
-		#{city}
+		#{city},
+		#{blog_id}
 
 		)
 	</insert>

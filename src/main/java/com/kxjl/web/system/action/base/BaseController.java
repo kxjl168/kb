@@ -138,6 +138,22 @@ public class BaseController {
 	
 
 	}
+	
+	/**
+	 * 记录访问统计原始数据
+	 * 
+	 * @param map
+	 * @return
+	 * @author zj
+	 * @date 2017-12-28
+	 */
+	public void saveStaticInfo(HttpServletRequest request, String type1,
+			String type2,String imei) {
+
+		stasticService.saveStaticInfo(request, type1, type2,imei);
+	
+
+	}
 
 	/**
 	 * 保持请求信息

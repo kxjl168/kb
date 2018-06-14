@@ -33,6 +33,8 @@ public class StasticServiceImpl implements StasticService {
 	@Autowired
 	StasticDao stasticDao;
 
+	
+	
 	/**
 	 * 记录访问统计原始数据
 	 * 
@@ -42,11 +44,11 @@ public class StasticServiceImpl implements StasticService {
 	 * @date 2017-12-28
 	 */
 	public void saveStaticInfo(HttpServletRequest request, String type1,
-			String type2) {
-
+			String type2,String arctileId ) {
 		final HttpServletRequest rt = request;
 		final String t1 = type1;
 		final String t2 = type2;
+		final String blogimei = arctileId;
 
 		new Thread(new Runnable() {
 
@@ -66,7 +68,7 @@ public class StasticServiceImpl implements StasticService {
 					log.setUserid(ip);
 
 					String city = IPUtils.getCityByIP(ip);
-
+					log.setBlog_id(blogimei);
 					log.setCity(city);
 					log.setType_first(t1);
 					log.setType_second(t2);
@@ -80,7 +82,21 @@ public class StasticServiceImpl implements StasticService {
 				}
 			}
 		}).run();
+	}
+	
+	/**
+	 * 记录访问统计原始数据
+	 * 
+	 * @param map
+	 * @return
+	 * @author zj
+	 * @date 2017-12-28
+	 */
+	public void saveStaticInfo(HttpServletRequest request, String type1,
+			String type2) {
 
+		
+		saveStaticInfo(request,type1,type2,"");
 	}
 	/**
 	 * 获取统计项
@@ -282,6 +298,29 @@ public class StasticServiceImpl implements StasticService {
 	 */
 	public int addActionLog(ActionLog log) {
 		return stasticDao.addActionLog(log);
+	}
+	
+	/**
+	 * 获取指定分类的具体数据
+	 * @param query
+	 * @return
+	 * @author zj
+	 * @date 2018年6月14日
+	 */
+	public List<ActionLog> GetActionList(ActionLog query)
+	{
+		return stasticDao.GetActionList(query);
+	}
+
+	/**
+	 * 获取指定分类的具体数据
+	 * @param query
+	 * @return
+	 * @author zj
+	 * @date 2018年6月14日
+	 */
+	public int GetActionListCount(ActionLog query) {
+		return stasticDao.GetActionListCount(query);
 	}
 
 	/**

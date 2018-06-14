@@ -135,7 +135,7 @@ public class BlogController extends BaseController {
 		JsonUtil.responseOutWithJson(response, rst);
 
 		saveStaticInfo(request, StasticTypeOne.DetailPage.toString(), detail
-				.get(0).getBlog_type_name());
+				.get(0).getBlog_type_name(),detail.get(0).getImei());
 
 		Kdata.getInstance().cleanrBLogList("");
 

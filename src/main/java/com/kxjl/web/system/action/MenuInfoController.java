@@ -54,7 +54,7 @@ public class MenuInfoController extends BaseController {
 			HttpServletResponse response, HttpSession session) {
 
 		JSONObject jobj = new JSONObject();
-		logger.info("sid:"+ session.getId());
+	//	logger.info("sid:"+ session.getId());
 		SysUserBean user = (SysUserBean) session
 				.getAttribute(Constant.SESSION_USER);
 

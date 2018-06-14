@@ -2,6 +2,7 @@ package com.kxjl.web.stastic.model;
 
 import java.util.List;
 
+import com.kxjl.web.blog.model.Blog;
 import com.kxjl.web.device.model.Device.RouteFlag;
 import com.kxjl.web.system.model.base.BaseModel;
 
@@ -58,7 +59,7 @@ public class ActionLog extends BaseModel {
 	}
 	
 	
-	
+	private String id;
 	
 	private String userid;// varchar(30) comment 'user表id', ip
 	private String city;//地市
@@ -67,6 +68,7 @@ public class ActionLog extends BaseModel {
 	private String type_first;// varchar(20) comment '操作大类； 办事指南/应用服务',
 	private String type_second;// varchar(20) comment '具体的项ID,'
 
+	private String blog_id;
 	
 	private Double total_click;
 	private Double total_uv;
@@ -81,6 +83,8 @@ public class ActionLog extends BaseModel {
 	//查询结束时间
 	private String action_date_end;// varchar(20) comment '操作时间 2016-01-01
 	
+	//query 
+	private String blogname;
 	
 	public String getUserid() {
 		return userid;
@@ -88,6 +92,7 @@ public class ActionLog extends BaseModel {
 
 	public void setUserid(String userid) {
 		this.userid = userid;
+		this.id=this.userid+"_"+this.action_date;
 	}
 
 	public String getAction_date() {
@@ -96,6 +101,7 @@ public class ActionLog extends BaseModel {
 
 	public void setAction_date(String action_date) {
 		this.action_date = action_date;
+		this.id=this.userid+"_"+this.action_date;
 	}
 
 	public String getType_first() {
@@ -178,4 +184,29 @@ public class ActionLog extends BaseModel {
 		this.dateFormat = dateFormat;
 	}
 
+	public String getBlog_id() {
+		return blog_id;
+	}
+
+	public void setBlog_id(String blog_id) {
+		this.blog_id = blog_id;
+	}
+
+	public String getBlogname() {
+		return blogname;
+	}
+
+	public void setBlogname(String blogname) {
+		this.blogname = blogname;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	
 }

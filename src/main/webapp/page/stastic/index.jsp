@@ -10,6 +10,7 @@
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
 			<title>访问统计</title>
 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
+				<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap-table/css/bootstrap-table.min.css">
 
 			<link rel="stylesheet" href="../../css/kCommon.css">
 
@@ -320,7 +321,10 @@
 									    
 										
 											  <td class="desc">{{ x.userid }}</td>
-											  <td class="desc">{{ x.total_uv }}</td>
+											  
+											  
+											  
+											  <td class="desc" ng-bind-html="x.total_uv|sanitize"></td>
 											 
 										
 										</tr>
@@ -345,7 +349,7 @@
 
 							</li>
 							<li class="active">
-								<a href="#" ng-click="getDetailList(page2)">{{page}}</a>
+								<a href="#" ng-click="getDetailList(page2)">{{page2}}</a>
 							</li>
 							<li ng-repeat="x in pageDataAft2">
 
@@ -393,6 +397,42 @@
 
 
 
+<div class="modal fade" id="myModal_detail"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title " id="myModalLabel">{{detaildate}}访问详情</h4>
+				</div>
+
+
+
+				<div class="modal-body   container margin-top-10 " >
+					<div class="row " >
+					
+					   <div class="table-responsive" style="margin: 10px;">
+										<table id="table_detail"
+											class="table table-bordered table-hover"></table>
+						</div>
+						
+
+					</div>
+					
+				</div>
+				
+					<div class="modal-footer">
+					
+					</button>
+					                 <button type="button " class="btn btn-primary "  data-dismiss="modal" > 确定 </button>
+				</div>
+			</div>
+		</div>
+</div>
+
+
+
+
+
 
 				</script>
 
@@ -411,6 +451,9 @@
 
 
 				<script type="text/javascript" src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
+				
+				<script type="text/javascript" src="../../js/plugin/bootstrap-table/js/bootstrap-table.min.js"></script>
+				<script type="text/javascript" src="../../js/plugin/bootstrap-table/js/bootstrap-table-zh-CN.js"></script>
 
 
 				<!-- <script type="text/javascript" src="../../js/plugin/swiper/idangerous.swiper.min.js"></script> -->

@@ -216,8 +216,24 @@ limit 0,50
 	 * @author zj
 	 */
 	public int addActionLog(ActionLog log);
-
 	
+	
+	/**
+	 * 获取指定分类的具体数据
+	 * @param query
+	 * @return
+	 * @author zj
+	 * @date 2018年6月14日
+	 */
+	public int GetActionListCount(ActionLog query);
+	/**
+	 * 获取指定分类的具体数据
+	 * @param query
+	 * @return
+	 * @author zj
+	 * @date 2018年6月14日
+	 */
+	public List<ActionLog> GetActionList(ActionLog query);
 	/**
 	 * 获取具体点击数据
 	 * @param query
