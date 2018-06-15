@@ -440,8 +440,8 @@
 
 
 				<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
-				<!-- <script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
- -->
+				<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
+ 
 
 
 
