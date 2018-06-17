@@ -298,6 +298,9 @@ public class BlogController extends BaseController {
 
 			int pageCount = jsonIN.optInt("rows");// request.getParameter("pageCount");
 			int curPage = jsonIN.optInt("page");
+			
+			if(curPage==0)
+				curPage=1;
 
 			String key = "blog_getInfoList" + "_" + month + "_" + blog_type
 					+ "_" + blog_tag + "_" + pageCount + "_" + curPage + "_"+blog_title

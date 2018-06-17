@@ -163,8 +163,57 @@ gourl = function(e) {
 
 };
 
+function loadMobile(browser){
+	
+	
+	
+    var $overlay = $("#ftop");
+    var $header = $(".mobile.navbar-brand.toptitle");
+    
+ 
+    window.onscroll = function(){
+        var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
+        if(!!browser.versions.mobile || $(window).width() < 800){
+ 	       
+	    
+        if(scrollTop >= 69){
+            $overlay.addClass("fixed");
+        }else{
+            $overlay.removeClass("fixed");
+        }
+        if(scrollTop >= 160){
+            $header.removeClass("hide").addClass("fixed");
+        }else{
+            $header.addClass("hide").removeClass("fixed");
+        }
+        } 
+    };
+}
+
 $(function() {
 
+	 var browser = {
+		        versions: function() {
+		        var u = window.navigator.userAgent;
+		        return {
+		            trident: u.indexOf('Trident') > -1, //IE内核
+		            presto: u.indexOf('Presto') > -1, //opera内核
+		            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+		            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+		            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+		            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+		            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+		            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+		            iPad: u.indexOf('iPad') > -1, //是否为iPad
+		            webApp: u.indexOf('Safari') == -1 ,//是否为web应用程序，没有头部与底部
+		            weixin: u.indexOf('MicroMessenger') == -1 //是否为微信浏览器
+		            };
+		        }()
+		    };
+	 
+	 loadMobile(browser);
+
+	
 	var http = getImUrl();
 
 	var obj = new Object();
@@ -178,7 +227,7 @@ $(function() {
 				if (code == 200) {
 
 					if (json.visitData) {
-						var vdata = JSON.parse(json.visitData);
+						var vdata =json.visitData;
 
 						$(".pagevisit").html(vdata.pageVisitNum);
 						$(".uservisit").html(vdata.userVisitNum);
@@ -187,7 +236,7 @@ $(function() {
 				
 
 					if (json.fileinfo) {
-						var finfo = JSON.parse(json.fileinfo);
+						var finfo =json.fileinfo;
 						$(".phead").attr("src",
 								json.httppath + finfo.http_relative_path);
 						

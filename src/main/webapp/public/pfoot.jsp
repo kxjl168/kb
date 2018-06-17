@@ -42,7 +42,7 @@
         <br>
         <span>Designed and theme by <a href="http://256kb.cn/">Kx</a> </span>
              
- &nbsp;<span><span class="pagevisit glyphicon glyphicon-eye-open" title="总访问量">333</span> &nbsp;<span class="uservisit glyphicon glyphicon-user" title="访客数">333</span> </span>
+ &nbsp;<span><span class="pagevisit glyphicon glyphicon-eye-open" title="总访问量">${visitdata.pageVisitNum }</span> &nbsp;<span class="uservisit glyphicon glyphicon-user" title="访客数">${visitdata.userVisitNum }</span> </span>
 
     </div>
     </div>

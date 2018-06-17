@@ -40,10 +40,18 @@
 
 			<div class="short-about">
 			
-			 <img class="phead" src="${basePath}/public/index/head.jpg">
-			 <a href="${basePath}/public/about/">野生的喵喵</a>
-			 <p>闲读古诗对品茶，把酒话桑麻</p>
+			<img class="phead" src="${httppath}${head.http_relative_path }"> 
+			
+		
+			<a class=" "
+				href="${basePath}/public/about/">喵喵’s KxのBOOK</a>
+			<p>${sign }</p>
+		
 			</div>
+			
+			
+			
+	
 
 <hr>
 

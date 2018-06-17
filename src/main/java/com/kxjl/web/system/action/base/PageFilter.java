@@ -133,7 +133,7 @@ public class PageFilter implements Filter {
 
 					String imei = curl.substring(xindex + 1, dotindex);
 
-					String nurl = "../?" + pretag + "=" + imei;
+					String nurl = "/public/index?" + pretag + "=" + imei;
 					RequestDispatcher dispathcer = request.getRequestDispatcher(nurl);
 					dispathcer.forward(request, response);
 

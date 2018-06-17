@@ -46,7 +46,7 @@
     	var  sitetitle="KxのBook -256kb.cn | 野生的喵喵 的个人站点  ";
     	//var siteurl="https://256kb.cn/";
     	
-    	//var path="";
+    	//var path="http://127.0.0.1:8080/kb/file/";
     
 </script>
 
@@ -95,16 +95,17 @@
         <body id="ngSection"  ng-app="myApp" ng-controller="eduCtrl">
 
     	
-<div class="navbar-fixed-top ">
+<div id="ftop" class="navbar-fixed-top ">
 	<nav class="top3 navbar  navbar-kindex" role="navigation">
 
-		<div class="navbar-header">
+		<div class="navbar-header public">
 			<button type="button" id="menuBtn" class="navbar-toggle"
 				data-toggle="collapse" data-target="#menuItem">
 				<span class="sr-only"></span> <span
 					class="glyphicon glyphicon-tasks  "></span> <span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#" ng-cloak>KxのBook</a>
+			<a  class="pc navbar-brand  toptitle " href="#" ng-cloak>KxのBOOK</a>
+			<a id="toptitle" class="mobile navbar-brand  toptitle " href="#" ng-cloak>野生的喵喵's BOOK</a>
 
 
 
@@ -133,11 +134,15 @@
 
 
 
-		<div class="short-about">
+		<div id="mhead" class="short-about">
 
-			<img class="phead" src="/kb/public/index/head.jpg"> <a
-				href="/kb/public/about/">野生的喵喵</a>
-			<p>闲读古诗对品茶，把酒话桑麻</p>
+			<img class="phead" src="http://127.0.0.1:8080/kb/file/apk/201806/74330e2a-3e2a-48cb-ad87-07b4e6e632d6.jpg"> 
+			
+			<div class="hgroup">
+			<a class="navbar-brand toptitle"
+				href="/kb/public/about/">野生的喵喵’s BOOK</a>
+			<p>喵喵喵~~~~</p>
+			</div>
 		</div>
 
 
@@ -484,11 +489,11 @@
             <div id="collapseOner11" class="panel-collapse collapse in ">
                 <div class="panel-body">
 
-                    <div class="container">
+                    <div id="tpdiv"  class="container">
 
-                        <div ng-cloak ng-repeat="x in tplist">
+                        <div  ng-cloak ng-repeat="x in tplist">
                             <div class="row">
-                                <a ng-click="showtp(x)">
+                                <a  ng-href="{{preurl}}/public/index/bt/{{x.blog_type}}.html" >
                                     <img class="nopaddding img-responsive col-xs-2" style="width:20px; height:20px;" title="{{x.blog_type_name}}" ng-src="{{x.blog_type_url}}"> {{x.blog_type_name}}&nbsp;
                                     <span>({{x.view_nums}})</span>
                                 </a>
@@ -517,11 +522,11 @@
             <div id="collapseOner2" class="panel-collapse collapse in ">
                 <div class="panel-body">
 
-                    <div class="container">
+                    <div id="mdiv"  class="container">
 
                         <div ng-cloak ng-repeat="x in hlist">
                             <div class="row">
-                                <a ng-click="showh(x)"> 
+                                <a ng-href="{{preurl}}/public/index/h/{{x.month}}.html" > 
 					 {{x.month}}&nbsp;<span>({{x.view_nums}})</span>
 					 </a>
                                 <a ng-href="{{preurl}}/public/index/h/{{x.month}}.html" style="display: none;" style="" class="for spider">{{x.month}}</a>
@@ -549,10 +554,10 @@
             <div id="collapseOner3" class=" panel-collapse collapse in ">
                 <div class="panel-body ">
 
-                    <div class="container ">
+                    <div id="tgdiv" class="container ">
 
 
-       <a ng-cloak ng-repeat="x in tglist" ng-click="showyq(x)"> 
+       <a ng-cloak ng-repeat="x in tglist"  ng-href="{{preurl}}/public/index/yq/{{x.tags}}.html"> 
 					 {{x.tags}}&nbsp;,
 					 </a>
                         <a ng-cloak ng-repeat="x in tglist" ng-href="{{preurl}}/public/index/yq/{{x.tags}}.html" style="display: none;" style="" class="for spider">{{x.tags}}</a>
@@ -737,7 +742,7 @@
         <br>
         <span>Designed and theme by <a href="http://256kb.cn/">Kx</a> </span>
              
- &nbsp;<span><span class="pagevisit glyphicon glyphicon-eye-open" title="总访问量">333</span> &nbsp;<span class="uservisit glyphicon glyphicon-user" title="访客数">333</span> </span>
+ &nbsp;<span><span class="pagevisit glyphicon glyphicon-eye-open" title="总访问量">1</span> &nbsp;<span class="uservisit glyphicon glyphicon-user" title="访客数">1</span> </span>
 
     </div>
     </div>

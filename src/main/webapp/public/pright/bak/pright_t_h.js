@@ -85,7 +85,22 @@ var $scope = angular.element(ngSection).scope();
 
 							$scope.tplist = eval(json.datalist);
 
-						
+							var html="";
+							$.each($scope.tplist,function(index,item){
+								
+								html+='<div class="row"> ' 
+									+' <a href="'+preurl+'/public/index/bt/'+item.blog_type+'.html"> ' 
+								+' <img class="nopaddding img-responsive col-xs-2" style="width:20px; height:20px;" title="'+item.blog_type_name+'" src="'+item.blog_type_url+'"> '+item.blog_type_name+'&nbsp; '
+								+' <span>('+item.view_nums+')</span> '
+								 +'	 </a>'
+								 +'</div>';
+								
+								
+							});
+							
+							$("#tpdiv").html(html);
+							
+							
 
 							$scope.$apply();
 
@@ -124,7 +139,20 @@ var $scope = angular.element(ngSection).scope();
 
 							$scope.hlist = eval(json.datalist);
 
-						
+							var html="";
+							$.each($scope.hlist,function(index,item){
+								
+								html+='<div class="row"> '   
+									+' <a href="'+preurl+'/public/index/h/'+item.month+'.html"> ' 
+								 +'	'+item.month+'&nbsp;<span>('+item.view_nums+')</span> '
+								 +'	 </a> '
+								 +'</div>';
+								
+							});
+							
+							$("#mdiv").html(html);
+							
+							
 
 							$scope.$apply();
 
@@ -162,10 +190,21 @@ var $scope = angular.element(ngSection).scope();
 						if (code == 200) {
 
 							$scope.tglist = eval(json.datalist);
-
 						
 
 							$scope.$apply();
+							
+							var html="";
+							$.each($scope.tglist,function(index,item){
+								
+								html+='  <a href="'+preurl+'/public/index/tg/'+item.tags+'.html"> ' 
+								 +'	'+item.tags+'&nbsp;, '
+								 +'	 </a> ';
+							});
+							
+							$("#tgdiv").html(html);
+							
+							 
 
 						
 
@@ -217,7 +256,7 @@ var $scope = angular.element(ngSection).scope();
 								 +' </a> ';
 							});
 							
-							$("yqdiv").html(html);
+							$("#yqdiv").html(html);
 							
 							 
 							

@@ -36,7 +36,7 @@
 			<div class="container login_back" id="content">
 
 
-				<nav class="navbar navbar-default navbar-fixed-top  navbar-inverse" role="navigation">
+				<nav class="hide navbar navbar-default navbar-fixed-top  navbar-inverse" role="navigation">
 					<div class="navbar-header">
 						<button type="button" id="menuBtn" class="navbar-toggle" data-toggle="collapse" data-target="#menuItem">
 							<span class="sr-only"></span>

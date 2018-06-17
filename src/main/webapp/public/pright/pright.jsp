@@ -14,11 +14,11 @@
             <div id="collapseOner11" class="panel-collapse collapse in ">
                 <div class="panel-body">
 
-                    <div class="container">
+                    <div id="tpdiv"  class="container">
 
-                        <div ng-cloak ng-repeat="x in tplist">
+                        <div  ng-cloak ng-repeat="x in tplist">
                             <div class="row">
-                                <a ng-click="showtp(x)">
+                                <a  ng-href="{{preurl}}/public/index/bt/{{x.blog_type}}.html" >
                                     <img class="nopaddding img-responsive col-xs-2" style="width:20px; height:20px;" title="{{x.blog_type_name}}" ng-src="{{x.blog_type_url}}"> {{x.blog_type_name}}&nbsp;
                                     <span>({{x.view_nums}})</span>
                                 </a>
@@ -47,11 +47,11 @@
             <div id="collapseOner2" class="panel-collapse collapse in ">
                 <div class="panel-body">
 
-                    <div class="container">
+                    <div id="mdiv"  class="container">
 
                         <div ng-cloak ng-repeat="x in hlist">
                             <div class="row">
-                                <a ng-click="showh(x)"> 
+                                <a ng-href="{{preurl}}/public/index/h/{{x.month}}.html" > 
 					 {{x.month}}&nbsp;<span>({{x.view_nums}})</span>
 					 </a>
                                 <a ng-href="{{preurl}}/public/index/h/{{x.month}}.html" style="display: none;" style="" class="for spider">{{x.month}}</a>
@@ -79,10 +79,10 @@
             <div id="collapseOner3" class=" panel-collapse collapse in ">
                 <div class="panel-body ">
 
-                    <div class="container ">
+                    <div id="tgdiv" class="container ">
 
 
-       <a ng-cloak ng-repeat="x in tglist" ng-click="showyq(x)"> 
+       <a ng-cloak ng-repeat="x in tglist"  ng-href="{{preurl}}/public/index/yq/{{x.tags}}.html"> 
 					 {{x.tags}}&nbsp;,
 					 </a>
                         <a ng-cloak ng-repeat="x in tglist" ng-href="{{preurl}}/public/index/yq/{{x.tags}}.html" style="display: none;" style="" class="for spider">{{x.tags}}</a>

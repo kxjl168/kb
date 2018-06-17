@@ -194,7 +194,7 @@ function initQuery() {
 							$kfile.get("headimg").initFile(function(){
 								if(json.fileinfo)
 									{
-									finfo=JSON.parse(json.fileinfo);
+									var finfo =json.fileinfo;
 								$kfile.get("headimg").addFile(finfo.id,json.httppath+finfo.http_relative_path);
 									}
 							});

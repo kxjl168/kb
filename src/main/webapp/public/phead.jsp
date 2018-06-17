@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<div class="navbar-fixed-top ">
+<div id="ftop" class="navbar-fixed-top ">
 	<nav class="top3 navbar  navbar-kindex" role="navigation">
 
-		<div class="navbar-header">
+		<div class="navbar-header public">
 			<button type="button" id="menuBtn" class="navbar-toggle"
 				data-toggle="collapse" data-target="#menuItem">
 				<span class="sr-only"></span> <span
 					class="glyphicon glyphicon-tasks  "></span> <span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#" ng-cloak>KxのBook</a>
+			<a  class="pc navbar-brand  toptitle " href="#" ng-cloak>KxのBOOK</a>
+			<a id="toptitle" class="mobile navbar-brand  toptitle " href="#" ng-cloak>野生的喵喵's BOOK</a>
 
 
 
@@ -37,11 +38,15 @@
 
 
 
-		<div class="short-about">
+		<div id="mhead" class="short-about">
 
-			<img class="phead" src="${basePath}/public/index/head.jpg"> <a
-				href="${basePath}/public/about/">野生的喵喵</a>
-			<p></p>
+			<img class="phead" src="${httppath}${head.http_relative_path }"> 
+			
+			<div class="hgroup">
+			<a class="navbar-brand toptitle"
+				href="${basePath}/public/about/">野生的喵喵’s BOOK</a>
+			<p>${sign }</p>
+			</div>
 		</div>
 
 

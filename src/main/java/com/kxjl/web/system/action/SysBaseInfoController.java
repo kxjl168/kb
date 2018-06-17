@@ -51,8 +51,8 @@ import com.kxjl.web.system.model.SvrFileInfo;
 import com.kxjl.web.system.model.SysParameter;
 import com.kxjl.web.system.service.CommonService;
 import com.kxjl.web.system.service.DictInfoService;
+import com.kxjl.web.system.service.SysService;
 import com.kxjl.web.system.service.SystemParamService;
-
 
 /**
  * 系统公用基础相关
@@ -74,18 +74,22 @@ public class SysBaseInfoController extends BaseController {
 
 	@Autowired
 	private CommonService commonService;
-	
+
 	@Autowired
 	private SvrFileInfoDao fileInfoDao;
 
 	@Autowired
 	private VisitDataMapper visitDataMapper;
 
+	@Autowired
+	private SysService sysService;
+
 	// 日志记录对象
 	private Logger log = Logger.getLogger(SysBaseInfoController.class);
 
 	@RequestMapping(value = "/setSysInfo")
-	public void setSysInfo(HttpServletRequest request, HttpServletResponse response) {
+	public void setSysInfo(HttpServletRequest request,
+			HttpServletResponse response) {
 
 		JSONObject jsonIN;
 		JSONObject jsonOut = new JSONObject();
@@ -107,17 +111,14 @@ public class SysBaseInfoController extends BaseController {
 				dictInfoService.updateDictInfo(dsign);
 			else
 				dictInfoService.addDictInfo(dsign);
-			
-			
-			
-			
 
 			String imgs = request.getParameter("imgs");
 			JSONArray jimgs = new JSONArray(imgs);
-			String headimg=jimgs.optJSONObject(0).optString("val");
-			String headimgid=jimgs.optJSONObject(0).optString("id");
-			
-			DictInfo blog_head = dictInfoService.getDictInfoInfoByKey("blog_head");
+			String headimg = jimgs.optJSONObject(0).optString("val");
+			String headimgid = jimgs.optJSONObject(0).optString("id");
+
+			DictInfo blog_head = dictInfoService
+					.getDictInfoInfoByKey("blog_head");
 			if (blog_head == null)
 				blog_head = new DictInfo();
 
@@ -153,78 +154,28 @@ public class SysBaseInfoController extends BaseController {
 	}
 
 	@RequestMapping(value = "/getSysInfo")
-	public void getSysInfo(HttpServletRequest request, HttpServletResponse response) {
+	public void getSysInfo(HttpServletRequest request,
+			HttpServletResponse response) {
 
-		String localPath = ConfigReader.getInstance().getProperty("LOCAL_HTML_PATH",
+		String localPath = ConfigReader.getInstance().getProperty(
+				"LOCAL_HTML_PATH",
 				"F:\\kxjl\\code\\kb\\WebContent\\public/html/");
 
-		JSONObject jsonIN;
-		JSONObject jsonOut = new JSONObject();
-
-		String rst = "";
-		try {
-
-			Gson gs=new Gson();
-			DictInfo q = new DictInfo();
-			q.setDict_type("blog_head");
-			List<DictInfo> dhead = dictInfoService.getDictInfoPageList(q);
-			if (dhead != null && dhead.size() != 0&&dhead.get(0).getDict_name()!=null) {
-				
-				try {
-					SvrFileInfo info=new SvrFileInfo();
-					info.setId(Integer.parseInt( dhead.get(0).getDict_name()));
-					SvrFileInfo finfo=fileInfoDao.getFileInfo(info);
-					jsonOut.put("fileinfo",  gs.toJson(finfo));	
-				} catch (Exception e) {
-					jsonOut.put("fileinfo", "");
-				}
-			}
-			else
-				jsonOut.put("fileinfo", "");
-
-			q = new DictInfo();
-			q.setDict_type("blog_sign");
-			dhead = dictInfoService.getDictInfoPageList(q);
-			if (dhead != null && dhead.size() != 0) {
-				
-				
-				jsonOut.put("sign", dhead.get(0).getDict_name());
-			}
-			else
-				jsonOut.put("sign", "");
-
-			VisitData sum = visitDataMapper.selectSum();
-
-			
-			
-			jsonOut.put("visitData", gs.toJson(sum));
-			jsonOut.put("httppath", getImgHttpOutPath());
-
-			jsonOut.put("ResponseCode", "200");
-			jsonOut.put("ResponseMsg", "");
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-
-			try {
-				jsonOut.put("ResponseCode", "201");
-				jsonOut.put("ResponseMsg", "");
-
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}
-
-		}
-		rst = jsonOut.toString();
+		JSONObject jsonOut;
+		jsonOut = sysService.getSysInfoJSON();
+		String rst = jsonOut.toString();
+		
+		
 		JsonUtil.responseOutWithJson(response, rst);
 
 	}
 
 	@RequestMapping(value = "/removeStaticHtml")
-	public void removeStaticHtml(HttpServletRequest request, HttpServletResponse response) {
+	public void removeStaticHtml(HttpServletRequest request,
+			HttpServletResponse response) {
 
-		String localPath = ConfigReader.getInstance().getProperty("LOCAL_HTML_PATH",
+		String localPath = ConfigReader.getInstance().getProperty(
+				"LOCAL_HTML_PATH",
 				"F:\\kxjl\\code\\kb\\WebContent\\public/html/");
 
 		JSONObject jsonIN;
@@ -266,17 +217,23 @@ public class SysBaseInfoController extends BaseController {
 		String os = (String) pros.get("os.name");
 
 		String binname = "cmd.exe";
+		ProcessBuilder builder = new ProcessBuilder();
 		if (os.startsWith("Windows")) {// windows下调用系统命令
-			binname = "cmd.exe";
+			 builder.command("cmd.exe", "/c", comman);
+		
 		} else if (os.startsWith("Linux")) {// Linux下调用系统命令
-			binname = "/bin/sh";
+			  builder.command("sh", "-c", comman);
 		}
+		
+		
+		builder.directory(new File(System.getProperty("user.home")));
 
 		logger.info("Process :" + comman);
-		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", comman);
+	
 		builder.redirectErrorStream(true);
 		Process p = builder.start();
-		BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
+		BufferedReader r = new BufferedReader(new InputStreamReader(
+				p.getInputStream()));
 		String line;
 		while (true) {
 			line = r.readLine();
@@ -290,7 +247,8 @@ public class SysBaseInfoController extends BaseController {
 	}
 
 	@RequestMapping(value = "/getKdataList")
-	public void getKdataList(HttpServletRequest request, HttpServletResponse response) {
+	public void getKdataList(HttpServletRequest request,
+			HttpServletResponse response) {
 
 		String data = request.getParameter("data");
 		JSONObject jsonIN;
@@ -343,7 +301,8 @@ public class SysBaseInfoController extends BaseController {
 	 * @date 2018-1-6
 	 */
 	@RequestMapping(value = "/cleanKdata")
-	public void cleanKdata(HttpServletRequest request, HttpServletResponse response) {
+	public void cleanKdata(HttpServletRequest request,
+			HttpServletResponse response) {
 
 		String data = request.getParameter("data");
 		JSONObject jsonIN;
@@ -415,11 +374,13 @@ public class SysBaseInfoController extends BaseController {
 				String Token = js.optString("Token");
 				String userID = js.optString("userID");
 
-				Map<String, Object> validateRst = validateToken(Token, userID, "");
+				Map<String, Object> validateRst = validateToken(Token, userID,
+						"");
 
 				String rst_msg = (String) validateRst.get("ResponseMsg");
 
-				if (!String.valueOf(validateRst.get("ResponseCode")).equals("200")) {
+				if (!String.valueOf(validateRst.get("ResponseCode")).equals(
+						"200")) {
 					jsonOut.put("ResponseCode", "201");
 					jsonOut.put("ResponseMsg", rst_msg);
 
@@ -532,7 +493,8 @@ public class SysBaseInfoController extends BaseController {
 	 * @author zj
 	 */
 	@RequestMapping(value = "/getDictInfo_test")
-	public void getDictInfo_test(HttpServletRequest request, HttpServletResponse response) {
+	public void getDictInfo_test(HttpServletRequest request,
+			HttpServletResponse response) {
 
 		JSONObject jsonOut = new JSONObject();
 		JSONArray jsApps = new JSONArray();
@@ -573,14 +535,16 @@ public class SysBaseInfoController extends BaseController {
 	 * @author zj
 	 */
 	@RequestMapping(value = "/getDictInfo")
-	public void getDictInfo(HttpServletRequest request, HttpServletResponse response) {
+	public void getDictInfo(HttpServletRequest request,
+			HttpServletResponse response) {
 
 		JSONObject jsonOut = new JSONObject();
 		JSONArray jsApps = new JSONArray();
 		try {
 
 			// String params = handleNoAresRequest(request);
-			String params = AESEncrypt.deCrypt("", request.getParameter("data"), Constant.FIRST_AES_KEY);
+			String params = AESEncrypt.deCrypt("",
+					request.getParameter("data"), Constant.FIRST_AES_KEY);
 
 			logger.info("getDictInfo方法传入参数：" + params);
 
@@ -636,7 +600,8 @@ public class SysBaseInfoController extends BaseController {
 	 * 
 	 */
 	@RequestMapping(value = "/addSysParam")
-	public @ResponseBody int addSysParam(String name, String value, String desc) throws IOException {
+	public @ResponseBody
+	int addSysParam(String name, String value, String desc) throws IOException {
 		log.info("name:" + name + "value:" + value + "desc" + desc);
 
 		int result = 0;
@@ -662,7 +627,8 @@ public class SysBaseInfoController extends BaseController {
 	 * @param response
 	 */
 	@RequestMapping(value = "/init_updateSysParam")
-	public String init_updateSysParam(HttpServletRequest request, HttpServletResponse response, ModelMap map) {
+	public String init_updateSysParam(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
 
 		try {
 			request.setCharacterEncoding("UTF-8");
@@ -670,7 +636,8 @@ public class SysBaseInfoController extends BaseController {
 			String param_value = request.getParameter("param_value");
 			String param_desc = request.getParameter("param_desc");
 			param_name = new String(param_name.getBytes("ISO-8859-1"), "UTF-8");
-			param_value = new String(param_value.getBytes("ISO-8859-1"), "UTF-8");
+			param_value = new String(param_value.getBytes("ISO-8859-1"),
+					"UTF-8");
 			param_desc = new String(param_desc.getBytes("ISO-8859-1"), "UTF-8");
 			request.setAttribute("param_name", param_name);
 			request.setAttribute("param_value", param_value);
@@ -690,7 +657,8 @@ public class SysBaseInfoController extends BaseController {
 	 * @param response
 	 */
 	@RequestMapping(value = "/deleteSysParam")
-	public @ResponseBody int deleteSysParam(String name) throws IOException {
+	public @ResponseBody
+	int deleteSysParam(String name) throws IOException {
 		log.info("name:" + name);
 
 		int result = 0;
@@ -711,7 +679,9 @@ public class SysBaseInfoController extends BaseController {
 	 * @param response
 	 */
 	@RequestMapping(value = "/updateSysParam")
-	public @ResponseBody int updateSysParam(String name, String value, String desc, HttpServletResponse response) {
+	public @ResponseBody
+	int updateSysParam(String name, String value, String desc,
+			HttpServletResponse response) {
 		log.info("name:" + name + "value:" + value + "desc" + desc);
 
 		SysParameter sysParam = systemService.getOneSysParams(name);
@@ -730,7 +700,8 @@ public class SysBaseInfoController extends BaseController {
 	 * @param response
 	 */
 	@RequestMapping(value = "/updateSysParamValue")
-	public @ResponseBody int updateSysParam(String name, String value, HttpServletResponse response) {
+	public @ResponseBody
+	int updateSysParam(String name, String value, HttpServletResponse response) {
 		log.info("name:" + name + "value:" + value);
 
 		SysParameter sysParam = systemService.getOneSysParams(name);
@@ -751,7 +722,8 @@ public class SysBaseInfoController extends BaseController {
 	}
 
 	@RequestMapping(value = "/getWaterConfig")
-	public String getWaterConfig(Model map, HttpServletRequest request, HttpServletRequest response) {
+	public String getWaterConfig(Model map, HttpServletRequest request,
+			HttpServletRequest response) {
 		SysParameter param = systemService.getOneSysParams("WaterMark");
 		// log.info(list);
 
