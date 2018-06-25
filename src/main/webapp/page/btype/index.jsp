@@ -578,6 +578,7 @@
 			<script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
 
 			
+	<script type="text/javascript" src="../../js/plugin/jquery/jquery-ui.js"></script>
 
 
 			<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
@@ -592,8 +593,7 @@
 			<script type="text/javascript" src="../../js/plugin/jquery/noty.themes.bootstrap.js"></script>
 <script type="text/javascript" src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
-			<script type="text/javascript" src="../../js/plugin/jquery/jquery-ui.js"></script>
-
+		
 
 			    <script type="text/javascript"
 	src="../../js/plugin/jquery/jquery.validate.js"></script> 

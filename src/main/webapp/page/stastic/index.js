@@ -241,8 +241,8 @@ function init() {
 						var ndata=eval(json.n)||{};
 						
 
-var data= "昨日独立访问："+ ydata.userVisitNum||"0"+ " 页面访问："+ ydata.pageVisitNum||0 ;
-data+= " / 今日独立访问："+ ndata.userVisitNum||0+ " 页面访问："+ ndata.pageVisitNum||0 ;
+var data= "昨日独立访问："+ ydata.userVisitNum||"0"+ " 页面访问："+ ydata.pageVisitNum||"0" ;
+data+= " / 今日独立访问："+ ndata.userVisitNum||"0"+ " 页面访问："+ ndata.pageVisitNum||"0" ;
 
 $("#sdata").html(data);
 
@@ -397,6 +397,8 @@ $("#sdata").html(data);
 							{
 							$scope.detaillist[index].total_uv="<a href='#' onclick='showaction(\""+$scope.detaillist[index].userid+"\")'>"+$scope.detaillist[index].total_uv+"</a>";
 							}
+						else
+							$scope.detaillist[index].total_uv="<span>"+$scope.detaillist[index].total_uv+"</span>";
 					})
 					
 					//setchartdata(json.datalist);
