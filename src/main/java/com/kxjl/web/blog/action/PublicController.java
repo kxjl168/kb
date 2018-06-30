@@ -76,6 +76,31 @@ public class PublicController extends BaseController {
 
 		return view;
 	}
+	
+	@RequestMapping(value = "/")
+	public String index() {
+		ModelAndView view = getSysData();
+		view.setViewName("/public/index/");
+
+		 return "redirect:/public/index/";
+	}
+	
+	
+	@RequestMapping(value = "/public/search")
+	public String search() {
+		ModelAndView view = getSysData();
+		view.setViewName("/public/index/");
+
+		 return "/public/search/index";
+	}
+	@RequestMapping(value = "/public/cat")
+	public String cat() {
+		ModelAndView view = getSysData();
+		view.setViewName("/public/index/");
+
+		 return "/public/cat/index";
+	}
+
 
 	@RequestMapping(value = "/public/detail/")
 	public ModelAndView detail() {

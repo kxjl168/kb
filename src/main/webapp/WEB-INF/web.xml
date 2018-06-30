@@ -14,8 +14,8 @@
 	<!-- 配置为实际的zteimPhoneSafe.xml位置 -->
 	<context-param>
 		<param-name>CONFIG_FILE_PATH</param-name>
-		<param-value>\\VBOXSVR\share\git\kb\etc\kb.xml</param-value> 
-		<!-- <param-value>F:\kxjl\code\kb\etc\kb.xml</param-value>-->
+	<!-- 	<param-value>\\VBOXSVR\share\git\kb\etc\kb.xml</param-value>  -->
+		<param-value>F:\kxjl\code\kb\etc\kb.xml</param-value>
 		
 	</context-param>
 	
@@ -75,16 +75,22 @@
 	</error-page>
 	
 	
-		<!-- <servlet-mapping>    
+	
+	
+<servlet-mapping>    
     <servlet-name>default</servlet-name>    
     <url-pattern>*.js</url-pattern>    
     <url-pattern>*.css</url-pattern>    
-    <url-pattern>/assets/*"</url-pattern>    
-    <url-pattern>/images/*</url-pattern>    
-</servlet-mapping> -->
-	 
-	
-	<servlet>
+    
+    <url-pattern>/images/*</url-pattern>        
+     <url-pattern>/html/*</url-pattern>
+    <url-pattern>/js/*</url-pattern>
+    <url-pattern>/cool/*</url-pattern>
+    <url-pattern>/file/*</url-pattern>    
+</servlet-mapping> 
+
+
+<servlet>
 		<servlet-name>springmvc</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
@@ -98,11 +104,7 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
-
-	<!-- <servlet-mapping>
-		<servlet-name>springmvc</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>  -->
+<!-- 
  	<servlet-mapping>
 		<servlet-name>springmvc</servlet-name>
 		<url-pattern>*.do</url-pattern>
@@ -126,15 +128,15 @@
 	 <servlet-mapping>
 		<servlet-name>springmvc</servlet-name>
 		<url-pattern>/page/set/</url-pattern>
-	</servlet-mapping> 
+	</servlet-mapping>  -->
 	
 	 
 	
-	 <!-- <servlet-mapping>
+	 <servlet-mapping>
 		<servlet-name>springmvc</servlet-name>
-		<url-pattern>*.do</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping> 
-
+ <!--
 	 <servlet-mapping>
 		<servlet-name>springmvc</servlet-name>
 		<url-pattern>*.action</url-pattern>
@@ -208,6 +210,15 @@
     
     
     
+   <filter>
+    <filter-name>sitemesh</filter-name>
+    <filter-class>com.kxjl.web.system.action.base.WebSiteMeshFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>sitemesh</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
       
  
     

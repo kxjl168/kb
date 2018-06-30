@@ -21,7 +21,7 @@
 	
      <ConfigItem>
 		<ConfigName>excludedUrls</ConfigName>
-		<ConfigValue>.*/pown/url/.*,ie8.jsp,null.jsp,404.jsp,noaccess.jsp,.jpg,.png,.ico,.jpeg,.gif,kb/,kb,.*/public/.*,.*/blog.*/get.*, UploadCKFile.action,.html,UploadFile.action,login.jsp,exlogin.action,phonereg/,phonereg,.do,done.jsp,getVersionInfo.action</ConfigValue>
+		<ConfigValue>.js,.css,.*/pown/url/.*,ie8.jsp,null.jsp,404.jsp,noaccess.jsp,.jpg,.png,.ico,.jpeg,.gif,.*/public/.*,.*/blog.*/get.*, UploadCKFile.action,.html,UploadFile.action,login.jsp,exlogin.action,phonereg/,phonereg,.do,done.jsp,getVersionInfo.action</ConfigValue>
 		<ConfigDesc>不需要鉴权也可访问的url后缀		</ConfigDesc>
 	</ConfigItem> 
             
@@ -169,7 +169,7 @@
 		
 
 		<!-- <ConfigValue>F:\kxjl\code\kb\src\main\webapp\public\html\</ConfigValue> -->
-		<ConfigValue>
+		
 	<ConfigValue>F:\kxjl\code\kb\src\main\webapp\public\html\</ConfigValue>
 			<!-- <ConfigValue>H:\git\kb\src\main\webapp\public\html\</ConfigValue> -->
 
