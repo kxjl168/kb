@@ -1,1 +1,512 @@
-eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('3 1E=1d;7 1v(8,g,19){36(1E);8.1o("x-2O-1J",g);$(\'[x-37="H"]\').H();3 4v=8.H(\'2W\');$($(k.h).t(".H")[0]).1c("O").1c("P");6(J(19)!="16")$($(k.h).t(".H")[0]).1p(19);$($(k.h).t(".H")[0]).1s("z-E",3l);8.3Z();1E=4h(7(){8.1o("x-2O-1J","");8.H(\'21\')},32)};7 35(g,1V,1U){38({1J:\'确定执行操作吗？\',1T:g,19:\'3b\',3d:1g,3m:\'#3o\',3p:\'#3s\',3u:\'确定\',3K:\'取消\',3R:\'1i 1i-O\',41:\'1i 1i-4a\',4b:1g,4g:K,4j:K,4s:K,}).4t(7(26){6(26.4z){6(J(1V)=="7")1V()}6(26.4D){6(J(1U)=="7")1U()}})};7 O(g){3 8=$(\'<f l="1q j-A-12 Q ">\'+\'<q l="j-T-5 j-A-4"></q>\'+\'<q M="v"  l="j-T-1 j-A-2" 18="1f-17: 1M;"></q>\'+\'</f> \');3 R=$("h").t(".Q").1L;6(R!=0)8=$("#v");o{$("h").1K(8);8=$($(8).t("#v")[0])}1v($(8),g,"O")};7 g(g){O(g)};7 4m(g){3 8=$(\'<f l="1q j-A-12 Q ">\'+\'<q l="j-T-5 j-A-4"></q>\'+\'<q M="v"  l="j-T-1 j-A-2" 18="1f-17: 1M;"></q>\'+\'</f> \');3 R=$("h").t(".Q").1L;6(R!=0)8=$("#v");o{$("h").1K(8);8=$($(8).t("#v")[0])};1v($(8),g)};7 P(g){3 8=$(\'<f l="1q j-A-12 Q ">\'+\'<q l="j-T-5 j-A-4"></q>\'+\'<q M="v"  l="j-T-1 j-A-2" 18="1f-17: 1M;"></q>\'+\'</f> \');3 R=$("h").t(".Q").1L;6(R!=0)8=$("#v");o{$("h").1K(8);8=$($(8).t("#v")[0])};1v($(8),g,"P")};4n=7(e){3 W=$(e).1o("15");3 1q=$("#4x");6(W.n("14")>-1){$("#4R").4V("2W");$("#4W").4Y("2Z",7(){d.33(W,\'13\',"")});y K}o{y K}};7 2P(1x){3 $1I=$("#3a");3 $1H=$(".1G.3f-3g.3i");d.3k=7(){3 s=k.1l.s+k.h.s;6(!!1x.2M.1G||$(d).1m()<3q){6(s>=3r){$1I.1p("11")}o{$1I.1c("11")}6(s>=3t){$1H.1c("21").1p("11")}o{$1H.1p("21").1c("11")}}}}$(7(){3 1x={2M:7(){3 u=d.3y.3z;y{3A:u.n(\'3D\')>-1,3E:u.n(\'3F\')>-1,3J:u.n(\'27\')>-1,3L:u.n(\'3N\')>-1&&u.n(\'3P\')==-1,1G:!!u.1F(/27.*3T.*/),3U:!!u.1F(/\\(i[^;]+;( U;)? 40.+2o 42 X/),45:u.n(\'46\')>-1||u.n(\'47\')>-1,2s:u.n(\'2s\')>-1||u.n(\'2o\')>-1,2v:u.n(\'2v\')>-1,4c:u.n(\'4d\')==-1,4e:u.n(\'4f\')==-1}}()};2P(1x);3 14=2w();3 2C=13 4i();2J(14+"4k/4l.53",2N.4p(2C),7 4q(m){3 2X=m.4u;3 2Q=m.4w;6(2X==2T){6(m.2U){3 1B=m.2U;$(".4Q").1u(1B.4S);$(".4T").1u(1B.4U)}6(m.2b){3 2f=m.2b;$(".4X").1o("2g",m.51+2f.2Y)}6(m.2h)$(".30-31 p").1u(m.2h)}o{g(2Q)}},7 P(x){g("网络异常!")},K,"m")});(7(d){d.$w={s:7(S){6(J S==\'16\'){y d.1y||k.1l.s||k.h.s||0}o{6(J(d.1y)!=\'16\')d.1y=S;6(J(k.1l.s)!=\'16\')k.1l.s=S;6(J(k.h.s)!=\'16\')k.h.s=S}}}})(d);7 34(2n){3 E=d.1w.15.2r("/");3 1O=d.1w.15.2r("#");3 1z=d.1w.15.1A(E+1);6(1O>0)1z=d.1w.15.1A(E+1,1O-E-1);3 2y=13 3c("(^|&)"+2n+"=([^&]*)(&|$|#)","i");3 r=1z.1A(1).1F(2y);6(r!=1d)y 3e(r[2]);y 1d}7 2D(e){3 1t=e?e:d.3h;6(1t.2L){1t.2L()}o{1t.2D=1g}}7 3j(M,1C,1D){3 Z=$("#3n").S();3 G=\'%B-%C-%Y %10\';3 I=\'B-C-Y 10\';Z="28";6(Z=="3v"){G=\'%B-%C-%Y %10\';I=\'B-C-Y 10\'}o 6(Z=="28"){G=\'%B-%C-%Y\';I=\'B-C-Y\'}o 6(Z=="3w"){G=\'%B-%C\';I=\'B-C\'}o 6(Z=="3x"){G=\'%10:%29:%2a\';I=\'10:29:2a\'}3 1j={G:G,I:I,3B:M};6(1C!=1d)1j.3C=\'#F{$2c.$D(\\\'\'+1C+\'\\\')}\';6(1D!=1d)1j.3G=\'#F{$2c.$D(\\\'\'+1D+\'\\\')}\';3H(1j)}7 3I(){3 2d=13 2e();3 1h=13 2e(2d.3M());3 1N="-";3 3O=":";3 L=1h.3Q()+1;3 N=1h.3S();6(L>=1&&L<=9){L="0"+L}6(N>=0&&N<=9){N="0"+N}3 2j=1h.3V()+1N+L+1N+N;y 2j}3 3W=3X;7 2w(){3 14=3Y+"/";y 14}7 2J(W,1n,2k,2l,2m,1P){3 43=1n;3 1Q={x:1n};6(1P&&1P=="m")1Q=2N.44(1n);3 2p=W;6(2m)2q();$.1R({19:"48",W:2p,x:1Q,49:"m",O:7(x){1S();2t.2u("1R y: "+x);2k(x)},P:7(a,b,c){1S();2t.2u("1R P: "+a+b);2l(a)}})}7 2q(){3 1e=d.2x.k;3 V=$("<f M=\'V\' l=\'2z\'></f>");3 2A=$(1e).1m();3 2B=$(1e).1r();V.1s({\'1m\':2A,\'1r\':2B,\'1W\':"11",\'2E\':0,\'17\':0,"z-E":4o,"2F-2G":"#4r","2H":"0.2I","-1X-2H":"0.2I",\'1W\':"2K"});3 1Y=2T;3 1Z=4y;3 20=$("<f l=\\"4A-4B-g 2z \\"></f>").1u("<f l=\'4C\'><f 2g=\'1\'  1b=\'0\' 4E=\'\' 18=\'1f:4F 4G;\' l=\'4H\'></f></f><f 18=\'2G:#4I;1T-4J:4K;\'>正在处理，请稍候...</f>").1s({4L:"4M",2F:\'#4N\',1m:1Y,1r:1Z,17:($(k.h).4O(1g)-1Y)/2,2E:($(d).1r()-1Z)/2});20.1s({\'1W\':"2K","z-E":4P,"1b-22":"23","-1X-1b-22":"23","-2R-1b-22":"23","-1X-2S-24":"0 1a 2V 1k(0,0,0,0.5)","-2R-2S-24":"0 1a 2V 1k(0,0,0,0.5)","1T-24":"0 -1a 1a 1k(0,0,0,0.25)","1b-4Z":"1a 50 1k(0,0,0,0.25)"});V.2i(20);$(1e).t("h").52(0).2i(V)}7 1S(){$(d.2x.k).t("#V").39()}',62,314,'|||var|||if|function|target|||||window||div|msg|body||col|document|class|json|indexOf|else||span||scrollTop|find||message_new||data|return||xs|yyyy|MM||index||startDate|tooltip|dateFmt|typeof|false|month|id|strDate|success|error|toptooltip|size|val|sm||bgDiv|url||dd|datetype|HH|fixed||new|http|href|undefined|left|style|type|1px|border|removeClass|null|berthDocument|margin|true|date|btn|param|rgba|documentElement|width|sendData|attr|addClass|row|height|css|evt|html|showPopover|location|browser|pageYOffset|searchpath|substr|vdata|min|max|tipTimeout|match|mobile|header|overlay|title|prepend|length|20px|seperator1|indexj|datatype|sdata|ajax|ajaxLoadEnd|text|cancelcallback|donecallback|position|moz|maskWidth|maskHeight|loadingDiv|hide|radius|5px|shadow||rst|AppleWebKit|DAY|mm|ss|fileinfo|dp|curDate|Date|finfo|src|sign|append|currentdate|onsuccess|onfail|showProgress|name|Mac|http_url|ajaxLoading|lastIndexOf|iPhone|console|log|iPad|getImUrl|parent|reg|ie|bdWidth|bdHeight|obj|cancelBubble|top|background|color|opacity|85|SZUMWS|absolute|stopPropagation|versions|JSON|original|loadMobile|message|webkit|box|200|visitData|2px|show|code|http_relative_path|click|short|about|2000|open|GetQueryString|cconfirm|clearTimeout|toggle|swal|remove|ftop|warning|RegExp|showCancelButton|decodeURI|navbar|brand|event|toptitle|setTimeFormat|onscroll|1100|confirmButtonColor|dateType|3085d6|cancelButtonColor|800|69|d33|160|confirmButtonText|HOUR|MONTH|TIME|navigator|userAgent|trident|el|minDate|Trident|presto|Presto|maxDate|WdatePicker|getNowFormatDate|webKit|cancelButtonText|gecko|getTime|Gecko|seperator2|KHTML|getMonth|confirmButtonClass|getDate|Mobile|ios|getFullYear|preurl|siteurl|basePath|focus|CPU|cancelButtonClass|OS|ecStr|parse|android|Android|Linux|POST|dataType|danger|buttonsStyling|webApp|Safari|weixin|MicroMessenger|allowOutsideClick|setTimeout|Object|allowEscapeKey|sysBaseInfo|getSysInfo|info|gourl|100000|stringify|succsess|fff|allowEnterKey|then|ResponseCode|tp|ResponseMsg|rpdiv|90|value|datagrid|mask|loadimgdiv|dismiss|alt|10px|80px|loadimg|ddd|align|center|display|block|333|outerWidth|999|pagevisit|myModal_outurl|pageVisitNum|uservisit|userVisitNum|modal|btnconfirm_outurl|phead|one|bottom|solid|httppath|eq|action'.split('|'),0,{}))
+var tipTimeout = null;
+function showPopover(target, msg, type) {
+
+	clearTimeout(tipTimeout);
+
+	target.attr("data-original-title", msg);
+	$('[data-toggle="tooltip"]').tooltip();
+	var tp = target.tooltip('show');
+
+	$($(document.body).find(".tooltip")[0]).removeClass("success").removeClass(
+			"error");
+	if (typeof (type) != "undefined")
+		$($(document.body).find(".tooltip")[0]).addClass(type);
+
+	$($(document.body).find(".tooltip")[0]).css("z-index", 1100);
+
+	target.focus();
+
+	// 2秒后消失提示框
+	tipTimeout = setTimeout(function() {
+		 target.attr("data-original-title", "");
+		 target.tooltip('hide');
+	}, 2000);
+};
+
+function cconfirm(msg, donecallback, cancelcallback) {
+	swal({
+		title : '确定执行操作吗？',
+		text : msg,// '你将无法恢复它！',
+		type : 'warning',
+		showCancelButton : true,
+		confirmButtonColor : '#3085d6',
+		cancelButtonColor : '#d33',
+		confirmButtonText : '确定',
+		cancelButtonText : '取消',
+		confirmButtonClass : 'btn btn-success',
+		cancelButtonClass : 'btn btn-danger',
+		buttonsStyling : true,
+		allowOutsideClick : false,// 如果设置为false，用户无法通过点击弹窗外部关闭弹窗。
+		allowEscapeKey : false, // 如果设置为false，用户无法通过按下Escape键关闭弹窗。
+		allowEnterKey : false,
+	}).then(function(rst) {
+
+		if (rst.value) {
+			if (typeof (donecallback) == "function")
+				donecallback();
+		}
+
+		if (rst.dismiss) {
+			if (typeof (cancelcallback) == "function")
+				cancelcallback();
+		}
+
+		/*
+		 * swal( '已删除！', '你的文件已经被删除。'+rst.dismiss, 'success' );
+		 */
+	})
+};
+
+function success(msg) {
+	/*
+	 * swal({ title: "操作成功", text: msg, timer: 500, type:"success",
+	 * showConfirmButton: false });
+	 * 
+	 * return;
+	 */
+
+	// swal("干得漂亮！", "你点击了按钮！","success")
+	var target = $('<div class="row col-xs-12 toptooltip ">'
+			+ '<span class="col-sm-5 col-xs-4"></span>'
+			+ '<span id="message_new"  class="col-sm-1 col-xs-2" style="margin-left: 20px;"></span>'
+			+ '</div> ');
+	var size = $("body").find(".toptooltip").length;
+	if (size != 0)
+		target = $("#message_new");
+	else {
+		$("body").prepend(target);
+		target = $($(target).find("#message_new")[0]);
+	}
+
+	showPopover($(target), msg, "success");
+};
+
+function msg(msg) {
+	/*
+	 * swal({ title : "提示信息", text : msg, // timer: 1000, type : "info",
+	 * showConfirmButton : true });
+	 * 
+	 * return;
+	 */
+
+	success(msg);
+};
+
+function info(msg) {
+
+	/*
+	 * swal({ title : "提示信息", text : msg, // timer: 1000, type : "info",
+	 * showConfirmButton : true });
+	 * 
+	 * return;
+	 */
+
+	var target = $('<div class="row col-xs-12 toptooltip ">'
+			+ '<span class="col-sm-5 col-xs-4"></span>'
+			+ '<span id="message_new"  class="col-sm-1 col-xs-2" style="margin-left: 20px;"></span>'
+			+ '</div> ');
+	var size = $("body").find(".toptooltip").length;
+	if (size != 0)
+		target = $("#message_new");
+	else {
+		$("body").prepend(target);
+		target = $($(target).find("#message_new")[0]);
+	}
+	;
+
+	showPopover($(target), msg);
+};
+
+function error(msg) {
+	/*
+	 * swal({ title: "操作异常", text: msg, timer: 1000, type:"error",
+	 * showConfirmButton: false });
+	 * 
+	 * return;
+	 */
+
+	var target = $('<div class="row col-xs-12 toptooltip ">'
+			+ '<span class="col-sm-5 col-xs-4"></span>'
+			+ '<span id="message_new"  class="col-sm-1 col-xs-2" style="margin-left: 20px;"></span>'
+			+ '</div> ');
+	var size = $("body").find(".toptooltip").length;
+	if (size != 0)
+		target = $("#message_new");
+	else {
+		$("body").prepend(target);
+		target = $($(target).find("#message_new")[0]);
+	}
+	;
+
+	showPopover($(target), msg, "error");
+};
+
+gourl = function(e) {
+
+	var url = $(e).attr("href");
+
+	var row = $("#rpdiv");
+
+	if (url.indexOf("http") > -1) {
+		$("#myModal_outurl").modal("show");
+		$("#btnconfirm_outurl").one("click", function() {
+
+			window.open(url, 'new', "");
+		});
+		return false;
+	} else {
+
+		return false;
+
+	}
+	;
+
+};
+
+function loadMobile(browser){
+	
+	
+	
+    var $overlay = $("#ftop");
+    var $header = $(".mobile.navbar-brand.toptitle");
+    
+ 
+    window.onscroll = function(){
+        var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
+        if(!!browser.versions.mobile || $(window).width() < 800){
+ 	       
+	    
+        if(scrollTop >= 69){
+            $overlay.addClass("fixed");
+        }else{
+            $overlay.removeClass("fixed");
+        }
+        if(scrollTop >= 160){
+            $header.removeClass("hide").addClass("fixed");
+        }else{
+            $header.addClass("hide").removeClass("fixed");
+        }
+        } 
+    };
+}
+
+$(function() {
+
+	 var browser = {
+		        versions: function() {
+		        var u = window.navigator.userAgent;
+		        return {
+		            trident: u.indexOf('Trident') > -1, //IE内核
+		            presto: u.indexOf('Presto') > -1, //opera内核
+		            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+		            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+		            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+		            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+		            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+		            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+		            iPad: u.indexOf('iPad') > -1, //是否为iPad
+		            webApp: u.indexOf('Safari') == -1 ,//是否为web应用程序，没有头部与底部
+		            weixin: u.indexOf('MicroMessenger') == -1 //是否为微信浏览器
+		            };
+		        }()
+		    };
+	 
+	 loadMobile(browser);
+
+	
+	var http = getImUrl();
+
+	var obj = new Object();
+
+	SZUMWS(http + "sysBaseInfo/getSysInfo.action", JSON.stringify(obj),
+			function succsess(json) {
+
+				var code = json.ResponseCode;
+				var message = json.ResponseMsg;
+
+				if (code == 200) {
+
+					if (json.visitData) {
+						var vdata =json.visitData;
+
+						$(".pagevisit").html(vdata.pageVisitNum);
+						$(".uservisit").html(vdata.userVisitNum);
+					}
+
+				
+
+					if (json.fileinfo) {
+						var finfo =json.fileinfo;
+						$(".phead").attr("src",
+								json.httppath + finfo.http_relative_path);
+						
+					}
+					if(json.sign)
+						$(".short-about p").html(json.sign);
+
+				} else {
+					msg(message);
+				}
+
+			}, function error(data) {
+				//("网络异常!");
+
+			}, false, "json"
+
+	);
+});
+
+
+/** kwindow */
+(function(window) {
+
+	window.$w = {
+		scrollTop : function(val) {
+			if (typeof val == 'undefined') {
+				return window.pageYOffset || document.documentElement.scrollTop
+						|| document.body.scrollTop || 0;
+			} else {
+				if (typeof (window.pageYOffset) != 'undefined')
+					window.pageYOffset = val;
+				if (typeof (document.documentElement.scrollTop) != 'undefined')
+					document.documentElement.scrollTop = val;
+				if (typeof (document.body.scrollTop) != 'undefined')
+					document.body.scrollTop = val;
+
+			}
+		}
+
+	};
+
+})(window);
+
+function GetQueryString(name) {
+
+	var index = window.location.href.lastIndexOf("/");
+	var indexj = window.location.href.lastIndexOf("#");
+
+	// 最后一个/开始 截取#前面的，兼容history.js html4 url
+	var searchpath = window.location.href.substr(index + 1);
+	if (indexj > 0)
+		searchpath = window.location.href.substr(index + 1, indexj - index - 1);
+
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$|#)", "i");
+
+	var r = searchpath.substr(1).match(reg);
+
+	if (r != null)
+
+		return decodeURI(r[2]);
+
+	return null;
+}
+
+function cancelBubble(e) {
+	var evt = e ? e : window.event;
+	if (evt.stopPropagation) { // W3C
+		evt.stopPropagation();
+	} else { // IE
+		evt.cancelBubble = true;
+	}
+}
+
+function setTimeFormat(id, min, max) {
+	var datetype = $("#dateType").val();
+
+	var startDate = '%yyyy-%MM-%dd %HH';
+	var dateFmt = 'yyyy-MM-dd HH';
+
+	// startDate = '%HH:%mm';
+	// dateFmt = 'HH:mm';
+
+	datetype = "DAY";
+
+	if (datetype == "HOUR") {
+		startDate = '%yyyy-%MM-%dd %HH';
+		dateFmt = 'yyyy-MM-dd HH';
+	} else if (datetype == "DAY") {
+		startDate = '%yyyy-%MM-%dd';
+		dateFmt = 'yyyy-MM-dd';
+	} else if (datetype == "MONTH") {
+		startDate = '%yyyy-%MM';
+		dateFmt = 'yyyy-MM';
+	} else if (datetype == "TIME") {
+		startDate = '%HH:%mm:%ss';
+		dateFmt = 'HH:mm:ss';
+	}
+
+	var param = {
+		startDate : startDate,
+		dateFmt : dateFmt,
+		el : id
+	};
+	if (min != null)
+		param.minDate = '#F{$dp.$D(\'' + min + '\')}';
+	if (max != null)
+		param.maxDate = '#F{$dp.$D(\'' + max + '\')}';
+
+	WdatePicker(param);
+
+}
+
+function getNowFormatDate() {
+	var curDate = new Date();
+
+	// var date=new Date( curDate.getTime() + 24*60*60*1000);
+	var date = new Date(curDate.getTime());
+	var seperator1 = "-";
+	var seperator2 = ":";
+	var month = date.getMonth() + 1;
+	var strDate = date.getDate();
+	if (month >= 1 && month <= 9) {
+		month = "0" + month;
+	}
+	if (strDate >= 0 && strDate <= 9) {
+		strDate = "0" + strDate;
+	}
+	var currentdate = date.getFullYear() + seperator1 + month + seperator1
+			+ strDate;
+	// + " " + date.getHours() + seperator2 + date.getMinutes()
+	// + seperator2 + date.getSeconds();
+	return currentdate;
+}
+
+var preurl = siteurl;// "https://www.256kb.cn";
+
+function getImUrl() {
+	var http = basePath + "/"; // "${pageContext.request.contextPath}";
+
+	/*
+	 * if (window.location.href.indexOf('58.67.201.8') > 0) http =
+	 * "http://58.67.201.8:8083/gserver/"; else
+	 * if(window.location.href.indexOf('127.0.0.1') > 0)
+	 * http='http://127.0.0.1:8080/kb/';
+	 */
+	return http;
+}
+
+/**
+ * http 非加密测试 同步
+ * 
+ * @param url
+ * @param sendData
+ * @param onsuccess
+ * @param onfail
+ */
+function SZUMWS(url, sendData, onsuccess, onfail, showProgress, datatype) {
+
+	// console.log("sendData: " + sendData);
+	var ecStr = sendData; // window.HMClient.AESEncrypt(sendData);
+	// console.log("ecCrypt result: " + ecStr);
+	// console.log("url: " + url);
+
+	var sdata = {
+		data : sendData
+	};
+
+	if (datatype && datatype == "json")
+		sdata = JSON.parse(sendData);
+
+	var http_url = url; // url.substring(0, url.lastIndexOf('.')) +
+	// '_test.action';
+	if (showProgress)
+		ajaxLoading();
+	$.ajax({
+		type : "POST",
+		url : http_url,
+		// 数据需要Aes加密
+		data : sdata,
+		dataType : "json",
+		success : function(data) {
+
+			ajaxLoadEnd();
+
+			console.log("ajax return: " + data);
+			// 数据需要Aes解密
+			// var decryData =data.ResponseMsg;//
+			// window.HMClient.AESDeCrypt(data.ResponseMsg);
+			// var json = JSON.parse(decryData);
+			onsuccess(data);
+
+		},
+		error : function(a, b, c) {
+
+			ajaxLoadEnd();
+			console.log("ajax error: " + a + b);
+			onfail(a);
+			// popupAlert("网络异常!");
+
+		}
+	});
+
+}
+
+function ajaxLoading() {
+	var berthDocument = window.parent.document;
+	// 创建背景层
+	var bgDiv = $("<div id='bgDiv' class='ie'></div>");
+	// 获取当前文档宽度作为背景层宽度
+	var bdWidth = $(berthDocument).width();
+	// 获取当前文档高度作为背景层高度
+	var bdHeight = $(berthDocument).height();
+	// 设置背景层样式
+	bgDiv.css({
+		'width' : bdWidth,
+		'height' : bdHeight,
+		'position' : "fixed",
+		'top' : 0,
+		'left' : 0,
+		"z-index" : 100000,
+		"background-color" : "#fff",
+		"opacity" : "0.85",
+		"-moz-opacity" : "0.85",
+
+		'position' : "absolute"
+
+	});
+
+	var maskWidth = 200;
+	var maskHeight = 90;
+
+	// var loadingDiv = $('<div id="loadingDiv" style="border:1px;"><img
+	// src="'+basePath+'/images/loading.gif" /><br/><a
+	// style="font-size:14px;">正在加载数据，请稍候...</a></div>');
+
+	// var url=getImUrl()+"szhmpt/android/images/loading.gif";
+
+	var loadingDiv = $("<div class=\"datagrid-mask-msg ie \"></div>")
+			.html(
+					"<div class='loadimgdiv'><div src='1'  border='0' alt='' style='margin:10px 80px;' class='loadimg'></div></div><div style='color:#ddd;text-align:center;'>正在处理，请稍候...</div>")
+			.css({
+				display : "block",
+
+				background : '#333',
+				width : maskWidth,
+				height : maskHeight,
+				left : ($(document.body).outerWidth(true) - maskWidth) / 2,
+				top : ($(window).height() - maskHeight) / 2
+			});
+
+	loadingDiv.css({
+
+		'position' : "absolute",
+
+		"z-index" : 999,
+		"border-radius" : "5px",
+		"-moz-border-radius" : "5px",
+		"-webkit-border-radius" : "5px",
+		"-moz-box-shadow" : "0 1px 2px rgba(0,0,0,0.5)",
+		"-webkit-box-shadow" : "0 1px 2px rgba(0,0,0,0.5)",
+		"text-shadow" : "0 -1px 1px rgba(0,0,0,0.25)",
+		"border-bottom" : "1px solid rgba(0,0,0,0.25)"
+
+	});
+	// 将确认框添加到背景层中
+	bgDiv.append(loadingDiv);
+	// 将背景层添加 到页面中
+	$(berthDocument).find("body").eq(0).append(bgDiv);
+}
+
+function ajaxLoadEnd() {
+	$(window.parent.document).find("#bgDiv").remove();
+}

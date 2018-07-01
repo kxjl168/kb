@@ -133,8 +133,13 @@ public class PageFilter implements Filter {
 
 					String imei = curl.substring(xindex + 1, dotindex);
 
-					String nurl = "/public/index?" + pretag + "=" + imei;
+					//String nurl = cpath+"/public/index/?" + pretag + "=" + imei;
+					String nurl = cpath+"/public/index/?" + pretag + "=" + imei;
 					RequestDispatcher dispathcer = request.getRequestDispatcher(nurl);
+					
+					
+					//request.removeAttribute("com.opensymphony.sitemesh.APPLIED_ONCE"); 
+					
 					dispathcer.forward(request, response);
 
 					// wrapper.sendRedirect(nurl);
@@ -335,8 +340,8 @@ public class PageFilter implements Filter {
 		if (StaticFilter(request, response2, chain))
 			return;
 		
-		 if (WeiStaticFilter(request, response2, chain))
-		 return;
+		// if (WeiStaticFilter(request, response2, chain))
+		// return;
 
 
 		// 配置文件中读取

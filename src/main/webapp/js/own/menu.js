@@ -1,1 +1,391 @@
-eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('k A(m){1h.F.o=v()+m};k 1i(){$.P({m:B+"/f/Q.G",R:"S",T:"U",V:W,X:k(d){8(Y!=d&&d.t!=0){e 7=Z(d);e H="<l>";e 10="<12 13=\\"1j-1k: 1l;\\">";$.1m(7,k(i,f){8(f.r!=\'系统管理\'){H+="<9  w=\'"+f.w+"\' "+" I=\'"+f.I+"\' "+" c = \'"+f.c+"\' "+">"+"<14 15=\'\' 16=\'"+17+"/18/1n/1o 1p.19\' />"+f.r+"</9>"}u{10+="<1a"+" I=\'"+f.I+"\' "+" w=\'"+f.w+"\' c = \'"+f.c+"\'><14   15=\'\' 16=\'"+17+"/18/1q.19\' /></1a></12> "}});H+="</l>";$("#1b").6(H+10);1r();$("#1b l 9").1s(0).1t()}}})};k 1u(l,p){e B=v();$.P({m:B+"f/Q.G",R:"S",T:"U",V:W,X:k(d){8(Y!=d&&d.t!=0){7=Z(d.7);e J=$(l);e 6="";K(e i=0;i<7.t;i++){8(!7[i].L){6+="<9 {{g}} h=\\"s\\">"+"<a 13=\\"1v:1w;\\" o=\\""+1x+"/"+7[i].c+"\\"   >"+7[i].r+"</a>"+"<a o=\\"#\\" ";8(7[i].c){6+=" x=\\"y:A(\'"+7[i].c+"\')\\" "}6+=" h=\\"s-M\\""+" d-M=\\"s\\" "+"  >"+7[i].r+" {{z}}</a>";e n=0;K(e j=0;j<7.t;j++){8(7[i].w==7[j].L){8(n==0){6+="<l h=\\"s-f\\"> ";n++}6=6.q("{{z}}"," <b h=\\"1c\\"></b>");8((p==7[j].c)||(p+"/"==7[j].c)){6+="<9 h=\\"g\\"><a o=\\"#\\">"+7[j].r+"</a></9>";6=6.q("{{g}}","h=\\"g\\" ")}u{6+="<9 ><a o=\\"#\\"  "+" x=\\"y:A(\'"+7[j].c+"\')\\"  "+">"+7[j].r+"</a></9>"}}}6=6.q("{{z}}","");8((p==7[i].c)||(p+"/"==7[i].c))6=6.q("{{g}}","h=\\"g\\" ");u 6=6.q("{{g}}","");8(n>0)6+="</l>";6+="</9>"}u{}}8(d.1d!="1e")6+="<9 ><a o=\\"#\\"   x=\\"y:N()\\">登出 </a></9>";J.6(6)}},O:k(O){11.F=v()+"1f.1g"}})};k 1y(l,p){e 7=[{C:1,m:\'D/1z\',E:\'公司账号管理\'},{C:2,m:\'D/1A\',E:\'子账号管理\'},{C:3,m:\'D/1B\',E:\'路由器管理\'},{C:4,m:\'D/1C\',E:\'流量管理\'},{C:5,m:\'D/1D\',E:\'设置\'},];e B=v();$.P({m:B+"f/Q.G",R:"S",T:"U",V:W,X:k(d){8(Y!=d&&d.t!=0){7=Z(d.7);e J=$(l);e 6="";K(e i=0;i<7.t;i++){8(!7[i].L){6+="<9 {{g}} h=\\"s\\"><a o=\\"#\\" ";8(7[i].c){6+=" x=\\"y:A(\'"+7[i].c+"\')\\" "}6+=" h=\\"s-M\\""+" d-M=\\"s\\" "+"  >"+7[i].r+" {{z}}</a>";e n=0;K(e j=0;j<7.t;j++){8(7[i].w==7[j].L){8(n==0){6+="<l h=\\"s-f\\"> ";n++}6=6.q("{{z}}"," <b h=\\"1c\\"></b>");8((p==7[j].c)||(p+"/"==7[j].c)){6+="<9 h=\\"g\\"><a o=\\"#\\">"+7[j].r+"</a></9>";6=6.q("{{g}}","h=\\"g\\" ")}u{6+="<9 ><a o=\\"#\\"  "+" x=\\"y:A(\'"+7[j].c+"\')\\"  "+">"+7[j].r+"</a></9>"}}}6=6.q("{{z}}","");8((p==7[i].c)||(p+"/"==7[i].c))6=6.q("{{g}}","h=\\"g\\" ");u 6=6.q("{{g}}","");8(n>0)6+="</l>";6+="</9>"}u{}}8(d.1d!="1e")6+="<9 ><a o=\\"#\\"   x=\\"y:N()\\">登出 </a></9>";J.6(6)}},O:k(O){11.F=v()+"1f.1g"}})};k N(){8(1E("确定要退出吗？")){11.F=v()+"N.G"}};',62,103,'||||||html|menus|if|li|||menuUrl|data|var|menu|active|class|||function|ul|url||href|curmenu|replace|menuName|dropdown|length|else|getImUrl|menuId|onclick|javascript|ico|loadmenu|basePath|id|page|menutext|location|do|tableStr|menuICO|ulDom|for|menuParentid|toggle|logout|error|ajax|getRootMenus|type|post|dataType|json|async|false|success|null|eval|sysdiv|document|span|style|img|alt|src|webctx|images|png|label|nav|caret|utype|normal_user|login|jsp|window|getRootMenu|padding|top|0px|each|icon|Top|bar_triangle|setting_2|addMenuClickEvent|eq|click|initmenu_p|display|none|preurl|initmenu|company|pccount|device|translog|set|confirm'.split('|'),0,{}))
+function loadmenu(url) {
+
+	window.location.href = getImUrl() + url;
+};
+
+function getRootMenu() {
+
+	// $("#nav").html("");
+
+	$.ajax({
+		url : basePath + "/menu/getRootMenus.do",
+		type : "post",
+		dataType : "json",
+		async : false,
+		success : function(data) {
+			if (null != data && data.length != 0) {
+				var menus = eval(data);
+				// 初始化菜单单元格
+				var tableStr = "<ul>";
+
+				var sysdiv = "<span style=\"padding-top: 0px;\">";
+				$.each(menus, function(i, menu) {
+					// tableStr += "<td menuId='" + menu.menuId + "' menuUrl =
+					// '"
+					// + menu.menuUrl
+					// + "'><a style='cursor: pointer;'><b/><span>"
+					// + menu.menuName + "</span></td>";
+
+					if (menu.menuName != '系统管理') {
+						tableStr += "<li  menuId='" + menu.menuId + "' "
+								+ " menuICO='" + menu.menuICO + "' "
+								+ " menuUrl = '" + menu.menuUrl + "' " + ">"
+								+ "<img alt='' src='" + webctx
+								+ "/images/icon/Top bar_triangle.png' />"
+								+ menu.menuName + "</li>";
+					} else {
+						sysdiv += "<label" + " menuICO='" + menu.menuICO + "' "
+								+ " menuId='" + menu.menuId + "' menuUrl = '"
+								+ menu.menuUrl + "'><img   alt='' src='"
+								+ webctx
+								+ "/images/setting_2.png' /></label></span> ";
+
+					}
+
+				});
+				tableStr += "</ul>";
+				// 把菜单追加到frameTopMenu div中
+				$("#nav").html(tableStr + sysdiv);
+
+				// $("#nav ul
+				// li").eq(0).addClass("navliSelect").find("img").get(0).src=
+				// webctx + "/images/icon/Top bar_triangle02.png";
+
+				addMenuClickEvent();
+
+				$("#nav ul li").eq(0).click();
+			}
+		}
+	});
+
+};
+
+
+function initmenu_p(ul,curmenu){
+	
+
+	var basePath = getImUrl();
+
+	$
+			.ajax({
+				url : basePath + "menu/getRootMenus.do",
+				type : "post",
+				dataType : "json",
+				async : false,
+				success : function(data) {
+					if (null != data && data.length != 0) {
+						menus = eval(data.menus);
+
+						/*
+						 * if(data!=null&&data.toIndex=="true") {
+						 * window.location.href = basePath + "page/pccountM";
+						 * return ; }
+						 */
+
+						var ulDom = $(ul);
+
+						var html = "";
+						for ( var i = 0; i < menus.length; i++) {
+
+							if (!menus[i].menuParentid) {
+
+
+								html += "<li {{active}} class=\"dropdown\">" +
+										"<a style=\"display:none;\" href=\""+preurl+"/"+menus[i].menuUrl+"\"   >"+menus[i].menuName+"</a>" +
+										"<a href=\"#\" " ;
+								
+								if(menus[i].menuUrl){
+									html +=" onclick=\"javascript:loadmenu('"
+										+ menus[i].menuUrl + "')\" ";
+								}
+										
+								
+								
+								html +=" class=\"dropdown-toggle\""
+										+ " data-toggle=\"dropdown\" "
+										+ "  >"
+										+ menus[i].menuName + " {{ico}}</a>";
+
+								var n=0;
+								
+								for ( var j = 0; j < menus.length; j++) {
+									if (menus[i].menuId == menus[j].menuParentid) {
+										
+										if(n==0)
+											{
+											html += "<ul class=\"dropdown-menu\"> ";
+											n++;
+											}
+										
+										html=html.replace("{{ico}}"," <b class=\"caret\"></b>");
+										
+									
+										
+										if( (curmenu == menus[j].menuUrl )||(curmenu+"/" == menus[j].menuUrl))
+											{
+											html += "<li class=\"active\"><a href=\"#\">"
+												+ menus[j].menuName + "</a></li>";
+											html=html.replace("{{active}}","class=\"active\" ");
+											}
+											
+										else
+											{
+											html += "<li ><a href=\"#\"  "
+												+ " onclick=\"javascript:loadmenu('"
+												+ menus[j].menuUrl + "')\"  " + ">"
+												+ menus[j].menuName + "</a></li>";
+											
+											
+											}
+										
+										
+									
+										
+									}
+
+								}
+								
+								html=html.replace("{{ico}}","");
+								
+								if( (curmenu == menus[i].menuUrl )||(curmenu+"/" == menus[i].menuUrl))
+									html=html.replace("{{active}}","class=\"active\" ");
+								else
+								html=html.replace("{{active}}","");
+								
+								if(n>0)
+								html += "</ul>";
+
+								html += "</li>";
+
+							} else {
+								
+								/*if (curmenu == menus[i].menuUrl)
+									html += "<li class=\"active\"><a href=\"#\">"
+											+ menus[i].menuName + "</a></li>";
+								else
+									html += "<li ><a href=\"#\"  "
+											+ " onclick=\"javascript:loadmenu('"
+											+ menus[i].menuUrl + "')\"  " + ">"
+											+ menus[i].menuName + "</a></li>";*/
+								
+
+							}
+
+						}
+
+						if(data.utype!="normal_user")
+						html += "<li ><a href=\"#\"   onclick=\"javascript:logout()\">登出 </a></li>";
+
+						ulDom.html(html);
+					}
+				},
+				error : function(error) {
+					document.location = getImUrl() + "login.jsp";
+				}
+			});
+};
+
+
+function getSysInfo(){
+	$.ajax({
+		url : basePath + "/sys/getSysinfo.do",
+		type : "post",
+		dataType : "json",
+		async : false,
+		success : function(data) {
+			if (null != data && data.length != 0) {
+				var menus = eval(data);
+				// 初始化菜单单元格
+				var tableStr = "<ul>";
+
+				var sysdiv = "<span style=\"padding-top: 0px;\">";
+				$.each(menus, function(i, menu) {
+					// tableStr += "<td menuId='" + menu.menuId + "' menuUrl =
+					// '"
+					// + menu.menuUrl
+					// + "'><a style='cursor: pointer;'><b/><span>"
+					// + menu.menuName + "</span></td>";
+
+					if (menu.menuName != '系统管理') {
+						tableStr += "<li  menuId='" + menu.menuId + "' "
+								+ " menuICO='" + menu.menuICO + "' "
+								+ " menuUrl = '" + menu.menuUrl + "' " + ">"
+								+ "<img alt='' src='" + webctx
+								+ "/images/icon/Top bar_triangle.png' />"
+								+ menu.menuName + "</li>";
+					} else {
+						sysdiv += "<label" + " menuICO='" + menu.menuICO + "' "
+								+ " menuId='" + menu.menuId + "' menuUrl = '"
+								+ menu.menuUrl + "'><img   alt='' src='"
+								+ webctx
+								+ "/images/setting_2.png' /></label></span> ";
+
+					}
+
+				});
+				tableStr += "</ul>";
+			
+
+				$("#nav ul li").eq(0).click();
+			}
+		}
+	});
+}
+
+function initmenu(ul, curmenu) {
+
+	var menus = [ {
+		id : 1,
+		url : 'page/company',
+		menutext : '公司账号管理'
+
+	},
+
+	{
+		id : 2,
+		url : 'page/pccount',
+		menutext : '子账号管理'
+
+	}, {
+		id : 3,
+		url : 'page/device',
+		menutext : '路由器管理'
+
+	}, {
+		id : 4,
+		url : 'page/translog',
+		menutext : '流量管理'
+
+	}, {
+		id : 5,
+		url : 'page/set',
+		menutext : '设置'
+
+	}, ];
+
+	var basePath = getImUrl();
+
+	$
+			.ajax({
+				url : basePath + "menu/getRootMenus.do",
+				type : "post",
+				dataType : "json",
+				async : false,
+				success : function(data) {
+					if (null != data && data.length != 0) {
+						menus = eval(data.menus);
+
+						/*
+						 * if(data!=null&&data.toIndex=="true") {
+						 * window.location.href = basePath + "page/pccountM";
+						 * return ; }
+						 */
+
+						var ulDom = $(ul);
+
+						var html = "";
+						for ( var i = 0; i < menus.length; i++) {
+
+							if (!menus[i].menuParentid) {
+
+
+								html += "<li {{active}} class=\"dropdown\"><a href=\"#\" " ;
+								
+								if(menus[i].menuUrl){
+									html +=" onclick=\"javascript:loadmenu('"
+										+ menus[i].menuUrl + "')\" ";
+								}
+										
+								
+								
+								html +=" class=\"dropdown-toggle\""
+										+ " data-toggle=\"dropdown\" "
+										+ "  >"
+										+ menus[i].menuName + " {{ico}}</a>";
+
+								var n=0;
+								
+								for ( var j = 0; j < menus.length; j++) {
+									if (menus[i].menuId == menus[j].menuParentid) {
+										
+										if(n==0)
+											{
+											html += "<ul class=\"dropdown-menu\"> ";
+											n++;
+											}
+										
+										html=html.replace("{{ico}}"," <b class=\"caret\"></b>");
+										
+									
+										
+										if( (curmenu == menus[j].menuUrl )||(curmenu+"/" == menus[j].menuUrl))
+											{
+											html += "<li class=\"active\"><a href=\"#\">"
+												+ menus[j].menuName + "</a></li>";
+											html=html.replace("{{active}}","class=\"active\" ");
+											}
+											
+										else
+											{
+											html += "<li ><a href=\"#\"  "
+												+ " onclick=\"javascript:loadmenu('"
+												+ menus[j].menuUrl + "')\"  " + ">"
+												+ menus[j].menuName + "</a></li>";
+											
+											
+											}
+										
+										
+									
+										
+									}
+
+								}
+								
+								html=html.replace("{{ico}}","");
+								
+								if( (curmenu == menus[i].menuUrl )||(curmenu+"/" == menus[i].menuUrl))
+									html=html.replace("{{active}}","class=\"active\" ");
+								else
+								html=html.replace("{{active}}","");
+								
+								if(n>0)
+								html += "</ul>";
+
+								html += "</li>";
+
+							} else {
+								
+								/*if (curmenu == menus[i].menuUrl)
+									html += "<li class=\"active\"><a href=\"#\">"
+											+ menus[i].menuName + "</a></li>";
+								else
+									html += "<li ><a href=\"#\"  "
+											+ " onclick=\"javascript:loadmenu('"
+											+ menus[i].menuUrl + "')\"  " + ">"
+											+ menus[i].menuName + "</a></li>";*/
+								
+
+							}
+
+						}
+
+						if(data.utype!="normal_user")
+						html += "<li ><a href=\"#\"   onclick=\"javascript:logout()\">登出 </a></li>";
+
+						ulDom.html(html);
+					}
+				},
+				error : function(error) {
+					document.location = getImUrl() + "login.jsp";
+				}
+			});
+
+};
+
+// 退出系统
+function logout() {
+	if (confirm("确定要退出吗？")) {
+		document.location = getImUrl() + "logout.do";
+	}
+};

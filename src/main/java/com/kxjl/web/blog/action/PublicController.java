@@ -18,7 +18,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import org.springframework.web.servlet.ModelAndView;
@@ -48,11 +50,36 @@ public class PublicController extends BaseController {
 	@Autowired
 	SysService sysService;
 
+	
+	@RequestMapping(value = "/public/index/{type}/{value}.html")
+	public String listhtml(HttpServletRequest request,@PathVariable("type") String type,@PathVariable("value") String value) {
+
+		return "forward:/public/index/?"+type+"="+value;
+	}
+	
 	@RequestMapping(value = "/public/index/")
 	public ModelAndView list(HttpServletRequest request) {
 
 		ModelAndView view = getSysData();
 		view.setViewName("/public/index/main");
+
+		return view;
+	}
+	
+	@RequestMapping(value = "/public/about/")
+	public ModelAndView about(HttpServletRequest request) {
+
+		ModelAndView view = getSysData();
+		view.setViewName("/public/about/index");
+
+		return view;
+	}
+	
+	@RequestMapping(value = "/public/bx/")
+	public ModelAndView bx(HttpServletRequest request) {
+
+		ModelAndView view = getSysData();
+		view.setViewName("/public/bx/index");
 
 		return view;
 	}
@@ -69,38 +96,55 @@ public class PublicController extends BaseController {
 		return view;
 	}
 
-	@RequestMapping(value = "/page/set/")
-	public ModelAndView set() {
-		ModelAndView view = getSysData();
-		view.setViewName("/page/set/main");
-
-		return view;
-	}
-	
 	@RequestMapping(value = "/")
 	public String index() {
 		ModelAndView view = getSysData();
 		view.setViewName("/public/index/");
 
-		 return "redirect:/public/index/";
+		return "redirect:/public/index/";
 	}
-	
-	
+
 	@RequestMapping(value = "/public/search")
 	public String search() {
 		ModelAndView view = getSysData();
 		view.setViewName("/public/index/");
 
-		 return "/public/search/index";
+		return "/public/search/index";
 	}
+
+	@RequestMapping(value = "/page/set")
+	public String p_set(Map<String, Object> maps) {
+
+		maps.putAll(sysService.getSysInfo());
+
+		return "/page/set/main";
+	}
+	
+	@RequestMapping(value = "/page/{url}")
+	public String p_btype(Map<String, Object> maps,
+			@PathVariable(name = "url") String url) {
+
+		maps.putAll(sysService.getSysInfo());
+
+		return "/page/" + url + "/index";
+	}
+	
+	@RequestMapping(value = "/pown/{url}")
+	public String pown_btype(Map<String, Object> maps,
+			@PathVariable(name = "url") String url) {
+
+		maps.putAll(sysService.getSysInfo());
+
+		return "/pown/" + url + "/index";
+	}
+
 	@RequestMapping(value = "/public/cat")
 	public String cat() {
 		ModelAndView view = getSysData();
 		view.setViewName("/public/index/");
 
-		 return "/public/cat/index";
+		return "/public/cat/index";
 	}
-
 
 	@RequestMapping(value = "/public/detail/")
 	public ModelAndView detail() {

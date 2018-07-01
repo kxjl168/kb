@@ -6,55 +6,18 @@
 		<html lang="en">
 
 		<head>
-			<meta charset="UTF-8">
-			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+			
 			<title >GOOGLE搜索,google镜像,google反向代理,翻墙,google-256kb.cn | 野生的喵喵 的个人站点 </title>
-			<meta name="fragment" content="!">
+			
 			<meta name="keywords" content="GOOGLE 搜索代理转发 KxのBook">
 <meta name="description" content="GOOGLE搜索 代理转发- KxのBook Kx的个人站点" />
-<meta name="author" content="ZHANGJIE"> 
-			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
-
-			<link rel="stylesheet" href="../../css/kCommon.css">
-
-	
-			<link rel="stylesheet" href="../../css/common.css">
-
-			<script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
-
-			<script type="text/javascript" src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
-
-	
-	<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
-			<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
-				<script type="text/javascript" src="../../js/plugin/angular/angular-sanitize.min.js"></script>
-				
-					
-				<link rel="stylesheet" href="../../js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/default.css">
-			<link rel="stylesheet" href="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/obsidian.css">
-			
-	<script type="text/javascript" src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
-
-		
 
 		</head>
 
-		<body id="ngSection" ng-app="myApp" ng-controller="eduCtrl">
+		<body >
 
 
-			<div class="" id="content" style="">
-
-			<%@include file="../phead.jsp"%>
-
-
-
-
-				<div class=" row row-margin-top-70">
-
-					
-
-
-					<div class="c ">
+	<div class="c ">
 					
 					
 						<div class="col-sm-12 col-xs-12 nopadding pleft">
@@ -153,21 +116,6 @@
 					
 					
 					</div>
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-				</div>
-					
-			</div>
 
 
 
@@ -211,32 +159,9 @@
 
 		
 
-			<%@include file="../pfoot.jsp" %>
-			
-
-
-
-			<script type="text/javascript" src="../../js/plugin/jquery/jquery.noty.min.js"></script>
-			<script type="text/javascript" src="../../js/plugin/jquery/noty.layout.center.js"></script>
-			<script type="text/javascript" src="../../js/plugin/jquery/noty.themes.bootstrap.js"></script>
-
-
-			    <script type="text/javascript"
-	src="../../js/plugin/jquery/jquery.validate.js"></script> 
-
-		<script type="text/javascript"
-	src="${basePath}/js/own/kvalidate.js"></script>
-	
-
-			<!-- <script type="text/javascript" src="../../js/plugin/swiper/idangerous.swiper.min.js"></script> -->
-			<script src="../../js/own/menu.js"></script>
-<script src="../../js/own/loading.js"></script>
 
 	<script type="text/javascript" src="index.js"></script>
-				<script type="text/javascript" src="../pright/pright_t_h.js"></script>
-
-
-					
+				
 
 
 </body>

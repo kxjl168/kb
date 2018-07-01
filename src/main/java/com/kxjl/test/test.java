@@ -39,10 +39,54 @@ public class test {
 		
 		//testGzip();
 		
-		testhtml();
+		//testhtml();
 		
-		
+		testl();
 	}
+	
+	
+	
+	private static void testl() {
+
+		
+		String url = "http://esss.4saas.com/JsonRequest";
+
+		// String url =
+		// "http://10.204.37.192:8080/gserver/version/getVersionInfo.action?type=2";
+
+		
+	
+		String data = "";
+
+		String responsedata = "";
+		try {
+			
+			JSONObject j=new JSONObject();
+			j.put("staff_name", "lyh");
+			j.put("password", "123456");
+			j.put("wechatid", "o7B4swRzGQfHwRg1Caa7nFrWMmRc");
+			j.put("multi_user_token", "cpic");
+			
+			
+			int num=2;
+		
+				responsedata = sendHttpData(url,URLEncoder.encode(j.toString()));
+				System.out.println("返回:" + responsedata);
+			
+		
+			// System.out.println("解密:" + out);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println(responsedata);
+		// ***********vmInstallApp*****************
+
+	}
+	
+	
 	
 	public static void testhtml() {
 		// http://127.0.0.1:8080/kb/public/detail/344f5834-fe93-49e8-835d-b07e1a1def96.html
@@ -331,6 +375,8 @@ public class test {
 		httpPost.setRequestHeader("Content-type", "application/json");
 		httpPost.setRequestHeader("Accept", "application/json");
 		httpPost.setRequestHeader("Connection", "close");
+		httpPost.setRequestHeader("User-Agent",
+		"Mozilla/5.0 (Linux; Android 4.4.4; HM NOTE 1LTEW Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/33.0.0.0 Mobile Safari/537.36 MicroMessenger/6.0.0.54_r849063.501 NetType/WIFI");
 		// httpPost.setRequestHeader("Authorization", "Basic YWRtaW46MTIz");
 		httpPost.setRequestBody(is);
 

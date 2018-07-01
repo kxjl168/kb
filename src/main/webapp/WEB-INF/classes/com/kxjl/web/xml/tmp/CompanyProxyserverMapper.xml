@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zteict.web.company.dao.CompanyProxyserverDao">
+	<resultMap id="CompanyProxyserverMap" type="com.zteict.web.company.model.CompanyProxyserver">
+	
+	</resultMap>
+	
+	
+	
+	
+	<select id="getconflictProxyserverInfo" parameterType="com.zteict.web.company.model.CompanyProxyserver" resultMap="CompanyProxyserverMap">
+		
+select substring_index(substring_index(cp.ipdesc, '-',1), '.',3) ippre
+, cast( substring_index(substring_index(cp.ipdesc, '-',1), '.',-1) as SIGNED INTEGER) ipstart
+,cast( substring_index(substring_index(cp.ipdesc, '-',-1), '.',-1)  as SIGNED INTEGER) ipend
+, cp.* from company_proxyserver cp
+where substring_index(substring_index(cp.ipdesc, '-',1), '.',3)
+=substring_index(substring_index(#{ipdesc}, '-',1), '.',3) 
+ and 
+ <![CDATA[
+(
+( 
+	
+cast( substring_index(substring_index(#{ipdesc}, '-',1), '.',-1) as SIGNED INTEGER)
+>=cast( substring_index(substring_index(cp.ipdesc, '-',1), '.',-1) as SIGNED INTEGER)
+and 
+
+cast( substring_index(substring_index(#{ipdesc}, '-',1), '.',-1) as SIGNED INTEGER)
+<=cast( substring_index(substring_index(cp.ipdesc, '-',-1), '.',-1)  as SIGNED INTEGER)
+) or 
+(
+ cast( substring_index(substring_index(#{ipdesc}, '-',-1), '.',-1)  as SIGNED INTEGER)
+ >=cast( substring_index(substring_index(cp.ipdesc, '-',1), '.',-1) as SIGNED INTEGER)
+and
+cast( substring_index(substring_index(#{ipdesc}, '-',-1), '.',-1)  as SIGNED INTEGER)
+<=cast( substring_index(substring_index(cp.ipdesc, '-',-1), '.',-1)  as SIGNED INTEGER)
+)
+)
+ ]]>
+and proxyserver_id=#{proxyserver_id}
+<if test='recordid != null and recordid != "" '>
+			and recordid !=#{recordid}
+		</if>
+
+	</select>
+	
+	<select id="getCompanyProxyserverPageList" parameterType="com.zteict.web.company.model.CompanyProxyserver" resultMap="CompanyProxyserverMap">
+		select *  from company_proxyserver a  left join proxyserver_info p on a.proxyserver_id=p.id
+		where 1=1
+		<if test='proxyserver_id != null and proxyserver_id != "" '>
+			and a.proxyserver_id = #{proxyserver_id}
+		</if>
+		<if test='companyid != null and companyid != "" '>
+			and a.companyid = #{companyid} 
+		</if>
+		
+
+		limit #{start},#{pageCount}
+	</select>
+	
+	<select id="getCompanyProxyserverPageListCount" parameterType="com.zteict.web.company.model.CompanyProxyserver" resultType="java.lang.Integer">
+		select count(*) from company_proxyserver a 
+		where 1=1
+			<if test='proxyserver_id != null and proxyserver_id != "" '>
+			and a.proxyserver_id = #{proxyserver_id}
+		</if>
+		<if test='companyid != null and companyid != "" '>
+			and a.companyid = #{companyid} 
+		</if>
+		
+	</select>
+	
+<select id="getCompanyProxyserverInfo" parameterType="com.zteict.web.company.model.CompanyProxyserver" resultType="com.zteict.web.company.model.CompanyProxyserver">
+		select * from company_proxyserver where recordid=#{recordid}
+	</select>
+
+
+	<insert id="addCompanyProxyserver" parameterType="com.zteict.web.company.model.CompanyProxyserver">
+	    
+
+	    
+		insert into company_proxyserver 
+		(proxyserver_id,companyid,ipdesc)
+		values(#{proxyserver_id},#{companyid},#{ipdesc})
+	</insert>
+	
+	<update id="updateCompanyProxyserver" parameterType="com.zteict.web.company.model.CompanyProxyserver">
+		update company_proxyserver 
+	<trim prefix=" set " suffixOverrides=",">
+  
+
+
+		<if test='ipdesc != null'>
+			ipdesc=#{ipdesc},
+		</if>
+		
+		</trim>
+		
+		where recordid=#{recordid}
+	</update>
+	
+	<delete id="deleteCompanyProxyserver"  parameterType="com.zteict.web.company.model.CompanyProxyserver">
+		delete from company_proxyserver where recordid=#{recordid}
+	</delete>
+	
+	
+</mapper>
+  
+
+
+
+
+

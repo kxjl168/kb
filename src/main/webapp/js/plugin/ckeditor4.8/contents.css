@@ -206,3 +206,8 @@ a > img {
 	max-height: 1080px;
 	margin:0 auto;
 }
+
+.cke_editable p{
+	margin: 0 0 0.8em!important;
+	line-height: 1.1!important;
+}

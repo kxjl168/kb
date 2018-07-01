@@ -129,3 +129,7 @@
             </div>
         </div>
     </div>
+    
+    	<script type="text/javascript" src="${basePath}/public/pright/pright_t_h.js"></script>
+
+    

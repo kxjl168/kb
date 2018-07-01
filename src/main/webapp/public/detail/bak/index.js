@@ -229,6 +229,9 @@ function init() {
 
 
                             $scope.$apply();
+                            
+                            $('.pct').autoMenu();
+                            
 
                             $scope.getReplayList();
 

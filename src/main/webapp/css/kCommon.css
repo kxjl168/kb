@@ -859,3 +859,10 @@ a {
     border: 1px solid transparent;
     border-radius: 4px;
 }
+
+.pct p,.cke_editable p{
+	margin: 0 0 0.8em!important;
+	line-height: 1.2;
+}
+
+
