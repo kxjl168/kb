@@ -218,6 +218,9 @@ $(function() {
 
 	var obj = new Object();
 
+	
+	
+	
 	SZUMWS(http + "sysBaseInfo/getSysInfo.action", JSON.stringify(obj),
 			function succsess(json) {
 

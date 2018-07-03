@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<!-- 基本配置 -->
-	<ConfigItem>
-		<ConfigName>CompanyName</ConfigName>
-		<ConfigValue>深圳中兴网信</ConfigValue>
-		<ConfigDesc>公司名称</ConfigDesc>
-	</ConfigItem>
+
 	
 	<ConfigItem>
 		<ConfigName>blackiplist</ConfigName>
@@ -21,7 +17,7 @@
 	
      <ConfigItem>
 		<ConfigName>excludedUrls</ConfigName>
-		<ConfigValue>.js,.css,.*/pown/url/.*,ie8.jsp,null.jsp,404.jsp,noaccess.jsp,.jpg,.png,.ico,.jpeg,.gif,.*/public/.*,.*/blog.*/get.*, UploadCKFile.action,.html,UploadFile.action,login.jsp,exlogin.action,phonereg/,phonereg,.do,done.jsp,getVersionInfo.action</ConfigValue>
+		<ConfigValue>.js,.css,.*/pown/url/.*,ie8.jsp,kb/,kb,null.jsp,404.jsp,index.jsp,noaccess.jsp,.jpg,.png,.ico,.jpeg,.gif,search/init.action,replay/addOrUpdate.action,.*/public/.*,.*/.*/get.*,.*/sysBaseInfo/get.*,.*/kurl/get.*,UploadCKFile.action,.html,UploadFile.action,login.jsp,exlogin.action,phonereg/,phonereg,done.jsp,getVersionInfo.action</ConfigValue>
 		<ConfigDesc>不需要鉴权也可访问的url后缀		</ConfigDesc>
 	</ConfigItem> 
             
@@ -165,10 +161,10 @@
 	
 		<ConfigItem>
 		<ConfigName>LOCAL_HTML_PATH</ConfigName>
-	<!-- <ConfigValue>F:\kxjl\code\kb\src\main\webapp\public\html\</ConfigValue> -->
+	<ConfigValue>F:\kxjl\code\kb\src\main\webapp\public\html\</ConfigValue>
 		
 	 
-			 <ConfigValue>H:\git\kb\src\main\webapp\public\html\</ConfigValue> 
+		<!-- 	 <ConfigValue>H:\git\kb\src\main\webapp\public\html\</ConfigValue>  -->
 		<ConfigDesc>html静态目录</ConfigDesc>
 	</ConfigItem>
 	

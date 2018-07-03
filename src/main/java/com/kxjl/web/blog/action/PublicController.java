@@ -57,7 +57,7 @@ public class PublicController extends BaseController {
 		return "forward:/public/index/?"+type+"="+value;
 	}
 	
-	@RequestMapping(value = "/public/index/")
+	@RequestMapping(value = "/public/index")
 	public ModelAndView list(HttpServletRequest request) {
 
 		ModelAndView view = getSysData();
@@ -66,7 +66,7 @@ public class PublicController extends BaseController {
 		return view;
 	}
 	
-	@RequestMapping(value = "/public/about/")
+	@RequestMapping(value = "/public/about")
 	public ModelAndView about(HttpServletRequest request) {
 
 		ModelAndView view = getSysData();
@@ -75,7 +75,7 @@ public class PublicController extends BaseController {
 		return view;
 	}
 	
-	@RequestMapping(value = "/public/bx/")
+	@RequestMapping(value = "/public/bx")
 	public ModelAndView bx(HttpServletRequest request) {
 
 		ModelAndView view = getSysData();
@@ -96,7 +96,19 @@ public class PublicController extends BaseController {
 		return view;
 	}
 
+
+
 	@RequestMapping(value = "/")
+	public String index3() {
+
+		ModelAndView view = getSysData();
+		view.setViewName("/public/index/");
+
+		return "redirect:/public/index";
+	}
+	
+	
+	@RequestMapping(value = "/welcome")
 	public String index() {
 		ModelAndView view = getSysData();
 		view.setViewName("/public/index/");
@@ -146,7 +158,7 @@ public class PublicController extends BaseController {
 		return "/public/cat/index";
 	}
 
-	@RequestMapping(value = "/public/detail/")
+	@RequestMapping(value = "/public/detail")
 	public ModelAndView detail() {
 
 		ModelAndView view = getSysData();

@@ -131,14 +131,12 @@ public class BaseController {
 	 * @author zj
 	 * @date 2017-12-28
 	 */
-	public void saveStaticInfo(HttpServletRequest request, String type1,
-			String type2) {
+	public void saveStaticInfo(HttpServletRequest request, String type1, String type2) {
 
 		stasticService.saveStaticInfo(request, type1, type2);
-	
 
 	}
-	
+
 	/**
 	 * 记录访问统计原始数据
 	 * 
@@ -147,11 +145,9 @@ public class BaseController {
 	 * @author zj
 	 * @date 2017-12-28
 	 */
-	public void saveStaticInfo(HttpServletRequest request, String type1,
-			String type2,String imei) {
+	public void saveStaticInfo(HttpServletRequest request, String type1, String type2, String imei) {
 
-		stasticService.saveStaticInfo(request, type1, type2,imei);
-	
+		stasticService.saveStaticInfo(request, type1, type2, imei);
 
 	}
 
@@ -163,7 +159,7 @@ public class BaseController {
 	 * @author zj
 	 * @date 2017-12-27
 	 */
-	public void saveRequestInfo(HttpServletRequest request, String type,String extras) {
+	public void saveRequestInfo(HttpServletRequest request, String type, String extras) {
 
 		final HttpServletRequest rt = request;
 		final String t = type;
@@ -177,7 +173,6 @@ public class BaseController {
 					RequestInfo rinfo = new RequestInfo();
 					rinfo.setAction_type(t);
 
-					
 					// 计算ip
 					String ip = "";
 					try {
@@ -190,8 +185,7 @@ public class BaseController {
 					rinfo.setCity(city);
 					rinfo.setVal1(val1);
 					rinfo.setUri(rt.getRequestURI());
-					SimpleDateFormat sdf = new SimpleDateFormat(
-							"yyyy-MM-dd HH:mm:ss");
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					String time = sdf.format(new Date());
 					rinfo.setCreateTime(time);
 
@@ -202,6 +196,11 @@ public class BaseController {
 			}
 		}).start();
 
+	}
+
+	@ResponseStatus(code = HttpStatus.NOT_FOUND)
+	protected void noHandlerFound(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		response.sendRedirect(request.getContextPath() + "/404.jsp");
 	}
 
 	@ExceptionHandler(RuntimeException.class)
@@ -215,7 +214,7 @@ public class BaseController {
 	@ModelAttribute
 	public void ImgSvrModel(Model model) {
 		String HTTP_PATH = getImgHttpPath();
-		model.addAttribute("HTTP_PATH", HTTP_PATH);
+		//model.addAttribute("HTTP_PATH", HTTP_PATH);
 		// 获取 文件服务器http地址图片前缀
 
 	}
@@ -236,18 +235,15 @@ public class BaseController {
 		try {
 
 			String responsedata = "";
-			String serverUrl = ConfigReader.getInstance().getProperty(
-					"FILE_SVR_PATH")
-					+ "FileSvr/UploadFile.action";
+			String serverUrl = ConfigReader.getInstance().getProperty("FILE_SVR_PATH") + "FileSvr/UploadFile.action";
 			ArrayList<FormFieldKeyValuePair> fds = new ArrayList<FormFieldKeyValuePair>();
 
 			FormFieldKeyValuePair p1 = new FormFieldKeyValuePair("path", dir);
 			fds.add(p1);
 
 			try {
-				responsedata = HttpPostEmulator
-						.sendHttpPostRequestByMutiPartFile(serverUrl, fds,
-								new MultipartFile[] { receiveFile });
+				responsedata = HttpPostEmulator.sendHttpPostRequestByMutiPartFile(serverUrl, fds,
+						new MultipartFile[] { receiveFile });
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -301,8 +297,7 @@ public class BaseController {
 	 * @author zj
 	 */
 	public String getImgHttpPath() {
-		String HTTP_PATH = ConfigReader.getInstance().getProperty(
-				"FILE_SVR_HTTP_PATH");
+		String HTTP_PATH = ConfigReader.getInstance().getProperty("FILE_SVR_HTTP_PATH");
 		return HTTP_PATH;
 	}
 
@@ -314,8 +309,7 @@ public class BaseController {
 	 * @author zj
 	 */
 	public String getImgHttpOutPath() {
-		String HTTP_PATH = ConfigReader.getInstance().getProperty(
-				"FILE_SVR_HTTP_OUTER_PATH");
+		String HTTP_PATH = ConfigReader.getInstance().getProperty("FILE_SVR_HTTP_OUTER_PATH");
 		return HTTP_PATH;
 	}
 
@@ -336,8 +330,7 @@ public class BaseController {
 
 			if (datastr.equals("")) {
 				InputStream instream = request.getInputStream();
-				BufferedReader reader = new BufferedReader(
-						new InputStreamReader(instream, "utf-8"));
+				BufferedReader reader = new BufferedReader(new InputStreamReader(instream, "utf-8"));
 				StringBuilder sb = new StringBuilder();
 				String line = "";
 				while ((line = reader.readLine()) != null) {
@@ -387,8 +380,7 @@ public class BaseController {
 	 * @author zj
 	 */
 
-	public Map<String, Object> validateToken(String Token, String userID,
-			String deviceID) {
+	public Map<String, Object> validateToken(String Token, String userID, String deviceID) {
 		boolean rst = true;
 		Map<String, Object> map = new HashMap<String, Object>();
 		String VToken = ConfigReader.getInstance().getProperty("VToken");
@@ -482,8 +474,7 @@ public class BaseController {
 		String data = null;
 		try {
 			InputStream instream = request.getInputStream();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					instream, "utf-8"));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(instream, "utf-8"));
 			StringBuilder sb = new StringBuilder();
 			String line = "";
 			while ((line = reader.readLine()) != null) {
@@ -512,8 +503,7 @@ public class BaseController {
 		String data = null;
 		try {
 			InputStream instream = request.getInputStream();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					instream, "utf-8"));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(instream, "utf-8"));
 			StringBuilder sb = new StringBuilder();
 			String line = "";
 			while ((line = reader.readLine()) != null) {
@@ -544,8 +534,7 @@ public class BaseController {
 	 * @date 2016-1-22
 	 * @author zj
 	 */
-	public void responseDataNoKey(HttpServletRequest request,
-			HttpServletResponse response, String data) {
+	public void responseDataNoKey(HttpServletRequest request, HttpServletResponse response, String data) {
 		try {
 
 			String res = "";
@@ -554,8 +543,7 @@ public class BaseController {
 			res = AESEncrypt.enCrypt("", data, Constant.FIRST_AES_KEY);
 
 			response.setHeader("content-type", "text/html; charset=UTF-8");
-			response.setHeader("Content-Length", ""
-					+ res.getBytes("UTF-8").length);
+			response.setHeader("Content-Length", "" + res.getBytes("UTF-8").length);
 			response.setCharacterEncoding("UTF-8");
 
 			// 转码
@@ -583,10 +571,9 @@ public class BaseController {
 				sb.append('＜');// 全角小于号
 				break;
 			/*
-			 * case '\'': sb.append('‘');// 全角单引号 break; case '\"':
-			 * sb.append('“');// 全角双引号 break; case '&': sb.append('＆');// 全角
-			 * break; case '\\': sb.append('＼');// 全角斜线 break; case '#':
-			 * sb.append('＃');// 全角井号 break;
+			 * case '\'': sb.append('‘');// 全角单引号 break; case '\"': sb.append('“');// 全角双引号
+			 * break; case '&': sb.append('＆');// 全角 break; case '\\': sb.append('＼');//
+			 * 全角斜线 break; case '#': sb.append('＃');// 全角井号 break;
 			 */
 			default:
 				sb.append(c);
@@ -604,8 +591,7 @@ public class BaseController {
 	 * @param data
 	 * @date 2016-7-11
 	 */
-	public void responseDataNoAllKey(HttpServletRequest request,
-			HttpServletResponse response, String data) {
+	public void responseDataNoAllKey(HttpServletRequest request, HttpServletResponse response, String data) {
 		try {
 
 			// 转码
@@ -623,8 +609,7 @@ public class BaseController {
 			jsonOut.put("ResponseMsg", res);
 
 			response.setHeader("content-type", "text/html; charset=UTF-8");
-			response.setHeader("Content-Length", ""
-					+ jsonOut.toString().getBytes("UTF-8").length);
+			response.setHeader("Content-Length", "" + jsonOut.toString().getBytes("UTF-8").length);
 			response.setCharacterEncoding("UTF-8");
 
 			response.getWriter().print(jsonOut);
@@ -643,8 +628,7 @@ public class BaseController {
 	 * @author
 	 * @date 2015-12-15 下午2:34:43 *
 	 */
-	public String handleRequest(HttpServletRequest request,
-			String second_aes_key) {
+	public String handleRequest(HttpServletRequest request, String second_aes_key) {
 
 		if (true)
 			return handleRequestNoKey(request);
@@ -652,8 +636,7 @@ public class BaseController {
 		String data = null;
 		try {
 			InputStream instream = request.getInputStream();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					instream, "utf-8"));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(instream, "utf-8"));
 			StringBuilder sb = new StringBuilder();
 			String line = "";
 			while ((line = reader.readLine()) != null) {
@@ -676,8 +659,7 @@ public class BaseController {
 			logger.info("second_key为:" + second_aes_key);
 			logger.info("===================================");
 			// 请求为login.action时不加密
-			if (reqAction.equals("login.action")
-					|| reqAction.equals("loginMobile.action")) {
+			if (reqAction.equals("login.action") || reqAction.equals("loginMobile.action")) {
 				return datastr;
 			}
 			// 第一次使用普通的AES解密
@@ -704,8 +686,8 @@ public class BaseController {
 	 * @date 2016-1-22
 	 * @author zj
 	 */
-	public void responseData(HttpServletRequest request,
-			HttpServletResponse response, String data, String second_aes_key) {
+	public void responseData(HttpServletRequest request, HttpServletResponse response, String data,
+			String second_aes_key) {
 
 		if (true) {
 			responseDataNoKey(request, response, data);
@@ -725,8 +707,7 @@ public class BaseController {
 			String uri = request.getRequestURI();
 			String reqAction = uri.substring(uri.lastIndexOf("/") + 1);
 			// 请求为login.action时不加密
-			if (!reqAction.equals("login.action")
-					&& !reqAction.equals("loginMobile.action")) {
+			if (!reqAction.equals("login.action") && !reqAction.equals("loginMobile.action")) {
 				// if (Pattern.matches(phoneRegex,loginId) ||
 				// Pattern.matches(emailRegex,loginId)) {
 				// user = uService.getUserInfoByLoginIdOrPhoneOrEmail(loginId);
@@ -753,8 +734,7 @@ public class BaseController {
 			}
 
 			response.setHeader("content-type", "text/html; charset=UTF-8");
-			response.setHeader("Content-Length", ""
-					+ res.getBytes("UTF-8").length);
+			response.setHeader("Content-Length", "" + res.getBytes("UTF-8").length);
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().print(res);
 			response.getWriter().flush();
@@ -774,8 +754,7 @@ public class BaseController {
 		String data = null;
 		try {
 			InputStream instream = request.getInputStream();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					instream, "utf-8"));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(instream, "utf-8"));
 			StringBuilder sb = new StringBuilder();
 			String line = "";
 			while ((line = reader.readLine()) != null) {
@@ -800,8 +779,8 @@ public class BaseController {
 	 * @param AesKey
 	 * @date 2016-7-1
 	 */
-	public void responseDataWithKey(HttpServletRequest request,
-			HttpServletResponse response, String data, String AesKey) {
+	public void responseDataWithKey(HttpServletRequest request, HttpServletResponse response, String data,
+			String AesKey) {
 		try {
 
 			String res = "";
@@ -810,8 +789,7 @@ public class BaseController {
 			res = AESEncrypt.enCrypt("", data, AesKey);
 
 			response.setHeader("content-type", "text/html; charset=UTF-8");
-			response.setHeader("Content-Length", ""
-					+ res.getBytes("UTF-8").length);
+			response.setHeader("Content-Length", "" + res.getBytes("UTF-8").length);
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().print(res);
 			response.getWriter().flush();

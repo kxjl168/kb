@@ -295,7 +295,7 @@ public class SysUserController extends BaseController {
 	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute(Constant.SESSION_USER);
-		return "/login";
+		return "redirect:/";
 	}
 
 	/**

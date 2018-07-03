@@ -6,7 +6,7 @@
 <html>
 <head>
 
-<title>400 -KxのBook </title>
+<title>404-KxのBook </title>
 <meta name="keywords" content="KxのBook 个人站点  个人BLOG">
 <meta name="description" content="首页-欢迎访问-Kx的个人站点" />
 <meta name="author" content="ZHANG JIE"> 

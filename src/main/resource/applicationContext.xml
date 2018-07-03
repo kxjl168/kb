@@ -13,6 +13,21 @@
     http://www.springframework.org/schema/context   
     http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	
+	
+	<mvc:annotation-driven/>
+    
+<!-- 	
+	<mvc:resources mapping="/css/**" cache-period="30" location="/css/" order="0"/>
+<mvc:resources mapping="/js/**" cache-period="30" location="/js/" order="0"/>
+<mvc:resources mapping="/images/**" cache-period="30" location="/images/" order="0"/>
+<mvc:resources mapping="/html/**" cache-period="30" location="/html/" order="0"/>
+<mvc:resources mapping="/cool/**" cache-period="30" location="/cool/" order="0"/>
+<mvc:resources mapping="/file/**" cache-period="30" location="/file/" order="0"/>
+<mvc:resources mapping="/public/html/**" cache-period="30" location="/public/html/" order="0"/>
+
+	
+	 -->
+	
 	<!--引入配置属性文件 -->
 	<context:property-placeholder location="classpath:config.properties" />
 	<context:property-placeholder location="classpath:log4j.properties" />
@@ -36,6 +51,7 @@
 		<property name="messageConverters">
 			<list>
 				<!-- json转换器 -->
+				
 				<ref bean="mappingJacksonHttpMessageConverter" />
 			</list>
 		</property>
@@ -73,6 +89,14 @@
 	
 		<bean id="SpringBeanUtil" class="com.kxjl.web.system.SpringBeanUtil"/>
 	
+	<!-- <mvc:default-servlet-handler /> -->
+	
+	
+	
+
+
+	
+	
 	
 
 	<mvc:interceptors>
@@ -80,20 +104,21 @@
 	
 			
 			<!-- 使用filter -->
-	<!--<mvc:interceptor>
+	<mvc:interceptor>
 
-               <mvc:mapping path="/*/*.action" />  
-               <mvc:mapping path="*.action" />
+               <mvc:mapping path="/**" />  
+               
 			
-			<bean class="com.zteict.web.system.action.base.LoginInterceptor">
+			<bean class="com.kxjl.web.system.action.base.LoginInterceptor">
 			    <property name="excludedUrls">
                      <list>
-                         <value>/login</value>
+                         <value>/login.jsp</value>
                         
-                         <value>/</value>                     </list>
+                         <value>/</value>  
+                          </list>
                  </property>
 			    </bean> 
-		</mvc:interceptor> -->
+		</mvc:interceptor> 
 		
 		<mvc:interceptor>
 			<mvc:mapping path="/**.action"/>

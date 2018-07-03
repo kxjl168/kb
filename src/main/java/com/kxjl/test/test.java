@@ -31,7 +31,7 @@ public class test {
 
 		// testPatter();
 
-		// update();
+		 update();
 
 		//testcity();
 		
@@ -41,7 +41,7 @@ public class test {
 		
 		//testhtml();
 		
-		testl();
+		//testl();
 	}
 	
 	
@@ -250,7 +250,7 @@ public class test {
 
 	private static void update() {
 
-		String url = "http://127.0.0.1:8080/gserver/version/getVersionInfo.action?type=2";
+		String url = "http://127.0.0.1:8080/kb/blog/addOrUpdate.action";
 
 		// String url =
 		// "http://10.204.37.192:8080/gserver/version/getVersionInfo.action?type=2";

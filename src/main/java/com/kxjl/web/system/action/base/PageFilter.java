@@ -42,6 +42,12 @@ import com.kxjl.web.system.model.SysUserBean.UserType;
 import com.kxjl.web.system.service.CommonService;
 import com.kxjl.web.system.service.MenuInfoService;
 
+/**
+ * 权限控制!
+ * @author zj
+ * @date 2018年7月2日
+ *
+ */
 public class PageFilter implements Filter {
 
 	public FilterConfig config;
@@ -315,6 +321,20 @@ public class PageFilter implements Filter {
 		/*
 		 * chain.doFilter(request, response); if(true) return;
 		 */
+		
+		String cpath= request.getContextPath();// ,
+		String curl= request.getRequestURI();
+		
+		if(curl.equals(cpath)||curl.equals(cpath+"/")) {
+		//	chain.doFilter(request, response);
+		//	return;
+			//wrapper.sendRedirect("public/index");
+			//
+			//return;
+		}
+		
+		
+		
 
 		// web.xml中读取
 		String excludedUrls = config.getInitParameter("excludedUrls");
@@ -376,7 +396,7 @@ public class PageFilter implements Filter {
 			// 跟目录，放
 			if (request.getContextPath().equals("")) {
 				if (request.getRequestURI().equals("/")) {
-					logger.debug("pass:user is null but is / && request.getContextPath():" + request.getContextPath());
+					logger.warn("pass:user is null but is / && request.getContextPath():" + request.getContextPath());
 					chain.doFilter(request, response);
 					return;
 				}
@@ -414,8 +434,9 @@ public class PageFilter implements Filter {
 
 			}
 
-			if (request.getRequestURI().endsWith("/")) {
+		/*	if (request.getRequestURI().endsWith("/")) {*/
 
+			//所有目录都要过滤
 				// zj 171215 直接访问url权限过滤
 				// System.out.println("filter:"+request.getRequestURI());
 				boolean inaccess = false;
@@ -434,12 +455,24 @@ public class PageFilter implements Filter {
 				}
 
 				if (!inaccess) {
+					
+					
+					if(user.getUtype()==UserType.Root||user.getUtype()==UserType.Admin)
+					{
+						chain.doFilter(request, response);
+						return;
+					}
+					else
+					{
 					String loginPath = request.getContextPath() + "/noaccess.jsp";
 					wrapper.sendRedirect(loginPath);
-
+					logger.debug("inaccess:" + inaccess);// ,
+					return ;
+					}
+					
 				}
 
-				logger.debug("inaccess:" + inaccess);// ,
+				
 
 			}
 
@@ -448,7 +481,7 @@ public class PageFilter implements Filter {
 
 			chain.doFilter(request, response);
 			return;
-		}
+		/*}*/
 
 	}
 
