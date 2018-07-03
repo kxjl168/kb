@@ -13,11 +13,16 @@
     line-height: 25px;
     
     position: fixed;
-	bottom: 10%;
-	right: 5%;
+	top: 20%;
+	right: 1%;
 	z-index: 1;
 	text-align: left;
 }
+
+
+.autoMenu ul{
+	background: #f2efef!important;
+} 
 
 .autoMenu li {
     list-style: none;
@@ -51,7 +56,7 @@
 	color: #399c9c;
 }
 .autoMenu ul>li.active>a{
-	color: #ff5370;
+	color: #444a7d;
 }
 
 .autoMenu .btn-box{
@@ -66,7 +71,7 @@
 	width: 26px;
 	height: 26px;
 	border-radius: 50%;
-	border:4px solid #91ba61;
+	/* border:4px solid #91ba61;  */
 	background: #91ba61;
 	position: absolute;
 	top:3px;
@@ -91,7 +96,7 @@
 	width: 26px;
 	height: 26px;
 	border-radius: 50%;
-	border:4px solid #ff5370;
+	/* border:4px solid #ff5370;*/
 	background: #ff5370;
 	position: absolute;
 	top:3px;

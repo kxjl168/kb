@@ -47,7 +47,7 @@
                 var height = typeof opts.height === 'number' && opts.height;
                 var padding = typeof opts.padding === 'number' && opts.padding;
                 //that.$element.width(width+padding*2);
-                var html = '<div class="autoMenu "><ul style="height: '+ height +'px;padding:' + padding + 'px">';
+                var html = '<div class="autoMenu "><ul style="padding:' + padding + 'px">';
                 var num = 0;
                 $(that.$element).find("*") .each(function(){
                     var _this = $(this);
@@ -63,7 +63,7 @@
                         num++;
                     }
                 })
-                html += '</ul><a href="javascript:void(0);" class="btn-box">'
+                html += '</ul><a href="javascript:void(0);" title="隐藏目录" class="btn-box">'
                             +'<span class="icon-minus-sign"></span>'
                         +'</a></div>';
                 return html;   
@@ -109,10 +109,12 @@
                 _this.$element. parents().find(".autoMenu .btn-box").on('click',function(){
                     if($(this).find('span').hasClass('icon-minus-sign')){
                         $(this).find('span').removeClass('icon-minus-sign').addClass('icon-plus-sign');
-                        _this.$element.find('.autoMenu  ul').fadeOut();
+                        _this.$element.parents().find('.autoMenu  ul').fadeOut();
+                        $(this).attr("title",'显示目录');
                     }else{
                         $(this).find('span').removeClass('icon-plus-sign').addClass('icon-minus-sign');
-                        _this.$element.find('.autoMenu  ul').fadeIn();
+                        _this.$element.parents().find('.autoMenu  ul').fadeIn();
+                        $(this).attr("title",'隐藏目录');
                     }
                     
                 })
