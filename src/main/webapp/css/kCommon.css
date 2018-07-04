@@ -4,9 +4,9 @@
   /* height: 200px; */
 }
 .spig {
-  /* display: block; */
+   display: block; 
   width: 300px;
-  height: 155px;
+  /* height: 155px; */
   position: absolute;
   top: 50px;
   left: 300px;
@@ -16,13 +16,25 @@
 ** sprite
 */
 
+.mdiv{
+	margin-top: -40px;
+}
+
+
 #gotop{
-float: right;
-    right: 125px;
+
+    
+        /* float: right; */
+    width: 0px;
+    right: 0px;
     position: relative;
-    top: 10px;
+    top: 45px;
+    /* margin-top: -45px!important; */
     opacity: 0;
-    z-index:1;
+    z-index: 1;
+    margin: 0 auto;
+    display: block;
+    visibility: collapse;
 }
 
 
@@ -90,7 +102,7 @@ float: right;
   transition: all 0.3s ease-in-out;
 }
 .pall {
-  float: left;
+  /* float: left; */
   overflow-x: hidden;
 }
 .pall > .pleft {
@@ -115,6 +127,15 @@ float: right;
 
 
 @media screen and (max-width: 768px) {
+	
+	.spig {
+    
+  width: 100px!important;
+	}
+	.rightline {
+  border-right: solid 0px #e5e5e5!important;
+}
+	
 	  .pall > .pright {
     width: 95%;
   }
@@ -136,7 +157,7 @@ float: right;
  
   
   .pall  .pleft {
-    width: 95%;
+    width: 98%;
   }
   
     .sidebar-container
@@ -247,6 +268,7 @@ float: right;
   .pall > .pleft {
     width: 73%;
     border-right: solid 1px #e5e5e5;
+    padding-left: 25px!important;
   }
   
 	

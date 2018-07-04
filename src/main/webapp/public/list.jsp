@@ -3,7 +3,7 @@
 
 <div ng-repeat="x in datalist" class="pgdiv row">
 
-									<div class="row col-xs-12 ">
+									<div class="row col-xs-12 nopaddding ">
 
 										<div class="nopadding-left">
 											<img class="nopaddding img-responsive col-xs-2" style="width:25px; height:25px;" title="{{x.blog_type_name}}"   ng-src="{{x.blog_type_url}}">
@@ -12,7 +12,7 @@
 											</div>
 
 
-											<div class="tagcloud col-sm-3 col-xs-12  text-right">
+											<div class="tagcloud col-sm-3 col-xs-12 nopaddding  text-right">
 										
 											<i class="fa fa-tags"></i>
 											<a class="color2" ng-repeat="t in x.tagStrs" title="t"  ng-click="showtgs(t)" >{{t}}&nbsp;,</a>
@@ -20,19 +20,19 @@
 										</div>
 									</div>
 
-									<div class="margin-top-10 row col-sm-10 col-xs-12"></div>
-									<div class="hide row col-xs-12">
+									<div class="margin-top-10 row col-sm-10 col-xs-12 nopaddding"></div>
+									<div class="hide row col-xs-12 nopaddding">
 										<hr></hr>
 									</div>
 
 
-									<div class="col-xs-12 row">
+									<div class="col-xs-12 nopaddding row">
 										<div class="alldot">
 											<div ng-cloak class=" pageText " ng-bind-html="x.context">
 											</div>
 										
 										</div>
-											<div class="more row col-xs-12"></div>
+											<div class="more row col-xs-12 nopaddding"></div>
 											<div>
 												
 												<a  class="detailbtn h5 text-right pull-right text-info margin-right-20"  ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html"  >详情</a>
@@ -42,19 +42,19 @@
 									
 									</div>
 									<br>
-									<div ng-cloak class="row  col-sm-10 col-xs-12 margin-top-5 ">post@{{x.create_date}}&nbsp;
+									<div ng-cloak class="row  col-sm-10 col-xs-12 nopaddding margin-top-5 ">post@{{x.create_date}}&nbsp;
 										<span ><a ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html">阅读</a>({{x.view_nums}})&nbsp;</span>
 										<span ><a ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html#rpdiv">评论</a>({{x.replay_nums}})&nbsp;</span>
 									</div>
 
 
-									<div class="row col-xs-12">
+									<div class="row col-xs-12 nopaddding">
 										<hr></hr>
 									</div>
 								</div>
 
 
-<div class="  col-xs-12 row tablefoot" ng-show="total">
+<div class="  col-xs-12 nopaddding row tablefoot" ng-show="total">
 
 
 						<ul class="pagination pull-right">
@@ -88,8 +88,8 @@
 						</select>
 					</div>
 					
-			<div class=" col-xs-12">
-				<div class=" col-xs-12 row panel panel-default pageText" >
+			<div class=" col-xs-12 nopaddding">
+				<div class=" col-xs-12 nopaddding row panel panel-default pageText" >
 					<div> 我有几张阿里云幸运券分享给你，用券购买或者升级阿里云相应产品会有特惠惊喜哦！
 					<br>
 					 把想要买的产品的幸运券都领走吧！快下手，马上就要抢光了。 <a href="https://promotion.aliyun.com/ntms/act/ambassador/sharetouser.html?userCode=2pgttaay&productCode=vm&utm_source=2pgttaay">点击领取</a>

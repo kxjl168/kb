@@ -33,7 +33,7 @@
 
 
 
-                        <div class="wrapper col-xs-12 ">
+                        <div class="wrapper col-xs-12  nopaddding">
 
 
                           
@@ -41,7 +41,7 @@
                                 <div id="pleft" ng-cloak>
                                     <div>
 
-                                        <div class="row col-xs-12 ">
+                                        <div class="row col-xs-12  nopaddding">
 
                                             <div class="nopadding-left">
                                                 <img class="nopaddding img-responsive col-xs-2" style="width:25px; height:25px;" title="{{x.blog_type_name}}" ng-src="{{x.blog_type_url}}">
@@ -61,7 +61,7 @@
                                             <hr></hr>
                                         </div>
 
-                                        <div class="col-xs-12 row">
+                                        <div class="col-xs-12 row nopaddding">
                                             <div class="">
                                                 <div ng-cloak class=" pageText " ng-bind-html="x.context|sanitize">
                                                 </div>

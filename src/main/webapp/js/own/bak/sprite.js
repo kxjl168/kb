@@ -1,15 +1,25 @@
 (function(window) {
 	
 	 $.fn.extend({
-	        returntop: function() {
+	        returntop: function(me) {
 	            if (this[0]) {
 	                var b = this.click(function() {
 	                    $("html, body").animate({
 	                        scrollTop: 0
 	                    },
-	                    300)
-	                }),
-	                c = null;
+	                    300);
+	                    msgs = ["坐火箭飞咯~~~", "哇，又飞走了啦~~", "老婆，快出来看月亮~", "嗖嗖嗖~~~", "还要继续飞嘛。。。", "飞上瘾了啊啊啊啊！？"];
+	                    var i = Math.floor(Math.random() * msgs.length);
+	                    me.showMessage(msgs[i]);
+	                    
+	                });
+	                
+	                this.hover(function() {
+	                	 msgs = ["想体验嗖的感觉嘛>_<！", "免费过山车哦~", "试试吧", "Let's Go !"];
+	                     var i = Math.floor(Math.random() * msgs.length);
+	                     me.showMessage(msgs[i]);
+	                  
+	                });
 	            }
 	        }
 
@@ -111,6 +121,35 @@
         $(me.default.sid).removeClass("active").removeClass("o1").removeClass("o2").removeClass("o3").removeClass("o4");
         clearInterval(me._timer);
     };
+    
+    Sprite.prototype.showTop=function(){
+    	$("body").find('#gotop').css("visibility",'visible');
+    	 $("body").find('#gotop').stop().animate({
+				color: "#A0410D",
+			 right:'-50px',
+			 opacity:1,
+			 
+			 width:'37px',
+			}, 400,function(){
+			
+		});
+    	 
+    	 event.stopPropagation();
+    	 return false;
+    };
+    
+    Sprite.prototype.hideTop=function(){
+    	$("body").find('#gotop').stop().animate({
+			//color: "#A0410D",
+		 right:'0px',
+		 opacity:0,
+		 
+		 width:'0px',
+		 
+		}, 400,function(){
+			$("body").find('#gotop').css("visibility",'collapse');
+		});
+    };
 
     Sprite.prototype.initHover = function() {
         var me = this;
@@ -127,11 +166,8 @@
 
 
             
-            $("body").find('#gotop').stop().animate({
-				color: "#A0410D",
-			 right:'80px',
-			 opacity:1,
-			}, 400);
+            me.showTop();
+           
 			
             
 
@@ -145,11 +181,7 @@
 		 $(this.default.scontainer).hover(function() {
 			 
 				},function() {
-					$("body").find('#gotop').stop().animate({
-						//color: "#A0410D",
-					 right:'125px',
-					 opacity:0,
-					}, 400);	
+					 me.hideTop();
 			});
 		 
     };
@@ -336,8 +368,11 @@
 
     Sprite.prototype.createDom = function() {
 
-        var dom = " <div id=\"spig\" class=\"spig\" style=\"top: 1225px; left: 171.625px;\"> " +
+        var dom = " <div id=\"spig\" class=\"spig\" style=\"top: 225px; left: 50.625px;\"> " +
             " <div id=\"message\" style=\"display: block; opacity: 0.498272;\">" + this.default.initmsg + "</div> " +
+            
+        
+            "<div class='mdiv'>" +
             
             "<div id='gotop' title='返回顶部'><span class='fa-stack fa-lg'> " +
             ' <i class="fa fa-circle fa-stack-2x topcircle"></i> '+
@@ -346,7 +381,7 @@
             '</div>  ' +
             
             " <div id=\"mumu\" class=\"mumu\" style=\"opacity: 1;\"></div>" +
-           
+            "</div>"+
             " </div> ";
 
         var spig=$("#spig");
@@ -360,7 +395,7 @@
         this.default.mumu = $("body").find(this.default.mumu);
         
         //回顶部
-        $("body").find('#gotop').returntop();
+        $("body").find('#gotop').returntop(this);
         
         
         
@@ -398,7 +433,10 @@
     Sprite.prototype.initClick = function() {
         var stat_click = 0;
         var me = this;
-        $(me.default.sid).click(function() {
+        $("body").find(me.default.sid).click(function() {
+        	
+            me.showTop();
+        	
             if (!me._ismove) {
                 stat_click++;
                 if (stat_click > 4) {
@@ -424,6 +462,10 @@
             } else {
                 me._ismove = false;
             }
+        });
+        
+        $('body').click(function(){
+        	me.hideTop();
         });
     };
 
