@@ -14,28 +14,12 @@ $(function() {
 
 	initCKPlugin();
 	
-	init();
+	
 
 
 	var $scope = angular.element(ngSection).scope();
-	kvalidate.init($("#fm"), {
-		s_title : {
-			required : true,
 	
-		},
-		s_context : "required",
-		
-	}, {
-		s_title : {
-			required : "标题必须填写",
-
-		},
-
-		s_context : "请输入内容",
-		
-	}, $scope.doupdate, "");
-	
-
+	init();
 
 });
 
@@ -56,7 +40,7 @@ function initCKPlugin()
 	            	
 	            	$scope.save(null,null,function(){
 						
-						$scope.getList();
+						//$scope.getList();
 						msg("保存成功！");
 					});
 	            	});	
@@ -94,6 +78,9 @@ function changerows(option) {
 }
 
 function init() {
+	
+
+	
 
 	initmenu($("#menuul"), "page/blog/");
 
@@ -120,6 +107,10 @@ function init() {
 	var $scope = angular.element(ngSection).scope();
 	$scope
 			.$apply(function() {
+				
+				
+			
+				
 				
 				
 				$scope.getenableList = function(id, fucOnFinished, clear) {
@@ -281,12 +272,6 @@ function init() {
 				};
 
 				$scope.addOrModify = function(item) {
-					var http2 = getImUrl();
-					var imei=item==null?"":item.imei;
-					window.location.href=http2+"page/blog/detail.jsp?imei="+imei;
-					return;
-					
-					
 					kvalidate.resetForm("#fm");
 					if (item != null) {
 						
@@ -333,7 +318,7 @@ function init() {
 										
 									
 
-										$("#myModal2").modal('show');
+									//	$("#myModal2").modal('show');
 
 									} else {
 										msg(message);
@@ -379,15 +364,30 @@ function init() {
 
 				};
 				
+				
+				$scope.cancel=function(){
+					var http2 = getImUrl();
+					
+					window.location.href=http2+"page/blog/";
+				};
+				
 				var http = getImUrl();
 
 				$scope.doupdate = function(fm, value) {
 
 					$scope.save(fm,value,function(){
-						$("#myModal2").modal('hide');
-
-						$scope.getList();
+						
+						msg("操作成功");
 						setTimeout(function() {
+							var http2 = getImUrl();
+							
+							window.location.href=http2+"page/blog/";
+							
+						}, 200);
+						//$("#myModal2").modal('hide');
+
+						//$scope.getList();
+						/*setTimeout(function() {
 							$scope.s_recordid = "";
 							$scope.s_dict_key = "";
 							$scope.s_dict_name = "";
@@ -395,7 +395,7 @@ function init() {
 							$scope.s_sort = "";
 
 							$scope.$apply();
-						}, 10);
+						}, 10);*/
 					});
 
 				};
@@ -439,6 +439,7 @@ function init() {
 								+ message);
 						if (code == 200) {
 
+							if(typeof(callback)=="function")
 							callback();
 
 						} else {
@@ -464,7 +465,7 @@ function init() {
 
 				$scope.citys_select = [ '上海', '南京', 'nanjing', '扬州', '苏州' ];
 
-				$scope.getdictList = function(id, fucOnFinished, clear) {
+				$scope.getdictList = function(callback) {
 
 					var http = getImUrl();
 
@@ -484,20 +485,23 @@ function init() {
 
 							$scope.dicts = eval(json.datalist);
 
-						
+							$scope.$apply();
 							
-							setTimeout(function() {
+						/*	setTimeout(function() {
 
 						
 								$('#q_type').get(0).selectedIndex = 1;
 							
 								$scope.q_type = $("#q_type").val();
 							
-							}, 30);
+							}, 30);*/
 
-							$scope.$apply();
+						if(typeof(callback)=="function")
+							{
+							callback();
+							}
 
-							console.log('-----guideList -OK= ');
+						
 
 						} else {
 							msg(message);
@@ -514,7 +518,7 @@ function init() {
 					);
 
 				};
-				$scope.getdictList();
+				
 
 				$scope.title = "文章管理";
 			
@@ -600,14 +604,70 @@ function init() {
 					);
 
 				};
+				
+				
+				kvalidate.init($("#fm"), {
+					s_title : {
+						required : true,
+				
+					},
+					s_context : "required",
+					
+				}, {
+					s_title : {
+						required : "标题必须填写",
+
+					},
+
+					s_context : "请输入内容",
+					
+				}, $scope.doupdate, "");
 			
-				$scope.getList();
+				//$scope.getList();
+				
+				
+				$scope.getdictList(function(){
+					var imei=GetQueryStringO("imei");
+					var object={};
+					object.imei=imei;
+					if(imei==null||imei=="")
+						object=null;
+					$scope.addOrModify(object);
+					
+				});
+				
+				
 
 				return;
 
 			});		
 
 };
+
+
+
+
+function GetQueryStringO(name) {
+
+/*    var index = window.location.href.lastIndexOf("/");
+    var indexj = window.location.href.lastIndexOf("#");
+
+    // 最后一个/开始 截取#前面的，兼容history.js html4 url
+    var searchpath = window.location.href.substr(index + 1);
+    if (indexj > 0)
+        searchpath = window.location.href.substr(index + 1, indexj - index - 1);
+*/
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$|#)", "i");
+
+    var r = window.location.search.substr(1).match(reg);
+
+    if (r != null)
+
+        return decodeURI(r[2]);
+
+    return null;
+}
+
 
 
 app.filter("sanitize", [ '$sce', function($sce) {
