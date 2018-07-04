@@ -4,7 +4,7 @@
   /* height: 200px; */
 }
 .spig {
-  display: block;
+  /* display: block; */
   width: 300px;
   height: 155px;
   position: absolute;
@@ -93,7 +93,7 @@ float: right;
   float: left;
   overflow-x: hidden;
 }
-.pall > #pleft {
+.pall > .pleft {
   float: left;
   position: relative;
 }
@@ -102,16 +102,7 @@ float: right;
   position: relative;
   padding-left: 2vh;
 }
-@media screen and (max-width: 768px) {
-  .pall .ctrl {
-    visibility: hidden;
-  }
-   .pright >.siderabout{
-   visibility: collapse;
-   height: 0px;
-  }
- 
-}
+
 .pall.is-open > .pleft {
   width: 95%;
   border-right: solid 0px #e5e5e5;
@@ -120,23 +111,35 @@ float: right;
   width: 0px;
   opacity: 0;
 }
-@media screen and (min-width: 768px) {
-  .pall > .pleft {
-    width: 73%;
-    border-right: solid 1px #e5e5e5;
-  }
-  
-
-}
-
 
 
 
 @media screen and (max-width: 768px) {
-  .wrapper > #pleft {
+	  .pall > .pright {
     width: 95%;
   }
-   .thead .sidebar-container
+	  .pall .ctrl {
+    visibility: hidden;
+  }
+   .pright .siderabout{
+   visibility: collapse;
+   height: 0px;
+  }
+  
+     .pright .sidebar-container
+  {
+
+  visibility:hidden;
+  height: 0px;
+  }
+    
+ 
+  
+  .pall  .pleft {
+    width: 95%;
+  }
+  
+    .sidebar-container
   {
    visibility: visible;
    margin-top:52px;
@@ -150,13 +153,13 @@ float: right;
     text-align: center;
   }
   
-  .thead #mhead img {
+   #mhead img {
    z-index:100;
    position: relative;
   top:-50px;
   }
   
-   .thead #mhead .hgroup {
+    #mhead .hgroup {
   position: relative;
   top:-50px;
   }
@@ -170,7 +173,7 @@ float: right;
   {
   visibility:visible; 
   } */
-  .thead #mhead {
+   #mhead {
   width: auto;
   }
   
@@ -221,7 +224,7 @@ float: right;
     float: none;
     }
   
-   .thead .sidebar-container a{
+    .sidebar-container a{
    /*   color: #65c588bf; */
    /* font-size: 15px; */
         margin: 0 auto;
@@ -230,25 +233,28 @@ float: right;
     display: block;
     
    }
-   .thead .sidebar-container p{
+    .sidebar-container p{
       color: #b2b4b5b8;
    }
   
-     #pright> .sidebar-container
-  {
-
-  visibility:hidden;
-  height: 0px;
-  }
+  
 }
-.wrapper > #pright {
+.pall > .pright {
   opacity: 1;
 }
 @media screen and (min-width: 768px) {
-  .wrapper > #pright {
+
+  .pall > .pleft {
+    width: 73%;
+    border-right: solid 1px #e5e5e5;
+  }
+  
+	
+	
+  .pall > .pright {
     width: 25%;
   }
-     #pright> .sidebar-container
+     .pright> .sidebar-container
   {
   visibility:visible;
  
@@ -269,23 +275,13 @@ float: right;
   .navbar-brand{
    visibility: visible;
    }
-  .thead #mhead {
+   #mhead {
   display: none;
   }
-  
-    .thead .sidebar-container
-  {
-   visibility: hidden;
-     height: 0px;
-    }
- 
+
 
 }
-@media screen and (max-width: 768px) {
-  .wrapper > #pright {
-    width: 95%;
-  }
-}
+
 /*折叠 end */
 .result {
   position: fixed;

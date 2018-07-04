@@ -3,7 +3,7 @@
 
 
 	
-
+<div class="">
 	<div class=" panel panel-success siderabout " >
 
 		<div class="panel-heading" title="" data-toggle="collapse" data-parent="#accordion" href="#collapseOner1">
@@ -74,6 +74,7 @@
 
 	</div>
 
+</div>
 	
 
 	

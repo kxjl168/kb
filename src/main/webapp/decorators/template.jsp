@@ -41,7 +41,7 @@
 
 
 </head>
-	<body id="ngSection" ng-app="myApp" ng-controller="eduCtrl">
+	<body id="ngSection" ng-app="myApp" ng-controller="eduCtrl" style="overflow: hidden">
 
 
 	
