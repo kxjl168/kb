@@ -73,6 +73,9 @@ function checkLogin(cb) {
 					if(typeof cb !='undefined')
 						cb();
 				}
+			},
+			error:function(a,b,c){
+				error(b);
 			}
 		});
 	}

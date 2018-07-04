@@ -12,10 +12,10 @@
 											</div>
 
 
-											<div class="col-sm-3 col-xs-12  text-right">
+											<div class="tagcloud col-sm-3 col-xs-12  text-right">
 										
-											
-											<a ng-repeat="t in x.tagStrs"  ng-click="showtgs(t)">{{t}},</a>
+											<i class="fa fa-tags"></i>
+											<a class="color2" ng-repeat="t in x.tagStrs" title="t"  ng-click="showtgs(t)" >{{t}}&nbsp;,</a>
 											</div>
 										</div>
 									</div>

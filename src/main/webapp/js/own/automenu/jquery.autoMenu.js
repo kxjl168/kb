@@ -1,6 +1,8 @@
 /* 
  * blogMenu plugin 1.0   2017-09-01 by cary
- * 说明：自动根据标签（h3,h4）生成博客目录
+ * modidfy kxjl168 20180704 MIT lincese.
+ * http://www.256kb.cn
+ * 说明：自动根据标签（h1,h2）生成博客目录
  */
 (function ($) {
 
@@ -35,7 +37,7 @@
 
                 //console.log(opts)
                 this.$element.parent().find(".autoMenu").remove();
-                this.$element.after(this.createHtml());
+                this.$element.before(this.createHtml());
                 this.setActive();
                 this.bindEvent();
                 
@@ -47,11 +49,13 @@
                 var height = typeof opts.height === 'number' && opts.height;
                 var padding = typeof opts.padding === 'number' && opts.padding;
                 //that.$element.width(width+padding*2);
-                var html = '<div class="autoMenu "><ul style="padding:' + padding + 'px">';
+                var html = '<div class="autoMenu "><span class="title">文章目录:</span><a href="javascript:void(0);" title="隐藏目录" class="btn-box">'
+                    +'<span class="icon-minus-sign"></span>'
+                    +'</a><ul >';
                 var num = 0;
                 $(that.$element).find("*") .each(function(){
                     var _this = $(this);
-                    if(_this.get(0).tagName == opts.levelOne.toUpperCase()){
+                    if(opts.levelOne.toUpperCase().indexOf( _this.get(0).tagName)>-1 ){
                         _this.attr('id',num);
                         var nodetext = that.handleTxt(_this.html());
                         html += '<li name="'+ num +'"><a href="#'+ num +'">'+ nodetext +'</a></li>';
@@ -63,9 +67,9 @@
                         num++;
                     }
                 })
-                html += '</ul><a href="javascript:void(0);" title="隐藏目录" class="btn-box">'
-                            +'<span class="icon-minus-sign"></span>'
-                        +'</a></div>';
+                html += '</ul></div>';
+                if(num==0)
+                	html="";
                 return html;   
             },
             handleTxt: function(txt){
@@ -153,8 +157,8 @@
      * 插件的默认值
      */
     $.fn.autoMenu.defaults = {
-        levelOne : 'li', //一级标题
-        levelTwo : 'h4',  //二级标题（暂不支持更多级）
+        levelOne : 'h1,ul', //一级标题
+        levelTwo : 'h2',  //二级标题（暂不支持更多级）
         width : 200, //容器宽度
         height : 400, //容器高度
         padding: 20, //内部间距

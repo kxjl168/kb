@@ -51,8 +51,8 @@ function initQuery() {
 
 					var obj = new Object();
 
-					var index = GetQueryString("i");
-					if (index != null) {
+					var index = GetQueryString("i")||$("#i").val();
+					if (index != null&&index!="") {
 						$scope.clean();
 						
 						$scope.page = index;
@@ -66,20 +66,20 @@ function initQuery() {
 					}
 					
 					
-					var blog_type = GetQueryString("bt");
-					if (blog_type != null) {
+					var blog_type = GetQueryString("bt")||$("#bt").val();
+					if (blog_type != null&&blog_type!="") {
 						$scope.clean();
 						$scope.blog_type = blog_type;
 					}
 
-					var month = GetQueryString("h");
-					if (month != null) {
+					var month = GetQueryString("h")||$("#h").val();
+					if (month != null&&month!="") {
 						$scope.clean();
 						$scope.month = month;
 					}
 
-					var blog_tag = GetQueryString("tg");
-					if (blog_tag != null) {
+					var blog_tag = GetQueryString("tg")||$("#tg").val();
+					if (blog_tag != null&&blog_tag!="") {
 						$scope.clean();
 						$scope.blog_tag = blog_tag;
 					}
@@ -175,6 +175,19 @@ function initQuery() {
 										 $('pre code').each(function(i, block) {
 									         hljs.highlightBlock(block);
 									     });
+										 
+										 
+										 jQuery(".pgdiv a.ptitle ").hover(function() {
+												jQuery(this).stop().animate({
+													//color: "#A0410D",
+													marginLeft: '15px'
+												}, 400);
+												},function() {
+													jQuery(this).stop().animate({
+													//color: "#444444",
+														marginLeft: '0px'
+												}, 400);
+											});
 										 
 									},100);
 									  

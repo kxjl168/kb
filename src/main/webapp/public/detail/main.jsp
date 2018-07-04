@@ -38,7 +38,7 @@
 
                           
 
-                                <div ng-cloak>
+                                <div id="pleft" ng-cloak>
                                     <div>
 
                                         <div class="row col-xs-12 ">
@@ -49,10 +49,10 @@
 
 
                                                 <div class="col-sm-3 col-xs-12 text-right">
-
-                                                    <a ng-repeat="t in x.tagStrs" ng-click="showtgs(t)">{{t}},</a>
+	<i class="fa fa-tags"></i>
+                                                    <a ng-repeat="t in x.tagStrs" title="t" ng-click="showtgs(t)">{{t}},</a>
                                                 </div>
-                                                <span ng-click="ff()" style="margin-top:5px;width:15px; height:20px;color:#1f4433;" class="ctrl nopaddding img-responsive col-xs-2 glyphicon glyphicon-transfer" title="隐藏/打开侧边栏"></span>
+                                                <span ng-click="ff()" style="margin-top:5px;width:15px; height:20px;color:#1f4433;" class="ctrl nopaddding img-responsive col-xs-2 fa fa-arrows-alt" title="隐藏/打开侧边栏"></span>
                                             </div>
                                         </div>
 

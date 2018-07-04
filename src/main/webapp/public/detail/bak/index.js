@@ -60,7 +60,7 @@ function init() {
 
             $scope.ff = function(e) {
 
-                var wrapper = $('.wrapper');
+                var wrapper = $('.pall');
 
 
 

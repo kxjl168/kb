@@ -15,8 +15,24 @@
 /**
 ** sprite
 */
+
+#gotop{
+float: right;
+    right: 125px;
+    position: relative;
+    top: 10px;
+    opacity: 0;
+    z-index:1;
+}
+
+
+.topcircle{
+	color:#1F7A68;
+}
+
 .mumu,
 .mumu.open {
+	z-index:2;
   background: url(../images/cat.png);
   width: 55px;
   height: 55px;
@@ -65,47 +81,47 @@
   color: #56e6a2;
 }
 /*折叠*/
-#pleft,
-#pright {
+.pleft,
+.pright {
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   -webkit-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-.wrapper {
+.pall {
   float: left;
   overflow-x: hidden;
 }
-.wrapper > #pleft {
+.pall > #pleft {
   float: left;
   position: relative;
 }
-.wrapper > #pright {
+.pall > .pright {
   float: left;
   position: relative;
   padding-left: 2vh;
 }
 @media screen and (max-width: 768px) {
-  .wrapper .ctrl {
+  .pall .ctrl {
     visibility: hidden;
   }
-   #pright >.siderabout{
+   .pright >.siderabout{
    visibility: collapse;
    height: 0px;
   }
  
 }
-.wrapper.is-open > #pleft {
+.pall.is-open > .pleft {
   width: 95%;
   border-right: solid 0px #e5e5e5;
 }
-.wrapper.is-open > #pright {
+.pall.is-open > .pright {
   width: 0px;
   opacity: 0;
 }
 @media screen and (min-width: 768px) {
-  .wrapper > #pleft {
+  .pall > .pleft {
     width: 73%;
     border-right: solid 1px #e5e5e5;
   }
@@ -779,14 +795,53 @@ a {
 	
 }
 
-.pageText ul
+
+.pageText ul,.cke_editable ul,.pageText h1,.pageText h2,.cke_editable h1,.cke_editableh2
 {
-	border-left: 5px solid #868ae8;
-    background: #6084ea6b;
-    padding-left: 5px;
+	    border-left: 5px solid #ffcea7;
+    background: #f1e5ca6b;
+    overflow: auto;
     list-style: none;
+    color: #555556;
+  
+    font-weight: bold;
+      font-size: 15px!important;
+       padding: 5px!important;
+       padding-bottom: 10px!important;
+       margin: 10px 0px!important;
+      
+}
+.pageText h2,.cke_editable h2
+{
+font-size: 13px!important;
+    border-left: 5px solid #dcdcdc;
+    background: #d8d7d76b;
+    /* border: 1px solid; */
+    margin-left: 10px;
+    color: #9a9a9a;
+      padding: 10px!important;
+}
+.pct p,.cke_editable p{
+	line-height: 1.8em;
+    word-break: break-all;
+    /* padding: 10px; */
+    margin-bottom: 2px;
+    padding: 0px!important;
+    margin-top: 0px;
 }
 
+
+.pageText {
+	    color: #565a5f;
+  
+    font: 15px "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
+}
+
+
+pre {
+ 
+    padding: 0px!important;
+}
 
 
 .rightico {
@@ -807,9 +862,10 @@ a {
 
 .lincense
 {
-    padding: 10px;
-       background: #f9eec4a3;
-    border-left: 5px #f7c477 solid;
+      padding: 10px;
+    color: #afafaf!important;
+    background: #e0e0e0a3;
+    border-left: 5px #9393a5 solid;
 }
 
 
@@ -859,10 +915,3 @@ a {
     border: 1px solid transparent;
     border-radius: 4px;
 }
-
-.pct p,.cke_editable p{
-	margin: 0 0 0.8em!important;
-	line-height: 1.2;
-}
-
-

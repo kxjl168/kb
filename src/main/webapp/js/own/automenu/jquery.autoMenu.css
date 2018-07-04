@@ -12,17 +12,39 @@
     font-family: 'Microsoft Yahei';
     line-height: 25px;
     
-    position: fixed;
+    
+    
+    
+    position: inherit;
+    float: right;
 	top: 20%;
-	right: 1%;
+	right: 5%;
 	z-index: 1;
 	text-align: left;
+	
+		border-left: 5px solid #88888e!important;
+    background: #f2efef!important;
+    
+    -webkit-box-shadow:0 0 10px #CCC;  
+  -moz-box-shadow:0 0 10px #CCC;  
+  box-shadow:0 0 10px #CCC;
+  
+  margin: 5px;
+  padding: 5px;
+   
 }
 
-
-.autoMenu ul{
-	background: #f2efef!important;
-} 
+.autoMenu .title {
+      font-size: 14px;
+    font-weight: bold;
+   color:#3c7496;
+    height: 40px;
+    line-height: 40px;
+  
+    position: relative;
+    /* float: left; */
+    vertical-align: middle;
+}
 
 .autoMenu li {
     list-style: none;
@@ -44,19 +66,20 @@
 .autoMenu ul{
 	line-height: 2;
 	overflow-y: auto; 
-	background: #fff;
-	-webkit-box-shadow:0 0 10px #CCC;  
-  -moz-box-shadow:0 0 10px #CCC;  
-  box-shadow:0 0 10px #CCC;
+	  font-weight: normal!important;
+			border-left: 0px solid #88888e!important;
+    background: #f2efef!important;
+  	padding-left:10px!important;
+    list-style: none;
 }
 .autoMenu ul>li.sub{
 	padding-left: 20px;
 }
 .autoMenu ul>li>a{
-	color: #399c9c;
+	color: #b5b5b5;
 }
 .autoMenu ul>li.active>a{
-	color: #444a7d;
+	color: #424242;
 }
 
 .autoMenu .btn-box{
@@ -65,6 +88,7 @@
     height: 40px;
     text-decoration: none;
     position: relative;
+    float: right;
 }
 .autoMenu .icon-plus-sign{
 	display: inline-block;

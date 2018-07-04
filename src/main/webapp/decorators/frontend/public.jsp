@@ -68,7 +68,7 @@
 
 		<div class=" row row-margin-top-70">
 
-		<div class="  " style="min-height: 500px;">
+		<div class=" pall " style="min-height: 500px;">
 
 			<div id="pgdiv" name="pgdiv"
 				class="col-sm-9 col-xs-12 pleft rightline">
@@ -76,7 +76,7 @@
 
 			</div>
 
-			<div class="col-sm-3 col-xs-12">
+			<div class="col-sm-3 col-xs-12 pright">
 
 				<%@include file="../../public/pright/pright.jsp"%>
 

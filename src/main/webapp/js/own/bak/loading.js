@@ -57,6 +57,8 @@ function cconfirm(msg, donecallback, cancelcallback) {
 	})
 };
 
+
+
 function success(msg) {
 	/*
 	 * swal({ title: "操作成功", text: msg, timer: 500, type:"success",
@@ -218,6 +220,9 @@ $(function() {
 
 	var obj = new Object();
 
+	
+	
+	
 	SZUMWS(http + "sysBaseInfo/getSysInfo.action", JSON.stringify(obj),
 			function succsess(json) {
 
@@ -249,7 +254,7 @@ $(function() {
 				}
 
 			}, function error(data) {
-				msg("网络异常!");
+				//("网络异常!");
 
 			}, false, "json"
 

@@ -14,8 +14,8 @@
 	<!-- 配置为实际的zteimPhoneSafe.xml位置 -->
 	<context-param>
 		<param-name>CONFIG_FILE_PATH</param-name>
-	<param-value>\\VBOXSVR\share\git\kb\etc\kb.xml</param-value> 
-	 <!--		<param-value>F:\kxjl\code\kb\etc\kb.xml</param-value>--> 
+	 <!--<param-value>\\VBOXSVR\share\git\kb\etc\kb.xml</param-value> --> 
+			<param-value>F:\kxjl\code\kb\etc\kb.xml</param-value>
 		
 	</context-param>
 	
@@ -85,6 +85,7 @@
     <url-pattern>*.jpeg</url-pattern>
     <url-pattern>*.gif</url-pattern>
     
+    <url-pattern>/css/*</url-pattern>   
     <url-pattern>/images/*</url-pattern>        
      <url-pattern>/html/*</url-pattern>
     <url-pattern>/js/*</url-pattern>
@@ -205,7 +206,7 @@
         <filter-class>com.kxjl.tool.prerenderio.PreRenderSEOFilter</filter-class>
         <init-param>
             <param-name>prerenderServiceUrl</param-name>
-            <param-value>http://256kb.cn:13333</param-value>
+            <param-value>http://www.256kb.cn:13333</param-value>
         </init-param>
         <init-param>
             <param-name>crawlerUserAgents</param-name>
@@ -230,7 +231,7 @@
   <filter-mapping>
     <filter-name>sitemesh</filter-name>
     <url-pattern>/*</url-pattern>
-  
+   
   </filter-mapping>
   
    

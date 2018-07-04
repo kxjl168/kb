@@ -17,7 +17,12 @@
 
 <body>
 	<div ng-cloak>
-
+	
+	<input type="hidden" id="i" value="${i }" />
+	<input type="hidden" id="bt" value="${bt }" />
+		<input type="hidden" id="tg" value="${tg }" />
+			<input type="hidden" id="h" value="${h }" />
+ 
 						<%@include file="../list.jsp"%>
 
 					</div>

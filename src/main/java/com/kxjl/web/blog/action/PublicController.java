@@ -3,6 +3,7 @@ package com.kxjl.web.blog.action;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,7 @@ import com.kxjl.web.system.action.base.BaseController;
 import com.kxjl.web.system.model.DictInfo;
 import com.kxjl.web.system.model.SysUserBean;
 import com.kxjl.web.system.service.SysService;
+import com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex.KeyIndexIterator;
 
 import sun.util.logging.resources.logging;
 
@@ -62,7 +64,19 @@ public class PublicController extends BaseController {
 
 		ModelAndView view = getSysData();
 		view.setViewName("/public/index/main");
+		
+		
+		Enumeration paras= request.getParameterNames();
+		while(paras.hasMoreElements()) {
+			
+			String v= (String)paras.nextElement();
+		
+			
+			view.addObject(v,request.getParameter(v));
 
+		}
+		
+		
 		return view;
 	}
 	
@@ -70,7 +84,7 @@ public class PublicController extends BaseController {
 	public ModelAndView about(HttpServletRequest request) {
 
 		ModelAndView view = getSysData();
-		view.setViewName("/public/about/index");
+		view.setViewName("/public/about/main");
 
 		return view;
 	}
@@ -79,7 +93,7 @@ public class PublicController extends BaseController {
 	public ModelAndView bx(HttpServletRequest request) {
 
 		ModelAndView view = getSysData();
-		view.setViewName("/public/bx/index");
+		view.setViewName("/public/bx/main");
 
 		return view;
 	}
@@ -121,7 +135,7 @@ public class PublicController extends BaseController {
 		ModelAndView view = getSysData();
 		view.setViewName("/public/index/");
 
-		return "/public/search/index";
+		return "/public/search/main";
 	}
 
 	@RequestMapping(value = "/page/set")
@@ -147,7 +161,7 @@ public class PublicController extends BaseController {
 
 		maps.putAll(sysService.getSysInfo());
 
-		return "/pown/" + url + "/index";
+		return "/pown/" + url + "/main";
 	}
 
 	@RequestMapping(value = "/public/cat")
@@ -155,7 +169,7 @@ public class PublicController extends BaseController {
 		ModelAndView view = getSysData();
 		view.setViewName("/public/index/");
 
-		return "/public/cat/index";
+		return "/public/cat/main";
 	}
 
 	@RequestMapping(value = "/public/detail")

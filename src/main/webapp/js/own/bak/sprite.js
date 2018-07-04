@@ -1,4 +1,20 @@
 (function(window) {
+	
+	 $.fn.extend({
+	        returntop: function() {
+	            if (this[0]) {
+	                var b = this.click(function() {
+	                    $("html, body").animate({
+	                        scrollTop: 0
+	                    },
+	                    300)
+	                }),
+	                c = null;
+	            }
+	        }
+
+	    });
+	
 
     function Sprite(options) {
         this.default = {
@@ -110,12 +126,32 @@
             me.startAnimate();
 
 
+            
+            $("body").find('#gotop').stop().animate({
+				color: "#A0410D",
+			 right:'80px',
+			 opacity:1,
+			}, 400);
+			
+            
 
         });
         $(me.default.sid).mouseout(function() {
             $(me.default.sid).fadeTo("300", 1);
             me.stopAnimate();
         });
+        
+
+		 $(this.default.scontainer).hover(function() {
+			 
+				},function() {
+					$("body").find('#gotop').stop().animate({
+						//color: "#A0410D",
+					 right:'125px',
+					 opacity:0,
+					}, 400);	
+			});
+		 
     };
 
     Sprite.prototype.initHit = function() {
@@ -302,7 +338,15 @@
 
         var dom = " <div id=\"spig\" class=\"spig\" style=\"top: 1225px; left: 171.625px;\"> " +
             " <div id=\"message\" style=\"display: block; opacity: 0.498272;\">" + this.default.initmsg + "</div> " +
-            " <div id=\"mumu\" class=\"mumu\" style=\"opacity: 1;\"></div> " +
+            
+            "<div id='gotop' title='返回顶部'><span class='fa-stack fa-lg'> " +
+            ' <i class="fa fa-circle fa-stack-2x topcircle"></i> '+
+            '   <i class="fa fa-rocket fa-stack-1x fa-inverse"></i> '+
+            '  </span> '+
+            '</div>  ' +
+            
+            " <div id=\"mumu\" class=\"mumu\" style=\"opacity: 1;\"></div>" +
+           
             " </div> ";
 
         var spig=$("#spig");
@@ -314,9 +358,19 @@
         this.default.scontainer = $("body").find(this.default.scontainer);
         this.default.smsg = $("body").find(this.default.smsg);
         this.default.mumu = $("body").find(this.default.mumu);
-        	
+        
+        //回顶部
+        $("body").find('#gotop').returntop();
+        
+        
+        
+		
 
     };
+    
+    
+
+
 
 
     Sprite.prototype.initScroll = function() {

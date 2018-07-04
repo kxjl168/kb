@@ -31,6 +31,8 @@
 
 <link rel="stylesheet" href="${basePath}/css/tooltip.css">
 
+
+<link rel="stylesheet" href="${basePath}/css/font-awesome-4.7.0/css/font-awesome.min.css">
 	
 	
 

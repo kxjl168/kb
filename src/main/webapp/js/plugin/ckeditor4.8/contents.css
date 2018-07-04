@@ -207,7 +207,58 @@ a > img {
 	margin:0 auto;
 }
 
-.cke_editable p{
-	margin: 0 0 0.8em!important;
-	line-height: 1.1!important;
+
+/* modify css */
+.cke_editable {
+	    color: #565a5f;
+  
+    font: 15px "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
 }
+
+
+.pageText ul,.cke_editable ul
+{
+	border-left: 5px solid #868ae8;
+     background: #6084ea6b;
+     overflow:auto;
+    
+    list-style: none;
+    font-weight: bold;
+    padding: 5px!important;
+   
+}
+.pageText h1,.pageText h2,.cke_editable h1,.cke_editableh2
+{
+	    border-left: 5px solid #ffcea7;
+    background: #f1e5ca6b;
+    overflow: auto;
+    list-style: none;
+    color: #555556;
+  
+    font-weight: bold;
+      font-size: 15px!important;
+       padding: 5px!important;
+       padding-bottom: 10px!important;
+      
+}
+
+.pageText h2,.cke_editable h2
+{
+font-size: 13px!important;
+    border-left: 5px solid #dcdcdc;
+    background: #d8d7d76b;
+    /* border: 1px solid; */
+    margin-left: 10px;
+    color: #9a9a9a;
+      padding: 10px!important;
+}
+.pct p,.cke_editable p{
+	line-height: 1.8em;
+    word-break: break-all;
+    /* padding: 10px; */
+    margin-bottom: 2px;
+    padding: 0px!important;
+    margin-top: 0px;
+}
+
+
