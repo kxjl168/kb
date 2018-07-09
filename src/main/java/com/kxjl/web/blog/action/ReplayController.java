@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -30,6 +31,7 @@ import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.tool.config.configWarthDog;
 import com.kxjl.tool.sendmail.MailUtil;
+import com.kxjl.tool.utils.CookieUtil;
 import com.kxjl.tool.utils.IPUtils;
 import com.kxjl.tool.utils.JEscape;
 import com.kxjl.tool.utils.JsonUtil;
@@ -53,6 +55,9 @@ public class ReplayController extends BaseController {
 
 	@Autowired
 	BlogService blogService;
+
+	@Autowired
+	CookieUtil cookieUtil;
 
 	@RequestMapping(value = "/")
 	public ModelAndView GroupList() {
@@ -256,10 +261,10 @@ public class ReplayController extends BaseController {
 			Replay replay = new Replay();
 			replay.setBlogimei(imei);// (recordid);// (accountid);
 			replay.setReplay_recordid(pid);
-			
-			if(!ublog.startsWith("http"))
-				ublog="http://"+ublog;
-			
+
+			if (!ublog.startsWith("http"))
+				ublog = "http://" + ublog;
+
 			replay.setUser_blog(ublog);
 			replay.setUserid(userid);
 			replay.setPpid(ppid);
@@ -271,9 +276,7 @@ public class ReplayController extends BaseController {
 				replay.setUser_blog("http://www.256kb.cn");
 				replay.setUserid("KxのBOOK");
 				replay.setState("1");
-			}
-			else
-			{
+			} else {
 				replay.setState("0");
 			}
 
@@ -290,7 +293,7 @@ public class ReplayController extends BaseController {
 
 				Kdata.getInstance().cleanrBLogList("");
 
-				//String key = "replay_getInfoList" + "_" + imei + "_";
+				// String key = "replay_getInfoList" + "_" + imei + "_";
 				Kdata.getInstance().cleanrReplayList("");
 
 				jsonOut.put("ResponseCode", 200);
@@ -313,29 +316,29 @@ public class ReplayController extends BaseController {
 				if (enableMail.equalsIgnoreCase("true")) {
 
 					if (!isRoot) {
-						//访客留言
+						// 访客留言
 						String rtitle = "关于";
 						if (!imei.equals("about"))
 							rtitle = blog.getTitle();
-						final String title = "KxのBook上的["+rtitle+"]的有了新的评论";
+						final String title = "KxのBook上的[" + rtitle + "]的有了新的评论";
 						String uid = xssEncode(JEscape.unescape(userid));
 						String ucontent = xssEncode(JEscape.unescape(content));
-					//	final String message = "From " + uid + ":\r\n<br>" + ucontent + "";
+						// final String message = "From " + uid + ":\r\n<br>" + ucontent + "";
 						final String recvmail = ConfigReader.getInstance().getProperty("AdminMail");
 
-						String url="";
+						String url = "";
 						if (!imei.equals("about"))
-						url=ConfigReader.getInstance().getProperty("domain","http://www.256kb.cn")+ "/public/html/"+blog.getShowdate()+"/"+blog.getImei()+".html#commet";
+							url = ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn")
+									+ "/public/html/" + blog.getShowdate() + "/" + blog.getImei() + ".html#commet";
 						else
-							url=ConfigReader.getInstance().getProperty("domain","http://www.256kb.cn")+ "/public/about/";
-						
-						final String message =  " 《 " + rtitle + "》收到了来至"+uid+"(email:"+replay.getEmail()+"/blog:"+replay.getUser_blog()+")的新回复.\r\n<br>"
-								+ ucontent
-								+ "<a href=\""+url+"\">点击这里查看</a>"
-								+ "+\r\n<br><div>若上述链接无法打开,请将该地址复制到浏览器地址栏中访问<a href=\""+url+"\">"+url+"</a></div>";
-						
-						
-						
+							url = ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn")
+									+ "/public/about/";
+
+						final String message = " 《 " + rtitle + "》收到了来至" + uid + "(email:" + replay.getEmail()
+								+ "/blog:" + replay.getUser_blog() + ")的新回复.\r\n<br>" + ucontent + "<a href=\"" + url
+								+ "\">点击这里查看</a>" + "+\r\n<br><div>若上述链接无法打开,请将该地址复制到浏览器地址栏中访问<a href=\"" + url + "\">"
+								+ url + "</a></div>";
+
 						new Thread(new Runnable() {
 
 							@Override
@@ -345,33 +348,34 @@ public class ReplayController extends BaseController {
 							}
 						}).start();
 					} else {
-						//答复
-						if(replay.getReplay_recordid()!=0)
-						{
-							Replay rqq=new Replay();
+						// 答复
+						if (replay.getReplay_recordid() != 0) {
+							Replay rqq = new Replay();
 							rqq.setRecordid(replay.getReplay_recordid());
-							Replay toReplay=replayService.getReplay(rqq);
+							Replay toReplay = replayService.getReplay(rqq);
 							String uid = xssEncode(JEscape.unescape(replay.getUserid()));
 							String ucontent = xssEncode(JEscape.unescape(replay.getContent()));
-							if(toReplay.getEmail()!=null&&!toReplay.getEmail().equals(""))
-							{
-								//访客留言
+							if (toReplay.getEmail() != null && !toReplay.getEmail().equals("")) {
+								// 访客留言
 								String rtitle = "关于";
 								if (!imei.equals("about"))
 									rtitle = blog.getTitle();
 								final String title = "你在KxのBook的评论有了新的回复";
-							
-								
-								String url="";
+
+								String url = "";
 								if (!imei.equals("about"))
-									url=ConfigReader.getInstance().getProperty("domain","http://www.256kb.cn")+ "/public/html/"+blog.getShowdate()+"/"+blog.getImei()+".html#commet";
-									else
-										url=ConfigReader.getInstance().getProperty("domain","http://www.256kb.cn")+ "/public/about/";
-									
-								
-								final String message =  uid +"你好! 你在《 " + rtitle + "》中的评论收到了来至 KxのBook[野生的喵喵]的新回复.<a href=\""+url+"\">点击这里查看</a>"
-										+ "+\r\n<br><div>若上述链接无法打开,请将该地址复制到浏览器地址栏中访问<a href=\""+url+"\">"+url+"</a></div>";
-								final String recvmail =toReplay.getEmail();
+									url = ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn")
+											+ "/public/html/" + blog.getShowdate() + "/" + blog.getImei()
+											+ ".html#commet";
+								else
+									url = ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn")
+											+ "/public/about/";
+
+								final String message = uid + "你好! 你在《 " + rtitle
+										+ "》中的评论收到了来至 KxのBook[野生的喵喵]的新回复.<a href=\"" + url + "\">点击这里查看</a>"
+										+ "+\r\n<br><div>若上述链接无法打开,请将该地址复制到浏览器地址栏中访问<a href=\"" + url + "\">" + url
+										+ "</a></div>";
+								final String recvmail = toReplay.getEmail();
 
 								new Thread(new Runnable() {
 
@@ -382,10 +386,18 @@ public class ReplayController extends BaseController {
 									}
 								}).start();
 							}
-							
+
 						}
 
 					}
+
+				}
+
+				if (!isRoot) {
+
+					cookieUtil.editCookie(request, response, "uemail", replay.getEmail(), 3600 * 24 * 15);// 15Day
+					cookieUtil.editCookie(request, response, "uname", replay.getUserid(), 3600 * 24 * 15);// 15Day
+					cookieUtil.editCookie(request, response, "usite", replay.getUser_blog(), 3600 * 24 * 15);// 15Day
 
 				}
 
@@ -443,7 +455,7 @@ public class ReplayController extends BaseController {
 
 			if (replayService.updateReplay(r) > 0) {
 
-				updateBlogCount(rp);
+				updateBlogCount(rp, true);
 
 				jsonOut.put("ResponseCode", "200");
 				jsonOut.put("ResponseMsg", "操作成功");
@@ -495,7 +507,7 @@ public class ReplayController extends BaseController {
 		return sb.toString();
 	}
 
-	private void updateBlogCount(Replay rp) {
+	private void updateBlogCount(Replay rp, boolean isadd) {
 		if (!rp.getBlogimei().equals("about")) {
 			Replay rqq = new Replay();
 			rqq.setBlogimei(rp.getBlogimei());
@@ -505,7 +517,8 @@ public class ReplayController extends BaseController {
 			bq.setImei(rp.getBlogimei());
 			Blog blog = blogService.getBlogInfoById(bq);
 
-			blog.setReplay_nums(replay_nums + 1);
+			blog.setReplay_nums(replay_nums);
+
 			blogService.updateBlog(blog);
 		}
 
@@ -545,7 +558,7 @@ public class ReplayController extends BaseController {
 
 			if (replayService.deleteReplay(recordid) > 0) {
 
-				updateBlogCount(rp);
+				updateBlogCount(rp, false);
 
 				res.put("ResponseCode", "200");
 				res.put("ResponseMsg", "删除成功");

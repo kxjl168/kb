@@ -36,6 +36,7 @@ import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.common.Md5Encrypt;
 import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.tool.utils.AESEncrypt;
+import com.kxjl.tool.utils.CookieUtil;
 import com.kxjl.tool.utils.JsonUtil;
 import com.kxjl.tool.utils.StringUtil;
 import com.kxjl.web.autodata.dao.VisitDataMapper;
@@ -83,6 +84,9 @@ public class SysBaseInfoController extends BaseController {
 
 	@Autowired
 	private SysService sysService;
+	
+	@Autowired
+	private CookieUtil cookieUti;
 
 	// 日志记录对象
 	private Logger log = Logger.getLogger(SysBaseInfoController.class);
@@ -149,6 +153,28 @@ public class SysBaseInfoController extends BaseController {
 
 		}
 		rst = jsonOut.toString();
+		JsonUtil.responseOutWithJson(response, rst);
+
+	}
+	
+	@RequestMapping(value = "/getCookie")
+	public void getCookie(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		String uemail=cookieUti.getCookieByName(request,"uemail");
+		String uname=cookieUti.getCookieByName(request,"uname");
+		String usite=cookieUti.getCookieByName(request,"usite");
+
+		JSONObject jsonOut=new JSONObject();
+		jsonOut.put("uemail", uemail);
+		jsonOut.put("uname", uname);
+		jsonOut.put("usite", usite);
+	
+	
+		
+		jsonOut.put("ResponseCode", "200");
+		jsonOut.put("ResponseMsg", "");
+		String rst = jsonOut.toString();
 		JsonUtil.responseOutWithJson(response, rst);
 
 	}

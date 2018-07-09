@@ -102,7 +102,7 @@
   transition: all 0.3s ease-in-out;
 }
 .pall {
-  /* float: left; */
+  float: left; 
   overflow-x: hidden;
 }
 .pall > .pleft {

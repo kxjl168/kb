@@ -192,6 +192,55 @@ function initReplayModel() {
 
 				var http = getImUrl();
 
+				
+
+				$scope.getCookie = function() {
+
+					var obj = {};
+
+		
+					SZUMWS(http + "sysBaseInfo/getCookie.action", JSON
+							.stringify(obj), function succsess(json) {
+
+						var code = json.ResponseCode;
+						var message = json.ResponseMsg;
+						console.log('-----return -code= ' + code + ';message= '
+								+ message);
+						if (code == 200) {
+
+							//msg("感谢您的关注,评论等待审核中...");
+
+							var uemail=json.uemail;
+							var uname=json.uname;
+							var usite=json.usite;
+							
+							$("#s_uid").val(uname);
+							$("#s_ublog").val(unescape( usite));
+							$("#s_email").val(uemail);
+							
+							$scope.s_uid=uname;
+							$scope.s_ublog=unescape( usite);
+							$scope.s_email=uemail;
+						
+
+						} else {
+						//	msg(message);
+						}
+
+					}, function error(data) {
+						//msg("net work error！");
+
+					}, false, false
+
+					);
+
+				};
+				$scope.getCookie();
+				
+				
+				
+				
+				
 				$scope.doupdate = function(fm) {
 
 					var obj = {};
@@ -226,10 +275,10 @@ function initReplayModel() {
 							msg("感谢您的关注,评论等待审核中...");
 
 							setTimeout(function() {
-								$scope.s_uid = "";
+								//$scope.s_uid = "";
 								$scope.s_text = "";
-								$scope.s_ublog = "";
-								$scope.s_email = "";
+								//$scope.s_ublog = "";
+								//$scope.s_email = "";
 								$scope.canc();
 
 								$scope.$apply();
