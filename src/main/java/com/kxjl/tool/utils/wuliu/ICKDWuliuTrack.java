@@ -282,11 +282,11 @@ public class ICKDWuliuTrack extends AbsWuliuTrack {
 		logger.debug(url);
 
 		String rst = track.sendPost(url, null);
-
+		logger.info(rst);
 		try {
 			JSONObject js = new JSONObject(rst);
 			if (js.optString("errCode").equals("0")) {
-				logger.debug(rst);
+				logger.info(rst);
 			} else {
 				if (js.optString("errCode").equals("11")) {
 					logger.debug(rst);
@@ -305,7 +305,7 @@ public class ICKDWuliuTrack extends AbsWuliuTrack {
 					rst = K100Track.GetWuliu(num);
 				}
 				
-				logger.debug(rst);
+				logger.info(rst);
 			}
 
 		} catch (Exception e) {
