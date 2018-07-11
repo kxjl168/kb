@@ -44,7 +44,7 @@
 
  			<div id="d1" onclick="msg($(window).scrollTop()+'/'+$('html').scrollTop());" style="border: 1px solid red;height: 1500px">111</div>
  			
- 		
+ 		<script type="text/javascript" src="//ra.revolvermaps.com/0/0/8.js?i=0hklog811es&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>
 
         </body>
 

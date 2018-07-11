@@ -31,6 +31,7 @@ import com.google.gson.JsonObject;
 import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.utils.JEscape;
 import com.kxjl.tool.utils.JsonUtil;
+import com.kxjl.tool.utils.wuliu.ICKDWuliuTrack;
 import com.kxjl.web.blog.model.Blog;
 import com.kxjl.web.blog.model.Kurl;
 import com.kxjl.web.blog.service.KurlService;
@@ -52,6 +53,27 @@ public class PublicController extends BaseController {
 	@Autowired
 	SysService sysService;
 
+	
+
+	@RequestMapping("/public/wuliu")
+	public String wuliu(Map<String, Object> map) {
+
+		
+
+		return "/public/wuliu/main";
+	}
+
+	@RequestMapping("/public/wuliuinfo")
+	
+	public void wuliuinfo( String id,HttpServletResponse response) {
+
+
+	
+		String jStr = ICKDWuliuTrack.GetWuliu(id);
+
+		JsonUtil.responseOutWithJson(response, jStr);
+	}
+	
 	
 	@RequestMapping(value = "/public/index/{type}/{value}.html")
 	public String listhtml(HttpServletRequest request,@PathVariable("type") String type,@PathVariable("value") String value) {

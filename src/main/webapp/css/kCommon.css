@@ -933,3 +933,109 @@ pre {
     border: 1px solid transparent;
     border-radius: 4px;
 }
+
+
+
+
+/**
+物流信息
+
+*/
+
+.wuliu{
+	position: relative;
+    font-size: 16px;
+    background: #FFF;
+    padding: 20px 30px;
+}
+
+.wuliu tr {
+    line-height: 50px!important;
+    overflow: hidden;
+}
+.wuliu .line{
+	    position: relative;
+	    z-index:1;
+	     overflow: hidden;
+}
+.wuliu .lineparent{
+	
+width: 40px!important;
+
+    color: #c6c6c6;
+    overflow: hidden;
+    text-align: center;
+}
+
+
+.wuliu .line:after, .wuliu .line:before {
+    content: ' ';
+    position: absolute;
+    display: block;
+    width: 1px;
+    height: 100px;
+    left: 50%;
+    top: -100px;
+    margin-left: 0;
+    background: #c6c6c6;
+}
+
+.wuliu .line:after {
+    top: auto;
+    bottom: -105px;
+}
+
+
+.wuliu .route-icon:before {
+    font-family: ickdfont;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-style: normal;
+    font-size: 18px;
+  
+    z-index: 1;
+}
+.wuliu  .first .line:before {
+    display: none;
+}
+
+.wuliu  .last .line:after {
+    display: none;
+}
+
+ .result-table-header {
+    height: 43px;
+    text-align: center;
+    line-height: 43px;
+    font-size: 15px;
+    display: flex;
+    border-bottom: 2px solid #3385ff;
+}
+
+.tbdiv
+{
+	bottom: 8px;
+}
+.itop:before{
+	    position: relative;
+    height: 15px;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+.igray{
+	color:#eee;
+}
+.itime{
+	font-weight: bold;
+}
+.done{
+	color:#2b8bea;
+}
+.ibottom:before{
+	    position: relative;
+    height: 15px;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
