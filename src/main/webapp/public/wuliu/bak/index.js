@@ -66,7 +66,9 @@ var createResultHtml = function(json, forceOrd) {
     if(forceOrd!=null ){
     	
     	json.data=json.data.reverse();
-    	if(json.ord=="ASC"){
+    
+    }
+if(json.ord=="ASC"){
     	
     	uclass=" igray ";
     	dclass=" ";
@@ -79,22 +81,20 @@ var createResultHtml = function(json, forceOrd) {
         	json.ord="ASC";
     		}
     	
-    
-    }
    
     
     qdata=json;
     	
     
-    html += '<div class="col-xs-12 row">'+json.expTextName+'</div>';
+    html += '<div class=" row">'+json.expTextName+'</div>';
    
-    html += '<div class="col-xs-12 row result-table-header ' + json.ord + ' notranslate">' + '<span class="col-xs-3" data-order="' + ord + '" onClick="sortResult()"  >时间'
-   +' <div class="tbdiv col-xs-3 pull-right row">   '
+    html += '<div class=" row result-table-header ' + json.ord + ' notranslate">' + '<span class="col-xs-3 " data-order="' + ord + '" onClick="sortResult()"  >时间'
+   +' <div class="tbdiv col-sm-3 col-xs-5 pull-right row">   '
    +' <i id="itop" class="itop col-xs-12 fa fa-caret-up '+uclass+' fa-stack-1x" ></i> '
    +' <i id="ibottom" class="ibottom col-xs-12 fa fa-caret-down  '+dclass+' fa-stack-1x"></i> '
    +' </div> '
-    +' </span>' + '<span class="col-xs-8">地点和跟踪进度</span>' + "</div>";
-    html += '<table class="result-data wuliu ' + ord + '" border="0" cellspacing="0" width="100%">';
+    +' </span>' + '<span class="col-sm-5 col-xs-7">地点和跟踪进度</span>' + "</div>";
+    html += '<div class="row result-data wuliu ' + ord + '" border="0" cellspacing="0" width="100%">';
     var index = 0;
     var lastday,cday;
     for (var i = 0, l = json.data.length; i < l; i++) {
@@ -176,10 +176,10 @@ var createResultHtml = function(json, forceOrd) {
         	}
         
         
-        html += '<tr class="' + clsName + '">';
-        html += '<td class="col-xs-2 itime">' + cday + "</td>";
-        html += '<td class="col-xs-1 ">' + ctime + "</td>";
-        html += '<td class="col-2 lineparent"><span class="line">';
+        html += '<div class="trow  row ' + clsName + '">';
+        html += '<div class="col-sm-3 col-xs-12 itime">' + cday + "</div>";
+        html += '<div class="col-sm-2 col-xs-11 coltime">' + ctime + "</div>";
+        html += '<div class="col-sm-1 col-xs-2 lineparent"><span class="line">';
         	
         	  html+=''
                   +	' <span class="fa-stack route-icon ' +  done +' "> '
@@ -187,12 +187,12 @@ var createResultHtml = function(json, forceOrd) {
                   +	'  <i class="fa '+icon+' fa-stack-1x "></i> '
                   +	'  </span> ';
         	
-        	html+='</i></span></td>';
-        html += '<td class="col-xs-8" id="content-index-' + index + '">' + row.context + ad + "</td>";
-        html += "</tr>";
+        	html+='</i></span></div>';
+        html += '<div class="col-sm-6 col-xs-10 lastcol" id="content-index-' + index + '">' + row.context + ad + "</div>";
+        html += "</div>";
         index++;
     }
-    html += "</table>";
+    html += "</div>";
     html += "</div>";
     return html;
 };
@@ -387,16 +387,16 @@ function init() {
 				};
 				
 				$scope.search = function(url) {
-
+					var http = getImUrl();
 					var obj = {};
 
-					if($("#num").val()==null||$("#num").val()==""||$("#num").val().length<4)
+					if($("#kwd").val()==null||$("#kwd").val()==""||$("#kwd").val().length<4)
 						{
 						info("请输入正确快递单号！");
 						return;
 						}
 					
-					obj.id =$("#num").val();
+					obj.id =$("#kwd").val();
 
 					SZUMWS(http + "public/wuliuinfo.action", JSON
 							.stringify(obj), function succsess(response) {
@@ -415,7 +415,7 @@ function init() {
 						msg("net work error！");
 						
 
-					}, true, false
+					}, true, "json"
 
 					);
 

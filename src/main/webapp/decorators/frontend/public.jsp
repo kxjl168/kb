@@ -68,7 +68,7 @@
 
 		<div class=" row row-margin-top-70">
 
-		<div class=" pall " style="min-height: 500px;">
+		<div class=" pall col-xs-12 " style="min-height: 500px;">
 
 			<div id="pgdiv" name="pgdiv"
 				class="col-sm-9 col-xs-12 pleft rightline">

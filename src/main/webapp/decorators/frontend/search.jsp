@@ -68,10 +68,10 @@
 
 		<div class=" row row-margin-top-70">
 
-		<div class="  " style="min-height: 500px;">
+		<div class=" pall " style="min-height: 500px;">
 
 			<div id="pgdiv" name="pgdiv"
-				class="col-sm-12 col-xs-12 pleft rightline">
+				class=" col-sm-12 col-xs-12 pleft rightline">
 				<sitemesh:write property='body' />
 
 			</div>

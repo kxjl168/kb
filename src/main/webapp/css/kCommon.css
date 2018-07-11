@@ -102,7 +102,7 @@
   transition: all 0.3s ease-in-out;
 }
 .pall {
-  float: left; 
+ /* float: left; */ 
   overflow-x: hidden;
 }
 .pall > .pleft {
@@ -942,6 +942,8 @@ pre {
 
 */
 
+
+
 .wuliu{
 	position: relative;
     font-size: 16px;
@@ -949,7 +951,7 @@ pre {
     padding: 20px 30px;
 }
 
-.wuliu tr {
+.wuliu tr ,.wuliu .trow{
     line-height: 50px!important;
     overflow: hidden;
 }
@@ -959,11 +961,10 @@ pre {
 	     overflow: hidden;
 }
 .wuliu .lineparent{
-	
-width: 40px!important;
+	padding:10px;
 
     color: #c6c6c6;
-    overflow: hidden;
+    
     text-align: center;
 }
 
@@ -1038,4 +1039,56 @@ width: 40px!important;
     display: block;
     margin: 0;
     padding: 0;
+}
+
+
+@media screen and (max-width: 768px) {
+	
+	
+	.row-margin-top-70{
+	margin-top: 10px;
+	}
+	
+.wuliu{
+	
+    padding: 0px ;
+}
+.tbdiv{
+	position:absolute;
+	top: -5px;
+	right: -5px; 
+}
+
+
+.col-xs-12{
+	padding: 0px!important;
+}
+.pall{
+	padding-left: 10px!important;
+}
+	.lastcol{
+	border-bottom: 1px solid #eee;
+	}
+	
+	.itime{
+	padding-left: 50px;
+	}
+	
+	.coltime{
+	padding-left: 80px;
+	}
+.wuliu .line:after, .wuliu .line:before {
+
+    height: 220px;
+
+    top: -220px;
+
+}
+
+.wuliu .line:after {
+    top: auto;
+    bottom: -225px;
+}
+
+
 }

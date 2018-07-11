@@ -28,112 +28,112 @@ import org.json.JSONObject;
  * 
  *      <pre>
  * 
-$.jsonp({
-    url: "//biz.trace.ickd.cn/" + com.spell + "/" + no,
-    data: $("#queryForm").serialize() + "&tk=" + Query.sign(no + time) + "&tm=" + time,
-    dataType: "jsonp",
-    jsonp: "callback",
-    callbackParameter: "callback",
-    success: function(a, b) {
-        THIS._afterQuery();
-        if (a == "reTry") {
-            return window.__reCallbackSuccess = arguments.callee
-        }
-        if ("success" == b) {
-            THIS.showResult(a)
-        }
-    },
-    error: function(a, b) {
-        THIS._afterQuery();
-        locakMask = false;
-        if ("timeout" == b) {
-            THIS.showError("查询超时，请重新查询。")
-        } else if ("error" == b) {
-            THIS.showError("系统发生错误，请稍后再试。")
-        }
-    },
-    cache: !1,
-    timeout: 18e3
-})
-
-
-Query.sign = function() {
-    function a() {
-        var a, b, c;
-        for (b = 0; 256 > b; b += 1) {
-            for (a = b,
-            c = 0; 8 > c; c += 1)
-                1 & a ? a = j ^ a >>> 1 : a >>>= 1;
-            g[b] = a >>> 0
-        }
-    }
-    function b(a) {
-        return Array.prototype.map.call(a, function(a) {
-            return a.charCodeAt(0)
-        })
-    }
-    function c(a) {
-        var b, c, d, e, f = -1;
-        for (b = 0,
-        d = a.length; d > b; b += 1) {
-            for (e = 255 & (f ^ a[b]),
-            c = 0; 8 > c; c += 1)
-                1 === (1 & e) ? e = e >>> 1 ^ j : e >>>= 1;
-            f = f >>> 8 ^ e
-        }
-        return -1 ^ f
-    }
-    function d(a, b) {
-        var c, e, f;
-        if ("undefined" != typeof d._x1l0o && b && a || (d._x1l0o = -1,
-        a)) {
-            for (c = d._x1l0o,
-            e = 0,
-            f = a.length; f > e; e += 1)
-                c = c >>> 8 ^ g[255 & (c ^ a[e])];
-            return d._x1l0o = c,
-            -1 ^ c
-        }
-    }
-    function e(a) {
-        var b, c, d, e, f, g = typeof a, h = 16, i = 0;
-        if ("string" !== g && "number" !== g)
-            return 0 / 0;
-        if (a = (a + "").replace(/\s/g, "").split(".")[0],
-        b = a.length,
-        !b)
-            return 0 / 0;
-        if (h || (h = 10),
-        "number" != typeof h || 2 > h || h > 36)
-            return 0 / 0;
-        for (c = a.split("").reverse(),
-        d = 0; b > d; d++)
-            e = c[d],
-            f = e.charCodeAt(0),
-            f >= 97 && (e = f - 87),
-            i += Math.floor(e) * Math.pow(h, d);
-        return i
-    }
-    var f, g = [], h = "edb", i = 15900, j = e(h + e(i));
-    return a(),
-    f = function(a, e) {
-        var a = "string" == typeof a ? b(a + document.URL) : a
-          , f = e ? c(a) : d(a);
-        return (f >>> 0).toString(16)
-    }
-    ,
-    f.direct = c,
-    f.table = d,
-    f
-}();
- * 
- *      </pre>
+ * $.jsonp({
+ *     url: "//biz.trace.ickd.cn/" + com.spell + "/" + no,
+ *     data: $("#queryForm").serialize() + "&tk=" + Query.sign(no + time) + "&tm=" + time,
+ *     dataType: "jsonp",
+ *     jsonp: "callback",
+ *     callbackParameter: "callback",
+ *     success: function(a, b) {
+ *         THIS._afterQuery();
+ *         if (a == "reTry") {
+ *             return window.__reCallbackSuccess = arguments.callee
+ *         }
+ *         if ("success" == b) {
+ *             THIS.showResult(a)
+ *         }
+ *     },
+ *     error: function(a, b) {
+ *         THIS._afterQuery();
+ *         locakMask = false;
+ *         if ("timeout" == b) {
+ *             THIS.showError("查询超时，请重新查询。")
+ *         } else if ("error" == b) {
+ *             THIS.showError("系统发生错误，请稍后再试。")
+ *         }
+ *     },
+ *     cache: !1,
+ *     timeout: 18e3
+ * })
  * 
  * 
- * 综合查询
+ * Query.sign = function() {
+ *     function a() {
+ *         var a, b, c;
+ *         for (b = 0; 256 > b; b += 1) {
+ *             for (a = b,
+ *             c = 0; 8 > c; c += 1)
+ *                 1 & a ? a = j ^ a >>> 1 : a >>>= 1;
+ *             g[b] = a >>> 0
+ *         }
+ *     }
+ *     function b(a) {
+ *         return Array.prototype.map.call(a, function(a) {
+ *             return a.charCodeAt(0)
+ *         })
+ *     }
+ *     function c(a) {
+ *         var b, c, d, e, f = -1;
+ *         for (b = 0,
+ *         d = a.length; d > b; b += 1) {
+ *             for (e = 255 & (f ^ a[b]),
+ *             c = 0; 8 > c; c += 1)
+ *                 1 === (1 & e) ? e = e >>> 1 ^ j : e >>>= 1;
+ *             f = f >>> 8 ^ e
+ *         }
+ *         return -1 ^ f
+ *     }
+ *     function d(a, b) {
+ *         var c, e, f;
+ *         if ("undefined" != typeof d._x1l0o && b && a || (d._x1l0o = -1,
+ *         a)) {
+ *             for (c = d._x1l0o,
+ *             e = 0,
+ *             f = a.length; f > e; e += 1)
+ *                 c = c >>> 8 ^ g[255 & (c ^ a[e])];
+ *             return d._x1l0o = c,
+ *             -1 ^ c
+ *         }
+ *     }
+ *     function e(a) {
+ *         var b, c, d, e, f, g = typeof a, h = 16, i = 0;
+ *         if ("string" !== g && "number" !== g)
+ *             return 0 / 0;
+ *         if (a = (a + "").replace(/\s/g, "").split(".")[0],
+ *         b = a.length,
+ *         !b)
+ *             return 0 / 0;
+ *         if (h || (h = 10),
+ *         "number" != typeof h || 2 > h || h > 36)
+ *             return 0 / 0;
+ *         for (c = a.split("").reverse(),
+ *         d = 0; b > d; d++)
+ *             e = c[d],
+ *             f = e.charCodeAt(0),
+ *             f >= 97 && (e = f - 87),
+ *             i += Math.floor(e) * Math.pow(h, d);
+ *         return i
+ *     }
+ *     var f, g = [], h = "edb", i = 15900, j = e(h + e(i));
+ *     return a(),
+ *     f = function(a, e) {
+ *         var a = "string" == typeof a ? b(a + document.URL) : a
+ *           , f = e ? c(a) : d(a);
+ *         return (f >>> 0).toString(16)
+ *     }
+ *     ,
+ *     f.direct = c,
+ *     f.table = d,
+ *     f
+ * }();
+ * 
+ * </pre>
+ * 
+ * 
+ *      综合查询
  * @author zj
  * @date 2018年7月10日
- *
+ * 
  */
 public class ICKDWuliuTrack extends AbsWuliuTrack {
 
@@ -251,6 +251,7 @@ public class ICKDWuliuTrack extends AbsWuliuTrack {
 
 	/**
 	 * 获取物流信息
+	 * 
 	 * @param num
 	 * @return
 	 * @author zj
@@ -258,9 +259,9 @@ public class ICKDWuliuTrack extends AbsWuliuTrack {
 	 */
 	public static String GetWuliu(String num) {
 
-		if(num==null||num.equals(""))
+		if (num == null || num.equals(""))
 			return "{}";
-			
+
 		ICKDWuliuTrack track = new ICKDWuliuTrack();
 
 		Calendar c = Calendar.getInstance();
@@ -271,8 +272,8 @@ public class ICKDWuliuTrack extends AbsWuliuTrack {
 
 		logger.debug("tk=" + tk);
 
-		String url = "https://biz.trace.ickd.cn/auto/" + num + "?mailNo=" + num + "&tk=" + tk
-				+ "&tm=" + minisecond + "&callback=";
+		String url = "https://biz.trace.ickd.cn/auto/" + num + "?mailNo=" + num
+				+ "&tk=" + tk + "&tm=" + minisecond + "&callback=";
 		Calendar c2 = Calendar.getInstance();
 		Long miniseonds2 = c.getTimeInMillis();
 		String minisecond2 = String.valueOf(miniseonds2);
@@ -283,36 +284,44 @@ public class ICKDWuliuTrack extends AbsWuliuTrack {
 		String rst = track.sendPost(url, null);
 
 		try {
-			JSONObject js=new JSONObject(rst);
-			if(js.optString("expSpellName").equals("yunda"))
-			{
-				//yunda的需要腾讯验证码，使用快递鸟查询
-				//url+=			"&spellName=yunda&exp-textName=&ticket=t02mJkDAAj8czNCEvT7YXNQ1uqBXh554P4SiYXBZYQ0rEVFIs7F0Y_TC9qAof5t18D5JWGpR4koRRyz71J_TJrkVI_tzms8_C5lgN2yNieG5O9PM0e3asO9HA**&randstr=%40GGH";
-				// rst = track.sendPost(url, null);
-				rst =KdniaoTrackQueryAPI.GetYunDa(num);
-	
-			}//基本是顺丰的
-			else if(js.optString("message").equals("查询不到信息，请核对单号和快递公司是否正确")){
-				rst=K100Track.GetWuliu(num);
+			JSONObject js = new JSONObject(rst);
+			if (js.optString("errCode").equals("0")) {
+				logger.debug(rst);
+			} else {
+				if (js.optString("errCode").equals("11")) {
+					logger.debug(rst);
+					if (js.optString("expSpellName").equals("yunda")) {
+						// yunda的需要腾讯验证码，使用快递鸟查询
+						// url+=
+						// "&spellName=yunda&exp-textName=&ticket=t02mJkDAAj8czNCEvT7YXNQ1uqBXh554P4SiYXBZYQ0rEVFIs7F0Y_TC9qAof5t18D5JWGpR4koRRyz71J_TJrkVI_tzms8_C5lgN2yNieG5O9PM0e3asO9HA**&randstr=%40GGH";
+						// rst = track.sendPost(url, null);
+						rst = KdniaoTrackQueryAPI.GetYunDa(num);
+
+					}// 基本是顺丰的
+					else {
+						rst = K100Track.GetWuliu(num);
+					}
+				} else {
+					rst = K100Track.GetWuliu(num);
+				}
+				
+				logger.debug(rst);
 			}
-			
-			
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
-		
-		logger.debug(rst);
-		
+
+	
+
 		return rst;
 	}
 
 	public static void main(String[] args) {
 
 		/*
-		 * long d=-1548591426; String k= Long.toHexString(d); while(k.startsWith("f"))
-		 * k=k.substring(1); System.out.println(k);
+		 * long d=-1548591426; String k= Long.toHexString(d);
+		 * while(k.startsWith("f")) k=k.substring(1); System.out.println(k);
 		 * 
 		 * if(true) return;
 		 */
@@ -329,8 +338,8 @@ public class ICKDWuliuTrack extends AbsWuliuTrack {
 		// tk=53cbd712&tm=1531271066526
 
 		/*
-		 * String v=Long.toHexString(-4592476); //去除负数ff while(v.startsWith("f"))
-		 * v=v.substring(1);
+		 * String v=Long.toHexString(-4592476); //去除负数ff
+		 * while(v.startsWith("f")) v=v.substring(1);
 		 */
 
 		// System.out.println("ff"+v);
@@ -342,8 +351,9 @@ public class ICKDWuliuTrack extends AbsWuliuTrack {
 
 		System.out.println("tk=" + tk);
 
-		String url = "https://biz.trace.ickd.cn/auto/" + num + "?mailNo=" + num + "&spellName=&exp-textName=&tk=" + tk
-				+ "&tm=" + minisecond + "&callback=";
+		String url = "https://biz.trace.ickd.cn/auto/" + num + "?mailNo=" + num
+				+ "&spellName=&exp-textName=&tk=" + tk + "&tm=" + minisecond
+				+ "&callback=";
 		Calendar c2 = Calendar.getInstance();
 		Long miniseonds2 = c.getTimeInMillis();
 		String minisecond2 = String.valueOf(miniseonds2);
@@ -361,14 +371,16 @@ public class ICKDWuliuTrack extends AbsWuliuTrack {
 		System.out.println(rst);
 	}
 
-	public String getOrderTracesByJson(String expCode, String expNo) throws Exception {
+	public String getOrderTracesByJson(String expCode, String expNo)
+			throws Exception {
 
 		return "";
 	}
 
 	public String SendHttpData2(String url, String str) {
 
-		// logger.info("HTTP Request URL:" + url + ",HTTP Request PARAM:" + str);
+		// logger.info("HTTP Request URL:" + url + ",HTTP Request PARAM:" +
+		// str);
 		HttpClient client = new HttpClient();
 		// client.getHostConfiguration().setProxy("10.41.70.8", 80);
 		// client.getParams().setAuthenticationPreemptive(true);
@@ -380,7 +392,8 @@ public class ICKDWuliuTrack extends AbsWuliuTrack {
 			client.setTimeout(60000);
 
 			// httpPost.setRequestHeader("Content-type", "application/json");
-			httpPost.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+			httpPost.setRequestHeader("Content-type",
+					"application/x-www-form-urlencoded; charset=UTF-8");
 
 			httpPost.setRequestHeader("Accept", "application/json");
 			httpPost.setRequestHeader("Connection", "close");
@@ -397,9 +410,10 @@ public class ICKDWuliuTrack extends AbsWuliuTrack {
 			client.executeMethod(httpPost);
 			int resStatusCode = httpPost.getStatusCode();
 			if (resStatusCode == HttpStatus.SC_OK) {
-				BufferedReader br = new BufferedReader(
-						new InputStreamReader(httpPost.getResponseBodyAsStream(), "utf-8"));
-				// logger.info("HTTP Request CHARSET:" + httpPost.getResponseCharSet());
+				BufferedReader br = new BufferedReader(new InputStreamReader(
+						httpPost.getResponseBodyAsStream(), "utf-8"));
+				// logger.info("HTTP Request CHARSET:" +
+				// httpPost.getResponseCharSet());
 				String res = null;
 				StringBuffer sb = new StringBuffer();
 				while ((res = br.readLine()) != null) {
@@ -407,8 +421,10 @@ public class ICKDWuliuTrack extends AbsWuliuTrack {
 				}
 				responseData = sb.toString();
 			} else {
-				// logger.error("http请求失败 " + resStatusCode + ":" + httpPost.getStatusText());
-				exception = new Exception("[SerialHttpSender] HttpErrorCode:" + resStatusCode);
+				// logger.error("http请求失败 " + resStatusCode + ":" +
+				// httpPost.getStatusText());
+				exception = new Exception("[SerialHttpSender] HttpErrorCode:"
+						+ resStatusCode);
 			}
 			if (exception != null) {
 				throw exception;
@@ -422,7 +438,8 @@ public class ICKDWuliuTrack extends AbsWuliuTrack {
 			// java.net.SocketTimeoutException: Read timed out
 
 			String message = ex.getMessage();
-			if (message != null && message.toLowerCase().indexOf("read timed") > -1) {
+			if (message != null
+					&& message.toLowerCase().indexOf("read timed") > -1) {
 				// throw new Exception(ex.getMessage());
 			} else {
 				ex.printStackTrace();
@@ -458,7 +475,8 @@ public class ICKDWuliuTrack extends AbsWuliuTrack {
 		StringBuilder result = new StringBuilder();
 		try {
 			URL realUrl = new URL(url);
-			HttpURLConnection conn = (HttpURLConnection) realUrl.openConnection();
+			HttpURLConnection conn = (HttpURLConnection) realUrl
+					.openConnection();
 			// 发送POST请求必须设置如下两行
 			conn.setDoOutput(true);
 			conn.setDoInput(true);
@@ -468,13 +486,21 @@ public class ICKDWuliuTrack extends AbsWuliuTrack {
 			conn.setRequestProperty("accept", "*/*");
 			conn.setRequestProperty("Content-type", "application/json");
 			conn.setRequestProperty("connection", "Keep-Alive");
-			conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
-			Random r=new Random();
-			
-		/*	conn.setRequestProperty("Cookie",
-					"Hm_lvt_39418dcb8e053c84230016438f4ac86c=1531212321; Hm_lpvt_39418dcb8e053c84230016438f4ac86c=1531273461");*/
-			conn.setRequestProperty("Cookie",
-					"Hm_lvt_39418dcb8e053c84230016438f4ac86c="+r.nextInt(1000000)+"; Hm_lpvt_39418dcb8e053c84230016438f4ac86c="+r.nextInt(1000000));
+			conn.setRequestProperty("user-agent",
+					"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+			Random r = new Random();
+
+			/*
+			 * conn.setRequestProperty("Cookie",
+			 * "Hm_lvt_39418dcb8e053c84230016438f4ac86c=1531212321; Hm_lpvt_39418dcb8e053c84230016438f4ac86c=1531273461"
+			 * );
+			 */
+			conn.setRequestProperty(
+					"Cookie",
+					"Hm_lvt_39418dcb8e053c84230016438f4ac86c="
+							+ r.nextInt(1000000)
+							+ "; Hm_lpvt_39418dcb8e053c84230016438f4ac86c="
+							+ r.nextInt(1000000));
 			conn.setRequestProperty("Referer", "https://www.ickd.cn/");
 
 			conn.connect();
@@ -498,7 +524,8 @@ public class ICKDWuliuTrack extends AbsWuliuTrack {
 			// flush输出流的缓冲
 			out.flush();
 			// 定义BufferedReader输入流来读取URL的响应
-			in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+			in = new BufferedReader(new InputStreamReader(
+					conn.getInputStream(), "UTF-8"));
 			String line;
 			while ((line = in.readLine()) != null) {
 				result.append(line);
