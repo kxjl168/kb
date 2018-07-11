@@ -197,13 +197,13 @@ var $scope = angular.element(ngSection).scope();
 							var html="";
 							$.each($scope.tglist,function(index,item){
 								
-								html+='  <a href="'+preurl+'/public/index/tg/'+item.tags+'.html"> ' 
+								html+='  <a rel="'+item.page+'" href="'+preurl+'/public/index/tg/'+item.tags+'.html"> ' 
 								 +'	'+item.tags+'&nbsp;, '
 								 +'	 </a> ';
 							});
 							
 							$("#tgdiv").html(html);
-							
+							$("#tgdiv a").tagcloud();
 							 
 
 						

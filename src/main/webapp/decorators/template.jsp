@@ -50,7 +50,7 @@
 	<sitemesh:write property='body' />
 
 
-<%@include file="adialog.jsp"%>
+<%@include file="frontend/adialog.jsp"%>
 
 
 </body>

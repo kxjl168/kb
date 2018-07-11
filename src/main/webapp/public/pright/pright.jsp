@@ -130,6 +130,9 @@
         </div>
     </div>
     
+    <script type="text/javascript"
+	src="${basePath}/js/plugin/tagcloud.js"></script>
+	
     	<script type="text/javascript" src="${basePath}/public/pright/pright_t_h.js"></script>
 
     

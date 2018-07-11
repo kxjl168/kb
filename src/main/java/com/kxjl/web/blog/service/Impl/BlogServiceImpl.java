@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,12 +48,14 @@ public class BlogServiceImpl implements BlogService {
 				}
 				
 
+				
 				for (String string : ts.keySet()) {
-					if (rst.size() > 30)
+					if (rst.size() > 50)
 						break;
 					else {
 						Blog bg = new Blog();
 						bg.setTags(string);
+						bg.setPage(ts.get(string));
 						rst.add(bg);
 
 					}

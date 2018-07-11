@@ -42,7 +42,7 @@ public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
                 .addExcludedPath("/logoUploadFile")
                 .addExcludedPath("/UploadCKFile")
                 .addExcludedPath("/UploadFile")
-                
+               
                 .addExcludedPath("/FileSvr/*")
                .addExcludedPath("/**.action")
                .addExcludedPath("/**.do")
