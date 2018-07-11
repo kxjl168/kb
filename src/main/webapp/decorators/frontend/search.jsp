@@ -83,6 +83,7 @@
 
 
 
+<%@include file="adialog.jsp"%>
 
 
 		<%@include file="../../public/pfoot.jsp"%>

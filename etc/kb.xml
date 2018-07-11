@@ -17,7 +17,7 @@
 	
      <ConfigItem>
 		<ConfigName>excludedUrls</ConfigName>
-		<ConfigValue>.woff2,.woff,.tff,.svg,.eot,.js,.css,.*/pown/url/.*,ie8.jsp,kb/,kb,null.jsp,404.jsp,index.jsp,noaccess.jsp,.jpg,.png,.ico,.jpeg,.gif,search/init.action,replay/addOrUpdate.action,.*/public/.*,.*/.*/get.*,.*/sysBaseInfo/get.*,.*/kurl/get.*,UploadCKFile.action,.html,UploadFile.action,login.jsp,exlogin.action,phonereg/,phonereg,done.jsp,getVersionInfo.action</ConfigValue>
+		<ConfigValue>dosearch.action,.woff2,.woff,.tff,.svg,.eot,.js,.css,.*/pown/url/.*,ie8.jsp,kb/,kb,null.jsp,404.jsp,index.jsp,noaccess.jsp,.jpg,.png,.ico,.jpeg,.gif,search/init.action,replay/addOrUpdate.action,.*/public/.*,.*/.*/get.*,.*/sysBaseInfo/get.*,.*/kurl/get.*,UploadCKFile.action,.html,UploadFile.action,login.jsp,exlogin.action,phonereg/,phonereg,done.jsp,getVersionInfo.action</ConfigValue>
 		<ConfigDesc>不需要鉴权也可访问的url后缀		</ConfigDesc>
 	</ConfigItem> 
             
