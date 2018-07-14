@@ -9,26 +9,26 @@
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
 			<title>角色管理</title>
-			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
+			<!-- <link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
 
 			<link rel="stylesheet" href="../../css/kCommon.css">
 
 			<link rel="stylesheet" href="../../css/zcfg.css">
 			<link rel="stylesheet" href="../../css/common.css">
 			<link rel="stylesheet" href="../../css/swiper_zcfg.css">
-			<link rel="stylesheet" href="../../js/plugin/swiper/idangerous.swiper.css">
-			<link rel="stylesheet" href="../../js/plugin/ztree/zTreeStyle.css">
+			<link rel="stylesheet" href="../../js/plugin/swiper/idangerous.swiper.css">-->
+			<link rel="stylesheet" href="../../js/plugin/ztree/zTreeStyle.css"> 
 
 
 
 		</head>
 
-		<body id="ngSection" ng-app="myApp" ng-controller="eduCtrl">
+		<body >
 
 
 			<div class="" id="content" style="">
 
-				<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+				<!-- <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
 					<div class="navbar-header">
 						<button type="button" id="menuBtn" class="navbar-toggle" data-toggle="collapse" data-target="#menuItem">
 							<span class="sr-only"></span>
@@ -50,7 +50,7 @@
 						</form>
 
 						<ul class="nav navbar-nav " id="menuul">
-							<!-- <li>
+							<li>
 						<a href="#" ng-click="load('company')">公司账号管理</a>
 					</li>
 					<li class="active">
@@ -61,13 +61,13 @@
 					</li>
 					<li class="">
 						<a href="">登出</a>
-					</li> -->
+					</li>
 
 						</ul>
 
 
 					</div>
-				</nav>
+				</nav> -->
 
 
 
@@ -454,9 +454,8 @@
 				</div>
 			</div>
 
-			</script>
-
-			<script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
+			
+			<!-- <script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
 
 			<script type="text/javascript" src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
@@ -465,23 +464,8 @@
 
 
 			<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
-			<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
-
-
-
-
-			<script type="text/javascript" src="../../js/plugin/jquery/jquery.noty.min.js"></script>
-			<script type="text/javascript" src="../../js/plugin/jquery/noty.layout.center.js"></script>
-			<script type="text/javascript" src="../../js/plugin/jquery/noty.themes.bootstrap.js"></script>
-
-
-
-
-			<script type="text/javascript" src="../../js/plugin/swiper/idangerous.swiper.min.js"></script>
 		
-			<script type="text/javascript" src="../../js/plugin/ztree/jquery.ztree.all.min.js"></script>
 
-	
 			    <script type="text/javascript"
 	src="../../js/plugin/jquery/jquery.validate.js"></script> 
 
@@ -491,16 +475,25 @@
 
 				<script src="../../js/own/menu.js"></script>
 <script src="../../js/own/loading.js"></script>
+
+			<script type="text/javascript" src="../../js/plugin/jquery/jquery.noty.min.js"></script>
+			<script type="text/javascript" src="../../js/plugin/jquery/noty.layout.center.js"></script>
+			<script type="text/javascript" src="../../js/plugin/jquery/noty.themes.bootstrap.js"></script>
+
+
+
+
+			<script type="text/javascript" src="../../js/plugin/swiper/idangerous.swiper.min.js"></script> -->
+		
+			<script type="text/javascript" src="../../js/plugin/ztree/jquery.ztree.all.min.js"></script>
+
+		<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
+
+	
 			<script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>
 			<script type="text/javascript" src="index.js"></script>
 
 
-			<script>
-				$(function () {
-					$('#myModal').modal({
-						keyboard: true
-					})
-				});
 
 
 </body >

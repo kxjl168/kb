@@ -725,6 +725,8 @@ public class BlogController extends BaseController {
 			if (blogService.deleteBlog(recordid) > 0) {
 				res.put("ResponseCode", "200");
 				res.put("ResponseMsg", "删除成功");
+				
+				Kdata.getInstance().cleanrBLogList("");
 			} else {
 				res.put("ResponseCode", "201");
 				res.put("ResponseMsg", "删除失败");

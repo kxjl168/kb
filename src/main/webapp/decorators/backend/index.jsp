@@ -20,7 +20,7 @@
 <meta name="description" content="KxのBook -256kb.cn | 野生的喵喵 的个人站点 | 分享工作及生活的点滴" />
 <meta name="author" content="ZHANG JIE">
 <title><sitemesh:write property='title' /></title>
-<title>KxのBook -256kb.cn | 野生的喵喵 的个人站点</title>
+<title>后台管理-KxのBook -256kb.cn | 野生的喵喵 的个人站点</title>
 
 <link rel="stylesheet" type="text/css" media="screen"
 	href="${basePath}/js/plugin/bootstrap/css/bootstrap.min.css">
@@ -44,13 +44,14 @@
 <link rel="stylesheet"
 	href="${basePath}/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/obsidian.css">
 
+<link  rel="stylesheet"
+	href="${basePath}/js/own/kpro.css"></link>
+
+
 
 	<script type="text/javascript"
 		src="${basePath}/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
 	
-	  <link  rel="stylesheet"
-	href="${basePath}/js/own/kpro.css"></link>
-	 							 
 <sitemesh:write property='head' />
 
 
@@ -60,43 +61,33 @@
 
 </head>
 <body id="ngSection" ng-app="myApp" ng-controller="eduCtrl" >
-<script type="text/javascript" src="${basePath}/js/own/kpro.js"></script>
+ <script type="text/javascript" src="${basePath}/js/own/kpro.js"></script>
 	
 
-	<%@include file="../../public/phead.jsp"%>
-
+	<%@include file="../../page/phead.jsp"%>
+	   		 							 
 
 	<div class="" id="content" style="">
 
 
 
-		<div class=" row row-margin-top-70">
+		<div class=" row ">
 
-		<div class=" pall col-xs-12 " style="min-height: 500px;">
+		<div class="  " style="min-height: 500px;">
 
 			<div id="pgdiv" name="pgdiv"
-				class="col-sm-9 col-xs-12 pleft rightline">
+				class="col-sm-12 col-xs-12  ">
 				<sitemesh:write property='body' />
 
 			</div>
 
-			<div class="col-sm-3 col-xs-12 pright">
-
-				<%@include file="../../public/pright/pright.jsp"%>
-
-			</div>
-			</div>
+			
 
 		</div>
 
 
-
-<%@include file="adialog.jsp"%>
-
-
-		<%@include file="../../public/pfoot.jsp"%>
+	
 </body>
-
 
 
 <script type="text/javascript"
@@ -113,7 +104,26 @@
 <script type="text/javascript" src="${basePath}/js/own/kvalidate.js"></script>
 
 				
+<script>
+				var modal_counter = 0;
+$(document).ready(function () {
+        $('.modal').on('shown.bs.modal', function () {
+            modal_counter++;
+        });
+        $('.modal').on('hidden.bs.modal', function () {
+            modal_counter--;
+            if(modal_counter){
+                $('body').addClass('modal-open');
+            }
+            else{
+                $('body').removeClass('modal-open');
+            }
+        });
+})
 
+		
+		
+		</script>
 
 </html>
 

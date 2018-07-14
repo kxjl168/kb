@@ -9,7 +9,7 @@
 	<meta name="viewport"
 		content="width=device-width,user-scalable=no, initial-scale=1">
 		<title>设置</title>
-		<link rel="stylesheet" type="text/css" media="screen"
+<%-- 		<link rel="stylesheet" type="text/css" media="screen"
 			href="${basePath}/js/plugin/bootstrap/css/bootstrap.min.css">
 
 			<link rel="stylesheet" href="${basePath}/css/kCommon.css">
@@ -17,19 +17,17 @@
 				<link rel="stylesheet" href="${basePath}/css/zcfg.css">
 					<link rel="stylesheet" href="${basePath}/css/common.css">
 						<link rel="stylesheet" href="${basePath}/css/swiper_zcfg.css">
-							<!-- <link rel="stylesheet" href="${basePath}/js/plugin/swiper/idangerous.swiper.css">
- -->
- 
+	 --%>
  <link rel="stylesheet" href="${basePath}/js/own/FileUploadMuti.css">
 
  
 </head>
-<body id="ngSection" ng-app="myApp" ng-controller="eduCtrl">
+<body >
 
 
 	<div class="container" id="content" style="">
 
-		<nav class="navbar navbar-default navbar-fixed-top navbar-inverse"
+		<!-- <nav class="navbar navbar-default navbar-fixed-top navbar-inverse"
 			role="navigation">
 		<div class="navbar-header ">
 			<button type="button" id="menuBtn" class="navbar-toggle"
@@ -55,15 +53,15 @@
 			</form>
 
 			<ul class="nav navbar-nav " id="menuul">
-				<!-- 	<li ><a href="#" ng-click="load('entry')">子账号列表</a></li>
+					<li ><a href="#" ng-click="load('entry')">子账号列表</a></li>
 										<li class="active"><a href="#">设置</a></li>
-										<li class=""><a href="">登出</a></li>    -->
+										<li class=""><a href="">登出</a></li>   
 
 			</ul>
 
 
 		</div>
-		</nav>
+		</nav> -->
 
 
 
@@ -443,7 +441,7 @@
 
 
 
-	
+	<%-- 
 
 	<script type="text/javascript"
 		src="${basePath}/js/plugin/jquery/jquery.v1.11.3.js"></script>
@@ -451,10 +449,6 @@
 
 	<script type="text/javascript"
 		src="${basePath}/js/plugin/angular/angular.min.js"></script>
-	<!-- 	<script type="text/javascript"
-		src="${basePath}/js/plugin/angular/angular-resource.min.js"></script>
- -->
-
 
 
 	<script type="text/javascript"
@@ -469,15 +463,11 @@
 		src="${basePath}/js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
 
-	<!-- 	<script type="text/javascript"
-		src="${basePath}/js/plugin/swiper/idangerous.swiper.min.js"></script>
- -->
 	<script src="${basePath}/js/own/menu.js "></script>
 
-	<script src="${basePath}/js/own/loading.js"></script>
+	<script src="${basePath}/js/own/loading.js"></script> --%>
 
-	<!-- <script type="text/javascript"
-		src="${basePath}/js/plugin/select2/select2.full.min.js"></script> -->
+
 	<script type="text/javascript" src="${basePath }/page/set/index.js"></script>
 	<script type="text/javascript" src="${basePath }/page/set/m.js"></script>
 

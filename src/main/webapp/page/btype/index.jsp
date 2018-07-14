@@ -9,7 +9,7 @@
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<title>概览</title>
-			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
+<!-- 			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
 				<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css">
 
 			<link rel="stylesheet" href="../../css/kCommon.css">
@@ -19,46 +19,16 @@
 			<link rel="stylesheet" href="../../css/swiper_zcfg.css">
 			<link rel="stylesheet" href="../../js/plugin/swiper/idangerous.swiper.css">
 
-
+ -->
 
 		</head>
 
-		<body id="ngSection" ng-app="myApp" ng-controller="eduCtrl">
+		<body >
 
 
 			<div class="" id="content" style="">
 
-				<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
-					<div class="navbar-header">
-						<button type="button" id="menuBtn" class="navbar-toggle" data-toggle="collapse" data-target="#menuItem">
-							<span class="sr-only"></span>
-							<span class="glyphicon glyphicon-th-list  "></span>
-							<span class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="#">{{title}}</a>
-					</div>
-					<div class="collapse navbar-collapse  pull-right-k" id="menuItem">
-						
-
-						<ul class="nav navbar-nav " id="menuul">
-							<!-- <li>
-						<a href="#" ng-click="load('company')">公司账号管理</a>
-					</li>
-					<li class="active">
-						<a href="#">{{title}}</a>
-					</li>
-					<li>
-						<a href="#" ng-click="load('set')">设置</a>
-					</li>
-					<li class="">
-						<a href="">登出</a>
-					</li> -->
-
-						</ul>
-
-
-					</div>
-				</nav>
+				
 
 
 
@@ -167,8 +137,9 @@
 								</caption>
 								<thead>
 									<tr>
-										<th>类型KEY</th>
-											<th class="" >类型值</th>
+										<th>key</th>
+											<th>图标</th>
+											<th class="" >类型</th>
 										<th class="hide" >排序</th>
 										
 									
@@ -185,6 +156,8 @@
 
 									<tr ng-repeat="x in datalist">
 										<td>{{ x.dict_key }}</td>
+											<td><img style="max-width:30px;" src="{{ x.val2 }}{{x.val1}}" class="img-responsive" /></td>
+										 
 											<td class="">{{ x.dict_name }}</td>
 											<td class="hide">{{ x.sort}}</td>
 											
@@ -572,26 +545,24 @@
 
 			
 			
-				
-			
-
+			<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>		
+			<script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
+			<script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>
+<%-- 
 			<script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
 
 			
-	<script type="text/javascript" src="../../js/plugin/jquery/jquery-ui.js"></script>
 
 
 			<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
-			<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
+		
 
-<script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
 
 
 
 			<script type="text/javascript" src="../../js/plugin/jquery/jquery.noty.min.js"></script>
 			<script type="text/javascript" src="../../js/plugin/jquery/noty.layout.center.js"></script>
 			<script type="text/javascript" src="../../js/plugin/jquery/noty.themes.bootstrap.js"></script>
-<script type="text/javascript" src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
 		
 
@@ -607,16 +578,11 @@
 <script src="../../js/own/loading.js"></script>
 
 			
-			<script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>
+			 --%>
 			<script type="text/javascript" src="index.js"></script>
 	<script type="text/javascript" src="upload.js"></script>
 
-			<script>
-				//$(function () {
-				//	$('#myModal').modal({
-				//		keyboard: true
-				//	})
-				//});
+	
 </script>
 
 </body>

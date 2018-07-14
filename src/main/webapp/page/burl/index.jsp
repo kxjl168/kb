@@ -14,7 +14,7 @@
 
 <meta name="description" content="常用链接- KxのBook Kx的个人站点" />
 <meta name="author" content="ZHANGJIE"> 
-			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
+			<%-- <link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
 
 			<link rel="stylesheet" href="../../css/kCommon.css">
 
@@ -33,20 +33,17 @@
 					
 				<link rel="stylesheet" href="../../js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/default.css">
 			<link rel="stylesheet" href="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/obsidian.css">
-			
-<%-- 	<script type="text/javascript" src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
- --%>
-		
 
+ --%>
 		</head>
 
-		<body id="ngSection" ng-app="myApp" ng-controller="eduCtrl">
+		<body >
 
 
 			<div class="" id="content" style="">
 
-			<%@include file="../../public/phead.jsp"%>
-
+		<%-- 	<%@include file="../../public/phead.jsp"%>
+ --%>
 
 
 
@@ -58,14 +55,14 @@
 					<div class="c ">
 					
 					
-						<div class="col-sm-12 col-xs-12 nopadding pleft">
+						<div class="">
 					
 							
 					
 				
 					
 					
-					<div class="col-xs-12" id="srzt" style="min-height: 400px;">
+					<div class="" id="srzt" style="min-height: 400px;">
 					
 					
 					
@@ -464,26 +461,25 @@
 
 
 
-		
+		<%-- 
 			<script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
 
 			
 
 
 			<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
-<!-- 			<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
 
-<script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
-
- -->
 
 			<script type="text/javascript" src="../../js/plugin/jquery/jquery.noty.min.js"></script>
 			<script type="text/javascript" src="../../js/plugin/jquery/noty.layout.center.js"></script>
 			<script type="text/javascript" src="../../js/plugin/jquery/noty.themes.bootstrap.js"></script>
+			
+			<script type="text/javascript" src="../../js/plugin/jquery/jquery-ui.js"></script>
+			
+			
 <script type="text/javascript" src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
-			<script type="text/javascript" src="../../js/plugin/jquery/jquery-ui.js"></script>
-
+			
 
 			    <script type="text/javascript"
 	src="../../js/plugin/jquery/jquery.validate.js"></script> 
@@ -495,7 +491,7 @@
 			
 				<script src="../../js/own/menu.js"></script>
 <script src="../../js/own/loading.js"></script>
-
+ --%>
 			
 			
 			<script type="text/javascript" src="index.js"></script>

@@ -9,7 +9,7 @@
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
 			<title>概览</title>
-			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
+		<!-- 	<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
 				<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css">
 
 			<link rel="stylesheet" href="../../css/kCommon.css">
@@ -17,7 +17,7 @@
 			<link rel="stylesheet" href="../../css/zcfg.css">
 			<link rel="stylesheet" href="../../css/common.css">
 			<link rel="stylesheet" href="../../css/swiper_zcfg.css">
-			<link rel="stylesheet" href="../../js/plugin/swiper/idangerous.swiper.css">
+			<link rel="stylesheet" href="../../js/plugin/swiper/idangerous.swiper.css"> -->
 
   
   <style >
@@ -33,10 +33,7 @@
 
 			<div class="" id="content" style="">
 
-					<%@include file="../phead.jsp"%>
-
-
-
+				
 
 				<div class=" row row-margin-top-70">
 
@@ -390,7 +387,7 @@
 
 			</script>
 
-			<script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
+			<%-- <script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
 
 	<script type="text/javascript" src="../../js/plugin/jquery/jquery-ui.js"></script>
 
@@ -423,53 +420,25 @@
 			<script src="../../js/own/menu.js"></script>
 <script src="../../js/own/loading.js"></script>
  
-  <script type="text/javascript"
+ 
+	
+
+			<script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script> --%>
+			
+				<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>		
+			<script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
+			<script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>
+			
+			 <script type="text/javascript"
 	src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/ckeditor.js"></script> 
 	<script type="text/javascript"
 	src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/adapters/jquery.js"></script> 
-	
-
-	<%--  <script src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
-	 --%>
-
 			
-			<script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>
 			<script type="text/javascript" src="index.js"></script>
 
 
 			<script>
-				$(function () {
-					$('#myModal').modal({
-						keyboard: true
-					})
-				});
 				
-				$(".modal-dialog").find("input").on('blur',function(){
-				   $('.modal-dialog').css({margin:"2.5vh auto"});
-				 //  msg("onblur");
-				});
-				
-				$('#identifier').on('shown.bs.modal', function () {
-  // 执行一些动作...
- // stopBodyScrolling(true);
-});
-
-				  $('#myModal2').on('hide.bs.modal',
-    function() {
-  //stopBodyScrolling(false);
-    });
-		
-		function stopBodyScrolling (bool) {
-    if (bool === true) {
-        document.body.addEventListener("touchmove", freezeVp, false);
-    } else {
-        document.body.removeEventListener("touchmove", freezeVp, false);
-    }
-};
-var freezeVp = function(e) {
-    e.preventDefault();
-};
-
 		
 		
 		</script>

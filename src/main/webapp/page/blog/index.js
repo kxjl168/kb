@@ -519,7 +519,7 @@ function init() {
 				$scope.title = "文章管理";
 			
 				$scope.page = 1;
-				$scope.rows = 10;
+				$scope.rows = 20;
 
 				$scope.rows_select = [ 5, 10, 20 ];
 				setTimeout(function() {
@@ -540,7 +540,8 @@ function init() {
 					var http = getImUrl();
 
 					var obj = new Object();
-					obj.name = $scope.q_name;
+					obj.blog_title = $scope.q_name;
+					obj.blog_tag=$scope.q_tags;
 
 					obj.show="-1";
 					obj.page = $scope.page;
@@ -615,4 +616,3 @@ app.filter("sanitize", [ '$sce', function($sce) {
 		return htmlCode ? $sce.trustAsHtml(htmlCode) : "";
 	}
 } ]);
-

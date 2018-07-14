@@ -34,7 +34,7 @@ $(function() {
 		s_sort : {
 			required : true,
 		},
-		s_type:"required",
+		/*s_type:"required", */
 	/*	oldname:"required",*/
 		
 	}, {
@@ -210,7 +210,7 @@ function init() {
 						$scope.s_recordid = "";
 						$scope.s_dict_key = "";
 						$scope.s_dict_name = "";
-						$scope.s_type = "";
+						$scope.s_type = "1";
 						
 						$scope.url = "";
 						$scope.desc_info="";
@@ -386,7 +386,7 @@ function init() {
 
 									$scope.$apply();
 
-									console.log('-----guideList -OK= ');
+								//	console.log('-----guideList -OK= ');
 
 								} else {
 									msg(message);

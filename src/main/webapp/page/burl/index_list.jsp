@@ -9,23 +9,22 @@
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<title>友情链接管理</title>
-			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
-				<!-- <link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css"> -->
-
+			<!-- <link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
+				
 			<link rel="stylesheet" href="../../css/kCommon.css">
 
 			<link rel="stylesheet" href="../../css/zcfg.css">
-			<link rel="stylesheet" href="../../css/common.css">
+			<link rel="stylesheet" href="../../css/common.css"> -->
 		
 
 		</head>
 
-		<body id="ngSection" ng-app="myApp" ng-controller="eduCtrl">
+		<body >
 
 
 			<div class="" id="content" style="">
 
-				<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+				<!-- <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
 					<div class="navbar-header">
 						<button type="button" id="menuBtn" class="navbar-toggle" data-toggle="collapse" data-target="#menuItem">
 							<span class="sr-only"></span>
@@ -53,7 +52,7 @@
 
 
 					</div>
-				</nav>
+				</nav> -->
 
 
 
@@ -310,7 +309,7 @@
 					<input   type="text " class="hide form-control " name="s_recordid" id="s_recordid" ng-model="s_recordid" placeholder=" ">
 					
 					
-					<div class="form-group col-xs-12 row ">
+					<div class="form-group col-xs-12 row  hide">
 							<div class="control-label padding-top-0 col-xs-4 ">URL分类：</div>
 							<div class="col-xs-7 text-right ">
 							 <input required  type="text" class="form-control " name="s_type" id="s_type" ng-model="s_type" placeholder=" ">
@@ -569,18 +568,14 @@
 			
 				
 			
-
+<%-- 
 			<script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
 
 			
 
 
 			<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
-<!-- 			<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
 
-<script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
-
- -->
 
 			<script type="text/javascript" src="../../js/plugin/jquery/jquery.noty.min.js"></script>
 			<script type="text/javascript" src="../../js/plugin/jquery/noty.layout.center.js"></script>
@@ -600,7 +595,7 @@
 			
 				<script src="../../js/own/menu.js"></script>
 <script src="../../js/own/loading.js"></script>
-
+ --%>
 			
 			
 			<script type="text/javascript" src="index_list.js"></script>
