@@ -1,0 +1,101 @@
+.kprodiv{
+    margin: 0 auto;
+    padding: 0!important;
+    position: fixed;
+    top: 0;
+    width: 100%;
+     z-index: 1031;
+    /* height: 5px; */
+}
+.kprodiv hr{
+	margin: 0 auto!important;
+	padding: 0!important;
+}
+.kprodiv .hrpro {
+	margin: 0px !important;
+	border: 1px solid #0ce638d4    !important;
+	width: 0;
+	opacity: 0;
+	float:left;
+	 -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  -webkit-transition: opacity 1s ease-in-out;
+  -ms-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
+.kprodiv span {
+                display: block;
+                width: 4px;
+                height: 4px;
+                float:left;
+                position: relative;
+                top: -1px;
+                left: -1px;
+               /* overflow:hidden; */
+               background:#44bb8eaa;
+             
+                border-radius: 50%;
+                  -webkit-border-radius:50%;
+              border: 1px solid #44bb8e;
+               box-shadow:0 0 10px 2px #34bd83;
+  
+    
+                 -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all  0.5s ease-in-out;
+  -webkit-transition: all  0.5s ease-in-out;
+  -ms-transition: all  0.5s ease-in-out;
+  transition: all  0.5s ease-in-out;
+            }
+            
+@-webkit-keyframes blink{
+  
+    0% {
+        transform: scale(1);
+        opacity: .25
+    }
+    50% {
+        transform: scale (1, 5);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: .25;
+    }
+
+}
+
+@-moz-keyframes blink{/* Firefox */
+  0% {
+        transform: scale(1);
+        opacity: .25
+    }
+    50% {
+        transform: scale (1, 5);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: .25;
+    }
+
+}
+@keyframes blink{
+     0% {
+        transform: scale(1);
+        opacity: .25
+    }
+    50% {
+        transform: scale (1, 5);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: .25;
+    }
+
+}
+.blink {
+    animation:blink 1000ms infinite;
+    -webkit-animation:blink 1000ms infinite;
+     -moz-animation:blink 1000ms infinite;
+}    

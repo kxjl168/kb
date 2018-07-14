@@ -47,7 +47,10 @@
 
 	<script type="text/javascript"
 		src="${basePath}/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
-
+	
+	  <link  rel="stylesheet"
+	href="${basePath}/js/own/kpro.css"></link>
+	 							 
 <sitemesh:write property='head' />
 
 
@@ -57,7 +60,8 @@
 
 </head>
 <body id="ngSection" ng-app="myApp" ng-controller="eduCtrl" >
-
+<script type="text/javascript" src="${basePath}/js/own/kpro.js"></script>
+	
 
 	<%@include file="../../public/phead.jsp"%>
 

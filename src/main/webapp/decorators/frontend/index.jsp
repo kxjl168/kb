@@ -44,10 +44,14 @@
 <link rel="stylesheet"
 	href="${basePath}/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/obsidian.css">
 
+<link  rel="stylesheet"
+	href="${basePath}/js/own/kpro.css"></link>
+
+
 
 	<script type="text/javascript"
 		src="${basePath}/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
-
+	
 <sitemesh:write property='head' />
 
 
@@ -57,10 +61,11 @@
 
 </head>
 <body id="ngSection" ng-app="myApp" ng-controller="eduCtrl" >
-
+ <script type="text/javascript" src="${basePath}/js/own/kpro.js"></script>
+	
 
 	<%@include file="../../public/phead.jsp"%>
-
+	   		 							 
 
 	<div class="" id="content" style="">
 
@@ -86,13 +91,10 @@
 
 		</div>
 
-
 <%@include file="adialog.jsp"%>
 
 		<%@include file="../../public/pfoot.jsp"%>
 </body>
-
-
 
 
 <script type="text/javascript"
