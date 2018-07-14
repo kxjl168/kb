@@ -63,9 +63,9 @@
 		me.inter=setInterval(() => {
 				me.updatepro(me.proval,me);
 				
-		/*		if(me.proval==100)
-					clearInterval(inter);
-				me.proval+=5;*/
+		/*
+		 * if(me.proval==100) clearInterval(inter); me.proval+=5;
+		 */
 				
 			}, me.animationInterval);
 		
@@ -81,8 +81,8 @@
 	  
 	
 	  /**
-	   * 更新进度/监听完成事件。等待完完成，加载间隔快-》慢
-	   */
+		 * 更新进度/监听完成事件。等待完完成，加载间隔快-》慢
+		 */
 	Ktop.method("updatepro",function(progress,bean) {
 		var me = bean;
 		if(pageStatus == "complete"){
@@ -136,7 +136,7 @@
 		var me = this;
 	
 			
-			//var per = Math.round(evt.loaded / evt.total * 100);
+			// var per = Math.round(evt.loaded / evt.total * 100);
 		
 			$("body").find(".kprodiv .hrpro").css("width",
 					per + "%");

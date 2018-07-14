@@ -74,11 +74,16 @@
 			
 			<div class="panel panel-top panel-default row " >	
 				<div class="panel-heading">小站历程</div>
-			 	<div class="panel-body">
+			 	<div class="panel-body sitehistory">
 		
 					<div id="div1" style="margin: 0 auto">
+					 <p>2018-07-14	上线网页加载<a href="http://www.256kb.cn//public/html/2018/07/4c0f50ac-bc98-4a59-8e96-fcd42323aecd.html">进度条</a> <p>	&nbsp;
+					 <p>2018-06-09	简单记录了瞄先生的<a href="http://www.256kb.cn//public/html/2018/06/3a540028-6854-4885-89a6-c31ea2fdda34.html">猫生</a><p>	&nbsp;
+					 <p>2018-03-01	上线本站小精灵-<a href="http://www.256kb.cn//public/html/2018/03/57790aef-bc01-44dc-b563-bdb1638f5f98.html">瞄小凡先生</a><p>	&nbsp;
+					 <p>2018-01-24	发现后台有被攻击的<a href="http://www.256kb.cn//public/html/2018/01/c7498dad-4f8f-4d67-9d23-3ba1a5c63d1a.html">记录</a>(大概算吧.),php随机url访问攻击...<p>	&nbsp;
 					 <p>2018-01-12	依赖香港服务器上线<a href="http://www.256kb.cn/public/search/">Google搜索转发页面</a>,(终于可以上google了啊...)<p>	&nbsp;
-						<p>2018-01-03	 建站,属于一拍脑袋就开干,IT人士怎么能没有自己的一个站点;好吧,这是第二个站点,多年前第一个asp.net空间怎么没的都没太关注-_-!<p>	&nbsp;
+					 <p>2018-01-10	增加<a href="http://www.256kb.cn//public/html/2018/01/4a854350-8433-4026-b327-c74c4cad7651.html">AnglurJS SEO优化</a>,可以被搜索引擎收录<p>	&nbsp;
+					<p>2018-01-03	 建站,属于一拍脑袋就开干,IT人士怎么能没有自己的一个站点;好吧,这是第二个站点,多年前第一个asp.net空间怎么没的都没太关注-_-!<p>	&nbsp;
 					</div>
     			</div>
 			</div>

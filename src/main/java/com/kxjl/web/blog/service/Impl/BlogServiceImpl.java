@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kxjl.web.system.dao.SystemParamsDao;
+import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.web.blog.dao.BlogDao;
 import com.kxjl.web.blog.model.Blog;
 import com.kxjl.web.blog.service.BlogService;
@@ -48,9 +49,10 @@ public class BlogServiceImpl implements BlogService {
 				}
 				
 
+				int max=ConfigReader.getInstance().getIntProperty("MaxTags",100);
 				
 				for (String string : ts.keySet()) {
-					if (rst.size() > 50)
+					if (rst.size() >max)
 						break;
 					else {
 						Blog bg = new Blog();

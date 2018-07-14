@@ -1093,3 +1093,15 @@ pre {
 
 }
 
+.sitehistory a,.pct a
+{
+color:#251abb;
+text-decoration: underline;	
+}
+
+.sitehistory a:hover,.pct a:hover
+{
+	color: #33983b;
+	text-decoration: none!important;	
+}
+
