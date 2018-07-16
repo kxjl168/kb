@@ -35,6 +35,7 @@ import com.kxjl.tool.utils.wuliu.ICKDWuliuTrack;
 import com.kxjl.web.blog.model.Blog;
 import com.kxjl.web.blog.model.Kurl;
 import com.kxjl.web.blog.service.KurlService;
+import com.kxjl.web.stastic.model.ActionLog.StasticTypeOne;
 import com.kxjl.web.system.action.base.BaseController;
 import com.kxjl.web.system.model.DictInfo;
 import com.kxjl.web.system.model.SysUserBean;
@@ -108,6 +109,8 @@ public class PublicController extends BaseController {
 		ModelAndView view = getSysData();
 		view.setViewName("/public/about/main");
 
+		saveStaticInfo(request, StasticTypeOne.HomePage.toString(), "");
+		
 		return view;
 	}
 	

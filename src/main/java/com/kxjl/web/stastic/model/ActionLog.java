@@ -22,6 +22,7 @@ public class ActionLog extends BaseModel {
 		NIL("",""),
 		HomePage("homepage","首页"),
 		GSearch("gsearch","G搜索"),
+		AboutPage("about","关于"),
 		DetailPage("detailpag","详情页");
 		
 
