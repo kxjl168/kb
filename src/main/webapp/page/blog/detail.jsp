@@ -22,13 +22,13 @@
   
   <style >
 /*宽度全屏*/
- .modal-dialog{position:absolute;width:auto;margin:2.5vh auto;left:0;right:0;}
+/* .modal-dialog{position:absolute;width:auto;margin:2.5vh auto;left:0;right:0;} */
 
   </style>
 
 		</head>
 
-		<body id="ngSection" ng-app="myApp" ng-controller="eduCtrl">
+		<body >
 
 
 			<div class="" id="content" style="">
@@ -38,29 +38,14 @@
 
 
 
-				
-
-			</div>
-
-
-
-
-
-
-
-		
-
-
-
-		
-		<div class="row  col-xs-12 nopadding row-margin-top-70"  >
-					<form name="fm" id="fm" class="form-horizontal " >
+<div class="row  col-xs-12 nopadding row-margin-top-70"  >
+					<form name="fm" id="fm" class="form-horizontal " style="margin:20px!important;">
 				
 
 					<input   type="text " class="hide form-control " name="s_recordid" id="s_recordid" ng-model="s_recordid" placeholder=" ">
 					
 					
-					<div class="form-group   ">
+					<div class="form-group   " style="margin-top:50px;" >
 							<div class="control-label padding-top-0 col-sm-3 col-xs-12 ">标题：</div>
 							<div class="col-sm-9 col-xs-12 text-right ">
 							 <input required  type="text" class="form-control " name="s_title" id="s_title" ng-model="s_title" placeholder=" ">
@@ -141,33 +126,24 @@
 	
 
 
-<div class="modal fade " id="myModal3" data-backdrop="static"  tabindex="-1 " role="dialog " aria-labelledby="myModalLabel " aria-hidden="true ">
-		<div class="modal-dialog " style="width: 250px; ">
-			<div class="modal-content ">
-				<div class="modal-header ">
-					<button type="button " class="close " data-dismiss="modal" aria-hidden="true ">&times;</button>
-					<h4 class="modal-title " id="myModalLabel ">确认操作</h4>
-				</div>
 
+				
 
-
-				<div class="modal-body container margin-top-10 " ">
-							<div class="row ">
-
-								<p class="col-xs-10">确认执行操作吗？</p>
-
-							</div>
-						</div>
-						<div class="modal-footer ">
-							<button type="button " class="btn btn-default btn-warning " data-dismiss="modal">取消
-							</button>
-							<button id="btnconfirm" type="button " class="btn btn-primary "> 确定 </button>
-						</div>
-					</div>
-				</div>
 			</div>
 
-			</script>
+
+
+
+
+
+
+		
+
+
+
+		
+		
+
 <%-- 
 			<script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
 

@@ -215,7 +215,7 @@
 
 	    		   +' 				</div> '
 	    		   +' 				<div class="row"> '
-	    		   +' 					<div class=" col-sm-5  "> '
+	    		   +' 					<div class=" col-sm-5 col-xs-6 "> '
 									
 	    		   +' 				<div tabindex="500"  class="btn btn-primary btn-file"> '
 	    		   +' 				<i class="glyphicon glyphicon-folder-open"></i>&nbsp;   '
@@ -230,7 +230,7 @@
 	    		   +' 				<button type="button" id="btnremoveimg" tabindex="500" title="清除选中文件" class="hide btn btn-default btn-secondary fileinput-remove fileinput-remove-button"> '
 	    		   +' 				<i class="glyphicon glyphicon-trash"></i>  <span class="hidden-xs">移除</span></button> '
 									
-	    		   +' 				<div class="col-sm-2  "> '
+	    		   +' 				<div class="col-sm-2 col-xs-6 "> '
 	    		   +' 					<button type="button " class="btn btn-primary" name="uploadSub" '
 	    		   +' 						id="uploadSub">上传</button> '
 	    		   +' 				</div> '

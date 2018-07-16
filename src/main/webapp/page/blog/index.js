@@ -70,8 +70,38 @@ function initCKPlugin()
 	        });
 	    }
 	});
+	
+	var pluginname2="kuploadTFile";
+	var cmd_name2="cmd_upload";
+	CKEDITOR.plugins.add( pluginname2, {
+		 
+	    init: function( editor ) {
+	        editor.addCommand( cmd_name2, {
+	            exec: function( editor ) {
+	            	
+	          	var $scope = angular.element(ngSection).scope();
+	          	
+	            	$scope.$apply(function() {
+	            	
+	            	$scope.save(null,null,function(){
+						
+						$scope.getList();
+						msg("保存成功！");
+					});
+	            	});	
+	            }
+	        });
+	        editor.ui.addButton( 'btn_kupload', {
+	            label: '上传图片',
+	            command:cmd_name2,
+	            toolbar: 'insert',
+	            icon: basePath+'/images/logo2.png',
+	        });
+	    }
+	});
 
-	CKEDITOR.morePluginnames=pluginname;
+
+	CKEDITOR.morePluginnames=pluginname+","+pluginname2;
 	$("#s_context").ckeditor();
 	//CKEDITOR.config.extraPlugins= pluginname+',codesnippet,colorbutton,font,liststyle,copyformatting';
 	/*CKEDITOR.replace( 's_context', {

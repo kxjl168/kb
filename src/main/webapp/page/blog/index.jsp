@@ -152,6 +152,7 @@
 										<th width="15%">操作</th> -->
 										
 										<th >文章标题</th>
+										<th >操作</th>
 											<th >可见</th>
 											<!--  <th   >标题</th> -->
 										<th  >文章类型</th>
@@ -161,7 +162,7 @@
 										<th  >评论次数</th>
 										<th  >发布日期</th>
 										
-										<th >操作</th>
+										
 									</tr>
 
 								</thead>
@@ -170,6 +171,11 @@
 
 									<tr ng-repeat="x in datalist">
 											<th>{{x.title}}</th>
+												<td>
+											<a href="#" class="text-info" ng-click="addOrModify(x)">修改</a>
+											<a href="#" class="text-warning" ng-click="del(x)">删除</a>
+
+										</td>
 												<th>{{x.showdesc}}</th>
 											<!-- <th style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" >{{x.context}}</script> </th> -->
 										<th class="" >{{x.blog_type_name}}</th>
@@ -181,11 +187,7 @@
 										
 									
 									
-										<td>
-											<a href="#" class="text-info" ng-click="addOrModify(x)">修改</a>
-											<a href="#" class="text-warning" ng-click="del(x)">删除</a>
-
-										</td>
+									
 									</tr>
 
 
