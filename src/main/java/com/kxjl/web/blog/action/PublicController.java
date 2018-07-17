@@ -203,6 +203,7 @@ public class PublicController extends BaseController {
 		ModelAndView view = getSysData();
 		view.setViewName("/public/detail/main");
 
+	
 		return view;
 	}
 

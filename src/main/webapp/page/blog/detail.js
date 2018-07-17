@@ -54,8 +54,61 @@ function initCKPlugin()
 	        });
 	    }
 	});
+	
+	
+	
+	
+	
+	$kfile.init({
+		fileUploadname:"fileUploadURL", //上传文件的name
+		httppath:$("#httppath").val(),  //img -static目录前缀
+		isimg:true,
+		filesufix:'png,jpg,gif,jpeg,',
+		maxFileSize:5*1024*1024,//2M
+		maximgupload : 1,//最多可上传图片数量
+		uploadurl:basePath + '/UploadFileXhr.action',//上传图片action url
+		container:$("body").find('#upimgs'), //图片容器
+		uploaddonecallback:function(obj){
+			var htmlData=CKEDITOR.instances.s_context.getData();
+			var appEndData='<img src="'+obj.FileUrl+'" orisrc="'+obj.FileUrl2+'"  class="img-responsive " onclick="showOriImg()"  >';
+			var theData=htmlData+appEndData;
+			CKEDITOR.instances.s_context.setData(theData);
+		}
+	});
+	$kfile.get("upimgs").initFile(function(){
+		
+	});
+	
+	
+	var pluginname2="kuploadTFile";
+	var cmd_name2="cmd_upload";
+	CKEDITOR.plugins.add( pluginname2, {
+		 
+	    init: function( editor ) {
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	        editor.addCommand( cmd_name2, {
+	            exec: function( editor ) {
+	            	$kfile.get("upimgs").uploadimg( $kfile.get("upimgs").container.find(".gdimg") );
 
-	CKEDITOR.morePluginnames=pluginname;
+	            }
+	        });
+	        editor.ui.addButton( 'btn_kupload', {
+	            label: '上传图片',
+	            command:cmd_name2,
+	            toolbar: 'insert',
+	            icon: basePath+'/images/logo2.png',
+	        });
+	    }
+	});
+
+
+	CKEDITOR.morePluginnames=pluginname+","+pluginname2;
+
 	$("#s_context").ckeditor();
 	//CKEDITOR.config.extraPlugins= pluginname+',codesnippet,colorbutton,font,liststyle,copyformatting';
 	/*CKEDITOR.replace( 's_context', {

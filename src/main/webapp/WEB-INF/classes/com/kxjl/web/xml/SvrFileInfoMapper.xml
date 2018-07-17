@@ -10,6 +10,9 @@
 		<result property="save_name" column="save_name" />
 		<result property="full_path" column="full_path" />
 		<result property="http_relative_path" column="http_relative_path" />
+		
+			<result property="http_relative_path2" column="http_relative_path2" />
+		
 		<result property="http_down_url" column="http_down_url" />
 
 		<result property="file_size" column="file_size" />
@@ -33,7 +36,8 @@
 		,file_size
 		,save_date
 		,file_md5
-		,down_nums
+		,down_nums,
+		http_relative_path2
 		)
 		values(
 		#{id},#{old_name},#{save_name},#{full_path},#{http_relative_path}
@@ -42,6 +46,7 @@
 		,#{save_date}
 		,#{file_md5}
 		,#{down_nums}
+		,#{http_relative_path2}
 		)
 	</insert>
 

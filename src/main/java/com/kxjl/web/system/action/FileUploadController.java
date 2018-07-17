@@ -153,8 +153,10 @@ public class FileUploadController {
 
 		String downURL = "";
 		String httpDownURL = "";
+		String httpURL2 = "";
 		String md5 = "";
 		String fileName = "";
+		String oriName="";
 		String os = System.getProperty("os.name");
 		SvrFileInfo efile = null;
 		try {
@@ -233,7 +235,8 @@ public class FileUploadController {
 				}
 
 				UUID uuid = UUID.randomUUID();
-				fileName = uuid.toString() + extension; // 随机生成的唯一文件名
+				fileName = uuid.toString() + extension; // 随机生成的唯一文件名 压缩后的
+				oriName = uuid.toString() +"_orign"+ extension; // 随机生成的唯一文件名 原始
 				String absoluteURL =uploadPath+relativePath + fileName; // 文件存放的绝对路径
 				// logger.info("name:" + name);
 
@@ -273,6 +276,7 @@ public class FileUploadController {
 
 					relativeURL = relativePath + fileName; // 文件相对路径
 					httpURL = http_path + relativeURL;
+					httpURL2=http_path + relativePath+oriName;
 
 					downURL = "/FileSvr/downFile.action?m5=" + md5;
 					httpDownURL = http_path + downURL;
@@ -283,6 +287,7 @@ public class FileUploadController {
 					finfo.setSave_name(fileName);
 					finfo.setFull_path(absoluteURL);
 					finfo.setHttp_relative_path(relativeURL);
+					finfo.setHttp_relative_path2(relativePath+oriName);
 					finfo.setHttp_down_url(downURL);
 					finfo.setFile_md5(md5);
 					finfo.setFile_size(mfile.getSize());
@@ -302,8 +307,18 @@ public class FileUploadController {
 																		// + "/"
 																		// +
 																		// fileName;
+					
+					
+
+					String orpath=efile.getHttp_relative_path2();
+					if(orpath==null||orpath.equals(""))
+						orpath=relativeURL.substring(relativeURL.lastIndexOf("."))+"_orign"+ extension;
+					httpURL2=http_path+orpath;
+					
+					
 					downURL = efile.getHttp_down_url();
 					httpDownURL = http_path + downURL;
+					
 				}
 
 				break;// 只处理一个文件一张图片
@@ -327,6 +342,8 @@ public class FileUploadController {
 				jsonOut.put("ResponseCode", "200");
 				jsonOut.put("ResponseMsg", "OK");
 				jsonOut.put("FileUrl", httpURL);
+				jsonOut.put("FileUrl2", httpURL2);
+				
 				jsonOut.put("relativeURL", relativeURL);
 				jsonOut.put("downURL", downURL);
 				jsonOut.put("httpDownURL", httpDownURL);

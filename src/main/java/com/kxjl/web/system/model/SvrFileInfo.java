@@ -17,7 +17,11 @@ public class SvrFileInfo {
 	private String old_name;// varchar(100) comment '文件原始名称',
 	private String save_name;// varchar(150) comment '文件存储名称',
 	private String full_path;// varchar(400) comment '文件本地存储全路径',
+	//压缩文件
 	private String http_relative_path;// varchar(500) comment '文件访问相对路径
+	
+	//原始文件
+	private String http_relative_path2;// varchar(500) comment '文件访问相对路径
 										// (不带http://xxxx/)',
 	private String http_down_url;// int comment
 									// '文件下载路径.action-计算下载次数(不带http://xxxx/)',
@@ -104,5 +108,13 @@ public class SvrFileInfo {
 
 	public void setDown_nums(Integer down_nums) {
 		this.down_nums = down_nums;
+	}
+
+	public String getHttp_relative_path2() {
+		return http_relative_path2;
+	}
+
+	public void setHttp_relative_path2(String http_relative_path2) {
+		this.http_relative_path2 = http_relative_path2;
 	}
 }

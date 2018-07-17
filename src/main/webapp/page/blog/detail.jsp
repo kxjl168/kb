@@ -9,7 +9,7 @@
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
 			<title>修改</title>
-			<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
+		<!-- 	<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
 				<link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css">
 
 			<link rel="stylesheet" href="../../css/kCommon.css">
@@ -17,9 +17,11 @@
 			<link rel="stylesheet" href="../../css/zcfg.css">
 			<link rel="stylesheet" href="../../css/common.css">
 			<link rel="stylesheet" href="../../css/swiper_zcfg.css">
-			<link rel="stylesheet" href="../../js/plugin/swiper/idangerous.swiper.css">
+			<link rel="stylesheet" href="../../js/plugin/swiper/idangerous.swiper.css"> -->
 
-  
+   <link rel="stylesheet" href="${basePath}/js/own/FileUploadMuti.css">
+
+ 
   <style >
 /*宽度全屏*/
 /* .modal-dialog{position:absolute;width:auto;margin:2.5vh auto;left:0;right:0;} */
@@ -86,6 +88,9 @@
 						
 							
 						</div>
+						
+						<input type="hidden" id="httppath" value="${httppath } ">
+						<div id="upimgs" class="hide"></div>
 					
 					
 					<div class="form-group   ">
@@ -186,6 +191,11 @@
 	src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/ckeditor.js"></script> 
 	<script type="text/javascript"
 	src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/adapters/jquery.js"></script> 
+
+
+	<script type="text/javascript"
+	src="${basePath}/js/own/FileUploadMuti.js"></script>
+
 
 			<script type="text/javascript" src="detail.js"></script>
 

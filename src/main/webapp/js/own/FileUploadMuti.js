@@ -63,6 +63,7 @@
 				httppath:'',
 				notnull:false,// 是否至少一个文件
 				notnullmsg:'',//缺少文件提示
+				uploaddonecallback:null,
 		// 
 		};
 	/*
@@ -739,6 +740,9 @@
 			
 
 		}
+		
+		if(typeof(me.options.uploaddonecallback)=="function") 
+		me.options.uploaddonecallback(obj);
 	}
 	
 	/**

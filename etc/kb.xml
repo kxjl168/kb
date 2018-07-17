@@ -23,7 +23,7 @@
             
 	<ConfigItem>
 		<ConfigName>HTTP_PATH</ConfigName>
-		<ConfigValue>http://127.0.0.1:8080/gserver/file/</ConfigValue>
+		<ConfigValue>http://127.0.0.1:8080/kb/file/</ConfigValue>
 		<ConfigDesc>作为文件服务器时，外网下载目录地址-拼接图片url的地址
 		</ConfigDesc>
 	</ConfigItem>
