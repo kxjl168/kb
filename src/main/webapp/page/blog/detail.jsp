@@ -47,7 +47,7 @@
 					<input   type="text " class="hide form-control " name="s_recordid" id="s_recordid" ng-model="s_recordid" placeholder=" ">
 					
 					
-					<div class="form-group   " style="margin-top:50px;" >
+					<div class="form-group   " style="margin-top:20px;" >
 							<div class="control-label padding-top-0 col-sm-3 col-xs-12 ">标题：</div>
 							<div class="col-sm-9 col-xs-12 text-right ">
 							 <input required  type="text" class="form-control " name="s_title" id="s_title" ng-model="s_title" placeholder=" ">

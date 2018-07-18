@@ -68,11 +68,14 @@ function initCKPlugin()
 		maximgupload : 1,//最多可上传图片数量
 		uploadurl:basePath + '/UploadFileXhr.action',//上传图片action url
 		container:$("body").find('#upimgs'), //图片容器
+		cleanpic:false,//再次弹出时是否清除图片显示
 		uploaddonecallback:function(obj){
 			var htmlData=CKEDITOR.instances.s_context.getData();
-			var appEndData='<img src="'+obj.FileUrl+'" orisrc="'+obj.FileUrl2+'"  class="img-responsive " onclick="showOriImg()"  >';
-			var theData=htmlData+appEndData;
-			CKEDITOR.instances.s_context.setData(theData);
+			var appEndData='<img src="'+obj.FileUrl+'" orisrc="'+obj.FileUrl2+'" fid="'+obj.fileid+'"  class="img-responsive " onclick="showOriImg()"  >';
+			//var theData=htmlData+appEndData;
+			 var ele=CKEDITOR.dom.element.createFromHtml(appEndData);
+			
+			CKEDITOR.instances.s_context.insertElement(ele);
 		}
 	});
 	$kfile.get("upimgs").initFile(function(){
@@ -80,21 +83,22 @@ function initCKPlugin()
 	});
 	
 	
-	var pluginname2="kuploadTFile";
+	var pluginname2="kuploadFile";
 	var cmd_name2="cmd_upload";
 	CKEDITOR.plugins.add( pluginname2, {
 		 
 	    init: function( editor ) {
-	    	
-	    	
-	    	
-	    	
-	    	
-	    	
+
 	        editor.addCommand( cmd_name2, {
 	            exec: function( editor ) {
+	            	
+	            	var selection = CKEDITOR.instances.s_context.getSelection();
+	            	//if(selection.getType()==3){
+	            	//var img=$( selection.getSelectedElement().$ );
+	            	//$kfile.get("upimgs").showpre(img.attr("src"));
+	            	//}
+	            	
 	            	$kfile.get("upimgs").uploadimg( $kfile.get("upimgs").container.find(".gdimg") );
-
 	            }
 	        });
 	        editor.ui.addButton( 'btn_kupload', {
@@ -103,13 +107,23 @@ function initCKPlugin()
 	            toolbar: 'insert',
 	            icon: basePath+'/images/logo2.png',
 	        });
+	        editor.on("doubleclick", function(a) {
+                var b = a.data.element;
+                !b.is("img") || b.data("cke-realelement") || b.isReadOnly() || ( 
+                		$kfile.get("upimgs").addFile($(b.$).attr("fid"), $(b.$).attr("src")),
+                		$kfile.get("upimgs").uploadimg( $kfile.get("upimgs").container.find(".gdimg") )
+                				);
+            },null, null, 1);//优先级1
+	        
 	    }
 	});
 
 
 	CKEDITOR.morePluginnames=pluginname+","+pluginname2;
-
+	CKEDITOR.removePlugins="image";
 	$("#s_context").ckeditor();
+	
+
 	//CKEDITOR.config.extraPlugins= pluginname+',codesnippet,colorbutton,font,liststyle,copyformatting';
 	/*CKEDITOR.replace( 's_context', {
 		extraPlugins: pluginname+',codesnippet,colorbutton,font,liststyle,copyformatting',

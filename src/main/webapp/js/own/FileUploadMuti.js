@@ -151,7 +151,7 @@
 				});
 
 			
-					me.dropBox =$("body").find("#"+me.options.modal_id).find(".dropBox");
+					me.dropBox =$("body").find("#"+me.options.modal_id).find(".dropBox")[0];//原生dom
 					me.dropBox.ondragenter =me. ignoreDrag;
 					me.dropBox.ondragover = me.ignoreDrag;
 					me.dropBox.ondrop =function(e){ me.drop(e,me)};
@@ -286,10 +286,16 @@
 	 */
 	FileUploadMuti.prototype.removedropimg=function(){
 		var me =this;
-		$("body").find("#"+me.options.modal_id).find("#imgpre").attr("src", "");
+		
 		me.hidepro();
 		
-		$("body").find("#"+me.options.modal_id).find(".imgtip").show();
+		if(me.options.cleanpic)
+			{
+			$("body").find("#"+me.options.modal_id).find("#imgpre").attr("src", "");	
+			$("body").find("#"+me.options.modal_id).find(".imgtip").show();
+			}
+		
+		
 		if(me.options.isimg)
 			{
 			$("body").find("#"+me.options.modal_id).find(".flabetxt" ).html("图片:");
@@ -417,7 +423,7 @@
 		id = id || "";
 		url = url || "/img/default.jpg";
 
-		if (id != "") {
+		if (id != ""||url!='/img/default.jpg') {
 			var eitem = null;
 			var isexistnullimg = false;
 			
@@ -547,6 +553,12 @@
 		instance.processFiles(files);
 	}
 		
+	
+	FileUploadMuti.prototype.showpre=function(src){
+		var me=this;
+		$("#"+me.options.modal_id).find(".imgpre").attr("src", "" + src + "");
+	};
+	
 	/**
 	 * 文件预览
 	 */

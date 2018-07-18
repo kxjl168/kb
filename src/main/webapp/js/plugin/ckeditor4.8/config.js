@@ -25,6 +25,13 @@ CKEDITOR.editorConfig = function( config ) {
 	config.extraPlugins=plugins+","+ CKEDITOR.morePluginnames;
 	else
 		config.extraPlugins=plugins;
+	
+	//移除默认的上传图片组件
+	if(typeof( CKEDITOR.removePlugins)!="undefined")
+	config.removePlugins = CKEDITOR.removePlugins;
+	
+	//允许输入class等
+	config.allowedContent = true;
 
 	config.codeSnippet_theme= 'obsidian';
 	config.height= 356;
@@ -51,8 +58,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// Set the most common block elements.
 	config.format_tags = 'p;h1;h2;h3;pre';
 	
-	//允许输入class等
-	config.allowedContent = true;
+	
 
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
