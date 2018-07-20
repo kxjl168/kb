@@ -227,14 +227,22 @@ function init() {
 							$("#srzt").html(rst+rstpage);
 							else if(typeof(rcnt)!="undefined")
 								{
-								$("#srzt").html(json.html);
+								try {
+									$("#srzt").html(json.html);
+								} catch (e) {
+									// TODO: handle exception
+								};
+								
 								//google
 								$("#srzt").find("#searchform").addClass("hide");
 								$("#srzt").find("#footcnt").addClass("hide");
+								$("#srzt").find(".hdtb-msb").addClass("hide");
+								$("#srzt").find("#hdtb-msb").children().eq(1).hide();
+								
+								
 								
 								if($scope.lastData.length<10)
 								$scope.lastData.push($("#srzt").html());
-								
 								}
 								
 							else
