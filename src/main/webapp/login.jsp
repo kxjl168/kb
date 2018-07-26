@@ -40,7 +40,7 @@
 				</nav>
 
 
-				<div class=" col-xs-12 column row row-margin-top-70">
+				<div class=" col-xs-12 column row row-margin-top-80">
 
 
 <!-- 					<div class="col-xs-4 col-md-3 col-lg-3 col-xs-offset-2  col-sm-offset-3 col-md-offset-4 text-center row-margin-top-70"> -->

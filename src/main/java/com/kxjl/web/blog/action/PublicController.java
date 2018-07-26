@@ -38,7 +38,9 @@ import com.kxjl.web.blog.service.KurlService;
 import com.kxjl.web.stastic.model.ActionLog.StasticTypeOne;
 import com.kxjl.web.system.action.base.BaseController;
 import com.kxjl.web.system.model.DictInfo;
+import com.kxjl.web.system.model.MenuInfo;
 import com.kxjl.web.system.model.SysUserBean;
+import com.kxjl.web.system.service.MenuInfoService;
 import com.kxjl.web.system.service.SysService;
 import com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex.KeyIndexIterator;
 
@@ -53,6 +55,9 @@ public class PublicController extends BaseController {
 
 	@Autowired
 	SysService sysService;
+	
+	@Autowired
+	MenuInfoService menuService;
 
 	
 
@@ -176,6 +181,14 @@ public class PublicController extends BaseController {
 			@PathVariable(name = "url") String url) {
 
 		maps.putAll(sysService.getSysInfo());
+		
+		
+		
+		List<MenuInfo> topmeus= menuService.queryRootMenus();
+		
+		maps.put("menus",topmeus);
+		
+		
 
 		return "/page/" + url + "/index";
 	}

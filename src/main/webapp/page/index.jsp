@@ -30,7 +30,7 @@
 					<div class="navbar-header">
 						<button type="button" id="menuBtn" class="navbar-toggle" data-toggle="collapse" data-target="#menuItem">
 							<span class="sr-only"></span>
-							<span class="glyphicon glyphicon-th-list  "></span>
+							<span class="fa fa-navicon  "></span>
 							<span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="#">子账号管理</a>

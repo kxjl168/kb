@@ -5,8 +5,7 @@
 		<div class="navbar-header public">
 			<button type="button" id="menuBtn" class="navbar-toggle"
 				data-toggle="collapse" data-target="#menuItem">
-				<span class="sr-only"></span> <span
-					class="glyphicon glyphicon-tasks  "></span> <span class="icon-bar"></span>
+				<span class="sr-only"></span><span class="fa fa-navicon  "></span> <span class=""></span>
 			</button>
 			<a  class="pc navbar-brand  toptitle " href="#" ng-cloak>KxのBOOK</a>
 			<a id="toptitle" class="mobile navbar-brand  toptitle " href="#" ng-cloak>野生的喵喵's BOOK</a>

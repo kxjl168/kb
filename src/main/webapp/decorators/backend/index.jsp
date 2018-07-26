@@ -67,11 +67,11 @@
 	<%@include file="../../page/phead.jsp"%>
 	   		 							 
 
-	<div class="" id="content" style="">
+	<div class="bodyDiv" id="content" style="">
 
 
 
-		<div class=" row ">
+		<div class=" row col-xs-12 ">
 
 		<div class="  " style="min-height: 500px;">
 

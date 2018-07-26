@@ -699,9 +699,21 @@ table {
   background: #0BB5D9;
   /**background: #9EC8F5;  */
 }
-.row-margin-top-70 {
-  margin-top: 70px;
+
+.row-margin-top-80{
+	margin-top: 80px; 
 }
+
+.row-margin-top-70 {
+   margin-top: 70px; 
+  /* margin-top: 5px; */
+}
+
+.backbodyDiv .row-margin-top-70
+{
+	margin-top: 5px!important;
+}
+
 body {
   overflow: auto !important;
 }
@@ -1102,5 +1114,21 @@ text-decoration: underline;
 {
 	color: #33983b;
 	text-decoration: none!important;	
+}
+
+
+
+
+.bodyDiv{
+	padding: 5px!important;
+}
+
+.relative{
+	position: relative!important;
+}
+
+
+.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+    background-color: #90909000!important;
 }
 

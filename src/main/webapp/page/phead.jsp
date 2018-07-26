@@ -1,9 +1,9 @@
-<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
-					<div class="navbar-header">
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse relative" role="navigation">
+					<div class="navbar-header  relative ">
 						<button type="button" id="menuBtn" class="navbar-toggle" data-toggle="collapse" data-target="#menuItem">
 							<span class="sr-only"></span>
-							<span class="glyphicon glyphicon-th-list  "></span>
-							<span class="icon-bar"></span>
+							<span class="fa fa-navicon  "></span>
+							<span class=""></span>
 						</button>
 						<a class="navbar-brand" href="#" ng-cloak>{{title}}</a>
 					</div>

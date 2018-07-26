@@ -45,7 +45,7 @@
 		</nav>
 
 
-		<div class=" col-xs-12 column row row-margin-top-70">
+		<div class=" col-xs-12 column row row-margin-top-80">
 
 
 			<div style="text-align: center;margin: 20 auto;">
