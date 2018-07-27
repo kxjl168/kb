@@ -73,18 +73,19 @@
 
 		<div class=" row col-xs-12 ">
 
-		<div class=" pbackall  " style="min-height: 500px;">
+		<div class="  " style="min-height: 500px;">
 
 
 	<div 
-				class="col-sm-2 col-menu-left  ">
-				<%@include file="left_navi.jsp"%>
+				class="col-sm-2 col-xs-12  ">
+				<%-- <%@include file="left_navi.ftl"%> --%>
+				<#include "left_navi.ftl" >
 
 			</div>
 
 
 			<div id="pgdiv" name="pgdiv"
-				class="col-sm-10 col-xs-12  ">
+				class="col-sm-12 col-xs-12  ">
 				<sitemesh:write property='body' />
 
 			</div>
@@ -93,7 +94,6 @@
 
 		</div>
 
-<%@include file="../frontend/adialog.jsp"%>
 
 	
 </body>

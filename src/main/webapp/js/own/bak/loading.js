@@ -165,6 +165,22 @@ gourl = function(e) {
 
 };
 
+
+function cconfirm2(msg, donecallback, cancelcallback) {
+	
+		
+		$("#myModal_outurl").find (".msgtitle").html(msg);
+		
+		$("#myModal_outurl").modal("show");
+		$("#btnconfirm_outurl").one("click", function() {
+
+			if(typeof(donecallback)=="function")
+				donecallback();
+		});
+		return false;
+	
+}
+
 function loadMobile(browser){
 	
 	

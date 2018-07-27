@@ -506,12 +506,8 @@
 
 
 
-			<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
-			<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
-
-<script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
-
-
+		
+		
 
 			<script type="text/javascript" src="../../js/plugin/jquery/jquery.noty.min.js"></script>
 			<script type="text/javascript" src="../../js/plugin/jquery/noty.layout.center.js"></script>
@@ -529,11 +525,11 @@
 			<script src="../../js/own/menu.js"></script>
 <script src="../../js/own/loading.js"></script> --%>
 
-<script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
+<script type="text/javascript" src="${basePath }/js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
 
-	<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
-			<script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>
-			<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript" src="${basePath }/js/plugin/angular/angular-resource.min.js"></script>
+			<script type="text/javascript" src="${basePath }/js/plugin/select2/select2.full.min.js"></script>
+			<script type="text/javascript" src="${basePath }/page/user/index.js"></script>
 
 
 

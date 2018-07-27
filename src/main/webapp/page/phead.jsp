@@ -1,5 +1,6 @@
-<nav class="navbar navbar-default navbar-fixed-top navbar-inverse relative" role="navigation">
-					<div class="navbar-header  relative ">
+<nav class="navbar navbar-kback  relative" role="navigation">
+<!-- navbar-default navbar-fixed-top navbar-inverse -->
+					<div class="navbar-header    relative ">
 						<button type="button" id="menuBtn" class="navbar-toggle" data-toggle="collapse" data-target="#menuItem">
 							<span class="sr-only"></span>
 							<span class="fa fa-navicon  "></span>

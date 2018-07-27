@@ -1,5 +1,8 @@
 package com.kxjl.web.system.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *  菜单信息
  * @date 2016-7-29
@@ -17,6 +20,8 @@ public class MenuInfo {
 	private String menuICO; //菜单ICO
 	
 	private String menuGroup; //菜单ICO
+	
+	private List<MenuInfo> childMenus=new ArrayList<>();
 	
 	public String getMenuId() {
 		return menuId;
@@ -59,5 +64,11 @@ public class MenuInfo {
 	}
 	public void setMenuGroup(String menuGroup) {
 		this.menuGroup = menuGroup;
+	}
+	public List<MenuInfo> getChildMenus() {
+		return childMenus;
+	}
+	public void setChildMenus(List<MenuInfo> childMenus) {
+		this.childMenus = childMenus;
 	}
 }

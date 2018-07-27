@@ -2,6 +2,9 @@ package com.kxjl.web.system.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
 
 import com.kxjl.web.system.model.MenuInfo;
@@ -26,7 +29,15 @@ public interface MenuInfoService {
 	
 	public List<MenuInfo> queryAllMenus();
 	
-	
+	/**
+	 * 左侧分级菜单，jstl使用
+	 * @param session
+	 * @param request
+	 * @return
+	 * @author zj
+	 * @date 2018年7月27日
+	 */
+	public List<MenuInfo> getLeftMenuTree(HttpSession session, HttpServletRequest request) ;
 	/**
 	 * 更新用户菜单信息
 	 * 

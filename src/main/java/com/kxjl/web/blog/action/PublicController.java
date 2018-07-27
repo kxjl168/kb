@@ -169,24 +169,38 @@ public class PublicController extends BaseController {
 	}
 
 	@RequestMapping(value = "/page/set")
-	public String p_set(Map<String, Object> maps) {
+	public String p_set(Map<String, Object> maps, HttpSession session, HttpServletRequest request) {
 
 		maps.putAll(sysService.getSysInfo());
-
+		List<MenuInfo> leftmenus= menuService.getLeftMenuTree( session,  request);
+		
+		maps.put("menus",leftmenus);
 		return "/page/set/main";
 	}
 	
+	
+	@RequestMapping(value = "/page/todo")
+	public String p_todo(Map<String, Object> maps, HttpSession session, HttpServletRequest request) {
+
+		maps.putAll(sysService.getSysInfo());
+		List<MenuInfo> leftmenus= menuService.getLeftMenuTree( session,  request);
+		
+		maps.put("menus",leftmenus);
+		return "forward:/todo/index";
+	}
+	
+	
 	@RequestMapping(value = "/page/{url}")
-	public String p_btype(Map<String, Object> maps,
+	public String p_btype(Map<String, Object> maps, HttpSession session, HttpServletRequest request,
 			@PathVariable(name = "url") String url) {
 
 		maps.putAll(sysService.getSysInfo());
 		
 		
 		
-		List<MenuInfo> topmeus= menuService.queryRootMenus();
+		List<MenuInfo> leftmenus= menuService.getLeftMenuTree( session,  request);
 		
-		maps.put("menus",topmeus);
+		maps.put("menus",leftmenus);
 		
 		
 
