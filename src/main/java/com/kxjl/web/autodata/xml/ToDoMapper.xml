@@ -28,8 +28,8 @@
     select 
     <include refid="Base_Column_List" />
     from to_do where 1=1
-     <if test="is_done != null and is_done!='' ">
-        is_done=#{isDone}
+     <if test="isDone != null and isDone!='' ">
+        and is_done=#{isDone}
       </if>
    order by create_date desc
   </select>
@@ -95,7 +95,7 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.kxjl.web.autodata.model.ToDo">
     update to_do
     <set>
-      <if test="title != null">
+      <if test="title != null and title!='' ">
         title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="isDone != null">

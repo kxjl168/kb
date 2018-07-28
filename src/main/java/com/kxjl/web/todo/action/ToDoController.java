@@ -1,9 +1,12 @@
 package com.kxjl.web.todo.action;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONArray;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.Page;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kxjl.tool.utils.JsonUtil;
 import com.kxjl.tool.utils.MapResult;
 import com.kxjl.tool.utils.MapResultUtil;
@@ -64,15 +68,16 @@ public class ToDoController extends BaseController {
 			Page page = PageUtil.getPage(pageCondition);
 			List<ToDo> infos = todoService.getTodoList(bean);
 
-			Gson gs = new Gson();
+			Gson gs =new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 			String jsStr = gs.toJson(infos);
 
+		
 			jsonOut.put("ResponseCode", "200");
 			jsonOut.put("ResponseMsg", "");
 			jsonOut.put("total", page.getTotal());
-			jsonOut.put("rows", jsStr);
+			jsonOut.put("rows",new org.json.JSONArray(jsStr));
 
-		} catch (JSONException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 
@@ -100,13 +105,15 @@ public class ToDoController extends BaseController {
 		MapResult msg = new MapResult();
 		try {
 			int result = todoService.deleteByPrimaryKey(bean.getId());
-			if (result == 1) {
+			if (result >0) {
 				msg = MapResultUtil.success();
 			}
+			else
+				msg = MapResultUtil.fail();
 		} catch (Exception e) {
 			msg = MapResultUtil.fail();
 		}
-		Gson gs=new Gson();
+		Gson gs=new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		String rstr=gs.toJson(msg);
 		return rstr;
 	}
@@ -128,8 +135,9 @@ public class ToDoController extends BaseController {
 			else
 			{
 
-			if (null == item.getId() || item.getId() != 0) {
+			if (null == item.getId() || item.getId() == 0) {
 
+				item.setCreateDate(new Date());
 				rst = todoService.insertSelective(item);
 			} else {
 				rst = todoService.updateByPrimaryKeySelective(item);

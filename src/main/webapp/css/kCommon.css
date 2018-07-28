@@ -1215,3 +1215,18 @@ back-head
 .pbackall .row-margin-top-70{
 	margin-top: 5px!important;
 }
+.todothing{
+	line-height: 25px;
+    height: 25px;
+    font-size: 18px;
+}
+.done{
+ text-decoration: line-through;
+ color: #dadada!important;	
+}
+.thingtime
+{
+	font-size: 12px;
+	color:#cacace;
+}
+

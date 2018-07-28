@@ -51,7 +51,7 @@ public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
                 .addExcludedPath("/UploadFile")
                
                 .addExcludedPath("/FileSvr/*")
-               .addExcludedPath("/**.action")
+               .addExcludedPath("/**.action")   //否则会返回页面~
                .addExcludedPath("/**.do")
              
            

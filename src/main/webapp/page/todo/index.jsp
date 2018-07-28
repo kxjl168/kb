@@ -12,6 +12,10 @@
 
 <meta name="keywords" content="GOOGLE 搜索代理转发 KxのBook">
 	<meta name="description" content="GOOGLE搜索 代理转发- KxのBook Kx的个人站点" />
+	
+	<%-- 
+	<link  rel="stylesheet" href="${basePath }/js/plugin/bootstrap-table/css/bootstrap-table.min.css"></link>
+	 --%>
 </head>
 
 <body>
@@ -53,8 +57,8 @@
 								<div
 									class=" col-sm-8  col-xs-12 nopaddding row mar margin-bottom-5">
 									<div
-										class="control-label nopaddding padding-top-0 col-xs-4 col-sm-3  ">ToDO：</div>
-									<div class="  col-sm-9 col-xs-8 text-right ">
+										class="control-label nopaddding padding-top-0 col-xs-2 col-sm-2  ">ToDO：</div>
+									<div class="  col-sm-9 col-xs-10 text-right ">
 										<input id="t_title" placeholder="待办事项" name="t_title"
 											ng-model="t_title" type="text" class=" form-control">
 									</div>
@@ -66,18 +70,14 @@
 									<div
 										class="control-label nopaddding padding-top-0 col-xs-2 col-sm-3  "
 										style="lline-height: 30px;">
-										<span class="glyphicon  glyphicon-arrow-left  " title="后退"
+										<span class="hide glyphicon  glyphicon-arrow-left  " title="后退"
 											ng-click="back();">
 											
-											  <select id="is_done" class="form-control"  style="width: 200px">
-                                       <option value="">全部事项</option>  
-					<option value="1">已完成</option> 
-					<option value="0">待办</option>
-			</select>
+											  
 											
 											</span>
 									</div>
-									<div class="  col-sm-5 col-xs-10 text-right ">
+									<div class="  col-sm-5 col-xs-12 text-right ">
 										<button type="button" ng-click="doupdate()"
 											class="btn btn-primary btn-block   ">记录</button>
 									</div>
@@ -93,9 +93,17 @@
 			</div>
 
 
-			<div class="col-xs-12" id="todolist" style="min-height: 400px;"></div>
-
-
+<div class="col-xs-12 col-sm-2 row margin-bottom-5">
+<select id="is_done" class="form-control" >
+                                       <option value="">全部事项</option>  
+					<option value="1">已完成</option> 
+					<option value="0"  selected="selected">待办</option>
+			</select>
+</div>
+			<div class="col-xs-12 row" style="min-height: 400px;">
+			 <table id="todolist" class="table-responsive"></table>
+			</div>
+	
 		</div>
 
 

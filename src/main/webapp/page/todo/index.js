@@ -13,6 +13,11 @@ $(function() {
 	init();
 	
 	
+	$("#is_done").change(function(){
+		doquery();
+	});
+	
+	
 	
 	// hljs.initHighlightingOnLoad();
 	
@@ -73,7 +78,7 @@ function changerows(option) {
 function initBtable() {
 	// 初始化Table
 	$('#todolist').bootstrapTable({
-		url :  basePath+'todo/getInfoList', // 请求后台的URL（*）
+		url :  basePath+'/todo/getInfoList.action', // 请求后台的URL（*）
 		method : 'post', // 请求方式（*）
 		contentType : 'application/x-www-form-urlencoded',
 		toolbar : '#toolbar', // 工具按钮用哪个容器
@@ -103,7 +108,7 @@ function initBtable() {
 				offset : params.offset, // 每页显示数据的开始行号
 				sortName : params.sort, // 要排序的字段
 				sortOrder : params.order, // 排序规则
-				is_done:$("#is_done").val(),
+				isDone:$("#is_done").val(),
 			};
 			return param;
 		},
@@ -113,18 +118,23 @@ function initBtable() {
 		}, {
 			field : 'title',
 			title : '待办事项',
-			align : 'center',
-			valign : 'middle'
+			align : 'left',
+			width:'70%',
+			valign : 'middle',
+			formatter:function(value,row,index){
+				var css="undone";
+				if(row.isDone=='1')
+					css="done";
+				return '<div class="todothing  '+css+'">'+value+'</div><div class="thingtime">'+row.createDate+'</div>';
+			}
 		}
 
 ,
 		
-		
-		
-		
 		{
 			title : '操作',
 			field : 'vehicleno',
+			width:'30%',
 			align : 'center',
 			formatter : modifyAndDeleteButton,
 			events : PersonnelInformationEvents
@@ -135,62 +145,33 @@ function initBtable() {
 }
 
 function modifyAndDeleteButton(value, row, index) {
-	return [ '<div class="">'
-			+ '<button id = "update" type = "button" class = "btn btn-info"><i class="glyphicon glyphicon-pencil">修改</i> </button>&nbsp;'
-			+ '<button id = "delete" type = "button" class = "btn btn-danger"><i class="glyphicon glyphicon-trash">删除</i> </button>'
-			+ '</div>' ].join("");
+	var html=  '<div class="">';
+	         
+	         
+	     	var css="undone";
+			if(row.isDone==0)
+				{
+			html+='<button id = "update" type = "button" class = "btn btn-success"><i class="fa fa-check"></i> </button>&nbsp;';
+				}
+			html+= '<button id = "delete" type = "button" class = "btn btn-danger"><i class="glyphicon glyphicon-trash"></i> </button>'
+			+ '</div>' ;
+			
+			return html;
 }
 
 window.PersonnelInformationEvents = {
 	"click #update" : function(e, value, row, index) {
-		$.ajax({
-			type : "post",
-			url : '/manager/brand/load',
-			data : {
-				id : row.id
-			},
-			async : false,
-			dataType : "json",
-			success : function(response) {
-				$("#id").val(response.id);
-				$("#brandName").val(response.brandName);
-				
-				$("#oldname").val (response.oldname);
-				
-				/*initImg(function(){
-					//$.each(response.commondityImages,function(index,item){
-					addImg("",$("#val2").val()+response.httpRelativePath);
-					//});
-				})*/
-				
-	
-				$("#status").find("option:selected").removeAttr('selected');
-				$("#status").find("option[value='" + response.status + "']").select();
-						
-				
-				$("#sort").val( response.sort);
-				$("#remark").val( response.remark);
-				
-				
-				$imgs.initImg(function(){
-					$imgs.addImg(response.fileId,$("#val2").val()+response.httpRelativePath);
-					//$("#fileId").val( response.fileId);	
-					//$("#fullurl").attr("src",$("#val2").val()+response.httpRelativePath);
-				},1);
-				
-				
-				
-				
-
-				$("#myModal").modal();
-			}
-		});
+		
+		var id=row.id;
+		var title="";
+		update(id,title,1);//完成
+		
 
 	},
 
 	"click #delete" : function(e, value, row, index) {
-		var msg = "您真的确定要删除吗？";
-		var url = basePath+"todo/delete";
+		var msg = "您真的确定要删除事项吗？";
+		var url = basePath+"/todo/delete";
 		cconfirm2(msg,function() {
 			$.ajax({
 				type : "post",
@@ -198,12 +179,13 @@ window.PersonnelInformationEvents = {
 				data : {
 					"id" : row.id
 				},
+				dataType:'json',
 				success : function(response) {
-					if (response.bol) {
+					if (response.ResponseCode=='200') {
 						success("删除成功！");
 						doquery();
 					} else {
-						error("删除失败！"+response.message);
+						error("删除失败！"+response.ResponseMsg);
 					}
 				}
 			});
@@ -214,7 +196,7 @@ window.PersonnelInformationEvents = {
 
 function doquery() {
 	var opt = {
-		url :  basePath+"todo/getInfoList",
+		url :  basePath+"/todo/getInfoList.action",
 		silent : true
 	};
 	$("#todolist").bootstrapTable('refresh', opt);
@@ -224,12 +206,21 @@ function doquery() {
 
 function update(id,title,is_done){
 	
+	if(id==null &&(title==null||title==""))
+		{
+		error("事项不能为空");
+		return;
+		}
+	
+	
 	var http=getImUrl();
 	
 	var obj={};	
 	obj.id=id;
 	obj.title=title;
-	obj.is_done=is_done;
+	obj.isDone=is_done;
+	
+	
 	
 	SZUMWS(http + "todo/saveOrUpdate.action", JSON
 			.stringify(obj), function succsess(json) {
@@ -239,6 +230,7 @@ function update(id,title,is_done){
 	
 		if (code == 200) {
 
+			$("#t_title").val("");
 			doquery();
 			
 		} else {
@@ -301,14 +293,14 @@ function init() {
 			
 
 				
-				$scope.title = siteurl;
+			//	$scope.title = siteurl;
 				
 				$scope.page = 1;
 				$scope.rows = 10;
 
 				
 				var title="TODO LIST!";
-				$("#title").html(title);
+				//$("#title").html(title);
 
 	
 				$("#kwd").bind('keypress', function(event) {

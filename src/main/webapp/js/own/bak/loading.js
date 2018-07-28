@@ -152,7 +152,7 @@ gourl = function(e) {
 	if (url.indexOf("http") > -1) {
 		$("#myModal_outurl").modal("show");
 		$("#btnconfirm_outurl").one("click", function() {
-
+			$("#myModal_outurl").modal("hide");
 			window.open(url, 'new', "");
 		});
 		return false;
@@ -174,6 +174,7 @@ function cconfirm2(msg, donecallback, cancelcallback) {
 		$("#myModal_outurl").modal("show");
 		$("#btnconfirm_outurl").one("click", function() {
 
+			$("#myModal_outurl").modal("hide");
 			if(typeof(donecallback)=="function")
 				donecallback();
 		});

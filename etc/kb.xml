@@ -161,10 +161,10 @@
 	
 		<ConfigItem>
 		<ConfigName>LOCAL_HTML_PATH</ConfigName>
- <ConfigValue>F:\kxjl\code\kb\src\main\webapp\public\html\</ConfigValue>  
+ <!-- <ConfigValue>F:\kxjl\code\kb\src\main\webapp\public\html\</ConfigValue>  -->
 		
 	 
-		 <!--	 <ConfigValue>H:\git\kb\src\main\webapp\public\html\</ConfigValue> -->
+			 <ConfigValue>H:\git\kb\src\main\webapp\public\html\</ConfigValue> 
 		<ConfigDesc>html静态目录</ConfigDesc>
 	</ConfigItem>
 	
