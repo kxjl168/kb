@@ -1,10 +1,12 @@
 package com.kxjl.web.system.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import com.kxjl.web.system.model.MenuInfo;
@@ -12,14 +14,21 @@ import com.kxjl.web.system.model.SysUserBean;
 
 
 
-
 /**
- * 菜单 service
- * @author kangyongji
+ * 菜单权限管理
+ * @author zj
+ * @date 2018年7月30日
  *
  */
-
 public interface MenuInfoService {
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * 查询跟菜单

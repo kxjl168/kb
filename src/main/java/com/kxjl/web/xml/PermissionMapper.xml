@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxjl.web.privilege.dao.PermissionMapper">
+  <resultMap id="BaseResultMap" type="com.kxjl.web.privilege.model.Permission">
+    <id column="menu_id" jdbcType="VARCHAR" property="menuId" />
+    <result column="menu_orderid" jdbcType="VARCHAR" property="menuOrderid" />
+    <result column="menu_parentid" jdbcType="VARCHAR" property="menuParentid" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
+    <result column="menu_ico" jdbcType="VARCHAR" property="menuIco" />
+    <result column="menu_group" jdbcType="VARCHAR" property="menuGroup" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="available" jdbcType="CHAR" property="available" />
+    <result column="parentname" jdbcType="CHAR" property="parentname" />
+    
+  </resultMap>
+  <sql id="Base_Column_List">
+    menu_id, menu_orderid, menu_parentid, menu_name, menu_url, menu_ico, menu_group, 
+    type, available
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from menu_info
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from menu_info
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kxjl.web.privilege.model.Permission">
+    insert into menu_info (menu_id, menu_orderid, menu_parentid, 
+      menu_name, menu_url, menu_ico, 
+      menu_group, type, available
+      )
+    values (#{menuId,jdbcType=VARCHAR}, #{menuOrderid,jdbcType=VARCHAR}, #{menuParentid,jdbcType=VARCHAR}, 
+      #{menuName,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR}, #{menuIco,jdbcType=VARCHAR}, 
+      #{menuGroup,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{available,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kxjl.web.privilege.model.Permission">
+    insert into menu_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        menu_id,
+      </if>
+      <if test="menuOrderid != null">
+        menu_orderid,
+      </if>
+      <if test="menuParentid != null">
+        menu_parentid,
+      </if>
+      <if test="menuName != null">
+        menu_name,
+      </if>
+      <if test="menuUrl != null">
+        menu_url,
+      </if>
+      <if test="menuIco != null">
+        menu_ico,
+      </if>
+      <if test="menuGroup != null">
+        menu_group,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="available != null">
+        available,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuOrderid != null">
+        #{menuOrderid,jdbcType=VARCHAR},
+      </if>
+      <if test="menuParentid != null">
+        #{menuParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null">
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIco != null">
+        #{menuIco,jdbcType=VARCHAR},
+      </if>
+      <if test="menuGroup != null">
+        #{menuGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="available != null">
+        #{available,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kxjl.web.privilege.model.Permission">
+    update menu_info
+    <set>
+      <if test="menuOrderid != null">
+        menu_orderid = #{menuOrderid,jdbcType=VARCHAR},
+      </if>
+      <if test="menuParentid != null">
+        menu_parentid = #{menuParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null">
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        menu_url = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIco != null">
+        menu_ico = #{menuIco,jdbcType=VARCHAR},
+      </if>
+      <if test="menuGroup != null">
+        menu_group = #{menuGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="available != null">
+        available = #{available,jdbcType=CHAR},
+      </if>
+    </set>
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kxjl.web.privilege.model.Permission">
+    update menu_info
+    set menu_orderid = #{menuOrderid,jdbcType=VARCHAR},
+      menu_parentid = #{menuParentid,jdbcType=VARCHAR},
+      menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_url = #{menuUrl,jdbcType=VARCHAR},
+      menu_ico = #{menuIco,jdbcType=VARCHAR},
+      menu_group = #{menuGroup,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      available = #{available,jdbcType=CHAR}
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+  
+  
+  
+  
+
+     <select id="selectPermissionList" parameterType="com.kxjl.web.privilege.model.Permission" resultMap="BaseResultMap">
+    select 
+   p.*,p1.menu_name parentname
+    from menu_info p left join menu_info p1 on p.menu_parentid=p1.menu_id
+    where 1=1
+      <if test="menuName != null and menuName !='' ">
+       and  p.menu_name like concat('%',#{menuName},'%')
+      </if>
+       <if test="menuParentid != null and menuParentid !='' ">
+       and  p.menu_parentid =#{menuParentid}
+      </if>
+       <if test="type != null and type !='' ">
+       and  p.type =#{type}
+      </if>
+       <if test="available != null and available !='' ">
+       and  p.available =#{available}
+      </if>
+      
+      order by p.menu_orderid 
+    
+  </select>
+  
+
+<select id="getRolePermissionList" parameterType="com.kxjl.web.privilege.model.Role"
+		resultMap="BaseResultMap">
+
+			select distinct menu.* from 
+role_menu rm 
+ left join menu_info menu on menu.menu_id=rm.menu_id
+ left join role r on rm.role_id=r.role_en
+where 1=1
+ 
+ and r.id=#{role_en}
+ 
+and menu.available=1
+ order by menu.menu_orderid asc
+
+	</select>
+	
+	 <select id="selectPermissionsByRoleId" resultMap="BaseResultMap">
+    SELECT t2.* FROM role_menu t1,menu_info t2 
+    WHERE t1.menu_id=t2.menu_id AND t2.available=1 
+    AND t1.role_id=#{roleId} ORDER BY t2.type asc,t2.menu_orderid
+  </select>
+
+
+  <select id="selectPermissionsByManagerId" resultMap="BaseResultMap">
+   select * from (
+   SELECT  distinct t2.* FROM 
+manager m, manager_role ur,
+role_menu t1,menu_info t2 
+WHERE 
+m.managerid=ur.manager_id
+and ur.role_id=t1.role_id and 
+t1.menu_id=t2.menu_id AND t2.available=1 
+AND m.managerid=#{mangerId}
+) temp
+order BY temp.type asc,temp.menu_orderid
+  </select>
+
+
+
+</mapper>
