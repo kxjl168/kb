@@ -72,6 +72,14 @@ public interface PermissionService {
 	 */
 	List<Permission> getRolePermissionList(Role role);
 	
+	/**
+	 * 获取用户角色树
+	 * @param Manager_id
+	 * @return
+	 * @author zj
+	 * @date 2018年7月31日
+	 */
+	public List<String> getRoleTree(String Manager_id);
 	
 	/**
 	 * 通过roleId 查询角色对应权限

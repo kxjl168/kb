@@ -1,10 +1,15 @@
 package com.kxjl.web.privilege.service.Impl;
 
+import com.kxjl.web.privilege.dao.ManagerRoleDao;
 import com.kxjl.web.privilege.dao.PermissionMapper;
 import com.kxjl.web.privilege.dao.RoleDao;
+import com.kxjl.web.privilege.model.ManagerRole;
 import com.kxjl.web.privilege.model.Permission;
 import com.kxjl.web.privilege.model.Role;
 import com.kxjl.web.privilege.service.PermissionService;
+import com.kxjl.web.privilege.service.PrivilegeService;
+import com.kxjl.web.system.model.SysUserBean;
+import com.kxjl.web.system.model.SysUserBean.UserType;
 
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -12,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +28,9 @@ public class PermissionServiceImpl implements PermissionService {
 
 	@Autowired
 	private PermissionMapper permissionMapper;
+	
+	@Autowired
+	PrivilegeService privilegeService;
 
 	@Autowired
 	private RoleDao roleDao;
@@ -95,6 +104,65 @@ public class PermissionServiceImpl implements PermissionService {
 		return lstTree;
 	}
 
+	
+	/**
+	 * 构造权限树数据
+	 * 
+	 * @param role_id
+	 * @return
+	 * @author zj
+	 * @date 2018年5月10日
+	 */
+	
+	public List<String> getRoleTree(String Manager_id) {
+		List<String> lstTree = new ArrayList<String>();
+
+		try {
+
+			SysUserBean query=new SysUserBean();
+			query.setUserid(Manager_id);
+			query.setUtype(UserType.LoginUser);
+			List<Role> Managerroles =privilegeService.getManagerRoleList(query);
+
+			Role rq=new Role();
+			rq.setPageCount(40);
+			List<Role> allroles =roleDao.getRolePageList(rq);
+
+
+			String rootid = "0";
+			for (Role role : allroles) {
+				StringBuffer sBuffer = new StringBuffer();
+				sBuffer.append("{");
+				sBuffer.append("id:\"" + role.getRole_en() + "\",");
+				sBuffer.append("pId:\"" + rootid + "\",");
+				sBuffer.append("open:true,");// 根节点打开
+
+				if (Managerroles != null)
+					for (int i = 0; i < Managerroles.size(); i++) {
+						if (Managerroles.get(i).getRole_en().equals(role.getRole_en())) {
+							sBuffer.append("checked:true,");// 选中
+							break;
+						}
+					}
+
+				sBuffer.append("name:\"" + role.getRole_zh() + "\",");
+
+				sBuffer.append("remark:\"" + "" + "\"");
+				// sBuffer.append("iconSkin:\"" + "diygroup" + "\"");
+				// sBuffer.append("icon:\"" + "images/group2.png" + "\",");
+
+				sBuffer.append("}");
+				lstTree.add(sBuffer.toString());
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return lstTree;
+	}
+	
 	/**
 	 * 构造权限树
 	 * 

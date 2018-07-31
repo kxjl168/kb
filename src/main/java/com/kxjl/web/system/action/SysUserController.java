@@ -170,10 +170,10 @@ public class SysUserController extends BaseController {
 			} else {
 				sucess = 1;
 				usr = new SysUserBean();
-				usr.setUserid(cusr.getAccountid());
-				usr.setUtype(UserType.UnLoginUser);
+				usr.setUserid(String.valueOf( cusr.getRecordid()));
+				usr.setUtype(UserType.LoginUser);
 				usr.setName(cusr.getUser_name());
-				map.put("type", UserType.UnLoginUser.toString());
+				map.put("type", UserType.LoginUser.toString());
 				session.setAttribute(Constant.SESSION_USER, usr);
 				createToken(request, usr, "");
 				

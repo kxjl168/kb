@@ -15,15 +15,15 @@
 		
 	</resultMap>
 	<select id= "queryRootMenus" resultMap = "menuInfoMap">
-		select * from menu_info where menu_parentid is null order by menu_orderid asc;
+		select * from menu_info where (menu_parentid is null or menu_parentid='0') and available=1 order by menu_orderid asc;
 	</select>
 	<select id= "queryMenusByParent" resultMap = "menuInfoMap" parameterType="java.lang.String">
-		select * from menu_info where menu_parentid = #{parentId} order by menu_orderid asc;
+		select * from menu_info where menu_parentid = #{parentId} and available=1 order by menu_orderid asc;
 	</select>
 	
 	
 	<select id= "queryAllMenus" resultMap = "menuInfoMap" >
-		select * from menu_info where 1=1 
+		select * from menu_info where 1=1  and available=1
 		
 		
 	order by menu_orderid asc;

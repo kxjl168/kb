@@ -31,7 +31,7 @@ public interface ManagerRoleDao {
 
 
 	/**
-	 * 获取用户的所有角色
+	 * 获取后台用户的所有角色
 	 * 
 	 * @param query
 	 * @return
@@ -39,14 +39,32 @@ public interface ManagerRoleDao {
 	 */
 	public List<Role> getManagerRoleList(SysUserBean query);
 
+	/**
+	 * 获取前台用户的角色
+	 * @param query
+	 * @return
+	 * @author zj
+	 * @date 2018年7月31日
+	 */
+	public List<Role> getUserRoleList(SysUserBean query);
+	
 	
 	/**
-	 * 获取用户的所有菜单
+	 * 获取管理用户的所有菜单
 	 * 
 	 * @param query
 	 * @return
 	 * @date 2016-8-4
 	 */
 	public List<MenuInfo> getManagerMenusList(SysUserBean query);
+	
+	/**
+	 * 获取前台用户的所有菜单
+	 * 
+	 * @param query
+	 * @return
+	 * @date 2016-8-4
+	 */
+	public List<MenuInfo> getUserMenusList(SysUserBean query);
 	
 }

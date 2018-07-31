@@ -47,7 +47,7 @@ role_menu rm
  left join menu_info menu on menu.menu_id=rm.menu_id
  left join role r on rm.role_id=r.role_en
 where r.role_en=#{role_en}
- 
+ and menu.available=1
 
 	</select>
 

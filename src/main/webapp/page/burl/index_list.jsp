@@ -598,8 +598,8 @@
  --%>
 			
 			
-			<script type="text/javascript" src="index_list.js"></script>
-	<script type="text/javascript" src="upload.js"></script>
+			<script type="text/javascript" src="${basePath }/page/burl/index_list.js"></script>
+	<script type="text/javascript" src="${basePath }/page/burl/upload.js"></script>
 
 		
 

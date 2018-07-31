@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,6 +30,7 @@ import com.kxjl.web.system.action.base.BaseController;
 import com.kxjl.web.system.model.SysUserBean;
 import com.kxjl.web.user.model.User;
 import com.kxjl.web.user.service.UserService;
+
 
 
 
@@ -180,7 +182,6 @@ public class UserController extends BaseController {
 	}
 	
 	
-	
 
 	/**
 	 * 添加或者更新company信息
@@ -191,7 +192,7 @@ public class UserController extends BaseController {
 	 * @author zj
 	 */
 	@RequestMapping(value = "/addOrUpdate")
-	public void addOrUpdate(HttpServletRequest request,
+	public void addOrUpdate(User user,HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
 		JSONObject jsonOut = new JSONObject();
 		String data = request.getParameter("data");
@@ -199,13 +200,19 @@ public class UserController extends BaseController {
 
 		try {
 
-			jsonIN = new JSONObject(data);
+			
+			String roleids = request.getParameter("roleids");
+			
+			int recordid=0;
+			if(null!=user.getRecordid())
+			recordid=user.getRecordid();
+		/*	jsonIN = new JSONObject(data);
 
 			int recordid = jsonIN.optInt("recordid");
 			String accountid = jsonIN.optString("accountid");
 			String pass = jsonIN.optString("pass");
-			/*String ip_refresh_interval = jsonIN
-					.optString("ip_refresh_interval");*/
+			String ip_refresh_interval = jsonIN
+					.optString("ip_refresh_interval");
 			
 			String user_name = jsonIN.optString("user_name");
 			String desc = jsonIN.optString("desc_info");
@@ -220,7 +227,7 @@ public class UserController extends BaseController {
 			//company.setIp_desc(ip_desc);
 
 			SysUserBean user = (SysUserBean) session
-					.getAttribute(Constant.SESSION_USER);
+					.getAttribute(Constant.SESSION_USER);*/
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String time = sdf.format(new Date());
@@ -228,27 +235,27 @@ public class UserController extends BaseController {
 			int rst = -1;                                              
 
      			if (recordid != 0) {
-				company = userService                                               
+				User company = userService                                               
 						.getUserInfoById(recordid);
 				company.setUpdate_date(time);
 				//company.setIp_refresh_interval(ip_refresh_interval);
-				company.setUser_name(user_name);
-				company.setDesc_info(desc);
+				company.setUser_name(user.getUser_name());
+				company.setDesc_info(user.getDesc_info());
 				//company.setIp_desc(ip_desc);
 
 				/*
 				 * if (user != null) company.setUpdatedby(user.getName());
 				 */
 
-				rst = userService.updateUser(company);
+				rst = userService.updateUser(company,roleids);
 
 			} else {
 				/*
 				 * if (user != null) company.setCreator(user.getName());
 				 */
-				company.setCreate_date(time);
+				user.setCreate_date(time);
 
-				rst = userService.addUser(company);
+				rst = userService.addUser(user,roleids);
 			}
 
 			if (rst > 0) {

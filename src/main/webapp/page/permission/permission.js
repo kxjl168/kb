@@ -96,7 +96,7 @@ $(function() {
 		
 		changeParentList(function(){
 				
-			$('#parentid').get(0).selectedIndex = 1;
+			$('#menuParentid').get(0).selectedIndex = 1;
 		})
 		
 		
@@ -398,6 +398,14 @@ function groupTable() {
 			};
 			return param;
 		},
+		 rowStyle: function (row, index) {
+             var style = {};           // ['active', 'success', 'info', 'warning', 'danger'];  
+               //  style={css:{'color':'#ed5565'}};
+             if(row.available=="0")
+             style.classes="warning";
+            
+             return style;
+         },
 		columns : [ 
 			{
 			field : 'menuId',
@@ -457,7 +465,7 @@ function groupTable() {
 
 				 var html="根节点";
 				 if(row.menuParentid!=0)
-	                html="<a href='#' onclick='showparent(\""+row.parentid+"\",\""+row.parentname+"\")' >"+row.parentname+"</a>";
+	                html="<a href='#' onclick='showparent(\""+row.menuParentid+"\",\""+row.parentname+"\")' >"+row.parentname+"</a>";
 
 	                 return html;
 	             }

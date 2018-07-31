@@ -1230,3 +1230,32 @@ back-head
 	color:#cacace;
 }
 
+/** permission tree**/
+
+.menuContent {
+	position: absolute;
+	/* left: 135.266px;
+    top: 105px; */
+	margin-top: 1px;
+	min-width: 195px;
+	z-index: 1040;
+	background: rgb(247, 247, 247);
+	border: 1px solid #8fa5d6e8;;
+}
+
+.menuContent .cleanbtn {
+	padding: 5px;
+	font-size: 13px;
+	/* margin: 5px; */
+	color: #8189c5;
+	/* border-bottom: 1px solid blue; */
+	text-decoration: underline;
+}
+
+.permission a,.permission a:hover{
+	text-decoration: underline;
+	color: #337ab7!important;
+}
+/** permission tree end**/
+
+

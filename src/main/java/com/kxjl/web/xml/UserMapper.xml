@@ -53,7 +53,8 @@
 		select * from user_info where accountid = #{id}
 	</select>
 	
-	<insert id="addUser" parameterType="com.kxjl.web.user.model.User">
+	<insert id="addUser"  useGeneratedKeys="true"
+    keyProperty="accountid" parameterType="com.kxjl.web.user.model.User">
 	    
 
 	    

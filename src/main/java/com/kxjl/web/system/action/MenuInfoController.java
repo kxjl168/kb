@@ -74,7 +74,10 @@ public class MenuInfoController extends BaseController {
 			session.setAttribute(Constant.SESSION_USER, user);
 		}
 
-		String key = user.getUtype().toString();
+		String key = user.getUserid()+"_"+ user.getUtype().toString();
+		if(user.getUtype()==UserType.UnLoginUser)
+		 key = user.getUtype().toString();
+		
 		List<MenuInfo> rst = Kdata.getInstance().getMenuList(key);
 
 		if (rst == null || rst.size() == 0) {

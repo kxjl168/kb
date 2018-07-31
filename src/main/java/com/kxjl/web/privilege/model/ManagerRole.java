@@ -12,6 +12,9 @@ public class ManagerRole extends BaseModel {
 
 	private String role_id; // 标题
 	private String manager_id;
+	
+	private String user_type;//用户类型，1：后台管理员 2：普通用户
+	
 	public String getRole_id() {
 		return role_id;
 	}
@@ -23,6 +26,12 @@ public class ManagerRole extends BaseModel {
 	}
 	public void setManager_id(String manager_id) {
 		this.manager_id = manager_id;
+	}
+	public String getUser_type() {
+		return user_type;
+	}
+	public void setUser_type(String user_type) {
+		this.user_type = user_type;
 	}
 	
 

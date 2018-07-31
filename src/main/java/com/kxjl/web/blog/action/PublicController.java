@@ -190,6 +190,16 @@ public class PublicController extends BaseController {
 	}
 	
 	
+	@RequestMapping(value = "/page/yqurl")
+	public String yqurl(Map<String, Object> maps, HttpSession session, HttpServletRequest request) {
+
+		maps.putAll(sysService.getSysInfo());
+		List<MenuInfo> leftmenus= menuService.getLeftMenuTree( session,  request);
+		
+		maps.put("menus",leftmenus);
+		return "/page/burl/index_list";
+	}
+	
 	@RequestMapping(value = "/page/{url}")
 	public String p_btype(Map<String, Object> maps, HttpSession session, HttpServletRequest request,
 			@PathVariable(name = "url") String url) {

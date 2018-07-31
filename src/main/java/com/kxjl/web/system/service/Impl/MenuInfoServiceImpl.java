@@ -16,6 +16,7 @@ import com.kxjl.web.blog.action.Kdata;
 import com.kxjl.web.privilege.dao.ManagerRoleDao;
 import com.kxjl.web.privilege.dao.RoleDao;
 import com.kxjl.web.privilege.model.Role;
+import com.kxjl.web.privilege.service.PrivilegeService;
 import com.kxjl.web.system.dao.MenuInfoDao;
 import com.kxjl.web.system.model.MenuInfo;
 import com.kxjl.web.system.model.SysUserBean;
@@ -37,7 +38,7 @@ public class MenuInfoServiceImpl implements MenuInfoService {
 	@Autowired
 	RoleDao roleDao;
 	@Autowired
-	ManagerRoleDao managerRoleDao;
+	PrivilegeService privilegeService;
 
 	@Override
 	public List<MenuInfo> queryRootMenus() {
@@ -63,7 +64,7 @@ public class MenuInfoServiceImpl implements MenuInfoService {
 
 		// List<MenuInfo> menus = menuService.queryRootMenus();
 
-		List<Role> roles = managerRoleDao.getManagerRoleList(user);
+		List<Role> roles = privilegeService.getManagerRoleList(user);
 
 		boolean isroot = false;
 		// 过滤权限
@@ -81,9 +82,7 @@ public class MenuInfoServiceImpl implements MenuInfoService {
 		if (isroot) {
 			rst = queryAllMenus();
 		} else {
-			Role r = new Role();
-			r.setRole_en(user.getUtype().toString());// 用户类型与角色一样
-			rst = roleDao.getRoleMenusList(r);
+			rst = privilegeService.getManagerMenusList(user);
 		}
 
 		user.setMenus(rst);
@@ -106,7 +105,7 @@ public class MenuInfoServiceImpl implements MenuInfoService {
 		String key = user.getUtype().toString();
 		List<MenuInfo> rst = Kdata.getInstance().getMenuList(key);
 
-		String key_left = user.getUtype().toString() + "_left";
+		String key_left = user.getUtype().toString() +"_"+ user.getUserid()+"_left";
 		List<MenuInfo> leftrst = Kdata.getInstance().getMenuList(key_left);
 
 		if (leftrst != null && leftrst.size() != 0)
@@ -137,7 +136,7 @@ public class MenuInfoServiceImpl implements MenuInfoService {
 
 		for (int i = 0; i < allmenu.size(); i++) {
 
-			if (allmenu.get(i).getMenuParentid() == null || allmenu.get(i).getMenuParentid().equals(""))
+			if (allmenu.get(i).getMenuParentid() == null || allmenu.get(i).getMenuParentid().equals("0"))
 				ms.add(allmenu.get(i));
 		}
 

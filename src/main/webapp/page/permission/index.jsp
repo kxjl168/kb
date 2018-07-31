@@ -99,7 +99,7 @@
 			</div>
 			
 			
-				<div class="col-xs-12 row ">
+				<div class="col-xs-12 row permission">
 						<div class="table-responsive">
 							<table class="table"  id="table_list">
 							
@@ -176,7 +176,7 @@
 										</div>
 									</div>
 
-									<div class="form-group">
+									<div class="form-group hide">
 										<label for="name" class="col-lg-3 control-label">权限代码</label>
 
 										<div class="col-lg-9">

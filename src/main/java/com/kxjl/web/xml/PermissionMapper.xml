@@ -181,7 +181,7 @@ role_menu rm
  left join role r on rm.role_id=r.role_en
 where 1=1
  
- and r.id=#{role_en}
+ and r.role_en=#{role_en}
  
 and menu.available=1
  order by menu.menu_orderid asc
