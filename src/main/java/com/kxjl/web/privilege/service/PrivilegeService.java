@@ -34,10 +34,20 @@ public interface PrivilegeService {
 	 */
 	public int updateManagerRoleList(String manager_id, String roleids);
 	
+	/**
+	 * 更新用户的角色数据
+	 * @param role_id
+	 * @param menuids
+	 * @return
+	 * @date 2016-10-17
+	 * @author zj
+	 */
+	public int updateUserRoleList(String manager_id, String roleids);
+	
 	
 
 	/**
-	 * 获取用户的所有角色
+	 * 获取用户的所有角色,管理员或者普通用户
 	 * 
 	 * @param query
 	 * @return

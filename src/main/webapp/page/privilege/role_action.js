@@ -118,7 +118,7 @@ function loadMenuTree()
 			role_id : role_id
 		},
 		dataType : "json",
-		url :  basePath + '/Privilege/getMenuTree.do',// 请求的action路径
+		url :  basePath + '/privilege/permission/getMenuTreeSecond.do',// 请求的action路径
 		error : function() {// 请求失败处理函数
 			parent.gloabeAlert('请求失败');
 		},

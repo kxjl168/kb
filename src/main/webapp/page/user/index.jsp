@@ -20,6 +20,7 @@
 			<link rel="stylesheet" href="../../js/plugin/swiper/idangerous.swiper.css"> -->
 
 
+	<link rel="stylesheet" href="${basePath }/js/plugin/ztree/zTreeStyle.css"> 
 
 		</head>
 
@@ -418,6 +419,26 @@
 							 </span> -->
 							</div>
 							</div>
+							
+							
+						<div class="form-group col-xs-12 row ">
+							<div class="control-label padding-top-0 col-xs-4 ">角色：</div>
+						
+							<div class="col-xs-7 text-right ">
+						
+							<span style="margin: 5px;"> 
+                 <input id="selectAll"  name="app" type="checkbox"
+              
+                  attr="" value="" class="r_hide">
+                 <span style=";margin-top:5px; vertical-align: middle;" class="WellCheckBox WellCheckBoxH"></span>
+			     <label  style="margin-left:5px; margin-right:5px;" class="WellCheckname ">全选</label>
+										
+										<div id="treeDemo" style="width: 90%; height: 80%" class="ztree"></div>	
+							</div>
+							
+							
+							
+						</div>
 					
 
 
@@ -525,13 +546,18 @@
 			<script src="../../js/own/menu.js"></script>
 <script src="../../js/own/loading.js"></script> --%>
 
+		<script type="text/javascript" src="${basePath }/js/plugin/ztree/jquery.ztree.all.min.js"></script>
+
+		<script type="text/javascript" src="${basePath }/js/plugin/angular/angular-resource.min.js"></script>
+
+
 <script type="text/javascript" src="${basePath }/js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
 
 	<script type="text/javascript" src="${basePath }/js/plugin/angular/angular-resource.min.js"></script>
 			<script type="text/javascript" src="${basePath }/js/plugin/select2/select2.full.min.js"></script>
 			<script type="text/javascript" src="${basePath }/page/user/index.js"></script>
 
-
+	<script type="text/javascript" src="${basePath }/page/user/urole_tree.js"></script>
 
 
 </body >

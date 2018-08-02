@@ -32,7 +32,7 @@ public interface UserService {
 	 * @param User
 	 * @return
 	 */
-	public int addUser(User User);
+	public int addUser(User User,String roleids);
 	
 	/**
 	 * 删除User
@@ -46,7 +46,7 @@ public interface UserService {
 	 * @param User
 	 * @return
 	 */
-	public int updateUser(User User);
+	public int updateUser(User User,String roleids);
 	
 	
 

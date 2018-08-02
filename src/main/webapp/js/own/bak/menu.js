@@ -87,7 +87,7 @@ function initmenu_p(ul,curmenu){
 						var html = "";
 						for ( var i = 0; i < menus.length; i++) {
 
-							if (!menus[i].menuParentid) {
+							if (menus[i].menuParentid==null||menus[i].menuParentid==0) {
 
 
 								html += "<li {{active}} class=\"dropdown\">" +
@@ -286,7 +286,7 @@ function initmenu(ul, curmenu) {
 						var html = "";
 						for ( var i = 0; i < menus.length; i++) {
 
-							if (!menus[i].menuParentid) {
+							if (menus[i].menuParentid==null||menus[i].menuParentid==0) {
 
 
 								html += "<li {{active}} class=\"dropdown\"><a href=\"#\" " ;

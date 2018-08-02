@@ -19,6 +19,9 @@ $(function () {
 
 	}*/
 
+	
+	loadMenuTree("");
+	
 	init();
 	
 	var $scope = angular.element(ngSection).scope();
@@ -236,6 +239,9 @@ function init() {
 				$scope.s_recordid=item.recordid;
 				//$scope.s_ip_refresh=parseInt(item.ip_refresh_interval);
 				
+				loadMenuTree(item.recordid);
+				
+				
 				$("#s_account").attr('disabled','');
 				
 				}
@@ -243,6 +249,9 @@ function init() {
 				{
 				$scope.edit="新增";
 				$("#s_account").removeAttr('disabled');
+				
+				loadMenuTree("");
+				
 				
 				$scope.s_account="";
 				$scope.s_pass="";
@@ -282,6 +291,11 @@ function init() {
 				}
 
 		
+			
+			var roleids= getSelectIds();
+			
+			obj.roleids=roleids;
+			
 			
 			SZUMWS(http + "user/addOrUpdate.action", JSON
 					.stringify(obj), function succsess(json) {
@@ -323,7 +337,7 @@ function init() {
 			/*	if (fucOnFinished != null)
 					fucOnFinished();*/
 
-			}, false, false
+			}, false, 'json'
 
 			);
 			

@@ -33,6 +33,7 @@ import com.kxjl.tool.utils.StringUtil;
 import com.kxjl.web.privilege.dao.RoleDao;
 import com.kxjl.web.privilege.dao.SysUserBeanDao;
 import com.kxjl.web.privilege.model.Role;
+import com.kxjl.web.privilege.service.PermissionService;
 import com.kxjl.web.privilege.service.PrivilegeService;
 import com.kxjl.web.system.action.base.BaseController;
 import com.kxjl.web.system.model.MenuInfo;
@@ -63,6 +64,10 @@ public class PrivilegeController extends BaseController {
 
 	@Autowired
 	PrivilegeService privilegeService;
+	
+	@Autowired
+	private PermissionService permissionService;
+
 
 	@Autowired
 	private MenuInfoService menuService;
@@ -146,7 +151,8 @@ public class PrivilegeController extends BaseController {
 		
 		view.addObject("bean", bean);
 		
-		
+	/*	
+	 未用到
 		List<Role> roles = privilegeService.getManagerRoleList(bean);
 	
 		Role query2=new Role();
@@ -164,7 +170,7 @@ public class PrivilegeController extends BaseController {
 		
 		view.addObject("roles", AllRoles);
 
-
+*/
 		return view;
 	}
 
@@ -411,6 +417,23 @@ public class PrivilegeController extends BaseController {
 		return view;
 	}
 	
+
+	/**
+	 * 构造用户树数据 zTree
+	 * 
+	 * @param orgname
+	 *            用户组或者用户名称
+	 * @return
+	 * @date 2016-3-3
+	 * @author zj
+	 */
+	@RequestMapping(value = { "/getRoleTree" }, method = RequestMethod.POST)
+	public @ResponseBody List<String> getRoleTree(@RequestParam("user_id") String user_id) {
+		// 获取所有部门信息
+		return permissionService.getRoleTree(user_id);
+	}
+	
+	
 	/**
 	 * 构造用户树数据
 	 * @param orgname   用户组或者用户名称
@@ -423,6 +446,10 @@ public class PrivilegeController extends BaseController {
 	List<String> getMenuTree(@RequestParam("role_id") String role_id) {
 		// 获取所有部门信息
 	
+		if(true)
+		// 获取所有部门信息
+		return permissionService.getPermissionTreeSecond(role_id);
+		
 
 		List<String> lstTree = new ArrayList<String>();
 

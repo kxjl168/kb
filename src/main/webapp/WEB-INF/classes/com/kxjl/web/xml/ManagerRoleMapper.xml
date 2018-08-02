@@ -25,7 +25,7 @@
 		insert into
 		manager_role
 
-		values(#{manager_id},#{role_id})
+		values(#{manager_id},#{role_id},#{user_type})
 	</insert>
 
 
@@ -43,12 +43,22 @@
 		resultMap="RoleMap">
 		select r.* from role r LEFT JOIN manager_role mr on
 		r.role_en=mr.role_id
+		
 		left join manager m on m.managerid=mr.manager_id
 		
-		where  1=1
+		where  1=1 and mr.user_type=1
 		and m.managerid=#{userid}
+	</select>
+	
+	<select id="getUserRoleList" parameterType="com.kxjl.web.system.model.SysUserBean"
+		resultMap="RoleMap">
+		select r.* from role r LEFT JOIN manager_role mr on
+		r.role_en=mr.role_id
 		
-
+		left join user_info m on m.recordid=mr.manager_id
+		
+		where  1=1 and mr.user_type=2
+		and m.recordid=#{userid}
 	</select>
 
 <!-- 	  获取用户的所有菜单 -->
@@ -62,6 +72,18 @@ role_menu rm
  LEFT JOIN manager_role mr on r.role_en=mr.role_id
 left join manager m on m.managerid=mr.manager_id
 		where m.managerid=#{userid}
+
+	</select>
+	
+	<select id="getUserMenusList" parameterType="com.kxjl.web.system.model.SysUserBean"
+		resultMap="MenuMap">
+select distinct menu.* from 
+role_menu rm 
+ left join menu_info menu on menu.menu_id=rm.menu_id
+ left join role r on rm.role_id=r.role_en
+ LEFT JOIN manager_role mr on r.role_en=mr.role_id
+left join user_info m on m.recordid=mr.manager_id
+		where m.recordid=#{userid}
 
 	</select>
 
