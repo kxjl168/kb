@@ -313,7 +313,7 @@ function init() {
 				$scope.addOrModify = function(item) {
 					var http2 = getImUrl();
 					var imei=item==null?"":item.imei;
-					window.location.href=http2+"page/blog/detail.jsp?imei="+imei;
+					window.location.href=http2+"page/blog/detail?imei="+imei;
 					return;
 					
 					

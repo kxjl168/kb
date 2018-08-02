@@ -189,6 +189,16 @@ public class PublicController extends BaseController {
 		return "forward:/todo/index";
 	}
 	
+	@RequestMapping(value = "/page/blog/detail")
+	public String p_detail_edit(Map<String, Object> maps, HttpSession session, HttpServletRequest request) {
+
+		maps.putAll(sysService.getSysInfo());
+		List<MenuInfo> leftmenus= menuService.getLeftMenuTree( session,  request);
+		
+		maps.put("menus",leftmenus);
+		return "/page/blog/detail";
+	}
+	
 	
 	@RequestMapping(value = "/page/{url}")
 	public String p_btype(Map<String, Object> maps, HttpSession session, HttpServletRequest request,
