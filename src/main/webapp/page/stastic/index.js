@@ -151,7 +151,7 @@ function initDetailTable() {
             align: 'center',
             valign: 'middle',
             formatter: function (value, row, index) {
-                return "<a href='"+row.blog_id+"'>"+value+"</a>";
+                return "<a href='"+basePath+"/public/detail/?i="+row.blog_id+"'>"+value+"</a>";
             }
         },
         /*{
@@ -241,8 +241,8 @@ function init() {
 						var ndata=eval(json.n)||{};
 						
 
-var data= "昨日独立访问："+ ydata.userVisitNum||"0"+ " 页面访问："+ ydata.pageVisitNum||"0" ;
-data+= " / 今日独立访问："+ ndata.userVisitNum||"0"+ " 页面访问："+ ndata.pageVisitNum||"0" ;
+						var data= "昨日独立访问："+ yu+ " 页面访问："+ (ydata.pageVisitNum||0) +"<br>";
+						data+= " / 今日独立访问："+ (ndata.userVisitNum||0)+ " 页面访问："+ (ndata.pageVisitNum||0) ;
 
 $("#sdata").html(data);
 

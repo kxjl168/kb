@@ -56,3 +56,10 @@
 	<div style="background-color: red; border: 1px solid #777;"></div>
 
 </nav>
+
+<script>
+  $(function(){
+	 if($("#t1").html()=="")
+		 $("#t1").html($("#t2").html());
+  });
+</script>

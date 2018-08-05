@@ -43,6 +43,7 @@ import com.kxjl.web.stastic.service.StasticService;
 //import com.kxjl.web.system.action.base.BaseController;
 import com.kxjl.web.system.action.base.BaseController;
 import com.kxjl.web.system.model.SysUserBean;
+import com.kxjl.web.system.model.SysUserBean.UserType;
 import com.kxjl.web.blog.action.Kdata.DataType;
 import com.kxjl.web.blog.action.Kdata.Enable;
 import com.kxjl.web.blog.model.Blog;
@@ -72,8 +73,7 @@ public class BlogController extends BaseController {
 	 * @date 2017-12-26
 	 */
 	@RequestMapping(value = "/getDetailList")
-	public void getDetailList(HttpServletRequest request,
-			HttpServletResponse response) {
+	public void getDetailList(HttpServletRequest request, HttpServletResponse response) {
 		// String data = request.getParameter("data");
 
 		// JSONObject jsonIN;
@@ -85,29 +85,32 @@ public class BlogController extends BaseController {
 			// jsonIN = new JSONObject(data);
 
 			String imei = parseStringParam(request, "i");
-			if(imei.equals("null")||imei.equals(""))
-			{
-				String url=request.getHeader("Referer");
+			if (imei.equals("null") || imei.equals("")) {
+				String url = request.getHeader("Referer");
 				try {
-					imei=url.substring(url.lastIndexOf("/")+1,url.lastIndexOf("."));
+					imei = url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf("."));
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
-				
-				//http://127.0.0.1:8080/kb/public/detail/i/344f5834-fe93-49e8-835d-b07e1a1def96.html
+
+				// http://127.0.0.1:8080/kb/public/detail/i/344f5834-fe93-49e8-835d-b07e1a1def96.html
 			}
-			
-			
+
 			Blog query = new Blog();
 			query.setImei(imei);
 
 			// cur ,next, pre
 			detail = blogService.getBlogDetailPageList(query);
+			
+			//计数
+			SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
+			if (user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin) {
+				blogService.updateBlogReadTime(query);
+			}
 
 			String prepath = getImgHttpOutPath();
 			for (Blog blog : detail) {
 				blog.setBlog_type_url(prepath + blog.getBlog_type_url());
-				
 
 			}
 
@@ -118,9 +121,6 @@ public class BlogController extends BaseController {
 			jsonOut.put("ResponseMsg", "");
 			jsonOut.put("total", detail.size());
 			jsonOut.put("datalist", jsStr);
-			
-			
-			
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -139,8 +139,8 @@ public class BlogController extends BaseController {
 		rst = jsonOut.toString();
 		JsonUtil.responseOutWithJson(response, rst);
 
-		saveStaticInfo(request, StasticTypeOne.DetailPage.toString(), detail
-				.get(0).getBlog_type_name(),detail.get(0).getImei());
+		saveStaticInfo(request, StasticTypeOne.DetailPage.toString(), detail.get(0).getBlog_type_name(),
+				detail.get(0).getImei());
 
 		Kdata.getInstance().cleanrBLogList("");
 
@@ -155,8 +155,7 @@ public class BlogController extends BaseController {
 	 * @date 2017-12-26
 	 */
 	@RequestMapping(value = "/getDetailInfo")
-	public void getDetailInfo(HttpServletRequest request,
-			HttpServletResponse response) {
+	public void getDetailInfo(HttpServletRequest request, HttpServletResponse response) {
 		String data = request.getParameter("data");
 
 		JSONObject jsonIN;
@@ -210,8 +209,7 @@ public class BlogController extends BaseController {
 	 * @date 2018-1-18
 	 */
 	@RequestMapping(value = "/getEnableList")
-	public void getKdataList(HttpServletRequest request,
-			HttpServletResponse response) {
+	public void getKdataList(HttpServletRequest request, HttpServletResponse response) {
 
 		String data = request.getParameter("data");
 		JSONObject jsonIN;
@@ -260,15 +258,12 @@ public class BlogController extends BaseController {
 	 * 
 	 * @param clientType
 	 * @param packageName
-	 * @param curPage
-	 *            当前页
-	 * @param pageCount
-	 *            每页多少条
+	 * @param curPage     当前页
+	 * @param pageCount   每页多少条
 	 * @return
 	 */
 	@RequestMapping(value = "/getInfoList")
-	public void getInfoList(HttpServletRequest request,
-			HttpServletResponse response) {
+	public void getInfoList(HttpServletRequest request, HttpServletResponse response) {
 		// String blogid = request.getParameter("blogid");
 
 		/*
@@ -303,18 +298,14 @@ public class BlogController extends BaseController {
 
 			int pageCount = jsonIN.optInt("rows");// request.getParameter("pageCount");
 			int curPage = jsonIN.optInt("page");
-			
-			if(curPage==0)
-				curPage=1;
 
-			String key = "blog_getInfoList" + "_" + month + "_" + blog_type
-					+ "_" + blog_tag + "_" + pageCount + "_" + curPage + "_"+blog_title
-					+ show;
+			if (curPage == 0)
+				curPage = 1;
+
+			String key = "blog_getInfoList" + "_" + month + "_" + blog_type + "_" + blog_tag + "_" + pageCount + "_"
+					+ curPage + "_" + blog_title + show;
 			List<Blog> infos = Kdata.getInstance().getBlogList(key);
 
-			
-			
-			
 			Blog query = new Blog();
 			query.setPage(curPage);
 			query.setPageCount(pageCount);
@@ -327,10 +318,9 @@ public class BlogController extends BaseController {
 			query.setTitle(blog_title);// (id);
 			query.setBlog_type(blog_type);// (blog_name);
 			query.setMonth(month);
-			
-			
-			Integer maxshownum=ConfigReader.getInstance().getIntProperty("maxshownum", 1000);
-			
+
+			Integer maxshownum = ConfigReader.getInstance().getIntProperty("maxshownum", 1000);
+
 			if (infos == null || infos.size() == 0) {
 
 				infos = blogService.getBlogPageList(query);
@@ -350,18 +340,17 @@ public class BlogController extends BaseController {
 
 						String img = ms.group();
 						String t = JEscape.unescape(img);
-					//	System.out.println(t);
+						// System.out.println(t);
 						JEscape.unescape(blog.getContent());
 						c = c.replace(img, "");
 
 					}
 					c = JEscape.unescape(c);
 
-					
 					if (c.length() > maxshownum) {
 						try {
 							String rc = c.substring(0, maxshownum);
-							//System.out.println(rc);
+							// System.out.println(rc);
 
 							// jsoup 自动补全标签
 							Document jd = Jsoup.parseBodyFragment(rc);
@@ -412,8 +401,7 @@ public class BlogController extends BaseController {
 	}
 
 	@RequestMapping(value = "/getTgList")
-	public void getTgList(HttpServletRequest request,
-			HttpServletResponse response) {
+	public void getTgList(HttpServletRequest request, HttpServletResponse response) {
 
 		String data = request.getParameter("data");
 		JSONObject jsonIN;
@@ -462,29 +450,18 @@ public class BlogController extends BaseController {
 		JsonUtil.responseOutWithJson(response, rst);
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 
 	/**
 	 * 页面-获取month列表
 	 * 
 	 * @param clientType
 	 * @param packageName
-	 * @param curPage
-	 *            当前页
-	 * @param pageCount
-	 *            每页多少条
+	 * @param curPage     当前页
+	 * @param pageCount   每页多少条
 	 * @return
 	 */
 	@RequestMapping(value = "/getHList")
-	public void getHList(HttpServletRequest request,
-			HttpServletResponse response) {
+	public void getHList(HttpServletRequest request, HttpServletResponse response) {
 
 		String data = request.getParameter("data");
 		JSONObject jsonIN;
@@ -542,8 +519,7 @@ public class BlogController extends BaseController {
 	 * @date 2017-12-29
 	 */
 	@RequestMapping(value = "/getTpList")
-	public void getTpList(HttpServletRequest request,
-			HttpServletResponse response) {
+	public void getTpList(HttpServletRequest request, HttpServletResponse response) {
 
 		String data = request.getParameter("data");
 		JSONObject jsonIN;
@@ -605,8 +581,7 @@ public class BlogController extends BaseController {
 	 * @author zj
 	 */
 	@RequestMapping(value = "/addOrUpdate")
-	public void addOrUpdate(HttpServletRequest request,
-			HttpServletResponse response, HttpSession session) {
+	public void addOrUpdate(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		JSONObject jsonOut = new JSONObject();
 		String data = request.getParameter("data");
 		JSONObject jsonIN;
@@ -666,14 +641,13 @@ public class BlogController extends BaseController {
 			}
 
 			if (rst > 0) {
-				
-				//本地缓存html文件删除
+
+				// 本地缓存html文件删除
 				String localPath = ConfigReader.getInstance().getProperty("LOCAL_HTML_PATH");
-				String localFilePath = localPath +  blog.getShowdate() + "/";
-				
+				String localFilePath = localPath + blog.getShowdate() + "/";
+
 				String htmlName = imei + ".html";
-				FileProcessor.deleteFile(localFilePath+htmlName);
-				
+				FileProcessor.deleteFile(localFilePath + htmlName);
 
 				Kdata.getInstance().cleanrBLogList("");
 
@@ -708,8 +682,7 @@ public class BlogController extends BaseController {
 	 * @date 2016-8-22
 	 */
 	@RequestMapping(value = "/del")
-	public @ResponseBody
-	Map delBanner(HttpServletRequest request) {
+	public @ResponseBody Map delBanner(HttpServletRequest request) {
 		Map res = new HashMap();
 		res.put("ResponseCode", "201");
 		res.put("ResponseMsg", "删除失败");
@@ -725,7 +698,7 @@ public class BlogController extends BaseController {
 			if (blogService.deleteBlog(recordid) > 0) {
 				res.put("ResponseCode", "200");
 				res.put("ResponseMsg", "删除成功");
-				
+
 				Kdata.getInstance().cleanrBLogList("");
 			} else {
 				res.put("ResponseCode", "201");

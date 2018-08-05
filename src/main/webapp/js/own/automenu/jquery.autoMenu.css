@@ -22,16 +22,24 @@
 	z-index: 1;
 	text-align: left;
 	
-		border-left: 5px solid #88888e!important;
+		border-left: 5px solid #1a71b0!important;
     background: #f2efef!important;
     
-    -webkit-box-shadow:0 0 10px #CCC;  
-  -moz-box-shadow:0 0 10px #CCC;  
-  box-shadow:0 0 10px #CCC;
+    -webkit-box-shadow:0 0 10px #257ab7;  
+  -moz-box-shadow:0 0 10px #257ab7;  
+  box-shadow:0 0 10px #257ab7;
   
   margin: 5px;
   padding: 5px;
    
+}
+
+.autoMenu.fix{
+	   position: fixed!important;
+}
+.autoMenu .fa{
+	padding-top: 2px;
+	padding-left: 5px;
 }
 
 .autoMenu .title {
@@ -44,6 +52,7 @@
     position: relative;
     /* float: left; */
     vertical-align: middle;
+    margin-right: 20px;
 }
 
 .autoMenu li {
