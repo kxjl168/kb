@@ -105,18 +105,35 @@ public class BlogServiceImpl implements BlogService {
 
 		if (blogs != null && blogs.size() != 0) {
 
-			// 访问数+1
+			/*// 访问数+1
 			Blog b = blogs.get(0);
 			b.setView_nums(b.getView_nums() + 1);
-			updateBlog(b);
+			updateBlog(b);*/
 
 			query.setRecordid(blogs.get(0).getRecordid());
 			rsts = blogDao.getBlogDetailPageList(query);
 		}
 
 		return rsts;
-
 	}
+	
+	/**
+	 * 计数加+1
+	 * @param query
+	 */
+	public void updateBlogReadTime(Blog query) {
+		List<Blog> blogs = blogDao.getBlogPageList(query);
+
+		if (blogs != null && blogs.size() != 0) {
+
+			// 访问数+1
+			Blog b = blogs.get(0);
+			b.setView_nums(b.getView_nums() + 1);
+			updateBlog(b);
+		}
+		
+	}
+	
 
 	/**
 	 * 分页获取banner列表

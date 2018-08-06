@@ -479,7 +479,7 @@ function init() {
 						
 						var num=$($("#s_context"  ).val()).find(".pct").length;
 						var ct=$("<div class='pct'>"+$("#s_context"  ).val() +"</div>");
-						if(num>0)
+						if(num>0||$($("#s_context"  ).val()).hasClass("pct"))
 							ct=$($("#s_context"  ).val());
 						
 						

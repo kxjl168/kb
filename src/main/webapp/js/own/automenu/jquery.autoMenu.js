@@ -49,9 +49,13 @@
                 var height = typeof opts.height === 'number' && opts.height;
                 var padding = typeof opts.padding === 'number' && opts.padding;
                 //that.$element.width(width+padding*2);
-                var html = '<div class="autoMenu "><span class="title">文章目录:</span><a href="javascript:void(0);" title="隐藏目录" class="btn-box">'
+                var html = '<div class="autoMenu fix"><span class="title">文章目录:</span><a href="javascript:void(0);" title="隐藏目录" class="btn-box">'
                     +'<span class="icon-minus-sign"></span>'
-                    +'</a><ul >';
+                    +'</a>'
+                    +' <a href="javascript:void(0);" title="目录固定" class="btn-box">'
+                    +'<span class="fa fa-2x fa-compress"></span>'
+                    +'</a>'
+                    +'<ul >';
                 var num = 0;
                 $(that.$element).find("*") .each(function(){
                     var _this = $(this);
@@ -115,10 +119,20 @@
                         $(this).find('span').removeClass('icon-minus-sign').addClass('icon-plus-sign');
                         _this.$element.parents().find('.autoMenu  ul').fadeOut();
                         $(this).attr("title",'显示目录');
-                    }else{
+                    }else  if($(this).find('span').hasClass('icon-plus-sign')){
                         $(this).find('span').removeClass('icon-plus-sign').addClass('icon-minus-sign');
                         _this.$element.parents().find('.autoMenu  ul').fadeIn();
                         $(this).attr("title",'隐藏目录');
+                    }
+                    else  if($(this).find('span').hasClass('fa-compress')){
+                        $(this).find('span').removeClass('fa-compress').addClass('fa-expand');
+                        _this.$element.parents().find('.autoMenu ').toggleClass("fix");
+                        $(this).attr("title",'浮动目录');
+                    }
+                    else  if($(this).find('span').hasClass('fa-expand')){
+                        $(this).find('span').removeClass('fa-expand').addClass('fa-compress');
+                        _this.$element.parents().find('.autoMenu ').toggleClass("fix");
+                        $(this).attr("title",'固定目录');
                     }
                     
                 })

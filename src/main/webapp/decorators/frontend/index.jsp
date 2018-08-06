@@ -19,8 +19,8 @@
 <meta name="keywords" content="KxのBook,256kb,野生的喵喵,个人站点">
 <meta name="description" content="KxのBook -256kb.cn | 野生的喵喵 的个人站点 | 分享工作及生活的点滴" />
 <meta name="author" content="ZHANG JIE">
-<title><sitemesh:write property='title' /></title>
-<title>KxのBook -256kb.cn | 野生的喵喵 的个人站点</title>
+<title id="t1"><sitemesh:write property='title' /></title>
+<title id="t2">KxのBook -256kb.cn | 野生的喵喵 的个人站点 | 分享工作及生活的点滴</title>
 
 <link rel="stylesheet" type="text/css" media="screen"
 	href="${basePath}/js/plugin/bootstrap/css/bootstrap.min.css">

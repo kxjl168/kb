@@ -114,7 +114,7 @@ public class PublicController extends BaseController {
 		ModelAndView view = getSysData();
 		view.setViewName("/public/about/main");
 
-		saveStaticInfo(request, StasticTypeOne.HomePage.toString(), "");
+		saveStaticInfo(request, StasticTypeOne.AboutPage.toString(), "");
 		
 		return view;
 	}
@@ -160,6 +160,18 @@ public class PublicController extends BaseController {
 		return "redirect:/public/index/";
 	}
 
+	
+
+	@RequestMapping(value = "/public/share")
+	public ModelAndView share() {
+
+		ModelAndView view = getSysData();
+		view.setViewName("/public/share/main");
+
+	
+		return view;
+	}
+	
 	@RequestMapping(value = "/public/search")
 	public String search() {
 		ModelAndView view = getSysData();
@@ -179,6 +191,17 @@ public class PublicController extends BaseController {
 	}
 	
 	
+	@RequestMapping(value = "/page/portal")
+	public String p_portal(Map<String, Object> maps, HttpSession session, HttpServletRequest request) {
+
+		maps.putAll(sysService.getSysInfo());
+		List<MenuInfo> leftmenus= menuService.getLeftMenuTree( session,  request);
+		
+		maps.put("menus",leftmenus);
+		return "/page/stastic/portal";
+	}
+	
+	
 	@RequestMapping(value = "/page/todo")
 	public String p_todo(Map<String, Object> maps, HttpSession session, HttpServletRequest request) {
 
@@ -187,6 +210,16 @@ public class PublicController extends BaseController {
 		
 		maps.put("menus",leftmenus);
 		return "forward:/todo/index";
+	}
+	
+	@RequestMapping(value = "/page/blog/detail")
+	public String p_detail_edit(Map<String, Object> maps, HttpSession session, HttpServletRequest request) {
+
+		maps.putAll(sysService.getSysInfo());
+		List<MenuInfo> leftmenus= menuService.getLeftMenuTree( session,  request);
+		
+		maps.put("menus",leftmenus);
+		return "/page/blog/detail";
 	}
 	
 	

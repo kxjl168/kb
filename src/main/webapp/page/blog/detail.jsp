@@ -35,7 +35,7 @@
 
 			<div class="" id="content" style="">
 
-					<%@include file="../phead.jsp"%>
+				<%-- 	<%@include file="../phead.jsp"%> --%>
 
 
 
@@ -48,7 +48,7 @@
 					
 					
 					<div class="form-group   " style="margin-top:20px;" >
-							<div class="control-label padding-top-0 col-sm-3 col-xs-12 ">标题：</div>
+							<div class="control-label padding-top-0 col-sm-1 col-xs-12 ">标题：</div>
 							<div class="col-sm-9 col-xs-12 text-right ">
 							 <input required  type="text" class="form-control " name="s_title" id="s_title" ng-model="s_title" placeholder=" ">
 							 </div>
@@ -60,7 +60,7 @@
 						<div class="form-group   ">
 						
 						<div class=" nopadding">
-							 <div class="control-label padding-top-0 col-sm-3 col-xs-12 ">文章类型：</div>
+							 <div class="control-label padding-top-0 col-sm-1 col-xs-12 ">文章类型：</div>
 							<div class="col-sm-9 col-xs-12 text-right ">
 							<select class="form-control " id="s_type" ng-model="s_type">
 								<option  ng-repeat="x in dicts " value="{{x.dict_key}}">{{x.dict_name}}</option>
@@ -75,7 +75,7 @@
 					<div class="form-group   ">
 						
 						<div class=" nopadding">
-						   	<div class="control-label padding-top-0 col-sm-3 col-xs-12  ">是否可见：</div>
+						   	<div class="control-label padding-top-0 col-sm-1 col-xs-12  ">是否可见：</div>
 							<div class="col-sm-9 col-xs-12  text-right ">
 							<select class="form-control " id="en_type" ng-model="en_type">
 								<option  ng-repeat="x in enables " value="{{x.value}}">{{x.desc}}</option>
@@ -94,7 +94,7 @@
 					
 					
 					<div class="form-group   ">
-							<div class="control-label padding-top-0 col-sm-3 col-xs-12 ">文章标签：</div>
+							<div class="control-label padding-top-0 col-sm-1 col-xs-12 ">文章标签：</div>
 							<div class="col-sm-9 col-xs-12 text-right ">
 						 <input required  type="text" class="form-control " name="s_tags" id="s_tags" ng-model="s_tags" placeholder=" ">
 							</div>
@@ -104,7 +104,7 @@
 						</div>
 
 						<div class=" form-group   ">
-								<div class="control-label padding-top-0 col-sm-3 col-xs-12 ">内容：</div>
+								<div class="control-label padding-top-0 col-sm-1 col-xs-12 ">内容：</div>
 								<div class="col-sm-9 col-xs-12 text-right ">
 								 <textarea   id="s_context" name= "s_context" ng-model="s_context"  placeholder=" ">{{s_context}}</textarea>
 							</div>
@@ -123,7 +123,7 @@
 					</div>
 		
 		
-				<div class="modal-footer row nopadding">
+				<div class="modal-footer col-sm-10 col-xs-12 row nopadding ">
 					<button type="button " class="btn btn-default btn-warning " ng-click="cancel()">取消
 					</button>
 					                 <button type="button " class="btn btn-primary " ng-click="update() "> 确定 </button>

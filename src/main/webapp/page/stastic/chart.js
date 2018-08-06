@@ -1,4 +1,4 @@
-function setchartdata(jdata) {
+function setchartdata(jdata,title,ele) {
 		// if (jdata == null)
 		// jdata = {
 		// Time : "9月13号",
@@ -78,6 +78,7 @@ function setchartdata(jdata) {
 			series : [ {
 				name : '累计访问数据（pv）-9月1号',
 				type : 'bar',
+				smooth :true,
 				// stack : '总量',
 				data : [ 35, 25, 36, 10, 33, 29 ],
 				 itemStyle: {normal: {
@@ -86,6 +87,7 @@ function setchartdata(jdata) {
 			}, {
 				name : '累计访问数据（uv）-9月1号',
 				type : 'bar',
+				smooth :true,
 				// stack : '总量',
 				data : [ 22, 10, 26, 6, 20, 20 ],
 				 itemStyle: {normal: {
@@ -102,7 +104,10 @@ function setchartdata(jdata) {
 		var queryDate1 = $("#effectDate").val();
 		var queryDate2 = $("#effectDate2").val();
 
-		option.title.text = $("#dateType option:selected").text() + "访问统计";
+		
+		var ctitle=title||$("#dateType option:selected").text()
+		
+		option.title.text = ctitle + "访问统计";
 		option.legend.data.push('累计访问量（pv）');
 		option.legend.data.push('24小时独立访问量（uv）');
 		option.series[0].name = '累计访问量（pv）';
@@ -119,14 +124,17 @@ function setchartdata(jdata) {
 			});
 		}
 
-		$("#pchart").html('');
-		myChart = echarts.init(document.getElementById('pchart'));
+		
+		var id=ele||'pchart';
+		
+		$("#"+id).html('');
+		myChart = echarts.init(document.getElementById(id));
 		// 使用刚指定的配置项和数据显示图表。
 		myChart.setOption(option);
 		myChart.on('click', function(params) {
 			// 控制台打印数据的名称
 			 //msg(params.name);
-			 getDetailList(1,params.name);
+			 getDetailList(1,params.name,id);
 		});
 	}
 

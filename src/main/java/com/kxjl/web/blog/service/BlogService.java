@@ -43,8 +43,21 @@ public interface BlogService {
 	 */
 	public List<Blog> getBlogTypeGroups();
 	
+	/**
+	 * 获取文章及前后文章
+	 * @param query
+	 * @return
+	 * @author zj
+	 * @date 2018年8月4日
+	 */
 	public List<Blog> getBlogDetailPageList(Blog query);
 	
+	
+	/**
+	 * 计数加1
+	 * @param query
+	 */
+	public void updateBlogReadTime(Blog query) ;
 	
 	/**
 	 * 分页获取banner列表
