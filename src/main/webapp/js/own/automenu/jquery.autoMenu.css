@@ -46,6 +46,10 @@
     vertical-align: middle;
 }
 
+.autoMenu ul{
+	max-height: 600px;
+}
+
 .autoMenu li {
     list-style: none;
 }
