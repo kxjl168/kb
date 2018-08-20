@@ -133,7 +133,7 @@ public class BaseController {
 	 */
 	public void saveStaticInfo(HttpServletRequest request, String type1, String type2) {
 
-		stasticService.saveStaticInfo(request, type1, type2);
+		stasticService.saveStaticInfo(request.getRemoteAddr(), type1, type2,"");
 
 	}
 

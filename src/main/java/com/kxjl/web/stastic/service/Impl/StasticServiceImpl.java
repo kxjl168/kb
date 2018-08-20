@@ -33,8 +33,45 @@ public class StasticServiceImpl implements StasticService {
 	@Autowired
 	StasticDao stasticDao;
 
-	
-	
+	public void saveStaticInfo(String ipinput, String type1, String type2, String arctileId) {
+		// final HttpServletRequest rt = request;
+		final String ip = ipinput;
+		final String t1 = type1;
+		final String t2 = type2;
+		final String blogimei = arctileId;
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					ActionLog log = new ActionLog();
+
+					// 计算ip
+					/*
+					 * String ip = ""; try { ip = rt.getRemoteAddr(); } catch (Exception e) {
+					 * 
+					 * }
+					 */
+
+					log.setUserid(ip);
+
+					String city = IPUtils.getCityByIP(ip);
+					log.setBlog_id(blogimei);
+					log.setCity(city);
+					log.setType_first(t1);
+					log.setType_second(t2);
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String time = sdf.format(new Date());
+					log.setAction_date(time);
+					addActionLog(log);
+				} catch (Exception e) {
+					logger.error(e.getMessage());
+				}
+			}
+		}).run();
+	}
+
 	/**
 	 * 记录访问统计原始数据
 	 * 
@@ -43,8 +80,7 @@ public class StasticServiceImpl implements StasticService {
 	 * @author zj
 	 * @date 2017-12-28
 	 */
-	public void saveStaticInfo(HttpServletRequest request, String type1,
-			String type2,String arctileId ) {
+	public void saveStaticInfo(HttpServletRequest request, String type1, String type2, String arctileId) {
 		final HttpServletRequest rt = request;
 		final String t1 = type1;
 		final String t2 = type2;
@@ -72,8 +108,7 @@ public class StasticServiceImpl implements StasticService {
 					log.setCity(city);
 					log.setType_first(t1);
 					log.setType_second(t2);
-					SimpleDateFormat sdf = new SimpleDateFormat(
-							"yyyy-MM-dd HH:mm:ss");
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					String time = sdf.format(new Date());
 					log.setAction_date(time);
 					addActionLog(log);
@@ -83,7 +118,7 @@ public class StasticServiceImpl implements StasticService {
 			}
 		}).run();
 	}
-	
+
 	/**
 	 * 记录访问统计原始数据
 	 * 
@@ -92,12 +127,11 @@ public class StasticServiceImpl implements StasticService {
 	 * @author zj
 	 * @date 2017-12-28
 	 */
-	public void saveStaticInfo(HttpServletRequest request, String type1,
-			String type2) {
+	public void saveStaticInfo(HttpServletRequest request, String type1, String type2) {
 
-		
-		saveStaticInfo(request,type1,type2,"");
+		saveStaticInfo(request, type1, type2, "");
 	}
+
 	/**
 	 * 获取统计项
 	 * 
@@ -106,12 +140,10 @@ public class StasticServiceImpl implements StasticService {
 	 * @author zj
 	 * @date 2017-12-28
 	 */
-	public List<DictInfo> GetStaticTypeList()
-	{
+	public List<DictInfo> GetStaticTypeList() {
 		return stasticDao.GetStaticTypeList();
 	}
-	
-	
+
 	/**
 	 * 用户关注APP情况，根据传入的APP名称及ID列表，动态返回字段
 	 * 
@@ -125,14 +157,9 @@ public class StasticServiceImpl implements StasticService {
 	 * @date 2016-10-14
 	 * @author zj
 	 */
-	public List<HashMap<Object, Object>> GetUserFocusAppList(
-			@Param(value = "name") String name,
-			@Param(value = "sex") String sex,
-			@Param(value = "age1") String age1,
-			@Param(value = "age2") String age2
-			,@Param(value="appNames") String[] appNames
-			,@Param(value="appIds") String[] appIds
-			,int start,
+	public List<HashMap<Object, Object>> GetUserFocusAppList(@Param(value = "name") String name,
+			@Param(value = "sex") String sex, @Param(value = "age1") String age1, @Param(value = "age2") String age2,
+			@Param(value = "appNames") String[] appNames, @Param(value = "appIds") String[] appIds, int start,
 			int pageCount) {
 
 		String caseblock = "";
@@ -144,29 +171,27 @@ public class StasticServiceImpl implements StasticService {
 		// max(case app_name when '教育谷' then stat else 0 end) '教育谷',
 		// max(case app_name when '教育谷' then stat else 0 end) '教育谷'
 		for (int i = 0; i < appNames.length; i++) {
-			if(appNames[i].trim().equals(""))
+			if (appNames[i].trim().equals(""))
 				continue;
-			caseblock += " max(case app_name when '" + appNames[i]
-					+ "' then stat else 0 end) '" + appNames[i] + "',";
+			caseblock += " max(case app_name when '" + appNames[i] + "' then stat else 0 end) '" + appNames[i] + "',";
 		}
 		caseblock = caseblock.substring(0, caseblock.length() - 1);
 
 		// 1,4,5,6,7,8,9,10
 		for (int i = 0; i < appIds.length; i++) {
-			if(appIds[i].trim().equals(""))
+			if (appIds[i].trim().equals(""))
 				continue;
 			inblock += appIds[i] + ",";
 		}
 		inblock = inblock.substring(0, inblock.length() - 1);
 
-		return stasticDao.GetUserFocusAppList(name, sex, age1, age2, caseblock,
-				inblock, start,
-				 pageCount);
+		return stasticDao.GetUserFocusAppList(name, sex, age1, age2, caseblock, inblock, start, pageCount);
 
 	}
-	
+
 	/**
 	 * 查询用户使用APP的次数统计
+	 * 
 	 * @param name
 	 * @param sex
 	 * @param age1
@@ -182,21 +207,14 @@ public class StasticServiceImpl implements StasticService {
 	 * @date 2016-10-14
 	 * @author zj
 	 */
-	public List<HashMap<Object, Object>> GetUserAppuseRecondList(
-			@Param(value="name") String name
-			,@Param(value="sex") String sex
-			,@Param(value="age1") String age1
-			,@Param(value="age2") String age2
-			,@Param(value="appNames") String[] appNames
-			,@Param(value="time_type") String time_type
-			,@Param(value="time1") String time1
-			,@Param(value="time2") String time2	
-			,@Param(value="start") Integer start
-			,@Param(value="pageCount") Integer pageCount
-			
-			)
-			{
-		
+	public List<HashMap<Object, Object>> GetUserAppuseRecondList(@Param(value = "name") String name,
+			@Param(value = "sex") String sex, @Param(value = "age1") String age1, @Param(value = "age2") String age2,
+			@Param(value = "appNames") String[] appNames, @Param(value = "time_type") String time_type,
+			@Param(value = "time1") String time1, @Param(value = "time2") String time2,
+			@Param(value = "start") Integer start, @Param(value = "pageCount") Integer pageCount
+
+	) {
+
 		String caseblock = "";
 		String dateblock = "";
 
@@ -206,49 +224,38 @@ public class StasticServiceImpl implements StasticService {
 		// max(case app_name when '教育谷' then stat else 0 end) '教育谷',
 		// max(case app_name when '教育谷' then stat else 0 end) '教育谷'
 		for (int i = 0; i < appNames.length; i++) {
-			if(appNames[i].trim().equals(""))
+			if (appNames[i].trim().equals(""))
 				continue;
-			caseblock += " max(case app_name when '" + appNames[i]
-					+ "' then stat else 0 end) '" + appNames[i] + "',";
+			caseblock += " max(case app_name when '" + appNames[i] + "' then stat else 0 end) '" + appNames[i] + "',";
 		}
 		caseblock = caseblock.substring(0, caseblock.length() - 1);
 
-		
 //		str_to_date(action_date,'%Y-%m-%d %H:%i:%s') BETWEEN str_to_date('2016-10-01 08','%Y-%m-%d %H')
 //		and str_to_date('2016-10-14','%Y-%m-%d %H')
-		//dateblock= " str_to_date(action_date,'%Y-%m-%d %H:%i:%s') BETWEEN ";
-		String dateFormat="%Y-%m-%d %H";
-		if(time_type.equals("HOUR"))
-			 dateFormat="%Y-%m-%d %H";
-		else if(time_type.equals("DAY"))
-			 dateFormat="%Y-%m-%d";
-		else  if(time_type.equals("MONTH"))
-			 dateFormat="%Y-%m";
-		
-		//dateblock+="  str_to_date('"+time1+"','"+dateFormat+"')	and str_to_date('"+time2+"','"+dateFormat+"') ";
-		
-		
-		return stasticDao.GetUserAppuseRecondList(name, sex, age1, age2, caseblock,
-				dateFormat,time1,time2, start,
-				 pageCount);
-			}
-	
-	
-	public List<HashMap<Object, Object>> GetUserVisitRecondList(
-			@Param(value="name") String name
-			,@Param(value="sex") String sex
-			,@Param(value="age1") String age1
-			,@Param(value="age2") String age2
-			,@Param(value="appNames") String[] appNames
-			,@Param(value="time_type") String time_type
-			,@Param(value="time1") String time1
-			,@Param(value="time2") String time2	
-			,@Param(value="start") Integer start
-			,@Param(value="pageCount") Integer pageCount
-			
-			)
-			{
-		
+		// dateblock= " str_to_date(action_date,'%Y-%m-%d %H:%i:%s') BETWEEN ";
+		String dateFormat = "%Y-%m-%d %H";
+		if (time_type.equals("HOUR"))
+			dateFormat = "%Y-%m-%d %H";
+		else if (time_type.equals("DAY"))
+			dateFormat = "%Y-%m-%d";
+		else if (time_type.equals("MONTH"))
+			dateFormat = "%Y-%m";
+
+		// dateblock+=" str_to_date('"+time1+"','"+dateFormat+"') and
+		// str_to_date('"+time2+"','"+dateFormat+"') ";
+
+		return stasticDao.GetUserAppuseRecondList(name, sex, age1, age2, caseblock, dateFormat, time1, time2, start,
+				pageCount);
+	}
+
+	public List<HashMap<Object, Object>> GetUserVisitRecondList(@Param(value = "name") String name,
+			@Param(value = "sex") String sex, @Param(value = "age1") String age1, @Param(value = "age2") String age2,
+			@Param(value = "appNames") String[] appNames, @Param(value = "time_type") String time_type,
+			@Param(value = "time1") String time1, @Param(value = "time2") String time2,
+			@Param(value = "start") Integer start, @Param(value = "pageCount") Integer pageCount
+
+	) {
+
 		String caseblock = "";
 		String dateblock = "";
 
@@ -258,35 +265,29 @@ public class StasticServiceImpl implements StasticService {
 		// max(case app_name when '教育谷' then stat else 0 end) '教育谷',
 		// max(case app_name when '教育谷' then stat else 0 end) '教育谷'
 		for (int i = 0; i < appNames.length; i++) {
-			if(appNames[i].trim().equals(""))
+			if (appNames[i].trim().equals(""))
 				continue;
-			caseblock += " max(case app_name when '" + appNames[i]
-					+ "' then stat else 0 end) '" + appNames[i] + "',";
+			caseblock += " max(case app_name when '" + appNames[i] + "' then stat else 0 end) '" + appNames[i] + "',";
 		}
 		caseblock = caseblock.substring(0, caseblock.length() - 1);
 
-		
 //		str_to_date(action_date,'%Y-%m-%d %H:%i:%s') BETWEEN str_to_date('2016-10-01 08','%Y-%m-%d %H')
 //		and str_to_date('2016-10-14','%Y-%m-%d %H')
-		//dateblock= " str_to_date(action_date,'%Y-%m-%d %H:%i:%s') BETWEEN ";
-		String dateFormat="%Y-%m-%d %H";
-		if(time_type.equals("HOUR"))
-			 dateFormat="%Y-%m-%d %H";
-		else if(time_type.equals("DAY"))
-			 dateFormat="%Y-%m-%d";
-		else  if(time_type.equals("MONTH"))
-			 dateFormat="%Y-%m";
-		
-		//dateblock+="  str_to_date('"+time1+"','"+dateFormat+"')	and str_to_date('"+time2+"','"+dateFormat+"') ";
-		
-		
-		return stasticDao.GetUserVisitRecondList(name, sex, age1, age2, caseblock,
-				dateFormat,time1,time2, start,
-				 pageCount);
-			}
-	
-	
+		// dateblock= " str_to_date(action_date,'%Y-%m-%d %H:%i:%s') BETWEEN ";
+		String dateFormat = "%Y-%m-%d %H";
+		if (time_type.equals("HOUR"))
+			dateFormat = "%Y-%m-%d %H";
+		else if (time_type.equals("DAY"))
+			dateFormat = "%Y-%m-%d";
+		else if (time_type.equals("MONTH"))
+			dateFormat = "%Y-%m";
 
+		// dateblock+=" str_to_date('"+time1+"','"+dateFormat+"') and
+		// str_to_date('"+time2+"','"+dateFormat+"') ";
+
+		return stasticDao.GetUserVisitRecondList(name, sex, age1, age2, caseblock, dateFormat, time1, time2, start,
+				pageCount);
+	}
 
 	/**
 	 * 添加点击日志
@@ -299,21 +300,22 @@ public class StasticServiceImpl implements StasticService {
 	public int addActionLog(ActionLog log) {
 		return stasticDao.addActionLog(log);
 	}
-	
+
 	/**
 	 * 获取指定分类的具体数据
+	 * 
 	 * @param query
 	 * @return
 	 * @author zj
 	 * @date 2018年6月14日
 	 */
-	public List<ActionLog> GetActionList(ActionLog query)
-	{
+	public List<ActionLog> GetActionList(ActionLog query) {
 		return stasticDao.GetActionList(query);
 	}
 
 	/**
 	 * 获取指定分类的具体数据
+	 * 
 	 * @param query
 	 * @return
 	 * @author zj
@@ -370,19 +372,19 @@ public class StasticServiceImpl implements StasticService {
 	public List<ActionLog> GetDayDetailList(ActionLog query) {
 		return stasticDao.GetDayDetailList(query);
 	}
-	
+
 	/**
 	 * 获取具体点击数据
+	 * 
 	 * @param query
 	 * @return
 	 * @date 2016-7-14
 	 * @author zj
 	 */
-	public int GetDetailListCount(ActionLog query)
-	{
+	public int GetDetailListCount(ActionLog query) {
 		return stasticDao.GetDetailListCount(query);
 	}
-	
+
 	/**
 	 * 获取天数据
 	 * 
