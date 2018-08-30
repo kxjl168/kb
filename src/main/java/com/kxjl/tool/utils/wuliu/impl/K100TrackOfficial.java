@@ -1,4 +1,4 @@
-package com.kxjl.tool.utils.wuliu;
+package com.kxjl.tool.utils.wuliu.impl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,6 +9,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -20,31 +22,36 @@ import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+import com.kxjl.tool.common.Md5Encrypt;
+import com.kxjl.tool.utils.DateUtil;
+import com.kxjl.tool.utils.wuliu.AbsWuliuTrack;
+import com.kxjl.tool.utils.wuliu.WuliuUtil;
+
+
 
 /**
- * 快递查询接口，跟踪爱查快递html页面js， 模拟生成该页面查询请求。
- * 
- * @see https://www.ickd.cn/ <br/>
- *      一下为页面核心源码，当页面加密算法有变动时，本方法需要对应变更.
- * 
- * <pre>
- * 
- * 
- * 
- * </pre>
- * 
- * 
- * 
- *      顺丰查询
+ * 快递100官方标准api
  * @author zj
  * @date 2018年7月10日
- * 
+ *
  */
-public class K100Track extends AbsWuliuTrack {
+@Service
+public class K100TrackOfficial implements AbsWuliuTrack {
 
-	private static Logger logger = Logger.getLogger(K100Track.class);
+	private static Logger logger = Logger.getLogger(K100TrackOfficial.class);
 
 	String url = "https://www.ickd.cn/";
+	
+	
+/*    （2）测试key：tEstUAuZiIye5061
+
+    （3）测试customer：0358AAD70C8B4FAAAF71D0436A8C8A38
+*/
+	String key="tEstUAuZiIye5061";
+	String customer="0358AAD70C8B4FAAAF71D0436A8C8A38";
 
 	long[] g;
 	String h = "edb";
@@ -62,8 +69,7 @@ public class K100Track extends AbsWuliuTrack {
 	private static String getType(String num) {
 
 		String type = "shunfeng";
-		String url = "https://www.kuaidi100.com/autonumber/autoComNum?resultv2=1&text="
-				+ num;
+		String url = "https://www.kuaidi100.com/autonumber/autoComNum?resultv2=1&text=" + num;
 		Calendar c2 = Calendar.getInstance();
 		Long miniseonds2 = c2.getTimeInMillis();
 		String minisecond2 = String.valueOf(miniseonds2);
@@ -71,13 +77,12 @@ public class K100Track extends AbsWuliuTrack {
 
 		logger.debug(url);
 
-		K100Track track = new K100Track();
+		K100TrackOfficial track = new K100TrackOfficial();
 		String rst = track.sendPost(url, null);
 
 		try {
 			JSONObject jtype = new JSONObject(rst);
-			type = jtype.optJSONArray("auto").getJSONObject(0)
-					.optString("comCode");
+			type = jtype.optJSONArray("auto").getJSONObject(0).optString("comCode");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -86,20 +91,10 @@ public class K100Track extends AbsWuliuTrack {
 
 	}
 
-	/**
-	 * 获取物流信息
-	 * 
-	 * @param num
-	 * @return
-	 * @author zj
-	 * @date 2018年7月11日
-	 */
-	public static String GetWuliu(String num) {
 
-		if (num == null || num.equals(""))
-			return "{}";
+	public String getOrderTracesByJson(String expCode, String num) throws Exception {
 
-		K100Track track = new K100Track();
+		String rststr = "";
 
 		Calendar c = Calendar.getInstance();
 		Long miniseonds = c.getTimeInMillis();
@@ -107,56 +102,67 @@ public class K100Track extends AbsWuliuTrack {
 
 		String type = getType(num);
 
-		String url = "http://www.kuaidi100.com/query?type=" + type + "&postid="
-				+ num + "&id=1&valicode=&temp=0.16859480039596852";
-		Calendar c2 = Calendar.getInstance();
-		Long miniseonds2 = c.getTimeInMillis();
-		String minisecond2 = String.valueOf(miniseonds2);
-		url += "&" + "_" + minisecond2 + "=";
-
-		logger.debug(url);
-
-		String rst = track.sendPost(url, null);
-
+		String param ="{\"com\":\""+type+"\",\"num\":\""+num+"\",\"from\":\"\",\"to\":\"\",\"resultv2\":0}";
+		String customer ="16208DAA244510FD20209DB54229BE63";//this.customer;
+		String key ="svMcziGT8667";//this.key;
+		
+		//String customer =this.customer;
+	//	String key =this.key;
+		
+		
+		String sign = Md5Encrypt.MD5(param+key+customer,true);
+		Map<String,String> params = new HashMap();
+		params.put("param",param);
+		params.put("sign",sign);
+		params.put("customer",customer);
+	
+		
+	
 		try {
+			String rst = sendPost("http://poll.kuaidi100.com/poll/query.do", params);
+			
 			JSONObject ickJson = new JSONObject(rst);
 
-			ickJson.put("ord", "DESC");
-			if (type.equals("shunfeng"))
-				ickJson.put("expTextName", "顺丰快递");
-			else if (type.equals("shentong"))
-				ickJson.put("expTextName", "申通快递");
-			else if (type.equals("zhongtong"))
-				ickJson.put("expTextName", "中通快递");
-			else
-				ickJson.put("expTextName", type);
+			if (ickJson.optString("status").equals("200")) {
+				ickJson.put("errCode", "0");
+				ickJson.put("mailNo", num);
+				WuliuUtil.setComInfo(type, ickJson);
 
-			rst = ickJson.toString();
+				/*
+				 * "data": [ { "ftime": "2018-06-11 17:55:33", "context": "已签收，签收人凭取货码签收。",
+				 * "location": "", "time": "2018-06-11 17:55:33" },]
+				 */
+				JSONArray jarray = ickJson.optJSONArray("data");
+				if (jarray.length() >= 2) {
+					try {
+
+						Date d1 = DateUtil.getDate(jarray.optJSONObject(0).optString("time"), "yyyy-MM-dd HH:mm:ss");
+						Date d2 = DateUtil.getDate(jarray.optJSONObject(1).optString("time"), "yyyy-MM-dd HH:mm:ss");
+						if (d1.getTime() > d2.getTime()) {
+							ickJson.put("ord", "DESC");
+						} else {
+							ickJson.put("ord", "ASC");
+						}
+					} catch (Exception e) {
+						
+						ickJson.put("ord", "DESC");
+					}
+				}
+
+			}
+
+			rststr = ickJson.toString();
 
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-
-		logger.debug(rst);
-
-		return rst;
-	}
-
-	public static void main(String[] args) {
-		GetWuliu("456698803172");
-
-	}
-
-	public String getOrderTracesByJson(String expCode, String expNo)
-			throws Exception {
-
-		return "";
+		logger.info(rststr);
+		return rststr;
 	}
 
 	public String SendHttpData2(String url, String str) {
 
-		// logger.info("HTTP Request URL:" + url + ",HTTP Request PARAM:" +
-		// str);
+		// logger.info("HTTP Request URL:" + url + ",HTTP Request PARAM:" + str);
 		HttpClient client = new HttpClient();
 		// client.getHostConfiguration().setProxy("10.41.70.8", 80);
 		// client.getParams().setAuthenticationPreemptive(true);
@@ -168,8 +174,7 @@ public class K100Track extends AbsWuliuTrack {
 			client.setTimeout(60000);
 
 			// httpPost.setRequestHeader("Content-type", "application/json");
-			httpPost.setRequestHeader("Content-type",
-					"application/x-www-form-urlencoded; charset=UTF-8");
+			httpPost.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
 
 			httpPost.setRequestHeader("Accept", "application/json");
 			httpPost.setRequestHeader("Connection", "close");
@@ -186,10 +191,9 @@ public class K100Track extends AbsWuliuTrack {
 			client.executeMethod(httpPost);
 			int resStatusCode = httpPost.getStatusCode();
 			if (resStatusCode == HttpStatus.SC_OK) {
-				BufferedReader br = new BufferedReader(new InputStreamReader(
-						httpPost.getResponseBodyAsStream(), "utf-8"));
-				// logger.info("HTTP Request CHARSET:" +
-				// httpPost.getResponseCharSet());
+				BufferedReader br = new BufferedReader(
+						new InputStreamReader(httpPost.getResponseBodyAsStream(), "utf-8"));
+				// logger.info("HTTP Request CHARSET:" + httpPost.getResponseCharSet());
 				String res = null;
 				StringBuffer sb = new StringBuffer();
 				while ((res = br.readLine()) != null) {
@@ -197,10 +201,8 @@ public class K100Track extends AbsWuliuTrack {
 				}
 				responseData = sb.toString();
 			} else {
-				// logger.error("http请求失败 " + resStatusCode + ":" +
-				// httpPost.getStatusText());
-				exception = new Exception("[SerialHttpSender] HttpErrorCode:"
-						+ resStatusCode);
+				// logger.error("http请求失败 " + resStatusCode + ":" + httpPost.getStatusText());
+				exception = new Exception("[SerialHttpSender] HttpErrorCode:" + resStatusCode);
 			}
 			if (exception != null) {
 				throw exception;
@@ -214,8 +216,7 @@ public class K100Track extends AbsWuliuTrack {
 			// java.net.SocketTimeoutException: Read timed out
 
 			String message = ex.getMessage();
-			if (message != null
-					&& message.toLowerCase().indexOf("read timed") > -1) {
+			if (message != null && message.toLowerCase().indexOf("read timed") > -1) {
 				// throw new Exception(ex.getMessage());
 			} else {
 				ex.printStackTrace();
@@ -251,8 +252,7 @@ public class K100Track extends AbsWuliuTrack {
 		StringBuilder result = new StringBuilder();
 		try {
 			URL realUrl = new URL(url);
-			HttpURLConnection conn = (HttpURLConnection) realUrl
-					.openConnection();
+			HttpURLConnection conn = (HttpURLConnection) realUrl.openConnection();
 			// 发送POST请求必须设置如下两行
 			conn.setDoOutput(true);
 			conn.setDoInput(true);
@@ -260,21 +260,15 @@ public class K100Track extends AbsWuliuTrack {
 			conn.setRequestMethod("POST");
 			// 设置通用的请求属性
 			conn.setRequestProperty("accept", "*/*");
-			conn.setRequestProperty("Content-type", "application/json");
+			conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded");
 			conn.setRequestProperty("connection", "Keep-Alive");
-			conn.setRequestProperty("user-agent",
-					"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+			conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
 
 			Random r = new Random();
 
-			conn.setRequestProperty(
-					"Cookie",
-					"Hm_lvt_39418dcb8e053c84230016438f4ac86c="
-							+ r.nextInt(1000000)
-							+ "; Hm_lpvt_39418dcb8e053c84230016438f4ac86c="
-							+ r.nextInt(1000000));
-			conn.setRequestProperty("Referer",
-					"http://www.kuaidi100.com/all/sf.shtml");
+			conn.setRequestProperty("Cookie", "Hm_lvt_39418dcb8e053c84230016438f4ac86c=" + r.nextInt(1000000)
+					+ "; Hm_lpvt_39418dcb8e053c84230016438f4ac86c=" + r.nextInt(1000000));
+			conn.setRequestProperty("Referer", "http://www.kuaidi100.com/all/sf.shtml");
 
 			conn.connect();
 			// 获取URLConnection对象对应的输出流
@@ -297,8 +291,7 @@ public class K100Track extends AbsWuliuTrack {
 			// flush输出流的缓冲
 			out.flush();
 			// 定义BufferedReader输入流来读取URL的响应
-			in = new BufferedReader(new InputStreamReader(
-					conn.getInputStream(), "UTF-8"));
+			in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 			String line;
 			while ((line = in.readLine()) != null) {
 				result.append(line);

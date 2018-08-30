@@ -31,7 +31,8 @@ import com.google.gson.JsonObject;
 import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.utils.JEscape;
 import com.kxjl.tool.utils.JsonUtil;
-import com.kxjl.tool.utils.wuliu.ICKDWuliuTrack;
+
+import com.kxjl.tool.utils.wuliu.WuliuHelper;
 import com.kxjl.web.blog.model.Blog;
 import com.kxjl.web.blog.model.Kurl;
 import com.kxjl.web.blog.service.KurlService;
@@ -59,6 +60,8 @@ public class PublicController extends BaseController {
 	@Autowired
 	MenuInfoService menuService;
 
+	@Autowired
+	WuliuHelper wuliuHelper;
 	
 
 	@RequestMapping("/public/wuliu")
@@ -75,7 +78,7 @@ public class PublicController extends BaseController {
 
 
 	
-		String jStr = ICKDWuliuTrack.GetWuliu(id);
+		String jStr = wuliuHelper.getWuliuInfo(id);
 
 		JsonUtil.responseOutWithJson(response, jStr);
 	}

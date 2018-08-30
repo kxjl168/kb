@@ -30,6 +30,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.kxjl.tool.common.Constant;
@@ -63,6 +65,67 @@ public class BlogController extends BaseController {
 
 		return view;
 	}
+	
+	
+	/**
+	 * 关联文章 根据tag获取
+	 * @param request
+	 * @param response
+	 * @author zj
+	 * @date 2018年8月30日
+	 */
+	@RequestMapping(value = "/getRelatedList")
+	public void getRelatedList(HttpServletRequest request, HttpServletResponse response) {
+		// String data = request.getParameter("data");
+
+		// JSONObject jsonIN;
+		JSONObject jsonOut = new JSONObject();
+		List<Blog> detail = new ArrayList<Blog>();
+		String rst = "";
+		try {
+
+			// jsonIN = new JSONObject(data);
+
+			String imei = parseStringParam(request, "i");
+		
+			Blog query = new Blog();
+			query.setImei(imei);
+
+			// cur ,next, pre
+			Blog data = blogService.getBlogInfoById(query);
+			//data.getTagStrs()
+			
+			Page<Object> pg=PageHelper.startPage(1, 10);
+			detail=blogService.getRelatedBlogs(data);
+		
+
+			Gson gs = new Gson();
+			String jsStr = gs.toJson(detail);
+
+			jsonOut.put("ResponseCode", "200");
+			jsonOut.put("ResponseMsg", "");
+			jsonOut.put("total", detail.size());
+			jsonOut.put("datalist", jsStr);
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			try {
+				jsonOut.put("ResponseCode", "201");
+				jsonOut.put("ResponseMsg", "");
+				jsonOut.put("total", 0);
+				jsonOut.put("datalist", "");
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+
+		}
+		rst = jsonOut.toString();
+		JsonUtil.responseOutWithJson(response, rst);
+
+	}
+	
 
 	/**
 	 * 获取当前详细及前后关联的两个

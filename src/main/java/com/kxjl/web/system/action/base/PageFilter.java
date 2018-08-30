@@ -280,6 +280,10 @@ public class PageFilter implements Filter {
 						Thread.sleep(3600);
 						//RequestDispatcher dispatcher = request.getRequestDispatcher(htmlPath);
 						// dispatcher.forward(request, response);
+						
+						//RequestDispatcher dispatcher = request.getRequestDispatcher(htmlPath);
+						//dispatcher.forward(request, localCharResponseWrapper);
+						
 						response.sendRedirect(htmlPath);
 
 						isDone = true;

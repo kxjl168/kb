@@ -7,6 +7,16 @@
 	
 	
 
+<select id="getRelatedBlogs" parameterType="com.kxjl.web.blog.model.Blog" resultMap="BlogMap">
+select * from blog_info where 1=1 
+ 
+          <foreach collection="tagStrs" item="ti" open=" and " close=" " separator=" or ">
+            tags like CONCAT('%',#{ti},'%')
+          </foreach>
+          
+          order by create_date desc
+</select>
+
 	
 		<select id="getBlogTags"  resultMap="BlogMap">
 	<![CDATA[ 

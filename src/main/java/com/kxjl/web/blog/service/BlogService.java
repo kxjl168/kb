@@ -107,4 +107,13 @@ public interface BlogService {
 	 */
 	public Blog getBlogInfoById(Blog query);
 	
+	/**
+	 * 关联文章
+	 * @param query
+	 * @return
+	 * @author zj
+	 * @date 2018年8月30日
+	 */
+	public List<Blog> getRelatedBlogs(Blog query);
+	
 }

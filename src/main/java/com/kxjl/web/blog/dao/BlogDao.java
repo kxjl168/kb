@@ -16,6 +16,15 @@ public interface BlogDao {
 	
 	
 	/**
+	 * 关联文章
+	 * @param query
+	 * @return
+	 * @author zj
+	 * @date 2018年8月30日
+	 */
+	public List<Blog> getRelatedBlogs(Blog query);
+	
+	/**
 	 * 文章tag总数列表
 	 * 
 	 * @param map
