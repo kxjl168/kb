@@ -960,6 +960,7 @@ pre {
     font-size: 16px;
     background: #FFF;
     padding: 20px 30px;
+    color:#555666;
 }
 
 .wuliu tr ,.wuliu .trow{
@@ -1051,6 +1052,11 @@ pre {
     margin: 0;
     padding: 0;
 }
+.even{
+    background: #F9F9F9!important;
+}
+
+/*wuli end*/
 
 
 @media screen and (max-width: 768px) {
