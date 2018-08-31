@@ -34,6 +34,44 @@ public class StasticServiceImpl implements StasticService {
 	StasticDao stasticDao;
 
 	
+	public void saveStaticInfo(String ipinput, String type1, String type2, String arctileId) {
+		// final HttpServletRequest rt = request;
+		final String ip = ipinput;
+		final String t1 = type1;
+		final String t2 = type2;
+		final String blogimei = arctileId;
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					ActionLog log = new ActionLog();
+
+					// 计算ip
+					/*
+					 * String ip = ""; try { ip = rt.getRemoteAddr(); } catch (Exception e) {
+					 * 
+					 * }
+					 */
+
+					log.setUserid(ip);
+
+					String city = IPUtils.getCityByIP(ip);
+					log.setBlog_id(blogimei);
+					log.setCity(city);
+					log.setType_first(t1);
+					log.setType_second(t2);
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String time = sdf.format(new Date());
+					log.setAction_date(time);
+					addActionLog(log);
+				} catch (Exception e) {
+					logger.error(e.getMessage());
+				}
+			}
+		}).run();
+	}
 	
 	/**
 	 * 记录访问统计原始数据

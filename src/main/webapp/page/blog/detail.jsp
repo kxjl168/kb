@@ -33,7 +33,7 @@
 		<body >
 
 
-			<div class="" id="content" style="">
+			<div  ng-cloak class="" id="content" style="">
 
 				<%-- 	<%@include file="../phead.jsp"%> --%>
 

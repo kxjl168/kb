@@ -1,3 +1,4 @@
+
 package com.kxjl.web.blog.action;
 
 import java.text.SimpleDateFormat;
@@ -65,6 +66,23 @@ public class BlogController extends BaseController {
 
 		return view;
 	}
+	
+	
+	/**
+	 * 获取当前详细及前后关联的两个
+	 * 
+	 * @param map
+	 * @return
+	 * @author zj
+	 * @date 2017-12-26
+	 */
+	@RequestMapping(value = "/sabout")
+	public void sabout(HttpServletRequest request, HttpServletResponse response) {
+		// String data = request.getParameter("data");
+		saveStaticInfo(request, StasticTypeOne.AboutPage.toString(), "","");
+
+	}
+
 	
 	
 	/**

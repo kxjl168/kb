@@ -60,7 +60,12 @@ function init() {
 	initQuery();
 
 
+SZUMWS(http + "blog/sabout.action","",
+			function succsess(json) {
+			}, function error(data) {
+			}, false, false
 
+	);
 };
 
 

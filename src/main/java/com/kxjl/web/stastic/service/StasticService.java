@@ -16,7 +16,7 @@ import com.kxjl.web.system.model.DictInfo;
 
 public interface StasticService {
 
-	
+	public void saveStaticInfo(String ipinput, String type1, String type2, String arctileId);
 	/**
 	 * 记录访问统计原始数据
 	 * 

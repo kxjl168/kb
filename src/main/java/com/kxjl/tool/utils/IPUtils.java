@@ -1,3 +1,4 @@
+
 package com.kxjl.tool.utils;
 
 import java.util.ArrayList;
@@ -16,57 +17,140 @@ import com.kxjl.tool.httpPost.SendPostRequest;
  */
 public class IPUtils {
 
-	/**
-	 * 
-	 * 根据ip查询淘宝库获取地市
-	 * @param map
-	 * @return
-	 * @author zj
-	 * @date 2017-12-27
-	 */
-	public static String getCityByIP(String ip)
-	{
-		
-		
-		String url_taobao = "http://ip.taobao.com/service/getIpInfo.php?ip=";
-		String city="";
-		
-		String enable=ConfigReader.getInstance().getProperty("taobaoip");
-		if(!enable.equals("true"))
+	// 200/min
+	// http://extreme-ip-lookup.com/json/183.206.14.48
+
+	public static String getCityByIPEx(String ip) {
+
+		String url_taobao = "http://extreme-ip-lookup.com/json/" ;
+		String city = "";
+
+		String enable = ConfigReader.getInstance().getProperty("taobaoip");
+		if (!enable.equals("true"))
 			return city;
-		
+
+		/*
+		 * { "businessName" : "", "businessWebsite" : "", "city" : "Nanjing",
+		 * "continent" : "Asia", "country" : "China", "countryCode" : "CN", "ipName" :
+		 * "48.14.206.183.static.js.chinamobile", "ipType" : "Residential", "isp" :
+		 * "China Mobile Communications Corporation", "lat" : "32.0617", "lon" :
+		 * "118.7778", "org" : "China Mobile Communications Corporation", "query" :
+		 * "183.206.14.48", "region" : "Jiangsu", "status" : "success" }
+		 */
+
 		try {
 			String rst = SendPostRequest.sendHttpData(url_taobao + ip, "");
 			JSONObject js = new JSONObject(rst);
-			if (js.optString("code").equals("0")) {
-				 city = js.optJSONObject("data").optString("city");
-				 if(city.equals("")) //国外取国家
-				 city = js.optJSONObject("data").optString("country")
-				 +"_"+js.optJSONObject("data").optString("area")
-				 +"_"+js.optJSONObject("data").optString("region");
-			//	System.out.println(city);
+			if (js.optString("status").equals("success")) {
+
+				String country = js.optString("country");
+
+				String region = js.optString("region");
+				String scity = js.optString("city");
+
+				city = country + "-" + region + "-" + scity;
 			}
-		//	System.out.println(rst);
-		//	System.out.println("===========taobao end================");
-		//	System.out.println("========================");
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return city;
 	}
-	
-	
-	
+
+	public static String getCityByIPiplook(String ip) {
+
+		//150/min
+		//http://ip-api.com/json/183.206.14.41
+		String url_taobao = "http://ip-api.com/json/" ;
+		String city = "";
+
+		String enable = ConfigReader.getInstance().getProperty("taobaoip");
+		if (!enable.equals("true"))
+			return city;
+
+		/*
+		 * {"as":"AS56046 China Mobile communications corporation","city":"Nanjing",
+		 * "country":"China","countryCode":"CN","isp":"China Mobile Guangdong","lat":32.
+		 * 0617,"lon":118.7778,"org":"China Mobile","query":"183.206.14.41","region":
+		 * "JS","regionName":"Jiangsu","status":"success","timezone":"Asia/Shanghai",
+		 * "zip":""}
+		 */
+
+		try {
+			String rst = SendPostRequest.sendHttpData(url_taobao + ip, "");
+			JSONObject js = new JSONObject(rst);
+			if (js.optString("status").equals("success")) {
+
+				String country = js.optString("country");
+
+				String region = js.optString("regionName");
+				String scity = js.optString("city");
+
+				city = country + "-" + region + "-" + scity;
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return city;
+	}
+
+	public static String getCityByIP(String ip)
+	{
+		return getCityByIPEx(ip);
+	}
+
+	/**
+	 * 
+	 * 根据ip查询淘宝库获取地市
+	 * 
+	 * @param map
+	 * @return
+	 * @author zj
+	 * @date 2017-12-27
+	 */
+	public static String getCityByIPTaobao(String ip) {
+
+		String url_taobao = "http://ip.taobao.com/service/getIpInfo.php?ip=";
+		String city = "";
+
+		String enable = ConfigReader.getInstance().getProperty("taobaoip");
+		if (!enable.equals("true"))
+			return city;
+
+		try {
+			String rst = SendPostRequest.sendHttpData(url_taobao + ip, "");
+			JSONObject js = new JSONObject(rst);
+			if (js.optString("code").equals("0")) {
+				city = js.optJSONObject("data").optString("city");
+				if (city.equals("")) // 国外取国家
+					city = js.optJSONObject("data").optString("country") + "_"
+							+ js.optJSONObject("data").optString("area") + "_"
+							+ js.optJSONObject("data").optString("region");
+				// System.out.println(city);
+			}
+			// System.out.println(rst);
+			// System.out.println("===========taobao end================");
+			// System.out.println("========================");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return city;
+	}
+
 	public static void main(String[] args) {
-		
+
 		System.out.println(getCityByIP("183.206.15.135"));
 		/*
-		System.out.println(getNetMask("255.255.255.0"));
-
-		System.out.println(getPoolMax(getNetMask("255.255.255.128")));
-
-		generatIPList("192.168.0.1", "192.168.1.20", "255.255.254.0");*/
+		 * System.out.println(getNetMask("255.255.255.0"));
+		 * 
+		 * System.out.println(getPoolMax(getNetMask("255.255.255.128")));
+		 * 
+		 * generatIPList("192.168.0.1", "192.168.1.20", "255.255.254.0");
+		 */
 
 		// System.out.println(getEndIP("10.229.0.1", 24).getStartIP());
 
@@ -86,8 +170,7 @@ public class IPUtils {
 	public static Nets getEndIP(String StartIP, String netmask) {
 		Nets nets = new Nets();
 		String[] start = Negation(StartIP, netmask).split("\\.");
-		nets.setStartIP(start[0] + "." + start[1] + "." + start[2] + "."
-				+ (Integer.valueOf(start[3]) + 1));
+		nets.setStartIP(start[0] + "." + start[1] + "." + start[2] + "." + (Integer.valueOf(start[3]) + 1));
 		nets.setEndIP(TaskOR(Negation(StartIP, netmask), netmask));
 		nets.setNetMask(netmask);
 		return nets;
@@ -204,8 +287,7 @@ public class IPUtils {
 		String[] temp2 = netmask.trim().split("\\.");
 		int[] rets = new int[4];
 		for (int i = 0; i < 4; i++) {
-			rets[i] = 255 - (Integer.parseInt(temp1[i]) ^ Integer
-					.parseInt(temp2[i]));
+			rets[i] = 255 - (Integer.parseInt(temp1[i]) ^ Integer.parseInt(temp2[i]));
 		}
 		return rets[0] + "." + rets[1] + "." + rets[2] + "." + (rets[3] - 1);
 	}
@@ -255,8 +337,7 @@ public class IPUtils {
 	 * @date 2016-5-12
 	 * @author zj
 	 */
-	public static List<String> generatIPList(String startIP, String endIP,
-			String subnet) {
+	public static List<String> generatIPList(String startIP, String endIP, String subnet) {
 		List<String> ips = new ArrayList<String>();
 
 		try {
@@ -279,8 +360,7 @@ public class IPUtils {
 			String startData = tempSdata.substring(netmask, 32);
 			String endData = tempEdata.substring(netmask, 32);
 
-			for (Long i = Long.parseLong(startData, 2); i <= Long.parseLong(
-					endData, 2); i++) {
+			for (Long i = Long.parseLong(startData, 2); i <= Long.parseLong(endData, 2); i++) {
 
 				String curdata = toBinEight(i, num);
 
@@ -292,7 +372,7 @@ public class IPUtils {
 				System.out.println(ips.get(i));
 			}
 		} catch (Exception e) {
-			System.err.println("IPUtils:"+e.getMessage());
+			System.err.println("IPUtils:" + e.getMessage());
 		}
 
 		return ips;
@@ -359,10 +439,8 @@ public class IPUtils {
 	private static String toBinaryFromIP(String ip) {
 		String[] tempStart = ip.split("\\.");
 
-		String decString = (toBinEight(Long.parseLong(tempStart[0]), 8)
-				+ toBinEight(Long.parseLong(tempStart[1]), 8)
-				+ toBinEight(Long.parseLong(tempStart[2]), 8) + toBinEight(
-				Long.parseLong(tempStart[3]), 8));
+		String decString = (toBinEight(Long.parseLong(tempStart[0]), 8) + toBinEight(Long.parseLong(tempStart[1]), 8)
+				+ toBinEight(Long.parseLong(tempStart[2]), 8) + toBinEight(Long.parseLong(tempStart[3]), 8));
 
 		return decString;
 	}
@@ -384,8 +462,7 @@ public class IPUtils {
 			String t3 = bdata.substring(16, 24);
 			String t4 = bdata.substring(24, 32);
 
-			return Integer.parseInt(t1, 2) + "." + Integer.parseInt(t2, 2)
-					+ "." + Integer.parseInt(t3, 2) + "."
+			return Integer.parseInt(t1, 2) + "." + Integer.parseInt(t2, 2) + "." + Integer.parseInt(t3, 2) + "."
 					+ Integer.parseInt(t4, 2);
 		}
 
@@ -423,3 +500,4 @@ class Nets {
 	}
 
 }
+
