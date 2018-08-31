@@ -23,6 +23,40 @@ function showPopover(target, msg, type) {
 	}, 2000);
 };
 
+
+
+function bin2hex(str) {
+	var result = "";
+	for (i = 0; i < str.length; i++ ) {
+		var c = str.charCodeAt(i);
+		result += byte2Hex(c>>8 & 0xff); // 高字节
+		result += byte2Hex(c & 0xff);	// 低字节
+	}
+	return result;
+};
+function byte2Hex(b) {
+	if(b < 0x10)
+		return "0" + b.toString(16);
+	else
+		return b.toString(16);
+};
+/*通过canvas获取浏览器唯一标识,传入 canvasid*/
+function getUUID(canvasId){
+	
+	var canvas=$("#"+canvasId)[0]; //myCanvas
+	var ctx=canvas.getContext('2d');
+	ctx.fillStyle='#FF0000';
+	ctx.fillRect(0,0,8,10);
+	
+	var b64=canvas.toDataURL().replace("data:image/png;base64,","");
+	var bin=window.atob(b64);
+	var crc=bin2hex(bin.slice(-16,-12));
+	$("#"+canvasId).hide();
+	return crc;
+};
+
+
+
 function cconfirm(msg, donecallback, cancelcallback) {
 	swal({
 		title : '确定执行操作吗？',

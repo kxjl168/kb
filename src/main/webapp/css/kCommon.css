@@ -1265,3 +1265,109 @@ back-head
 /** permission tree end**/
 
 
+.relatedLink
+{
+	margin-top: 10px;
+	padding: 0px;
+}
+
+.relatedLink li{
+	line-height: 45px;
+	height: 40px;
+}
+
+/**related link*/
+.relatedLink a{
+	 font: 15px "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
+	 color: #3c77d4;
+    word-wrap: break-word;
+	 text-decoration: underline!important;
+}
+
+.relatedLink a:hover{
+	 color: #33983b;
+	 text-decoration: none;
+	
+}
+/**/
+
+
+/**打赏*/
+.good{
+	
+	margin: 0 auto;
+	text-align: center;
+	position: relative;
+	display: block;
+	width: 200px;
+}
+
+
+.pbord{
+	border-radius: 29.97px;
+    width: 236.89px;
+    height: 236.89px;
+    padding: 18.05px;
+    margin-top: 5.53px;
+     margin-bottom: 10.53px;
+    border: 9.02px solid rgb(60, 175, 54);
+}
+.alip{
+	 border: 9.02px solid #4a82e8!important;
+}
+.alip .ptip{
+	color: #4a82e8!important;
+}
+
+.ptip{
+	color: rgb(60, 175, 54);
+    width: 48.13px;
+    position: relative;
+    margin: 0 auto;
+    font-size: 12px;
+    font-weight: 700;
+    background: #fff;
+    height: 15px;
+    text-align:center;
+    line-height: 15px;
+    margin-top: 14px;
+}
+.paybody{
+	width: 340px;
+}
+
+.paybody .modal-body{
+	padding: 0px!important;
+}
+.paybody .modal-title{
+	font-size: 14px;
+	font-weight: bold;
+}
+.paycontent{
+	margin: 0 auto;
+	width: 250px;
+	display: block;
+	position: relative;
+}
+.paycontent .tab-pane{
+	padding: 10px;
+}
+
+ul.pul 
+{
+    list-style:none; /* 去掉ul前面的符号 */
+    margin: 0 auto; /* 与外界元素的距离为0 */
+    padding: 0px; /* 与内部元素的距离为0 */
+    display: block;
+	position: relative;
+	width: 200px;
+}
+
+ ul.pul li
+{
+	min-width:80px;
+	line-height:25px;
+    float:left; /* 向左漂移，将竖排变为横排 */
+    margin: 5px;
+}
+/**打赏*/

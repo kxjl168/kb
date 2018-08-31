@@ -13,8 +13,17 @@ $(function() {
     hljs.initHighlightingOnLoad();
 
 
+    $(".paytype").click(function(){
+    	 var forele=$(this).attr('for');
+    	 $(".paycontent").find(".tab-pane").removeClass('active');
+    	 $(forele).addClass("active");
+    });
+    
+
 
 });
+
+
 
 function changerows(option) {
     var num = $(option).val();
@@ -24,6 +33,11 @@ function changerows(option) {
         $scope.rows = num;
         $scope.getList();
     });
+};
+
+
+function closepop(){
+	  $(".pbtn").popover('hide');
 };
 
 function init() {
@@ -155,6 +169,123 @@ function init() {
             }, 50);
             $scope.pageData = [];
 
+            $scope.getgoodnum=function(imei){
+           	 var obj = new Object();
+                if (typeof(imei) == "undefined")
+               	 {
+               	 obj.i = GetQueryString("i");
+               		if(obj.i==null)
+                           obj.i=$scope.getIMEI();
+               	 }
+                    
+                else
+                    obj.i = imei;
+                
+                SZUMWS(
+                        http + "bloglike/goodnum.action",
+                        JSON.stringify(obj),
+                        function succsess(json) {
+
+                            var code = json.ResponseCode;
+                            var message = json.ResponseMsg;
+                       
+                            if (code == 200) {
+
+                                $scope.goodnum = eval(json.total);
+
+                                if($scope.goodnum==0)
+                                	   $scope.goodnum ="";
+                               
+                                $scope.$apply();
+                                
+                               
+
+                            } else {
+                                msg(message);
+                            }
+
+                        },
+                        function error(data) {
+                          
+
+                        }, false, false
+
+                    );
+               };
+
+            
+            $scope.good=function(imei){
+            	 var obj = new Object();
+                 if (typeof(imei) == "undefined")
+                	 {
+                	 obj.imei = GetQueryString("i");
+                		if(obj.imei==null)
+                            obj.imei=$scope.getIMEI();
+                	 }
+                     
+                 else
+                     obj.imei = imei;
+
+                 
+                 var uid=getUUID("myCanvas");
+                 obj.cookie = uid;
+                 SZUMWS(
+                     http + "bloglike/good.action",
+                     JSON.stringify(obj),
+                     function succsess(json) {
+
+                         var code = json.ResponseCode;
+                         var message = json.ResponseMsg;
+                    
+                         if (code == 200) {
+                             
+                        	  $scope.goodnum = eval(json.total);
+                              
+                              $scope.$apply();
+                             
+
+                         } else {
+                             msg(message);
+                         }
+
+                     },
+                     function error(data) {
+
+                     }, false, "json"
+
+                 );
+            };
+            $scope.pay=function(imei){
+            	
+            	
+            	$("#payMd").modal('show');
+            	
+            	return;
+            	
+                   var  content =
+                	    "   <div>" +
+                	    "<div><label><input class='paytype' type='radio' value='1'>微信</label></div>" +
+                	    "<div><label><input class='paytype' type='radio' value='2'>支付宝</label></div>" +
+                	    "</div>" +
+                	   "<div class='pbord' >"+
+                       
+                     
+                         "   <img class='img-responsive' src='https://res.zgboke.com/wp-content/themes/begin/img/wechat.jpg'></img>" +
+                         
+                           "<div class='ptip'>xxx</div>"+
+                         "</div>";
+                
+                 $(".pbtn").popover({
+                 	 container: 'body',
+                     placement: "bottom",
+                     content: content,
+                     title: "<b>选择打赏方式:</b> &nbsp<span class='pclose fa fa-times' style='float:right' onclick='closepop()'></span>",
+                     html: true
+                 });
+                 $(".pbtn").popover('show');
+                 
+                
+            };
             
             $scope.getRelatedList=function(imei){
             	
@@ -183,7 +314,7 @@ function init() {
 
                              $scope.relatedlist = eval(json.datalist);
 
-                             
+                             $scope.getgoodnum();
 
                              $scope.$apply();
                              
@@ -215,7 +346,7 @@ function init() {
 
             
             	return searchpath;
-            }
+            };
             
             
             $scope.getList = function(imei, fucOnFinished, clear) {
@@ -300,7 +431,7 @@ function init() {
                             
 
                             $scope.getRelatedList();
-                            $scope.getReplayList();
+                            $scope.getgoodnum();
 
                             $('pre code').each(function(i, block) {
                                 hljs.highlightBlock(block);

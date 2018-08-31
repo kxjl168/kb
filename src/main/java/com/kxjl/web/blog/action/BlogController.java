@@ -85,6 +85,7 @@ public class BlogController extends BaseController {
 
 	
 	
+	
 	/**
 	 * 关联文章 根据tag获取
 	 * @param request
@@ -106,6 +107,8 @@ public class BlogController extends BaseController {
 
 			String imei = parseStringParam(request, "i");
 		
+			
+			
 			Blog query = new Blog();
 			query.setImei(imei);
 
@@ -115,7 +118,11 @@ public class BlogController extends BaseController {
 			
 			Page<Object> pg=PageHelper.startPage(1, 10);
 			detail=blogService.getRelatedBlogs(data);
-		
+			String prepath = getImgHttpOutPath();
+			for (Blog blog : detail) {
+				blog.setBlog_type_url(prepath + blog.getBlog_type_url());
+			}
+			
 
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(detail);

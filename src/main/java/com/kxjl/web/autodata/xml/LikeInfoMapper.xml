@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxjl.web.autodata.dao.LikeInfoMapper">
+  <resultMap id="BaseResultMap" type="com.kxjl.web.autodata.model.LikeInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="imei" jdbcType="VARCHAR" property="imei" />
+    <result column="cookie" jdbcType="VARCHAR" property="cookie" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, imei, cookie, update_date, create_date, ip, city
+  </sql>
+  
+  
+  
+  
+
+    
+  <select id="selectByCookie" parameterType="com.kxjl.web.autodata.model.LikeInfo" resultMap="BaseResultMap">
+    select 
+   *
+    from like_info
+    where imei=#{imei} and cookie=#{cookie}
+  </select>
+    
+  
+  <select id="getTotalLikeNum" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select 
+   count(*)
+    from like_info
+    where imei=#{imei}
+  </select>
+  
+  
+  
+  
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from like_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from like_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.kxjl.web.autodata.model.LikeInfo">
+    insert into like_info (id, imei, cookie, 
+      update_date, create_date, ip, 
+      city)
+    values (#{id,jdbcType=INTEGER}, #{imei,jdbcType=VARCHAR}, #{cookie,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kxjl.web.autodata.model.LikeInfo">
+    insert into like_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="imei != null">
+        imei,
+      </if>
+      <if test="cookie != null">
+        cookie,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="imei != null">
+        #{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="cookie != null">
+        #{cookie,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kxjl.web.autodata.model.LikeInfo">
+    update like_info
+    <set>
+      <if test="imei != null">
+        imei = #{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="cookie != null">
+        cookie = #{cookie,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kxjl.web.autodata.model.LikeInfo">
+    update like_info
+    set imei = #{imei,jdbcType=VARCHAR},
+      cookie = #{cookie,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      ip = #{ip,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
