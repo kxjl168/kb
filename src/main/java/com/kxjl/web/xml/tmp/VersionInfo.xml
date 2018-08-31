@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="versionInfo" >
+	<resultMap id="versionInfoMap" type="com.zteict.web.version.model.VersionInfo" >
+		<result property="recordid" column="recordid"/>
+		<result property="upgradepackageid" column="upgradepackageid"/>
+		<result property="clienttype" column="clienttype"/>
+		<result property="isforceupgrade" column="isforceupgrade"/>
+		<result property="isallowall" column="isallowall"/>
+		<result property="versionnum" column="versionnum"/>
+		<result property="effectdate" column="effectdate"/>
+		<result property="qrcodeurl" column="qrcodeurl"/>
+		<result property="creator" column="creator"/>
+		<result property="createdate" column="createdate"/>
+		<result property="annotation" column="annotation"/>
+	</resultMap>
+	<resultMap id="upgradePackageMap" type="com.zteict.web.version.model.UpgradePackage">
+		<result property="recordid" column="recordid"/>
+		<result property="upgradepackagename" column="upgradepackagename"/>
+		<result property="upgradepackagepath" column="upgradepackagepath"/>
+		<result property="md5" column="md5"/>
+		<result property="annotation" column="annotation"/>
+		<result property="createby" column="createby"/>
+		<result property="createdate" column="createdate"/>
+		<result property="updatedby" column="updatedby"/>
+		<result property="updateddate" column="updateddate"/>
+	</resultMap>
+	<resultMap id="incrementUpgradeMap" type="com.zteict.web.version.model.IncrementalUpgrade">
+		<result property="recordid" column="recordid"/>
+		<result property="clienttype" column="clienttype"/>
+		<result property="currentVersion" column="current_version"/>
+		<result property="lowVersion" column="low_version"/>
+		<result property="diffPath" column="diff_path"/>
+	</resultMap>
+	<resultMap id="upgradeUserMap" type="com.zteict.web.version.model.UpgradeUser">
+		<result property="recordId" column="record_id"/>
+		<result property="idType" column="id_type"/>
+		<result property="id" column="id"/>
+		<result property="versionId" column="version_id"/>
+		<result property="idDesc" column="id_desc"/>
+	</resultMap>
+	<select id= "getVersionInfo" resultMap = "versionInfoMap" parameterType="com.zteict.web.version.model.VersionInfo">
+		select recordid,upgradepackageid,clienttype,isforceupgrade,
+		isallowall,versionnum,effectdate,qrcodeurl,creator,createdate,
+		updatedby,updateddate,annotation from version_info where clienttype = #{clienttype} and versionnum &gt; #{versionnum}
+		order by versionnum desc
+	</select>
+	<select id= "getVersionInfoByClientAndVerNum" resultMap = "versionInfoMap" parameterType="com.zteict.web.version.model.VersionInfo">
+		select recordid,upgradepackageid,clienttype,isforceupgrade,
+		isallowall,versionnum,effectdate,qrcodeurl,creator,createdate,
+		updatedby,updateddate,annotation from version_info where clienttype = #{clienttype} and versionnum = #{versionnum}
+		order by versionnum desc limit 1
+	</select>
+	<select id= "getVersionInfoByRecordId" resultMap = "versionInfoMap" parameterType="java.lang.Integer">
+		select recordid,upgradepackageid,clienttype,isforceupgrade,
+		isallowall,versionnum,effectdate,qrcodeurl,creator,createdate,
+		updatedby,updateddate,annotation from version_info where recordid = #{recordId}
+	</select>
+	<select id= "getUpgradePackage" resultMap = "upgradePackageMap" parameterType="java.lang.Integer">
+		select recordid,upgradepackagename,upgradepackagepath,md5,
+		annotation,createby,createdate,updatedby,updateddate
+		 from upgrade_package where recordid = #{upgradePackageId}
+	</select>
+	<select id= "getIncrementalUpgrade" resultMap = "incrementUpgradeMap" parameterType="com.zteict.web.version.model.IncrementalUpgrade">
+		select recordid,clienttype,current_version,low_version,
+		diff_path from incremental_upgrade where low_version = #{lowVersion} and clienttype = #{clienttype} and current_version = #{currentVersion}
+		order by recordid desc limit 1 
+	</select>
+	<select id= "getUpgradeUser" resultMap = "upgradeUserMap" parameterType="com.zteict.web.version.model.UpgradeUser">
+		select record_id,id_type,id,version_id,
+		id_desc from upgrade_user where version_id = #{versionId}
+	</select>
+	
+	<select id= "getUpgradeVersion" resultType = "com.zteict.web.version.model.UpgradePackageVersionInfo" parameterType="com.zteict.web.version.model.UpgradePackageVersionInfo">
+		select p.upgradepackagename,p.upgradepackagepath,v.versionnum,v.recordid,v.clienttype,v.annotation,
+		DATE_FORMAT(v.effectdate,'%Y-%m-%d %T') effectdate
+		,v.isforceupgrade 
+		 from upgrade_package p, version_info v where p.recordid = v.upgradepackageid 
+		 <if test="clientType != 0">
+    		and v.clienttype = #{clientType}
+	    </if>
+	    <if test="upgradepackageName != null">
+    		and p.upgradepackagename like CONCAT('%',#{upgradepackageName},'%') 
+	    </if>
+	     order by v.recordid desc limit #{currentPage},#{pageCount}
+	</select>
+	<select id= "getUpgradeVersionCount" resultType = "java.lang.Long" parameterType="com.zteict.web.version.model.UpgradePackageVersionInfo">
+		select count(p.upgradepackagename) as allData from upgrade_package p, version_info v where p.recordid = v.upgradepackageid 
+		 <if test="clientType != 0">
+    		and v.clienttype = #{clientType}
+	    </if>
+	    <if test="upgradepackageName != null">
+    		and p.upgradepackagename like CONCAT('%',#{upgradepackageName},'%') 
+	    </if>
+	</select>
+	<insert id="saveVersionInfo" useGeneratedKeys="true" keyProperty="recordid" parameterType="com.zteict.web.version.model.VersionInfo">
+		<![CDATA[
+		insert into version_info (upgradepackageid,clienttype,isforceupgrade,isallowall,versionnum,effectdate,qrcodeurl,creator,createdate,annotation) 
+		values(#{upgradepackageid},#{clienttype},#{isforceupgrade},#{isallowall},#{versionnum},#{effectdate},#{qrcodeurl},#{creator},#{createdate},#{annotation})
+		]]>
+	</insert>
+	<insert id="savePackageInfo" useGeneratedKeys="true" keyProperty="recordid" parameterType="com.zteict.web.version.model.UpgradePackage">
+		<![CDATA[
+		insert into upgrade_package (upgradepackagename,upgradepackagepath,md5,annotation,createby,createdate) 
+		values(#{upgradepackagename},#{upgradepackagepath},#{md5},#{annotation},#{createby},#{createdate})
+		]]>
+	</insert>
+	<insert id="saveIncrementalPackageInfo" parameterType="com.zteict.web.version.model.IncrementalUpgrade">
+		<![CDATA[
+		insert into incremental_upgrade (clienttype,current_version,low_version,diff_path) 
+		values(#{clienttype},#{currentVersion},#{lowVersion},#{diffPath})
+		]]>
+	</insert>
+	<insert id="saveUpgradeUser" parameterType="com.zteict.web.version.model.UpgradeUser">
+		<![CDATA[
+		insert into upgrade_user (id_type,id,version_id,id_desc) 
+		values(#{idType},#{id},#{versionId},#{idDesc})
+		]]>
+	</insert>
+	
+	
+	
+	
+	<delete  id="delUpgradeUserByUserID" parameterType="String">
+		delete from upgrade_user where id_type=2 and id = #{userid}
+	</delete>
+	
+	<delete  id="delUpgradeUserByDeptID" parameterType="String">
+		delete from upgrade_user where id_type=1 and id = #{deptid}
+	</delete>
+	
+	<delete  id="delUpgradeUserInfo" parameterType="String">
+		delete from upgrade_user where version_id = #{versionID}
+	</delete>
+
+	
+	<select id="getupgradepackageVer" resultType = "com.zteict.web.version.model.UpgradePackageVersionInfo" parameterType="com.zteict.web.version.model.UpgradePackageVersionInfo">
+      select p.upgradepackagename,p.upgradepackagepath,v.versionnum,v.recordid,v.clienttype,v.annotation,v.effectdate,v.isforceupgrade 
+	  from upgrade_package p, version_info v where p.recordid = v.upgradepackageid 
+	  and v.clienttype = #{clientType} and v.versionnum &lt; #{versionNum}
+	</select>
+	
+	<select id="getIncrementalUpgradeByParams" resultType = "com.zteict.web.version.model.IncrementalUpgrade" parameterType="com.zteict.web.version.model.IncrementalUpgrade">
+      select recordid,clienttype,current_version,low_version,diff_path from incremental_upgrade 
+      where clienttype = #{clienttype} and current_version = #{currentVersion}
+	</select>
+	
+	<update id="updateVersionInfo" parameterType="com.zteict.web.version.model.VersionInfo">
+		update version_info set upgradepackageid = #{upgradepackageid},clienttype = #{clienttype},isforceupgrade=#{isforceupgrade},isallowall=#{isallowall},versionnum=#{versionnum},effectdate=#{effectdate},
+		qrcodeurl=#{qrcodeurl},updatedby=#{updatedby},updateddate=#{updateddate},annotation=#{annotation} where recordid = #{recordid}
+	</update>
+	<update id="updateUpgradeUserfo" parameterType="com.zteict.web.version.model.UpgradeUser">
+		update upgrade_user set id_type = #{idType},id = #{id},version_id=#{versionId},id_desc=#{idDesc} where record_id = #{recordId}
+	</update>
+	<update id="updateUpgradePackageInfo" parameterType="com.zteict.web.version.model.UpgradePackage">
+		update upgrade_package set upgradepackagename = #{upgradepackagename},upgradepackagepath = #{upgradepackagepath},md5=#{md5},annotation=#{annotation},updatedby=#{updatedby},updateddate=#{updateddate}
+		 where recordid = #{recordid}
+	</update>
+	
+	<delete  id="deleteUpgradePackageInfo" parameterType="com.zteict.web.version.model.UpgradePackage">
+		delete from upgrade_package where recordid = #{recordid}
+	</delete>
+	
+	<delete  id="deleteIncrementalUpgrade" parameterType="com.zteict.web.version.model.IncrementalUpgrade">
+		delete from incremental_upgrade where recordid = #{recordid}
+	</delete>
+	
+	<delete  id="deleteVersionInfo" parameterType="com.zteict.web.version.model.VersionInfo">
+		delete from version_info where recordid = #{recordid}
+	</delete>
+	
+	<delete  id="deleteUpgradeUser" parameterType="com.zteict.web.version.model.UpgradeUser">
+		delete from upgrade_user where record_id = #{recordId}
+	</delete>
+</mapper>

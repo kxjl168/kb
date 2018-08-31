@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxjl.web.autodata.dao.VisitDataMapper">
+  <resultMap id="BaseResultMap" type="com.kxjl.web.autodata.model.VisitData">
+    <id column="datetime" jdbcType="VARCHAR" property="datetime" />
+    <result column="user_visit_num" jdbcType="INTEGER" property="userVisitNum" />
+    <result column="page_visit_num" jdbcType="VARCHAR" property="pageVisitNum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    datetime, user_visit_num, page_visit_num
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from visit_data
+    where datetime = #{datetime,jdbcType=VARCHAR}
+  </select>
+  
+  
+   <select id="selectSum" parameterType="java.lang.String" resultMap="BaseResultMap">
+    
+  select sum(user_visit_num) user_visit_num,sum(page_visit_num) page_visit_num from visit_data
+  
+  
+  </select>
+  
+ 
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from visit_data
+    where datetime = #{datetime,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kxjl.web.autodata.model.VisitData">
+    insert into visit_data (datetime, user_visit_num, page_visit_num
+      )
+    values (#{datetime,jdbcType=VARCHAR}, #{userVisitNum,jdbcType=INTEGER}, #{pageVisitNum,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kxjl.web.autodata.model.VisitData">
+    insert into visit_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="datetime != null">
+        datetime,
+      </if>
+      <if test="userVisitNum != null">
+        user_visit_num,
+      </if>
+      <if test="pageVisitNum != null">
+        page_visit_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="datetime != null">
+        #{datetime,jdbcType=VARCHAR},
+      </if>
+      <if test="userVisitNum != null">
+        #{userVisitNum,jdbcType=INTEGER},
+      </if>
+      <if test="pageVisitNum != null">
+        #{pageVisitNum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kxjl.web.autodata.model.VisitData">
+    update visit_data
+    <set>
+      <if test="userVisitNum != null">
+        user_visit_num = #{userVisitNum,jdbcType=INTEGER},
+      </if>
+      <if test="pageVisitNum != null">
+        page_visit_num = #{pageVisitNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where datetime = #{datetime,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kxjl.web.autodata.model.VisitData">
+    update visit_data
+    set user_visit_num = #{userVisitNum,jdbcType=INTEGER},
+      page_visit_num = #{pageVisitNum,jdbcType=VARCHAR}
+    where datetime = #{datetime,jdbcType=VARCHAR}
+  </update>
+</mapper>

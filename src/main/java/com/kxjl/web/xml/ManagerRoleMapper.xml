@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kxjl.web.privilege.dao.ManagerRoleDao">
+
+	<resultMap id="ManagerResMap" type="com.kxjl.web.privilege.model.ManagerRole">
+	</resultMap>
+
+	<resultMap id="RoleMap" type="com.kxjl.web.privilege.model.Role">
+	</resultMap>
+
+<resultMap id="MenuMap" type="com.kxjl.web.system.model.MenuInfo">
+		<result property="menuId" column="menu_id"/>
+		<result property="menuOrderid" column="menu_orderid"/>
+		<result property="menuParentid" column="menu_parentid"/>
+		<result property="menuName" column="menu_name"/>
+		<result property="menuUrl" column="menu_url"/>
+		<result property="menuICO" column="menu_ico"/>
+			<result property="menuGroup" column="menu_group"/>
+		
+	</resultMap>
+
+	<!-- public int addManagerRole(ManagerRole ManagerRole); -->
+
+	<insert id="addManagerRole" parameterType="com.kxjl.web.privilege.model.ManagerRole">
+		insert into
+		manager_role
+
+		values(#{manager_id},#{role_id},#{user_type})
+	</insert>
+
+
+	<!-- public int deleteManagerRole(SysUserBean user); -->
+
+	<delete id="deleteManagerRole" parameterType="com.kxjl.web.privilege.model.ManagerRole">
+		delete from
+		manager_role
+		where manager_id = #{manager_id}
+	</delete>
+
+	<!-- public List<Role> getManagerRoleList(SysUserBean query); -->
+
+	<select id="getManagerRoleList" parameterType="com.kxjl.web.system.model.SysUserBean"
+		resultMap="RoleMap">
+		select r.* from role r LEFT JOIN manager_role mr on
+		r.role_en=mr.role_id
+		
+		left join manager m on m.managerid=mr.manager_id
+		
+		where  1=1 and mr.user_type=1
+		and m.managerid=#{userid}
+	</select>
+	
+	<select id="getUserRoleList" parameterType="com.kxjl.web.system.model.SysUserBean"
+		resultMap="RoleMap">
+		select r.* from role r LEFT JOIN manager_role mr on
+		r.role_en=mr.role_id
+		
+		left join user_info m on m.recordid=mr.manager_id
+		
+		where  1=1 and mr.user_type=2
+		and m.recordid=#{userid}
+	</select>
+
+<!-- 	  获取用户的所有菜单 -->
+<!-- 	public List<MenuInfo> getManagerMenusList(SysUserBean query); -->
+	<select id="getManagerMenusList" parameterType="com.kxjl.web.system.model.SysUserBean"
+		resultMap="MenuMap">
+select distinct menu.* from 
+role_menu rm 
+ left join menu_info menu on menu.menu_id=rm.menu_id
+ left join role r on rm.role_id=r.role_en
+ LEFT JOIN manager_role mr on r.role_en=mr.role_id
+left join manager m on m.managerid=mr.manager_id
+		where m.managerid=#{userid}
+
+	</select>
+	
+	<select id="getUserMenusList" parameterType="com.kxjl.web.system.model.SysUserBean"
+		resultMap="MenuMap">
+select distinct menu.* from 
+role_menu rm 
+ left join menu_info menu on menu.menu_id=rm.menu_id
+ left join role r on rm.role_id=r.role_en
+ LEFT JOIN manager_role mr on r.role_en=mr.role_id
+left join user_info m on m.recordid=mr.manager_id
+		where m.recordid=#{userid}
+
+	</select>
+
+
+
+</mapper>

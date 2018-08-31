@@ -1,0 +1,81 @@
+package com.kxjl.web.privilege.service;
+
+import java.util.List;
+
+
+import com.kxjl.web.privilege.model.Role;
+import com.kxjl.web.system.model.MenuInfo;
+import com.kxjl.web.system.model.SysUserBean;
+
+public interface PrivilegeService {
+	
+
+	
+
+	/**
+	 * 更新角色下的可见菜单数据
+	 * @param role_id
+	 * @param menuids
+	 * @return
+	 * @date 2016-10-17
+	 * @author zj
+	 */
+	public int updateRoleMenuList(String role_id, String menuids);
+	
+	
+
+	/**
+	 * 更新后台管理员的角色数据
+	 * @param role_id
+	 * @param menuids
+	 * @return
+	 * @date 2016-10-17
+	 * @author zj
+	 */
+	public int updateManagerRoleList(String manager_id, String roleids);
+	
+	/**
+	 * 更新用户的角色数据
+	 * @param role_id
+	 * @param menuids
+	 * @return
+	 * @date 2016-10-17
+	 * @author zj
+	 */
+	public int updateUserRoleList(String manager_id, String roleids);
+	
+	
+
+	/**
+	 * 获取用户的所有角色,管理员或者普通用户
+	 * 
+	 * @param query
+	 * @return
+	 * @date 2016-8-4
+	 */
+	public List<Role> getManagerRoleList(SysUserBean query);
+
+	
+	/**
+	 * 获取用户的所有菜单
+	 * 
+	 * @param query
+	 * @return
+	 * @date 2016-8-4
+	 */
+	public List<MenuInfo> getManagerMenusList(SysUserBean query);
+	
+	
+	/**
+	 * 获取角色的所有菜单
+	 * 
+	 * @param query
+	 * @return
+	 * @date 2016-8-4
+	 */
+	public List<MenuInfo> getRoleMenusList(Role query);
+	
+	
+	
+	
+}

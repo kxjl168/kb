@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kxjl.web.system.dao.DictInfoDao">
+	<resultMap id="DictInfoMap" type="com.kxjl.web.system.model.DictInfo">
+	
+	</resultMap>
+	
+	
+	<select id="getDictInfoPageList" parameterType="com.kxjl.web.system.model.DictInfo" resultMap="DictInfoMap">
+		select a.*  from dict_info a 
+		where 1=1
+		<if test='dict_type != null and dict_type != "" '>
+			and a.dict_type = #{dict_type}
+		</if>
+		<if test='dict_key != null and dict_key != "" '>
+			and a.dict_key =#{dict_key}
+		</if>
+		
+		<if test='dict_name != null and dict_name != "" '>
+			and a.dict_name =#{dict_name}
+		</if>
+		order by a.sort asc
+
+		limit #{start},#{pageCount}
+	</select>
+	
+
+	
+	<select id="getDictInfoPageListCount" parameterType="com.kxjl.web.system.model.DictInfo" resultType="java.lang.Integer">
+		select count(*) from dict_info a 
+		where 1=1
+			<if test='dict_type != null and dict_type != "" '>
+			and a.dict_type = #{dict_type}
+		</if>
+		<if test='dict_key != null and dict_key != "" '>
+			and a.dict_key =#{dict_key}
+		</if>
+		
+		<if test='dict_name != null and dict_name != "" '>
+			and a.dict_name =#{dict_name}
+		</if>
+		
+		
+	</select>
+	
+<select id="getDictInfoInfoById" parameterType="java.lang.Integer" resultType="com.kxjl.web.system.model.DictInfo">
+		select * from dict_info where id = #{id}
+	</select>
+
+<select id="getDictInfoInfoByKey" parameterType="java.lang.String" resultType="com.kxjl.web.system.model.DictInfo">
+		select * from dict_info where dict_key = #{key} limit 1
+	</select>
+
+
+	
+	<insert id="addDictInfo" parameterType="com.kxjl.web.system.model.DictInfo">
+	    
+
+	    
+		insert into dict_info 
+		(dict_key,dict_name,sort,dict_type,
+		create_date,val1,desc_info )
+		values(#{dict_key},#{dict_name},#{sort},#{dict_type}
+		,		now(),#{val1},#{desc_info})
+	</insert>
+	
+	<update id="updateDictInfo" parameterType="com.kxjl.web.system.model.DictInfo">
+		update dict_info 
+			<trim prefix=" set " suffixOverrides=",">
+		update_date=now(),
+		<if test='dict_key != null'>
+			dict_key=#{dict_key},
+		</if>
+		<if test='val1 != null'>
+			val1=#{val1},
+		</if>
+			<if test='desc_info != null'>
+			desc_info=#{desc_info},
+		</if>
+		
+		<if test='dict_name != null'>
+			dict_name=#{dict_name},
+		</if>
+		<if test='sort != null'>
+			sort=#{sort},
+		</if>
+		<if test='dict_type != null'>
+			dict_type=#{dict_type},
+		</if>
+		
+		
+		</trim>
+		
+		where id=#{id}
+	</update>
+	
+	<delete id="deleteDictInfo"  parameterType="java.lang.Integer">
+		delete from dict_info where id = #{id}
+	</delete>
+	
+	
+</mapper>
+  
+
+
+
+
+

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kxjl.web.system.dao.RequestInfoDao">
+	<resultMap id="RequestInfoMap" type="com.kxjl.web.system.model.RequestInfo">
+	
+	</resultMap>
+	
+	
+	
+	<select id="getRequestCountByCondition" parameterType="com.kxjl.web.system.model.RequestInfo" resultType="java.lang.Integer">
+		select count(*) from request_info 
+		where 1=1
+		
+	and	ip=#{ip} and action_type=#{action_type}
+and createTime>DATE_SUB(now(),INTERVAL #{sec} SECOND)
+		
+	</select>
+
+
+	
+	<insert id="addRequestInfo" parameterType="com.kxjl.web.system.model.RequestInfo">
+	    
+
+	    
+		insert into request_info 
+		(ip,city,action_type,sessionid,
+		uri,createTime,val1 )
+		values(#{ip},#{city},#{action_type},#{sessionid}
+		,		#{uri},#{createTime},#{val1})
+	</insert>
+	
+	
+	
+</mapper>
+  
+
+
+
+
+
