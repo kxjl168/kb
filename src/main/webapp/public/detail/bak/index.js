@@ -240,7 +240,7 @@ function init() {
                          if (code == 200) {
                              
                         	  $scope.goodnum = eval(json.total);
-                              
+                              $("#gdnum").html($scope.goodnum);
                               $scope.$apply();
                              
 
@@ -313,9 +313,8 @@ function init() {
                          if (code == 200) {
 
                              $scope.relatedlist = eval(json.datalist);
-
                              $scope.getgoodnum();
-
+                       
                              $scope.$apply();
                              
                             
@@ -431,7 +430,7 @@ function init() {
                             
 
                             $scope.getRelatedList();
-                            $scope.getgoodnum();
+                      
 
                             $('pre code').each(function(i, block) {
                                 hljs.highlightBlock(block);
