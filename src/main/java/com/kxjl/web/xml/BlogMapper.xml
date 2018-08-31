@@ -9,7 +9,8 @@
 
 <select id="getRelatedBlogs" parameterType="com.kxjl.web.blog.model.Blog" resultMap="BlogMap">
 select a.*,d.dict_name blog_type_name,d.val1 blog_type_url from blog_info a left join dict_info d on (d.dict_type='blog_type' and a.blog_type=d.dict_key) where 1=1 
-  and a.recordid!=#{recordid}
+  and a.showflag='1'
+  and  a.recordid!=#{recordid}
           <foreach collection="tagStrs" item="ti" open=" and (" close=" ) " separator=" or ">
             a.tags like CONCAT('%',#{ti},'%')
           </foreach>
