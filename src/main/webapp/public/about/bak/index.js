@@ -59,13 +59,13 @@ function init() {
 
 	initQuery();
 
-
-SZUMWS(http + "blog/sabout.action","",
+	/*  var http = getImUrl();
+	SZUMWS(http + "blog/sabout.action","",
 			function succsess(json) {
 			}, function error(data) {
 			}, false, false
 
-	);
+	);*/
 };
 
 

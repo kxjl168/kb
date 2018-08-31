@@ -225,5 +225,15 @@ public interface StasticService {
 	 * @author zj
 	 */
 	public List<ActionLog> GetMonthDetailList(ActionLog query);
+	
+	/**
+	 * 从日志表中查找之前的地市记录 -记录缓存
+	 * @param ip
+	 * @return
+	 * @author zj
+	 * @date 2018年8月31日
+	 */
+	public String GetCityFromLogData(@Param(value="ip") String ip);
+	
 		
 }

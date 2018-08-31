@@ -117,7 +117,7 @@ public class PublicController extends BaseController {
 		ModelAndView view = getSysData();
 		view.setViewName("/public/about/main");
 
-		//saveStaticInfo(request, StasticTypeOne.AboutPage.toString(), "");
+		saveStaticInfo(request, StasticTypeOne.AboutPage.toString(), "");
 		
 		return view;
 	}

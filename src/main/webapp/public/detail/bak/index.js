@@ -196,6 +196,8 @@ function init() {
                                 if($scope.goodnum==0)
                                 	   $scope.goodnum ="";
                                
+                                $("#gdnum").html($scope.goodnum);
+                                
                                 $scope.$apply();
                                 
                                

@@ -5,9 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.tool.httpPost.SendPostRequest;
+import com.kxjl.web.stastic.dao.StasticDao;
+import com.kxjl.web.stastic.service.StasticService;
+import com.kxjl.web.system.SpringBeanUtil;
 
 /*
  * 
@@ -15,8 +20,11 @@ import com.kxjl.tool.httpPost.SendPostRequest;
  * 
  * @author zj
  */
+
 public class IPUtils {
 
+
+	
 	// 200/min
 	// http://extreme-ip-lookup.com/json/183.206.14.48
 
@@ -99,6 +107,15 @@ public class IPUtils {
 
 	public static String getCityByIP(String ip)
 	{
+
+		StasticService stasticService=
+				(StasticService)SpringBeanUtil.getBeanByName("stasticServiceImpl");
+		
+		//先从本地查找
+		String city=stasticService.GetCityFromLogData(ip);
+		if(city!=null&&!city.equals(""))
+			return city;
+		else
 		return getCityByIPEx(ip);
 	}
 

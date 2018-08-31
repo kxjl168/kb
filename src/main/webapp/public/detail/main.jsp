@@ -148,7 +148,7 @@
 					<div class="row col-xs-12 margin-top-10">
 						<div class="good">
 							<button type="button " class="btn btn-info   " ng-click="good() ">
-								<i class="fa fa-heart-o"></i> 赞一个 <span >&nbsp;<span id="gdnum"></span></span>
+								<i class="fa fa-heart-o"></i> 赞一个 <span >&nbsp;<span id="gdnum" ng-bind-html="goodnum|sanitize">{{goodnum}}</span></span>
 							</button>
 							<button type="button " class="pbtn btn btn-warning   "
 								ng-click="pay() ">

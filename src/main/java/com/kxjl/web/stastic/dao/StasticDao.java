@@ -15,6 +15,8 @@ public interface StasticDao {
 
 	
 	
+	
+	
 	/**
 	 * 
 	 * 
@@ -264,6 +266,16 @@ limit 0,50
 	public List<DictInfo> GetStaticTypeList();
 	
 	
+	
+	
+	/**
+	 * 从日志表中查找之前的地市记录
+	 * @param ip
+	 * @return
+	 * @author zj
+	 * @date 2018年8月31日
+	 */
+	public String GetCityFromLogData(@Param(value="ip") String ip);
 	
 	
 	/**

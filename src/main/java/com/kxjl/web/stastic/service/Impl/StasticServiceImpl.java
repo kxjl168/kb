@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import sun.util.logging.resources.logging;
 
+import com.kxjl.web.blog.action.Kdata;
 import com.kxjl.web.stastic.dao.StasticDao;
 import com.kxjl.web.stastic.model.ActionLog;
 import com.kxjl.web.stastic.service.StasticService;
@@ -432,5 +433,30 @@ public class StasticServiceImpl implements StasticService {
 	public List<ActionLog> GetMonthDetailList(ActionLog query) {
 		return stasticDao.GetMonthDetailList(query);
 	}
+	
+	/**
+	 * 从日志表中查找之前的地市记录
+	 * @param ip
+	 * @return
+	 * @author zj
+	 * @date 2018年8月31日
+	 */
+	public String GetCityFromLogData(@Param(value="ip") String ip) {
+		
+		//缓存查找，存储
+		String city=String.valueOf( Kdata.getInstance().getCommonList(ip));
+		if(city!=null&&!city.equals("")&&!city.equals("null"))
+			return city;
+		else
+		{
+		 city= stasticDao.GetCityFromLogData(ip);
+		 if(city!=null&&!city.equals("")&&!city.equals("null"))
+		 {
+			 Kdata.getInstance().SavedCommonList(ip,city);
+		 }
+		 return city;
+		}
+	}
+	
 
 }
