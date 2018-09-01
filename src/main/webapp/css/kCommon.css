@@ -838,7 +838,7 @@ a {
        padding: 5px!important;
        padding-bottom: 10px!important;
        margin: 10px 0px!important;
-      
+      max-height: 400px;
 }
 .pageText h2,.cke_editable h2
 {
@@ -1371,3 +1371,23 @@ ul.pul
     margin: 5px;
 }
 /**打赏*/
+
+
+/*hlight no break*/
+.hljs {
+  display: inline-block;
+  white-space: pre;
+  overflow-x: auto;
+  padding: 0.5em;
+ width: 100%;
+
+}
+.hljs-tag .hljs-value,.bash .hljs-variable{
+	color: #daa3a3!important;
+}
+/**/
+
+.ctrl{
+	margin-top: 2px; width: 15px; height: 20px; color: #1f4433;
+	color:#4c4269!important;
+}

@@ -53,5 +53,14 @@ public interface SvrFileInfoDao {
 	 * @author zj
 	 */
 	public SvrFileInfo getFileInfo(SvrFileInfo info);
+	
+	/**
+	 * 界面查询附件列表 非图片的其他附件，展现下载次数
+	 * @param info
+	 * @return
+	 * @author zj
+	 * @date 2018年9月1日
+	 */
+	public List<SvrFileInfo> getFileList(SvrFileInfo info);
 
 }

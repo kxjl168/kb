@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FileSystemUtils;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -107,6 +109,7 @@ public class FileUploadController {
 
 						out.close();
 
+						stream.close();
 						fileService.addFileDonwLoadNums(sInfo);
 					}
 				}
@@ -265,11 +268,35 @@ public class FileUploadController {
 					//压缩文件 zj 180107
 					String orginFile =uploadPath+relativePath + uuid.toString()+"_orign" + extension;; // 文件存放原始图片
 					File orginFileData = new File(orginFile);
-					//保持源文件
-					mfile.transferTo(orginFileData);
-					//使用压缩后的图片
-					ImageUtil.resize(orginFileData, uploaderFile);
-					//end
+				
+					try {
+				
+						if(extension.contains("png")||
+								extension.contains("jpeg")||
+								extension.contains("jpg")||
+								extension.contains("bmp"))
+						{
+							//保持源文件
+							mfile.transferTo(orginFileData);
+						//使用压缩后的图片
+						ImageUtil.resize(orginFileData, uploaderFile);
+						}
+						//end
+						else
+						{
+							//保持源文件
+							mfile.transferTo(uploaderFile);
+							/*
+							 * //压缩异常 -普通非图片文件-附件管理 FileUtils.copyFile(orginFileData, uploaderFile);
+							 */
+						}
+						
+				
+					} catch (Exception e) {
+						
+					}
+					
+					
 					
 
 					logger.info("uploaderFile值:  " + uploaderFile);
