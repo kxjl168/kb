@@ -84,10 +84,10 @@ public class PublicController extends BaseController {
 	}
 	
 	
-	@RequestMapping(value = "/{value}.html")
+	@RequestMapping(value = "/google{value}.html")
 	public String listhtml(HttpServletRequest request,@PathVariable("value") String value) {
 
-		return value;
+		return "google"+value;
 	}
 	
 	
