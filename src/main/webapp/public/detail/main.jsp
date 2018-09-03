@@ -54,8 +54,8 @@
 										<i class="fa fa-tags"></i> <a ng-repeat="t in x.tagStrs"
 											title="t" ng-click="showtgs(t)">{{t}},</a>
 									</div> <span ng-click="ff()"
-									style="margin-top: 5px; width: 15px; height: 20px; color: #1f4433;"
-									class="ctrl nopaddding img-responsive col-xs-2 fa fa-arrows-alt"
+									style=""
+									class="ctrl nopaddding img-responsive col-xs-2 fa fa-exchange"
 									title="隐藏/打开侧边栏"></span>
 							</div>
 						</div>

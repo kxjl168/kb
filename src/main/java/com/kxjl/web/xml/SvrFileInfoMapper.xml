@@ -25,6 +25,19 @@
 
 
 
+	<select id="getFileList" parameterType="com.kxjl.web.system.model.SvrFileInfo" resultMap="svrFileInfoMap">
+	select * from file_svr_info where 1=1
+	and  old_name not  like CONCAT('%','.png')
+and  old_name not  like CONCAT('%','.jpg')
+and  old_name not  like CONCAT('%','.jpeg')
+	and  old_name not  like CONCAT('%','.gif')
+and  old_name not  like CONCAT('%','.bmp')
+<if test="old_name!=null and old_name!='' ">
+		and old_name like  CONCAT('%',#{old_name},'%')
+		</if>
+	</select>
+
+
 	<insert id="SaveFileInfo" parameterType="com.kxjl.web.system.model.SvrFileInfo">
 		insert
 		into

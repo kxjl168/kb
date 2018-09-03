@@ -12,12 +12,9 @@
     font-family: 'Microsoft Yahei';
     line-height: 25px;
     
-    
-    
-    
     position: inherit;
     float: right;
-	top: 20%;
+	top: 10%;
 	right: 5%;
 	z-index: 1;
 	text-align: left;

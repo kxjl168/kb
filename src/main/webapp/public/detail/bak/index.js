@@ -9,7 +9,7 @@ app.controller('eduCtrl', function($scope) {
 $(function() {
 
     init();
-
+    //hljs.configure({useBR: true});
     hljs.initHighlightingOnLoad();
 
 
