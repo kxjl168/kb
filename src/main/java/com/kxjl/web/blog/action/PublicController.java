@@ -84,6 +84,13 @@ public class PublicController extends BaseController {
 	}
 	
 	
+	@RequestMapping(value = "/{value}.html")
+	public String listhtml(HttpServletRequest request,@PathVariable("value") String value) {
+
+		return value;
+	}
+	
+	
 	@RequestMapping(value = "/public/index/{type}/{value}.html")
 	public String listhtml(HttpServletRequest request,@PathVariable("type") String type,@PathVariable("value") String value) {
 
