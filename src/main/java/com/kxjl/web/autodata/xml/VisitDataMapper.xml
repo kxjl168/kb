@@ -4,10 +4,12 @@
   <resultMap id="BaseResultMap" type="com.kxjl.web.autodata.model.VisitData">
     <id column="datetime" jdbcType="VARCHAR" property="datetime" />
     <result column="user_visit_num" jdbcType="INTEGER" property="userVisitNum" />
-    <result column="page_visit_num" jdbcType="VARCHAR" property="pageVisitNum" />
+    <result column="page_visit_num" jdbcType="INTEGER" property="pageVisitNum" />
+     <result column="attack_visit_num" jdbcType="INTEGER" property="attackVisitNum" />
+      <result column="attack_page_visit_num" jdbcType="INTEGER" property="attackPageVisitNum" />
   </resultMap>
   <sql id="Base_Column_List">
-    datetime, user_visit_num, page_visit_num
+    *
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -19,7 +21,7 @@
   
    <select id="selectSum" parameterType="java.lang.String" resultMap="BaseResultMap">
     
-  select sum(user_visit_num) user_visit_num,sum(page_visit_num) page_visit_num from visit_data
+  select sum(user_visit_num-attack_visit_num) user_visit_num,sum(page_visit_num-attack_page_visit_num) page_visit_num from visit_data
   
   
   </select>

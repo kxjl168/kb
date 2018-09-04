@@ -6,6 +6,26 @@ public class VisitData {
     private Integer userVisitNum;
 
     private Integer pageVisitNum;
+    
+    private Integer attackVisitNum;
+    
+    public Integer getAttackVisitNum() {
+		return attackVisitNum;
+	}
+
+	public void setAttackVisitNum(Integer attackVisitNum) {
+		this.attackVisitNum = attackVisitNum;
+	}
+
+	public Integer getAttackPageVisitNum() {
+		return attackPageVisitNum;
+	}
+
+	public void setAttackPageVisitNum(Integer attackPageVisitNum) {
+		this.attackPageVisitNum = attackPageVisitNum;
+	}
+
+	private Integer attackPageVisitNum;
 
     public String getDatetime() {
         return datetime;
