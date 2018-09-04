@@ -343,7 +343,7 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 <select id="GetCityFromLogData" parameterType="java.lang.String"
 		resultType="java.lang.String">
 		select city from (
-select DISTINCT city from user_action_log where userid=#{ip} 
+select DISTINCT city from user_action_log where userid=#{userid} 
 ) tp where tp.city is not null  limit 1
 		</select>
 
