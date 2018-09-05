@@ -89,6 +89,8 @@ public class StasticServiceImpl implements StasticService {
 		final String t2 = type2;
 		final String blogimei = arctileId;
 
+		
+		
 		new Thread(new Runnable() {
 
 			@Override
@@ -103,6 +105,8 @@ public class StasticServiceImpl implements StasticService {
 					} catch (Exception e) {
 
 					}
+					
+					//logger.info("***saveStaticInfo***type1:"+type1+" type2:"+type2+"  ip:"+ip+" arctileId:"+arctileId);
 
 					log.setUserid(ip);
 
