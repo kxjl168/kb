@@ -35,6 +35,7 @@ import com.kxjl.tool.utils.IPUtils;
 import com.kxjl.web.blog.model.Blog;
 import com.kxjl.web.blog.service.BlogService;
 import com.kxjl.web.stastic.model.ActionLog;
+import com.kxjl.web.stastic.model.ActionLog.StasticTypeOne;
 import com.kxjl.web.stastic.service.StasticService;
 import com.kxjl.web.system.model.MenuInfo;
 import com.kxjl.web.system.model.SysUserBean;
@@ -289,6 +290,18 @@ public class PageFilter implements Filter {
 						isDone = true;
 					}
 				} else {
+					
+					Blog bq=new Blog();
+					bq.setImei(imei);
+					Blog detailitem=bservice.getBlogInfoById(bq);
+					
+					//记录直接访问html的日志，多为爬虫访问链接，页面js统计未执行.
+					stasticService.saveStaticInfo(request, StasticTypeOne.DetailPage.toString(),detailitem.getBlog_type_name(), imei);
+					
+					//直接访问静态页面，其他filter不走了
+					//isDone = true;
+					
+					
 					//Thread.sleep(2000);
 					//logger.info("html "+htmlPath+" visited!");
 					// 不用重定向，直接访问html。
@@ -397,28 +410,33 @@ public class PageFilter implements Filter {
 		// System.out.println("pageFilter:" + request.getRequestURI());
 		if (user == null) {
 
-			// 跟目录，放
+			//网页访问的肯定有user信息.
+			//没有的就是直接url访问或者爬虫
+			
+			
+		/*	// 跟目录，放
 			if (request.getContextPath().equals("")) {
 				if (request.getRequestURI().equals("/")) {
 					logger.warn("pass:user is null but is / && request.getContextPath():" + request.getContextPath());
 					chain.doFilter(request, response);
 					return;
 				}
-			}
-
+			}*/
+/*
 			logger.debug("request.getContextPath():" + request.getContextPath());// ,
 			// page!");
 			logger.debug("request.getRequestURI(): " + request.getRequestURI());
 			String loginPath = request.getContextPath() + "/login.jsp";
 			logger.debug("no userinfo, redirect to login page!");
-			wrapper.sendRedirect(loginPath);
+			wrapper.sendRedirect(loginPath);*/
 
-			if (!(request.getRequestURI().startsWith("/public") || request.getRequestURI().startsWith("/page")
+			if ( request.getRequestURI().contains(".php")|| !(request.getRequestURI().startsWith("/public") || request.getRequestURI().startsWith("/page")
 					|| request.getRequestURI().startsWith("/pown"))) {
 				stasticService.saveStaticInfo(request, "attack",request.getRequestURI(), "");
+				return;
 			}
 
-			return;
+			
 		} else {
 
 			// 登录后，刷新过菜单时，访问根目录，直接跳转第一个菜单

@@ -126,7 +126,9 @@ order by t asc
 	</select>
 	
 <select id="getBlogInfoById" parameterType="java.lang.Integer" resultType="com.kxjl.web.blog.model.Blog">
-		select * from blog_info a where 1=1
+		select a.*,d.dict_name blog_type_name from blog_info a 
+		left join dict_info d on (d.dict_type='blog_type' and a.blog_type=d.dict_key)
+		where 1=1
 		<if test='imei != null and imei != "" '>
 			and a.imei =#{imei}
 		</if>

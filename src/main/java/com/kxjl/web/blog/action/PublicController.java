@@ -35,6 +35,7 @@ import com.kxjl.tool.utils.JsonUtil;
 import com.kxjl.tool.utils.wuliu.WuliuHelper;
 import com.kxjl.web.blog.model.Blog;
 import com.kxjl.web.blog.model.Kurl;
+import com.kxjl.web.blog.service.BlogService;
 import com.kxjl.web.blog.service.KurlService;
 import com.kxjl.web.stastic.model.ActionLog.StasticTypeOne;
 import com.kxjl.web.system.action.base.BaseController;
@@ -62,6 +63,10 @@ public class PublicController extends BaseController {
 
 	@Autowired
 	WuliuHelper wuliuHelper;
+	
+	@Autowired
+	BlogService bservice;
+
 	
 
 	@RequestMapping("/public/wuliu")
@@ -114,6 +119,8 @@ public class PublicController extends BaseController {
 
 		}
 		
+		saveStaticInfo(request, StasticTypeOne.HomePage.toString(), "index");
+
 		
 		return view;
 	}
@@ -282,8 +289,38 @@ public class PublicController extends BaseController {
 	}
 
 	@RequestMapping(value = "/public/detail")
-	public ModelAndView detail() {
+	public ModelAndView detail(HttpServletRequest request) {
 
+		try {
+			
+		
+		String imei = request.getParameter("i");
+		if (imei.equals("null") || imei.equals("")) {
+			String url = request.getHeader("Referer");
+			try {
+				imei = url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf("."));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+			// http://127.0.0.1:8080/kb/public/detail/i/344f5834-fe93-49e8-835d-b07e1a1def96.html
+		}
+		
+		
+		Blog query = new Blog();
+		query.setImei(imei);
+		
+		Blog detailitem=bservice.getBlogInfoById(query);
+		
+		//记录直接访问html的日志，多为爬虫访问链接，页面js统计未执行.
+		stasticService.saveStaticInfo(request, StasticTypeOne.DetailPage.toString(),detailitem.getBlog_type_name(), imei);
+		
+		
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
 		ModelAndView view = getSysData();
 		view.setViewName("/public/detail/main");
 

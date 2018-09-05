@@ -13,8 +13,7 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.http.HttpException;
-import org.apache.http.client.params.ClientPNames;
+
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
@@ -31,7 +30,7 @@ public class test {
 
 		// testPatter();
 
-		 update();
+		 //update();
 
 		//testcity();
 		
@@ -39,7 +38,7 @@ public class test {
 		
 		//testGzip();
 		
-		//testhtml();
+		testhtml();
 		
 		//testl();
 	}
@@ -94,12 +93,14 @@ public class test {
 		  HttpClient httpClient = new HttpClient();  
 		 // httpClient.getParams().setParameter(ClientPNames.ALLOW_CIRCULAR_REDIRECTS, true);
 		  
-				  String u1="http://256kb.cn//public/html/2018/05/f00c6b4e-8c17-4dbe-aa85-901aca96bb3b.html";
+				  String u1="http://256kb.cn//public/html/2018/09/237bd8f6-c36d-43d9-a4bc-b311b00aac5d.html";
 		  String u2="http://256kb.cn/public/detail/?i=f00c6b4e-8c17-4dbe-aa85-901aca96bb3b";
 	        GetMethod getMethod = new GetMethod(u1);  
 	        try {  
-	                getMethod.addRequestHeader("accept-encoding", "gzip,deflate");  
-	                getMethod.addRequestHeader("user-agent","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; Alexa Toolbar; Maxthon 2.0)");
+	                //getMethod.addRequestHeader("accept-encoding", "gzip,deflate");  
+	                //getMethod.addRequestHeader("user-agent","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; Alexa Toolbar; Maxthon 2.0)");
+	                getMethod.addRequestHeader("user-agent","/Mozilla/5.0 (compatible; *****Baiduspider/2.0; +http://www.baidu.com/search/spider.html +zj test !!)");
+	                
 	                Date d1=new Date();
 	                int result = httpClient.executeMethod(getMethod); 
 	                Date d2=new Date();

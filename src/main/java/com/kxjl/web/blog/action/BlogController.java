@@ -227,8 +227,8 @@ public class BlogController extends BaseController {
 		rst = jsonOut.toString();
 		JsonUtil.responseOutWithJson(response, rst);
 
-		saveStaticInfo(request, StasticTypeOne.DetailPage.toString(), detail.get(0).getBlog_type_name(),
-				detail.get(0).getImei());
+//		saveStaticInfo(request, StasticTypeOne.DetailPage.toString(), detail.get(0).getBlog_type_name(),
+//				detail.get(0).getImei());
 
 		Kdata.getInstance().cleanrBLogList("");
 
@@ -484,8 +484,7 @@ public class BlogController extends BaseController {
 		rst = jsonOut.toString();
 		JsonUtil.responseOutWithJson(response, rst);
 
-		saveStaticInfo(request, StasticTypeOne.HomePage.toString(), "index");
-
+	
 	}
 
 	@RequestMapping(value = "/getTgList")
