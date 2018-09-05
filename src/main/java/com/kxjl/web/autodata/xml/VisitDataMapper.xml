@@ -21,8 +21,7 @@
   
    <select id="selectSum" parameterType="java.lang.String" resultMap="BaseResultMap">
     
-  select sum(user_visit_num-attack_visit_num) user_visit_num,sum(page_visit_num-attack_page_visit_num) page_visit_num from visit_data
-  
+ select sum(user_visit_num)-sum(attack_visit_num) user_visit_num,sum(page_visit_num)-sum(attack_page_visit_num) page_visit_num from visit_data
   
   </select>
   
