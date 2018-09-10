@@ -4,6 +4,7 @@ import static com.google.common.collect.FluentIterable.from;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -33,7 +34,7 @@ public class CommonServiceImpl implements CommonService {
 
 	private static Logger logger = Logger.getLogger(CommonServiceImpl.class);
 
-	private final String key = "black_iplist";
+	private static final String key = "black_iplist";
 
 	/**
 	 * 定时任务，清空ip缓存，重新计算
@@ -44,13 +45,15 @@ public class CommonServiceImpl implements CommonService {
 
 		List<String> ips = commonDao.getBlackIPList();
 
-		final String morebackiplist = ConfigReader.getInstance().getProperty(
-				"blackiplist");
+		// 同步
+		List<String> sips = Collections.synchronizedList(ips);
+
+		final String morebackiplist = ConfigReader.getInstance().getProperty("blackiplist");
 		if (isNotBlank(morebackiplist)) {
-			ips.addAll(Arrays.asList(morebackiplist.trim().split(",")));
+			sips.addAll(Arrays.asList(morebackiplist.trim().split(",")));
 		}
 
-		Kdata.getInstance().SavedCommonList(key, ips);
+		Kdata.getInstance().SavedCommonList(key, sips);
 
 	}
 
@@ -65,25 +68,31 @@ public class CommonServiceImpl implements CommonService {
 
 		try {
 
-			List<String> ips = (List<String>) Kdata.getInstance()
-					.getCommonList(key);
+			List<String> ips = (List<String>) Kdata.getInstance().getCommonList(key);
+
+			if (ips == null) {
+				resetBlackIPList();
+				ips = (List<String>) Kdata.getInstance().getCommonList(key);
+			}
 
 			final String ip = request.getRemoteAddr();
 			final String referer = request.getHeader("Referer");
+
+			
+
+			//System.out.println("ips:" + ips.size() + "ip:" + ip + "/referer:" + referer);
 
 			inblack = from(ips).anyMatch(new Predicate<String>() {
 				@Override
 				public boolean apply(String regex) {
 					final Pattern pattern = Pattern.compile(regex);
 					return pattern.matcher(ip).matches()
-							|| (!StringUtils.isBlank(referer) && pattern
-									.matcher(referer).matches());
+							|| (!StringUtils.isBlank(referer) && pattern.matcher(referer).matches());
 				}
 			});
 
 			if (inblack) {
-				logger.warn(ip + " is in blackiplist ,request url:"
-						+ request.getRequestURI() + " ");
+				logger.warn(ip + " is in blackiplist ,request url:" + request.getRequestURI() + " ");
 			}
 
 		} catch (Exception e) {

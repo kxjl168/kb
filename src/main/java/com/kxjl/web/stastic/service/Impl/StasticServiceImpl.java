@@ -34,6 +34,32 @@ public class StasticServiceImpl implements StasticService {
 	@Autowired
 	StasticDao stasticDao;
 
+	/**
+	 * 解析代理获取ip
+	 * @param request
+	 * @return
+	 * @author zj
+	 * @date 2018年9月8日
+	 */
+	 public String getIpAddr(HttpServletRequest request){
+	        
+	        String ipAddress = request.getHeader("X-Forwarded-For");
+	        if(ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+	            ipAddress = request.getHeader("X-Real-IP");
+	        }
+	       
+	        if(ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+	            ipAddress = request.getRemoteAddr();
+	        }
+	        //对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
+	        if(ipAddress!=null && ipAddress.length()>15){ //"***.***.***.***".length() = 15
+	            if(ipAddress.indexOf(",")>0){
+	                ipAddress = ipAddress.substring(0,ipAddress.indexOf(","));
+	            }
+	        }
+	        return ipAddress;
+	    }
+	
 	
 	public void saveStaticInfo(String ipinput, String type1, String type2, String arctileId) {
 		// final HttpServletRequest rt = request;

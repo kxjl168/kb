@@ -16,6 +16,16 @@ import com.kxjl.web.system.model.DictInfo;
 
 public interface StasticService {
 
+
+	/**
+	 * 解析代理获取ip
+	 * @param request
+	 * @return
+	 * @author zj
+	 * @date 2018年9月8日
+	 */
+	 public String getIpAddr(HttpServletRequest request);
+	
 	public void saveStaticInfo(String ipinput, String type1, String type2, String arctileId);
 	/**
 	 * 记录访问统计原始数据

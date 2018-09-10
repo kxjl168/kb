@@ -1,6 +1,7 @@
 package com.kxjl.web.blog.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -20,8 +21,7 @@ import com.kxjl.web.system.model.MenuInfo;
  * @date 2018-1-6
  */
 public class Kdata {
-	
-	
+
 	/**
 	 * 是否启用/可见
 	 * 
@@ -32,14 +32,14 @@ public class Kdata {
 	 */
 	public enum Enable {
 
-		NIL("-1",""),Enable("1","可见"),	Disable("0","不可见");
+		NIL("-1", ""), Enable("1", "可见"), Disable("0", "不可见");
 
 		public String value = "";
 		public String desc = "";
 
-		private Enable(String val,String desc) {
+		private Enable(String val, String desc) {
 			this.value = val;
-			this.desc=desc;
+			this.desc = desc;
 		}
 
 		@Override
@@ -49,7 +49,6 @@ public class Kdata {
 			try {
 				j.put("value", value);
 				j.put("desc", desc);
-		
 
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -57,19 +56,17 @@ public class Kdata {
 
 			return j.toString();
 		}
-		
-		public  static Enable parse(String val)
-		{
+
+		public static Enable parse(String val) {
 			for (Enable item : Enable.values()) {
-				if(item.value.equals(val))
+				if (item.value.equals(val))
 					return item;
 			}
 			return Enable.NIL;
 		}
 
 	}
-	
-	
+
 	/**
 	 * 缓存类型
 	 * 
@@ -80,8 +77,8 @@ public class Kdata {
 	 */
 	public enum DataType {
 
-		NIL("", ""), Common("0","common"), Blog("-1", "blog"), Replay("0", "Replay"), Menu("1",
-				"Menu"),BlackIPList("2","BlackipList");
+		NIL("", ""), Common("0", "common"), Blog("-1", "blog"), Replay("0", "Replay"), Menu("1",
+				"Menu"), BlackIPList("2", "BlackipList");
 
 		private String value = "";
 		private String desc = "";
@@ -90,7 +87,7 @@ public class Kdata {
 		private DataType(String val, String desc) {
 			this.value = val;
 			this.desc = desc;
-			this.num=0;
+			this.num = 0;
 		}
 
 		@Override
@@ -142,19 +139,16 @@ public class Kdata {
 		}
 
 	}
-
-	
-	
-	
+	//ConcurrentHashMap 若一致性，
 	// 其他通用缓存
-		private static ConcurrentHashMap<String, Object> savedCommonList = new ConcurrentHashMap<String,Object>();
-	
+	private  HashMap<String, Object> savedCommonList = new HashMap<String, Object>();
+
 	// 日志缓存
-	private static ConcurrentHashMap<String, List<Blog>> savedBlogList = new ConcurrentHashMap<String, List<Blog>>();
+	private  HashMap<String, List<Blog>> savedBlogList = new HashMap<String, List<Blog>>();
 
-	private static ConcurrentHashMap<String, List<Replay>> savedReplayList = new ConcurrentHashMap<String, List<Replay>>();
+	private  HashMap<String, List<Replay>> savedReplayList = new HashMap<String, List<Replay>>();
 
-	private static ConcurrentHashMap<String, List<MenuInfo>> savedMenuList = new ConcurrentHashMap<String, List<MenuInfo>>();
+	private  HashMap<String, List<MenuInfo>> savedMenuList = new HashMap<String, List<MenuInfo>>();
 
 	public int GetNumOfType(DataType type) {
 		int num = 0;
@@ -164,6 +158,14 @@ public class Kdata {
 			num = savedReplayList.size();
 		else if (type == DataType.Menu)
 			num = savedMenuList.size();
+		else if (type == DataType.Common)
+			num = savedCommonList.size();
+		else if (type == DataType.BlackIPList) {
+			List<String> ips = (List<String>) Kdata.getInstance().getCommonList("black_iplist");
+			if (ips != null)
+				num = ips.size();
+		}
+
 		return num;
 	}
 
@@ -177,26 +179,27 @@ public class Kdata {
 		if (instance == null)
 			instance = new Kdata();
 
+	//	System.out.println("******"+instance.hashCode()+"********");
 		return instance;
 
 	}
-	
-	public Object getCommonList(String key) {
+
+	//同步
+	public synchronized Object getCommonList(String key) {
 		return savedCommonList.get(key);
 	}
-
-	public void SavedCommonList(String key, Object list) {
+	//同步
+	public synchronized void SavedCommonList(String key, Object list) {
 		savedCommonList.put(key, list);// = savedBlogList;
 	}
-
-	public void cleanrCommonList(String key) {
+	//同步
+	public synchronized void cleanrCommonList(String key) {
 		if (key != null && !key.equals("")) {
 			if (savedCommonList.containsKey(key))
 				savedCommonList.remove(key);
 		} else
 			savedCommonList.clear();
 	}
-	
 
 	public List<Blog> getBlogList(String key) {
 		return savedBlogList.get(key);

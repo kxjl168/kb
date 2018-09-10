@@ -93,6 +93,9 @@ public class LoginInterceptor implements HandlerInterceptor {
 		if (user == null || user.getUserid() == null || user.getUserid().isEmpty()) {
 
 			logger.warn(uri+"用户没有登录");
+			String loginPath = request.getContextPath() + "/login.jsp";
+			logger.debug("no userinfo, redirect to login page!");
+			response.sendRedirect(loginPath);
 			return false;
 		} else {
 

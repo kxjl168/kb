@@ -414,14 +414,14 @@ public class PageFilter implements Filter {
 			//没有的就是直接url访问或者爬虫
 			
 			
-		/*	// 跟目录，放
+		// 跟目录，放
 			if (request.getContextPath().equals("")) {
 				if (request.getRequestURI().equals("/")) {
 					logger.warn("pass:user is null but is / && request.getContextPath():" + request.getContextPath());
 					chain.doFilter(request, response);
 					return;
 				}
-			}*/
+			}
 /*
 			logger.debug("request.getContextPath():" + request.getContextPath());// ,
 			// page!");

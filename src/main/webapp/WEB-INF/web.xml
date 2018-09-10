@@ -14,8 +14,8 @@
 	<!-- 配置为实际的zteimPhoneSafe.xml位置 -->
 	<context-param>
 		<param-name>CONFIG_FILE_PATH</param-name>
-			 <param-value>\\VBOXSVR\share\git\kb\etc\kb.xml</param-value>
-	<!-- <param-value>F:\kxjl\code\kb\etc\kb.xml</param-value>  -->
+		<!--	 <param-value>\\VBOXSVR\share\git\kb\etc\kb.xml</param-value> -->
+	 <param-value>F:\kxjl\code\kb\etc\kb.xml</param-value>  
 		
 	</context-param>
 	
