@@ -159,6 +159,21 @@
 
 
 
+
+	<div class="row col-xs-12">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- auto -->
+    <ins class="adsbygoogle"
+             style="display:block"
+                  data-ad-client="ca-pub-4546997533420825"
+                       data-ad-slot="5098577692"
+                            data-ad-format="auto"
+                                 data-full-width-responsive="true"></ins>
+                             <script>
+                                 (adsbygoogle = window.adsbygoogle || []).push({});
+                             </script>
+	</div>
+
 					<div class="row col-xs-12">
 						<hr></hr>
 					</div>
@@ -296,7 +311,7 @@
           
 			
 			
-			  <div class="modal fade " id="myModal_outurl" tabindex="-1 " role="dialog " aria-labelledby="myModalLabel " aria-hidden="true">
+			  <!-- <div class="modal fade " id="myModal_outurl" tabindex="-1 " role="dialog " aria-labelledby="myModalLabel " aria-hidden="true">
 				<div class="modal-dialog " style="width: 250px; ">
 					<div class="modal-content ">
 						<div class="modal-header ">
@@ -309,7 +324,7 @@
 						<div class="modal-body container margin-top-10 ">
 							<div class="row ">
 
-								<p class="col-xs-10 ">确认要访问该网站吗？</p>
+								<p class="col-xs-10 msgtitle-md">确认要访问该网站吗？</p>
 
 							</div>
 						</div>
@@ -320,7 +335,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 
 
   

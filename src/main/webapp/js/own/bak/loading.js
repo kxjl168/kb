@@ -182,7 +182,37 @@ gourl = function(e) {
 	var url = $(e).attr("href");
 
 	var row = $("#rpdiv");
+	$("#myModal_outurl").find(".modal-title").html("操作确认");
+	$("#myModal_outurl").find(".msgtitle-md").html("确认要访问该网站吗？");
+	
 
+	if (url.indexOf("http") > -1) {
+		$("#myModal_outurl").modal("show");
+		$("#btnconfirm_outurl").one("click", function() {
+			$("#myModal_outurl").modal("hide");
+			window.open(url, 'new', "");
+		});
+		return false;
+	} else {
+
+		return false;
+
+	}
+	;
+
+};
+
+
+gdurl = function(e) {
+
+	var url = $(e).attr("dhref");
+
+	var row = $("#rpdiv");
+
+	$("#myModal_outurl").find(".modal-title").html("下载确认");
+	$("#myModal_outurl").find(".msgtitle-md").html("点击确认开始下载~~");
+	
+	
 	if (url.indexOf("http") > -1) {
 		$("#myModal_outurl").modal("show");
 		$("#btnconfirm_outurl").one("click", function() {

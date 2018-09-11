@@ -134,5 +134,20 @@
 	src="${basePath}/js/plugin/tagcloud.js"></script>
 	
     	<script type="text/javascript" src="${basePath}/public/pright/pright_t_h.js"></script>
+    	
+    	
+    	 <div class=" panel panel-success">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- auto -->
+    <ins class="adsbygoogle"
+             style="display:block"
+                  data-ad-client="ca-pub-4546997533420825"
+                       data-ad-slot="5098577692"
+                            data-ad-format="auto"
+                                 data-full-width-responsive="true"></ins>
+                             <script>
+                                 (adsbygoogle = window.adsbygoogle || []).push({});
+                             </script>
 
+</div>
     

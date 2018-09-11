@@ -147,21 +147,6 @@ canc = function(e, x) {
 	$("#cbtn").addClass("hide");
 };
 
-gourl = function(url) {
-	var row = $("#rpdiv");
-
-	if ($(url).attr("href").indexOf("http") > -1) {
-		$("#myModal_outurl").modal("show");
-		$("#btnconfirm_outurl").one("click", function() {
-
-			window.open($(url).attr("href"), 'new', "")
-		});
-		return false;
-	} else {
-		return false;
-		// window.location.hash = "#commet";
-	}
-};
 
 beginReplay = function(e, mainid, preid) {
 	var $scope = angular.element(ngSection)

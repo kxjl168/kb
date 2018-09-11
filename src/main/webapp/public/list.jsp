@@ -99,6 +99,20 @@
 				</div>
 			</div>
 			
+			<div class="col-xs-12 ">
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- auto -->
+    <ins class="adsbygoogle"
+             style="display:block"
+                  data-ad-client="ca-pub-4546997533420825"
+                       data-ad-slot="5098577692"
+                            data-ad-format="auto"
+                                 data-full-width-responsive="true"></ins>
+                             <script>
+                                 (adsbygoogle = window.adsbygoogle || []).push({});
+                             </script>
+			</div>
+			
 			
 			  
 				

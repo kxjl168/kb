@@ -14,7 +14,7 @@
 						<div class="modal-body container margin-top-10 ">
 							<div class="row ">
 
-								<p class="col-xs-10 msgtitle ">确认要访问该网站吗？</p>
+								<p class="col-xs-10 msgtitle-md ">确认要访问该网站吗？</p>
 
 							</div>
 						</div>
