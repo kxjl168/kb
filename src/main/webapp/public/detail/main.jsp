@@ -1,42 +1,38 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 
-    <%@include file="/common/tag.jsp"%>
+<%@include file="/common/tag.jsp"%>
 
-        <html lang="en">
+<html lang="en">
 
-        <head>
-         
-          
-            <script type="text/javascript" src="${basePath}/js/plugin/angular/angular.min.js"></script>
-            <script type="text/javascript" src="${basePath}/js/plugin/angular/angular-resource.min.js"></script>
-            <script type="text/javascript" src="${basePath}/js/plugin/angular/angular-sanitize.min.js"></script>
+<head>
 
 
-            <link rel="stylesheet" href="${basePath}/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/default.css">
-            <link rel="stylesheet" href="<c:out value='${basePath}'/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/obsidian.css">
-
-            <script type="text/javascript" src="<c:out value='${basePath}'/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
-            <link rel="stylesheet" href="<c:out value='${basePath}'/>/js/own/automenu/jquery.autoMenu.css">
-
-
-
-        </head>
-
-        <body >
-
-    
-            <div class="" id="content" style="">
+<script type="text/javascript"
+	src="${basePath}/js/plugin/angular/angular.min.js"></script>
+<script type="text/javascript"
+	src="${basePath}/js/plugin/angular/angular-resource.min.js"></script>
+<script type="text/javascript"
+	src="${basePath}/js/plugin/angular/angular-sanitize.min.js"></script>
 
 
-                    <div class=" ">
+<link rel="stylesheet"
+	href="${basePath}/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/default.css">
+	<link rel="stylesheet"
+		href="<c:out value='${basePath}'/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/obsidian.css">
+
+		<script type="text/javascript"
+			src="<c:out value='${basePath}'/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
+		<link rel="stylesheet"
+			href="<c:out value='${basePath}'/>/js/own/automenu/jquery.autoMenu.css">
+</head>
+
+<body>
 
 
+	<div class="" id="content" style="">
 
-                        <div class="wrapper col-xs-12  nopaddding">
-
-
-
+			<div class="wrapper col-xs-12  nopaddding">
 
 				<div id="pleft" ng-cloak>
 					<div>
@@ -53,8 +49,7 @@
 									<div class="col-sm-3 col-xs-12 text-right">
 										<i class="fa fa-tags"></i> <a ng-repeat="t in x.tagStrs"
 											title="t" ng-click="showtgs(t)">{{t}},</a>
-									</div> <span ng-click="ff()"
-									style=""
+									</div> <span ng-click="ff()" style=""
 									class="ctrl nopaddding img-responsive col-xs-2 fa fa-exchange"
 									title="隐藏/打开侧边栏"></span>
 							</div>
@@ -148,7 +143,8 @@
 					<div class="row col-xs-12 margin-top-10">
 						<div class="good">
 							<button type="button " class="btn btn-info   " ng-click="good() ">
-								<i class="fa fa-heart-o"></i> 赞一个 <span >&nbsp;<span id="gdnum" ng-bind-html="goodnum|sanitize">{{goodnum}}</span></span>
+								<i class="fa fa-heart-o"></i> 赞一个 <span>&nbsp;<span
+									id="gdnum" ng-bind-html="goodnum|sanitize">{{goodnum}}</span></span>
 							</button>
 							<button type="button " class="pbtn btn btn-warning   "
 								ng-click="pay() ">
@@ -160,19 +156,8 @@
 
 
 
-	<div class="row col-xs-12">
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- auto -->
-    <ins class="adsbygoogle"
-             style="display:block"
-                  data-ad-client="ca-pub-4546997533420825"
-                       data-ad-slot="5098577692"
-                            data-ad-format="auto"
-                                 data-full-width-responsive="true"></ins>
-                             <script>
-                                 (adsbygoogle = window.adsbygoogle || []).push({});
-                             </script>
-	</div>
+
+					<div id='googlead' class="row col-xs-12"></div>
 
 					<div class="row col-xs-12">
 						<hr></hr>
@@ -199,56 +184,58 @@
 					</div>
 
 
-<canvas id="myCanvas"></canvas>
-					<div class="modal fade " id="payMd"  data-backdrop="static"   tabindex="-1 " role="dialog "
-						aria-labelledby="myModalLabel " aria-hidden="true">
-						<div class="modal-dialog paybody" >
+					<canvas id="myCanvas"></canvas>
+					<div class="modal fade " id="payMd" data-backdrop="static"
+						tabindex="-1 " role="dialog " aria-labelledby="myModalLabel "
+						aria-hidden="true">
+						<div class="modal-dialog paybody">
 							<div class="modal-content ">
-								<div class="modal-header " style="border-bottom:0px">
+								<div class="modal-header " style="border-bottom: 0px">
 									<button type="button " class="close " data-dismiss="modal"
 										aria-hidden="true ">&times;</button>
-									<h4 class="modal-title "   id="myModalLabel ">打赏方式:</h4>
+									<h4 class="modal-title " id="myModalLabel ">打赏方式:</h4>
 								</div>
 
 
 
 								<div class="modal-body  ">
 									<div class="col-xs-12 ">
-									<div class='pcenter'>
-										
-
-<ul class="pul">
-											<li><label><input
-														class='paytype' name='paytype' checked="checked" for="#pp1" type='radio'>微信</label></li> 
-											<li><label><input
-														class='paytype' name='paytype' for="#pp2" type='radio'>支付宝</label></li>
-														</ul>
+										<div class='pcenter'>
 
 
-										<div class="tab-content paycontent">
-											<div class="row  col-xs-12 tab-pane fade in active " id="pp1">
-												<div class='pbord'>
+											<ul class="pul">
+												<li><label><input class='paytype'
+														name='paytype' checked="checked" for="#pp1" type='radio'>微信</label></li>
+												<li><label><input class='paytype'
+														name='paytype' for="#pp2" type='radio'>支付宝</label></li>
+											</ul>
 
 
-													<img class='img-responsive'
-														src='${basePath }/public/detail/weixin.png'></img>
+											<div class="tab-content paycontent">
+												<div class="row  col-xs-12 tab-pane fade in active "
+													id="pp1">
+													<div class='pbord'>
 
-													<div class='ptip'>微信</div>
+
+														<img class='img-responsive'
+															src='${basePath }/public/detail/weixin.png'></img>
+
+														<div class='ptip'>微信</div>
+													</div>
+												</div>
+												<div class="row  col-xs-12 tab-pane fade in  " id="pp2">
+													<div class='pbord alip'>
+
+
+														<img class='img-responsive'
+															src='${basePath }/public/detail/zhifub.png'></img>
+
+														<div class='ptip'>支付宝</div>
+													</div>
 												</div>
 											</div>
-											<div class="row  col-xs-12 tab-pane fade in  " id="pp2">
-												<div class='pbord alip'>
 
-
-													<img class='img-responsive'
-														src='${basePath }/public/detail/zhifub.png'></img>
-
-													<div class='ptip'>支付宝</div>
-												</div>
-											</div>
 										</div>
-									
-									</div>
 
 
 									</div>
@@ -261,94 +248,99 @@
 
 
 
+				</div>
+
+
+
+
+				<%@include file="comment.jsp"%>
+
+			</div>
+
+	</div>
+
+
+
+	<div class="result" id="outdiv">
+		<div class="indiv">
+			<img class="imgresult" id="bigimg" src="">
+		</div>
+	</div>
+
+
+
+
+
+	<script type="text/javascript" src="${basePath}/public/detail/index.js"></script>
+	<script type="text/javascript"
+		src="${basePath}/public/detail/replay.js"></script>
+
+
+	<script type="text/javascript"
+		src="${basePath}/js/own/automenu/jquery.autoMenu.js"></script>
+
+
+
+
+
+
+	<script async
+		src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		
+		
+<div id='googleadcode_bottom' style='display: none'>
+
+	<!-- auto -->
+	<ins class="adsbygoogle" style="display: block"
+		data-ad-client="ca-pub-4546997533420825" data-ad-slot="3251638392"
+		data-ad-format="auto" data-full-width-responsive="true"></ins>
+	<script>
+		(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
 </div>
 
 
+<div id='googleadcode_d_right' style='display: none'>
 
+	<!-- auto -->
+	<ins class="adsbygoogle" style="display: block"
+		data-ad-client="ca-pub-4546997533420825" data-ad-slot="3316337130"
+		data-ad-format="auto" data-full-width-responsive="true"></ins>
+	<script>
+		(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+</div>
 
-					<%@include file="comment.jsp" %>
+<div id='googleadcode3' style='display: none'>
+	
+	<!-- auto -->
+	<ins class="adsbygoogle" style="display: block"
+		data-ad-client="ca-pub-4546997533420825" data-ad-slot="5098577692"
+		data-ad-format="auto" data-full-width-responsive="true"></ins>
+	<script>
+		(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+</div>
 
+<script language='javascript'>
+	setTimeout(function() {
+		if (document.all.item('googlead3') != null) {
+			googlead3.innerHTML = googleadcode3.innerHTML;
+		}
 
+		if (document.all.item('googlead2') != null) {
+			googlead2.innerHTML = googleadcode_d_right.innerHTML;
+		}
 
-
-                       
-
-                        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-                    </div>
-
-            </div>
-
-
-
-
-
-
-
-            <div class="result" id="outdiv">
-                <div class="indiv">
-                    <img class="imgresult" id="bigimg" src="">
-                </div>
-            </div>
-
-
-
+		if (document.all.item('googlead') != null) {
+			googlead.innerHTML = googleadcode_bottom.innerHTML;
+		}
+	}, 500);
+</script>
 
 
 
 
-          
-			
-			
-			  <!-- <div class="modal fade " id="myModal_outurl" tabindex="-1 " role="dialog " aria-labelledby="myModalLabel " aria-hidden="true">
-				<div class="modal-dialog " style="width: 250px; ">
-					<div class="modal-content ">
-						<div class="modal-header ">
-							<button type="button " class="close " data-dismiss="modal" aria-hidden="true ">&times;</button>
-							<h4 class="modal-title " id="myModalLabel ">访问确认</h4>
-						</div>
+</body>
 
-
-
-						<div class="modal-body container margin-top-10 ">
-							<div class="row ">
-
-								<p class="col-xs-10 msgtitle-md">确认要访问该网站吗？</p>
-
-							</div>
-						</div>
-						<div class="modal-footer ">
-							<button type="button" class="btn btn-default btn-warning " data-dismiss="modal">取消
-							</button>
-							<button id="btnconfirm_outurl"  type="button " class="btn btn-primary "> 确定 </button>
-						</div>
-					</div>
-				</div>
-			</div> -->
-
-
-  
-                    <script type="text/javascript" src="${basePath}/public/detail/index.js"></script>
-                    <script type="text/javascript" src="${basePath}/public/detail/replay.js"></script>
-                 
-                    
-                        <script type="text/javascript" src="${basePath}/js/own/automenu/jquery.autoMenu.js"></script>
-
-
-
-
-
-        </body>
-
-        </html>
+</html>

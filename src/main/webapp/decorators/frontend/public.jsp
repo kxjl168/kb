@@ -48,6 +48,12 @@
 	<script type="text/javascript"
 		src="${basePath}/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
 	
+<script type="text/javascript"
+	src="${basePath}/js/plugin/jquery/jquery.validate.js"></script>
+
+<script type="text/javascript" src="${basePath}/js/own/kvalidate.js"></script>
+
+	
 	  <link  rel="stylesheet"
 	href="${basePath}/js/own/kpro.css"></link>
 	 							 
@@ -94,10 +100,13 @@
 <%@include file="adialog.jsp"%>
 
 
+
+
+
 		<%@include file="../../public/pfoot.jsp"%>
-</body>
-
-
+		
+		
+		
 
 <script type="text/javascript"
 	src="${basePath}/js/plugin/jquery/jquery-ui.js"></script>
@@ -107,12 +116,11 @@
 
 
 
-<script type="text/javascript"
-	src="${basePath}/js/plugin/jquery/jquery.validate.js"></script>
-
-<script type="text/javascript" src="${basePath}/js/own/kvalidate.js"></script>
-
+	
 				
+</body>
+
+
 
 
 </html>
