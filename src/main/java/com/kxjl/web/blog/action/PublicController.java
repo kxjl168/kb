@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -377,9 +378,9 @@ public class PublicController extends BaseController {
 		return view;
 	}
 
-	@RequestMapping(value = "/sitemap.xml",produces={"application/xml; charset=UTF-8"})
+	@RequestMapping(value = "/sitemap.xml")
 	@ResponseBody
-	public String sitemap(HttpServletRequest request, HttpServletResponse response) {
+	public void sitemap(HttpServletRequest request, HttpServletResponse response) {
 
 		/*
 		 * <urlset xmlns=“网页列表地址”> <url> <loc>网址</loc>
@@ -395,49 +396,56 @@ public class PublicController extends BaseController {
 		List<Blog> blogs = bservice.getBlogPageList(query);
 
 		StringBuffer sb = new StringBuffer();
-		//sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+		sb.append("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">");
+
 		for (Blog blog : blogs) {
 			// /public/html/${curBlog.showdate}/${curBlog.imei}.html
 			sb.append("<url>");
 			sb.append("<loc>" + "http://www.256kb.cn/public/html/" + blog.getShowdate() + "/" + blog.getImei()
 					+ ".html</loc>");
-			sb.append("<lastmod>" + blog.getUpdate_date() + "</lastmod>");
+
+			String date = blog.getUpdate_date();
+			if (date == null)
+				date = blog.getCreate_date();
+			
+			date=date.substring(0,10);
+
+			sb.append("<lastmod>" + date + "</lastmod>");
 			sb.append("<changefreq>always</changefreq>");
 			sb.append("<priority>1.0</priority>");
 			sb.append("</url>");
 
 		}
-		
-		return sb.toString();
-
-		/*try {
-
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("application/octet-stream");
-			response.setHeader("Content-Disposition", "attachment;filename=sitemap.xml");// mod // by // pengqp // at
-																							// try {
-
-			// 2012/8/29 // 下载文件乱码
-			ServletOutputStream out = response.getOutputStream();
-
-			out.write(sb.toString().getBytes("UTF-8"));
-			out.flush();
-			out.close();
-		} catch (Exception e) { // TODO: handle exception
-
-		}*/
+		sb.append("</urlset>");
+		// return sb.toString();
 
 		/*
 		 * try {
 		 * 
-		 * response.setHeader("content-type", "text/json; charset=UTF-8");
-		 * response.setHeader("Content-Length", "" +
-		 * sb.toString().getBytes("UTF-8").length);
 		 * response.setCharacterEncoding("UTF-8");
-		 * response.getWriter().print(sb.toString()); response.getWriter().flush(); }
-		 * catch (Exception e) { // TODO: handle exception }
+		 * response.setContentType("application/octet-stream");
+		 * response.setHeader("Content-Disposition",
+		 * "attachment;filename=sitemap.xml");// mod // by // pengqp // at // try {
+		 * 
+		 * // 2012/8/29 // 下载文件乱码 ServletOutputStream out = response.getOutputStream();
+		 * 
+		 * out.write(sb.toString().getBytes("UTF-8")); out.flush(); out.close(); } catch
+		 * (Exception e) { // TODO: handle exception
+		 * 
+		 * }
 		 */
 
+		try {
+
+			response.setHeader("content-type", "application/xml; charset=UTF-8");
+			response.setHeader("Content-Length", "" + sb.toString().getBytes("UTF-8").length);
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().print(sb.toString());
+			response.getWriter().flush();
+		} catch (Exception e) { // TODO: handle exception }
+
+		}
 	}
 
 }
