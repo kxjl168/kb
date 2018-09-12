@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@include file="/common/tag.jsp"%>
 
 <html lang="en">
@@ -8,11 +8,10 @@
 <head>
 
 
-<%-- <script type="text/javascript"
-	src="${basePath}/js/plugin/angular/angular.min.js"></script> --%>
- <script type="text/javascript"
+<script type="text/javascript"
+	src="${basePath}/js/plugin/angular/angular.min.js"></script>
+<script type="text/javascript"
 	src="${basePath}/js/plugin/angular/angular-resource.min.js"></script>
-	 --%>
 <script type="text/javascript"
 	src="${basePath}/js/plugin/angular/angular-sanitize.min.js"></script>
 
@@ -30,9 +29,6 @@
 
 <body>
 
-<input type="hidden" value="${curBlog.tags}" id="tagstrval"/>
-<input type="hidden" value="${curBlog.imei}" id="imei"/>
-
 
 	<div class="" id="content" style="">
 
@@ -45,22 +41,14 @@
 
 							<div class="nopadding-left">
 								<img class="nopaddding img-responsive col-xs-2"
-									style="width: 25px; height: 25px;" title="${curBlog.blog_type_name}"
-									src="${curBlog.blog_type_url}">
-									<div class="col-sm-8 col-xs-11 ptitle  ">${curBlog.title}</div>
+									style="width: 25px; height: 25px;" title="{{x.blog_type_name}}"
+									ng-src="{{x.blog_type_url}}">
+									<div class="col-sm-8 col-xs-11 ptitle  ">{{x.title}}</div>
 
 
 									<div class="col-sm-3 col-xs-12 text-right">
-										<i class="fa fa-tags"></i> 
-											
-											
-											
-											<c:forEach items="${curBlog.tagStrs }" var="tag">
-											<a 
-											title="${tag}" href="${basePath}/public/index/tg/${tag}.html">${tag},</a>
-											</c:forEach>
-											
-											
+										<i class="fa fa-tags"></i> <a ng-repeat="t in x.tagStrs"
+											title="t" ng-click="showtgs(t)">{{t}},</a>
 									</div> <span ng-click="ff()" style=""
 									class="ctrl nopaddding img-responsive col-xs-2 fa fa-exchange"
 									title="隐藏/打开侧边栏"></span>
@@ -74,8 +62,8 @@
 
 						<div class="col-xs-12 row nopaddding">
 							<div class="">
-								<div class=" pageText "
-									>${curBlog .content}</div>
+								<div ng-cloak class=" pageText "
+									ng-bind-html="x.context|sanitize"></div>
 							</div>
 
 
@@ -83,8 +71,8 @@
 
 						<br>
 							<div ng-cloak class="row col-xs-10 margin-top-5 ">
-								post@${curBlog .create_date}&nbsp; <span>阅读(<span id="rdnum">${curBlog .view_nums}</span>)&nbsp;
-								</span> <span>评论(<span id="rpnum">${curBlog .replay_nums}</span>
+								post@{{x.create_date}}&nbsp; <span>阅读(<span id="rdnum">{{x.view_nums}}</span>)&nbsp;
+								</span> <span>评论(<span id="rpnum">{{x.replay_nums}}</span>
 									)&nbsp;
 								</span>
 							</div>
@@ -98,27 +86,29 @@
 
 					<div class="  col-xs-12 row tablefoot">
 						<ul class="pagination pull-left">
-							<li>
-							<c:if test="${preBlog!=null }">
+							<li><a
+								ng-href="{{preurl}}/public/html/{{pre.showdate}}/{{pre.imei}}.html"
+								ng-show="pre" ng-click="" title="上一篇:{{pre.title}}">&laquo;{{pre.title}}</a>
 								<a
-								href="${basePath}/public/html/${preBlog.showdate}/${preBlog.imei}.html"
-								style="" class="for spider">${preBlog.title}</a>
-								</c:if>
-								</li>
+								ng-href="{{preurl}}/public/html/{{pre.showdate}}/{{pre.imei}}.html"
+								style="display: none;" class="for spider">{{pre.title}}</a></li>
 						</ul>
 						<ul class="pagination pull-right">
-							<li>
-								<c:if test="${nextBlog!=null }">
-								<a
-								href="${basePath}/public/html/${nextBlog.showdate}/${nextBlog.imei}.html"
-								style="" class="for spider">${nextBlog.title}</a>
-								</c:if>
-							</li>
+							<li><a
+								ng-href="{{preurl}}/public/html/{{next.showdate}}/{{next.imei}}.html"
+								ng-show="next" ng-click="" title="下一篇:{{next.title}}">{{next.title}}
+									&raquo;</a> <a
+								ng-href="{{preurl}}/public/html/{{next.showdate}}/{{next.imei}}.html"
+								style="display: none;" class="for spider">{{next.title}}</a></li>
 						</ul>
 
 
 
 
+
+						<select onchange="changerows(this)" class="hide pull-right">
+							<option ng-repeat="x in rows_select">{{x}}</option>
+						</select>
 					</div>
 
 
@@ -131,7 +121,7 @@
 							<div id="license_information">
 
 								<p>
-									本文 [${curBlog.title}]基于<a href="https://mit-license.org/"
+									本文 [{{x.title}}]基于<a href="https://mit-license.org/"
 										title="MIT License " target="_blank">MIT License </a>
 									许可协议发布,作者：野生的喵喵<a href="http://www.256kb.cn/">http://www.256kb.cn/</a>
 								</p>
@@ -140,7 +130,7 @@
 
 							<p>
 								文章固定链接： <a
-									href="{{preurl}}/public/html/${curBlog.showdate}/${curBlog.imei}.html">{{preurl}}/public/html/${curBlog.showdate}/${curBlog.imei}.html</a>
+									ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html">{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html</a>
 								转载请注明
 							</p>
 							<p></p>
@@ -154,7 +144,7 @@
 						<div class="good">
 							<button type="button " class="btn btn-info   " ng-click="good() ">
 								<i class="fa fa-heart-o"></i> 赞一个 <span>&nbsp;<span
-									id="gdnum" ng-bind-html="goodnum|sanitize">${goodnum}</span></span>
+									id="gdnum" ng-bind-html="goodnum|sanitize">{{goodnum}}</span></span>
 							</button>
 							<button type="button " class="pbtn btn btn-warning   "
 								ng-click="pay() ">
@@ -177,21 +167,16 @@
 						<div class="nopadding-left row relatedLink">
 
 							<ul class="col-xs-12 ">
-							
-							<c:forEach items="${relatedBLogs }" var="relateblog">
-							<li >
+								<li ng-repeat="rpage in relatedlist">
+									<!--   <a ng-href="{{preurl}}/public/html/{{next.showdate}}/{{next.imei}}.html" ng-show="next" ng-click="" title="下一篇:{{next.title}}">{{next.title}} &raquo;</a> -->
 
 									<img class="nopaddding img-responsive col-xs-2"
 									style="width: 25px; height: 25px;"
-									title="${relateblog.blog_type_name}"
-									src="${relateblog.blog_type_url}"> <a
-										href="${basePath}/public/html/${relateblog.showdate}/${relateblog.imei}.html"
-										class="col-sm-8 col-xs-11 ">${relateblog.title}</a>
+									title="{{rpage.blog_type_name}}"
+									ng-src="{{rpage.blog_type_url}}"> <a
+										ng-href="{{preurl}}/public/html/{{rpage.showdate}}/{{rpage.imei}}.html"
+										class="col-sm-8 col-xs-11 ">{{rpage.title}}</a>
 								</li>
-							</c:forEach>
-							
-							
-								
 							</ul>
 
 
@@ -286,7 +271,7 @@
 
 
 
-	<script type="text/javascript" src="${basePath}/public/detail/index.js"></script>
+	<script type="text/javascript" src="${basePath}/public/detail/index_angular.js"></script>
 	<script type="text/javascript"
 		src="${basePath}/public/detail/replay.js"></script>
 
@@ -299,13 +284,13 @@
 
 
 
-	<!-- <script async
-		src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+	<script async
+		src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 		
-		<!-- 
+		
 <div id='googleadcode_bottom' style='display: none'>
 
-	auto
+	<!-- auto -->
 	<ins class="adsbygoogle" style="display: block"
 		data-ad-client="ca-pub-4546997533420825" data-ad-slot="3251638392"
 		data-ad-format="auto" data-full-width-responsive="true"></ins>
@@ -317,7 +302,7 @@
 
 <div id='googleadcode_d_right' style='display: none'>
 
-	auto
+	<!-- auto -->
 	<ins class="adsbygoogle" style="display: block"
 		data-ad-client="ca-pub-4546997533420825" data-ad-slot="3316337130"
 		data-ad-format="auto" data-full-width-responsive="true"></ins>
@@ -328,17 +313,17 @@
 
 <div id='googleadcode3' style='display: none'>
 	
-	auto
+	<!-- auto -->
 	<ins class="adsbygoogle" style="display: block"
 		data-ad-client="ca-pub-4546997533420825" data-ad-slot="5098577692"
 		data-ad-format="auto" data-full-width-responsive="true"></ins>
 	<script>
 		(adsbygoogle = window.adsbygoogle || []).push({});
 	</script>
-</div> -->
+</div>
 
 <script language='javascript'>
-	/* setTimeout(function() {
+	setTimeout(function() {
 		if (document.all.item('googlead3') != null) {
 			googlead3.innerHTML = googleadcode3.innerHTML;
 		}
@@ -350,7 +335,7 @@
 		if (document.all.item('googlead') != null) {
 			googlead.innerHTML = googleadcode_bottom.innerHTML;
 		}
-	}, 500); */
+	}, 500);
 </script>
 
 

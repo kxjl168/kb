@@ -1,6 +1,6 @@
 var app = angular.module('myApp', ["ngSanitize"]);
 
-app.controller('eduCtrl', function($scope,$sce) {
+app.controller('eduCtrl', function($scope) {
 
 });
 
@@ -19,28 +19,7 @@ $(function() {
     	 $(forele).addClass("active");
     });
     
-    $('.pct').autoMenu();
-    
 
-    $("#title").html($(".ptitle").html());
-
-    document.title = $(".ptitle").html() + "-" + sitetitle;
-
-
-    var meta = document.getElementsByTagName('meta');
-    meta["keywords"].setAttribute('content', $("#tagstrval").val());
-
-    var $scope = angular.element(ngSection).scope();
-    $scope.$apply(function() {
-    	 $scope.initimg();
-    	 $scope.x={};
-    	 $scope.x.imei=$("#imei").val();
-    	 
-    		setTimeout(function() {
-   			 $scope.getReplayList();
-   		}, 300);
-    });
-   
 
 });
 
@@ -218,8 +197,7 @@ function init() {
                                 	   $scope.goodnum ="";
                                
                                 $("#gdnum").html($scope.goodnum);
-                                $("#rdnum").html($scope.view_num);
-                                $("#rpnum").html($scope.replay_num);
+                                
                                 $scope.$apply();
                                 
                                
@@ -237,8 +215,6 @@ function init() {
                     );
                };
 
-               
-          
             
             $scope.good=function(imei){
             	 var obj = new Object();
@@ -267,7 +243,6 @@ function init() {
                              
                         	  $scope.goodnum = eval(json.total);
                               $("#gdnum").html($scope.goodnum);
-                            
                               $scope.$apply();
                              
 
@@ -340,28 +315,6 @@ function init() {
                          if (code == 200) {
 
                              $scope.relatedlist = eval(json.datalist);
-                             
-                             
-                             var html="";
-                             html+="   <ul class=\"col-xs-12 \">";
-                             $.each($scope.relatedlist,function(index,item){
-                            	 html+=''
-                            	 
-                            	+' <li >  '
-
-                            	+' 	<img class="nopaddding img-responsive col-xs-2" '
-                            	+' 	style="width: 25px; height: 25px;" '
-                            	+' 	title="'+item.blog_type_name+'" '
-                            	+' 	src="'+item.blog_type_url+'"> <a '
-                            	+' 		href="'+basePath+'/public/html/'+item.showdate+'/'+item.imei+'.html"  '
-                            	+' 		class="col-sm-8 col-xs-11 ">'+item.title+'</a> '
-                            	+' </li> ' ;
-                             });
-                             html+="   </ul>";
-                             $(".relatedLink").html(html);
-                             
-
-                             
                              $scope.getgoodnum();
                        
                              $scope.$apply();
@@ -519,8 +472,8 @@ function init() {
                 );
 
             };
-            $scope.getRelatedList();
-          //  $scope.getList();
+
+            $scope.getList();
 
         });
 
@@ -529,6 +482,6 @@ function init() {
 
 app.filter("sanitize", ['$sce', function($sce) {
     return function(htmlCode) {
-       // return htmlCode ? $sce.trustAsHtml(htmlCode) : "";
+        return htmlCode ? $sce.trustAsHtml(htmlCode) : "";
     }
 }]);

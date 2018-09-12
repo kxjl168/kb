@@ -111,10 +111,19 @@ public class LikeController extends BaseController {
 			String imei = parseStringParam(request, "i");
 
 			int total = likemaper.getTotalLikeNum(imei);
+			
+			
+			Blog query=new Blog();
+			query.setImei(imei);
+			Blog tp = blogService.getBlogInfoById(query);
+			
 
 			jsonOut.put("ResponseCode", "200");
 			jsonOut.put("ResponseMsg", "");
 			jsonOut.put("total", total);
+			
+			jsonOut.put("view_num", tp.getView_nums());
+			jsonOut.put("replay_num", tp.getReplay_nums());
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

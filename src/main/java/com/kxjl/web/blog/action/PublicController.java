@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.kxjl.tool.common.Constant;
@@ -33,6 +35,7 @@ import com.kxjl.tool.utils.JEscape;
 import com.kxjl.tool.utils.JsonUtil;
 
 import com.kxjl.tool.utils.wuliu.WuliuHelper;
+import com.kxjl.web.autodata.dao.LikeInfoMapper;
 import com.kxjl.web.blog.model.Blog;
 import com.kxjl.web.blog.model.Kurl;
 import com.kxjl.web.blog.service.BlogService;
@@ -42,8 +45,10 @@ import com.kxjl.web.system.action.base.BaseController;
 import com.kxjl.web.system.model.DictInfo;
 import com.kxjl.web.system.model.MenuInfo;
 import com.kxjl.web.system.model.SysUserBean;
+import com.kxjl.web.system.model.SysUserBean.UserType;
 import com.kxjl.web.system.service.MenuInfoService;
 import com.kxjl.web.system.service.SysService;
+import com.sun.glass.ui.View;
 import com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex.KeyIndexIterator;
 
 import sun.util.logging.resources.logging;
@@ -66,6 +71,9 @@ public class PublicController extends BaseController {
 	
 	@Autowired
 	BlogService bservice;
+	
+	@Autowired
+	LikeInfoMapper likemaper;
 
 	
 
@@ -290,9 +298,90 @@ public class PublicController extends BaseController {
 
 	@RequestMapping(value = "/public/detail")
 	public ModelAndView detail(HttpServletRequest request) {
-
+		ModelAndView view = getSysData();
 		try {
 			
+		
+		String imei = request.getParameter("i");
+		if (imei.equals("null") || imei.equals("")) {
+			String url = request.getHeader("Referer");
+			try {
+				imei = url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf("."));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+			// http://127.0.0.1:8080/kb/public/detail/i/344f5834-fe93-49e8-835d-b07e1a1def96.html
+		}
+		
+		
+		Blog query = new Blog();
+		query.setImei(imei);
+		
+		Blog detailitem=bservice.getBlogInfoById(query);
+		
+		// cur ,next, pre
+		List<Blog> details = bservice.getBlogDetailPageList(query);
+		
+	
+
+		String prepath = getImgHttpOutPath();
+		for (Blog blog : details) {
+			blog.setBlog_type_url(prepath + blog.getBlog_type_url());
+		}
+		
+		details.get(0).setContent( JEscape.unescape( details.get(0).getContent()));
+		
+		view.addObject("curBlog", details.get(0));
+		
+		if(details.get(1)!=null)
+		view.addObject("nextBlog", details.get(1));
+		if(details.get(2)!=null)
+		view.addObject("preBlog", details.get(2));
+		
+		
+		int total = likemaper.getTotalLikeNum(imei);
+		view.addObject("goodnum", total);
+		
+		Page<Object> pg=PageHelper.startPage(1, 10);
+		List<Blog> relatedBLogs=bservice.getRelatedBlogs(detailitem);
+		
+		for (Blog blog : relatedBLogs) {
+			blog.setBlog_type_url(prepath + blog.getBlog_type_url());
+		}
+		
+		view.addObject("relatedBLogs", relatedBLogs);
+
+		//记录直接访问html的日志，多为爬虫访问链接，页面js统计未执行.
+		stasticService.saveStaticInfo(request, StasticTypeOne.DetailPage.toString(),detailitem.getBlog_type_name(), imei);
+		
+		//计数
+		SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
+		if (user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin) {
+			bservice.updateBlogReadTime(query);
+		}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+	
+		view.setViewName("/public/detail/main");
+
+	
+		return view;
+	}
+	
+	/**
+	 * angularjs 页面加载方式
+	 * @param request
+	 * @return
+	 * @author zj
+	 * @date 2018年9月12日
+	 */
+	@RequestMapping(value = "/public/detailo")
+	public ModelAndView detailo(HttpServletRequest request) {
+		ModelAndView view = getSysData();
 		
 		String imei = request.getParameter("i");
 		if (imei.equals("null") || imei.equals("")) {
@@ -316,13 +405,8 @@ public class PublicController extends BaseController {
 		stasticService.saveStaticInfo(request, StasticTypeOne.DetailPage.toString(),detailitem.getBlog_type_name(), imei);
 		
 		
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
-		
-		ModelAndView view = getSysData();
-		view.setViewName("/public/detail/main");
+	
+		view.setViewName("/public/detail/main_angular");
 
 	
 		return view;
