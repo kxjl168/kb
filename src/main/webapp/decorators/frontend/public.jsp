@@ -116,6 +116,63 @@
 
 
 
+
+
+
+ <script async
+		src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
+		
+		
+<div id='googleadcode_bottom' style='display: none'>
+
+	
+	<ins class="adsbygoogle" style="display: block"
+		data-ad-client="ca-pub-4546997533420825" data-ad-slot="3251638392"
+		data-ad-format="auto" data-full-width-responsive="true"></ins>
+	<script>
+		(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+</div>
+
+
+<div id='googleadcode_d_right' style='display: none'>
+
+	
+	<ins class="adsbygoogle" style="display: block"
+		data-ad-client="ca-pub-4546997533420825" data-ad-slot="3316337130"
+		data-ad-format="auto" data-full-width-responsive="true"></ins>
+	<script>
+		(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+</div>
+
+<div id='googleadcode3' style='display: none'>
+	
+	
+	<ins class="adsbygoogle" style="display: block"
+		data-ad-client="ca-pub-4546997533420825" data-ad-slot="5098577692"
+		data-ad-format="auto" data-full-width-responsive="true"></ins>
+	<script>
+		(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+</div> 
+
+<script language='javascript'>
+	
+		if (document.all.item('googlead3') != null) {
+			googlead3.innerHTML = googleadcode3.innerHTML;
+		}
+
+		if (document.all.item('googlead2') != null) {
+			googlead2.innerHTML = googleadcode_d_right.innerHTML;
+		}
+
+		if (document.all.item('googlead') != null) {
+			googlead.innerHTML = googleadcode_bottom.innerHTML;
+		}
+	
+</script>
+
 	
 				
 </body>

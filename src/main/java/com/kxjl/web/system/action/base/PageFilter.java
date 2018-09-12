@@ -250,7 +250,7 @@ public class PageFilter implements Filter {
 				if (!(localFile.exists())) {
 
 					if (curl.contains("public/detail/?i=")) {
-						if (!curl.contains("_escaped_fragment_")) {
+						/*if (!curl.contains("_escaped_fragment_")) {
 							String newurl = "";
 							if (curl.contains("?"))
 								newurl = curl + "&_escaped_fragment_";
@@ -261,12 +261,13 @@ public class PageFilter implements Filter {
 							response.sendRedirect(newurl);
 							isDone = true;
 							return isDone;
-						}
+						}*/
 					}
 					if (Pattern.matches(pattern, curl)) {
-						String newurl = request.getContextPath() + "/public/detail/?i=" + imei + "&_escaped_fragment_";
-						 //RequestDispatcher dispatcher = request.getRequestDispatcher(newurl);
-						 //dispatcher.forward(request, response);
+						//String newurl = request.getContextPath() + "/public/detail/?i=" + imei + "&_escaped_fragment_";
+						
+						String newurl = request.getContextPath() + "/public/detail/?i=" + imei + "";
+						
 						response.sendRedirect(newurl);
 						isDone = true;
 						return isDone;

@@ -519,7 +519,12 @@ function init() {
                 );
 
             };
-            $scope.getRelatedList();
+            
+            setTimeout(function(){
+            	$scope.getRelatedList();	
+			}, 500);
+            
+            
           //  $scope.getList();
 
         });
