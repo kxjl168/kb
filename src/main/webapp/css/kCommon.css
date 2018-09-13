@@ -1391,3 +1391,23 @@ ul.pul
 	margin-top: 2px; width: 15px; height: 20px; color: #1f4433;
 	color:#4c4269!important;
 }
+
+
+
+.bottom_detail_big { display:inline-block;width: 980px; height: 90px;}
+@media screen and (max-width: 768px) {
+	.bottom_detail_big { width: 740px; height: 60px; }
+}
+
+@media screen and (min-width: 768px) {
+	.bottom_detail_big { width: 980px; height: 90px; }
+}
+	
+
+
+
+/**google ad**/
+/* ins {
+    min-width: 300px;
+    min-height: 50px;
+} */

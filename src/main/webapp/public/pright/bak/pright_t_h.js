@@ -260,6 +260,27 @@ var $scope = angular.element(ngSection).scope();
 							
 							 
 							
+							setTimeout(function() {
+								var fixmeTop = $('#googlead2').offset().top;
+								 $(window).scroll(function () {
+								        var currentScroll = $(window).scrollTop();
+								        if (currentScroll >= fixmeTop) {
+								            $('#googlead2').css({
+								                top: '100',
+								                position: 'fixed',
+								                width: 'inherit'
+								            });
+								          
+								        } else {
+								            $('#googlead2').css({
+								                position: 'inherit',
+								                width: 'inherit'
+								            });
+								           
+								        }
+								    });
+							}, 3000);
+							 
 							
 						
 
@@ -284,6 +305,11 @@ var $scope = angular.element(ngSection).scope();
 			);
 		};
 		$scope.getYqList();
+		
+		
+		
+		
+		
 		
 		
 		

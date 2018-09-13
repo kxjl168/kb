@@ -167,7 +167,10 @@
 
 
 
-					<div id='googlead' class="row col-xs-12"></div>
+					<div class="row col-xs-12 margin-top-10">
+					 <div id='googlead'>
+					 </div>
+					</div>
 
 					<div class="row col-xs-12">
 						<hr></hr>
