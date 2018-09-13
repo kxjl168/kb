@@ -1396,7 +1396,7 @@ ul.pul
 
 .bottom_detail_big { display:inline-block;width: 980px; height: 90px;}
 @media screen and (max-width: 768px) {
-	.bottom_detail_big { width: 740px; height: 60px; }
+	.bottom_detail_big { width: 320px; height: 50px; }
 }
 
 @media screen and (min-width: 768px) {
