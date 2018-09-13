@@ -157,10 +157,21 @@
 	</script>
 </div> 
 
+<div id='googleadcode_link' style='display: none'>
+	
+	
+	<ins class="adsbygoogle" style="display: block"
+		data-ad-client="ca-pub-4546997533420825" data-ad-slot="6058206079"
+		data-ad-format="auto" data-full-width-responsive="true"></ins>
+	<script>
+		//(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+</div> 
+
 <script language='javascript'>
 	
 $(document).ready(function(){
-		
+	setTimeout(function() {
 		if (document.all.item('googlead3') != null) {
 			googlead3.innerHTML = googleadcode3.innerHTML;
 		}
@@ -173,11 +184,16 @@ $(document).ready(function(){
 			googlead.innerHTML = googleadcode_bottom.innerHTML;
 		}
 		
+		if (document.all.item('googlead_link') != null) {
+			googlead_link.innerHTML = googleadcode_link.innerHTML;
+		}
 		
+		
+			(adsbygoogle = window.adsbygoogle || []).push({});
 			(adsbygoogle = window.adsbygoogle || []).push({});
 			(adsbygoogle = window.adsbygoogle || []).push({});
 			(adsbygoogle = window.adsbygoogle || []).push({});	
-		
+	},500);	
 	 	 
 	});
 	

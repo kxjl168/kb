@@ -12,7 +12,7 @@
 	src="${basePath}/js/plugin/angular/angular.min.js"></script> --%>
  <script type="text/javascript"
 	src="${basePath}/js/plugin/angular/angular-resource.min.js"></script>
-	 --%>
+	
 <script type="text/javascript"
 	src="${basePath}/js/plugin/angular/angular-sanitize.min.js"></script>
 
@@ -199,6 +199,11 @@
 
 
 						</div>
+					</div>
+					
+					<div class="row col-xs-12 margin-top-10">
+					 <div id='googlead_link'>
+					 </div>
 					</div>
 
 

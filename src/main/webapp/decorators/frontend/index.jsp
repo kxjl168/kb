@@ -113,58 +113,86 @@
 				
 
 
-	<script async
-		src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+ <script async
+		src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
 		
 		
-<div id='googleadcode' style='display: none'>
+<div id='googleadcode_bottom' style='display: none'>
 
-	<!-- auto -->
-	<ins class="adsbygoogle" style="display: block"
-		data-ad-client="ca-pub-4546997533420825" data-ad-slot="5098577692"
+	
+	<ins class="adsbygoogle bottom_detail_big" style="display: block"
+		data-ad-client="ca-pub-4546997533420825" data-ad-slot="3251638392"
 		data-ad-format="auto" data-full-width-responsive="true"></ins>
 	<script>
-		(adsbygoogle = window.adsbygoogle || []).push({});
+		//(adsbygoogle = window.adsbygoogle || []).push({});
 	</script>
 </div>
 
 
-<div id='googleadcode2' style='display: none'>
+<div id='googleadcode_d_right' style='display: none'>
 
-	<!-- auto -->
+	
 	<ins class="adsbygoogle" style="display: block"
-		data-ad-client="ca-pub-4546997533420825" data-ad-slot="5098577692"
+		data-ad-client="ca-pub-4546997533420825" data-ad-slot="3316337130"
 		data-ad-format="auto" data-full-width-responsive="true"></ins>
 	<script>
-		(adsbygoogle = window.adsbygoogle || []).push({});
+		//(adsbygoogle = window.adsbygoogle || []).push({});
 	</script>
 </div>
 
 <div id='googleadcode3' style='display: none'>
 	
-	<!-- auto -->
+	
 	<ins class="adsbygoogle" style="display: block"
 		data-ad-client="ca-pub-4546997533420825" data-ad-slot="5098577692"
 		data-ad-format="auto" data-full-width-responsive="true"></ins>
 	<script>
-		(adsbygoogle = window.adsbygoogle || []).push({});
+		//(adsbygoogle = window.adsbygoogle || []).push({});
 	</script>
-</div>
+</div> 
+
+<div id='googleadcode_link' style='display: none'>
+	
+	
+	<ins class="adsbygoogle" style="display: block"
+		data-ad-client="ca-pub-4546997533420825" data-ad-slot="6058206079"
+		data-ad-format="auto" data-full-width-responsive="true"></ins>
+	<script>
+		//(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+</div> 
 
 <script language='javascript'>
+	
+$(document).ready(function(){
 	setTimeout(function() {
 		if (document.all.item('googlead3') != null) {
 			googlead3.innerHTML = googleadcode3.innerHTML;
 		}
 
 		if (document.all.item('googlead2') != null) {
-			googlead2.innerHTML = googleadcode2.innerHTML;
+			googlead2.innerHTML = googleadcode_d_right.innerHTML;
 		}
 
 		if (document.all.item('googlead') != null) {
-			googlead.innerHTML = googleadcode.innerHTML;
+			googlead.innerHTML = googleadcode_bottom.innerHTML;
 		}
-	}, 500);
+		
+		if (document.all.item('googlead_link') != null) {
+			googlead_link.innerHTML = googleadcode_link.innerHTML;
+		}
+		
+		
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			(adsbygoogle = window.adsbygoogle || []).push({});	
+	},500);	
+	 	 
+	});
+	
+	
+	
 </script>
 
 

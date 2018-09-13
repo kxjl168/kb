@@ -152,7 +152,8 @@
 	src="${basePath}/public/pright/pright_t_h.js"></script>
 
 
-<div id='googlead2' class=" panel panel-success">
-
+<div  class=" row col-xs-12">
+ <div id='googlead2'>
+ </div>
 </div>
 
