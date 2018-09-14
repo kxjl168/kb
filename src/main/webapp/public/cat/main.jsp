@@ -43,13 +43,13 @@
 						
 						<div class="row col-xs-12 nopadding">
 						<div class="col-xs-6 nopadding">
-						<p>安静的美男子<p>&nbsp;
-							<img   class=" img-responsive" src="cc1.png" alt="miao miao miao -_-"></img>
+						<p>安静的美男子<p>
+							<img   class=" img-responsive cattop" src="cc1.png" alt="miao miao miao -_-"></img>
 								
 						</div>
 						<div class="col-xs-6 nopadding" >
-							<p>喵喵喵!?<p>&nbsp;
-						<img class="col-xs-11 img-responsive" src="cc2.png" alt="miao miao miao -_-"></img>
+							<p>喵喵喵!?<p>
+						<img class=" img-responsive cattop"  src="cc2.png" alt="miao miao miao -_-"></img>
 						</div>
 						
 						</div>

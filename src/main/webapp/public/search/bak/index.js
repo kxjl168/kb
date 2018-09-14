@@ -154,8 +154,8 @@ function init() {
 
 						var code = json.ResponseCode;
 						var message = json.ResponseMsg;
-						console.log('-----return -code= ' + code + ';message= '
-								+ message);
+						//console.log('-----return -code= ' + code + ';message= '
+						//		+ message);
 						if (code == 200) {
 							
 				
@@ -211,8 +211,8 @@ function init() {
 
 						var code = json.ResponseCode;
 						var message = json.ResponseMsg;
-						console.log('-----return -code= ' + code + ';message= '
-								+ message);
+						//console.log('-----return -code= ' + code + ';message= '
+						//		+ message);
 						if (code == 200) {
 							
 							

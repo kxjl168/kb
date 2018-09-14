@@ -79,8 +79,8 @@ var $scope = angular.element(ngSection).scope();
 						// var json = JSON.parse(decryData);
 						var code = json.ResponseCode;
 						var message = json.ResponseMsg;
-						console.log('-----return -code= ' + code
-								+ ';message= ' + message);
+						//console.log('-----return -code= ' + code
+						//		+ ';message= ' + message);
 						if (code == 200) {
 
 							$scope.tplist = eval(json.datalist);
@@ -133,8 +133,8 @@ var $scope = angular.element(ngSection).scope();
 						// var json = JSON.parse(decryData);
 						var code = json.ResponseCode;
 						var message = json.ResponseMsg;
-						console.log('-----return -code= ' + code
-								+ ';message= ' + message);
+						//console.log('-----return -code= ' + code
+						//		+ ';message= ' + message);
 						if (code == 200) {
 
 							$scope.hlist = eval(json.datalist);
@@ -185,8 +185,8 @@ var $scope = angular.element(ngSection).scope();
 						// var json = JSON.parse(decryData);
 						var code = json.ResponseCode;
 						var message = json.ResponseMsg;
-						console.log('-----return -code= ' + code
-								+ ';message= ' + message);
+						//console.log('-----return -code= ' + code
+						//		+ ';message= ' + message);
 						if (code == 200) {
 
 							$scope.tglist = eval(json.datalist);
@@ -240,8 +240,8 @@ var $scope = angular.element(ngSection).scope();
 						// var json = JSON.parse(decryData);
 						var code = json.ResponseCode;
 						var message = json.ResponseMsg;
-						console.log('-----return -code= ' + code
-								+ ';message= ' + message);
+						//console.log('-----return -code= ' + code
+						//		+ ';message= ' + message);
 						if (code == 200) {
 
 							$scope.yqlist = eval(json.datalist);

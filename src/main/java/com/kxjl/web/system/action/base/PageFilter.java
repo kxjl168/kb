@@ -32,6 +32,7 @@ import com.kxjl.tool.html.CharResponseWrapper;
 import com.kxjl.tool.html.FileProcessor;
 import com.kxjl.tool.utils.DateUtil;
 import com.kxjl.tool.utils.IPUtils;
+import com.kxjl.web.blog.action.Kdata;
 import com.kxjl.web.blog.model.Blog;
 import com.kxjl.web.blog.service.BlogService;
 import com.kxjl.web.stastic.model.ActionLog;
@@ -296,6 +297,14 @@ public class PageFilter implements Filter {
 					bq.setImei(imei);
 					Blog detailitem=bservice.getBlogInfoById(bq);
 					
+					Blog query = new Blog();
+					query.setImei(imei);
+					// 计数
+					SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
+					if (user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin) {
+						bservice.updateBlogReadTime(query);
+						Kdata.getInstance().cleanrBLogList("");
+					}
 					//记录直接访问html的日志，多为爬虫访问链接，页面js统计未执行.
 					stasticService.saveStaticInfo(request, StasticTypeOne.DetailPage.toString(),detailitem.getBlog_type_name(), imei);
 					

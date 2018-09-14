@@ -507,7 +507,7 @@ function SZUMWS(url, sendData, onsuccess, onfail, showProgress, datatype) {
 
 			ajaxLoadEnd();
 
-			console.log("ajax return: " + data);
+			//console.log("ajax return: " + data);
 			// 数据需要Aes解密
 			// var decryData =data.ResponseMsg;//
 			// window.HMClient.AESDeCrypt(data.ResponseMsg);
@@ -518,7 +518,7 @@ function SZUMWS(url, sendData, onsuccess, onfail, showProgress, datatype) {
 		error : function(a, b, c) {
 
 			ajaxLoadEnd();
-			console.log("ajax error: " + a + b);
+			//console.log("ajax error: " + a + b);
 			onfail(a);
 			// popupAlert("网络异常!");
 

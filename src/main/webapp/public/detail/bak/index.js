@@ -218,8 +218,8 @@ function init() {
                                 	   $scope.goodnum ="";
                                
                                 $("#gdnum").html($scope.goodnum);
-                                $("#rdnum").html($scope.view_num);
-                                $("#rpnum").html($scope.replay_num);
+                                $("#rdnum").html(json.view_num);
+                                $("#rpnum").html(json.replay_num);
                                 $scope.$apply();
                                 
                                
@@ -424,8 +424,8 @@ function init() {
 
                         var code = json.ResponseCode;
                         var message = json.ResponseMsg;
-                        console.log('-----return -code= ' + code +
-                            ';message= ' + message);
+                       // console.log('-----return -code= ' + code +
+                      //      ';message= ' + message);
                         if (code == 200) {
 
                             $scope.datalist = eval(json.datalist);
@@ -522,7 +522,7 @@ function init() {
             
             setTimeout(function(){
             	$scope.getRelatedList();	
-			}, 500);
+			}, 50);
             
             
           //  $scope.getList();

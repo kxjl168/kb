@@ -330,6 +330,7 @@ public class PublicController extends BaseController {
 			SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
 			if (user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin) {
 				bservice.updateBlogReadTime(query);
+				Kdata.getInstance().cleanrBLogList("");
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

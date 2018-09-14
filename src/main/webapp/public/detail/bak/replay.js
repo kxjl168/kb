@@ -67,8 +67,8 @@ pass = function(event, id) {
 
 									var code = json.ResponseCode;
 									var message = json.ResponseMsg;
-									console.log('-----return -code= ' + code
-											+ ';message= ' + message);
+									//console.log('-----return -code= ' + code
+									//		+ ';message= ' + message);
 									if (code == 200) {
 
 										var $scope = angular.element(ngSection)
@@ -112,8 +112,8 @@ del = function(event, id) {
 
 									var code = json.ResponseCode;
 									var message = json.ResponseMsg;
-									console.log('-----return -code= ' + code
-											+ ';message= ' + message);
+									//console.log('-----return -code= ' + code
+									//		+ ';message= ' + message);
 									if (code == 200) {
 
 										var $scope = angular.element(ngSection)
@@ -189,8 +189,8 @@ function initReplayModel() {
 
 						var code = json.ResponseCode;
 						var message = json.ResponseMsg;
-						console.log('-----return -code= ' + code + ';message= '
-								+ message);
+						//console.log('-----return -code= ' + code + ';message= '
+						//		+ message);
 						if (code == 200) {
 
 							//msg("感谢您的关注,评论等待审核中...");
@@ -253,8 +253,8 @@ function initReplayModel() {
 
 						var code = json.ResponseCode;
 						var message = json.ResponseMsg;
-						console.log('-----return -code= ' + code + ';message= '
-								+ message);
+						//console.log('-----return -code= ' + code + ';message= '
+						//		+ message);
 						if (code == 200) {
 
 							msg("感谢您的关注,评论等待审核中...");
@@ -337,8 +337,8 @@ function initReplayModel() {
 
 								var code = json.ResponseCode;
 								var message = json.ResponseMsg;
-								console.log('-----return -code= ' + code
-										+ ';message= ' + message);
+								//console.log('-----return -code= ' + code
+							//			+ ';message= ' + message);
 								if (code == 200) {
 									
 									
