@@ -26,21 +26,8 @@ public class KurlServiceImpl implements KurlService {
 	 */
 	public List<Kurl> getKurlPageList(Kurl query) {
 		
-		String key = "getYQList";
-		List<Kurl> infos =(List<Kurl>)Kdata.getInstance().getCommonList(key);
-
-		if (infos == null || infos.size() == 0) {
-			try {
-				
-			infos = dictInfoDao.getKurlPageList(query);
-
-			Kdata.getInstance().SavedCommonList(key, infos);
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
 		
+		List<Kurl> infos =	 dictInfoDao.getKurlPageList(query);
 		
 		
 		return infos;

@@ -127,7 +127,7 @@ public class StasticServiceImpl implements StasticService {
 					// 计算ip
 					String ip = "";
 					try {
-						ip = rt.getRemoteAddr();
+						ip =getIpAddr(request);// rt.getRemoteAddr();
 					} catch (Exception e) {
 
 					}
