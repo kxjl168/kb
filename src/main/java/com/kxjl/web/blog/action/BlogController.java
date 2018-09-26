@@ -501,15 +501,8 @@ public class BlogController extends BaseController {
 			query.setPage(1);
 			query.setPageCount(10000);
 
-			String key = "getTgList";
-			List<Blog> infos = Kdata.getInstance().getBlogList(key);
-
-			if (infos == null || infos.size() == 0) {
-				infos = blogService.getBlogTags();
-
-				Kdata.getInstance().SavedBlogList(key, infos);
-
-			}
+		
+			List<Blog> infos=blogService.getBlogTags();
 
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(infos);
@@ -561,15 +554,10 @@ public class BlogController extends BaseController {
 			query.setPage(1);
 			query.setPageCount(10000);
 
-			String key = "getHList";
-			List<Blog> infos = Kdata.getInstance().getBlogList(key);
+			
+			List<Blog> infos = blogService.getBlogMonthGroup();
 
-			if (infos == null || infos.size() == 0) {
-				infos = blogService.getBlogMonthGroup();
-
-				Kdata.getInstance().SavedBlogList(key, infos);
-
-			}
+		
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(infos);
 
@@ -620,17 +608,8 @@ public class BlogController extends BaseController {
 			query.setPageCount(10000);
 
 			String key = "getTpList";
-			List<Blog> infos = Kdata.getInstance().getBlogList(key);
+			List<Blog> infos =blogService.getBlogTypeGroups();
 
-			if (infos == null || infos.size() == 0) {
-				infos = blogService.getBlogTypeGroups();
-				String prepath = getImgHttpOutPath();
-				for (Blog blog : infos) {
-					blog.setBlog_type_url(prepath + blog.getBlog_type_url());
-				}
-
-				Kdata.getInstance().SavedBlogList(key, infos);
-			}
 
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(infos);

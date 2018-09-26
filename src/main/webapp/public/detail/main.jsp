@@ -50,6 +50,8 @@
 									<div class="col-sm-8 col-xs-11 ptitle  ">${curBlog.title}</div>
 
 
+
+
 									<div class="col-sm-3 col-xs-12 text-right">
 										<i class="fa fa-tags"></i> 
 											
@@ -66,6 +68,12 @@
 									title="隐藏/打开侧边栏"></span>
 							</div>
 						</div>
+						
+						<div  class="postdiv row col-xs-12 margin-top-5 ">
+								post@${curBlog .create_date}&nbsp; <span>已有<span id="rdnum">${curBlog .view_nums}</span>人围观&nbsp;
+								</span> <span> <span id="rpnum">${curBlog .replay_nums}</span>人吐槽&nbsp;</span>
+							</div>
+						
 
 						<div class="margin-top-10 row col-xs-12"></div>
 						<div class="hide row col-xs-12">
@@ -82,13 +90,7 @@
 						</div>
 
 						<br>
-							<div ng-cloak class="row col-xs-10 margin-top-5 ">
-								post@${curBlog .create_date}&nbsp; <span>阅读(<span id="rdnum">${curBlog .view_nums}</span>)&nbsp;
-								</span> <span>评论(<span id="rpnum">${curBlog .replay_nums}</span>
-									)&nbsp;
-								</span>
-							</div>
-
+							
 
 							<div class="row col-xs-12">
 								<hr></hr>
@@ -140,7 +142,7 @@
 
 							<p>
 								文章固定链接： <a
-									href="{{preurl}}/public/html/${curBlog.showdate}/${curBlog.imei}.html">{{preurl}}/public/html/${curBlog.showdate}/${curBlog.imei}.html</a>
+									href="${preurl}/public/html/${curBlog.showdate}/${curBlog.imei}.html">${preurl}/public/html/${curBlog.showdate}/${curBlog.imei}.html</a>
 								转载请注明
 							</p>
 							<p></p>

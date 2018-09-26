@@ -184,20 +184,7 @@ public class KurlController extends BaseController {
 
 			
 			String key = "getYQList";
-			List<Kurl> infos =(List<Kurl>)Kdata.getInstance().getCommonList(key);
-
-			if (infos == null || infos.size() == 0) {
-				try {
-					
-				infos = kurlService.getKurlPageList(query);
-
-				Kdata.getInstance().SavedCommonList(key, infos);
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-			
+			List<Kurl> infos = kurlService.getKurlPageList(query);			
 			
 			int total = kurlService.getKurlPageListCount(query);
 			//int total = infos.size();

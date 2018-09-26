@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.kxjl.web.system.dao.SystemParamsDao;
 import com.kxjl.tool.config.ConfigReader;
+import com.kxjl.web.blog.action.Kdata;
 import com.kxjl.web.blog.dao.BlogDao;
 import com.kxjl.web.blog.model.Blog;
 import com.kxjl.web.blog.service.BlogService;
@@ -27,15 +28,16 @@ public class BlogServiceImpl implements BlogService {
 
 	/**
 	 * 关联文章
+	 * 
 	 * @param query
 	 * @return
 	 * @author zj
 	 * @date 2018年8月30日
 	 */
-	public List<Blog> getRelatedBlogs(Blog query){
+	public List<Blog> getRelatedBlogs(Blog query) {
 		return blogDao.getRelatedBlogs(query);
 	}
-	
+
 	/**
 	 * 文章tag总数列表
 	 * 
@@ -45,40 +47,49 @@ public class BlogServiceImpl implements BlogService {
 	 * @date 2017-12-29
 	 */
 	public List<Blog> getBlogTags() {
-		List<Blog> rst = new ArrayList<Blog>();
-		try {
 
-			List<Blog> bgs = blogDao.getBlogTags();
-			if (bgs != null && bgs.size() != 0) {
-				Blog b = bgs.get(0);
-				String[] tags = b.getTags().split(",");
-				HashMap<String, Integer> ts = new HashMap<String, Integer>();
+		String key = "getTgList";
+		List<Blog> infos = Kdata.getInstance().getBlogList(key);
 
-				for (String string : tags) {
-					ts.put(string,
-							ts.containsKey(string) ? (ts.get(string) + 1) : 1);
-				}
-				
+		if (infos == null || infos.size() == 0) {
 
-				int max=ConfigReader.getInstance().getIntProperty("MaxTags",100);
-				
-				for (String string : ts.keySet()) {
-					if (rst.size() >max)
-						break;
-					else {
-						Blog bg = new Blog();
-						bg.setTags(string);
-						bg.setPage(ts.get(string));
-						rst.add(bg);
+			List<Blog> rst = new ArrayList<Blog>();
+			try {
 
+				List<Blog> bgs = blogDao.getBlogTags();
+				if (bgs != null && bgs.size() != 0) {
+					Blog b = bgs.get(0);
+					String[] tags = b.getTags().split(",");
+					HashMap<String, Integer> ts = new HashMap<String, Integer>();
+
+					for (String string : tags) {
+						ts.put(string, ts.containsKey(string) ? (ts.get(string) + 1) : 1);
 					}
-				}
 
+					int max = ConfigReader.getInstance().getIntProperty("MaxTags", 100);
+
+					for (String string : ts.keySet()) {
+						if (rst.size() > max)
+							break;
+						else {
+							Blog bg = new Blog();
+							bg.setTags(string);
+							bg.setPage(ts.get(string));
+							rst.add(bg);
+
+						}
+					}
+
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
+			infos = rst;
+
+			Kdata.getInstance().SavedBlogList(key, infos);
 		}
-		return rst;
+
+		return infos;
 	}
 
 	/**
@@ -90,7 +101,19 @@ public class BlogServiceImpl implements BlogService {
 	 * @date 2017-12-29
 	 */
 	public List<Blog> getBlogMonthGroup() {
-		return blogDao.getBlogMonthGroup();
+		
+		
+		String key = "getHList";
+		List<Blog> infos = Kdata.getInstance().getBlogList(key);
+
+		if (infos == null || infos.size() == 0) {
+			infos = blogDao.getBlogMonthGroup();
+
+			Kdata.getInstance().SavedBlogList(key, infos);
+
+		}
+		
+		return infos;
 	}
 
 	/**
@@ -102,7 +125,22 @@ public class BlogServiceImpl implements BlogService {
 	 * @date 2017-12-29
 	 */
 	public List<Blog> getBlogTypeGroups() {
-		return blogDao.getBlogTypeGroups();
+		
+		String HTTP_PATH = ConfigReader.getInstance().getProperty("FILE_SVR_HTTP_OUTER_PATH");
+		String key = "getTpList";
+		List<Blog> infos = Kdata.getInstance().getBlogList(key);
+
+		if (infos == null || infos.size() == 0) {
+			infos = blogDao.getBlogTypeGroups();
+			String prepath =HTTP_PATH;
+			for (Blog blog : infos) {
+				blog.setBlog_type_url(prepath + blog.getBlog_type_url());
+			}
+
+			Kdata.getInstance().SavedBlogList(key, infos);
+		}
+		
+		return infos;
 	}
 
 	/**
@@ -116,10 +154,10 @@ public class BlogServiceImpl implements BlogService {
 
 		if (blogs != null && blogs.size() != 0) {
 
-			/*// 访问数+1
-			Blog b = blogs.get(0);
-			b.setView_nums(b.getView_nums() + 1);
-			updateBlog(b);*/
+			/*
+			 * // 访问数+1 Blog b = blogs.get(0); b.setView_nums(b.getView_nums() + 1);
+			 * updateBlog(b);
+			 */
 
 			query.setRecordid(blogs.get(0).getRecordid());
 			rsts = blogDao.getBlogDetailPageList(query);
@@ -127,9 +165,10 @@ public class BlogServiceImpl implements BlogService {
 
 		return rsts;
 	}
-	
+
 	/**
 	 * 计数加+1
+	 * 
 	 * @param query
 	 */
 	public void updateBlogReadTime(Blog query) {
@@ -142,9 +181,8 @@ public class BlogServiceImpl implements BlogService {
 			b.setView_nums(b.getView_nums() + 1);
 			updateBlog(b);
 		}
-		
+
 	}
-	
 
 	/**
 	 * 分页获取banner列表

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kxjl.web.blog.action.Kdata;
 import com.kxjl.web.blog.dao.KurlDao;
 import com.kxjl.web.blog.model.Kurl;
 import com.kxjl.web.blog.service.KurlService;
@@ -24,7 +25,25 @@ public class KurlServiceImpl implements KurlService {
 	 * @date 2016-8-4
 	 */
 	public List<Kurl> getKurlPageList(Kurl query) {
-		return dictInfoDao.getKurlPageList(query);
+		
+		String key = "getYQList";
+		List<Kurl> infos =(List<Kurl>)Kdata.getInstance().getCommonList(key);
+
+		if (infos == null || infos.size() == 0) {
+			try {
+				
+			infos = dictInfoDao.getKurlPageList(query);
+
+			Kdata.getInstance().SavedCommonList(key, infos);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
+		return infos;
 		// return null;
 	}
 

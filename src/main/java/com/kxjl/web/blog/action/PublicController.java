@@ -33,7 +33,9 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.kxjl.tool.common.Config;
 import com.kxjl.tool.common.Constant;
+import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.tool.utils.JEscape;
 import com.kxjl.tool.utils.JsonUtil;
 
@@ -303,11 +305,15 @@ public class PublicController extends BaseController {
 
 			details.get(0).setContent(JEscape.unescape(details.get(0).getContent()));
 
+			
+			
+			view.addObject("preurl", ConfigReader.getInstance().getProperty("domain","http://www.256kb.cn"));
+			
 			view.addObject("curBlog", details.get(0));
 
-			if (details.get(1) != null)
+			if (details.size()>1)
 				view.addObject("nextBlog", details.get(1));
-			if (details.get(2) != null)
+			if (details.size()>2)
 				view.addObject("preBlog", details.get(2));
 
 			int total = likemaper.getTotalLikeNum(imei);
@@ -321,6 +327,21 @@ public class PublicController extends BaseController {
 			}
 
 			view.addObject("relatedBLogs", relatedBLogs);
+			
+			
+			
+			
+			
+			view.addObject("tplist", bservice.getBlogTypeGroups());
+			view.addObject("hlist", bservice.getBlogMonthGroup());
+			view.addObject("tglist", bservice.getBlogTags());
+			
+			Kurl kquery = new Kurl();
+			kquery.setPage(1);
+			kquery.setPageCount(100);
+			kquery.setVal1("2");
+			view.addObject("yqlist", kurlService.getKurlPageList(kquery));
+			
 
 			// 记录直接访问html的日志，多为爬虫访问链接，页面js统计未执行.
 			stasticService.saveStaticInfo(request, StasticTypeOne.DetailPage.toString(), detailitem.getBlog_type_name(),
