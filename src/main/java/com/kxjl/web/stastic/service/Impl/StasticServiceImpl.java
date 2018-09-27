@@ -47,6 +47,12 @@ public class StasticServiceImpl implements StasticService {
 	        if(ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
 	            ipAddress = request.getHeader("X-Real-IP");
 	        }
+	        
+	        
+	        if(ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+	        	//prerender ip
+	            ipAddress = request.getParameter("X-Forwarded-For");
+	        }
 	       
 	        if(ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
 	            ipAddress = request.getRemoteAddr();

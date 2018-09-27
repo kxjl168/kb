@@ -5,6 +5,7 @@ import com.google.common.base.Predicate;
 import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.tool.utils.DateUtil;
 import com.kxjl.tool.utils.IPUtils;
+import com.kxjl.web.stastic.service.StasticService;
 import com.kxjl.web.translog.dao.SpiderlogDao;
 import com.kxjl.web.translog.model.Spiderlog;
 
@@ -59,6 +60,9 @@ public class PrerenderSeoService {
 	@Autowired
 	SpiderlogDao spdierlogDao;
 
+	@Autowired
+	StasticService stasticService;
+	
 	public PrerenderSeoService(Map<String, String> config, ServletContext sc) {
 		this.prerenderConfig = new PrerenderConfig(config);
 		this.httpClient = getHttpClient();
@@ -154,7 +158,7 @@ public class PrerenderSeoService {
 
 					Spiderlog slog = new Spiderlog();
 					try {
-						String ip = rt.getRemoteAddr();
+						String ip =stasticService.getIpAddr(servletRequest);//  rt.getRemoteAddr();
 						slog.setRequest_ip(ip);
 						String city = IPUtils.getCityByIP(ip);
 						slog.setRequest_city(city);
@@ -317,6 +321,8 @@ public class PrerenderSeoService {
 		if (!prerenderServiceUrl.endsWith("/")) {
 			prerenderServiceUrl += "/";
 		}
+		
+		
 		return prerenderServiceUrl + url;
 	}
 
@@ -503,8 +509,18 @@ public class PrerenderSeoService {
 	}
 
 	private String getFullUrl(HttpServletRequest request) {
-		final String url = getRequestURL(request);
-		final String queryString = request.getQueryString();
+		 String url = getRequestURL(request);
+		 String queryString = request.getQueryString();
+		
+
+		
+		//补充原始地址
+		if(isNotBlank(queryString))
+			queryString+="&X-Forwarded-For="+stasticService.getIpAddr(request);
+		else
+			queryString+="?X-Forwarded-For="+stasticService.getIpAddr(request);
+		
+		
 		return isNotBlank(queryString) ? String.format("%s?%s", url,
 				queryString) : url;
 	}

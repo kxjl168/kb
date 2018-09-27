@@ -412,6 +412,9 @@ public class PublicController extends BaseController {
 		 * <priority>0.8</priority> </url> </urlset>
 		 */
 
+		
+		String domain=ConfigReader.getInstance().getProperty("domain","http://www.256kb.cn");
+		
 		Blog query = new Blog();
 		query.setPageCount(2000000);
 		query.setShowflag("1");
@@ -424,7 +427,7 @@ public class PublicController extends BaseController {
 		for (Blog blog : blogs) {
 			// /public/html/${curBlog.showdate}/${curBlog.imei}.html
 			sb.append("<url>");
-			sb.append("<loc>" + "http://www.256kb.cn/public/html/" + blog.getShowdate() + "/" + blog.getImei()
+			sb.append("<loc>" + domain+"/public/html/" + blog.getShowdate() + "/" + blog.getImei()
 					+ ".html</loc>");
 
 			String date = blog.getUpdate_date();
