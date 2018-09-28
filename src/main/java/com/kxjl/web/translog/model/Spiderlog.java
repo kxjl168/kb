@@ -21,6 +21,7 @@ public class Spiderlog  extends BaseModel{
 	private String starttime;
 	private String endtime;
 	private String dateFormat;
+	private String title;
 	
 	public Integer getRecordid() {
 		return recordid;
@@ -81,6 +82,12 @@ public class Spiderlog  extends BaseModel{
 	}
 	public void setDateFormat(String dateFormat) {
 		this.dateFormat = dateFormat;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
 	

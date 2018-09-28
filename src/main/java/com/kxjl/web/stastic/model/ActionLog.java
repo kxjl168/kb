@@ -71,6 +71,8 @@ public class ActionLog extends BaseModel {
 
 	private String blog_id;
 	
+	private String spider_flag;
+	
 	private Double total_click;
 	private Double total_uv;
 	
@@ -208,6 +210,15 @@ public class ActionLog extends BaseModel {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	public String getSpider_flag() {
+		return spider_flag;
+	}
+
+	public void setSpider_flag(String spider_flag) {
+		this.spider_flag = spider_flag;
+	}
+
 
 	
 }

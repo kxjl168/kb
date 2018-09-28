@@ -154,6 +154,12 @@ function initDetailTable() {
                 return "<a href='"+basePath+"/public/detail/?i="+row.blog_id+"'>"+value+"</a>";
             }
         },
+        {
+            field: 'spider_flag',
+            title: '爬虫',
+            align: 'center',
+            valign: 'middle'
+        },
         /*{
             title: '操作',
             field: 'vehicleno',

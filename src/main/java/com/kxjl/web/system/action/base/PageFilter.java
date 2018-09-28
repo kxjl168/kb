@@ -301,12 +301,19 @@ public class PageFilter implements Filter {
 					query.setImei(imei);
 					// 计数
 					SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
-					if (user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin) {
+					if (user==null||(user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin)) {
 						bservice.updateBlogReadTime(query);
 						Kdata.getInstance().cleanrBLogList("");
 					}
 					//记录直接访问html的日志，多为爬虫访问链接，页面js统计未执行.
-					stasticService.saveStaticInfo(request, StasticTypeOne.DetailPage.toString(),detailitem.getBlog_type_name(), imei);
+					
+					//无用户信息，爬虫
+					boolean isspider=false;
+					if (user==null)
+						isspider=true;
+					
+					logger.debug("isspider:"+isspider);
+					stasticService.saveStaticInfo(request, StasticTypeOne.DetailPage.toString(),detailitem.getBlog_type_name(), imei,isspider);
 					
 					//直接访问静态页面，其他filter不走了
 					//isDone = true;
@@ -326,7 +333,7 @@ public class PageFilter implements Filter {
 		} catch (
 
 		Exception e) {
-			logger.error(e.getMessage());
+			logger.error("",e);
 		}
 		return isDone;
 	}

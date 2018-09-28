@@ -343,13 +343,18 @@ public class PublicController extends BaseController {
 			view.addObject("yqlist", kurlService.getKurlPageList(kquery));
 			
 
-			// 记录直接访问html的日志，多为爬虫访问链接，页面js统计未执行.
-			stasticService.saveStaticInfo(request, StasticTypeOne.DetailPage.toString(), detailitem.getBlog_type_name(),
-					imei);
-
 			// 计数
 			SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
-			if (user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin) {
+			
+			//无用户信息，爬虫
+			boolean isspider=false;
+			if (user==null)
+				isspider=true;
+			
+			stasticService.saveStaticInfo(request, StasticTypeOne.DetailPage.toString(),detailitem.getBlog_type_name(), imei,isspider);
+			
+
+			if (user==null||(user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin)) {
 				bservice.updateBlogReadTime(query);
 				Kdata.getInstance().cleanrBLogList("");
 			}

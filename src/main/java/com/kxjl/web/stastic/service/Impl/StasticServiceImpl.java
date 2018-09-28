@@ -67,55 +67,10 @@ public class StasticServiceImpl implements StasticService {
 	    }
 	
 	
-	public void saveStaticInfo(String ipinput, String type1, String type2, String arctileId) {
-		// final HttpServletRequest rt = request;
-		final String ip = ipinput;
-		final String t1 = type1;
-		final String t2 = type2;
-		final String blogimei = arctileId;
 
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				try {
-					ActionLog log = new ActionLog();
-
-					// 计算ip
-					/*
-					 * String ip = ""; try { ip = rt.getRemoteAddr(); } catch (Exception e) {
-					 * 
-					 * }
-					 */
-
-					log.setUserid(ip);
-
-					String city = IPUtils.getCityByIP(ip);
-					log.setBlog_id(blogimei);
-					log.setCity(city);
-					log.setType_first(t1);
-					log.setType_second(t2);
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					String time = sdf.format(new Date());
-					log.setAction_date(time);
-					addActionLog(log);
-				} catch (Exception e) {
-					logger.error(e.getMessage());
-				}
-			}
-		}).run();
-	}
 	
-	/**
-	 * 记录访问统计原始数据
-	 * 
-	 * @param map
-	 * @return
-	 * @author zj
-	 * @date 2017-12-28
-	 */
 	public void saveStaticInfo(HttpServletRequest request, String type1,
-			String type2,String arctileId ) {
+			String type2,String arctileId,Boolean ispider ) {
 		final HttpServletRequest rt = request;
 		final String t1 = type1;
 		final String t2 = type2;
@@ -147,6 +102,7 @@ public class StasticServiceImpl implements StasticService {
 					log.setCity(city);
 					log.setType_first(t1);
 					log.setType_second(t2);
+					log.setSpider_flag(ispider.toString());
 					SimpleDateFormat sdf = new SimpleDateFormat(
 							"yyyy-MM-dd HH:mm:ss");
 					String time = sdf.format(new Date());
@@ -157,6 +113,18 @@ public class StasticServiceImpl implements StasticService {
 				}
 			}
 		}).run();
+	}
+	/**
+	 * 记录访问统计原始数据
+	 * 
+	 * @param map
+	 * @return
+	 * @author zj
+	 * @date 2017-12-28
+	 */
+	public void saveStaticInfo(HttpServletRequest request, String type1,
+			String type2,String arctileId ) {
+		saveStaticInfo(request, type1, type2,arctileId,false);
 	}
 	
 	/**
@@ -493,6 +461,10 @@ public class StasticServiceImpl implements StasticService {
 		 return city;
 		}
 	}
+
+
+
+
 	
 
 }

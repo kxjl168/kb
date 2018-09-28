@@ -174,7 +174,8 @@
 								<thead>
 									<tr>
 										<th>爬虫标示</th>
-										<th>爬取URL</th>
+										<th >爬取URL</th>
+										<th >文章</th>
 										<th>请求IP</th>
 										<th>所属地市</th>
 										<th>时间</th>
@@ -187,6 +188,7 @@
 									<tr ng-repeat="x in datalist">
 										<td>{{ x.spider_head }}</td>
 										<td>{{ x.request_url }}</td>
+										<td>{{ x.title }}</td>
 										<td ><span ng-show="x.cool" class="background:green;">❤</span> <span ng-show="x.bad" class="background:red;">↓↓</span>  {{ x.request_ip }}</td>
 										
 										<td>{{ x.request_city }}</td>

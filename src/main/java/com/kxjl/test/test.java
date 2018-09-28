@@ -93,8 +93,8 @@ public class test {
 		  HttpClient httpClient = new HttpClient();  
 		 // httpClient.getParams().setParameter(ClientPNames.ALLOW_CIRCULAR_REDIRECTS, true);
 		  
-				  String u1="http://256kb.cn//public/html/2018/09/237bd8f6-c36d-43d9-a4bc-b311b00aac5d.html";
-		  String u2="http://256kb.cn/public/detail/?i=f00c6b4e-8c17-4dbe-aa85-901aca96bb3b";
+				  String u1="https://256kb.cn/public/html/2018/09/237bd8f6-c36d-43d9-a4bc-b311b00aac5d.html";
+		  String u2="https://www.256kb.cn/public/search/";
 	        GetMethod getMethod = new GetMethod(u1);  
 	        try {  
 	                //getMethod.addRequestHeader("accept-encoding", "gzip,deflate");  

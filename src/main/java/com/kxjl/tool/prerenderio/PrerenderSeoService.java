@@ -474,6 +474,8 @@ public class PrerenderSeoService {
 		final HttpGet getMethod = getHttpGet(apiUrl);
 		copyRequestHeaders(request, getMethod);
 		withPrerenderToken(getMethod);
+		
+		widthRealIp(getMethod,request);
 		CloseableHttpResponse prerenderServerResponse = null;
 
 		try {
@@ -506,21 +508,29 @@ public class PrerenderSeoService {
 		if (isNotBlank(token)) {
 			proxyRequest.addHeader("X-Prerender-Token", token);
 		}
+		
+		
 	}
 
+	/**
+	 * 带上真实的请求地址
+	 * @param proxyRequest
+	 * @param request
+	 * @author zj
+	 * @date 2018年9月28日
+	 */
+	private void widthRealIp(HttpRequest proxyRequest,HttpServletRequest request) {
+
+
+		proxyRequest.addHeader("X-Prerender-Token", stasticService.getIpAddr(request));
+		//补充原始地址
+	
+	}
+	
 	private String getFullUrl(HttpServletRequest request) {
 		 String url = getRequestURL(request);
 		 String queryString = request.getQueryString();
-		
 
-		
-		//补充原始地址
-		if(isNotBlank(queryString))
-			queryString+="&X-Forwarded-For="+stasticService.getIpAddr(request);
-		else
-			queryString+="?X-Forwarded-For="+stasticService.getIpAddr(request);
-		
-		
 		return isNotBlank(queryString) ? String.format("%s?%s", url,
 				queryString) : url;
 	}

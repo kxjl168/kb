@@ -134,7 +134,7 @@ public class BaseController {
 	 */
 	public void saveStaticInfo(HttpServletRequest request, String type1, String type2) {
 		
-		stasticService.saveStaticInfo(stasticService.getIpAddr(request), type1, type2,"");
+		stasticService.saveStaticInfo(request, type1, type2,"");
 
 	}
 

@@ -85,7 +85,7 @@ function init() {
 		$scope.title="爬虫日志";
 		//$scope.curpage=1;
 		$scope.page=1;
-		$scope.rows=10;
+		$scope.rows=20;
 		
 		$scope.rows_select=[5,10,20];
 		  setTimeout(function(){

@@ -26,7 +26,18 @@ public interface StasticService {
 	 */
 	 public String getIpAddr(HttpServletRequest request);
 	
-	public void saveStaticInfo(String ipinput, String type1, String type2, String arctileId);
+
+	/**
+	 * 记录访问统计原始数据
+	 * 
+	 * @param map
+	 * @return
+	 * @author zj
+	 * @date 2017-12-28
+	 */
+	public void saveStaticInfo(HttpServletRequest request, String type1,
+			String type2,String arctileId ,Boolean ispider) ;
+	
 	/**
 	 * 记录访问统计原始数据
 	 * 
