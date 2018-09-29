@@ -72,8 +72,8 @@
 					
 
 					<div ng-repeat="items in datalist" class="pgdiv" ng-cloak >	
-					<div class="panel panel-success">
-							<div class="panel-heading" title="" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+					<div class="panel panel-success urldv">
+							<div class="panel-heading urlhead" title="" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
 								<div class="row">
 									<h3 class="panel-title col-xs-10 ">{{items.name}}</h3>
 					
@@ -83,7 +83,7 @@
 								</div>
 							</div>
 							<div id="collapseOne" class="panel-collapse collapse in ">
-								<div class="panel-body">
+								<div class="panel-body urlbd">
 					
 									<div class="container">
 					
@@ -93,9 +93,13 @@
 										
 											<div ng-repeat="x in items.val" class="pgdiv" ng-cloak >
 										
-												<div class="col-sm-3 col-xs-10 durl">
-		 										<a ng-href={{x.url_val}}>{{x.url_name}}</a>
+												<div class="col-sm-3 col-xs-11 ">
+												<div class='durl'>
+		 										<a ng-href={{x.url_val}}><i class="fa fa-user-o"></i><span>{{x.url_name}}</span></a>
+		 										<div class="udesc">{{x.desc_info}}</div>
+		 										<div class="hide ufoot">{{x.desc_info}}</div>
 		 										</div> 
+		 										</div>
 											</div>
 										</div>
 									</div>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="rblock">
-	<div class=" panel panel-success">
+	<div class=" panel panel-success card">
 		<div class="panel-heading" title="" data-toggle="collapse"
 			data-parent="#accordion" href="#collapseOner11">
 			<div class="row">

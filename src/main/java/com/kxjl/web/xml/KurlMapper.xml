@@ -23,7 +23,7 @@
 			and a.val1= #{val1}
 		</if>
 		
-		order by a.sort asc
+		order by a.url_type,a.sort asc
 
 		limit #{start},#{pageCount}
 	</select>

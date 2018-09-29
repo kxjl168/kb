@@ -73,15 +73,15 @@
 				
 			<div class="row col-xs-12">
 					<div ng-repeat="items in datalist" class="pgdiv" ng-cloak >	
-					<div class="panel panel-success">
-							<div class="panel-heading" title=""  href="#collapseOne">
+					<div class="panel panel-success urldv">
+							<div class="panel-heading urlhead" title=""  href="#collapseOne">
 								<div class="row">
-									<h3 class="panel-title col-xs-10 ">{{items.name}} &nbsp;<span><a href="#" class="text-info" ng-click="addOrModify(null,items.name)">新增本类链接</a></span></h3>
+									<h3 class="panel-title col-xs-10 ">{{items.name}} &nbsp;<span><a href="#" class="urladd" ng-click="addOrModify(null,items.name)">新增本类链接</a></span></h3>
 			
 								</div>
 							</div>
 							<div id="collapseOne" class="panel-collapse collapse in ">
-								<div class="panel-body">
+								<div class="panel-body urlbd">
 					
 									<div class="container">
 					
@@ -91,14 +91,18 @@
 										
 											<div ng-repeat="x in items.val" class="pgdiv" ng-cloak >
 										
-												<div class="col-sm-3 col-xs-10 durl">
-		 										<a ng-href={{x.url_val}}>{{x.url_name}}</a>
+												<div class="col-sm-3 col-xs-11 ">
+												<div class='durl'>
+		 										<a ng-href={{x.url_val}}><i class="fa fa-user-o"></i><span>{{x.url_name}}</span></a>
 		 										
 		 										【
 		 											<a href="#" class="text-info" ng-click="addOrModify(x)">修改</a>
 											<a href="#" class="text-warning" ng-click="del(x)">删除</a>
 											】
-		 										
+											
+											
+		 										<div class="udesc">{{x.desc_info}}</div>
+		 										</div>
 		 										</div> 
 											</div>
 										</div>
