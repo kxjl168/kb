@@ -9,8 +9,8 @@
 <head>
 
 
-<link rel="bookmark" type="image/x-icon" href="/favicon.ico" />
-<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="bookmark" type="image/x-icon" href="/kb/favicon.ico" />
+<link rel="shortcut icon" href="/kb/favicon.ico" />
 
 <meta charset="UTF-8">
 <meta name="viewport"

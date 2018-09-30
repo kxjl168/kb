@@ -12,8 +12,8 @@
 		<ul class="nopaddding">
 			<li><a href="http://www.256kb.cn">首页</a></li>
 
-			<li><a href="http://www.256kb.cn/public/search/">Google</a></li>
-			<li><a href="http://www.256kb.cn/public/bx/">未雨绸缪</a></li>
+			<li><a href="http://www.256kb.cn/public/search/">Google搜索</a></li>
+			<li><a href="http://www.256kb.cn/public/wuliu/">快递查询</a></li>
 			<li><a href="http://www.256kb.cn/pown/url/">常用链接</a></li>
 			<li><a href="http://www.256kb.cn/public/about/">关于</a></li>
 

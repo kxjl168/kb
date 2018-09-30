@@ -9,8 +9,8 @@
 <head>
 
 
-<link rel="bookmark" type="image/x-icon" href="/favicon.ico" />
-<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="bookmark" type="image/x-icon" href="/kb/favicon.ico" />
+<link rel="shortcut icon" href="/kb/favicon.ico" />
 
 <meta charset="UTF-8">
 <meta name="viewport"
@@ -201,7 +201,15 @@ $(document).ready(function(){
 	
 </script>
 
-	
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126706596-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126706596-1');
+</script>
 				
 </body>
 

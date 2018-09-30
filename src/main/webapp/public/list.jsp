@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 
 
-<div ng-repeat="x in datalist" class="pgdiv row">
+<div ng-repeat="x in datalist" class="col-xs-12 pgdiv pgblock row margin-top-5">
 
 									<div class="row col-xs-12 nopaddding ">
 
@@ -35,7 +35,7 @@
 											<div class="more row col-xs-12 nopaddding"></div>
 											<div>
 												
-												<a  class="detailbtn h5 text-right pull-right text-info margin-right-20"  ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html"  >详情</a>
+												<a  class="btn btn-default detailbtn h5 text-right pull-right text-info margin-right-20"  ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html"  >详情</a>
 												<a ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html" style="display: none;" class="for spider" >{{x.title}}</a>
 
 											</div>
@@ -49,7 +49,7 @@
 
 
 									<div class="row col-xs-12 nopaddding">
-										<hr></hr>
+										<!-- <hr></hr> -->
 									</div>
 								</div>
 

@@ -41,8 +41,11 @@
 				
 
 		</div>
+		
+			<%@include file="../list.jsp"%> 
+		
 			<div class="row col-xs-12">
-										<hr></hr>
+										<!-- <hr></hr> -->
 			</div>
 	</div>
 
@@ -53,7 +56,7 @@
 					
 						<div ng-cloak>
 								
-									<%@include file="../list.jsp"%> 
+								
 
 							</div>
 							

@@ -9,7 +9,7 @@
 
 
 
-				<span id="titlepic" class="hide" data-toggle="collapse"
+				<span id="titlepic" class="hide" data-toggle=""
 					data-parent="#accordion" href="#collapseOner11"
 					class="glyphicon glyphicon-chevron-up pull-right "></span>
 			</div>
@@ -60,7 +60,7 @@
 
 
 
-				<span id="titlepic" class="hide" data-toggle="collapse"
+				<span id="titlepic" class="hide" data-toggle=""
 					data-parent="#accordion" href="#collapseOner2"
 					class="glyphicon glyphicon-chevron-up pull-right "></span>
 			</div>
@@ -101,7 +101,7 @@
 
 
 	<div class=" panel panel-success">
-		<div class="panel-heading " title="" data-toggle="collapse"
+		<div class="panel-heading " title="" data-toggle=""
 			data-parent="#accordion" href="#collapseOner3">
 			<div class="row">
 				<h3 class="panel-title col-xs-10  ">标签</h3>
@@ -143,10 +143,10 @@
 
 
 	<div class=" panel panel-success">
-		<div class="panel-heading " title="" data-toggle="collapse"
+		<div class="panel-heading " title="" data-toggle=""
 			data-parent="#accordion" href="#collapseOner3">
 			<div class="row">
-				<h3 class="panel-title col-xs-10  ">友情链接</h3>
+				<h3 class="panel-title col-xs-10  ">友情链接&nbsp;<a class="yl" href="${basePath}/public/about#faq">申请友链</a></h3>
 
 
 
@@ -196,8 +196,39 @@
 	src="${basePath}/public/pright/pright_t_h.js"></script>
 
 
+
+<div class=" panel panel-success">
+		<div class="panel-heading " title="" data-toggle=""
+			data-parent="#accordion" href="#collapseOner3">
+			<div class="row">
+				<h3 class="panel-title col-xs-10  ">可能喜欢&nbsp;</h3>
+
+
+
+				<span id="titlepic" class="hide" data-toggle="collapse"
+					data-parent="#accordion" href="#collapseOner3"
+					class="glyphicon glyphicon-chevron-up pull-right "></span>
+			</div>
+		</div>
+		<div id="collapseOner3" class=" panel-collapse collapse in ">
+			<div class="panel-body ">
+
+				<div class="container ">
+
+
+			 <div id='googlead2'>
+
+				</div>
+
+
+
+			</div>
+		</div>
+	</div>
+
+
 <div  class=" row col-xs-12">
- <div id='googlead2'>
+
  </div>
 </div>
 

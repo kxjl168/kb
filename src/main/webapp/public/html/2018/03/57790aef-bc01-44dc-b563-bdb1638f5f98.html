@@ -60,8 +60,8 @@
 <head>
 
 
-<link rel="bookmark" type="image/x-icon" href="/favicon.ico" />
-<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="bookmark" type="image/x-icon" href="/kb/favicon.ico" />
+<link rel="shortcut icon" href="/kb/favicon.ico" />
 
 <meta charset="UTF-8">
 <meta name="viewport"
@@ -219,8 +219,8 @@
 				class="col-sm-9 col-xs-12 pleft rightline">
 				
 
-<input type="hidden" value="opencv,java,图像处理,身份证识别" id="tagstrval"/>
-<input type="hidden" value="bdc8c0b5-44fb-4723-b2c5-fcf721c24089" id="imei"/>
+<input type="hidden" value="喵小凡,js动画" id="tagstrval"/>
+<input type="hidden" value="57790aef-bc01-44dc-b563-bdb1638f5f98" id="imei"/>
 
 
 	<div class="" id="content" style="">
@@ -234,9 +234,9 @@
 
 							<div class="nopadding-left">
 								<img class="nopaddding img-responsive col-xs-2"
-									style="width: 25px; height: 25px;" title="JAVA"
-									src="http://127.0.0.1:8081/kb/file/apk/201803/81242a02-fda0-41ea-959f-078af6a0e66d.jpg">
-									<div class="col-sm-8 col-xs-11 ptitle  ">opencv-身份证识别-java处理</div>
+									style="width: 25px; height: 25px;" title="BLOG开发"
+									src="http://127.0.0.1:8081/kb/file/apk/201801/40d1deda-eaf6-449f-a817-b6f1c27b2654.png">
+									<div class="col-sm-8 col-xs-11 ptitle  ">可爱喵小凡上线啦</div>
 
 
 
@@ -248,16 +248,10 @@
 											
 											
 											<a 
-											title="opencv" href="/kb/public/index/tg/opencv.html">opencv,</a>
+											title="喵小凡" href="/kb/public/index/tg/喵小凡.html">喵小凡,</a>
 											
 											<a 
-											title="java" href="/kb/public/index/tg/java.html">java,</a>
-											
-											<a 
-											title="图像处理" href="/kb/public/index/tg/图像处理.html">图像处理,</a>
-											
-											<a 
-											title="身份证识别" href="/kb/public/index/tg/身份证识别.html">身份证识别,</a>
+											title="js动画" href="/kb/public/index/tg/js动画.html">js动画,</a>
 											
 											
 											
@@ -268,7 +262,7 @@
 						</div>
 						
 						<div  class="postdiv row col-xs-12 margin-top-5 ">
-								post@2018-09-01 07:57:16&nbsp; <span>已有<span id="rdnum">54</span>人围观&nbsp;
+								post@2018-03-01 17:34:20&nbsp; <span>已有<span id="rdnum">54</span>人围观&nbsp;
 								</span> <span> <span id="rpnum">0</span>人吐槽&nbsp;</span>
 							</div>
 						
@@ -281,417 +275,135 @@
 						<div class="col-xs-12 row nopaddding">
 							<div class="">
 								<div class=" pageText "
-									><div class="pct">
-<p>综合前面图像处理的相关知识，处理身份证的简单识别.</p>
-<img src="http://127.0.0.1:8081/kb/favicon.ico" class="img-responsive">
-<p>使用Java实现.</p>
+									><div class="pct"><p>&nbsp;</p>
+
+<p>好吧，忙活了不少时间，搞定一个很cool的东西～，那就是本站的小天使，喵小凡先森，大家欢迎，～～～</p>
+
+<p><img alt="" src="http://www.256kb.cn/kb/file/pic/201803/fe2454fc-1dcc-4c96-a22f-3ae48ea80090.png" class="img-responsive"></p>
+
+<p><img alt="" src="http://www.256kb.cn/kb/file/pic/201803/9512bc25-14ae-4a42-84dd-700283c054e6.png" class="img-responsive"></p>
+
+<p><img alt="" src="http://www.256kb.cn/kb/file/pic/201803/136ff32d-61d7-4748-9a8c-57072efd30fa.png" class="img-responsive"></p>
+
+<p>就是我啦～～喵～</p>
 
 <p>&nbsp;</p>
 
-<h1>一.身份证识别概述</h1>
+<p>之前在这个</p>
 
-<h2>1.思路</h2>
+<blockquote>
+<p><strong><a href="http://pdfzj.cn/">PDF之家</a>&nbsp;</strong></p>
+</blockquote>
 
-<p>身份证中关键字段为黑色，</p>
+<p>这个网站瞎逛，突然发现网站上弹出个小人</p>
 
-<p>直接按颜色过滤像素点二值化，过滤偏黑灰色，及rgb 为 （111，111，111）至（0，0，0）的颜色，设置为黑色.</p>
+<p><img alt="" src="http://www.256kb.cn/kb/file/pic/201803/e2ec748a-58bd-4931-9805-13208fba7a1f.png" class="img-responsive">&nbsp;</p>
 
-<p>其他颜色转换为白色，在图片比较标准，无亮点，光照均有的情况下，基本可以完美识别出文字.</p>
+<p>点了几下。拖了几下，发现蛮好玩的，习惯性的调试了下网站，发现了小人的JS代码，于是拉下来，</p>
 
-<p>然后计算文字的左右投影</p>
+<p>做了下修改和封装，修改几个BUG兼容AngularJS/增加手机端的触摸兼容/增加参数配置，等等。</p>
 
-<p>根据投影切割行数据，</p>
+<p>总之就是根据本站小小修改了下啦。</p>
 
-<p>再对每一行，计算文字的上下垂直投影，计算文字宽度区域。</p>
-
-<p>根据每一行合并区域得出最后的所有字段的区域。</p>
-
-<p>根据区域切割图片。</p>
-
-<p>对每一个切割的图片进行文字识别即可.</p>
+<p>然后又觉得只有一个小图片在上面不动不过瘾，于是给本站的喵小凡先森加上了尾巴摇动的动画，哈哈</p>
 
 <p>&nbsp;</p>
 
-<h2>2.关键字段自动定位-实现结果</h2>
-
-<p>图片来源于网络。</p>
-
-<p>折腾了几天，终究基本实现.算是优化了一下吧。。哈哈.</p>
-
-<p>下方为第三行的垂直投影。</p>
-
-<p>&nbsp;</p>
-
-<p><img fid="133" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/fa324601-07c3-4044-96a9-ea03965bc59f_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/fa324601-07c3-4044-96a9-ea03965bc59f.png" class="img-responsive"></p>
-
-<h1>二.身份证识别详细过程</h1>
-
-<h2>&nbsp;1.图片二值化</h2>
-
-<p>直接按颜色过滤像素点二值化，过滤偏黑灰色，及rgb 为 （111，111，111）至（0，0，0）的颜色，设置为黑色.</p>
-
-<p>其他颜色转换为白色</p>
-
-<p>直接根据图像黑色过滤.</p>
-
-<pre><code class="language-java">//空图片       
-int imgheight = rectM.height();
-		int imgwidth = rectM.width();
-
-		Mat hist2 = new Mat(imgheight, imgwidth, CvType.CV_8UC1);
-
-		double[] v2 = new double[imgwidth * imgheight];
-
-		for (int j = 0; j &lt; imgwidth * imgheight; j++) {
-			v2[j] = 255;
-		}
-		hist2.put(0, 0, v2);
-
-//过滤黑色
-double max = imgheight;// 0;
-		for (int j = 0; j &lt; imgwidth; j++) {
-			for (int i = 0; i &lt; imgheight; i++) {
-
-				try {
-					// if (rectM.get(i, j)[0] &lt;= 100+param &amp;&amp; rectM.get(i, j)[1] &lt;= 100+param &amp;&amp;
-					// rectM.get(i, j)[2] &lt;= 100+param) {
-
-					// 对彩色图片过滤黑色阈值
-					if (rectM.get(i, j)[0] &lt;= param) {
-
-						hist2.put(i, j, 0);
-					} else {
-						// int k = 0;
-					}
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-
-			}
-		}</code></pre>
-
-<p>其中param即黑色的像素值，越黑越保留，</p>
-
-<p>关于这个值的计算，对不同的图片做了一下判断，需要判断图片的整体亮度，是否有亮点，对比是否清晰等，目前来说这个判断大体可用. 一些普通的图片都可以识别</p>
-
-<pre><code class="language-java">//获取灰度图的中间1/3区域宽度的平均灰度值
-		double avlihghtThird = getAvThirdWidthGray(bgr);
-		// 获取输入bgr图片的 平均灰度值
-		double avlihght = getAvGray(bgr);
-		// 获取灰度图的1/3区域高度的最大灰度值
-		double maxlihght = getMaxthresh(bgr);
-
-	
-		double param = (255 - maxlihght) * 2;
-
-		// 确定过滤的灰色阈值
-		if (Math.abs(avlihght - avlihghtThird) &lt; 20) {
-
-			// 中间区域与全图平均灰度差别不大，无高亮/图片颜色分布均衡
-
-			if (val &lt; 35) // 对比度比较低，整体偏亮
-			{
-				if (avlihghtThird &lt; 150) // 平均灰度第，颜色清晰
-					param = 115; // 过滤偏黑灰色.
-				else if (avlihghtThird &gt;= 150 &amp;&amp; avlihghtThird &lt; 180) // 平均灰度第，颜色清晰
-					param = 135; // 过滤偏黑灰色.
-				else
-					param = 149; // //平均灰度第，颜色不太清晰
-
-			} else if (val &gt;= 35 &amp;&amp; val &lt; 61) // 正常图片，颜色分布均衡
-			{
-				param = 110; // 过滤偏黑灰色.
-
-				if (maxlihght &lt; 200)
-					param = 85; // 过滤偏黑灰色.
-
-			} else if (val &gt;= 61 &amp;&amp; val &lt; 91) // 对比度比较高，色彩区分度高
-				param = 60; // 过滤偏黑色.
-			else if (val &gt;= 91) // 对比度超高，图片有亮度不均衡或者部分区域高亮
-			{
-				param = 60; // 过滤偏黑色.
-			}
-		}</code></pre>
-
-<p>原图：</p>
-
-<p><img fid="137" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/139e7de9-ed63-47ec-ba3a-cf40c3b97937_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/139e7de9-ed63-47ec-ba3a-cf40c3b97937.png" class="img-responsive"></p>
-
-<p>根据黑色二值化处理结果</p>
-
-<p>&nbsp;</p>
-
-<p><img fid="138" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/1553ce9b-c1fd-435c-826f-db2d9e544e04_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/1553ce9b-c1fd-435c-826f-db2d9e544e04.png" class="img-responsive"></p>
-
-<p>&nbsp;</p>
-
-<h2>2.图像水平垂直投影，定位关键数据位置</h2>
-
-<p>其实，第一版我是直接按照身份证的图，使用xy，初略给每个区域设定一个范围，然后直接截取图片，</p>
-
-<p>但是每个图片拍摄的都不一定完整，导致切割的非常不准，</p>
-
-<p>投影计算旨在不管图片怎么拍，都能把关键字段的位置定位出来.</p>
-
-<p>原理：扫描全图的像素，统计y轴上的每一行的总像素值.然后将统计结果转化为直方图显示.根据直方图计算出每一行的位置.</p>
-
-<p>然后对每一个行区域里面的数据做垂直投影，同上，统计所有x坐标上每一列的总像素，生成直方图，计算没一列的范围.</p>
-
-<p>然后定位每一个区域.</p>
-
-<p>水平投影行的像素计算:</p>
-
-<pre><code class="language-java">//每一行的像素总和统计，只统计一半宽度，剔除右侧身份证头像区域
-Mat hist = new Mat(1, imgheight, CvType.CV_32FC1);
-
-		Core.normalize(hist, hist, 0, hist.rows(), Core.NORM_MINMAX, -1, new Mat());
-		double[] v = new double[imgheight];
-
-		for (int j = 0; j &lt; imgheight; j++) {
-			v[j] = 0;
-		}
-		hist.put(0, 0, v);
-
-		double max = imgheight;// 0;
-
-		for (int i = 0; i &lt; imgheight; i++) {
-			for (int j = 0; j &lt; imgwidth / 2; j++) {
-				if (input.get(i, j)[0] == 0) {
-
-					double num = hist.get(0, i)[0];
-					num++;
-					hist.put(0, i, num);
-				} else {
-					int k = 0;
-				}
-			}
-			double num = hist.get(0, i)[0];
-			if (num &gt; max)
-				max = num;
-		}
-</code></pre>
-
-<p>生成直方图</p>
-
-<pre><code class="language-java">//数值统计转换为直方图，根据像素值/画布总宽度画线
-Mat hist2 = new Mat(imgheight, imgwidth, CvType.CV_8UC1);
-
-		Core.normalize(hist2, hist2, 0, hist2.rows(), Core.NORM_MINMAX, -1, new Mat());
-		double[] v2 = new double[imgwidth * imgheight];
-
-		for (int j = 0; j &lt; imgwidth * imgheight; j++) {
-			v2[j] = 255;
-		}
-		hist2.put(0, 0, v2);
-		for (int j = 0; j &lt; imgheight; j++) {
-
-			double y = (hist.get(0, j)[0] / max) * imgwidth;
-
-			// B component or gray image
-			Imgproc.line(hist2, new Point(0, j), new Point(y, j), new Scalar(0, 0, 0), 2, 8, 0);
-		}
-
-		Imgproc.cvtColor(hist2, hist2, Imgproc.COLOR_GRAY2BGR);</code></pre>
-
-<p>&nbsp;</p>
-
-<p>行区域启动判断</p>
-
-<pre><code class="language-java">	for (int j = 0; j &lt; imgheight; j++) {
-			double num = hist.get(0, j)[0];
-
-			if (!isstart) {
-				// 顶部和底部的排除
-				if (num &gt; 0 &amp;&amp; j &gt; 20 &amp;&amp; j &lt; imgheight - 20) {
-					if (start_val1 == 0)
-						start_val1 = num;
-					else {
-						start_val2 = num;
-
-						// 找到开始
-						if (start_val2 / start_val1 &gt;= 1.4 &amp;&amp; (start_val2 &gt; 10)) {
-							isstart = true;
-
-						} else {
-							// 重新开始计算
-							start_val1 = num;
-						}
-					}
-
-				}</code></pre>
-
-<p>&nbsp;</p>
-
-<p>行结束判断</p>
-
-<pre><code class="language-java">if (num &gt;= 0) {
-					if (start_val1 == 0)
-						start_val1 = num;
-					else {
-						start_val2 = num;
-
-						// 找到结束，每一行至少&gt;3%高度
-						if (start_val1 / start_val2 &gt; 1.4 &amp;&amp; (j - startj &gt; imgheight * 0.035) &amp;&amp; start_val2 &lt; 15) {
-							isend = true;
-							start_val1 = 0;
-						} else {
-							// 重新开始计算
-							start_val1 = num;
-						}
-
-					}
-
-				}</code></pre>
-
-<p>水平投影：</p>
-
-<p><img fid="139" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/20b969d5-14f4-4052-a229-fb8fc42a9140_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/20b969d5-14f4-4052-a229-fb8fc42a9140.png" class="img-responsive"></p>
-
-<p>&nbsp;</p>
-
-<p>第三行，垂直投影</p>
-
-<p><img fid="140" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/49c3f471-70c5-47ba-ba1f-5308b41e682a_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/49c3f471-70c5-47ba-ba1f-5308b41e682a.png" class="img-responsive"></p>
-
-<p>&nbsp;</p>
-
-<p>后面根据行列特定，合并区域即可.</p>
-
-<p>最后切割结果：</p>
-
-<p><img fid="141" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/e4943030-14eb-473c-8192-2933e5deb4ea_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/e4943030-14eb-473c-8192-2933e5deb4ea.png" class="img-responsive"></p>
-
-<h2>3.调整-非标准四边形证件识别</h2>
-
-<p>上面是针对标准四边形证件，方方正正的拍摄情况的，要是图片不是完整的，需要识别证件外边框，可能还需要进行透视变换为标准形状.</p>
-
-<p>比如原图如下：有一定的透视，拍色视角非正正方方，并且还有外部背景.</p>
-
-<p><img fid="142" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/9ea816ff-b667-4e29-9e37-28c3f866facb_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/9ea816ff-b667-4e29-9e37-28c3f866facb.png" class="img-responsive"></p>
-
-<p>这样处理.计算边框</p>
-
-<pre><code class="language-java">this.image.copyTo(m);
-
-		// 滤波，模糊处理，消除某些背景干扰信息
-		Imgproc.blur(m, filtered, new Size(3, 3));
-
-		// savetoImg(filtered, "blur_33");
-
-		// 腐蚀操作，消除某些背景干扰信息
-		Imgproc.erode(filtered, filtered, new Mat(), new Point(-1, -1), 3);// 1, 1);
-        
-       //这里这个边缘检测的阈值成了关键数据，目前还没有太好方法进行判定.
-    //上述使用的奥巴马的图片，使用值为17-17*3.
-        double threshmin = thresh;
-		double threshmax = threshmin * 3;
-
-		// 边缘检测
-		Imgproc.Canny(filtered, edges, threshmin, threshmax);
-   // 膨胀操作，尽量使边缘闭合
-		Imgproc.dilate(edges, dilated_edges, new Mat(), new Point(-1, -1), 3);// , 1, 1);</code></pre>
-
-<p>&nbsp;</p>
-
-<h2>4.轮廓计算</h2>
-
-<pre><code class="language-java">
-		List&lt;MatOfPoint&gt; contours = new ArrayList&lt;&gt;();// 每一组Point点集就是一个轮廓。
-		
-		Mat hierarchy = new Mat();
-		// RETR_EXTERNAL:表示只检测最外层轮廓，对所有轮廓设置hierarchy[i][2]=hierarchy[i][3]=-1
-
-		// CHAIN_APPROX_SIMPLE：压缩水平方向，垂直方向，对角线方向的元素，值保留该方向的重点坐标，如果一个矩形轮廓只需4个点来保存轮廓信息
-	
-		// 寻找边界轮廓
-		Imgproc.findContours(dilated_edges, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
-</code></pre>
-
-<p>在轮廓的结果中寻找最外层的矩形，有4个点，并且为凸边形.,有一定的面积.</p>
-
-<pre><code class="language-java">// For conversion later on
-		MatOfPoint2f approxCurve = new MatOfPoint2f();
-
-		Rect rect = new Rect();
-
-		// For each contour found
-		for (int i = 0; i &lt; contours.size(); i++) {
-
-			// Convert contours from MatOfPoint to MatOfPoint2f
-			MatOfPoint2f contour2f = new MatOfPoint2f(contours.get(i).toArray());		
-
-			// Processing on mMOP2f1 which is in type MatOfPoint2f
-			// 计算轮廓的长度
-			double approxDistance = Imgproc.arcLength(contour2f, true) * 0.02;
-
-			if (approxDistance &gt; 1) {
-				// Find Polygons
-				// 连续轮廓折线化
-				Imgproc.approxPolyDP(contour2f, approxCurve, approxDistance, true);
-
-				// Convert back to MatOfPoint
-				MatOfPoint points = new MatOfPoint(approxCurve.toArray());
-
-				// Rectangle Checks - Points, area, convexity
-				// 矩形检测，4个顶点，凸边形，有一定的面积.
-				if (points.total() == 4 &amp;&amp; Math.abs(Imgproc.contourArea(points)) &gt; 1000
-						&amp;&amp; Imgproc.isContourConvex(points)) {
-                    
-
-                       //外测的四边形
-                       rect = Imgproc.boundingRect(points);
-
-					
-						// 绘制边界轮廓
-						Imgproc.drawContours(outContouMat, contours, i, new Scalar(255, 255, 0), 3);</code></pre>
-
-<p>如下，外侧4个顶点</p>
-
-<p>&nbsp;</p>
-
-<p><img fid="144" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/b8d92bfb-f119-4163-bf7c-d0049bbdca30_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/b8d92bfb-f119-4163-bf7c-d0049bbdca30.png" class="img-responsive"></p>
-
-<h2>透视变换</h2>
-
-<p>计算矩形变换数据，矩形-》边框的变化.</p>
-
-<pre><code class="language-java">MatOfPoint2f rectMat_dest = new MatOfPoint2f(
-								new Point[] { new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y),
-										new Point(rect.x + rect.width, rect.y + rect.height),
-										new Point(rect.x, rect.y + rect.height), });
-
-						// 确定 approxCurve 点的顺序
-						List&lt;Point&gt; pts = new ArrayList&lt;&gt;();
-						Point pt1 = new Point(approxCurve.get(0, 0));
-						Point pt2 = new Point(approxCurve.get(1, 0));
-						Point pt3 = new Point(approxCurve.get(2, 0));
-						Point pt4 = new Point(approxCurve.get(3, 0));
-						pts.add(pt1);
-						pts.add(pt2);
-						pts.add(pt3);
-						pts.add(pt4);
-						Point[] npts = sortRectPoints(pts);
-
-
-						MatOfPoint2f rectMat_src = new MatOfPoint2f(new Point[] { npts[0], npts[1], npts[2], npts[3] });
-
-						// 矩形变换 获取 规则-&gt;不规则
-						Mat tp = Imgproc.getPerspectiveTransform(rectMat_dest, rectMat_src);
-						tp.copyTo(transMat);</code></pre>
-
-<p>,然后对原图进行整体变换</p>
-
-<pre><code class="language-java">	// 轮廓ok,变换原图
-
-			Imgproc.warpPerspective(rectM2, realRect, transMat, rectM2.size(), Imgproc.INTER_LINEAR); // +
-																										// Imgproc.WARP_INVERSE_MAP
-				</code></pre>
-
-<p><img fid="145" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/5195d601-f052-4387-99bb-90f3d74f2103_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/5195d601-f052-4387-99bb-90f3d74f2103.png" class="img-responsive"></p>
-
-<p>这就是前文开始处理的图了&gt;_&lt;.</p>
-
-<p>到此，所有的关键内容都切割出来了。下面就是识别的问题了.</p>
+<p>这个动画使用了js,配合css实现，js动态增加css类型，css类型切换背景图片。</p>
+
+<p>使用了4副小凡先生的图片</p>
+
+<p><img alt="" src="http://www.256kb.cn/kb/file/pic/201803/fe2454fc-1dcc-4c96-a22f-3ae48ea80090.png" class="img-responsive"><img alt="" src="http://www.256kb.cn/kb/file/pic/201803/ab60c299-a67e-449d-b274-988c8d1bbcbb.png" class="img-responsive"><img alt="" src="http://www.256kb.cn/kb/file/pic/201803/cb0de957-63ec-4969-aaba-624f1b71b463.png" class="img-responsive"><img alt="" src="http://www.256kb.cn/kb/file/pic/201803/56b79b0a-0220-4f90-95a9-bc8b9a20c06f.png" class="img-responsive"></p>
+
+<p>这个尾巴的动画差点玩死我了，像素级的编辑，还好能复制/旋转，搞了半天，起码尾巴甩起来还蛮飘逸的，HOHO</p>
+
+<p><img alt="" src="http://www.256kb.cn/kb/file/pic/201803/a8e7b4b9-5d71-4fcb-b609-8b50a4035867.png" class="img-responsive"></p>
+
+<p>分别设置了4个css属性切换</p>
+
+<pre><code class="language-css">
+.mumu.active.o1{
+	background: url(../images/c1.png);
+	width: 55px;
+	height: 55px;
+	margin: 0 auto;
+}
+.mumu.active.o1.o2{
+	background: url(../images/c2.png);
+	width: 55px;
+	height: 55px;
+	margin: 0 auto;
+}
+.mumu.active.o1.o2.o3{
+	background: url(../images/c3.png);
+	width: 55px;
+	height: 55px;
+	margin: 0 auto;
+}
+.mumu.active.o1.o2.o3.o4{
+	background: url(../images/c4.png);
+	width: 55px;
+	height: 55px;
+	margin: 0 auto;
+}</code></pre>
+
+<p>然后配合js动态修改css&nbsp;</p>
+
+<pre><code class="language-javascript">  Sprite.prototype.startAnimate = function() {
+
+        var me = this;
+        me.stopAnimate();
+        $(me.default.sid).toggleClass("active");
+
+        var index = 1;
+        var isadd = true;
+
+        me._timer = setInterval(function() {
+
+            /*循环切换css,css中切换png图片 1234-》4321*/
+            $(me.default.sid).toggleClass("o" + index);
+            if (isadd)
+                index++;
+            else
+                index--;
+            if (index == 5) {
+                isadd = false;
+                index--;
+            }
+            if (index == 0) {
+                isadd = true;
+                index++;
+            }
+
+        }, 100);
+    };</code></pre>
+
+<p>，</p>
+
+<p>总的来说，效果还可以的样子。</p>
+
+<p>感兴趣的同学自己下下来玩吧。</p>
+
+<p>只依赖jquery,</p>
+
+<p><img alt="" src="http://www.256kb.cn/kb/file/pic/201803/70d0128e-91ae-4cc7-aa44-5ef96614c984.png" class="img-responsive"></p>
+
+<pre><code class="language-html">&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;script   type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js" &gt;&lt;/script&gt;
+&lt;link rel="stylesheet"  href="sprite.css"&gt;&lt;/script&gt;
+&lt;script   type="text/javascript" src="sprite.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<blockquote>
+<p><a href="http://256kb.cn/down/miaoxiaofan.zip">猛击下载源码</a></p>
+</blockquote>
 
 <p>&nbsp;</p>
 </div></div>
@@ -713,14 +425,18 @@ Mat hist2 = new Mat(imgheight, imgwidth, CvType.CV_8UC1);
 						<ul class="pagination pull-left">
 							<li>
 							
+								<a
+								href="/kb/public/html/2018/02/b1929b60-bb90-4174-afbd-b9d996538db3.html"
+								style="" class="for spider">apache mail ssl 发送邮件连接设置</a>
+								
 								</li>
 						</ul>
 						<ul class="pagination pull-right">
 							<li>
 								
 								<a
-								href="/kb/public/html/2018/09/8e5af8bb-5e8a-41d7-9441-73704b5a14c2.html"
-								style="" class="for spider">opencv-java 基础API使用总结</a>
+								href="/kb/public/html/2018/03/86b49ac4-8616-41b9-862e-e022c111915e.html"
+								style="" class="for spider">Maven命令行下载jar,导出依赖，导入本地jar</a>
 								
 							</li>
 						</ul>
@@ -740,7 +456,7 @@ Mat hist2 = new Mat(imgheight, imgwidth, CvType.CV_8UC1);
 							<div id="license_information">
 
 								<p>
-									本文 [opencv-身份证识别-java处理]基于<a href="https://mit-license.org/"
+									本文 [可爱喵小凡上线啦]基于<a href="https://mit-license.org/"
 										title="MIT License " target="_blank">MIT License </a>
 									许可协议发布,作者：野生的喵喵<a href="http://www.256kb.cn/">http://www.256kb.cn/</a>
 								</p>
@@ -749,7 +465,7 @@ Mat hist2 = new Mat(imgheight, imgwidth, CvType.CV_8UC1);
 
 							<p>
 								文章固定链接： <a
-									href="http://www.256kb.cn/public/html/2018/09/bdc8c0b5-44fb-4723-b2c5-fcf721c24089.html">http://www.256kb.cn/public/html/2018/09/bdc8c0b5-44fb-4723-b2c5-fcf721c24089.html</a>
+									href="http://www.256kb.cn/public/html/2018/03/57790aef-bc01-44dc-b563-bdb1638f5f98.html">http://www.256kb.cn/public/html/2018/03/57790aef-bc01-44dc-b563-bdb1638f5f98.html</a>
 								转载请注明
 							</p>
 							<p></p>
@@ -790,76 +506,6 @@ Mat hist2 = new Mat(imgheight, imgwidth, CvType.CV_8UC1);
 
 							<ul class="col-xs-12 ">
 							
-							
-							<li >
-
-									<img class="nopaddding img-responsive col-xs-2"
-									style="width: 25px; height: 25px;"
-									title="测试"
-									src="http://127.0.0.1:8081/kb/file/apk/201801/93067979-1359-490a-9f64-94aabde3d7fe.jpg"> <a
-										href="/kb/public/html/2018/09/8e5af8bb-5e8a-41d7-9441-73704b5a14c2.html"
-										class="col-sm-8 col-xs-11 ">opencv-java 基础API使用总结</a>
-								</li>
-							
-							<li >
-
-									<img class="nopaddding img-responsive col-xs-2"
-									style="width: 25px; height: 25px;"
-									title="JAVA"
-									src="http://127.0.0.1:8081/kb/file/apk/201803/81242a02-fda0-41ea-959f-078af6a0e66d.jpg"> <a
-										href="/kb/public/html/2018/08/3b3c7aef-5d18-4d5e-bb7b-aa32dbbc925a.html"
-										class="col-sm-8 col-xs-11 ">activiti简单流程示例</a>
-								</li>
-							
-							<li >
-
-									<img class="nopaddding img-responsive col-xs-2"
-									style="width: 25px; height: 25px;"
-									title="JAVA"
-									src="http://127.0.0.1:8081/kb/file/apk/201803/81242a02-fda0-41ea-959f-078af6a0e66d.jpg"> <a
-										href="/kb/public/html/2018/08/bb0f3d82-0a73-486c-ab66-c37ca89ab18d.html"
-										class="col-sm-8 col-xs-11 ">activiti-ui web项目集成</a>
-								</li>
-							
-							<li >
-
-									<img class="nopaddding img-responsive col-xs-2"
-									style="width: 25px; height: 25px;"
-									title="JAVA"
-									src="http://127.0.0.1:8081/kb/file/apk/201803/81242a02-fda0-41ea-959f-078af6a0e66d.jpg"> <a
-										href="/kb/public/html/2018/08/d7317d4e-9f29-45e4-af1d-f99930483f7e.html"
-										class="col-sm-8 col-xs-11 ">activiti-入门及基础总结</a>
-								</li>
-							
-							<li >
-
-									<img class="nopaddding img-responsive col-xs-2"
-									style="width: 25px; height: 25px;"
-									title="JAVA"
-									src="http://127.0.0.1:8081/kb/file/apk/201803/81242a02-fda0-41ea-959f-078af6a0e66d.jpg"> <a
-										href="/kb/public/html/2018/08/a8c28a63-1931-4cd3-99ee-cf2428611965.html"
-										class="col-sm-8 col-xs-11 ">maven项目中使用opencv打包jar及依赖jar为独立lib目录相关问题小记</a>
-								</li>
-							
-							<li >
-
-									<img class="nopaddding img-responsive col-xs-2"
-									style="width: 25px; height: 25px;"
-									title="日常问题记录"
-									src="http://127.0.0.1:8081/kb/file/apk/201801/8c9e3ea9-5b97-44c5-91ae-efd3e2355110.png"> <a
-										href="/kb/public/html/2018/08/05c3c152-a321-4b42-933b-e7a536a2413e.html"
-										class="col-sm-8 col-xs-11 ">Blog目录生成JS组件</a>
-								</li>
-							
-							<li >
-
-									<img class="nopaddding img-responsive col-xs-2"
-									style="width: 25px; height: 25px;"
-									title="测试"
-									src="http://127.0.0.1:8081/kb/file/apk/201801/93067979-1359-490a-9f64-94aabde3d7fe.jpg"> <a
-										href="/kb/public/html/2017/11/13892f60-8e5f-48b9-b479-a2a5097a0150.html"
-										class="col-sm-8 col-xs-11 ">test2</a>
-								</li>
 							
 							
 							
@@ -1175,7 +821,7 @@ Mat hist2 = new Mat(imgheight, imgwidth, CvType.CV_8UC1);
 
 
 
-				<span id="titlepic" class="hide" data-toggle="collapse"
+				<span id="titlepic" class="hide" data-toggle=""
 					data-parent="#accordion" href="#collapseOner11"
 					class="glyphicon glyphicon-chevron-up pull-right "></span>
 			</div>
@@ -1325,7 +971,7 @@ Mat hist2 = new Mat(imgheight, imgwidth, CvType.CV_8UC1);
 
 
 
-				<span id="titlepic" class="hide" data-toggle="collapse"
+				<span id="titlepic" class="hide" data-toggle=""
 					data-parent="#accordion" href="#collapseOner2"
 					class="glyphicon glyphicon-chevron-up pull-right "></span>
 			</div>
@@ -1438,7 +1084,7 @@ Mat hist2 = new Mat(imgheight, imgwidth, CvType.CV_8UC1);
 
 
 	<div class=" panel panel-success">
-		<div class="panel-heading " title="" data-toggle="collapse"
+		<div class="panel-heading " title="" data-toggle=""
 			data-parent="#accordion" href="#collapseOner3">
 			<div class="row">
 				<h3 class="panel-title col-xs-10  ">标签</h3>
@@ -1772,10 +1418,10 @@ Mat hist2 = new Mat(imgheight, imgwidth, CvType.CV_8UC1);
 
 
 	<div class=" panel panel-success">
-		<div class="panel-heading " title="" data-toggle="collapse"
+		<div class="panel-heading " title="" data-toggle=""
 			data-parent="#accordion" href="#collapseOner3">
 			<div class="row">
-				<h3 class="panel-title col-xs-10  ">友情链接</h3>
+				<h3 class="panel-title col-xs-10  ">友情链接&nbsp;<a class="yl" href="/kb/public/about#faq">申请友链</a></h3>
 
 
 

@@ -3,6 +3,24 @@
   /* 为较旧的或者不支持的浏览器设置备用属性 */
   /* height: 200px; */
 }
+
+
+ a{
+	
+	    color: #676767;
+}
+
+ a:hover{
+	   color: #1F7A68; 
+	  /*   background: #9cbbf3; */
+    /* border-color: #0da4d3; */
+    text-decoration: underline;
+}
+
+
+
+
+
 .spig {
    display: block; 
   width: 300px;
@@ -573,10 +591,7 @@ blockquote {
   font-size: 15px;
   word-break: break-all;
 }
-.replaybtn,
-.detailbtn {
-  color: #bbb!important;
-}
+
 .ba1 {
   color: #bbb;
 }
@@ -591,9 +606,7 @@ blockquote {
 	    */
 }
 
-.pgdiv:hover a.detailbtn {
-  color: #7673d9!important;
-}
+
 .b2:hover a.ba1 {
   color: #bbb;
 }
@@ -1498,6 +1511,7 @@ ul.pul
     box-shadow: 0 0 20px rgba(0, 0, 0, .4);
 } */
 
+/*cat*/
 .cattop{
     border: 1px solid #eee;
     text-align: left;
@@ -1513,6 +1527,7 @@ ul.pul
     box-shadow: 0 0 20px rgba(0, 0, 0, .4);
 } 
 
+/*end*/
 a, a img, input  {
 -webkit-transition: all 0.18s ease-out;
     -moz-transition: all 0.18s ease-out;
@@ -1547,4 +1562,46 @@ a, a img, input  {
 
 .postdiv{
 	text-align: right;
+}
+
+
+a.yl {
+	 color: #ecb866;
+	font-size: 13px;
+}
+a:hover.yl {
+	 color: #fff;
+}
+
+.pgblock{
+	background: #f9f9f9;
+	padding: 15px!important;
+	margin-bottom: 20px;
+	  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .3);
+ /*    -moz-box-shadow: 0 0 4px rgba(0, 0, 0, .4);
+    box-shadow: 0 0 4px rgba(0, 0, 0, .4); */
+}
+.btn-danger {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+.detailbtn:hover,
+.detailbtn:focus,
+.detailbtn:active,
+.detailbtn.active
+{
+background: #6789da!important;
+color:#ecb866!important;
+}
+.detailbtn {
+	background: #3f76a7!important;
+	width: 100px;
+}
+.pgdiv:hover a.detailbtn {
+  color: #ecb866!important;
+}
+.replaybtn,
+.detailbtn {
+  color:#efefef!important;
 }

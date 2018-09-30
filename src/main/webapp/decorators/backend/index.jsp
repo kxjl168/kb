@@ -10,7 +10,7 @@
 
 
 <link rel="bookmark" type="image/x-icon" href="/favicon.ico" />
-<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="shortcut icon" href="/kb/favicon.ico?1" />
 
 <meta charset="UTF-8">
 <meta name="viewport"
