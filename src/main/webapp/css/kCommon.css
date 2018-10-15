@@ -120,8 +120,8 @@
   transition: all 0.3s ease-in-out;
 }
 .pall {
- /* float: left; */ 
-  overflow-x: hidden;
+/*    float: left;   
+  overflow-x: hidden; */
 }
 .pall > .pleft {
   float: left;
@@ -1564,6 +1564,11 @@ a, a img, input  {
 	text-align: right;
 }
 
+.postdiv.left{
+	text-align: left;
+	margin-bottom: 5px;
+}
+
 
 a.yl {
 	 color: #ecb866;
@@ -1604,4 +1609,19 @@ color:#ecb866!important;
 .replaybtn,
 .detailbtn {
   color:#efefef!important;
+}
+
+.sidebar.lefturl{
+	
+}
+
+.sidebar.lefturl.fixed{
+	position: fixed;
+	 min-width: 270px ;
+
+}
+
+.fixed .nav-left{
+    overflow-y: scroll;
+   /*  height: 700px; */
 }

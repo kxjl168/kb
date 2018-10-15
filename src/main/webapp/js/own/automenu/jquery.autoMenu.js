@@ -49,7 +49,7 @@
                 var height = typeof opts.height === 'number' && opts.height;
                 var padding = typeof opts.padding === 'number' && opts.padding;
                 //that.$element.width(width+padding*2);
-                var html = '<div class="autoMenu fix"><span class="title">文章目录:</span><a href="javascript:void(0);" title="隐藏目录" class="btn-box">'
+                var html = '<div class="autoMenu "><span class="title">文章目录:</span><a href="javascript:void(0);" title="隐藏目录" class="btn-box">'
                     +'<span class="icon-minus-sign"></span>'
                     +'</a>'
                     +' <a href="javascript:void(0);" title="目录固定" class="btn-box">'
@@ -193,3 +193,19 @@
     });
 
 })(jQuery);
+
+
+	function otherScroll2(){
+		  var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
+		  var page=$(".pageText").scrollTop();
+		  var height=$(".autoMenu").height();
+		  if(scrollTop>page+height){
+			  //mobile, declare in other common js
+			  if(browser&&!browser.mobile)
+			  $(".autoMenu").addClass('fix');
+		  }
+		  else{
+			  $(".autoMenu").removeClass('fix');
+		  }
+	}
+

@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.kxjl.tool.common.Constant;
+import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.tool.utils.JEscape;
 import com.kxjl.tool.utils.JsonUtil;
 import com.kxjl.web.blog.model.Blog;
@@ -79,7 +80,7 @@ public class KurlController extends BaseController {
 
 			Kurl query = new Kurl();
 			query.setPage(curPage);
-			query.setPageCount(100);
+			query.setPageCount(1000);
 			query.setVal1("1");
 
 			// query.setIp(ip);
@@ -87,24 +88,9 @@ public class KurlController extends BaseController {
 			// query.setUrl_type(dict_type);// (url_title);// (id);
 			query.setUrl_name(url_type);// (url_name);
 
-			List<Kurl> infos = kurlService.getKurlPageList(query);
-
-			Map<String, List<Kurl>> datas = new HashMap<String, List<Kurl>>();
-			String prepath = getImgHttpOutPath();
-			for (int i = 0; i < infos.size(); i++) {
-
-				Kurl u = infos.get(i);
-				u.setVal2(prepath);
-				List<Kurl> item = new ArrayList<Kurl>();
-
-				if (datas.containsKey(u.getUrl_type())) {
-					item = datas.get(u.getUrl_type());
-
-				}
-				item.add(u);
-				datas.put(u.getUrl_type(), item);
-
-			}
+			String HTTP_PATH = ConfigReader.getInstance().getProperty("FILE_SVR_HTTP_OUTER_PATH");
+			String prepath = HTTP_PATH;
+			Map<String, List<Kurl>> datas=kurlService.getKurlItemPageList(query);
 
 			Gson gs = new Gson();
 

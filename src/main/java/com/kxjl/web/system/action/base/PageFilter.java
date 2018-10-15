@@ -391,8 +391,8 @@ public class PageFilter implements Filter {
 		}
 
 	
-		if (StaticFilter(request, response2, chain))
-			return;
+		//if (StaticFilter(request, response2, chain))
+		//	return;
 		
 		// if (WeiStaticFilter(request, response2, chain))
 		// return;

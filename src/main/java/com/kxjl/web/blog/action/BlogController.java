@@ -1,6 +1,8 @@
 
 package com.kxjl.web.blog.action;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,8 +18,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.apache.http.util.EntityUtils;
 import org.apache.ibatis.annotations.Param;
-
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
@@ -26,6 +37,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -37,6 +49,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.config.ConfigReader;
+import com.kxjl.tool.html.CharResponseWrapper;
 import com.kxjl.tool.html.FileProcessor;
 import com.kxjl.tool.utils.DateUtil;
 import com.kxjl.tool.utils.JEscape;
@@ -56,6 +69,8 @@ import com.kxjl.web.blog.service.BlogService;
 @RequestMapping(value = "/blog")
 public class BlogController extends BaseController {
 
+	private Logger logger= Logger.getLogger(BlogController.class);
+	
 	@Autowired
 	BlogService blogService;
 
@@ -66,6 +81,7 @@ public class BlogController extends BaseController {
 
 		return view;
 	}
+	
 	
 	
 	/**
@@ -79,15 +95,13 @@ public class BlogController extends BaseController {
 	@RequestMapping(value = "/sabout")
 	public void sabout(HttpServletRequest request, HttpServletResponse response) {
 		// String data = request.getParameter("data");
-		saveStaticInfo(request, StasticTypeOne.AboutPage.toString(), "","");
+		saveStaticInfo(request, StasticTypeOne.AboutPage.toString(), "", "");
 
 	}
 
-	
-	
-	
 	/**
 	 * 关联文章 根据tag获取
+	 * 
 	 * @param request
 	 * @param response
 	 * @author zj
@@ -106,23 +120,20 @@ public class BlogController extends BaseController {
 			// jsonIN = new JSONObject(data);
 
 			String imei = parseStringParam(request, "i");
-		
-			
-			
+
 			Blog query = new Blog();
 			query.setImei(imei);
 
 			// cur ,next, pre
 			Blog data = blogService.getBlogInfoById(query);
-			//data.getTagStrs()
-			
-			Page<Object> pg=PageHelper.startPage(1, 10);
-			detail=blogService.getRelatedBlogs(data);
+			// data.getTagStrs()
+
+			Page<Object> pg = PageHelper.startPage(1, 10);
+			detail = blogService.getRelatedBlogs(data);
 			String prepath = getImgHttpOutPath();
 			for (Blog blog : detail) {
 				blog.setBlog_type_url(prepath + blog.getBlog_type_url());
 			}
-			
 
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(detail);
@@ -150,7 +161,6 @@ public class BlogController extends BaseController {
 		JsonUtil.responseOutWithJson(response, rst);
 
 	}
-	
 
 	/**
 	 * 获取当前详细及前后关联的两个
@@ -189,8 +199,8 @@ public class BlogController extends BaseController {
 
 			// cur ,next, pre
 			detail = blogService.getBlogDetailPageList(query);
-			
-			//计数
+
+			// 计数
 			SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
 			if (user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin) {
 				blogService.updateBlogReadTime(query);
@@ -227,8 +237,9 @@ public class BlogController extends BaseController {
 		rst = jsonOut.toString();
 		JsonUtil.responseOutWithJson(response, rst);
 
-//		saveStaticInfo(request, StasticTypeOne.DetailPage.toString(), detail.get(0).getBlog_type_name(),
-//				detail.get(0).getImei());
+		// saveStaticInfo(request, StasticTypeOne.DetailPage.toString(),
+		// detail.get(0).getBlog_type_name(),
+		// detail.get(0).getImei());
 
 		Kdata.getInstance().cleanrBLogList("");
 
@@ -346,8 +357,10 @@ public class BlogController extends BaseController {
 	 * 
 	 * @param clientType
 	 * @param packageName
-	 * @param curPage     当前页
-	 * @param pageCount   每页多少条
+	 * @param curPage
+	 *            当前页
+	 * @param pageCount
+	 *            每页多少条
 	 * @return
 	 */
 	@RequestMapping(value = "/getInfoList")
@@ -484,7 +497,6 @@ public class BlogController extends BaseController {
 		rst = jsonOut.toString();
 		JsonUtil.responseOutWithJson(response, rst);
 
-	
 	}
 
 	@RequestMapping(value = "/getTgList")
@@ -501,8 +513,7 @@ public class BlogController extends BaseController {
 			query.setPage(1);
 			query.setPageCount(10000);
 
-		
-			List<Blog> infos=blogService.getBlogTags();
+			List<Blog> infos = blogService.getBlogTags();
 
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(infos);
@@ -536,8 +547,10 @@ public class BlogController extends BaseController {
 	 * 
 	 * @param clientType
 	 * @param packageName
-	 * @param curPage     当前页
-	 * @param pageCount   每页多少条
+	 * @param curPage
+	 *            当前页
+	 * @param pageCount
+	 *            每页多少条
 	 * @return
 	 */
 	@RequestMapping(value = "/getHList")
@@ -554,10 +567,8 @@ public class BlogController extends BaseController {
 			query.setPage(1);
 			query.setPageCount(10000);
 
-			
 			List<Blog> infos = blogService.getBlogMonthGroup();
 
-		
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(infos);
 
@@ -608,8 +619,7 @@ public class BlogController extends BaseController {
 			query.setPageCount(10000);
 
 			String key = "getTpList";
-			List<Blog> infos =blogService.getBlogTypeGroups();
-
+			List<Blog> infos = blogService.getBlogTypeGroups();
 
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(infos);

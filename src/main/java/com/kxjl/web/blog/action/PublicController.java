@@ -1,27 +1,55 @@
 package com.kxjl.web.blog.action;
 
+import static org.apache.commons.lang.StringUtils.isNotBlank;
+import static org.apache.http.HttpHeaders.CONTENT_LENGTH;
+import static org.apache.http.HttpHeaders.HOST;
+
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.StringReader;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.TreeMap;
 
+import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
+import org.apache.http.HttpRequest;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIUtils;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.message.HeaderGroup;
+import org.apache.http.util.EntityUtils;
 import org.apache.ibatis.annotations.Param;
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.config.TxNamespaceHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +64,8 @@ import com.google.gson.JsonObject;
 import com.kxjl.tool.common.Config;
 import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.config.ConfigReader;
+import com.kxjl.tool.config.configWarthDog;
+import com.kxjl.tool.html.FileProcessor;
 import com.kxjl.tool.utils.JEscape;
 import com.kxjl.tool.utils.JsonUtil;
 
@@ -61,6 +91,7 @@ import sun.util.logging.resources.logging;
 @Controller
 @RequestMapping(value = "/")
 public class PublicController extends BaseController {
+	private Logger logger = Logger.getLogger(PublicController.class);
 
 	@Autowired
 	KurlService kurlService;
@@ -243,6 +274,54 @@ public class PublicController extends BaseController {
 		maps.put("menus", leftmenus);
 		return "/page/burl/index_list";
 	}
+	
+	
+	@RequestMapping(value = "/page/burl")
+	public String p_brul(Map<String, Object> maps, HttpSession session, HttpServletRequest request) {
+
+		//maps.putAll(sysService.getSysInfo());
+
+		//List<MenuInfo> leftmenus = menuService.getLeftMenuTree(session, request);
+		
+		setLeftUrls(maps);
+		return "/page/burl/index";
+	}
+	
+	private void setLeftUrls(Map<String, Object> maps) {
+
+		Kurl query = new Kurl();
+		query.setPage(1);
+		query.setPageCount(100);
+		query.setVal1("1");
+
+		query.setUrl_name("");// (url_name);
+		Map<String, List<Kurl>> datas=kurlService.getKurlItemPageList(query);
+
+		List<MenuInfo> urls=new ArrayList<>();
+		for (List<Kurl> item : datas.values()) {
+			MenuInfo urlmenu=new MenuInfo();
+			urlmenu.setMenuName(	item.get(0).getUrl_type());
+			
+			urls.add(urlmenu);
+			
+		}
+		
+		
+		maps.put("menus", urls);
+
+	}
+	
+	@RequestMapping(value = "/pown/url/")
+	public String p_ourl(Map<String, Object> maps, HttpSession session, HttpServletRequest request) {
+
+		//maps.putAll(sysService.getSysInfo());
+
+		//List<MenuInfo> leftmenus = menuService.getLeftMenuTree(session, request);
+		
+		setLeftUrls(maps);
+		return "/pown/url/main";
+	}
+	
 
 	@RequestMapping(value = "/page/{url}")
 	public String p_btype(Map<String, Object> maps, HttpSession session, HttpServletRequest request,
@@ -265,12 +344,187 @@ public class PublicController extends BaseController {
 		return "/pown/" + url + "/main";
 	}
 
-	@RequestMapping(value = "/public/cat")
+	@RequestMapping(value = "/public/cat/")
 	public String cat() {
 		ModelAndView view = getSysData();
 		view.setViewName("/public/index/");
 
 		return "/public/cat/main";
+	}
+
+	/**
+	 * 带上真实的请求地址
+	 * 
+	 * @param proxyRequest
+	 * @param request
+	 * @author zj
+	 * @date 2018年9月28日
+	 */
+	private void widthRealIp(HttpRequest proxyRequest, HttpServletRequest request) {
+
+		proxyRequest.addHeader("X-Prerender-Token", stasticService.getIpAddr(request));
+		// 补充原始地址
+
+	}
+
+	private static final HeaderGroup hopByHopHeaders;
+	static {
+		hopByHopHeaders = new HeaderGroup();
+		String[] headers = new String[] { "Connection", "Keep-Alive", "Proxy-Authenticate", "Proxy-Authorization", "TE",
+				"Trailers", "Transfer-Encoding", "Upgrade" };
+		for (String header : headers) {
+			hopByHopHeaders.addHeader(new BasicHeader(header, null));
+		}
+	}
+
+	private void copyRequestHeaders(HttpServletRequest servletRequest, HttpRequest proxyRequest)
+			throws URISyntaxException {
+		// Get an Enumeration of all of the header names sent by the client
+		Enumeration<?> enumerationOfHeaderNames = servletRequest.getHeaderNames();
+		while (enumerationOfHeaderNames.hasMoreElements()) {
+			String headerName = (String) enumerationOfHeaderNames.nextElement();
+			// Instead the content-length is effectively set via
+			// InputStreamEntity
+			if (!headerName.equalsIgnoreCase(CONTENT_LENGTH) && !hopByHopHeaders.containsHeader(headerName)) {
+				Enumeration<?> headers = servletRequest.getHeaders(headerName);
+				while (headers.hasMoreElements()) {// sometimes more than one
+													// value
+					String headerValue = (String) headers.nextElement();
+
+					proxyRequest.addHeader(headerName, headerValue);
+				}
+			}
+		}
+	}
+
+	/**
+	 * 生成html静态页面
+	 * 
+	 * @param request
+	 * @param detailurl
+	 * @param localFilePath
+	 * @param htmlName
+	 * @author zj
+	 * @date 2018年10月15日
+	 */
+	public void generateHtml(HttpServletRequest request, String detailurl, String localFilePath, String htmlName) {
+
+		final HttpGet getMethod = new HttpGet(detailurl);
+		try {
+			copyRequestHeaders(request, getMethod);
+		} catch (URISyntaxException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		widthRealIp(getMethod, request);
+		CloseableHttpResponse prerenderServerResponse = null;
+		HttpClientBuilder builder = HttpClients.custom().setConnectionManager(new PoolingHttpClientConnectionManager())
+				.disableRedirectHandling();
+		CloseableHttpClient httpClinet = builder.build();
+		try {
+			prerenderServerResponse = httpClinet.execute(getMethod);
+
+			HttpEntity entity = prerenderServerResponse.getEntity();
+			String html = (entity != null) ? EntityUtils.toString(entity) : "";
+			String fpath = FileProcessor.writeFile(html, localFilePath, htmlName);
+			logger.info("write file done:" + fpath);
+		} catch (Exception e) {
+			logger.error(e);
+		} finally {
+			try {
+				if (prerenderServerResponse != null) {
+					prerenderServerResponse.close();
+				}
+			} catch (IOException e) {
+				logger.error("Close proxy error", e);
+			}
+		}
+
+	}
+	/**
+	 * 读取并返回静态html
+	 * @param localFile
+	 * @param response
+	 * @author zj
+	 * @date 2018年10月15日
+	 */
+	public void responseHtml(File localFile,HttpServletResponse response) {
+		try {
+
+			Scanner sc = new Scanner(localFile);
+			StringBuffer sb = new StringBuffer();
+
+			while (sc.hasNextLine()) {
+				String filetxt = sc.nextLine();
+				sb.append("\r\n");
+				sb.append(filetxt);
+			}
+
+			sc.close();
+			String htmldata= sb.toString();
+			response.setHeader("content-type", "text/html; charset=UTF-8");
+			response.setHeader("Content-Length", "" + htmldata.getBytes("UTF-8").length);
+			response.setCharacterEncoding("UTF-8");
+			
+			
+			response.getWriter().write(htmldata);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping(value = "/public/html/{year}/{month}/{imei}.html")
+	public void htmldetail(HttpServletRequest request, HttpServletResponse response, @PathVariable("year") String year,
+			@PathVariable("month") String month, @PathVariable("imei") String imei) {
+
+		String localPath = ConfigReader.getInstance().getProperty("LOCAL_HTML_PATH",
+				"F:\\kxjl\\code\\kb\\WebContent\\public/html/");
+
+		// String month = DateUtil.getNowStr("yyyy/MM");
+
+		String htmlPath = request.getContextPath() + "/" + "public/html/" + year + "/" + month + "/" + imei + ".html";
+
+		String localFilePath = localPath + year + "/" + month + "/";
+		String htmlName = imei + ".html";
+
+		File localFile = new File(localFilePath + htmlName);
+		if (!(localFile.exists())) {
+
+			String domain=ConfigReader.getInstance().getProperty("domain","http://www.256kb.cn");
+			
+			String detailurl = domain + request.getContextPath() + "/public/detail/?i=" + imei;
+
+			//第一次访问信息记录在/detail?i=xxx中
+			generateHtml(request, detailurl, localFilePath, htmlName);
+
+			responseHtml(localFile,response);
+			
+			/*try {
+				request.getRequestDispatcher("/public/detail/?i=" + imei).forward(request, response);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+
+		} else {
+
+			Blog bq = new Blog();
+			bq.setImei(imei);
+			Blog detailitem = bservice.getBlogInfoById(bq);
+
+			//后续静态页面的访问信息记录
+			saveVisitInfo(detailitem, request);
+
+			responseHtml(localFile,response);
+
+			// return "/public/html/"+year+"/"+month+"/"+imei;
+		}
 	}
 
 	@RequestMapping(value = "/public/detail")
@@ -305,15 +559,13 @@ public class PublicController extends BaseController {
 
 			details.get(0).setContent(JEscape.unescape(details.get(0).getContent()));
 
-			
-			
-			view.addObject("preurl", ConfigReader.getInstance().getProperty("domain","http://www.256kb.cn"));
-			
+			view.addObject("preurl", ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn"));
+
 			view.addObject("curBlog", details.get(0));
 
-			if (details.size()>1)
+			if (details.size() > 1)
 				view.addObject("nextBlog", details.get(1));
-			if (details.size()>2)
+			if (details.size() > 2)
 				view.addObject("preBlog", details.get(2));
 
 			int total = likemaper.getTotalLikeNum(imei);
@@ -327,37 +579,19 @@ public class PublicController extends BaseController {
 			}
 
 			view.addObject("relatedBLogs", relatedBLogs);
-			
-			
-			
-			
-			
+
 			view.addObject("tplist", bservice.getBlogTypeGroups());
 			view.addObject("hlist", bservice.getBlogMonthGroup());
 			view.addObject("tglist", bservice.getBlogTags());
-			
+
 			Kurl kquery = new Kurl();
 			kquery.setPage(1);
 			kquery.setPageCount(100);
 			kquery.setVal1("2");
 			view.addObject("yqlist", kurlService.getKurlPageList(kquery));
-			
 
-			// 计数
-			SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
-			
-			//无用户信息，爬虫
-			boolean isspider=false;
-			if (user==null)
-				isspider=true;
-			
-			stasticService.saveStaticInfo(request, StasticTypeOne.DetailPage.toString(),detailitem.getBlog_type_name(), imei,isspider);
-			
+			saveVisitInfo(detailitem, request);
 
-			if (user==null||(user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin)) {
-				bservice.updateBlogReadTime(query);
-				Kdata.getInstance().cleanrBLogList("");
-			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -365,6 +599,26 @@ public class PublicController extends BaseController {
 		view.setViewName("/public/detail/main");
 
 		return view;
+	}
+
+	private void saveVisitInfo(Blog blog, HttpServletRequest request) {
+		// 计数
+		SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
+
+		// 无用户信息，爬虫
+		boolean isspider = false;
+		if (user == null)
+			isspider = true;
+
+		stasticService.saveStaticInfo(request, StasticTypeOne.DetailPage.toString(), blog.getBlog_type_name(),
+				blog.getImei(), isspider);
+
+		Blog query = new Blog();
+		query.setImei(blog.getImei());
+		if (user == null || (user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin)) {
+			bservice.updateBlogReadTime(query);
+			Kdata.getInstance().cleanrBLogList("");
+		}
 	}
 
 	/**
@@ -417,9 +671,8 @@ public class PublicController extends BaseController {
 		 * <priority>0.8</priority> </url> </urlset>
 		 */
 
-		
-		String domain=ConfigReader.getInstance().getProperty("domain","http://www.256kb.cn");
-		
+		String domain = ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn");
+
 		Blog query = new Blog();
 		query.setPageCount(2000000);
 		query.setShowflag("1");
@@ -432,14 +685,13 @@ public class PublicController extends BaseController {
 		for (Blog blog : blogs) {
 			// /public/html/${curBlog.showdate}/${curBlog.imei}.html
 			sb.append("<url>");
-			sb.append("<loc>" + domain+"/public/html/" + blog.getShowdate() + "/" + blog.getImei()
-					+ ".html</loc>");
+			sb.append("<loc>" + domain + "/public/html/" + blog.getShowdate() + "/" + blog.getImei() + ".html</loc>");
 
 			String date = blog.getUpdate_date();
 			if (date == null)
 				date = blog.getCreate_date();
-			
-			date=date.substring(0,10);
+
+			date = date.substring(0, 10);
 
 			sb.append("<lastmod>" + date + "</lastmod>");
 			sb.append("<changefreq>always</changefreq>");

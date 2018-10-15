@@ -8,20 +8,15 @@ import com.kxjl.web.device.model.Device.RouteFlag;
 import com.kxjl.web.system.model.base.BaseModel;
 
 public class Blog extends BaseModel {
-	
-	
-	
-	
-	
-	
+
 	private Integer recordid; // id
 
 	/*
 	 * `recordid` int(11) NOT NULL AUTO_INCREMENT COMMENT '序列号', `title`
 	 * varchar(256) DEFAULT NULL, `blog_type` int(11) DEFAULT '0' COMMENT '分类',
-	 * `content` text, `view_nums` int(11) DEFAULT '0' COMMENT '查看次数',
-	 * `replay_nums` int(11) DEFAULT NULL COMMENT '评论次数', `create_date` datetime
-	 * DEFAULT NULL, `update_date` datetime DEFAULT NULL,
+	 * `content` text, `view_nums` int(11) DEFAULT '0' COMMENT '查看次数', `replay_nums`
+	 * int(11) DEFAULT NULL COMMENT '评论次数', `create_date` datetime DEFAULT NULL,
+	 * `update_date` datetime DEFAULT NULL,
 	 */
 	private String title;
 	private String blog_type;
@@ -34,23 +29,20 @@ public class Blog extends BaseModel {
 	private String update_date;
 	private String tags;
 	private String imei;
-	
-	private String showflag; //
-	
-	private String[] tagStrs;
-	
-	//query
-	
-	//静态链接日期前缀url
-	private String showdate;// /2018/01/   .html
 
+	private String showflag; //
+
+	private String[] tagStrs;
+
+	// query
+
+	// 静态链接日期前缀url
+	private String showdate;// /2018/01/ .html
 
 	private String blog_type_name;
 	private String blog_type_url;
 	private String month;
 	private String showdesc;
-	
-	
 
 	public Integer getRecordid() {
 		return recordid;
@@ -105,12 +97,21 @@ public class Blog extends BaseModel {
 	}
 
 	public void setCreate_date(String create_date) {
-		this.create_date =   DateUtil.getDateStr(DateUtil.getDate(create_date,DateUtil.defaultFormat),DateUtil.defaultFormat);
-		String showdate=DateUtil.getDateStr(DateUtil.getDate(this.getCreate_date(), "yyyy-MM-dd") ,"yyyy/MM");
-		this.showdate=showdate;
-		
-		String month=DateUtil.getDateStr(DateUtil.getDate(this.getCreate_date(), "yyyy-MM-dd") ,"yyyy-MM");
-		this.month=month;
+		this.create_date = DateUtil.getDateStr(DateUtil.getDate(create_date, DateUtil.defaultFormat),
+				DateUtil.defaultFormat);
+
+		if (this.update_date != null)
+			this.update_date = DateUtil.getDateStr(DateUtil.getDate(update_date, DateUtil.defaultFormat),
+					DateUtil.defaultFormat);
+		else
+			this.update_date = DateUtil.getDateStr(DateUtil.getDate(create_date, DateUtil.defaultFormat),
+					DateUtil.defaultFormat);
+
+		String showdate = DateUtil.getDateStr(DateUtil.getDate(this.getCreate_date(), "yyyy-MM-dd"), "yyyy/MM");
+		this.showdate = showdate;
+
+		String month = DateUtil.getDateStr(DateUtil.getDate(this.getCreate_date(), "yyyy-MM-dd"), "yyyy-MM");
+		this.month = month;
 	}
 
 	public String getUpdate_date() {
@@ -118,7 +119,12 @@ public class Blog extends BaseModel {
 	}
 
 	public void setUpdate_date(String update_date) {
-		this.update_date = update_date;
+		if (this.update_date != null)
+			this.update_date = DateUtil.getDateStr(DateUtil.getDate(update_date, DateUtil.defaultFormat),
+					DateUtil.defaultFormat);
+		else
+			this.update_date = DateUtil.getDateStr(DateUtil.getDate(create_date, DateUtil.defaultFormat),
+					DateUtil.defaultFormat);
 	}
 
 	public String getTags() {
@@ -127,9 +133,8 @@ public class Blog extends BaseModel {
 
 	public void setTags(String tag) {
 		this.tags = tag;
-		if(tags!=null&&!tags.equals(""))
-		{
-			tagStrs= tags.split(",");
+		if (tags != null && !tags.equals("")) {
+			tagStrs = tags.split(",");
 		}
 	}
 
@@ -155,9 +160,7 @@ public class Blog extends BaseModel {
 
 	public void setImei(String imei) {
 		this.imei = imei;
-		
 
-		
 	}
 
 	public String getBlog_type_url() {
@@ -176,15 +179,13 @@ public class Blog extends BaseModel {
 		this.month = month;
 	}
 
-
-
 	public String getShowdesc() {
 		return showdesc;
 	}
 
 	public void setShowdesc(String showdesc) {
 		this.showdesc = showdesc;
-		
+
 	}
 
 	public String getShowflag() {
@@ -193,7 +194,7 @@ public class Blog extends BaseModel {
 
 	public void setShowflag(String showflag) {
 		this.showflag = showflag;
-		this. showdesc=Kdata.Enable.parse(showflag).desc;
+		this.showdesc = Kdata.Enable.parse(showflag).desc;
 	}
 
 	public String getShowdate() {
@@ -204,5 +205,4 @@ public class Blog extends BaseModel {
 		this.showdate = showdate;
 	}
 
-	
 }

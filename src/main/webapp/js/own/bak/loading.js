@@ -269,13 +269,21 @@ function loadMobile(browser){
         }else{
             $header.addClass("hide").removeClass("fixed");
         }
-        } 
+        }
+        
+        if(typeof(otherScroll)=="function")
+        otherScroll();
+        
+        
+        if(typeof(otherScroll2)=="function")
+        otherScroll2();
+ 
     };
 }
-
+var browser =null;
 $(function() {
 
-	 var browser = {
+	browser= {
 		        versions: function() {
 		        var u = window.navigator.userAgent;
 		        return {

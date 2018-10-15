@@ -83,6 +83,7 @@
           
    <url-pattern>*.css</url-pattern>  
     <url-pattern>*.png</url-pattern>
+    <url-pattern>*.ico</url-pattern>
     <url-pattern>*.jpeg</url-pattern>
     <url-pattern>*.gif</url-pattern>
     
@@ -92,8 +93,8 @@
     <url-pattern>/js/*</url-pattern>
     <url-pattern>/cool/*</url-pattern>
     <url-pattern>/file/*</url-pattern>
-    <url-pattern>/public/html/*</url-pattern>    
-    
+<!--     <url-pattern>/public/html/*</url-pattern>    
+    --> 
 </servlet-mapping> 
 
 

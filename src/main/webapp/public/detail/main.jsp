@@ -8,8 +8,8 @@
 <head>
 
 
-<%-- <script type="text/javascript"
-	src="${basePath}/js/plugin/angular/angular.min.js"></script> --%>
+ <script type="text/javascript"
+	src="${basePath}/js/plugin/angular/angular.min.js"></script> 
  <script type="text/javascript"
 	src="${basePath}/js/plugin/angular/angular-resource.min.js"></script>
 	
@@ -70,7 +70,7 @@
 						</div>
 						
 						<div  class="postdiv row col-xs-12 margin-top-5 ">
-								post@${curBlog .create_date}&nbsp; <span>已有<span id="rdnum">${curBlog .view_nums}</span>人围观&nbsp;
+								发布于${curBlog .create_date}&nbsp; <span>已有<span id="rdnum">${curBlog .view_nums}</span>人围观&nbsp;
 								</span> <span> <span id="rpnum">${curBlog .replay_nums}</span>人吐槽&nbsp;</span>
 							</div>
 						
@@ -94,6 +94,10 @@
 
 							<div class="row col-xs-12">
 								<hr></hr>
+							</div>
+							
+							   <div  class="postdiv row col-xs-12 margin-top-5 left ">
+								最后更新于${curBlog .update_date}&nbsp; </span>
 							</div>
 					</div>
 
@@ -119,7 +123,7 @@
 						</ul>
 
 
-
+	               
 
 					</div>
 

@@ -1,6 +1,7 @@
 package com.kxjl.web.blog.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -10,6 +11,15 @@ import com.kxjl.web.blog.model.Kurl;
 
 
 public interface KurlService {
+	
+	/**
+	 * 链接分类数据
+	 * @param query
+	 * @return
+	 * @author zj
+	 * @date 2018年10月15日
+	 */
+	public 	Map<String, List<Kurl>>  getKurlItemPageList(Kurl query) ;
 	/**
 	 * 分页获取banner列表
 	 * @param query

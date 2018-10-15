@@ -78,7 +78,7 @@
 								<div class="panel panel-success urldv">
 									<div class="panel-heading urlhead" title="" href="#collapseOne">
 										<div class="row">
-											<h3 class="panel-title col-xs-10 ">
+											<h3 class="panel-title col-xs-10 " id="{{$index}}">
 												{{items.name}} &nbsp;<span><a href="#" class="urladd"
 													ng-click="addOrModify(null,items.name)">新增本类链接</a></span>
 											</h3>
@@ -98,7 +98,7 @@
 
 														<div class="col-sm-3 col-xs-11 ">
 															<div class='durl'>
-																<a ng-href={{x.url_val}}><i class="fa fa-user-o"></i><span>{{x.url_name}}</span></a>
+																<a ng-href={{x.url_val}} target="_blank"><i class="fa fa-user-o"></i><span>{{x.url_name}}</span></a>
 
 																【 <a href="javascript:void(0)" class="text-info"
 																	ng-click="addOrModify(x)">修改</a> <a href="#"
