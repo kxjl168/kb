@@ -13,7 +13,7 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
-
+import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
@@ -93,9 +93,14 @@ public class test {
 		  HttpClient httpClient = new HttpClient();  
 		 // httpClient.getParams().setParameter(ClientPNames.ALLOW_CIRCULAR_REDIRECTS, true);
 		  
-				  String u1="https://256kb.cn/public/html/2018/09/237bd8f6-c36d-43d9-a4bc-b311b00aac5d.html";
+				  String u1="http://127.0.0.1:8081/kb/public/html/2018/09/bdc8c0b5-44fb-4723-b2c5-fcf721c24089.html";
 		  String u2="https://www.256kb.cn/public/search/";
-	        GetMethod getMethod = new GetMethod(u1);  
+	        GetMethod getMethod = new GetMethod(u1);
+	       /* HttpMethodParams params = new HttpMethodParams();
+
+	        params.setContentCharset("UTF-8");
+
+	        getMethod.setParams(params);*/
 	        try {  
 	                //getMethod.addRequestHeader("accept-encoding", "gzip,deflate");  
 	                //getMethod.addRequestHeader("user-agent","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; Alexa Toolbar; Maxthon 2.0)");

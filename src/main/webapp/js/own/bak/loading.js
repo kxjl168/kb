@@ -277,6 +277,9 @@ function loadMobile(browser){
         
         if(typeof(otherScroll2)=="function")
         otherScroll2();
+        
+        if(typeof(otherScroll3)=="function")
+            otherScroll3();
  
     };
 }

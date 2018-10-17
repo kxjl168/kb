@@ -42,9 +42,9 @@
 									
 									</div>
 									<br>
-									<div ng-cloak class="row  col-sm-10 col-xs-12 nopaddding margin-top-5 ">post@{{x.create_date}}&nbsp;
-										<span ><a ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html">阅读</a>({{x.view_nums}})&nbsp;</span>
-										<span ><a ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html#rpdiv">评论</a>({{x.replay_nums}})&nbsp;</span>
+									<div ng-cloak class="row  col-sm-10 col-xs-12 nopaddding margin-top-5 ">发布于{{x.create_date}}&nbsp;
+										<span class="hide"><a ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html">围观</a>({{x.view_nums}})&nbsp;</span>
+										<span class="hide"><a ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html#rpdiv">评论</a>({{x.replay_nums}})&nbsp;</span>
 									</div>
 
 

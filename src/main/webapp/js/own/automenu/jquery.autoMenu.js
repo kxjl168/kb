@@ -197,7 +197,7 @@
 
 	function otherScroll2(){
 		  var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
-		  var page=$(".pageText").scrollTop();
+		  var page=$(".pageText").offset().top;
 		  var height=$(".autoMenu").height();
 		  if(scrollTop>page+height){
 			  //mobile, declare in other common js

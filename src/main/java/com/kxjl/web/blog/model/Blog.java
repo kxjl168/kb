@@ -100,12 +100,7 @@ public class Blog extends BaseModel {
 		this.create_date = DateUtil.getDateStr(DateUtil.getDate(create_date, DateUtil.defaultFormat),
 				DateUtil.defaultFormat);
 
-		if (this.update_date != null)
-			this.update_date = DateUtil.getDateStr(DateUtil.getDate(update_date, DateUtil.defaultFormat),
-					DateUtil.defaultFormat);
-		else
-			this.update_date = DateUtil.getDateStr(DateUtil.getDate(create_date, DateUtil.defaultFormat),
-					DateUtil.defaultFormat);
+		
 
 		String showdate = DateUtil.getDateStr(DateUtil.getDate(this.getCreate_date(), "yyyy-MM-dd"), "yyyy/MM");
 		this.showdate = showdate;
@@ -115,16 +110,17 @@ public class Blog extends BaseModel {
 	}
 
 	public String getUpdate_date() {
-		return update_date;
-	}
-
-	public void setUpdate_date(String update_date) {
 		if (this.update_date != null)
 			this.update_date = DateUtil.getDateStr(DateUtil.getDate(update_date, DateUtil.defaultFormat),
 					DateUtil.defaultFormat);
 		else
 			this.update_date = DateUtil.getDateStr(DateUtil.getDate(create_date, DateUtil.defaultFormat),
 					DateUtil.defaultFormat);
+		return this.update_date;
+	}
+
+	public void setUpdate_date(String update_date) {
+		this.update_date = update_date;
 	}
 
 	public String getTags() {

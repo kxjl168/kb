@@ -352,12 +352,7 @@
 .login_back {
   background: #29477f!important;
 }
-.more {
-  height: 90px;
-  /* 	background: -moz-linear-gradient(bottom,rgba(255,255,255,.1),rgba(255,255,255,0));
-background: -webkit-gradient(linear,0 top,0 bottom,from(rgba(255,255,255,0)),to(#fff));
-background: -o-linear-gradient(bottom,rgba(255,255,255,.1),rgba(255,255,255,0)); */
-}
+
 .durl {
   border-right: 1px solid #e5e5e5;
   
@@ -424,10 +419,17 @@ color:#344F99!important;
   line-height: 24px;
   font-size: 15px;
   /* 3 times the line-height to show 3 lines */
-  height: 130px;
+  height: 300px;
   overflow: hidden;
   margin-bottom: -90px;
 }
+.more {
+  height: 90px;
+   	background: -moz-linear-gradient(bottom,rgba(255,255,255,0),#f9f9f9); 
+background: -webkit-gradient(linear,0 top,0 bottom,from(rgba(255,255,255,0)),to(#f9f9f9));
+background: -o-linear-gradient(bottom,rgba(255,255,255,0),#f9f9f9); 
+}
+
 alldot::after {
   content: "...";
   font-weight: bold;
@@ -1625,3 +1627,37 @@ color:#ecb866!important;
     overflow-y: scroll;
    /*  height: 700px; */
 }
+
+
+.panel.siderabout.fixed{
+	position: fixed;
+    /* min-width: 275px; */
+    top: 80px;
+    width: 25%;
+    padding-right: 30px;
+    /* right: 50px; */
+
+	
+} 
+.panel.card.fixed{
+	position: fixed;
+    /* min-width: 275px; */
+    top: 660px;
+    width: 25%;
+    padding-right: 30px;
+    /* right: 50px; */
+	
+
+	}
+	
+	
+.panel.card.fixed2{
+	position: fixed;
+    /* min-width: 275px; */
+    top: 80px;
+    width: 25%;
+    padding-right: 30px;
+    /* right: 50px; */
+	
+
+	}

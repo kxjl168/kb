@@ -491,7 +491,13 @@ public class PublicController extends BaseController {
 		String htmlName = imei + ".html";
 
 		File localFile = new File(localFilePath + htmlName);
+		
+		logger.info("*************"+ request.getServerName()+":"+request.getServerPort());
+		
 		if (!(localFile.exists())) {
+			
+			
+		
 
 			String domain=ConfigReader.getInstance().getProperty("domain","http://www.256kb.cn");
 			

@@ -735,7 +735,7 @@ public class BlogController extends BaseController {
 			}
 
 		} catch (Exception e2) {
-			System.out.println(e2.getMessage());
+			logger.error(e2);
 			try {
 				jsonOut.put("ResponseCode", "201");
 				jsonOut.put("ResponseMsg", "FAILED");

@@ -81,12 +81,12 @@
 
 				</div>
 
-				<div class="col-sm-3 col-xs-12 pright">
+				<div class="col-sm-3 col-xs-12 pright earth">
 
 					<%@include file="../../public/index/pright.jsp"%>
 
 
-					<div class="row col-xs-12">
+					<div class="row col-xs-12 ">
 						<script type="text/javascript"
 							src="//ra.revolvermaps.com/0/0/8.js?i=0hklog811es&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33"
 							async="async"></script>
@@ -102,6 +102,28 @@
 
 		<%@include file="../../public/pfoot.jsp"%>
 </body>
+
+<script>
+
+function otherScroll3(){
+	  var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
+	  var page=$(".earth").offset().top;
+	  var height=$(".earth").height();
+	  if(scrollTop>page+height+20){
+		  //mobile, declare in other common js
+		  if(browser&&!browser.mobile)
+			  {
+			  $(".panel.card").addClass('fixed2');
+			 // $(".panel.siderabout").addClass('fixed');
+			  }
+		  
+	  }
+	  else{
+		  $(".panel.card").removeClass('fixed2');
+		 // $(".panel.siderabout").removeClass('fixed');
+	  }
+}
+</script>
 
 
 <script type="text/javascript"

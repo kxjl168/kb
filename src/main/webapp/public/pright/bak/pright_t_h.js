@@ -1,10 +1,11 @@
 
 
+	
+	
 $(function() {
 	
 	
-	
-	
+
 
 var $scope = angular.element(ngSection).scope();
 	$scope.$apply(function() {

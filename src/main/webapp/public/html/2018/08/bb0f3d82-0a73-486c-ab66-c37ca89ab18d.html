@@ -220,8 +220,8 @@
 				class="col-sm-9 col-xs-12 pleft rightline">
 				
 
-<input type="hidden" value="activiti,activiti-ui,java" id="tagstrval"/>
-<input type="hidden" value="3b3c7aef-5d18-4d5e-bb7b-aa32dbbc925a" id="imei"/>
+<input type="hidden" value="activiti,activiti-ui,java,angularJs" id="tagstrval"/>
+<input type="hidden" value="bb0f3d82-0a73-486c-ab66-c37ca89ab18d" id="imei"/>
 
 
 	<div class="" id="content" style="">
@@ -237,7 +237,7 @@
 								<img class="nopaddding img-responsive col-xs-2"
 									style="width: 25px; height: 25px;" title="JAVA"
 									src="http://127.0.0.1:8081/kb/file/apk/201803/81242a02-fda0-41ea-959f-078af6a0e66d.jpg">
-									<div class="col-sm-8 col-xs-11 ptitle  ">activiti简单流程示例</div>
+									<div class="col-sm-8 col-xs-11 ptitle  ">activiti-ui web项目集成</div>
 
 
 
@@ -257,6 +257,9 @@
 											<a 
 											title="java" href="/kb/public/index/tg/java.html">java,</a>
 											
+											<a 
+											title="angularJs" href="/kb/public/index/tg/angularJs.html">angularJs,</a>
+											
 											
 											
 									</div> <span ng-click="ff()" style=""
@@ -266,7 +269,7 @@
 						</div>
 						
 						<div  class="postdiv row col-xs-12 margin-top-5 ">
-								发布于2018-08-30 14:27:18&nbsp; <span>已有<span id="rdnum">21</span>人围观&nbsp;
+								发布于2018-08-28 16:32:25&nbsp; <span>已有<span id="rdnum">5</span>人围观&nbsp;
 								</span> <span> <span id="rpnum">0</span>人吐槽&nbsp;</span>
 							</div>
 						
@@ -279,379 +282,355 @@
 						<div class="col-xs-12 row nopaddding">
 							<div class="">
 								<div class=" pageText "
-									><div class="pct"><p>activiti的流程相关基础都已具备，本文通过一个简单的例子，演示流程的全部生命周期</p>
+									><div class="pct">
+<p>上篇我们编译完成了activiti-ui项目，</p>
 
-<h1>一.流程编辑创建</h1>
+<p>但那是作为一个单独的war来部署到tomcat中的，使用起来可能会有诸多不便。</p>
 
-<p>使用activiti-ui来定义流程，然后导出bpmn20.xml文件.（当然也可以使用eclipse插件或者idea插件来处理）</p>
+<p>那么如何将在线编辑功能嵌入我们自己的web项目呢？</p>
 
-<p>整体流程为上文中的请假流程：</p>
+<h1>一.web页面整合</h1>
 
-<h2>开始节点：</h2>
+<p>编译完成的项目目录中复制除WEB-INF的目录至我们自己的web目录中</p>
 
-<p>有一个Initiator,作为后续驳回重新编辑的id使用.</p>
+<p><img fid="183" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/60eda30e-51b9-48db-a525-a1ffc6f6ccba_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/60eda30e-51b9-48db-a525-a1ffc6f6ccba.png" class="img-responsive"></p>
 
-<p><img fid="190" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/60bf9d88-0192-401a-9d50-b9e4efe0f474_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/60bf9d88-0192-401a-9d50-b9e4efe0f474.png" class="img-responsive"></p>
+<p>复制至web activiti-app目录</p>
 
-<p>&nbsp;</p>
-
-<h2>领导审批节点，</h2>
-
-<p>审批人通过分组来确定</p>
-
-<p><img fid="191" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/2e685f54-a0ff-4a87-9ab4-467c4956ca3c_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/2e685f54-a0ff-4a87-9ab4-467c4956ca3c.png" class="img-responsive"></p>
+<p><img fid="185" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/e96f0b2d-1ee4-408b-bbe6-92e310a3092f_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/e96f0b2d-1ee4-408b-bbe6-92e310a3092f.png" class="img-responsive"></p>
 
 <p>&nbsp;</p>
 
-<p><img fid="192" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/ee4fcb3e-6e5c-4f6a-8eb6-2b24d542adbc_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/ee4fcb3e-6e5c-4f6a-8eb6-2b24d542adbc.png" class="img-responsive"></p>
+<p>复制META-INF/数据库配置至resources目录</p>
 
-<h2>审批条件</h2>
+<p><img fid="184" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/6f0ede30-5cfc-47bd-ae9f-d9705c0f0526_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/6f0ede30-5cfc-47bd-ae9f-d9705c0f0526.png" class="img-responsive"></p>
 
-<p>&nbsp;</p>
+<p>web.xml中增加配置</p>
 
-<p>审批通过与否，条件判断</p>
+<pre><code class="language-xml">    &lt;!-- All the Servlets and Filters are configured by this ServletContextListener : --&gt;
+    &lt;listener&gt;
+        &lt;listener-class&gt;org.activiti.app.servlet.WebConfigurer&lt;/listener-class&gt;
+    &lt;/listener&gt;
+    
+    </code></pre>
 
-<p><img fid="193" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/b22cb5a4-ba10-4f4b-910e-0524b6ca3229_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/b22cb5a4-ba10-4f4b-910e-0524b6ca3229.png" class="img-responsive"></p>
+<p>如果使用了spring的话，注释掉，activit包中已经包含以下部分申明</p>
 
-<p>&nbsp;</p>
-
-<p><img fid="194" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/1371a8ab-4aef-4e65-8984-3be9e568c287_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/1371a8ab-4aef-4e65-8984-3be9e568c287.png" class="img-responsive"></p>
-
-<p>&nbsp;</p>
-
-<h2>重新调整：</h2>
-
-<p>受理人为发起人id，与发起节点initator相同</p>
-
-<p><img fid="195" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/62e3b9fb-03db-49ce-bb45-d4538e560494_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/62e3b9fb-03db-49ce-bb45-d4538e560494.png" class="img-responsive"></p>
+<pre><code class="language-xml">&lt;!-- 	&lt;listener&gt;
+		&lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+	&lt;/listener&gt;
+ --&gt;</code></pre>
 
 <p>&nbsp;</p>
 
-<p>导出test.bpmn20.xml文件.</p>
+<h2>jar包引入</h2>
+
+<p>pom.xml文件引入</p>
+
+<pre><code class="language-xml">&lt;!-- project.version:6.0.0--&gt;
+
+&lt;dependency&gt;
+			&lt;groupId&gt;org.activiti&lt;/groupId&gt;
+			&lt;artifactId&gt;activiti-app-conf&lt;/artifactId&gt;
+			&lt;version&gt;${project.version}&lt;/version&gt;			
+&lt;/dependency&gt;
+
+
+&lt;dependency&gt;
+			&lt;groupId&gt;org.activiti&lt;/groupId&gt;
+			&lt;artifactId&gt;activiti-app-logic&lt;/artifactId&gt;
+			&lt;version&gt;6.0.1-SNAPSHOT&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+			&lt;groupId&gt;org.activiti&lt;/groupId&gt;
+			&lt;artifactId&gt;activiti-engine&lt;/artifactId&gt;
+			&lt;version&gt;${project.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+
+
+
+
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.activiti&lt;/groupId&gt;
+			&lt;artifactId&gt;activiti-rest&lt;/artifactId&gt;
+			&lt;version&gt;${project.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.activiti&lt;/groupId&gt;
+			&lt;artifactId&gt;activiti-spring&lt;/artifactId&gt;
+			&lt;version&gt;${project.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.hibernate&lt;/groupId&gt;
+			&lt;artifactId&gt;hibernate-validator&lt;/artifactId&gt;
+			&lt;version&gt;5.3.6.Final&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.hibernate&lt;/groupId&gt;
+			&lt;artifactId&gt;hibernate-core&lt;/artifactId&gt;
+			&lt;version&gt;4.2.16.Final&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		&lt;!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.hibernate&lt;/groupId&gt;
+			&lt;artifactId&gt;hibernate-entitymanager&lt;/artifactId&gt;
+			&lt;version&gt;4.2.16.Final&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		&lt;!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.0-api --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.hibernate.javax.persistence&lt;/groupId&gt;
+			&lt;artifactId&gt;hibernate-jpa-2.0-api&lt;/artifactId&gt;
+			&lt;version&gt;1.0.1.Final&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		&lt;!-- https://mvnrepository.com/artifact/org.hibernate.common/hibernate-commons-annotations --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.hibernate.common&lt;/groupId&gt;
+			&lt;artifactId&gt;hibernate-commons-annotations&lt;/artifactId&gt;
+			&lt;version&gt;4.0.2.Final&lt;/version&gt;
+		&lt;/dependency&gt;
+</code></pre>
 
 <p>&nbsp;</p>
 
-<h1>二.流程发布</h1>
+<h2>angularJs与spring rest的冲突处理</h2>
 
-<p>使用RepositoryService发布.</p>
+<p>activiti-ui前端采用angularjs控制页面的请求转发路由，如果spring采用rest&nbsp; ,控制全部路径，会导致angularjs无法正常跳转</p>
 
-<pre><code class="language-java">/**
-	 * 发布流程， 流程文件名与id相同
-	 * 
-	 * @param id
-	 * @param maps
+<p>处理如下：</p>
+
+<p>activiti-ui目录的全部请求均返回至activiti-ui/index.html根目录转给angularjs全权控制</p>
+
+<pre><code class="language-java">	/**
+	 * activiti-ui界面controller转给前台angularjs Controller控制
 	 * @return
 	 * @author zj
-	 * @date 2018年8月28日
+	 * @date 2018年8月27日
 	 */
-	@RequestMapping("/deploy/{id}")
-	public String test(@PathVariable("id") String id, Map&lt;String, String&gt; maps) {
+	@RequestMapping("/activiti-app/*")
+	public String activiti_app() {
 
-		RepositoryService repositoryService = processEngine.getRepositoryService();
-		Deployment dp =repositoryService.createDeployment().key(id). addClasspathResource("/diagrams/" + id + ".bpmn20.xml").deploy();
+		return "activiti-app/index";
 		
-		ProcessDefinition pd= repositoryService.createProcessDefinitionQuery().processDefinitionKey(id).latestVersion().singleResult();
 
+	}</code></pre>
+
+<p>同时修改activiti-app下 app-cfg.js中的请求路径</p>
+
+<p><img fid="186" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/e1d764de-a779-4315-a3cf-c958efeb8564_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/e1d764de-a779-4315-a3cf-c958efeb8564.png" class="img-responsive"></p>
+
+<pre><code class="language-javascript">ACTIVITI.CONFIG = {
+		'onPremise' : true,
+		'contextRoot' : '/activiti_test',
+		'webContextRoot' : '/activiti_test/activiti-app'
+	};</code></pre>
+
+<p>&nbsp;</p>
+
+<p>这样就可以了。</p>
+
+<p>正常集成访问：</p>
+
+<p><img fid="187" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/c955129b-5a0f-49fa-86d9-46ada536fa11_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/c955129b-5a0f-49fa-86d9-46ada536fa11.png" class="img-responsive"></p>
+
+<p>&nbsp;</p>
+
+<h1>二.提取查看流程页面</h1>
+
+<p>后续要是做应用，给用户查看流程的状态，只需要显示流程图及当前状态，将上方图中流程部分提取出来即可.</p>
+
+<p>作为单独页面，可以自定义嵌入任何地方.</p>
+
+<p>复制display文件夹下的displaymodel.html及dispalymodel.js</p>
+
+<p>原页面是嵌入angularJs模块框架中使用，</p>
+
+<p>我们需要能通过html页面独立访问，修改:html中增加相关js包，</p>
+
+<pre><code class="language-javascript">&lt;script src="../libs/jquery_1.11.0/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="../libs/jquery-ui-1.10.3.custom.min.js"&gt;&lt;/script&gt;
+
+&lt;script src="../libs/angular_1.3.13/angular.min.js"&gt;&lt;/script&gt;
+&lt;script src="../libs/angular-animate_1.3.13/angular-animate.min.js"&gt;&lt;/script&gt;
+&lt;script src="../libs/bootstrap_3.1.1/js/bootstrap.min.js"&gt;&lt;/script&gt;
+&lt;script src="../libs/angular-resource_1.3.13/angular-resource.min.js"&gt;&lt;/script&gt;
+&lt;script src="../libs/angular-cookies_1.3.13/angular-cookies.min.js"&gt;&lt;/script&gt;
+&lt;script src="../libs/angular-sanitize_1.3.13/angular-sanitize.min.js"&gt;&lt;/script&gt;
+&lt;script src="../libs/angular-route_1.3.13/angular-route.min.js"&gt;&lt;/script&gt;
+&lt;script src="../libs/angular-translate_2.4.2/angular-translate.min.js"&gt;&lt;/script&gt;
+&lt;script src="../libs/angular-translate-storage-cookie/angular-translate-storage-cookie.js"&gt;&lt;/script&gt;
+&lt;script src="../libs/angular-translate-loader-static-files/angular-translate-loader-static-files.js"&gt;&lt;/script&gt;
+&lt;script src="../libs/angular-strap_2.1.6/angular-strap.min.js"&gt;&lt;/script&gt;
+&lt;script src="../libs/angular-strap_2.1.6/angular-strap.tpl.min.js"&gt;&lt;/script&gt;
+&lt;script src="../libs/momentjs_2.5.1/momentjs.min.js"&gt;&lt;/script&gt;
+&lt;script src="../libs/bootstrap-tour_0.9.1/bootstrap-tour.min.js"&gt;&lt;/script&gt;
+&lt;script src="../libs/ng-file-upload/ng-file-upload-shim.min.js"&gt;&lt;/script&gt;
+&lt;script src="../libs/ng-file-upload/ng-file-upload.min.js"&gt;&lt;/script&gt;
+
+
+&lt;script src="../libs/ui-grid_3.0.0/ui-grid.js" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script src="../libs/angular-dragdrop_1.0.11/angular-dragdrop.min.js" type="text/javascript"&gt;&lt;/script&gt;
+
+
+&lt;!-- Configuration --&gt;
+&lt;script src="../scripts/app-cfg.js?v=2"&gt;&lt;/script&gt;
+
+        &lt;!-- build:css display/styles/displaymodel-style.css --&gt;
+        &lt;link type="text/css" rel="stylesheet" href="../display/jquery.qtip.min.css" /&gt;
+        &lt;link type="text/css" rel="stylesheet" href="../display/displaymodel.css" /&gt;</code></pre>
+
+<p>&nbsp;</p>
+
+<p>js中增加参数的获取，原js中参数是通过 #bpmnModel的attr来传递参数.</p>
+
+<pre><code class="language-javascript">var modelDiv = jQuery('#bpmnModel');
+var modelId = modelDiv.attr('data-model-id');
+var historyModelId = modelDiv.attr('data-history-id');
+var processDefinitionId = modelDiv.attr('data-process-definition-id');
+var modelType = modelDiv.attr('data-model-type');</code></pre>
+
+<p>我们需要调整为通过链接url获取</p>
+
+<pre><code class="language-javascript">var modelId =GetQueryString('id');
+var modelType = GetQueryString('type');
+
+
+
+function GetQueryString(name) {
+
+	var index = window.location.href.lastIndexOf("/");
+	var indexj = window.location.href.lastIndexOf("?");
+
+	// 最后一个/开始 截取#前面的，兼容history.js html4 url
+	var searchpath = window.location.search;
 	
-
-		if (dp != null)
-			maps.put("msg", "流程：[" + pd.getName() + "] 发布完成 ,id:" + dp.getId());
-		else
-			maps.put("msg", "流程发布失败");
-
-		return "page/success";
-	}</code></pre>
-
-<p>通过url链接发布流程</p>
-
-<p><img fid="197" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/bb205480-80fc-4e26-a108-ddaabbcf9228_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/bb205480-80fc-4e26-a108-ddaabbcf9228.png" class="img-responsive"></p>
-
-<p>&nbsp;</p>
-
-<h1>三.流程的启动</h1>
-
-<h2>启动</h2>
-
-<p>通过runService处理流程的启动.</p>
-
-<pre><code class="language-java">/**
-	 * 流程执行
-	 * 
-	 * @param id
-	 * @param action
-	 * @param maps
-	 * @return
-	 * @author zj
-	 * @date 2018年8月28日
-	 */
-	@RequestMapping("/start/{id}")
-	public String start(@PathVariable("id") String id, Map&lt;String, String&gt; maps) {
-
-		RepositoryService repositoryService = processEngine.getRepositoryService();
 	
-		Map&lt;String, Object&gt; variables = new HashMap&lt;String, Object&gt;();
-		variables.put("person", "张三");
+	var reg = new RegExp("(^|&amp;)" + name + "=([^&amp;]*)(&amp;|$|#)", "i");
 
-		User user = identityService.createUserQuery().userId("u1").singleResult();
+	var r = searchpath.substr(1).match(reg);
 
-		// 用来设置启动流程的人员ID，引擎会自动把用户ID保存到activiti:initiator中
-		identityService.setAuthenticatedUserId("u1");
-		String businessKey = "";// 业务key,后续流程处理表单详细界面自定义使用
-		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(id, businessKey, variables);
-		String processInstanceId = processInstance.getId();
+	if (r != null)
 
-		ProcessDefinition pd = repositoryService.createProcessDefinitionQuery().processDefinitionKey(id).latestVersion().singleResult();
+		return decodeURI(r[2]);
 
-		// 下一步处理人或者处理组
-		// 根据流程实例ID查询 最新一步的任务
-		Task task= taskService.createTaskQuery().processInstanceId(processInstanceId).orderByTaskCreateTime().desc().limitTaskVariables(1).singleResult();
-				
+	return null;
+}</code></pre>
 
-		List&lt;HistoricIdentityLink&gt; identityLinks= processEngine.getHistoryService().getHistoricIdentityLinksForTask(task.getId());
-		String groups="";
-		String users="";
-		for (HistoricIdentityLink historicIdentityLink : identityLinks) {
-			if(historicIdentityLink.getGroupId()!=null)
-			groups+= historicIdentityLink.getGroupId()+",";
-			if(historicIdentityLink.getUserId()!=null)
-			users+= historicIdentityLink.getUserId()+",";
-			
-		}
+<p>完成后：</p>
 
+<p>通过processid，显示流程</p>
 
-		maps.put("msg",
-				"启动成功！启动用户" + user.getFirstName() + user.getLastName() + " " + user.getId() + "&lt;br/&gt;" + " 下一步处理：&lt;br/&gt;"
-						+"&amp;nbsp;用户组："+groups+"  &lt;br/&gt;&amp;nbsp;用户："+ users + "&lt;br/&gt;  ProcessDefinition:" + pd.getName() + "  " + pd.getId() + " &lt;br/&gt; "
-						+ " ProcessInstance:" + processInstance.getId());
+<p><img fid="188" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/d4d5b41e-3bf3-49e2-87e5-afc1fa8a7a82_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/d4d5b41e-3bf3-49e2-87e5-afc1fa8a7a82.png" class="img-responsive"></p>
 
-		return "page/success";
-	}</code></pre>
+<p>通过taskid,获取当前处理进度</p>
 
-<p>然后一样通过url启动</p>
-
-<p><img fid="204" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/85d174fe-2ba2-46fa-b52a-ef8289ec1d00_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/85d174fe-2ba2-46fa-b52a-ef8289ec1d00.png" class="img-responsive"></p>
-
-<h2>查看</h2>
-
-<p>根据processinstanceid 查看流程</p>
-
-<p><img fid="205" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/982857b1-9955-45de-908f-e1385e6c3b5e_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/982857b1-9955-45de-908f-e1385e6c3b5e.png" class="img-responsive"></p>
+<p><img fid="189" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/eba255d3-a8af-4f6f-94c0-7946e5cd4137_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/eba255d3-a8af-4f6f-94c0-7946e5cd4137.png" class="img-responsive"></p>
 
 <p>&nbsp;</p>
 
-<p>流程已经提交，相当于已经发起了一个请假申请.目前等待领导审批，因为流程定义的时候为领导组或领导组2.</p>
+<h2>增加连线名称显示</h2>
 
-<p>所以这两个组的用户可以查看到待办任务.</p>
-
-<p>&nbsp;</p>
-
-<h1>四.待办任务</h1>
-
-<pre><code class="language-java">// 根据用户id查询其待办任务
-List&lt;Task&gt; t2 = taskService.createTaskQuery().taskCandidateOrAssigned(userid).list();
-String rst = packageTableData(t2);</code></pre>
-
-<p>这里封装了下待办的字段，查询流程及相关信息</p>
-
-<pre><code class="language-java">Task	t = (Task) o;
-
-					//待办节点
-					jo.put("name", t.getName());
-
-					ProcessDefinition pd = repositoryService.createProcessDefinitionQuery()
-							.processDefinitionId(t.getProcessDefinitionId()).singleResult();
-
-					List&lt;HistoricIdentityLink&gt; hlinks = historyService
-							.getHistoricIdentityLinksForProcessInstance(t.getProcessInstanceId());
-					String startUser = "";
-					for (HistoricIdentityLink historicIdentityLink : hlinks) {
-						if (historicIdentityLink.getType().equals("starter")
-								&amp;&amp; historicIdentityLink.getUserId() != null) {
-							User u = identityService.createUserQuery().userId(historicIdentityLink.getUserId())
-									.singleResult();
-							startUser += u.getFirstName() + " " + u.getLastName() + "";
-						}
-
-					}
-					jo.put("assige", t.getAssignee());
-					jo.put("startUser", startUser);
-					jo.put("pname", pd.getName() + " :" + pd.getVersion());
-					jo.put("id", t.getId());
-					jo.put("iid", t.getProcessInstanceId());
-					jo.put("prodid", t.getProcessDefinitionId());</code></pre>
-
-<p>我们使用一个页面来模拟查询用户的待办任务</p>
-
-<pre><code class="language-java">@RequestMapping("/tasklist/{userid}")
-	public String tasklist(@PathVariable("userid") String userid, Map&lt;String, String&gt; maps) {
-
-		User user = identityService.createUserQuery().userId(userid).singleResult();
-		maps.put("user", user.getFirstName() + " " + user.getLastName());
-		maps.put("uid", userid);
-
-		Group gp = identityService.createGroupQuery().groupMember(userid).singleResult();
-		maps.put("group", gp.getName());
-		return "page/list";
-	}</code></pre>
-
-<p>页面上使用bootstraptable显示界面</p>
-
-<p><img fid="206" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/6ef7f6af-8723-4481-9a98-7c1453fac82a_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/6ef7f6af-8723-4481-9a98-7c1453fac82a.png" class="img-responsive"></p>
-
-<p><img fid="207" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/820f8e21-8126-478e-8912-21ee4efb2c52_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/820f8e21-8126-478e-8912-21ee4efb2c52.png" class="img-responsive"></p>
+<p>github上的默认6.x代码流程中的连线是不会显示名称的，针对&nbsp;SequenceFlow 类型增加名字显示.</p>
 
 <p>&nbsp;</p>
 
-<p>可以看到待办任务，这里 当前处理人为空，因为我们流程中选择的为用户组，所以两个指定组中的用户都能收到任务。</p>
+<p>修改\Activiti\modules\activiti-ui\activiti-app-rest\src\main\java\org\activiti\app\rest\runtime\RuntimeDisplayJsonClientResource.java&nbsp; &nbsp;+332&nbsp;&nbsp;</p>
 
-<p>这里实际上是可以直接处理任务的，但是没有任务处理人的话，后续查询任务历史的时候比较麻烦。</p>
+<p>增加流程图显示及运行时的连线名称显示</p>
 
-<p>所以这里有一个签收的概念，签收后实际动作为补上任务处理人，相当于独占，组中其他人就无法处理这个任务了.</p>
+<p>修改\Activiti\modules\activiti-ui\activiti-app-logic\src\main\java\org\activiti\app\service\editor\BpmnDisplayJsonConverter.java&nbsp; &nbsp;+168</p>
 
-<h1>五.任务签收</h1>
+<p>增加流程图设计界面即activit-ui详情显示界面连线名称显示</p>
 
-<p>调用API，比较简单</p>
+<pre><code class="language-java"> protected void processElements(Collection&lt;FlowElement&gt; elementList, BpmnModel model, ArrayNode elementArray, ArrayNode flowArray, GraphicInfo diagramInfo, Set&lt;String&gt; completedElements,
+      Set&lt;String&gt; currentElements) {
 
-<pre><code class="language-java">	@RequestMapping("/claim/{userid}/{taskid}/")
-	public String claim(@PathVariable("taskid") String id, @PathVariable("userid") String userid,
-			Map&lt;String, String&gt; maps) {
+    for (FlowElement element : elementList) {
 
-		Task task = taskService.createTaskQuery().taskId(id).singleResult();
+      ObjectNode elementNode = objectMapper.createObjectNode();
+      if (completedElements != null) {
+        elementNode.put("completed", completedElements.contains(element.getId()));
+      }
 
-		// 签收当前任务，在任务表中记录当前处理人，以便后续查询
-		taskService.claim(id, userid);
+      if (currentElements != null) {
+        elementNode.put("current", currentElements.contains(element.getId()));
+      }
 
-		maps.put("msg", "签收完成");
+      if (element instanceof SequenceFlow) {
+        SequenceFlow flow = (SequenceFlow) element;
+        elementNode.put("id", flow.getId());
+      
+        
+        //add zj 180827-line -name
+        elementNode.put("name", flow.getName());
+        elementNode.put("test", "cool!");
+        
+        //add end</code></pre>
 
-		return "page/success";
-	}</code></pre>
+<p>&nbsp;</p>
 
-<p>界面上通过按钮触发，l2用户签收</p>
+<p>&nbsp;</p>
 
-<p><img fid="208" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/4a93ec71-bd5f-4fb6-aa3f-a0dfa8062a6a_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/4a93ec71-bd5f-4fb6-aa3f-a0dfa8062a6a.png" class="img-responsive"></p>
+<h2>jar包引入修改</h2>
 
-<p>签收完成后，补上了当前处理人，则这个时候组里面的其他用户就看不到待办任务了.</p>
+<p>修改完成，重新编译生成 activiti-app-rest.jar 及 activiti-app-logic.jar 代码，需要修改pom.xml中相关引用，使用本地编译好的jar包.同时需要调整相关依赖</p>
 
-<p><img fid="209" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/688fb501-c0ac-4442-a491-20e926295d3d_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/688fb501-c0ac-4442-a491-20e926295d3d.png" class="img-responsive"></p>
-
-<h1>六.任务的处理</h1>
-
-<p>签收完成，进行任务的处理，驳回或者通过。</p>
-
-<p>这里也是模拟，传入我们流程定义的时候的参数 agree即可控制流程的走向.</p>
-
-<pre><code class="language-java">@RequestMapping("/complete/{userid}/{taskid}/{action}")
-	public String complete(@PathVariable("taskid") String id, @PathVariable("userid") String userid,
-			@PathVariable("action") String action, Map&lt;String, String&gt; maps) {
-
-		Task task = taskService.createTaskQuery().taskId(id).singleResult();
+<pre><code class="language-xml">	&lt;dependency&gt;
+			&lt;groupId&gt;org.activiti&lt;/groupId&gt;
+			&lt;artifactId&gt;activiti-app-conf&lt;/artifactId&gt;
+			&lt;version&gt;${project.version}&lt;/version&gt;
+		&lt;/dependency&gt;
 
 
-		// 当前处理人 模拟
-		identityService.setAuthenticatedUserId(userid);
+		&lt;!-- 修改流程线条name字段返回 --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.activiti&lt;/groupId&gt;
+			&lt;artifactId&gt;activiti-app-logic&lt;/artifactId&gt;
+
+			&lt;version&gt;6.0.1-SNAPSHOT&lt;/version&gt;
+			&lt;scope&gt;system&lt;/scope&gt;
+			&lt;systemPath&gt;${project.basedir}/lib/activiti-app-logic-6.0.1-SNAPSHOT.jar&lt;/systemPath&gt;
+		&lt;/dependency&gt;
+
+		&lt;!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-core --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.liquibase&lt;/groupId&gt;
+			&lt;artifactId&gt;liquibase-core&lt;/artifactId&gt;
+			&lt;version&gt;3.5.3&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.activiti&lt;/groupId&gt;
+			&lt;artifactId&gt;activiti-dmn-json-converter&lt;/artifactId&gt;
+			&lt;version&gt;${project.version}&lt;/version&gt;
+		&lt;/dependency&gt;
 		
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.activiti&lt;/groupId&gt;
+			&lt;artifactId&gt;activiti-app-rest&lt;/artifactId&gt;
+			&lt;version&gt;6.0.1-SNAPSHOT&lt;/version&gt;
+			&lt;scope&gt;system&lt;/scope&gt;
+			&lt;systemPath&gt;${project.basedir}/lib/activiti-app-rest-6.0.1-SNAPSHOT.jar&lt;/systemPath&gt;
 
-		Map&lt;String, Object&gt; variables = new HashMap&lt;String, Object&gt;();
-		variables.put("agree", action);
-
+		&lt;/dependency&gt;
 		
-		// 存储特殊的与任务关联的变量值  -将审批通过与否与taskid关联起来，存储在 act_hi_varinst时保留taskid
-		taskService.setVariableLocal(id, "agree", action);  
-		taskService.complete(id, variables);
+		&lt;!-- 修改流程线条name字段返回 end --&gt;
 
-		
-		
-		maps.put("msg", "流程处理完成,参数：" + action);
 
-		return "page/success";
-	}</code></pre>
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.activiti&lt;/groupId&gt;
+			&lt;artifactId&gt;activiti-engine&lt;/artifactId&gt;
+			&lt;version&gt;${project.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+</code></pre>
 
-<h2>驳回</h2>
-
-<p>页面上传入false，及驳回.</p>
-
-<p><img fid="210" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/5f104f18-764f-4db3-9bad-2b98ebb7a2fb_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/5f104f18-764f-4db3-9bad-2b98ebb7a2fb.png" class="img-responsive"></p>
-
-<p><img fid="211" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/575c93f5-1f75-4393-a24f-57b56c8a0c22_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/575c93f5-1f75-4393-a24f-57b56c8a0c22.png" class="img-responsive"></p>
-
-<p>这个时候，我们再看u1用户的待办流程及当前流程的状态图：</p>
-
-<p><img fid="212" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/93f06445-d153-4131-bbb0-46386d243760_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/93f06445-d153-4131-bbb0-46386d243760.png" class="img-responsive"></p>
-
-<p>可以看到流程走到了重新调整的节点，又到了发起人那里处理.</p>
-
-<p><img fid="213" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/adffecaf-d85b-417a-8733-cb22c386dd66_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/adffecaf-d85b-417a-8733-cb22c386dd66.png" class="img-responsive"></p>
-
-<h2>调整提交</h2>
-
-<p>然后我们调整提交后，再用l2用户审批通过，</p>
-
-<p><img fid="214" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/e143361a-0ac3-4e25-af67-768c73716ce0_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/e143361a-0ac3-4e25-af67-768c73716ce0.png" class="img-responsive"></p>
-
-<p>可以看到，走到人事审批了。</p>
-
-<p><img fid="215" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/0251f109-167d-4148-813a-3dd4ad2b29e9_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/0251f109-167d-4148-813a-3dd4ad2b29e9.png" class="img-responsive"></p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp;</p>
-
-<h1>七.已办任务</h1>
-
-<p>到这里基本上流程的过程都演示完成了。</p>
-
-<p>还差一个个人已办流程的呈现，</p>
-
-<p>可以通过historyService的来查询act_hi_actinst数据，根据当前任务及任务完成状态查询</p>
-
-<pre><code class="language-java">	@RequestMapping("/done/{userid}")
-	@ResponseBody
-	public String done(@PathVariable("userid") String userid, Map&lt;String, String&gt; maps) {
-
-		// 根据用户id查询其已完成的任务
-		List&lt;HistoricTaskInstance&gt; t2 = historyService.createHistoricTaskInstanceQuery().taskAssignee(userid).finished().list();
-	
-		String rst = packageTableData(t2);
-
-		return rst;
-	}</code></pre>
-
-<h2>已办任务</h2>
-
-<p>&nbsp;如下：可以查询办理了两次，第一次没通过，第二次通过</p>
-
-<p>&nbsp;</p>
-
-<p><img fid="216" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/ed40fa5c-a359-450d-bb8b-1b85d62913c7_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/ed40fa5c-a359-450d-bb8b-1b85d62913c7.png" class="img-responsive"></p>
-
-<h2>act_hi_varinst参数表缺失taskid问题</h2>
-
-<p>这里发现一个问题，在数据库中act_hi_varinst表 无法查询到第一次审批不通过的参数 agree，怎么都只有最后一次的参数。</p>
-
-<p>参数都只与processInstanceId关联了.</p>
-
-<p>研究后发现，可以如下修改，将指定参数与任务id关联</p>
-
-<pre><code class="language-java">// 存储特殊的与任务关联的变量值  -将审批通过与否与taskid关联起来，存储在 act_hi_varinst时保留taskid
-		taskService.setVariableLocal(id, "agree", action);  </code></pre>
-
-<p>这样重新测试一个单子后发现数据有记录了。</p>
-
-<p><img fid="218" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/00246f15-b78a-4887-b5e2-88734ec0c6d0_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/00246f15-b78a-4887-b5e2-88734ec0c6d0.png" class="img-responsive"></p>
-
-<p>&nbsp;</p>
-
-<p>第一次的单子 35035参数没有任务id,</p>
-
-<p>第二次的单子35058都是先驳回，重新提交再通过，这次agree参数都存储了下来，第一次false,第二次true.</p>
-
-<p><img fid="217" onclick="showOriImg()" orisrc="http://www.256kb.cn/kb/file/apk/201808/a7d5c0d2-09a4-465c-94cc-c6c5b310d060_orign.png" src="http://www.256kb.cn/kb/file/apk/201808/a7d5c0d2-09a4-465c-94cc-c6c5b310d060.png" class="img-responsive"></p>
-
-<p>&nbsp;</p>
-
-<p>至此，简单流程基本都跑通了，正式的流程开发需要补充每个任务的具体处理页面及补充业务数据表单独管理即可.</p>
-
-<p>&nbsp;</p>
+<h1>&nbsp;</h1>
 </div></div>
 							</div>
 
@@ -666,7 +645,7 @@ String rst = packageTableData(t2);</code></pre>
 							</div>
 							
 							   <div  class="postdiv row col-xs-12 margin-top-5 left ">
-								最后更新于2018-08-30 14:27:18&nbsp; </span>
+								最后更新于2018-08-30 14:28:18&nbsp; </span>
 							</div>
 					</div>
 
@@ -676,8 +655,8 @@ String rst = packageTableData(t2);</code></pre>
 							<li>
 							
 								<a
-								href="/kb/public/html/2018/08/bb0f3d82-0a73-486c-ab66-c37ca89ab18d.html"
-								style="" class="for spider">activiti-ui web项目集成</a>
+								href="/kb/public/html/2018/08/d7317d4e-9f29-45e4-af1d-f99930483f7e.html"
+								style="" class="for spider">activiti-入门及基础总结</a>
 								
 								</li>
 						</ul>
@@ -685,8 +664,8 @@ String rst = packageTableData(t2);</code></pre>
 							<li>
 								
 								<a
-								href="/kb/public/html/2018/09/8e5af8bb-5e8a-41d7-9441-73704b5a14c2.html"
-								style="" class="for spider">opencv-java 基础API使用总结</a>
+								href="/kb/public/html/2018/08/3b3c7aef-5d18-4d5e-bb7b-aa32dbbc925a.html"
+								style="" class="for spider">activiti简单流程示例</a>
 								
 							</li>
 						</ul>
@@ -706,7 +685,7 @@ String rst = packageTableData(t2);</code></pre>
 							<div id="license_information">
 
 								<p>
-									本文 [activiti简单流程示例]基于<a href="https://mit-license.org/"
+									本文 [activiti-ui web项目集成]基于<a href="https://mit-license.org/"
 										title="MIT License " target="_blank">MIT License </a>
 									许可协议发布,作者：野生的喵喵<a href="http://www.256kb.cn/">http://www.256kb.cn/</a>
 								</p>
@@ -715,7 +694,7 @@ String rst = packageTableData(t2);</code></pre>
 
 							<p>
 								文章固定链接： <a
-									href="http://127.0.0.1:8081/public/html/2018/08/3b3c7aef-5d18-4d5e-bb7b-aa32dbbc925a.html">http://127.0.0.1:8081/public/html/2018/08/3b3c7aef-5d18-4d5e-bb7b-aa32dbbc925a.html</a>
+									href="http://127.0.0.1:8081/public/html/2018/08/bb0f3d82-0a73-486c-ab66-c37ca89ab18d.html">http://127.0.0.1:8081/public/html/2018/08/bb0f3d82-0a73-486c-ab66-c37ca89ab18d.html</a>
 								转载请注明
 							</p>
 							<p></p>
@@ -783,8 +762,8 @@ String rst = packageTableData(t2);</code></pre>
 									style="width: 25px; height: 25px;"
 									title="JAVA"
 									src="http://127.0.0.1:8081/kb/file/apk/201803/81242a02-fda0-41ea-959f-078af6a0e66d.jpg"> <a
-										href="/kb/public/html/2018/08/bb0f3d82-0a73-486c-ab66-c37ca89ab18d.html"
-										class="col-sm-8 col-xs-11 ">activiti-ui web项目集成</a>
+										href="/kb/public/html/2018/08/3b3c7aef-5d18-4d5e-bb7b-aa32dbbc925a.html"
+										class="col-sm-8 col-xs-11 ">activiti简单流程示例</a>
 								</li>
 							
 							<li >
@@ -805,6 +784,16 @@ String rst = packageTableData(t2);</code></pre>
 									src="http://127.0.0.1:8081/kb/file/apk/201801/8c9e3ea9-5b97-44c5-91ae-efd3e2355110.png"> <a
 										href="/kb/public/html/2018/08/05c3c152-a321-4b42-933b-e7a536a2413e.html"
 										class="col-sm-8 col-xs-11 ">Blog目录生成JS组件</a>
+								</li>
+							
+							<li >
+
+									<img class="nopaddding img-responsive col-xs-2"
+									style="width: 25px; height: 25px;"
+									title="BLOG开发"
+									src="http://127.0.0.1:8081/kb/file/apk/201801/40d1deda-eaf6-449f-a817-b6f1c27b2654.png"> <a
+										href="/kb/public/html/2018/01/4a854350-8433-4026-b327-c74c4cad7651.html"
+										class="col-sm-8 col-xs-11 ">AngularJs站点SEO优化</a>
 								</li>
 							
 							<li >
@@ -1830,7 +1819,7 @@ String rst = packageTableData(t2);</code></pre>
 
 
 
-<div class=" panel panel-success">
+<div class=" panel panel-success lastright2">
 		<div class="panel-heading " title="" data-toggle=""
 			data-parent="#accordion" href="#collapseOner3">
 			<div class="row">
@@ -1843,7 +1832,7 @@ String rst = packageTableData(t2);</code></pre>
 					class="glyphicon glyphicon-chevron-up pull-right "></span>
 			</div>
 		</div>
-		<div id="collapseOner3" class=" panel-collapse collapse in ">
+		<div id="collapseOner3" class=" panel-collapse collapse in  ">
 			<div class="panel-body ">
 
 				<div class="container ">
@@ -1864,7 +1853,8 @@ String rst = packageTableData(t2);</code></pre>
 
  </div>
 </div>
-
+<div class=" panel panel-success lastright">
+</div>
 
 
 			</div>
@@ -1961,6 +1951,27 @@ String rst = packageTableData(t2);</code></pre>
 	src="/kb/js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
 
+<script>
+
+function otherScroll3(){
+	  var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
+	  var page=$(".lastright").offset().top;
+	  var height=$(".lastright").height();
+	  if(scrollTop>page+height+20){
+		  //mobile, declare in other common js
+		  if(browser&&!browser.mobile)
+			  {
+			//  $(".panel.card").addClass('fixed2');
+			 /*  $(".panel.siderabout").addClass('fixed2'); */
+			  }
+		  
+	  }
+	  else{
+		//  $(".panel.card").removeClass('fixed2');
+		  /* $(".panel.siderabout").removeClass('fixed2'); */
+	  }
+}
+</script>
 
 
 

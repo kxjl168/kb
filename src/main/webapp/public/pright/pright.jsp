@@ -197,7 +197,7 @@
 
 
 
-<div class=" panel panel-success">
+<div class=" panel panel-success lastright2">
 		<div class="panel-heading " title="" data-toggle=""
 			data-parent="#accordion" href="#collapseOner3">
 			<div class="row">
@@ -210,7 +210,7 @@
 					class="glyphicon glyphicon-chevron-up pull-right "></span>
 			</div>
 		</div>
-		<div id="collapseOner3" class=" panel-collapse collapse in ">
+		<div id="collapseOner3" class=" panel-collapse collapse in  ">
 			<div class="panel-body ">
 
 				<div class="container ">
@@ -231,4 +231,5 @@
 
  </div>
 </div>
-
+<div class=" panel panel-success lastright">
+</div>

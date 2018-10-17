@@ -114,6 +114,27 @@
 	src="${basePath}/js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
 
+<script>
+
+function otherScroll3(){
+	  var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
+	  var page=$(".lastright").offset().top;
+	  var height=$(".lastright").height();
+	  if(scrollTop>page+height+20){
+		  //mobile, declare in other common js
+		  if(browser&&!browser.mobile)
+			  {
+			//  $(".panel.card").addClass('fixed2');
+			 /*  $(".panel.siderabout").addClass('fixed2'); */
+			  }
+		  
+	  }
+	  else{
+		//  $(".panel.card").removeClass('fixed2');
+		  /* $(".panel.siderabout").removeClass('fixed2'); */
+	  }
+}
+</script>
 
 
 
