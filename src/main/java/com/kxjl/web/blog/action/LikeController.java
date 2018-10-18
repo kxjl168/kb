@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.google.gson.Gson;
+import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.utils.JsonUtil;
 import com.kxjl.web.autodata.dao.LikeInfoMapper;
 import com.kxjl.web.autodata.model.LikeInfo;
@@ -23,6 +24,8 @@ import com.kxjl.web.blog.model.Blog;
 import com.kxjl.web.blog.service.BlogService;
 import com.kxjl.web.system.action.SysBaseInfoController;
 import com.kxjl.web.system.action.base.BaseController;
+import com.kxjl.web.system.model.SysUserBean;
+import com.kxjl.web.system.model.SysUserBean.UserType;
 
 @Controller
 @RequestMapping(value = "/bloglike")
@@ -124,6 +127,18 @@ public class LikeController extends BaseController {
 			
 			jsonOut.put("view_num", tp.getView_nums());
 			jsonOut.put("replay_num", tp.getReplay_nums());
+			
+			
+			SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
+			if (user == null || (user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin))
+			{
+				jsonOut.put("spider_num", "");
+			}else {
+				jsonOut.put("spider_num", "爬虫访问"+tp.getSpider_nums()+"次");
+			}
+			
+			
+			
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

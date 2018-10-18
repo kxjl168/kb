@@ -1,5 +1,6 @@
 package com.kxjl.web.blog.action;
 
+import static com.google.common.collect.FluentIterable.from;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.apache.http.HttpHeaders.CONTENT_LENGTH;
 import static org.apache.http.HttpHeaders.HOST;
@@ -13,6 +14,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -59,6 +61,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.kxjl.tool.common.Config;
@@ -154,7 +158,8 @@ public class PublicController extends BaseController {
 
 		}
 
-		saveStaticInfo(request, StasticTypeOne.HomePage.toString(), "index");
+		
+		saveStaticInfo(request, StasticTypeOne.HomePage.toString(), "index",request.getQueryString());
 
 		return view;
 	}
@@ -274,19 +279,18 @@ public class PublicController extends BaseController {
 		maps.put("menus", leftmenus);
 		return "/page/burl/index_list";
 	}
-	
-	
+
 	@RequestMapping(value = "/page/burl")
 	public String p_brul(Map<String, Object> maps, HttpSession session, HttpServletRequest request) {
 
-		//maps.putAll(sysService.getSysInfo());
+		// maps.putAll(sysService.getSysInfo());
 
-		//List<MenuInfo> leftmenus = menuService.getLeftMenuTree(session, request);
-		
+		// List<MenuInfo> leftmenus = menuService.getLeftMenuTree(session, request);
+
 		setLeftUrls(maps);
 		return "/page/burl/index";
 	}
-	
+
 	private void setLeftUrls(Map<String, Object> maps) {
 
 		Kurl query = new Kurl();
@@ -295,33 +299,31 @@ public class PublicController extends BaseController {
 		query.setVal1("1");
 
 		query.setUrl_name("");// (url_name);
-		Map<String, List<Kurl>> datas=kurlService.getKurlItemPageList(query);
+		Map<String, List<Kurl>> datas = kurlService.getKurlItemPageList(query);
 
-		List<MenuInfo> urls=new ArrayList<>();
+		List<MenuInfo> urls = new ArrayList<>();
 		for (List<Kurl> item : datas.values()) {
-			MenuInfo urlmenu=new MenuInfo();
-			urlmenu.setMenuName(	item.get(0).getUrl_type());
-			
+			MenuInfo urlmenu = new MenuInfo();
+			urlmenu.setMenuName(item.get(0).getUrl_type());
+
 			urls.add(urlmenu);
-			
+
 		}
-		
-		
+
 		maps.put("menus", urls);
 
 	}
-	
+
 	@RequestMapping(value = "/pown/url/")
 	public String p_ourl(Map<String, Object> maps, HttpSession session, HttpServletRequest request) {
 
-		//maps.putAll(sysService.getSysInfo());
+		// maps.putAll(sysService.getSysInfo());
 
-		//List<MenuInfo> leftmenus = menuService.getLeftMenuTree(session, request);
-		
+		// List<MenuInfo> leftmenus = menuService.getLeftMenuTree(session, request);
+
 		setLeftUrls(maps);
 		return "/pown/url/main";
 	}
-	
 
 	@RequestMapping(value = "/page/{url}")
 	public String p_btype(Map<String, Object> maps, HttpSession session, HttpServletRequest request,
@@ -442,14 +444,16 @@ public class PublicController extends BaseController {
 		}
 
 	}
+
 	/**
 	 * 读取并返回静态html
+	 * 
 	 * @param localFile
 	 * @param response
 	 * @author zj
 	 * @date 2018年10月15日
 	 */
-	public void responseHtml(File localFile,HttpServletResponse response) {
+	public void responseHtml(File localFile, HttpServletResponse response) {
 		try {
 
 			Scanner sc = new Scanner(localFile);
@@ -462,12 +466,11 @@ public class PublicController extends BaseController {
 			}
 
 			sc.close();
-			String htmldata= sb.toString();
+			String htmldata = sb.toString();
 			response.setHeader("content-type", "text/html; charset=UTF-8");
 			response.setHeader("Content-Length", "" + htmldata.getBytes("UTF-8").length);
 			response.setCharacterEncoding("UTF-8");
-			
-			
+
 			response.getWriter().write(htmldata);
 
 		} catch (Exception e) {
@@ -491,32 +494,26 @@ public class PublicController extends BaseController {
 		String htmlName = imei + ".html";
 
 		File localFile = new File(localFilePath + htmlName);
-		
-		logger.info("*************"+ request.getServerName()+":"+request.getServerPort());
-		
-		if (!(localFile.exists())) {
-			
-			
-		
 
-			String domain=ConfigReader.getInstance().getProperty("domain","http://www.256kb.cn");
-			
+		logger.info("*************" + request.getServerName() + ":" + request.getServerPort());
+
+		if (!(localFile.exists())) {
+
+			String domain = ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn");
+
 			String detailurl = domain + request.getContextPath() + "/public/detail/?i=" + imei;
 
-			//第一次访问信息记录在/detail?i=xxx中
+			// 第一次访问信息记录在/detail?i=xxx中
 			generateHtml(request, detailurl, localFilePath, htmlName);
 
-			responseHtml(localFile,response);
-			
-			/*try {
-				request.getRequestDispatcher("/public/detail/?i=" + imei).forward(request, response);
-			} catch (ServletException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
+			responseHtml(localFile, response);
+
+			/*
+			 * try { request.getRequestDispatcher("/public/detail/?i=" +
+			 * imei).forward(request, response); } catch (ServletException e) { // TODO
+			 * Auto-generated catch block e.printStackTrace(); } catch (IOException e) { //
+			 * TODO Auto-generated catch block e.printStackTrace(); }
+			 */
 
 		} else {
 
@@ -524,10 +521,10 @@ public class PublicController extends BaseController {
 			bq.setImei(imei);
 			Blog detailitem = bservice.getBlogInfoById(bq);
 
-			//后续静态页面的访问信息记录
+			// 后续静态页面的访问信息记录
 			saveVisitInfo(detailitem, request);
 
-			responseHtml(localFile,response);
+			responseHtml(localFile, response);
 
 			// return "/public/html/"+year+"/"+month+"/"+imei;
 		}
@@ -607,22 +604,59 @@ public class PublicController extends BaseController {
 		return view;
 	}
 
+	public List<String> getCrawlerUserAgents() {
+		List<String> crawlerUserAgents = Lists.newArrayList("baiduspider", "facebookexternalhit", "twitterbot",
+				"rogerbot", "linkedinbot", "embedly", "quora link preview", "showyoubo", "outbrain", "pinterest",
+				"developers.google.com/+/web/snippet", "slackbot", "vkShare", "W3C_Validator", "redditbot", "Applebot");
+
+		// kxjl
+		final String moreAgents = ConfigReader.getInstance().getProperty("crawlerUserAgents");
+		if (isNotBlank(moreAgents)) {
+			crawlerUserAgents.addAll(Arrays.asList(moreAgents.trim().split(",")));
+		}
+
+		return crawlerUserAgents;
+	}
+
+	/**是否为爬虫
+	 * 
+	 * @param userAgent
+	 * @return
+	 * @author zj
+	 * @date 2018年10月18日
+	 */
+	private boolean isInSearchUserAgent(final String userAgent) {
+		return from(getCrawlerUserAgents()).anyMatch(new Predicate<String>() {
+			@Override
+			public boolean apply(String item) {
+				return userAgent.toLowerCase().contains(item.toLowerCase());
+			}
+		});
+	}
+
 	private void saveVisitInfo(Blog blog, HttpServletRequest request) {
 		// 计数
 		SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
 
+		final String userAgent = request.getHeader("User-Agent");
+
 		// 无用户信息，爬虫
-		boolean isspider = false;
-		if (user == null)
-			isspider = true;
+		boolean isspider = isInSearchUserAgent(userAgent);
 
 		stasticService.saveStaticInfo(request, StasticTypeOne.DetailPage.toString(), blog.getBlog_type_name(),
 				blog.getImei(), isspider);
 
 		Blog query = new Blog();
 		query.setImei(blog.getImei());
-		if (user == null || (user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin)) {
-			bservice.updateBlogReadTime(query);
+		if (!isspider) {
+			if (user == null || (user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin)) {
+				bservice.updateBlogReadTime(query);
+				Kdata.getInstance().cleanrBLogList("");
+			}
+			
+		}
+		else {
+			bservice.updateBlogSpiderTime(query);
 			Kdata.getInstance().cleanrBLogList("");
 		}
 	}

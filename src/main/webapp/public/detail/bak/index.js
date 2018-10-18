@@ -220,6 +220,9 @@ function init() {
                                 $("#gdnum").html($scope.goodnum);
                                 $("#rdnum").html(json.view_num);
                                 $("#rpnum").html(json.replay_num);
+                                
+                                $("#spidernum").html(json.spider_num);
+                                
                                 $scope.$apply();
                                 
                                

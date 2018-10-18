@@ -46,9 +46,9 @@
 
 <link  rel="stylesheet"
 	href="${basePath}/js/own/kpro.css"></link>
-
-
-
+<%-- 
+<link rel="stylesheet" href="${basePath }/js/plugin/bootstrap-table/css/bootstrap-table.min.css"></script>
+ --%>
 	<script type="text/javascript"
 		src="${basePath}/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
 	

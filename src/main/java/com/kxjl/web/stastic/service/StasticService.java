@@ -18,6 +18,26 @@ public interface StasticService {
 
 
 	/**
+	 * 查询人的访问信息（非爬虫）
+	 * @param query
+	 * @return
+	 * @author zj
+	 * @date 2018年10月18日
+	 */
+	public List<ActionLog> GetUserVisitDetailList(ActionLog query);
+	
+	/**
+	 * 单用户的访问足迹
+	 * @param query
+	 * @return
+	 * @author zj
+	 * @date 2018年10月18日
+	 */
+	public List<ActionLog> GetUserVisitAllList(ActionLog query);
+	
+	
+	
+	/**
 	 * 解析代理获取ip
 	 * @param request
 	 * @return

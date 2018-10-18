@@ -183,6 +183,26 @@ public class BlogServiceImpl implements BlogService {
 		}
 
 	}
+	
+
+	/**
+	 * 爬取计数加+1
+	 * 
+	 * @param query
+	 */
+	public void updateBlogSpiderTime(Blog query) {
+		List<Blog> blogs = blogDao.getBlogPageList(query);
+
+		if (blogs != null && blogs.size() != 0) {
+
+			// 访问数+1
+			Blog b = blogs.get(0);
+			b.setSpider_nums(b.getSpider_nums() + 1);
+			updateBlog(b);
+		}
+
+	}
+
 
 	/**
 	 * 分页获取banner列表

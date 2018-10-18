@@ -4,11 +4,22 @@ app.controller('eduCtrl', function ($scope, eduSrv) {
 
 });
 
-/*document.addEventListener("deviceready", function() {
-	console.log("deviceready2=======: ");
-	init();
-});*/
+/*
+ * document.addEventListener("deviceready", function() {
+ * console.log("deviceready2=======: "); init(); });
+ */
 
+var cuserid="";
+function showdetail(userid){
+	
+	cuserid=userid;
+	$("#myModal_detail").modal('show');
+	 $("#table_detail2").bootstrapTable('refresh', null);
+}
+
+function query(){
+	   $("#table_detail").bootstrapTable('refresh', null);
+}
 
 
 function initDetailTable() {
@@ -20,7 +31,7 @@ function initDetailTable() {
 
     // 初始化Table
     $('#table_detail').bootstrapTable({
-        url:http + "statistics/GetActionList.action", // 请求后台的URL（*）
+        url:http + "statistics/GetUserVisitDetailList.action", // 请求后台的URL（*）
         method: 'post', // 请求方式（*）
         contentType: 'application/x-www-form-urlencoded',
         toolbar: '#toolbar', // 工具按钮用哪个容器
@@ -49,18 +60,22 @@ function initDetailTable() {
     
         	var page=1+ offset/rows;
      
+        	var sname= params.sort; // 要排序的字段
+        	if(sname=='blogname')
+        		sname="blog_id";
+        	
             var param = {
-            		rows: params.limit, // 每页要显示的数据条数
+            		pageCount: params.limit, // 每页要显示的数据条数
                 offset: params.offset, // 每页显示数据的开始行号
                 page:page,
-                sort: params.sort, // 要排序的字段
-             
-                date1 : $("#effectDate").val(),
-                date2 : $("#effectDate2").val(),
+                sortName: sname, // 要排序的字段
+                sortOrder:  params.order,
+                time1 : $("#effectDate").val(),
+                time2: $("#effectDate2").val(),
                 date_type : $("#dateType").val(),
-             //   qName : $("#s_type ").find("option:selected").text(),
-             //   date:cdate,
-               // userid:cuserid,
+             // qName : $("#s_type ").find("option:selected").text(),
+             // date:cdate,
+                userid:$("#userid").val(),
             };
             return param;
         },
@@ -72,83 +87,194 @@ function initDetailTable() {
                 valign: 'middle',
                 visible:false
             }, 
-        	{
+            {
+                field: 'blogname',
+                title: '文章',
+                align: 'left',
+                valign: 'middle',
+                sortable : true,
+                formatter: function (value, row, index) {
+                	if(value==undefined)
+                		value="";
+                    return "<a href='"+basePath+"/public/detail/?i="+row.blog_id+"'>"+value+"</a>";
+                }
+            },
+          
+          
+            {
+            field: 'userid',
+            title: '访问ip',
+            align: 'center',
+            sortable : true,
+            valign: 'middle' ,
+            formatter: function (value, row, index) {
+                return "<a href='javascript:void()' onclick='showdetail(\""+value+"\")'>"+value+"(访问详情)</a>";
+            }
+            }, 
+           
+            {
+            field: 'city',
+            title: '访问地市',
+            align: 'center',
+            valign: 'middle'
+            }, 
+            {
             field: 'action_date',
             title: '时间',
             align: 'center',
-            valign: 'middle'
-        },
-        {
-            field: 'type_first',
-            title: '分类一',
-            align: 'center',
-            valign: 'middle'
-        }, {
-            field: 'type_second',
-            title: '分类二',
-            align: 'center',
-            valign: 'middle'
-        },  {
-            field: 'blogname',
-            title: '文章',
-            align: 'center',
             valign: 'middle',
-            formatter: function (value, row, index) {
-                return "<a href='"+basePath+"/public/detail/?i="+row.blog_id+"'>"+value+"</a>";
+            sortable : true,
+            },
+            {
+            	 field: 'type_second',
+            title: '分类',
+            align: 'center',
+            sortable : true,
+          
             }
+        ],
+    });
+    
+    
+    
+    
+    
+    // 初始化Table
+    $('#table_detail2').bootstrapTable({
+        url:http + "statistics/GetUserVisitAllList.action", // 请求后台的URL（*）
+        method: 'post', // 请求方式（*）
+        contentType: 'application/x-www-form-urlencoded',
+        toolbar: '#toolbar', // 工具按钮用哪个容器
+    
+        showHeader: true,
+        searchAlign: 'left',
+        buttonsAlign: 'left',
+        searchOnEnterKey: true,
+        striped: true, // 是否显示行间隔色
+        cache: false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        pagination: true, // 是否显示分页（*）
+        sidePagination: "server", // 分页方式：client客户端分页，server服务端分页（*）
+        pageNumber: 1, // 初始化加载第一页，默认第一页
+        pageSize: 10, // 每页的记录行数（*）
+        pageList: [10, 25], // 可供选择的每页的行数（*）
+        search: false, // 是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+        detailView: false,
+        // showColumns: true, //是否显示所有的列
+        uniqueId: "id", // 每一行的唯一标识，一般为主键列
+        // queryParamsType : "limit",
+        queryParams: function queryParams(params) { // 设置查询参数
+        	
+        	var rows= params.limit; // 每页要显示的数据条数
+           var offset= params.offset; // 每页显示数据的开始行号
+           
+
+       	var sname= params.sort; // 要排序的字段
+       	if(sname=='blogname')
+       		sname="blog_id";
+       	
+        	var page=1+ offset/rows;
+     
+            var param = {
+            		pageCount: params.limit, // 每页要显示的数据条数
+                offset: params.offset, // 每页显示数据的开始行号
+                page:page,
+                sortName: sname, // 要排序的字段
+                sortOrder:  params.order,
+             
+                userid:cuserid,
+            };
+            return param;
         },
-        {
-            field: 'spider_flag',
-            title: '爬虫',
-            align: 'center',
-            valign: 'middle'
-        },
-        /*{
-            title: '操作',
-            field: 'vehicleno',
-            align: 'center',
-            formatter: modifyAndDeleteButton,
-            events: PersonnelInformationEvents
-        }*/
+        columns: [
+        	{
+                field: 'id',
+                title: '订单编号',
+                align: 'center',
+                valign: 'middle',
+                visible:false
+            }
+        	,
+        	 {
+                field: 'action_date',
+                title: '时间',
+                align: 'center',
+                valign: 'middle',
+                sortable : true
+            }, 
+            {
+               
+            	 field: 'type_first',
+            	 title: '分类一',
+                align: 'center',
+          
+            },
+            {
+            	  field: 'type_second',
+                title: '分类二',
+              
+                align: 'center',
+           
+            },
+            {
+            	field: 'blog_id',
+            	title: '额外数据',
+                align: 'center',
+             
+            },
+            {
+                field: 'blogname',
+                title: '文章',
+                align: 'center',
+                sortable : true,
+                valign: 'middle',
+                formatter: function (value, row, index) {
+                	if(value==undefined)
+                		value="";
+                    return "<a href='"+basePath+"/public/detail/?i="+row.blog_id+"'>"+value+"</a>";
+                }
+            }
+        
         ],
     });
 }
 
 
 $(function () {
-	/*if (clinetType == "Android" || clinetType == "http") {
-		console.log("deviceready1=======: ");
-		
-
-	}*/
-
-	init();
+	
+	initmenu($("#menuul"),"statistics/userPage");
+	
+	initDateSelect();
 	
 	var $scope = angular.element(ngSection).scope();
-	kvalidate.init(
-			$("#fm"),
-			{
-				s_roleid: {
-					required: true,
-				//	version4: true,
-					//minlength:4,
-				},
-				s_rolename:"required",
-				
-			},
-			{
-				s_roleid: {
-					required: "请输入角色ID",
-				//	version4: "版本号格式错误*.*.*.*",
-					//minlength:"至少4个字符"
-				},
-				s_rolename:"请输入角色名称",
-				
-			},
-			$scope.doupdate,
-			""
-		);
-	
+	$scope.$apply(function () {
+
+		
+		$scope.date_type2 = [ {
+			"value" : "HOUR",
+			"name" : "小时"
+		}, {
+			"value" : "DAY",
+			"name" : "天"
+		}, {
+			"value" : "MONTH",
+			"name" : "月"
+		}];
+		  setTimeout(function(){
+			  $("#dateType").get(0).selectedIndex=2;
+			   $("#dateType").trigger('change');
+			   
+			   setTimeout(function(){
+				   initDetailTable();	   
+			   },200);
+		  }, 50);
+		  
+		  
+			
+			
+			
+	});
+	 
+
 
 });
 
@@ -171,29 +297,29 @@ function loadMenuTree(role_id)
 				},
 			view : {
 				showLine : true, // 是否显示节点间的连线
-			//	addHoverDom : addHoverDom, // 增加节点 点击新增
-			//	removeHoverDom : removeHoverDom,
+			// addHoverDom : addHoverDom, // 增加节点 点击新增
+			// removeHoverDom : removeHoverDom,
 				selectedMulti : false
 			},
 			edit : {
 				enable : false,
 				editNameSelectAll : true,
-			//	renameTitle : renameTitle, // 编辑按钮说明文字
-			//	removeTitle : removeTitle, // 删除按钮说明文字
-			//	showRemoveBtn : showRemoveBtn, // 是否显示移除按钮
-			//	showRenameBtn : showRenameBtn
+			// renameTitle : renameTitle, // 编辑按钮说明文字
+			// removeTitle : removeTitle, // 删除按钮说明文字
+			// showRemoveBtn : showRemoveBtn, // 是否显示移除按钮
+			// showRenameBtn : showRenameBtn
 			// 是否显示编辑按钮
 			},
 			callback : {
-			//	beforeDrag : beforeDrag,
-			//	beforeEditName : beforeEditName, // 编辑节点
-			//	beforeRemove : beforeRemove, // 删除节点
-			//	beforeRename : beforeRename,
-			//	onRemove : onRemove,
-			//	onRename : onRename,
-			//	beforeDrop : beforeDrop,
-			//	beforeClick : beforeClick,
-			//	onCheck : onCheck
+			// beforeDrag : beforeDrag,
+			// beforeEditName : beforeEditName, // 编辑节点
+			// beforeRemove : beforeRemove, // 删除节点
+			// beforeRename : beforeRename,
+			// onRemove : onRemove,
+			// onRename : onRename,
+			// beforeDrop : beforeDrop,
+			// beforeClick : beforeClick,
+			// onCheck : onCheck
 			},
 			data : {
 				simpleData : {
@@ -206,7 +332,7 @@ function loadMenuTree(role_id)
 		};
 	
 	
-	//var role_id=$("#role_id").val();
+	// var role_id=$("#role_id").val();
 	
 	// 防止页面乱码现象
 	$.ajax({
@@ -223,9 +349,9 @@ function loadMenuTree(role_id)
 		},
 		success : function(data) { // 请求成功后处理函数
 			var data1 = eval('[' + data + ']');
-//			if (typeof (data1.name) == undefined) {
-//				data1.name = '';
-//			}
+// if (typeof (data1.name) == undefined) {
+// data1.name = '';
+// }
 			zNodes = data1; // 把后台封装好的简单Json格式赋给treeNodes
 
 			
@@ -247,7 +373,7 @@ function loadMenuTree(role_id)
 
 function changerows(option) {
 	var num = $(option).val();
-	//msg(num);
+	// msg(num);
 
 	var $scope = angular.element(ngSection).scope();
 	$scope.$apply(function () {
@@ -260,14 +386,14 @@ function selectAll() {
 	var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 	
 	var ck= $("#selectAll").get(0).checked;
-	//alert(ck);
+	// alert(ck);
 	zTree.checkAllNodes(ck);
 }
 
 
 function init() {
 
-	initmenu($("#menuul"),"page/privilege/");
+	initmenu($("#menuul"),"statistics/userPage");
 	var http = getImUrl();// "";
 
 	
@@ -292,255 +418,34 @@ function init() {
 	var $scope = angular.element(ngSection).scope();
 	$scope.$apply(function () {
 
-
-		$scope.title = "角色管理";
-		$scope.page = 1;
-		$scope.rows = 10;
-		$scope.rows_select = [5, 10, 20];
-		  setTimeout(function(){
-			   $("div.tablefoot select").val($scope.rows);
-		   }, 50);
-		  
-		$scope.pageData = [];
 		
-		$scope.cpTypes = [{
-			"id": 0,
-			"text": "江苏"
+		$scope.date_type2 = [ {
+			"value" : "HOUR",
+			"name" : "小时"
 		}, {
-			"id": 2,
-			"text": "浙江",
-			"selected": true
+			"value" : "DAY",
+			"name" : "天"
 		}, {
-			"id": 3,
-			"text": "山东"
-
-		}, {
-			"id": 4,
-			"text": "安徽"
-
+			"value" : "MONTH",
+			"name" : "月"
 		}];
-
-		$scope.selType = 1;
-
-		//$("#myModal").draggable();
-		//	$("#myModal").resizable();
-		$("#cpType").select2({
-
-			"placeholder": "请选择类型",
-			"allowClear": false,
-			"minimumResultsForSearch": Infinity,
-			"data": $scope.cpTypes
-		});
-
-		$("#cpType2").select2({
-
-			"placeholder": "请选择类型",
-			"allowClear": false,
-			"minimumResultsForSearch": Infinity,
-			"data": $scope.cpTypes
-		});
-
-		$scope.load = function (type) {
-
-			window.location.href = "../../page/" + type;
-		};
+		 // setTimeout(function(){
+			   $("#dateType").get(0).selectedIndex=1;
+			   $("#dateType").trigger('change');
+		 // }, 50);
 
 		
+
 		
-		$scope.del=function(item)
-		{
-			if(item==null)
-				return;
-			
-			var id= item.role_en;
-			
-			
-			
-		$("#myModal3").modal("show");
-		$("#btnconfirm").one("click",function ()
-		{
-		
-			
-			
-			
-			var obj={};
-			
-			obj.role_id=id;
-			
-				SZUMWS(http + "Privilege/delRole.action", JSON
-						.stringify(obj), function succsess(json) {
-
-					var code = json.ResponseCode;
-					var message = json.ResponseMsg;
-					console.log('-----return -code= ' + code + ';message= '
-							+ message);
-					if (code == 200) {
-			
-						msg("删除成功！");
-						
-						$("#myModal3").modal("hide");
-						
-						$scope.getList();
-					
-
-					} else {
-						msg(message);
-					}
-
-				
-					
-				
-
-				}, function error(data) {
-					msg("网络异常!");
-					//$("#myModal2").modal('hide');
-					
-					
-
-				}, false, "json"
-
-				);
-				
-				//$("#btnconfirm").unbind("click",delfun(id));
-				
-				
-		});
-		
-		}
-		
-		$scope.addOrModify=function(item)
-		{
-			kvalidate.resetForm("#fm");
-			
-			if(item!=null)
-				{
-				$scope.edit="编辑";
-				
-				loadMenuTree(item.role_en)
-				
-				$scope.s_roleid=item.role_en;
-				$scope.s_rolename=item.role_zh;
-				$scope.s_desc=item.role_desc;
-				$("#s_roleid").attr('disabled','');
-				}
-			else
-				{
-				$scope.edit="新增";
-				loadMenuTree("");
-				
-				$("#s_roleid").removeAttr('disabled');
-				
-				$scope.s_roleid="";
-				$scope.s_rolename="";
-				$scope.s_desc="";
-			
-				
-				}
-			
-			
-			//$scope.getcompayList();
-			$("#myModal2").modal('show');
-		}
-		
-		
-		$scope.doupdate=function(){
-			
-
-			
-			var menuids="";
-			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-			var nodes = zTree.getCheckedNodes(true);
-			for ( var i = 0, l = nodes.length; i < l; i++) {		
-				menuids+=nodes[i].id+",";
-
-			}
-			
-			
-			var obj={};
-			
-		
-			
-			obj.role_id=$scope.s_roleid;
-			obj.role_name=$scope.s_rolename;
-			obj.menuids=menuids;
-			obj.desc=$scope.s_desc;   //$scope.s_company;
-			
-			SZUMWS(http + "Privilege/addOrUpdateRoleInfo.action", JSON
-					.stringify(obj), function succsess(json) {
-
-				var code = json.ResponseCode;
-				var message = json.ResponseMsg;
-				console.log('-----return -code= ' + code + ';message= '
-						+ message);
-				if (code == 200) {
-		
-					
-					
-					$("#myModal2").modal('hide');
-						
-					$scope.getList();
-					setTimeout(function(){
-					$scope.s_roleid="";
-					$scope.s_rolename="";
-					$scope.s_desc="";
-				
-					$scope.s_ip_refresh="";
-					
-					$scope.$apply();
-					},1000);
-
-				} else {
-					msg(message);
-				}
-/*
-				if (fucOnFinished != null)
-					fucOnFinished();*/
-				
-			
-
-			}, function error(data) {
-				msg("网络异常!");
-				//$("#myModal2").modal('hide');
-				
-			/*	if (fucOnFinished != null)
-					fucOnFinished();*/
-
-			}, false, "json"
-
-			);
-		}
-		
-		$scope.update=function()
-		{
-			
-			/*if($scope.fm.s_roleid.$error.required)
-				{
-				error("角色ID必须要填写");
-				return;
-				}
-			if($scope.fm.s_rolename.$error.required)
-			{
-				error("角色名称必须要填写");
-			return;
-			}*/
-		
-			kvalidate.validate("#fm");
-			
-		}
-
-
-
-		$scope.citys_select = ['上海', '南京', 'nanjing', '扬州', '苏州'];
-
 		$scope.getcompayList = function (id, fucOnFinished, clear) {
 
 			var http = getImUrl();// "";
 
 			var obj = new Object();
 
-			//obj.deviceid = $scope.id;// "12345678";
-			//obj.ip = $scope.ip;
-			//obj.compy_name = $scope.compy_name;
+			// obj.deviceid = $scope.id;// "12345678";
+			// obj.ip = $scope.ip;
+			// obj.compy_name = $scope.compy_name;
 			obj.page = 1;// 1;// "12345678";
 			obj.rows = 40;// 10;// "12345678";
 
@@ -556,7 +461,7 @@ function init() {
 
 						$scope.compays_select = eval(json.datalist);
 
-						//$scope.total = json.total;
+						// $scope.total = json.total;
 
 						$scope.$apply();
 
@@ -581,12 +486,6 @@ function init() {
 			);
 
 		}
-		//$scope.getcompayList();
-
-
-
-	
-
 
 
 		$scope.getList = function (id, fucOnFinished, clear) {
@@ -603,13 +502,13 @@ function init() {
 
 			// alert($scope.etId);
 
-			//if ($scope.lastSecondID != $scope.etId) {
+			// if ($scope.lastSecondID != $scope.etId) {
 
-			//	$scope.page = 1;// // 1;// "12345678";
+			// $scope.page = 1;// // 1;// "12345678";
 			// 10;// "12345678";
-			//	}
+			// }
 
-			//	$scope.lastSecondID = $scope.etId;
+			// $scope.lastSecondID = $scope.etId;
 
 			var http = getImUrl();// "";
 
@@ -634,7 +533,8 @@ function init() {
 						$scope.total = json.total;
 						$scope.pageDataPre = [];
 						$scope.pageDataAft = [];
-						$scope.pageNum = Math.ceil($scope.total / $scope.rows);// + ($scope.total%$scope.rows)>0?1:0;
+						$scope.pageNum = Math.ceil($scope.total / $scope.rows);// +
+																				// ($scope.total%$scope.rows)>0?1:0;
 
 						for (var i = $scope.page - 3; i < $scope.page; i++) {
 							if (i > 0)
@@ -656,8 +556,8 @@ function init() {
 					if (fucOnFinished != null)
 						fucOnFinished();
 
-					//$('#refresh').removeClass('visible');
-					//$('#refresh2').removeClass('visible');
+					// $('#refresh').removeClass('visible');
+					// $('#refresh2').removeClass('visible');
 
 				}, function error(data) {
 					msg("网络异常!");
@@ -665,17 +565,17 @@ function init() {
 					if (fucOnFinished != null)
 						fucOnFinished();
 
-					//	$("#refresh").removeClass('visible');
-					//$('#refresh2').removeClass('visible');
+					// $("#refresh").removeClass('visible');
+					// $('#refresh2').removeClass('visible');
 
 				}, false, "json"
 
 			);
 
 		}
-		//$scope.apply();
+		// $scope.apply();
 
-		$scope.getList();
+		// $scope.getList();
 
 		return;
 
@@ -1136,10 +1036,10 @@ function keyword(id, url, source, serviceid, appName, appType, AppUrl,
 
 function openList(id) {
 	var location = "http://www.szzfcg.cn/viewer.do?id=36364830";
-	//alert(location)
-	//window.location.href=location;
+	// alert(location)
+	// window.location.href=location;
 	open_without_referrer(location);
-	//open_new_window(location);
+	// open_new_window(location);
 }
 
 function open_new_window_cool(full_link) {
@@ -1173,8 +1073,9 @@ function getItem(obj, nodeType) {
 		// obj.Id=8;
 
 
-		/*onclick='open_new_window(\""
-			   + encodeURI( obj.URL)*/
+		/*
+		 * onclick='open_new_window(\"" + encodeURI( obj.URL)
+		 */
 
 
 		itemHtml = "	<a class=\"list-group-item\"  "

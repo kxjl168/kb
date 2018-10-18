@@ -72,6 +72,7 @@
 						<div  class="postdiv row col-xs-12 margin-top-5 ">
 								发布于${curBlog .create_date}&nbsp; <span>已有<span id="rdnum">${curBlog .view_nums}</span>人围观&nbsp;
 								</span> <span> <span id="rpnum">${curBlog .replay_nums}</span>人吐槽&nbsp;</span>
+								<span id="spidernum"></span>
 							</div>
 						
 

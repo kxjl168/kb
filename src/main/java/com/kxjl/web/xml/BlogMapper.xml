@@ -166,6 +166,9 @@ order by t asc
 		<if test='view_nums != null'>
 			view_nums=#{view_nums},
 		</if>
+		<if test='spider_nums != null'>
+			spider_nums=#{spider_nums},
+		</if>
 		<if test='replay_nums != null'>
 			replay_nums=#{replay_nums},
 		</if>

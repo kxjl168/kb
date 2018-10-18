@@ -336,6 +336,11 @@ public class SearchController extends BaseController {
 				else if (searengin.contains("google"))
 					desturl = preurl + searengin + "/search?q="
 							+ URLEncoder.encode(data, "utf-8");
+				
+				
+				//记录搜索关键词
+				saveStaticInfo(request, StasticTypeOne.GSearch.getDesc(), "",data);
+				
 
 			} else if (url != null && !url.equals("")) {
 				// 替换自动附加的本站链接前缀

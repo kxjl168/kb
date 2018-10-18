@@ -1661,3 +1661,39 @@ color:#ecb866!important;
 	
 
 	}
+
+	.sortable:after{
+	  content: "\f0dc";
+	  padding-left: 10px;
+}
+/** bootstraptable sort*/	
+	 .desc:after {
+     
+    content: "\f0dd";
+
+}
+
+.asc:after{
+	content: "\f0de";
+	
+}
+
+
+
+.fixed-table-container thead th .both {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.fixed-table-container thead th .sortable {
+     cursor: pointer;
+    background-position: right;
+    background-repeat: no-repeat;
+    padding-right: 30px; 
+      
+}
+/** bootstraptable sort end*/	
+	

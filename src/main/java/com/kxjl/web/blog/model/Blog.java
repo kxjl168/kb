@@ -24,6 +24,8 @@ public class Blog extends BaseModel {
 	private String content;
 	private Integer view_nums; // 链接url
 	private Integer replay_nums; // 创建者
+	
+	private Integer spider_nums; // 爬取次数
 
 	private String create_date;
 	private String update_date;
@@ -199,6 +201,14 @@ public class Blog extends BaseModel {
 
 	public void setShowdate(String showdate) {
 		this.showdate = showdate;
+	}
+
+	public Integer getSpider_nums() {
+		return spider_nums;
+	}
+
+	public void setSpider_nums(Integer spider_nums) {
+		this.spider_nums = spider_nums;
 	}
 
 }

@@ -77,6 +77,7 @@ public class ActionLog extends BaseModel {
 	private Double total_uv;
 	
 	//query 
+	private String date_type;
 	private String time1;
 	private String time2;
 	private String dateFormat;
@@ -217,6 +218,14 @@ public class ActionLog extends BaseModel {
 
 	public void setSpider_flag(String spider_flag) {
 		this.spider_flag = spider_flag;
+	}
+
+	public String getDate_type() {
+		return date_type;
+	}
+
+	public void setDate_type(String date_type) {
+		this.date_type = date_type;
 	}
 
 

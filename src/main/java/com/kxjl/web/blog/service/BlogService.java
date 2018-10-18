@@ -12,7 +12,7 @@ import com.kxjl.web.blog.model.Blog;
 
 public interface BlogService {
 	
-	
+	public void updateBlogSpiderTime(Blog query) ;
 	/**
 	 * 文章tag总数列表
 	 * 

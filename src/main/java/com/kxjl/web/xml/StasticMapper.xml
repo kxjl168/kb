@@ -351,6 +351,35 @@ select DISTINCT city from user_action_log where userid=#{ip}
 		</select>
 
 
+<select id="GetUserVisitDetailList" parameterType="com.kxjl.web.stastic.model.ActionLog" resultType="com.kxjl.web.stastic.model.ActionLog">
+select * from(select b.title blogname,ul.* from user_action_log ul left join blog_info b on ul.blog_id=b.imei
+where 1=1
+and spider_flag='false'
+and type_first='detailpag'
+and userid!='127.0.0.1' 
+and str_to_date(action_date,'${dateFormat}') BETWEEN str_to_date('${time1}','${dateFormat}')
+		and str_to_date('${time2}','${dateFormat}')
+order by action_date desc 
+) t  
+
+
+</select>
+
+
+
+<select id="GetUserVisitAllList" parameterType="com.kxjl.web.stastic.model.ActionLog" resultType="com.kxjl.web.stastic.model.ActionLog">
+	
+select log.*,b.title blogname  from user_action_log log left join blog_info b on log.blog_id=b.imei
+
+ where 1=1
+ and userid=#{userid} 
+ 
+ <if test=" sortName !=null and sortName !='' ">
+            order by log.${sortName} ${sortOrder}
+        </if>
+</select>
+
+
 </mapper>
   
 
