@@ -1,7 +1,11 @@
 package com.kxjl.web.stastic.service.Impl;
 
+import static com.google.common.collect.FluentIterable.from;
+import static org.apache.commons.lang.StringUtils.isNotBlank;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +26,9 @@ import com.kxjl.web.stastic.model.ActionLog;
 import com.kxjl.web.stastic.service.StasticService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
+import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.tool.utils.DateUtil;
 import com.kxjl.tool.utils.IPUtils;
 
@@ -45,10 +52,9 @@ public class StasticServiceImpl implements StasticService {
 	 * @date 2018年10月18日
 	 */
 	public List<ActionLog> GetUserVisitDetailList(ActionLog query) {
-		//Page<ActionLog> p = PageHelper.startPage(query.getPage(), query.getPageCount());
+		// Page<ActionLog> p = PageHelper.startPage(query.getPage(),
+		// query.getPageCount());
 
-		
-		
 		return stasticDao.GetUserVisitDetailList(query);
 
 	}
@@ -62,7 +68,8 @@ public class StasticServiceImpl implements StasticService {
 	 * @date 2018年10月18日
 	 */
 	public List<ActionLog> GetUserVisitAllList(ActionLog query) {
-		//Page<ActionLog> p = PageHelper.startPage(query.getPage(), query.getPageCount());
+		// Page<ActionLog> p = PageHelper.startPage(query.getPage(),
+		// query.getPageCount());
 
 		return stasticDao.GetUserVisitAllList(query);
 	}
@@ -152,8 +159,51 @@ public class StasticServiceImpl implements StasticService {
 	 * @date 2017-12-28
 	 */
 	public void saveStaticInfo(HttpServletRequest request, String type1, String type2, String arctileId) {
-		saveStaticInfo(request, type1, type2, arctileId, false);
+
+		String userAgent = request.getHeader("Pre-User-Agent");// prerender带过来的原始爬虫agent
+		if (userAgent == null || userAgent.equals(""))
+			userAgent = request.getHeader("User-Agent");
+
+		// 无用户信息，爬虫
+		boolean isspider = isInSearchUserAgent(userAgent);
+		
+		System.out.println("**********************");
+		System.out.println("userAgent:"+userAgent);
+
+		saveStaticInfo(request, type1, type2, arctileId, isspider);
 	}
+	
+	public List<String> getCrawlerUserAgents() {
+		//prerender都是爬虫
+		List<String> crawlerUserAgents = Lists.newArrayList("baiduspider", "facebookexternalhit", "twitterbot",
+				"rogerbot", "linkedinbot", "embedly", "quora link preview", "showyoubo", "outbrain", "pinterest",
+				"developers.google.com/+/web/snippet", "slackbot", "vkShare", "W3C_Validator", "redditbot", "Applebot","prerender");
+
+		// kxjl
+		final String moreAgents = ConfigReader.getInstance().getProperty("crawlerUserAgents");
+		if (isNotBlank(moreAgents)) {
+			crawlerUserAgents.addAll(Arrays.asList(moreAgents.trim().split(",")));
+		}
+
+		return crawlerUserAgents;
+	}
+
+	/**是否为爬虫
+	 * 
+	 * @param userAgent
+	 * @return
+	 * @author zj
+	 * @date 2018年10月18日
+	 */
+	private boolean isInSearchUserAgent(final String userAgent) {
+		return from(getCrawlerUserAgents()).anyMatch(new Predicate<String>() {
+			@Override
+			public boolean apply(String item) {
+				return userAgent.toLowerCase().contains(item.toLowerCase());
+			}
+		});
+	}
+
 
 	/**
 	 * 记录访问统计原始数据

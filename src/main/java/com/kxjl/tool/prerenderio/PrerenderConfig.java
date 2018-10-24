@@ -13,6 +13,7 @@ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -113,10 +114,21 @@ public class PrerenderConfig {
 
 	public List<String> getWhitelist() {
 		final String whitelist = config.get("whitelist");
-		if (isNotBlank(whitelist)) {
-			return Arrays.asList(whitelist.trim().split(","));
+		
+		
+		List<String> wlist=new ArrayList<>();
+		// kxjl
+		final String excludedUrls =ConfigReader.getInstance().getProperty("excludedPrerenderUrls",".*/public/html/(\\d+/\\d+)/.*.html,.*public/detail/?i=.*");
+		if (isNotBlank(excludedUrls)) {
+			wlist.addAll(Arrays.asList(excludedUrls.trim().split(",")));
 		}
-		return null;
+		
+		
+		if (isNotBlank(whitelist)) {
+			 wlist.addAll( Arrays.asList(whitelist.trim().split(",")));
+		}
+		
+		return wlist;
 	}
 
 	public List<String> getBlacklist() {

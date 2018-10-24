@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
@@ -157,7 +158,17 @@ public class PublicController extends BaseController {
 			view.addObject(v, request.getParameter(v));
 
 		}
-
+		
+		if(ConfigReader.getInstance().getProperty("debug","false").equals("true"))
+		{
+		 Enumeration<String> headers= request.getHeaderNames();
+		 while(headers.hasMoreElements())
+		 {
+			 String key=headers.nextElement();
+			 System.out.println( key+":"+request.getHeader(key));
+		 }
+		}
+		 
 		
 		saveStaticInfo(request, StasticTypeOne.HomePage.toString(), "index",request.getQueryString());
 
@@ -638,7 +649,11 @@ public class PublicController extends BaseController {
 		// 计数
 		SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
 
-		final String userAgent = request.getHeader("User-Agent");
+		
+	
+			 String userAgent = request.getHeader("Pre-User-Agent");//prerender带过来的原始爬虫agent
+			if(userAgent==null||userAgent.equals(""))
+		  userAgent = request.getHeader("User-Agent");
 
 		// 无用户信息，爬虫
 		boolean isspider = isInSearchUserAgent(userAgent);

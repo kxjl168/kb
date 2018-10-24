@@ -93,7 +93,10 @@ public class test {
 		  HttpClient httpClient = new HttpClient();  
 		 // httpClient.getParams().setParameter(ClientPNames.ALLOW_CIRCULAR_REDIRECTS, true);
 		  
-				  String u1="http://127.0.0.1:8081/kb/public/html/2018/09/bdc8c0b5-44fb-4723-b2c5-fcf721c24089.html";
+				//  String u1="http://127.0.0.1:8081/kb/public/html/2018/09/bdc8c0b5-44fb-4723-b2c5-fcf721c24089.html";
+				  String u1="http://127.0.0.1/kb/public/index";
+		 // String u1="http://256kb.cn/kb/public/html/2018/09/bdc8c0b5-44fb-4723-b2c5-fcf721c24089.html";
+		// String u1="http://256kb.cn/public/index/";
 		  String u2="https://www.256kb.cn/public/search/";
 	        GetMethod getMethod = new GetMethod(u1);
 	       /* HttpMethodParams params = new HttpMethodParams();
@@ -105,6 +108,8 @@ public class test {
 	                //getMethod.addRequestHeader("accept-encoding", "gzip,deflate");  
 	                //getMethod.addRequestHeader("user-agent","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; Alexa Toolbar; Maxthon 2.0)");
 	                getMethod.addRequestHeader("user-agent","/Mozilla/5.0 (compatible; *****Baiduspider/2.0; +http://www.baidu.com/search/spider.html +zj test !!)");
+	                
+	                getMethod.addRequestHeader("Pre-User-Agent2"," +zj test !!)");
 	                
 	                Date d1=new Date();
 	                int result = httpClient.executeMethod(getMethod); 

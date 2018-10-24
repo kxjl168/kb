@@ -35,6 +35,7 @@ import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.google.common.collect.FluentIterable.from;
@@ -226,16 +227,21 @@ public class PrerenderSeoService {
 		}
 
 		final List<String> whiteList = prerenderConfig.getWhitelist();
-		if (whiteList != null && !isInWhiteList(url, whiteList)) {
-			log.trace("Whitelist is enabled, but this request is not listed; intercept: no");
+		if (whiteList != null && isInWhiteList(url, whiteList)) {
+			log.trace("Whitelist is enabled, but this request is  listed; intercept: no");
+			
+			
+			// 记录有转化过的爬虫请求
+			saveSpiderLog(request,"spider-detail:noprerender");
+			
 			return false;
 		}
 
-		final List<String> blacklist = prerenderConfig.getBlacklist();
+		/*final List<String> blacklist = prerenderConfig.getBlacklist();
 		if (blacklist != null && isInBlackList(url, referer, blacklist)) {
 			log.trace("Blacklist is enabled, and this request is listed; intercept: no");
 			return false;
-		}
+		}*/
 
 		if (hasEscapedFragment(request)) {
 			log.trace("Request Has _escaped_fragment_; intercept: yes");
@@ -442,6 +448,33 @@ public class PrerenderSeoService {
 	}
 
 	private boolean isInWhiteList(final String url, List<String> whitelist) {
+		
+		
+		// 配置文件中读取排除的白名单  detaill页面
+			//String	excludedUrls = ConfigReader.getInstance().getProperty("excludedPrerenderUrls",".*/public/html/(\\\\d+/\\\\d+)/.*.html,.*public/detail/?i=.*");
+			//String[]	urls = excludedUrls.split(",");
+				for (int i = 0; i < whitelist.size(); i++) {
+					if (whitelist.get(i).trim().equals(""))
+						continue;
+					if (url.endsWith(whitelist.get(i))) {
+						return true;
+					}
+
+					// *匹配
+					if (whitelist.get(i).contains("*")) {
+						String pattern = whitelist.get(i).trim();
+
+						
+						boolean isMatch = Pattern.matches(pattern, url);
+						if (isMatch) {
+							return true;
+						}
+					}
+
+				}
+
+		
+		
 		return from(whitelist).anyMatch(new Predicate<String>() {
 			@Override
 			public boolean apply(String regex) {
@@ -522,7 +555,8 @@ public class PrerenderSeoService {
 	private void widthRealIp(HttpRequest proxyRequest,HttpServletRequest request) {
 
 
-		proxyRequest.addHeader("X-Prerender-Token", stasticService.getIpAddr(request));
+		proxyRequest.addHeader("X-Forwarded-For", stasticService.getIpAddr(request));
+		proxyRequest.addHeader("Pre-User-Agent",  request.getHeader("User-Agent"));
 		//补充原始地址
 	
 	}
