@@ -326,7 +326,8 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 		type_second,
 		city,
 		blog_id,
-		spider_flag
+		spider_flag,
+		referer
 		)
 		values(
 		#{userid},
@@ -335,7 +336,9 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 		#{type_second},
 		#{city},
 		#{blog_id},
-		#{spider_flag}
+		#{spider_flag},
+		#{referer}
+		
 
 		)
 	</insert>

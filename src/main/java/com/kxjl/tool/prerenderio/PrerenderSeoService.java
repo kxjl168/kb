@@ -230,9 +230,11 @@ public class PrerenderSeoService {
 		if (whiteList != null && isInWhiteList(url, whiteList)) {
 			log.trace("Whitelist is enabled, but this request is  listed; intercept: no");
 			
-			
-			// 记录有转化过的爬虫请求
-			saveSpiderLog(request,"spider-detail:noprerender");
+			if (isInSearchUserAgent(userAgent)) {
+				// 记录有转化过的爬虫请求
+				saveSpiderLog(request,"spider-detail:noprerender");
+			}
+
 			
 			return false;
 		}

@@ -124,9 +124,13 @@ public class StasticServiceImpl implements StasticService {
 					String ip = "";
 					try {
 						ip = getIpAddr(request);// rt.getRemoteAddr();
+						
+						
 					} catch (Exception e) {
 
 					}
+					
+					String referer=request.getHeader("Referer");
 
 					// logger.info("***saveStaticInfo***type1:"+type1+" type2:"+type2+" ip:"+ip+"
 					// arctileId:"+arctileId);
@@ -134,6 +138,7 @@ public class StasticServiceImpl implements StasticService {
 					log.setUserid(ip);
 
 					String city = IPUtils.getCityByIP(ip);
+					log.setReferer(referer);
 					log.setBlog_id(blogimei);
 					log.setCity(city);
 					log.setType_first(t1);

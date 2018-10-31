@@ -71,6 +71,8 @@ public class ActionLog extends BaseModel {
 
 	private String blog_id;
 	
+	private String referer;//来源
+	
 	private String spider_flag;
 	
 	private Double total_click;
@@ -226,6 +228,14 @@ public class ActionLog extends BaseModel {
 
 	public void setDate_type(String date_type) {
 		this.date_type = date_type;
+	}
+
+	public String getReferer() {
+		return referer;
+	}
+
+	public void setReferer(String referer) {
+		this.referer = referer;
 	}
 
 

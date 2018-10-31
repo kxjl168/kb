@@ -434,7 +434,7 @@ public class PageFilter implements Filter {
 		// 跟目录，放
 			if (request.getContextPath().equals("")) {
 				if (request.getRequestURI().equals("/")) {
-					logger.warn("pass:user is null but is / && request.getContextPath():" + request.getContextPath());
+					logger.debug("pass:user is null but is / && request.getContextPath():" + request.getContextPath());
 					chain.doFilter(request, response);
 					return;
 				}

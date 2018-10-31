@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URLEncoder;
 import java.util.Date;
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,7 +15,9 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.json.JSONObject;
 
 import com.kxjl.tool.httpPost.SendPostRequest;
@@ -38,12 +41,59 @@ public class test {
 		
 		//testGzip();
 		
-		testhtml();
+		//testhtml();
 		
 		//testl();
+		
+		testlog4j();
 	}
 	
+	static {
+		 BasicConfigurator.configure();
+	}
 	
+	private static  Logger logger=Logger.getLogger(test.class);
+	
+	private static void testlog4j() {
+		
+		
+		
+/*		Properties properties=new Properties();
+	    properties.setProperty("log4j.root","TRACE,stdout,MyFile");
+	    properties.setProperty("log4j.rootCategory","TRACE");
+
+	    properties.setProperty("log4j.appender.stdout",     "org.apache.log4j.ConsoleAppender");
+	    properties.setProperty("log4j.appender.stdout.layout",  "org.apache.log4j.PatternLayout");
+	    properties.setProperty("log4j.appender.stdout.layout.ConversionPattern","%d{YYYY/MM/dd HH:mm:ss.SSS} [%5p] %t (%F) - %m%n");
+
+	    properties.setProperty("log4j.appender.MyFile", "org.apache.log4j.RollingFileAppender");
+	    properties.setProperty("log4j.appender.MyFile.File", "my_example.log");
+	    properties.setProperty("log4j.appender.MyFile.MaxFileSize", "100KB");
+	    properties.setProperty("log4j.appender.MyFile.MaxBackupIndex", "1");
+	    properties.setProperty("log4j.appender.MyFile.layout",  "org.apache.log4j.PatternLayout");
+	    properties.setProperty("log4j.appender.MyFile.layout.ConversionPattern","%d{yyyy/MM/dd HH:mm:ss.SSS} [%5p] %t (%F) - %m%n");
+
+	    PropertyConfigurator.configure(properties);
+	  
+	 //  Logger logger2 = Logger.getLogger("MyFile");
+		
+		 */
+		
+		
+		
+		logger.info("test info in test.java");
+		logger.debug("debug info in test.java");
+		
+		 logger.debug("Log4jExample: A Sample Debug Message");
+		 
+		         logger.info("Log4jExample: A Sample Info  Message");
+		 
+		         logger.warn("Log4jExample: A Sample Warn  Message");
+		 
+		         logger.error("Log4jExample: A Sample Error Message");
+		 
+		         logger.fatal("Log4jExample: A Sample Fatal Message");  
+	}
 	
 	private static void testl() {
 
@@ -370,7 +420,7 @@ public class test {
 
 	}
 
-	private static Logger logger = Logger.getLogger(test.class);
+	
 
 	public static String sendHttpData(String url, String str) throws Exception {
 

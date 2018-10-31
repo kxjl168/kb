@@ -159,16 +159,19 @@ public class PublicController extends BaseController {
 
 		}
 		
-		if(ConfigReader.getInstance().getProperty("debug","false").equals("true"))
-		{
+		//logger.info("info test!");
+		//logger.debug("debug test!");
+		
+		logger.debug("/***********index visit************");
+
 		 Enumeration<String> headers= request.getHeaderNames();
 		 while(headers.hasMoreElements())
 		 {
 			 String key=headers.nextElement();
-			 System.out.println( key+":"+request.getHeader(key));
+				logger.debug("*"+ key+":"+request.getHeader(key));
 		 }
-		}
-		 
+		
+		logger.debug("*************index visit end*******/");
 		
 		saveStaticInfo(request, StasticTypeOne.HomePage.toString(), "index",request.getQueryString());
 
@@ -506,7 +509,7 @@ public class PublicController extends BaseController {
 
 		File localFile = new File(localFilePath + htmlName);
 
-		logger.info("*************" + request.getServerName() + ":" + request.getServerPort());
+		logger.debug("*************from:" + request.getHeader("Referer")+ " " + htmlPath);
 
 		if (!(localFile.exists())) {
 
