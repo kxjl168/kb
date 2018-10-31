@@ -447,8 +447,10 @@ public class PageFilter implements Filter {
 			logger.debug("no userinfo, redirect to login page!");
 			wrapper.sendRedirect(loginPath);*/
 
-			if ( request.getRequestURI().contains(".php")|| !(request.getRequestURI().startsWith("/public") || request.getRequestURI().startsWith("/page")
-					|| request.getRequestURI().startsWith("/pown"))) {
+			if ( request.getRequestURI().contains(".php")
+					||!(request.getRequestURI().startsWith("/public") || request.getRequestURI().startsWith("/page")|| request.getRequestURI().startsWith("/pown"))
+					|| !request.getRequestURI().startsWith("/xjs/_/js/k=")
+					) {
 				stasticService.saveStaticInfo(request, "attack",request.getRequestURI(), "");
 				return;
 			}

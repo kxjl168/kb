@@ -148,6 +148,10 @@ public class StasticServiceImpl implements StasticService {
 					String time = sdf.format(new Date());
 					log.setAction_date(time);
 					addActionLog(log);
+					
+					
+					logger.debug("log:"+log.getUserid()+"/type_first"+log.getType_first()+"/spider_flag:"+log.getSpider_flag()+"/referer:"+log.getReferer());
+					
 				} catch (Exception e) {
 					logger.error(e.getMessage());
 				}
@@ -172,8 +176,8 @@ public class StasticServiceImpl implements StasticService {
 		// 无用户信息，爬虫
 		boolean isspider = isInSearchUserAgent(userAgent);
 		
-		System.out.println("**********************");
-		System.out.println("userAgent:"+userAgent);
+		//System.out.println("**********************");
+		//System.out.println("userAgent:"+userAgent);
 
 		saveStaticInfo(request, type1, type2, arctileId, isspider);
 	}
