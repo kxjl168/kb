@@ -9,6 +9,14 @@
 		<ConfigDesc>访问IP黑名单	</ConfigDesc>
 	</ConfigItem>
 	
+	<ConfigItem>
+		<ConfigName>debug</ConfigName>
+		<ConfigValue>true</ConfigValue>
+		<ConfigDesc>	</ConfigDesc>
+	</ConfigItem>
+	
+	
+	
 <ConfigItem>
 		<ConfigName>taobaoip</ConfigName>
 		<ConfigValue>false</ConfigValue>
@@ -45,7 +53,7 @@
 	
 	<ConfigItem>
 		<ConfigName>FILE_SVR_HTTP_PATH</ConfigName>
-		<ConfigValue>http://127.0.0.1:8080/kb/file/</ConfigValue>
+		<ConfigValue>http://127.0.0.1:8081/kb/file/</ConfigValue>
 		<ConfigDesc>本地使用的文件服务器地址-拼接图片url链接前缀
 		</ConfigDesc>
 	</ConfigItem>
@@ -53,7 +61,7 @@
 	
 	<ConfigItem>
 		<ConfigName>FILE_SVR_HTTP_OUTER_PATH</ConfigName>
-		<ConfigValue>http://127.0.0.1:8080/kb/file/</ConfigValue>
+		<ConfigValue>http://127.0.0.1:8081/kb/file/</ConfigValue>
 		<ConfigDesc>本地使用的文件服务器外网地址-拼接图片url链接前缀		</ConfigDesc>
 	</ConfigItem>
 	
@@ -161,13 +169,18 @@
 	
 		<ConfigItem>
 		<ConfigName>LOCAL_HTML_PATH</ConfigName>
-  <!--	<ConfigValue>F:\kxjl\code\kb\src\main\webapp\public\html\</ConfigValue>  --> 
+ 	<ConfigValue>F:\kxjl\code\kb\src\main\webapp\public\html\</ConfigValue> 
 		
 	 
-		 <ConfigValue>H:\git\kb\src\main\webapp\public\html\</ConfigValue>
+		 <!-- <ConfigValue>H:\git\kb\src\main\webapp\public\html\</ConfigValue> --> 
 		<ConfigDesc>html静态目录</ConfigDesc>
 	</ConfigItem>
 	
+	<ConfigItem>
+		<ConfigName>domain</ConfigName>
+		<ConfigValue>http://127.0.0.1:8081</ConfigValue>
+		<ConfigDesc>域名前缀</ConfigDesc>
+	</ConfigItem>
 	
 	
 </Config>
