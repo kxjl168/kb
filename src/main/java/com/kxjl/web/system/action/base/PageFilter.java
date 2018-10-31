@@ -451,7 +451,7 @@ public class PageFilter implements Filter {
 					||!(request.getRequestURI().startsWith("/public") || request.getRequestURI().startsWith("/page")|| request.getRequestURI().startsWith("/pown"))
 					|| !request.getRequestURI().startsWith("/xjs/_/js/k=")
 					) {
-				stasticService.saveStaticInfo(request, "attack",request.getRequestURI(), "");
+				stasticService.saveStaticInfo(request, "attack","", request.getRequestURI(),true);
 				return;
 			}
 
