@@ -126,8 +126,8 @@ function initDetailTable() {
             sortable : true,
             },
             {
-            	 field: 'type_second',
-            title: '分类',
+            	 field: 'referer',
+            title: '来源',
             align: 'center',
             sortable : true,
           
@@ -209,8 +209,8 @@ function initDetailTable() {
           
             },
             {
-            	  field: 'type_second',
-                title: '分类二',
+            	  field: 'referer',
+                title: '来源',
               
                 align: 'center',
            
