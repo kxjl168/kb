@@ -1667,7 +1667,7 @@ color:#ecb866!important;
 	  padding-left: 10px;
 }
 /** bootstraptable sort*/	
-	 .desc:after {
+	.sortable.desc:after {
      
     content: "\f0dd";
 

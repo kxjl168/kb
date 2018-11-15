@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import com.google.common.base.Predicate;
 import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.web.blog.action.Kdata;
+import com.kxjl.web.stastic.service.StasticService;
 import com.kxjl.web.system.dao.CommonDao;
 import com.kxjl.web.system.dao.DictInfoDao;
 import com.kxjl.web.system.dao.MenuInfoDao;
@@ -31,6 +32,9 @@ public class CommonServiceImpl implements CommonService {
 
 	@Autowired
 	private CommonDao commonDao;
+	
+	@Autowired
+	private StasticService stasticService;
 
 	private static Logger logger = Logger.getLogger(CommonServiceImpl.class);
 
@@ -75,7 +79,7 @@ public class CommonServiceImpl implements CommonService {
 				ips = (List<String>) Kdata.getInstance().getCommonList(key);
 			}
 
-			final String ip = request.getRemoteAddr();
+			final String ip =stasticService.getIpAddr(request);
 			final String referer = request.getHeader("Referer");
 
 			
@@ -93,6 +97,13 @@ public class CommonServiceImpl implements CommonService {
 
 			if (inblack) {
 				logger.warn(ip + " is in blackiplist ,request url:" + request.getRequestURI() + " ");
+				
+				
+				
+				//在黑名单中，再过滤是否有爬虫标识
+				
+				
+				
 			}
 
 		} catch (Exception e) {
