@@ -14,12 +14,28 @@ $(function() {
 
 	initCKPlugin();
 	
-	
+	init();
 
 
 	var $scope = angular.element(ngSection).scope();
+	kvalidate.init($("#fm"), {
+		s_title : {
+			required : true,
 	
-	init();
+		},
+		s_context : "required",
+		
+	}, {
+		s_title : {
+			required : "标题必须填写",
+
+		},
+
+		s_context : "请输入内容",
+		
+	}, $scope.doupdate, "");
+	
+
 
 });
 
@@ -40,7 +56,7 @@ function initCKPlugin()
 	            	
 	            	$scope.save(null,null,function(){
 						
-						//$scope.getList();
+						$scope.getList();
 						msg("保存成功！");
 					});
 	            	});	
@@ -55,50 +71,24 @@ function initCKPlugin()
 	    }
 	});
 	
-	
-	
-	
-	
-	$kfile.init({
-		fileUploadname:"fileUploadURL", //上传文件的name
-		httppath:$("#httppath").val(),  //img -static目录前缀
-		isimg:true,
-		filesufix:'png,jpg,gif,jpeg,',
-		maxFileSize:5*1024*1024,//5M
-		maximgupload : 1,//最多可上传图片数量
-		uploadurl:basePath + '/UploadFileXhr.action',//上传图片action url
-		container:$("body").find('#upimgs'), //图片容器
-		cleanpic:false,//再次弹出时是否清除图片显示
-		uploaddonecallback:function(obj){
-			var htmlData=CKEDITOR.instances.s_context.getData();
-			var appEndData='<img src="'+obj.FileUrl+'" orisrc="'+obj.FileUrl2+'" fid="'+obj.fileid+'"  class="img-responsive " onclick="showOriImg()"  >';
-			//var theData=htmlData+appEndData;
-			 var ele=CKEDITOR.dom.element.createFromHtml(appEndData);
-			
-			CKEDITOR.instances.s_context.insertElement(ele);
-		}
-	});
-	$kfile.get("upimgs").initFile(function(){
-		
-	});
-	
-	
-	var pluginname2="kuploadFile";
+	var pluginname2="kuploadTFile";
 	var cmd_name2="cmd_upload";
 	CKEDITOR.plugins.add( pluginname2, {
 		 
 	    init: function( editor ) {
-
 	        editor.addCommand( cmd_name2, {
 	            exec: function( editor ) {
 	            	
-	            	var selection = CKEDITOR.instances.s_context.getSelection();
-	            	//if(selection.getType()==3){
-	            	//var img=$( selection.getSelectedElement().$ );
-	            	//$kfile.get("upimgs").showpre(img.attr("src"));
-	            	//}
+	          	var $scope = angular.element(ngSection).scope();
+	          	
+	            	$scope.$apply(function() {
 	            	
-	            	$kfile.get("upimgs").uploadimg( $kfile.get("upimgs").container.find(".gdimg") );
+	            	$scope.save(null,null,function(){
+						
+						$scope.getList();
+						msg("保存成功！");
+					});
+	            	});	
 	            }
 	        });
 	        editor.ui.addButton( 'btn_kupload', {
@@ -107,23 +97,12 @@ function initCKPlugin()
 	            toolbar: 'insert',
 	            icon: basePath+'/images/logo2.png',
 	        });
-	        editor.on("doubleclick", function(a) {
-                var b = a.data.element;
-                !b.is("img") || b.data("cke-realelement") || b.isReadOnly() || ( 
-                		$kfile.get("upimgs").addFile($(b.$).attr("fid"), $(b.$).attr("src")),
-                		$kfile.get("upimgs").uploadimg( $kfile.get("upimgs").container.find(".gdimg") )
-                				);
-            },null, null, 1);//优先级1
-	        
 	    }
 	});
 
 
 	CKEDITOR.morePluginnames=pluginname+","+pluginname2;
-	CKEDITOR.removePlugins="image";
 	$("#s_context").ckeditor();
-	
-
 	//CKEDITOR.config.extraPlugins= pluginname+',codesnippet,colorbutton,font,liststyle,copyformatting';
 	/*CKEDITOR.replace( 's_context', {
 		extraPlugins: pluginname+',codesnippet,colorbutton,font,liststyle,copyformatting',
@@ -145,9 +124,6 @@ function changerows(option) {
 }
 
 function init() {
-	
-
-	
 
 	initmenu($("#menuul"), "page/blog/");
 
@@ -174,10 +150,6 @@ function init() {
 	var $scope = angular.element(ngSection).scope();
 	$scope
 			.$apply(function() {
-				
-				
-			
-				
 				
 				
 				$scope.getenableList = function(id, fucOnFinished, clear) {
@@ -339,6 +311,12 @@ function init() {
 				};
 
 				$scope.addOrModify = function(item) {
+					var http2 = getImUrl();
+					var imei=item==null?"":item.imei;
+					window.location.href=http2+"page/blog/detail?imei="+imei;
+					return;
+					
+					
 					kvalidate.resetForm("#fm");
 					if (item != null) {
 						
@@ -385,7 +363,7 @@ function init() {
 										
 									
 
-									//	$("#myModal2").modal('show');
+										$("#myModal2").modal('show');
 
 									} else {
 										msg(message);
@@ -431,30 +409,15 @@ function init() {
 
 				};
 				
-				
-				$scope.cancel=function(){
-					var http2 = getImUrl();
-					
-					window.location.href=http2+"page/blog/";
-				};
-				
 				var http = getImUrl();
 
 				$scope.doupdate = function(fm, value) {
 
 					$scope.save(fm,value,function(){
-						
-						msg("操作成功");
-						setTimeout(function() {
-							var http2 = getImUrl();
-							
-							window.location.href=http2+"page/blog/";
-							
-						}, 200);
-						//$("#myModal2").modal('hide');
+						$("#myModal2").modal('hide');
 
-						//$scope.getList();
-						/*setTimeout(function() {
+						$scope.getList();
+						setTimeout(function() {
 							$scope.s_recordid = "";
 							$scope.s_dict_key = "";
 							$scope.s_dict_name = "";
@@ -462,7 +425,7 @@ function init() {
 							$scope.s_sort = "";
 
 							$scope.$apply();
-						}, 10);*/
+						}, 10);
 					});
 
 				};
@@ -479,7 +442,7 @@ function init() {
 						
 						var num=$($("#s_context"  ).val()).find(".pct").length;
 						var ct=$("<div class='pct'>"+$("#s_context"  ).val() +"</div>");
-						if(num>0||$($("#s_context"  ).val()).hasClass("pct"))
+						if(num>0)
 							ct=$($("#s_context"  ).val());
 						
 						
@@ -506,7 +469,6 @@ function init() {
 								+ message);
 						if (code == 200) {
 
-							if(typeof(callback)=="function")
 							callback();
 
 						} else {
@@ -532,7 +494,7 @@ function init() {
 
 				$scope.citys_select = [ '上海', '南京', 'nanjing', '扬州', '苏州' ];
 
-				$scope.getdictList = function(callback) {
+				$scope.getdictList = function(id, fucOnFinished, clear) {
 
 					var http = getImUrl();
 
@@ -552,23 +514,20 @@ function init() {
 
 							$scope.dicts = eval(json.datalist);
 
-							$scope.$apply();
+						
 							
-						/*	setTimeout(function() {
+							setTimeout(function() {
 
 						
 								$('#q_type').get(0).selectedIndex = 1;
 							
 								$scope.q_type = $("#q_type").val();
 							
-							}, 30);*/
+							}, 30);
 
-						if(typeof(callback)=="function")
-							{
-							callback();
-							}
+							$scope.$apply();
 
-						
+							console.log('-----guideList -OK= ');
 
 						} else {
 							msg(message);
@@ -585,12 +544,12 @@ function init() {
 					);
 
 				};
-				
+				$scope.getdictList();
 
 				$scope.title = "文章管理";
 			
 				$scope.page = 1;
-				$scope.rows = 10;
+				$scope.rows = 20;
 
 				$scope.rows_select = [ 5, 10, 20 ];
 				setTimeout(function() {
@@ -611,7 +570,8 @@ function init() {
 					var http = getImUrl();
 
 					var obj = new Object();
-					obj.name = $scope.q_name;
+					obj.blog_title = $scope.q_name;
+					obj.blog_tag=$scope.q_tags;
 
 					obj.show="-1";
 					obj.page = $scope.page;
@@ -671,39 +631,8 @@ function init() {
 					);
 
 				};
-				
-				
-				kvalidate.init($("#fm"), {
-					s_title : {
-						required : true,
-				
-					},
-					s_context : "required",
-					
-				}, {
-					s_title : {
-						required : "标题必须填写",
-
-					},
-
-					s_context : "请输入内容",
-					
-				}, $scope.doupdate, "");
 			
-				//$scope.getList();
-				
-				
-				$scope.getdictList(function(){
-					var imei=GetQueryStringO("imei");
-					var object={};
-					object.imei=imei;
-					if(imei==null||imei=="")
-						object=null;
-					$scope.addOrModify(object);
-					
-				});
-				
-				
+				$scope.getList();
 
 				return;
 
@@ -712,34 +641,8 @@ function init() {
 };
 
 
-
-
-function GetQueryStringO(name) {
-
-/*    var index = window.location.href.lastIndexOf("/");
-    var indexj = window.location.href.lastIndexOf("#");
-
-    // 最后一个/开始 截取#前面的，兼容history.js html4 url
-    var searchpath = window.location.href.substr(index + 1);
-    if (indexj > 0)
-        searchpath = window.location.href.substr(index + 1, indexj - index - 1);
-*/
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$|#)", "i");
-
-    var r = window.location.search.substr(1).match(reg);
-
-    if (r != null)
-
-        return decodeURI(r[2]);
-
-    return null;
-}
-
-
-
 app.filter("sanitize", [ '$sce', function($sce) {
 	return function(htmlCode) {
 		return htmlCode ? $sce.trustAsHtml(htmlCode) : "";
 	}
 } ]);
-

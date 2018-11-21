@@ -710,7 +710,14 @@
 	
 	FileUploadMuti.prototype.uploaddone=function(jsonStr){
 		var me = this;
-		var obj = JSON.parse(jsonStr);
+		var obj ={};
+		try {
+			obj = JSON.parse(jsonStr);
+		} catch (e) {
+			me.error("上传失败！"+jsonStr); 
+			return ;
+		}
+		
 		
 		if(obj.ResponseCode!=200)
 			{me.error("上传失败！"+obj.ResponseMsg); 

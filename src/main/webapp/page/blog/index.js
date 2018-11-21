@@ -11,11 +11,14 @@ app.controller('eduCtrl', function($scope) {
 
 
 $(function() {
+	
+	
 
-	initCKPlugin();
+	//initCKPlugin();
 	
 	init();
 
+	initDetailTable();
 
 	var $scope = angular.element(ngSection).scope();
 	kvalidate.init($("#fm"), {
@@ -110,7 +113,195 @@ function initCKPlugin()
 	
 	
 };
+
+
+function query(){
+	   $("#table_detail").bootstrapTable('refresh', null);
+}
+
+
+function initDetailTable() {
 	
+	var http = getImUrl();// "";
+
+	
+
+
+
+    // 初始化Table
+    $('#table_detail').bootstrapTable({
+        url:http + "blog/getInfoList2.action", // 请求后台的URL（*）
+        method: 'post', // 请求方式（*）
+        contentType: 'application/x-www-form-urlencoded',
+        toolbar: '#toolbar', // 工具按钮用哪个容器
+    
+        showHeader: true,
+        searchAlign: 'left',
+        buttonsAlign: 'left',
+        searchOnEnterKey: true,
+        striped: true, // 是否显示行间隔色
+        cache: false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        pagination: true, // 是否显示分页（*）
+        sidePagination: "server", // 分页方式：client客户端分页，server服务端分页（*）
+        pageNumber: 1, // 初始化加载第一页，默认第一页
+        pageSize: 10, // 每页的记录行数（*）
+        pageList: [10, 25], // 可供选择的每页的行数（*）
+        search: false, // 是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+        detailView: false,
+        // showColumns: true, //是否显示所有的列
+        uniqueId: "id", // 每一行的唯一标识，一般为主键列
+        // queryParamsType : "limit",
+        queryParams: function queryParams(params) { // 设置查询参数
+        	
+        	var rows= params.limit; // 每页要显示的数据条数
+           var offset= params.offset; // 每页显示数据的开始行号
+           
+    
+        	var page=1+ offset/rows;
+     
+        	var sname= params.sort; // 要排序的字段
+        	if(sname=='showdesc')
+        		sname="showflag";
+        	
+        	
+        //	obj.blog_title = $scope.q_name;
+        //	obj.blog_tag=$scope.q_tags;
+
+        /*	obj.show="-1";
+        	obj.page = $scope.page;
+        	obj.rows = $scope.rows;
+        	*/
+            var param = {
+            		pageCount: params.limit, // 每页要显示的数据条数
+                offset: params.offset, // 每页显示数据的开始行号
+                page:page,
+                rows:rows,
+                show:"-1",
+                sortName: sname, // 要排序的字段
+                sortOrder:  params.order,
+                blog_title : $("#q_keys").val(),
+                blog_tag: $("#q_tags").val(),
+            };
+            return param;
+        },
+        columns: [
+        	{
+                field: 'title',
+                title: '文章标题',
+                align: 'left',
+                valign: 'middle',
+                visible:true
+            }, 
+            {
+                field: 'action',
+                title: '操作',
+                align: 'left',
+                valign: 'middle',
+                visible:true,
+                formatter: modifyAndDeleteButton,
+                events: PersonnelInformationEvents,
+               
+               
+            }, 
+            {
+                field: 'showdesc',
+                title: '可见',
+                align: 'left',
+                valign: 'middle',
+                sortable : true
+              
+            },
+            {
+                field: 'blog_type_name',
+                title: '文章类型',
+                align: 'left',
+                valign: 'middle',
+              
+            },
+            {
+                field: 'tags',
+                title: '标签',
+                align: 'left',
+                valign: 'middle',
+              
+            },
+            {
+                field: 'view_nums',
+                title: '点击次数',
+                align: 'left',
+                valign: 'middle',
+                sortable : true
+              
+            },
+            {
+                field: 'spider_nums',
+                title: '爬取次数',
+                align: 'left',
+                valign: 'middle',
+                sortable : true
+              
+            },
+            {
+                field: 'replay_nums',
+                title: '评论次数',
+                align: 'left',
+                valign: 'middle',
+                sortable : true
+              
+            },
+            {
+                field: 'create_date',
+                title: '发布日期',
+                align: 'left',
+                valign: 'middle',
+                sortable : true
+              
+            },
+            
+        ],
+    });
+    
+    
+    
+}
+
+
+function modifyAndDeleteButton(value, row, index) {
+	 var html='<a href="javascript:void(0)" id="modify" class="text-info" >修改</a>';
+     html+='<a href="javascript:void(0)"  id="delete" class="text-warning" >删除</a>';
+     
+    return html;
+};
+
+window.PersonnelInformationEvents = {
+    "click  #modify" : function (e, value, row, index) {
+    	addOrModify(row);
+    },
+    "click  #delete" : function (e, value, row, index) {
+    	del(row);
+    },
+};
+
+
+function del(row)
+{
+	
+	var $scope = angular.element(ngSection).scope();
+	$scope.$apply(function() {
+		$scope.del(row);
+	});
+	
+}
+
+function addOrModify(row)
+{
+	
+	var $scope = angular.element(ngSection).scope();
+	$scope.$apply(function() {
+		$scope.addOrModify(row);
+	});
+	
+}
 	
 
 function changerows(option) {
@@ -559,6 +750,11 @@ function init() {
 
 				$scope.getList = function(id, fucOnFinished, clear) {
 
+					
+					query();
+					
+					return;
+					
 					$scope.page = (id != null) ? id : 1;
 
 					if ($scope.page > $scope.pageNum)
@@ -632,7 +828,7 @@ function init() {
 
 				};
 			
-				$scope.getList();
+				//$scope.getList();
 
 				return;
 

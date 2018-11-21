@@ -126,30 +126,123 @@
 					</div>
 
 
-
-	<div class="col-xs-12 row ">
-
-				<div id="sdata" class=" col-xs-4  margin-bottom-10 padding-right-0 ">
-				</div>
-				<div class=" col-lg-2 col-md-2 col-xs-2 pull-right margin-bottom-10 padding-right-0 ">
+					<div class="col-xs-12 row ">
+						<div class="table-responsive ">
+							<table class="table" >
+								<caption>
+									{{title}}
+									<div class=" col-lg-2 col-md-2 col-xs-2 pull-right margin-bottom-10 padding-right-0 ">
 										<button type="button" ng-click="addOrModify()" class="btn btn-primary btn-block   ">新增文章</button>
 									</div>
 									<div class=" col-lg-2 col-md-2 col-xs-2 pull-right margin-bottom-10 padding-right-0 ">
 										<button type="button" ng-click="getList()" class="btn btn-primary btn-block   ">查询</button>
 									</div>
-			</div>
-			
-			<div class="col-xs-12 row ">
-				<div class="table-responsive" style="margin: 10px;">
-					<table id="table_detail" class=" "></table>
-				</div>
-			</div>
+								</caption>
+								<thead>
+									<tr>
+										<!-- <th width="10%">文章标题</th>
+											<th width="20%"  class="" >标题</th>
+										<th width="10%" class="" >文章类型</th>
+										<th width="10%" class="">标签</th>
+									
+										<th width="9%" class="">点击次数</th>
+										<th width="9%" class="">评论次数</th>
+										<th width="15%" class="">发布日期</th>
+										
+										<th width="15%">操作</th> -->
+										
+										<th >文章标题</th>
+										<th >操作</th>
+											<th >可见</th>
+											<!--  <th   >标题</th> -->
+										<th  >文章类型</th>
+										<th  >标签</th>
+									
+										<th  >点击次数</th>
+										<th  >评论次数</th>
+										<th  >发布日期</th>
+										
+										
+									</tr>
 
-					
+								</thead>
+								<tbody>
+
+
+									<tr ng-repeat="x in datalist">
+											<th>{{x.title}}</th>
+												<td>
+											<a href="#" class="text-info" ng-click="addOrModify(x)">修改</a>
+											<a href="#" class="text-warning" ng-click="del(x)">删除</a>
+
+										</td>
+												<th>{{x.showdesc}}</th>
+											<!-- <th style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" >{{x.context}}</script> </th> -->
+										<th class="" >{{x.blog_type_name}}</th>
+										<th class="">{{x.tags}}</th>
+									
+										<th class="">{{x.view_nums}}</th>
+										<th class="">{{x.replay_nums}}</th>
+										<th class="">{{x.create_date}}</th>
+										
+									
+									
+									
+									</tr>
+
+
+								</tbody>
+							</table>
+						</div>
+					</div>
 
 
 
-					
+					<div class="col-xs-12 row tablefoot">
+
+
+						<ul class="pagination pull-right">
+							<li>
+								<a href="#" ng-click="getList(page-1)">&laquo;</a>
+							</li>
+							<li ng-repeat="x in pageDataPre">
+
+								<a href="#" ng-click="getList(x)">{{x}}</a>
+
+							</li>
+							<li class="active">
+								<a href="#" ng-click="getList(page)">{{page}}</a>
+							</li>
+							<li ng-repeat="x in pageDataAft">
+
+								<a href="#" ng-click="getList(x)">{{x}}</a>
+
+							</li>
+							<li>
+								<a href="#" ng-click="getList(page+1)">&raquo;</a>
+							</li>
+
+							<!-- li>
+									<a href="#">&laquo;</a>
+								</li>
+								<li class="active">
+									<a href="#">1</a>
+								</li>
+								<li class="disabled">
+									<a href="#">2</a>
+								</li>
+								<li>
+									<a href="#">3</a>
+								</li>
+								<li>
+									<a href="#">&raquo;</a>
+								</li> -->
+						</ul>
+
+						<select onchange="changerows(this)" class="pull-right">
+							<option ng-repeat="x in rows_select">{{x}}</option>
+						</select>
+					</div>
 
 
 				</div>

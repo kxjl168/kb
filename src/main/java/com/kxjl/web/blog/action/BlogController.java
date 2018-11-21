@@ -29,6 +29,7 @@ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
 import org.apache.ibatis.annotations.Param;
 import org.apache.log4j.Logger;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
@@ -489,6 +490,158 @@ public class BlogController extends BaseController {
 				jsonOut.put("ResponseMsg", "");
 				jsonOut.put("total", 0);
 				jsonOut.put("datalist", "");
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+
+		}
+		rst = jsonOut.toString();
+		JsonUtil.responseOutWithJson(response, rst);
+
+	}
+	
+	/**
+	 * 页面-获取blog列表-后台接口
+	 * 
+	 * @param clientType
+	 * @param packageName
+	 * @param curPage
+	 *            当前页
+	 * @param pageCount
+	 *            每页多少条
+	 * @return
+	 */
+	@RequestMapping(value = "/getInfoList2")
+	public void getInfoList2(HttpServletRequest request, HttpServletResponse response) {
+		// String blogid = request.getParameter("blogid");
+
+		/*
+		 * int pageCount = Integer.parseInt(request.getParameter("rows"));//
+		 * request.getParameter("pageCount"); int curPage =
+		 * Integer.parseInt(request.getParameter("page"));
+		 */
+
+	
+		JSONObject jsonIN;
+		JSONObject jsonOut = new JSONObject();
+
+		String rst = "";
+		try {
+
+			
+
+			String blog_title = parseStringParam(request,"blog_title");
+			String blog_type = parseStringParam(request,"blog_type");
+			String blog_tag = parseStringParam(request,"blog_tag");
+			String month = parseStringParam(request,"month");
+
+			String show = parseStringParam(request,"show");
+
+			// 页面查询，为空，则默认查可见的
+			if (show.equals(""))
+				show = Kdata.Enable.Enable.value;
+
+			// 后台管理传ni -1,查询全部
+			if (show.equals(Kdata.Enable.NIL.value))
+				show = "";
+
+			int pageCount =parseIntegerParam(request,"rows");// request.getParameter("pageCount");
+			int curPage = parseIntegerParam(request,"page");
+			
+			String sortName = parseStringParam(request,"sortName");
+			String sortOrder = parseStringParam(request,"sortOrder");
+
+			if (curPage == 0)
+				curPage = 1;
+
+			String key = "blog_getInfoList" + "_" + month + "_" + blog_type + "_" + blog_tag + "_" + pageCount + "_"
+					+ curPage + "_" + blog_title + show+"_"+sortName+"_"+sortOrder;
+			List<Blog> infos = Kdata.getInstance().getBlogList(key);
+
+			Blog query = new Blog();
+			query.setPage(curPage);
+			query.setPageCount(pageCount);
+
+			query.setTags(blog_tag);
+			query.setShowflag(show);
+			query.setSortName(sortName);
+			query.setSortOrder(sortOrder);
+
+			// query.setIp(ip);
+			// query.setCity(city);
+			query.setTitle(blog_title);// (id);
+			query.setBlog_type(blog_type);// (blog_name);
+			query.setMonth(month);
+
+			Integer maxshownum = ConfigReader.getInstance().getIntProperty("maxshownum", 1000);
+
+			if (infos == null || infos.size() == 0) {
+
+				infos = blogService.getBlogPageList(query);
+				String prepath = getImgHttpOutPath();
+				for (Blog blog : infos) {
+					blog.setBlog_type_url(prepath + blog.getBlog_type_url());
+
+					// 剔除文章中的图片img内容，截取长度
+					Pattern p = Pattern.compile("%3Cimg.*?%3E"); // %3Cimg %3E
+																	// .*?最小匹配
+																	// .*最大匹配
+					Matcher ms = p.matcher(blog.getContent());
+
+					String c = blog.getContent();
+					// 截取超出部分、减少页面返回数据
+					while (ms.find()) {
+
+						String img = ms.group();
+						String t = JEscape.unescape(img);
+						// System.out.println(t);
+						JEscape.unescape(blog.getContent());
+						c = c.replace(img, "");
+
+					}
+					c = JEscape.unescape(c);
+
+					if (c.length() > maxshownum) {
+						try {
+							String rc = c.substring(0, maxshownum);
+							// System.out.println(rc);
+
+							// jsoup 自动补全标签
+							Document jd = Jsoup.parseBodyFragment(rc);
+
+							c = jd.body().html();
+
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+					}
+
+					blog.setContent(c);
+
+				}
+				Kdata.getInstance().SavedBlogList(key, infos);
+
+			}
+
+			int total = blogService.getBlogPageListCount(query);
+
+			Gson gs = new Gson();
+			String jsStr = gs.toJson(infos);
+
+			jsonOut.put("ResponseCode", "200");
+			jsonOut.put("ResponseMsg", "");
+			jsonOut.put("total", total);
+			jsonOut.put("rows", new JSONArray(jsStr));
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			try {
+				jsonOut.put("ResponseCode", "201");
+				jsonOut.put("ResponseMsg", "");
+				jsonOut.put("total", 0);
+				jsonOut.put("rows", "");
 			} catch (Exception e2) {
 				// TODO: handle exception
 			}

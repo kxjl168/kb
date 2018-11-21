@@ -153,7 +153,7 @@ function init() {
 							httppath:$scope.prepath,  //img -static目录前缀
 							isimg:false,
 							filesufix:'',
-							maxFileSize:1*1024*1024,//2M
+							maxFileSize:30*1024*1024,//30M
 							maximgupload : 1,//最多可上传图片数量
 							uploadurl:http + 'UploadFileXhr.action',//上传图片action url
 							container:$("body").find('#filedv'), //图片容器

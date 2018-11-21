@@ -261,4 +261,11 @@ font-size: 13px!important;
     margin-top: 0px;
 }
 
+.img-responsive{
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+
 

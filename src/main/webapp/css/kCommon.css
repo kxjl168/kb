@@ -146,6 +146,13 @@
 
 @media screen and (max-width: 768px) {
 	
+	
+	.panel.card.fixed2{
+	visibility: hidden;
+	}
+	
+	
+	
 	.spig {
     
   width: 100px!important;

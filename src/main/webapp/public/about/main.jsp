@@ -14,9 +14,9 @@
 			<meta name="robots" content="noindex,nofollow" />
 			<meta name="fragment" content="!">
 <meta name="keywords" content="关于我">
-<meta name="description" content="关于- KxのBook - Kx的个人站点" />
+<meta name="description" content="关于- KxのBook - 野生喵喵的个人站点" />
 <meta name="author" content="ZHANG JIE"> 
-			<title>关于 - KxのBook,Welcome~  Kx的个人站点</title>
+			<title>关于 - KxのBook,Welcome~  野生喵喵的个人站点</title>
 
 
 	
@@ -147,11 +147,11 @@
 			
 
 
-							<script type="text/javascript" src="../m_index.js"></script>
+							<script type="text/javascript" src="${basePath}/public/m_index.js"></script>
 						
 
-	<script type="text/javascript" src="index.js"></script>
-					<script type="text/javascript" src="../detail/replay.js"></script>
+	<script type="text/javascript" src="${basePath}/public/about/index.js"></script>
+					<script type="text/javascript" src="${basePath}/public/detail/replay.js"></script>
 
 
 </body>

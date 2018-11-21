@@ -64,7 +64,7 @@ function initCKPlugin()
 		httppath:$("#httppath").val(),  //img -static目录前缀
 		isimg:true,
 		filesufix:'png,jpg,gif,jpeg,',
-		maxFileSize:5*1024*1024,//5M
+		maxFileSize:5*1024*1024,//2M
 		maximgupload : 1,//最多可上传图片数量
 		uploadurl:basePath + '/UploadFileXhr.action',//上传图片action url
 		container:$("body").find('#upimgs'), //图片容器
