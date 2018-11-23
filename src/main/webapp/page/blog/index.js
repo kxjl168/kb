@@ -179,7 +179,7 @@ function initDetailTable() {
                 show:"-1",
                 sortName: sname, // 要排序的字段
                 sortOrder:  params.order,
-                blog_title : $("#q_keys").val(),
+                blog_title : $("#q_name").val(),
                 blog_tag: $("#q_tags").val(),
             };
             return param;

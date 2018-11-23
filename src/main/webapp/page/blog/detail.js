@@ -117,9 +117,59 @@ function initCKPlugin()
 	        
 	    }
 	});
+	
+	
+	
+	
+	
+	
+
+	var pluginname3="autoSave";
+	var cmd_name3="cmd_autoSave";
+	
+	CKEDITOR.plugins.add( pluginname3, {
+		 
+	    init: function( editor ) {
+
+	    	editor.addCommand( cmd_name3, {
+	            exec: function( editor ) {
+	            	
+	            	if(autosavehander)
+	            		{
+	            		
+	            		$(".cke_button_icon.cke_button__btn_kupload_icon").attr("style","background-image:url('"+basePath+'/images/auto.jpg'+"?t=HBDG');background-position:0 undefinedpx;background-size:16px;");
+	            		
+	            		
+	            		clearInterval(autosavehander);
+	            		autosavehander=null;
+	            		info("已关闭自动保存！");
+	            		}
+	            	else{
+	            		autoSave();
+	            		 
+	            		$(".cke_button_icon.cke_button__btn_kupload_icon").attr("style","background-image:url('"+basePath+'/images/auto2.jpg'+"?t=HBDG');background-position:0 undefinedpx;background-size:16px;");
+	            		
+	   	             
+	            		info("已开启自动保存！");
+	            	}
+	            }
+	        });
+	        editor.ui.addButton( 'btn_kupload', {
+	            label: '自动保存',
+	            command:cmd_name3,
+	            toolbar: 'insert',
+	            icon: basePath+'/images/auto.jpg',
+	        });
+	       
+	        
+	    }
+	});
+	
+	
+	
 
 
-	CKEDITOR.morePluginnames=pluginname+","+pluginname2;
+	CKEDITOR.morePluginnames=pluginname+","+pluginname2+","+pluginname3;
 	CKEDITOR.removePlugins="image";
 	$("#s_context").ckeditor();
 	
@@ -131,6 +181,31 @@ function initCKPlugin()
 	
 	
 };
+
+
+var autosavehander=null;
+function autoSave(){
+	var $scope = angular.element(ngSection).scope();
+  	
+	
+		
+	autosavehander=setInterval(function() {
+		$scope.$apply(function() {
+			
+			if($("#s_context").val()!="")
+				{
+			$scope.save(null,null,function(){
+				
+				info("已自动保存成功！");
+			});
+				}
+			});	
+	}, 20000);
+		
+
+
+	
+}
 	
 	
 

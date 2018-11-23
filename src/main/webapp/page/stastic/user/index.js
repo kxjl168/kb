@@ -92,7 +92,7 @@ function initDetailTable() {
                 title: '文章',
                 align: 'left',
                 valign: 'middle',
-                sortable : true,
+                sortable : false,
                 formatter: function (value, row, index) {
                 	if(value==undefined)
                 		value="";
@@ -105,7 +105,7 @@ function initDetailTable() {
             field: 'userid',
             title: '访问ip',
             align: 'center',
-            sortable : true,
+            sortable : false,
             valign: 'middle' ,
             formatter: function (value, row, index) {
                 return "<a href='javascript:void()' onclick='showdetail(\""+value+"\")'>"+value+"(访问详情)</a>";
@@ -123,13 +123,13 @@ function initDetailTable() {
             title: '时间',
             align: 'center',
             valign: 'middle',
-            sortable : true,
+            sortable : false,
             },
             {
             	 field: 'referer',
             title: '来源',
             align: 'center',
-            sortable : true,
+            sortable : false,
           
             }
         ],
