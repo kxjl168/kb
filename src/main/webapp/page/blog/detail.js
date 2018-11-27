@@ -85,6 +85,7 @@ function initCKPlugin()
 	
 	var pluginname2="kuploadFile";
 	var cmd_name2="cmd_upload";
+	var btn_name2="btn_kupload";
 	CKEDITOR.plugins.add( pluginname2, {
 		 
 	    init: function( editor ) {
@@ -101,7 +102,7 @@ function initCKPlugin()
 	            	$kfile.get("upimgs").uploadimg( $kfile.get("upimgs").container.find(".gdimg") );
 	            }
 	        });
-	        editor.ui.addButton( 'btn_kupload', {
+	        editor.ui.addButton( btn_name2, {
 	            label: '上传图片',
 	            command:cmd_name2,
 	            toolbar: 'insert',
@@ -126,7 +127,7 @@ function initCKPlugin()
 
 	var pluginname3="autoSave";
 	var cmd_name3="cmd_autoSave";
-	
+	var btn_name3="btn_autosave";
 	CKEDITOR.plugins.add( pluginname3, {
 		 
 	    init: function( editor ) {
@@ -137,7 +138,7 @@ function initCKPlugin()
 	            	if(autosavehander)
 	            		{
 	            		
-	            		$(".cke_button_icon.cke_button__btn_kupload_icon").attr("style","background-image:url('"+basePath+'/images/auto.jpg'+"?t=HBDG');background-position:0 undefinedpx;background-size:16px;");
+	            		$(".cke_button_icon.cke_button__"+btn_name3+"_icon").attr("style","background-image:url('"+basePath+'/images/auto.jpg'+"?t=HBDG');background-position:0 undefinedpx;background-size:16px;");
 	            		
 	            		
 	            		clearInterval(autosavehander);
@@ -147,14 +148,14 @@ function initCKPlugin()
 	            	else{
 	            		autoSave();
 	            		 
-	            		$(".cke_button_icon.cke_button__btn_kupload_icon").attr("style","background-image:url('"+basePath+'/images/auto2.jpg'+"?t=HBDG');background-position:0 undefinedpx;background-size:16px;");
+	            		$(".cke_button_icon.cke_button__"+btn_name3+"_icon").attr("style","background-image:url('"+basePath+'/images/auto2.jpg'+"?t=HBDG');background-position:0 undefinedpx;background-size:16px;");
 	            		
 	   	             
 	            		info("已开启自动保存！");
 	            	}
 	            }
 	        });
-	        editor.ui.addButton( 'btn_kupload', {
+	        editor.ui.addButton( btn_name3, {
 	            label: '自动保存',
 	            command:cmd_name3,
 	            toolbar: 'insert',
