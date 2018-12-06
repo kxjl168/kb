@@ -130,6 +130,16 @@ function initDetailTable() {
             title: '来源',
             align: 'center',
             sortable : false,
+            formatter: function (value, row, index) {
+            	if(value&&value.length>50)
+            		{
+            		return "<a href='javascript:void()' onclick='showdetail(\""+value+"\")'>"+value.substr(0,50)+"(访问详情)</a>";
+            		}
+            	else
+            		return "<a href='javascript:void()' onclick='showdetail(\""+value+"\")'>"+value+"(访问详情)</a>";
+            		
+                
+            }
           
             }
         ],

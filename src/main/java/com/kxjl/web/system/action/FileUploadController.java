@@ -34,6 +34,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.google.gson.JsonObject;
 import com.kxjl.tool.common.Md5EncryptFile;
 import com.kxjl.tool.config.ConfigReader;
+import com.kxjl.tool.utils.ImageRotateUtil;
 import com.kxjl.tool.utils.ImageUtil;
 import com.kxjl.tool.utils.JsonUtil;
 import com.kxjl.tool.utils.StringUtil;
@@ -266,20 +267,32 @@ public class FileUploadController {
 					//mfile.transferTo(uploaderFile);
 					
 					//压缩文件 zj 180107
-					String orginFile =uploadPath+relativePath + uuid.toString()+"_orign" + extension;; // 文件存放原始图片
+					String oFile =uploadPath+relativePath + uuid.toString()+"_1" + extension;; // 文件存放原始图片
+					String orginFile =uploadPath+relativePath + uuid.toString()+"_orign" + extension;; // 文件存放原始旋转过的图片
 					File orginFileData = new File(orginFile);
-				
+					File oFileData = new File(oFile);
 					try {
 				
-						if(extension.contains("png")||
+						if(extension.contains("gif")||
+								extension.contains("png")||
 								extension.contains("jpeg")||
 								extension.contains("jpg")||
 								extension.contains("bmp"))
 						{
 							//保持源文件
 							mfile.transferTo(orginFileData);
+							
+							//图片旋转处理
+							ImageRotateUtil.rotateImg(orginFileData,orginFileData, extension);
+							
+							
+							
+						
 						//使用压缩后的图片
 						ImageUtil.resize(orginFileData, uploaderFile);
+					
+						
+					
 						}
 						//end
 						else
@@ -320,7 +333,7 @@ public class FileUploadController {
 					finfo.setFile_size(mfile.getSize());
 					finfo.setDown_nums(0);
 
-					fileService.SaveFileInfo(finfo);
+					//fileService.SaveFileInfo(finfo);
 					efile=finfo;
 				} else {
 
