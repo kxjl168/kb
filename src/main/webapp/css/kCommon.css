@@ -1704,3 +1704,19 @@ color:#ecb866!important;
 }
 /** bootstraptable sort end*/	
 	
+	 .pageText img{
+	  cursor: pointer;
+	 } 
+	 
+	 .timeinfo{
+    padding: 15px;
+    width:auto;
+ color: #b96526!important;
+    background: #f1d8b79e;
+    border-left: 5px #ce9848 solid;
+    
+     -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+    margin-bottom: 10px;
+}

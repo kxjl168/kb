@@ -153,9 +153,9 @@ order by t asc
 	    
 		insert into blog_info 
 		(title,blog_type,content,tags,
-		create_date ,imei,showflag)
+		create_date ,imei,showflag,showtime)
 		values(#{title},#{blog_type},#{content},#{tags}
-			,#{create_date},#{imei},#{showflag})
+			,#{create_date},#{imei},#{showflag},#{showtime})
 	</insert>
 	
 	<update id="updateBlog" parameterType="com.kxjl.web.blog.model.Blog">
@@ -168,6 +168,10 @@ order by t asc
 			<if test='showflag != null'>
 			showflag=#{showflag},
 		</if>
+		<if test='showtime != null'>
+			showtime=#{showtime},
+		</if>
+		
 		<if test='view_nums != null'>
 			view_nums=#{view_nums},
 		</if>

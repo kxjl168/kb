@@ -33,6 +33,8 @@ public class Blog extends BaseModel {
 	private String imei;
 
 	private String showflag; //
+	
+	private String showtime;//显示过期警告 0不显示，1显示
 
 	private String[] tagStrs;
 
@@ -45,6 +47,8 @@ public class Blog extends BaseModel {
 	private String blog_type_url;
 	private String month;
 	private String showdesc;
+	
+	private String days;
 
 	public Integer getRecordid() {
 		return recordid;
@@ -209,6 +213,22 @@ public class Blog extends BaseModel {
 
 	public void setSpider_nums(Integer spider_nums) {
 		this.spider_nums = spider_nums;
+	}
+
+	public String getDays() {
+		return days;
+	}
+
+	public void setDays(String days) {
+		this.days = days;
+	}
+
+	public String getShowtime() {
+		return showtime;
+	}
+
+	public void setShowtime(String showtime) {
+		this.showtime = showtime;
 	}
 
 }

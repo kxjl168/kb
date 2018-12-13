@@ -212,7 +212,20 @@ public class SysBaseInfoController extends BaseController {
 
 			File localFile = new File(localPath);
 
-			doCmd(" cd " + localPath + "  && rm -rf * ");
+			
+			Properties pros = System.getProperties();
+			String os = (String) pros.get("os.name");
+
+			String binname = "cmd.exe";
+			ProcessBuilder builder = new ProcessBuilder();
+			if (os.startsWith("Windows")) {// windows下调用系统命令
+				doCmd(" cd " + localPath + " && f:  && rm -rf * ");
+			
+			} else if (os.startsWith("Linux")) {// Linux下调用系统命令
+				doCmd(" cd " + localPath + "  && rm -rf * ");
+			}
+			
+			
 
 			jsonOut.put("ResponseCode", "200");
 			jsonOut.put("ResponseMsg", "");
@@ -242,17 +255,25 @@ public class SysBaseInfoController extends BaseController {
 		Properties pros = System.getProperties();
 		String os = (String) pros.get("os.name");
 
+		
+		String localPath = ConfigReader.getInstance().getProperty(
+				"LOCAL_HTML_PATH",
+				"F:\\kxjl\\code\\kb\\WebContent\\public/html/");
+		
 		String binname = "cmd.exe";
 		ProcessBuilder builder = new ProcessBuilder();
 		if (os.startsWith("Windows")) {// windows下调用系统命令
 			 builder.command("cmd.exe", "/c", comman);
+			 builder.directory(new File(localPath));
 		
 		} else if (os.startsWith("Linux")) {// Linux下调用系统命令
 			  builder.command("sh", "-c", comman);
+				builder.directory(new File(System.getProperty("user.home")));
 		}
 		
+	
 		
-		builder.directory(new File(System.getProperty("user.home")));
+	
 
 		logger.info("Process :" + comman);
 	

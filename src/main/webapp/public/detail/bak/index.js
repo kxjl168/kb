@@ -223,6 +223,19 @@ function init() {
                                 
                                 $("#spidernum").html(json.spider_num);
                                 
+                                
+                                if(json.showtime!=null&&json.showtime=="1")
+                                	{
+                                if(json.days>json.maxday)
+                                	{
+                                	$("#days").html(json.days);
+                                	$("#timediv").removeClass("hide");
+                                	}
+                                	}
+                                
+                                
+                                
+                                
                                 $scope.$apply();
                                 
                                

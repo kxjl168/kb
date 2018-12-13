@@ -1,6 +1,7 @@
 package com.kxjl.web.blog.action;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,8 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.google.gson.Gson;
 import com.kxjl.tool.common.Constant;
+import com.kxjl.tool.config.ConfigReader;
+import com.kxjl.tool.utils.DateUtil;
 import com.kxjl.tool.utils.JsonUtil;
 import com.kxjl.web.autodata.dao.LikeInfoMapper;
 import com.kxjl.web.autodata.model.LikeInfo;
@@ -120,6 +123,13 @@ public class LikeController extends BaseController {
 			query.setImei(imei);
 			Blog tp = blogService.getBlogInfoById(query);
 			
+			
+			
+			Date lastModify= DateUtil.getDate( tp.getUpdate_date(),"yyyy-MM-dd HH:mm:ss");
+			Long days=((new Date()).getTime()- lastModify.getTime())/1000/3600/24;
+			
+			//tp.setDays(days.toString());
+			
 
 			jsonOut.put("ResponseCode", "200");
 			jsonOut.put("ResponseMsg", "");
@@ -127,6 +137,11 @@ public class LikeController extends BaseController {
 			
 			jsonOut.put("view_num", tp.getView_nums());
 			jsonOut.put("replay_num", tp.getReplay_nums());
+			
+			jsonOut.put("showtime", tp.getShowtime());
+			jsonOut.put("days", days);
+			
+			jsonOut.put("maxday", ConfigReader.getInstance().getIntProperty("maxday", 180)); //默认提示最大天数
 			
 			
 			SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);

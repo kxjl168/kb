@@ -56,7 +56,10 @@ public class test {
 	
 	private static void testlog4j() {
 		
+		System.out.println(System.getProperty("user.home"));
 		
+		if(true)
+		return;
 		
 /*		Properties properties=new Properties();
 	    properties.setProperty("log4j.root","TRACE,stdout,MyFile");

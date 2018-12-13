@@ -450,6 +450,7 @@ function init() {
 										setTimeout(function() {
 											 $("#s_type").val(item.blog_type);	
 											 $("#en_type").val(item.showflag);	
+											 $("#showtime").val(item.showtime);
 										}, 30);
 										
 										$scope.s_tags =item.tags;
@@ -550,6 +551,8 @@ function init() {
 						obj.recordid = $scope.s_recordid;
 						obj.title = $scope.s_title;
 						obj.blog_type =$("#s_type").val();
+						obj.showtime =$("#showtime").val();
+						
 						obj.tags =$scope.s_tags;
 						obj.show =$("#en_type").val();
 						

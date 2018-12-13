@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -210,6 +211,8 @@ public class BlogController extends BaseController {
 			String prepath = getImgHttpOutPath();
 			for (Blog blog : detail) {
 				blog.setBlog_type_url(prepath + blog.getBlog_type_url());
+				
+			
 
 			}
 
@@ -272,6 +275,9 @@ public class BlogController extends BaseController {
 
 			// cur ,next, pre
 			Blog detail = blogService.getBlogInfoById(query);
+			
+			
+			
 
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(detail);
@@ -827,6 +833,8 @@ public class BlogController extends BaseController {
 
 			String tags = jsonIN.optString("tags");
 			String show = jsonIN.optString("show");
+			
+			String showtime = jsonIN.optString("showtime");
 
 			Blog blog = new Blog();
 			blog.setRecordid(recordid);// (accountid);
@@ -839,6 +847,7 @@ public class BlogController extends BaseController {
 			blog.setShowflag(show);
 
 			blog.setBlog_type(blog_type);// (blog_name);
+			blog.setShowtime(showtime);
 
 			// 过滤img 增加 class="img-responsive"
 

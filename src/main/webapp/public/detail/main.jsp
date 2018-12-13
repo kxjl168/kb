@@ -36,6 +36,9 @@
 
 	<div class="" id="content" style="">
 
+				
+
+
 			<div class="wrapper col-xs-12  nopaddding">
 
 				<div id="pleft" ng-cloak>
@@ -69,6 +72,7 @@
 							</div>
 						</div>
 						
+						
 						<div  class="postdiv row col-xs-12 margin-top-5 ">
 								发布于${curBlog .create_date}&nbsp; <span>已有<span id="rdnum">${curBlog .view_nums}</span>人围观&nbsp;
 								</span> <span> <span id="rpnum">${curBlog .replay_nums}</span>人吐槽&nbsp;</span>
@@ -80,6 +84,31 @@
 						<div class="hide row col-xs-12">
 							<hr></hr>
 						</div>
+						
+						
+					
+						<div id="timediv" class=" hide row col-xs-12 col-md-9 col-lg-9">
+
+						<div class="pageText timeinfo">
+
+							<div id="license_information">
+
+								<p>
+								<i class=" fa fa-exclamation-triangle"></i>
+									本文最后更新于<span id="days"></span>天前,文中介绍内容及环境可能已不适用.请谨慎参考.
+								</p>
+							</div>
+
+
+							<p>
+								
+							</p>
+							
+
+						</div>
+					</div>
+				
+					
 
 						<div class="col-xs-12 row nopaddding">
 							<div class="">

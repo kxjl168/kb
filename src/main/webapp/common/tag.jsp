@@ -42,7 +42,7 @@
     	var webctx="${basePath}";
     	
     	var lstheight=700;
-    	var siteurl="http://127.0.0.1:8080/kb";
+    	var siteurl="http://127.0.0.1:8081/kb";
     	var  sitetitle="KxのBook -256kb.cn | 野生的喵喵 的个人站点  ";
     	//var siteurl="https://256kb.cn/";
     	
