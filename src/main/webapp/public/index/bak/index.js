@@ -84,7 +84,7 @@ app.filter("sanitize", [ '$sce', function($sce) {
 		
 		// return $sce.trustAsHtml(input.replace(urlRegex,'<a href="$1"' + targetHTML + '>$1</a>'));
 		//不替换emoji表情
-		return htmlCode ? $kchar.angularSce(htmlCode) : "";
+		return htmlCode ? $kchar.angularSce(htmlCode,$sce) : "";
 	}
 } ]);
 
