@@ -28,8 +28,10 @@
 
 									<div class="col-xs-12 nopaddding row">
 										<div class="alldot">
-											<div ng-cloak class=" pageText " ng-bind-html="x.context">
+											 <div ng-cloak class=" pageText " ng-bind-html="x.context|sanitize">
 											</div>
+										
+										
 										
 										</div>
 											<div class="more row col-xs-12 nopaddding"></div>

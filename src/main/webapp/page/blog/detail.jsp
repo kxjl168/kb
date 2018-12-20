@@ -21,7 +21,10 @@
 
    <link rel="stylesheet" href="${basePath}/js/own/FileUploadMuti.css">
 
- 
+
+    <link rel="stylesheet" type="text/css" href="${basePath}/js/plugin/select2/css/select2.css">
+    <link rel="stylesheet" type="text/css" href="${basePath}/js/plugin/select2/css/select2.bootstrap.css">
+
   <style >
 /*宽度全屏*/
 /* .modal-dialog{position:absolute;width:auto;margin:2.5vh auto;left:0;right:0;} */
@@ -203,17 +206,31 @@
 
 <script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>		
 			<script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
-			<script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>
+
+
+ <script src="${basePath}/js/plugin/select2/js/select2.full.min.js"></script>
+<script src="${basePath}/js/plugin/select2/js/i18n/zh-CN.js"></script>
 			
-			 <script type="text/javascript"
+		<%-- 	 <script type="text/javascript"
 	src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/ckeditor.js"></script> 
 	<script type="text/javascript"
-	src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/adapters/jquery.js"></script> 
+	src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/adapters/jquery.js"></script>  --%>
+	
+	
+	
+		 <script type="text/javascript"
+	src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.11/ckeditor.js"></script> 
+	<script type="text/javascript"
+	src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.11/adapters/jquery.js"></script> 
+	
+	
 
 
 	<script type="text/javascript"
 	src="${basePath}/js/own/FileUploadMuti.js"></script>
 
+
+<script type="text/javascript" src="${basePath}/js/own/kchar.js"></script>
 
 			<script type="text/javascript" src="detail.js"></script>
 

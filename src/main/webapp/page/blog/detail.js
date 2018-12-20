@@ -10,12 +10,41 @@ app.controller('eduCtrl', function($scope) {
 
 
 
+
+
+
 $(function() {
 
 	initCKPlugin();
 	
 	
-
+	//alert( escape("$#x"));
+	
+	var smile='😀';
+	
+	//alert( $kchar.codePointAt(smile));
+	
+	/*var high=smile.charCodeAt(0);
+	var low=smile.charCodeAt(1);
+	// alert(CKEDITOR.tools.htmlEncode('😀'));
+	
+	//alert(high+" "+low); 
+	
+	//d83d de00
+	//alert(high.toString(16)+" "+low.toString(16)); 
+	
+	   var MIN_SUPPLEMENTARY_CODE_POINT = 0x010000;
+	    var MIN_HIGH_SURROGATE = '\uD800'.charCodeAt(0);
+	    var MIN_LOW_SURROGATE  = '\uDC00'.charCodeAt(0);
+	 var codept= ((high << 10) + low) + (MIN_SUPPLEMENTARY_CODE_POINT
+             - (MIN_HIGH_SURROGATE << 10)
+             - MIN_LOW_SURROGATE);
+	 
+	 alert(codept.toString(16));
+	
+	 
+//	alert(unescape('😀'));
+*/
 
 	var $scope = angular.element(ngSection).scope();
 	
@@ -345,21 +374,6 @@ function init() {
 				$scope.selType = 1;
 
 			
-				$("#cpType").select2({
-
-					"placeholder" : "请选择类型",
-					"allowClear" : false,
-					"minimumResultsForSearch" : Infinity,
-					"data" : $scope.cpTypes
-				});
-
-				$("#cpType2").select2({
-
-					"placeholder" : "请选择类型",
-					"allowClear" : false,
-					"minimumResultsForSearch" : Infinity,
-					"data" : $scope.cpTypes
-				});
 
 				$scope.load = function(type) {
 
@@ -569,7 +583,9 @@ function init() {
 						});
 						
 						
-						obj.context= escape(ct[0].outerHTML);
+						var withemojihtml= $kchar. replaceEmoji(ct[0].outerHTML);
+						
+						obj.context= escape(withemojihtml);
 						
 
 					} else {

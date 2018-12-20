@@ -11,7 +11,7 @@ body,
 }
 
 .selection {
-    display: none;
+   /*  display: none; */
 }
 
 .titlehead {}

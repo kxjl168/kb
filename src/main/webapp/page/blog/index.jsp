@@ -25,7 +25,8 @@
  .modal-dialog{position:absolute;width:auto;margin:2.5vh auto;left:0;right:0;}
 
   </style>
-
+ <link rel="stylesheet" type="text/css" href="${basePath}/js/plugin/select2/css/select2.css">
+    <link rel="stylesheet" type="text/css" href="${basePath}/js/plugin/select2/css/select2.bootstrap.css">
 		</head>
 
 		<body id="ngSection" ng-app="myApp" ng-controller="eduCtrl">
@@ -338,10 +339,19 @@
 			<script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
 			<script type="text/javascript" src="../../js/plugin/select2/select2.full.min.js"></script>
 			
-			 <script type="text/javascript"
+		<%-- 	 <script type="text/javascript"
 	src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/ckeditor.js"></script> 
 	<script type="text/javascript"
 	src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/adapters/jquery.js"></script> 
+		
+			 --%>
+		 <script type="text/javascript"
+	src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.11/ckeditor.js"></script> 
+	<script type="text/javascript"
+	src="<c:out value="${basePath}"/>/js/plugin/ckeditor4.11/adapters/jquery.js"></script> 
+	
+	
+		
 			
 			<script type="text/javascript" src="index.js"></script>
 

@@ -432,7 +432,7 @@ function init() {
 				$scope.selType = 1;
 
 			
-				$("#cpType").select2({
+				/*$("#cpType").select2({
 
 					"placeholder" : "请选择类型",
 					"allowClear" : false,
@@ -446,7 +446,7 @@ function init() {
 					"allowClear" : false,
 					"minimumResultsForSearch" : Infinity,
 					"data" : $scope.cpTypes
-				});
+				});*/
 
 				$scope.load = function(type) {
 

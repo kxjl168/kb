@@ -574,8 +574,13 @@ public class PublicController extends BaseController {
 				blog.setBlog_type_url(prepath + blog.getBlog_type_url());
 			}
 
-			details.get(0).setContent(JEscape.unescape(details.get(0).getContent()));
+			String ct=JEscape.unescape(details.get(0).getContent());
+			//emoji替换
+			ct = ct.replace("[[", "&#x");
+			details.get(0).setContent(ct);
 
+			System.out.println(details.get(0).getContent());
+			
 			view.addObject("preurl", ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn"));
 
 			view.addObject("curBlog", details.get(0));

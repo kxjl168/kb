@@ -41,6 +41,7 @@
 
 
 
+<script type="text/javascript" src="${basePath}/js/own/kchar.js"></script>
 
 
 	<!-- <script type="text/javascript" src="${basePath}/js/plugin/select2/select2.full.min.js"></script>  -->

@@ -21,6 +21,7 @@ import org.apache.log4j.PropertyConfigurator;
 import org.json.JSONObject;
 
 import com.kxjl.tool.httpPost.SendPostRequest;
+import com.kxjl.tool.utils.JEscape;
 
 public class test {
 
@@ -51,15 +52,152 @@ public class test {
 	static {
 		 BasicConfigurator.configure();
 	}
-	
+	public static String getUnicode(String source){
+		 String returnUniCode=null;
+		 String uniCodeTemp=null;
+		 for(int i=0;i<source.length();i++){
+		  uniCodeTemp = "\\u"+Integer.toHexString((int)source.charAt(i));//使用char类的charAt()的方法
+		  returnUniCode=returnUniCode==null?uniCodeTemp:returnUniCode+uniCodeTemp;
+		 }
+		 System.out.print(source +" 's unicode = "+returnUniCode);
+		 return returnUniCode;//返回一个字符的unicode的编码值
+		}
 	private static  Logger logger=Logger.getLogger(test.class);
-	
+	 public static String stringToUnicode(String s) {
+	        String str = "";
+	        for (int i = 0; i < s.length(); i++) {
+	            int ch = (int) s.charAt(i);
+	            if (ch > 255)
+	                str += s.charAt(i) + ": " + "\\u" + Integer.toHexString(ch)
+	                        + "\n";
+	            else
+	                str += s.charAt(i) + ": " + "\\u00" + Integer.toHexString(ch)
+	                        + "\n";
+	        }
+	        return str;
+	    }
+	 
+	 
+	 private static final int CP_REGIONAL_INDICATOR = 0x1F1E7; // A-Z flag codes.
+
+	 /**
+	  * Get the flag codes of two (or one) regional indicator symbols.
+	  * @param s string starting with 1 or 2 regional indicator symbols.
+	  * @return one or two ASCII letters for the flag, or null.
+	  */
+	 public static String regionalIndicator(String s) {
+	     int cp0 = regionalIndicatorCodePoint(s);
+	     if (cp0 == -1) {
+	         return null;
+	     }
+	     StringBuilder sb = new StringBuilder();
+	     sb.append((char)(cp0 - CP_REGIONAL_INDICATOR + 'A'));
+	     int n0 = Character.charCount(cp0);
+	     int cp1 = regionalIndicatorCodePoint(s.substring(n0));
+	     if (cp1 != -1) {
+	         sb.append((char)(cp1 - CP_REGIONAL_INDICATOR + 'A'));
+	     }
+	     return sb.toString();
+	 }
+
+	 private static int regionalIndicatorCodePoint(String s) {
+	     if (s.isEmpty()) {
+	         return -1;
+	     }
+	     int cp0 = s.codePointAt(0);
+	     return CP_REGIONAL_INDICATOR > cp0 || cp0 >= CP_REGIONAL_INDICATOR + 26 ? -1 : cp0;
+	 }
+
+	 public static final char MIN_LOW_SURROGATE  = '\uDC00';
+	 public static final char MAX_LOW_SURROGATE  = '\uDFFF';
+
+	 public static final char MIN_HIGH_SURROGATE = '\uD800';
+	 public static final char MAX_HIGH_SURROGATE = '\uDBFF';
+
+
+/*public static int toCodePoint(char high, char low) {
+        // Optimized form of:
+        // return ((high - MIN_HIGH_SURROGATE) << 10)
+        //         + (low - MIN_LOW_SURROGATE)
+        //         + MIN_SUPPLEMENTARY_CODE_POINT;
+        return ((high << 10) + low) + (MIN_SUPPLEMENTARY_CODE_POINT
+                                       - (MIN_HIGH_SURROGATE << 10)
+                                       - MIN_LOW_SURROGATE);
+    }
+*/
+	 
+	 /**
+	  * cool
+	  * @param toConvert
+	  * @return
+	  * @author zj
+	  * @date 2018年12月19日
+	  */
+public static String convert16to32(String toConvert){
+    for (int i = 0; i < toConvert.length(); ) {
+        int codePoint = Character.codePointAt(toConvert, i);
+        i += Character.charCount(codePoint);
+        //System.out.printf("%x%n", codePoint);
+        String utf32 = String.format("0x%x%n", codePoint);
+        return utf32;
+    }
+    return null;
+}
+	 
+	 public static String stringToUnicode2(String s) {
+	        String str = "";
+	        for (int i = 0; i < s.length(); i++) {
+	            int ch = (int) s.charAt(i);
+	            if (ch > 255)
+	                str += s.charAt(i) + ": " + "\\u" + Integer.toHexString(ch)
+	                        + "\n";
+	            else
+	                str += s.charAt(i) + ": " + "\\u00" + Integer.toHexString(ch)
+	                        + "\n";
+	        }
+	        return str;
+	    }
 	private static void testlog4j() {
+		String d="🤟";
+		
+		int codePoint = Character.codePointAt(d, 0);
+		
+		System.out.println(stringToUnicode(d));
+		System.out.println(	JEscape.escape(d));
+		
+	
+		
+		String utf32 = String.format("0x%x%n", codePoint);
+		
+		System.out.println(utf32);
+		if(true)
+			return;
+		 System.out.println(convert16to32("\uD83D\uDE00"));
+		
+		
+		
+		
+		long x = Long.parseLong("D83D", 16)<<8;
+		long y = Long.parseLong("DE00", 16);
+		System.out.println(Long.toHexString(x+y));
+		
+		
+		
+		System.out.println( JEscape.escape(d));
+		
+		String dd= JEscape.unescape("%uD83D%uDE00");
+		System.out.println(dd);
+		//"%3Cp%3E%uD83D%uDE00%26nbsp%3B%3C/p%3E"
+		
+		
+		System.out.println(stringToUnicode(d));
+		
+
+		if(true)
+		return;
 		
 		System.out.println(System.getProperty("user.home"));
 		
-		if(true)
-		return;
 		
 /*		Properties properties=new Properties();
 	    properties.setProperty("log4j.root","TRACE,stdout,MyFile");

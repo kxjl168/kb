@@ -277,7 +277,8 @@ public class BlogController extends BaseController {
 			Blog detail = blogService.getBlogInfoById(query);
 			
 			
-			
+			//emoji替换
+			detail.setContent( JEscape.unescape( detail.getContent()) .replace("[[", "&#x"));
 
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(detail);
@@ -429,7 +430,7 @@ public class BlogController extends BaseController {
 
 			Integer maxshownum = ConfigReader.getInstance().getIntProperty("maxshownum", 1000);
 
-			if (infos == null || infos.size() == 0) {
+			//if (infos == null || infos.size() == 0) {
 
 				infos = blogService.getBlogPageList(query);
 				String prepath = getImgHttpOutPath();
@@ -439,7 +440,9 @@ public class BlogController extends BaseController {
 					// 剔除文章中的图片img内容，截取长度
 					Pattern p = Pattern.compile("%3Cimg.*?%3E"); // %3Cimg %3E
 																	// .*?最小匹配
-																	// .*最大匹配
+										
+					
+					// .*最大匹配
 					Matcher ms = p.matcher(blog.getContent());
 
 					String c = blog.getContent();
@@ -451,9 +454,14 @@ public class BlogController extends BaseController {
 						// System.out.println(t);
 						JEscape.unescape(blog.getContent());
 						c = c.replace(img, "");
+					
+						
 
 					}
 					c = JEscape.unescape(c);
+					
+					//emoji替换
+					c = c.replace("[[", "&#x");
 
 					if (c.length() > maxshownum) {
 						try {
@@ -475,7 +483,7 @@ public class BlogController extends BaseController {
 				}
 				Kdata.getInstance().SavedBlogList(key, infos);
 
-			}
+			//}
 
 			int total = blogService.getBlogPageListCount(query);
 
