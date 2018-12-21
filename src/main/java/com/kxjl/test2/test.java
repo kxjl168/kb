@@ -307,10 +307,10 @@ public static String convert16to32(String toConvert){
 	
 	public static void testhtml() {
 		
-		update2();
+		//update2();
 		
-		if(true)
-			return;
+		//if(true)
+		//	return;
 		
 		// http://127.0.0.1:8080/kb/public/detail/344f5834-fe93-49e8-835d-b07e1a1def96.html
 		// http://127.0.0.1:8080/kb/html/detail/344f5834-fe93-49e8-835d-b07e1a1def96.html
@@ -319,8 +319,8 @@ public static String convert16to32(String toConvert){
 
 				  //String u1="http://256kb.cn/googleac882b1d52647127.html";
 		  
-		  //http://256kb.cn:8888/kb/googleac882b1d52647127.html
-		  String u1="http://256kb.cn/googleac882b1d52647127.html"; //http://127.0.0.1:8080/kb/googleac882b1d52647127.html
+		  //http://256kb.cn:8888/kb/googleac882b1d52647127.html   //http://256kb.cn/googleac882b1d52647127.html
+		  String u1="http://127.0.0.1:8081/kb/googleac882b1d52647127.html"; //http://127.0.0.1:8080/kb/googleac882b1d52647127.html
 
 		 // String u1="http://256kb.cn/kb/public/html/2018/09/bdc8c0b5-44fb-4723-b2c5-fcf721c24089.html";
 		// String u1="http://256kb.cn/public/index/";
@@ -334,7 +334,7 @@ public static String convert16to32(String toConvert){
 	        try {  
 
 	                //getMethod.addRequestHeader("user-agent","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; Alexa Toolbar; Maxthon 2.0)");
-	                getMethod.addRequestHeader("user-agent","Mozilla/5.0 (compatible;Google *****Baiduspider/2.0; +http://www.baidu.com/search/spider.html +zj test !!)");
+	                getMethod.addRequestHeader("user-agent","Mozilla/5.0 (compatible;google *****Baiduspider/2.0; +http://www.baidu.com/search/spider.html +zj test !!)");
 
 	                getMethod.addRequestHeader("Pre-User-Agent2"," +zj test !!)");
 	                

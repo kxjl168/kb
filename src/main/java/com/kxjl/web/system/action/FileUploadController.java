@@ -333,7 +333,7 @@ public class FileUploadController {
 					finfo.setFile_size(mfile.getSize());
 					finfo.setDown_nums(0);
 
-					//fileService.SaveFileInfo(finfo);
+					fileService.SaveFileInfo(finfo);
 					efile=finfo;
 				} else {
 
