@@ -720,15 +720,23 @@ public class PublicController extends BaseController {
 		return view;
 	}
 	
-	
+	/**
+	 * 注意prerender的影响....坑爹了
+	 * @param request
+	 * @param response
+	 * @param value
+	 * @return
+	 * @author zj
+	 * @date 2018年12月21日
+	 */
 	@RequestMapping(value = "/google{value}.html")
-	public void google(HttpServletRequest request, HttpServletResponse response,@PathVariable("value") String value) {
+	public String google(HttpServletRequest request, HttpServletResponse response,@PathVariable("value") String value) {
 
-		//return "google"+value;
+		return "google"+value;
 		
 		
 		
-		String rootPath=ConfigReader.getInstance().getProperty("rootPath", "/usr/local/apache-tomcat-8.5.23/webapps/kb");
+	/*	String rootPath=ConfigReader.getInstance().getProperty("rootPath", "/usr/local/apache-tomcat-8.5.23/webapps/kb");
 		File f=new File(rootPath+"/google"+value+".html");
 		
 		String rst="";
@@ -752,7 +760,7 @@ public class PublicController extends BaseController {
 			response.getWriter().flush();
 			
 			
-			/*response.setCharacterEncoding("UTF-8");
+			response.setCharacterEncoding("UTF-8");
 			response.setContentType("application/octet-stream");
 			response.setHeader("Content-Disposition",
 					"attachment;filename=" +"google"+value+".html");
@@ -760,13 +768,12 @@ public class PublicController extends BaseController {
 
 			out.write(rst.getBytes("utf-8"));
 
-			out.close();*/
+			out.close();
 
 		} catch (Exception e) { // TODO: handle exception }
 
-		}
-		//return rst;
-		//return "google" + value;
+		}*/
+		
 	}
 	
 
