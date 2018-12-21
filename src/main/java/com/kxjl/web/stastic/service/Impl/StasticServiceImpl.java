@@ -106,8 +106,8 @@ public class StasticServiceImpl implements StasticService {
 		return ipAddress;
 	}
 
-	public void saveStaticInfo(HttpServletRequest request, String type1, String type2, String arctileId,
-			Boolean ispider) {
+	public void saveStaticInfo(final HttpServletRequest request, String type1, String type2, String arctileId,
+			final Boolean ispider) {
 		final HttpServletRequest rt = request;
 		final String t1 = type1;
 		final String t2 = type2;

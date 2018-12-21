@@ -1,4 +1,4 @@
-package com.kxjl.test;
+package com.kxjl.test2;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URLEncoder;
 import java.util.Date;
-import java.util.Properties;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,10 +14,10 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.params.HttpMethodParams;
+
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+
 import org.json.JSONObject;
 
 import com.kxjl.tool.httpPost.SendPostRequest;
@@ -42,11 +42,11 @@ public class test {
 		
 		//testGzip();
 		
-		//testhtml();
-		
+		testhtml();
+		//update2();
 		//testl();
 		
-		testlog4j();
+		//testlog4j();
 	}
 	
 	static {
@@ -276,16 +276,47 @@ public static String convert16to32(String toConvert){
 
 	}
 	
-	
+	private static void update2() {
+
+		String url = "https://www.256kb.cn/googleac882b1d52647127.html";
+
+		// String url =
+		// "http://10.204.37.192:8080/gserver/version/getVersionInfo.action?type=2";
+
+		String data = "";
+
+		String responsedata = "";
+		try {
+			responsedata = sendHttpData(url, data);
+
+			System.out.println("返回:" + responsedata);
+			// System.out.println("解密:" + out);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println(responsedata);
+		// ***********vmInstallApp*****************
+
+	}
+
 	
 	public static void testhtml() {
+		
+		update2();
+		
+		if(true)
+			return;
+		
 		// http://127.0.0.1:8080/kb/public/detail/344f5834-fe93-49e8-835d-b07e1a1def96.html
 		// http://127.0.0.1:8080/kb/html/detail/344f5834-fe93-49e8-835d-b07e1a1def96.html
 		  HttpClient httpClient = new HttpClient();  
 		 // httpClient.getParams().setParameter(ClientPNames.ALLOW_CIRCULAR_REDIRECTS, true);
 		  
 				//  String u1="http://127.0.0.1:8081/kb/public/html/2018/09/bdc8c0b5-44fb-4723-b2c5-fcf721c24089.html";
-				  String u1="http://127.0.0.1/kb/public/index";
+				  String u1="https://www.256kb.cn/googleac882b1d52647127.html";//http://www.256kb.cn:8888/googleac882b1d52647127.html";
 		 // String u1="http://256kb.cn/kb/public/html/2018/09/bdc8c0b5-44fb-4723-b2c5-fcf721c24089.html";
 		// String u1="http://256kb.cn/public/index/";
 		  String u2="https://www.256kb.cn/public/search/";
@@ -298,7 +329,7 @@ public static String convert16to32(String toConvert){
 	        try {  
 	                //getMethod.addRequestHeader("accept-encoding", "gzip,deflate");  
 	                //getMethod.addRequestHeader("user-agent","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; Alexa Toolbar; Maxthon 2.0)");
-	                getMethod.addRequestHeader("user-agent","/Mozilla/5.0 (compatible; *****Baiduspider/2.0; +http://www.baidu.com/search/spider.html +zj test !!)");
+	                getMethod.addRequestHeader("user-agent","Mozilla/5.0 (compatible;Google *****Baiduspider/2.0; +http://www.baidu.com/search/spider.html +zj test !!)");
 	                
 	                getMethod.addRequestHeader("Pre-User-Agent2"," +zj test !!)");
 	                

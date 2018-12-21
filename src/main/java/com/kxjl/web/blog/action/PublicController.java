@@ -5,6 +5,7 @@ import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.apache.http.HttpHeaders.CONTENT_LENGTH;
 import static org.apache.http.HttpHeaders.HOST;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -131,11 +132,7 @@ public class PublicController extends BaseController {
 		JsonUtil.responseOutWithJson(response, jStr);
 	}
 
-	@RequestMapping(value = "/google{value}.html")
-	public String listhtml(HttpServletRequest request, @PathVariable("value") String value) {
-
-		return "google" + value;
-	}
+	
 
 	@RequestMapping(value = "/public/index/{type}/{value}.html")
 	public String listhtml(HttpServletRequest request, @PathVariable("type") String type,
@@ -722,6 +719,56 @@ public class PublicController extends BaseController {
 
 		return view;
 	}
+	
+	
+	@RequestMapping(value = "/google{value}.html")
+	public void google(HttpServletRequest request, HttpServletResponse response,@PathVariable("value") String value) {
+
+		//return "google"+value;
+		
+		
+		
+		String rootPath=ConfigReader.getInstance().getProperty("rootPath", "/usr/local/apache-tomcat-8.5.23/webapps/kb");
+		File f=new File(rootPath+"/google"+value+".html");
+		
+		String rst="";
+		try {
+			BufferedReader fr=new BufferedReader(new FileReader(f));
+			rst=fr.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+
+			
+			//response.setHeader("Content-Length", "" + rst.toString().getBytes("UTF-8").length);
+			
+			
+			response.setContentType("text/html;");
+			response.setCharacterEncoding("UTF-8");
+			System.out.println("!!!! "+rst);
+			response.getWriter().print(rst);
+			response.getWriter().flush();
+			
+			
+			/*response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/octet-stream");
+			response.setHeader("Content-Disposition",
+					"attachment;filename=" +"google"+value+".html");
+			ServletOutputStream out = response.getOutputStream();
+
+			out.write(rst.getBytes("utf-8"));
+
+			out.close();*/
+
+		} catch (Exception e) { // TODO: handle exception }
+
+		}
+		//return rst;
+		//return "google" + value;
+	}
+	
 
 	@RequestMapping(value = "/sitemap.xml")
 	@ResponseBody

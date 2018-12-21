@@ -105,7 +105,7 @@ public class PrerenderSeoService {
 	/**
 	 * 记录爬虫日志
 	 */
-	private void saveSpiderLog(HttpServletRequest servletRequest,String flg) {
+	private void saveSpiderLog(final HttpServletRequest servletRequest,String flg) {
 		final HttpServletRequest rt = servletRequest;
 		final String flag=flg;
 		// kxjl SAVE LOG
