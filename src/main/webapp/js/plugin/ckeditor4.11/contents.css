@@ -16,7 +16,7 @@ body
 	/* Remove the background color to make it transparent. */
 	background-color: #fff;
 
-	margin: 20px;
+	margin: 20px!important;
 }
 
 .cke_editable
@@ -208,9 +208,9 @@ a > img {
 }
 
 
+/* 
 
-
-/* modify css */
+modify css
 .cke_editable {
 	    color: #565a5f;
   
@@ -249,7 +249,7 @@ a > img {
 font-size: 13px!important;
     border-left: 5px solid #dcdcdc;
     background: #d8d7d76b;
-    /* border: 1px solid; */
+    border: 1px solid;
     margin-left: 10px;
     color: #9a9a9a;
       padding: 10px!important;
@@ -257,7 +257,7 @@ font-size: 13px!important;
 .pct p,.cke_editable p{
 	line-height: 1.8em;
     word-break: break-all;
-    /* padding: 10px; */
+    padding: 10px;
     margin-bottom: 2px;
     padding: 0px!important;
     margin-top: 0px;
@@ -268,5 +268,5 @@ font-size: 13px!important;
     max-width: 100%;
     height: auto;
 }
-
+ */
 

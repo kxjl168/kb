@@ -199,11 +199,11 @@ function initReplayModel() {
 							var uname=json.uname;
 							var usite=json.usite;
 							
-							$("#s_uid").val(uname);
+							$("#s_uid").val(unescape(uname));
 							$("#s_ublog").val(unescape( usite));
 							$("#s_email").val(uemail);
 							
-							$scope.s_uid=uname;
+							$scope.s_uid=unescape(uname);
 							$scope.s_ublog=unescape( usite);
 							$scope.s_email=uemail;
 						
@@ -407,16 +407,16 @@ function initReplayModel() {
 			             +'    <div class="row col-lg-10 replayblock b1"> '
 
 
-			             +'        <div class="hide" id="f'+($scope.rnum-index)+'">'+($scope.rnum-index)+'楼&nbsp;<a href="'+item.user_blog+'" title="'+item.user_blog+'">'+item.userid+'</a> <span class="pull-right text-right">&nbsp;'+item.create_date+'</span> </div> '
+			             +'        <div class="hide" >'+($scope.rnum-index)+'楼&nbsp;<a  href="'+item.user_blog+'" title="'+item.user_blog+'">'+item.userid+'</a> <span class="pull-right text-right">&nbsp;'+item.create_date+'</span> </div> '
 
-			             +'        <div id="f'+($scope.rnum-index)+'"><a href="'+item.user_blog+'"   onclick="return gourl(this);"  title="'+item.user_blog+'">'+item.userid+' </a> <span class=" text-right">&nbsp;'+item.create_date+' </span> ';
+			             +'        <div ><a id="f'+(item.recordid)+'"   href="'+item.user_blog+'"   onclick="return gourl(this);"  title="'+item.user_blog+'">'+item.userid+' </a> <span class=" text-right">&nbsp;'+item.create_date+' </span> ';
 			                    
 			             if($scope.root)
 			            	 {
 			            	 html+='       <span  >【  ';
 			            	  if(item.state!=1)
-			            		  html+='<a   href="#f'+($scope.rnum-index)+'" class="   text-success margin-right-20" onclick="pass(this,\''+item.recordid+'\')">审核通过</a>&nbsp; ';
-			            	  html+='                          <a href="#f'+($scope.rnum-index)+'" class="   text-warning margin-right-20" onclick="del(this,\''+item.recordid+'\')">删除</a>'
+			            		  html+='<a   href="#f'+(item.recordid)+'" class="   text-success margin-right-20" onclick="pass(this,\''+item.recordid+'\')">审核通过</a>&nbsp; ';
+			            	  html+='                          <a href="#f'+(item.recordid)+'" class="   text-warning margin-right-20" onclick="del(this,\''+item.recordid+'\')">删除</a>'
 				             +'】 '
 				             +'                           </span> ';	
 				            
@@ -427,7 +427,7 @@ function initReplayModel() {
 			             +'    		<div class="rcct">'+item.content+'</div> '
 			             +'         <div class="row  margin-bottom-5"> '
 
-			             +'         <a href="#f'+($scope.rnum-index)+'" class="ba1 replaybtn  text-info margin-right-20" onclick="beginReplay(this,\''+item.recordid+'\')">回复</a> '
+			             +'         <a href="#f'+(item.recordid)+'" class="ba1 replaybtn  text-info margin-right-20" onclick="beginReplay(this,\''+item.recordid+'\')">回复</a> '
 			                    
 			             +'       	</div> '
 
@@ -438,15 +438,15 @@ function initReplayModel() {
 			            		 {
 			            	 
 			            	   html+= '    <div  class="replayblock b2"> '
-					             +'                <div id=""><a href="'+t.user_blog+'"  onclick="return gourl(this)"   title="'+t.user_blog+'">'+t.userid+'</a> @ <a href="'+t.tuser_blog+'" title="'+t.tuser_blog+'">'
+					             +'                <div ><a id="f'+(t.recordid)+'"  href="'+t.user_blog+'"  onclick="return gourl(this)"   title="'+t.user_blog+'">'+t.userid+'</a> @ <a href="'+t.tuser_blog+'" title="'+t.tuser_blog+'">'
 					             +t.tuid+'</a> <span class=" text-right">&nbsp;'+t.create_date+'</span> ';
 					         
 					             if($scope.root)
 				            	 {
 				            	 html+='       <span  >【  ';
 				            	  if(t.state!=1)
-				            		  html+='<a   href="#f'+($scope.rnum-iindex)+'" class="   text-success margin-right-20" onclick="pass(this,\''+t.recordid+'\')">审核通过</a>&nbsp; ';
-				            	  html+='                          <a href="#f'+($scope.rnum-iindex)+'" class="   text-warning margin-right-20" onclick="del(this,\''+t.recordid+'\')">删除</a>'
+				            		  html+='<a     href="#" class="   text-success margin-right-20" onclick="pass(this,\''+t.recordid+'\')">审核通过</a>&nbsp; ';
+				            	  html+='                          <a href="#" class="   text-warning margin-right-20" onclick="del(this,\''+t.recordid+'\')">删除</a>'
 					             +'】 '
 					             +'                           </span>';
 					          			
@@ -458,7 +458,7 @@ function initReplayModel() {
 					             +'              	<div class="rcct">'+t.content+'</div> '
 					             +'              	 <div class="row  margin-bottom-5"> '
 
-					             +'                    <a href="#ff'+($scope.rnum-iindex)+'" class=" replaybtn text-info margin-right-20" onclick="beginReplay(this,\''+t.recordid+'\',\''+item.recordid+'\')">回复</a> '
+					             +'                    <a href="#" class=" replaybtn text-info margin-right-20" onclick="beginReplay(this,\''+t.recordid+'\',\''+item.recordid+'\')">回复</a> '
 					                            
 					             +'                 	</div> '
 					             +'            </div> ';
@@ -474,6 +474,13 @@ function initReplayModel() {
 					});
 					
 					$("#cblock").html(html);
+					setTimeout(function() {
+						var tp=window.location.hash;
+						window.location.hash="#1";
+						window.location.hash=tp;
+						
+						//alert(location.hash);
+					}, 1000);
 					
 					
 					

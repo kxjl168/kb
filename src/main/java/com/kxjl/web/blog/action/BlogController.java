@@ -430,7 +430,7 @@ public class BlogController extends BaseController {
 
 			Integer maxshownum = ConfigReader.getInstance().getIntProperty("maxshownum", 1000);
 
-			//if (infos == null || infos.size() == 0) {
+			if (infos == null || infos.size() == 0) {
 
 				infos = blogService.getBlogPageList(query);
 				String prepath = getImgHttpOutPath();
@@ -460,8 +460,7 @@ public class BlogController extends BaseController {
 					}
 					c = JEscape.unescape(c);
 					
-					//emoji替换
-					c = c.replace("[[", "&#x");
+					
 
 					if (c.length() > maxshownum) {
 						try {
@@ -477,13 +476,16 @@ public class BlogController extends BaseController {
 							// TODO: handle exception
 						}
 					}
+					
+					//emoji替换  最后一步替换
+					c = c.replace("[[", "&#x");
 
 					blog.setContent(c);
 
 				}
 				Kdata.getInstance().SavedBlogList(key, infos);
 
-			//}
+			}
 
 			int total = blogService.getBlogPageListCount(query);
 
@@ -896,6 +898,11 @@ public class BlogController extends BaseController {
 				FileProcessor.deleteFile(localFilePath + htmlName);
 
 				Kdata.getInstance().cleanrBLogList("");
+				
+				
+				if(blog.getImei().equals("about"))
+				Kdata.getInstance().cleanrCommonList("about");
+				
 
 				jsonOut.put("ResponseCode", 200);
 				jsonOut.put("ResponseMsg", "OK");

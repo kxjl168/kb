@@ -160,7 +160,7 @@ function initCKPlugin()
 	CKEDITOR.plugins.add( pluginname3, {
 		 
 	    init: function( editor ) {
-
+	    	//editor.addContentsCss && editor.addContentsCss(basePath+"/css/kCommon.css");
 	    	editor.addCommand( cmd_name3, {
 	            exec: function( editor ) {
 	            	
@@ -203,6 +203,12 @@ function initCKPlugin()
 	CKEDITOR.removePlugins="image";
 	$("#s_context").ckeditor();
 	
+/*	
+	if(CKEDITOR.instances.s_context.addContentsCss)
+		{
+		CKEDITOR.instances.s_context.addContentsCss(basePath+"/kb/css/KCommon.css");
+		}
+	*/
 
 	//CKEDITOR.config.extraPlugins= pluginname+',codesnippet,colorbutton,font,liststyle,copyformatting';
 	/*CKEDITOR.replace( 's_context', {

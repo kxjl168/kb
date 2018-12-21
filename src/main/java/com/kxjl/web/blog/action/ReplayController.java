@@ -339,12 +339,21 @@ public class ReplayController extends BaseController {
 								+ "\">点击这里查看</a>" + "+\r\n<br><div>若上述链接无法打开,请将该地址复制到浏览器地址栏中访问<a href=\"" + url + "\">"
 								+ url + "</a></div>";
 
+						final String nickname="喵主子";
+						final String action=uid+" 回复了你 在256kb.cn 上的文章,在";
+						final String pageurl=url;
+						final String pagetitle=rtitle;
+						final String replayurl=url+"#f"+replay.getRecordid();
+						
 						new Thread(new Runnable() {
 
 							@Override
 							public void run() {
 								logger.debug("mail send to " + recvmail + "/" + message);
-								MailUtil.sendMail(recvmail, title, message);
+								//MailUtil.sendMail(recvmail, title, message);
+								
+								MailUtil.sendMail2(recvmail,title,"",nickname, action, pageurl, pagetitle, ucontent,replayurl);
+								
 							}
 						}).start();
 					} else {
@@ -377,12 +386,20 @@ public class ReplayController extends BaseController {
 										+ "</a></div>";
 								final String recvmail = toReplay.getEmail();
 
+								final String nickname=uid;
+								final String action="野生的喵喵 回复了你 在256kb.cn 上的文章,在:";
+								final String pageurl=url;
+								final String pagetitle=rtitle;
+								final String replayurl=url+"#f"+replay.getRecordid();
+								
 								new Thread(new Runnable() {
 
 									@Override
 									public void run() {
 										logger.debug("mail send to " + recvmail + "/" + message);
-										MailUtil.sendMail(recvmail, title, message);
+									//	MailUtil.sendMail(recvmail, title, message);
+										
+										MailUtil.sendMail2(recvmail,title,"",nickname, action, pageurl, pagetitle, ucontent,replayurl);
 									}
 								}).start();
 							}

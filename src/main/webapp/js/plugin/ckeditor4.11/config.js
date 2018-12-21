@@ -31,6 +31,12 @@ CKEDITOR.editorConfig = function( config ) {
 	config.fontawesomePath = basePath+'/css/font-awesome-4.7.0/css/font-awesome.min.css';
 	
 
+	config.contentsCss=[
+		CKEDITOR.getUrl(basePath+"/js/plugin/bootstrap/css/bootstrap.min.css")
+		,CKEDITOR.getUrl("contents.css")
+		,CKEDITOR.getUrl(basePath+"/css/kCommon.css?t=1")
+		];
+	
 	//移除默认的上传图片组件
 	if(typeof( CKEDITOR.removePlugins)!="undefined")
 	config.removePlugins = CKEDITOR.removePlugins;

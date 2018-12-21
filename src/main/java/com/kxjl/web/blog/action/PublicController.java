@@ -179,6 +179,29 @@ public class PublicController extends BaseController {
 	public ModelAndView about(HttpServletRequest request) {
 
 		ModelAndView view = getSysData();
+		
+		//获取文章id为0的内容， about
+		
+		Blog about= (Blog)Kdata.getInstance().getCommonList("about");
+		if(about==null)
+		{
+			Blog qry=new Blog();
+			qry.setImei("about");
+			about= bservice.getBlogInfoById(qry);
+			
+			try {
+				about.setContent(JEscape.unescape(about.getContent()) .replace("[[","&#x"));	
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			
+			Kdata.getInstance().SavedCommonList("about",about);
+		}
+	
+		
+		
+		view.addObject("about", about);
 		view.setViewName("/public/about/main");
 
 		saveStaticInfo(request, StasticTypeOne.AboutPage.toString(), "");

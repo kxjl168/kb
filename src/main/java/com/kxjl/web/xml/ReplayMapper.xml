@@ -70,7 +70,7 @@ select r.*,
 
 
 	
-	<insert id="addReplay" parameterType="com.kxjl.web.blog.model.Replay">
+	<insert id="addReplay" useGeneratedKeys="true" keyProperty="recordid" parameterType="com.kxjl.web.blog.model.Replay">
 	    
 
 	    

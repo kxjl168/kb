@@ -1,0 +1,10 @@
+<div
+	style="background-color: #eef2fa; border: 1px solid #d8e3e8; color: #111; padding: 0 15px; -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px;">
+	你好 {{nickname}}，<br>{{action}} <a
+		href="{{bloglink}}" rel="noopener"
+		target="_blank">【{{blogtitle}}】 </a> 中回应说：<br><br>{{replayData}}<br><br>您可以点击此链接回复: <a
+						href="{{replayLink}}"
+						rel="noopener" target="_blank">{{replayLink}}</a>
+					<p>				©2018<a href="https://256kb.cn/" rel="noopener"
+								target="_blank">野生的喵喵</a>.All rights reserved.	</p>
+</div>
