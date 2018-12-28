@@ -320,8 +320,10 @@ public static String convert16to32(String toConvert){
 				  //String u1="http://256kb.cn/googleac882b1d52647127.html";
 		  
 		  //http://256kb.cn:8888/kb/googleac882b1d52647127.html   //http://256kb.cn/googleac882b1d52647127.html
-		  String u1="http://127.0.0.1:8081/kb/googleac882b1d52647127.html"; //http://127.0.0.1:8080/kb/googleac882b1d52647127.html
-
+		  String u1="https://www.256kb.cn/public/html/2018/12/3650db2b-b474-4d2c-9129-6ca1fa7af4ba.html"; //http://127.0.0.1:8080/kb/googleac882b1d52647127.html
+		  //String u1="https://www.256kb.cn/public/detail?i=0c4f3944-4355-40da-8096-05a32df1c8b9"; //http://127.0.0.1:8080/kb/googleac882b1d52647127.html
+		 // String u1="http://192.168.100.126:8081/kb/public/html/2018/10/3bd0e8e0-0a20-48b7-83ee-8d90e44a8c3c.html"; //http://127.0.0.1:8080/kb/googleac882b1d52647127.html
+		  
 		 // String u1="http://256kb.cn/kb/public/html/2018/09/bdc8c0b5-44fb-4723-b2c5-fcf721c24089.html";
 		// String u1="http://256kb.cn/public/index/";
 		  String u2="https://www.256kb.cn/public/search/";

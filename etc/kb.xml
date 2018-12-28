@@ -22,6 +22,14 @@
            <ConfigDesc>爬虫标识     </ConfigDesc>
            </ConfigItem> 
 	
+	
+	   <ConfigItem>     
+                         <ConfigName>excludedPrerenderUrls</ConfigName>
+                         <ConfigValue>.*/public/html/(\\d+/\\d+)/.*.html,.*public/detail/?i=.*,.*google.*html</ConfigValue>
+                          <ConfigDesc>不经过prerender的链接-白名单     </ConfigDesc>
+                   </ConfigItem>     
+	
+	
 <ConfigItem>
 		<ConfigName>taobaoip</ConfigName>
 		<ConfigValue>false</ConfigValue>
@@ -153,10 +161,15 @@
 	</ConfigItem>
 		<ConfigItem>
 		<ConfigName>EnableMail</ConfigName>
-		<ConfigValue>false</ConfigValue>
+		<ConfigValue>true</ConfigValue>
 		<ConfigDesc>启用回复内容邮箱发送消息</ConfigDesc>
 	</ConfigItem>
 	
+	<ConfigItem>
+		<ConfigName>reloadMailTp</ConfigName>
+		<ConfigValue>true</ConfigValue>
+		<ConfigDesc>重读模板</ConfigDesc>
+	</ConfigItem>
 	
 		<ConfigItem>
 		<ConfigName>SSL_SMTP</ConfigName>

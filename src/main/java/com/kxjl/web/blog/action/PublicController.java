@@ -159,16 +159,19 @@ public class PublicController extends BaseController {
 		//logger.info("info test!");
 		//logger.debug("debug test!");
 		
-		logger.debug("/***********index visit************");
+		if(ConfigReader.getInstance().getProperty("debug","false").equals("true"))
+		{
+		logger.info("/***********index visit************");
 
 		 Enumeration<String> headers= request.getHeaderNames();
 		 while(headers.hasMoreElements())
 		 {
 			 String key=headers.nextElement();
-				logger.debug("*"+ key+":"+request.getHeader(key));
+				logger.info("*"+ key+":"+request.getHeader(key));
 		 }
 		
-		logger.debug("*************index visit end*******/");
+		logger.info("*************index visit end*******/");
+		}
 		
 		saveStaticInfo(request, StasticTypeOne.HomePage.toString(), "index",request.getQueryString());
 
@@ -458,6 +461,7 @@ public class PublicController extends BaseController {
 		HttpClientBuilder builder = HttpClients.custom().setConnectionManager(new PoolingHttpClientConnectionManager())
 				.disableRedirectHandling();
 		CloseableHttpClient httpClinet = builder.build();
+		
 		try {
 			prerenderServerResponse = httpClinet.execute(getMethod);
 
@@ -678,6 +682,21 @@ public class PublicController extends BaseController {
 		// 计数
 		SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
 
+		
+		if(ConfigReader.getInstance().getProperty("debug","false").equals("true"))
+		{
+		logger.info("/***********detail visit************");
+
+		 Enumeration<String> headers= request.getHeaderNames();
+		 while(headers.hasMoreElements())
+		 {
+			 String key=headers.nextElement();
+				logger.info("*"+ key+":"+request.getHeader(key));
+		 }
+		
+		logger.info("*************detail visit end*******/");
+		}
+		
 		
 	
 			 String userAgent = request.getHeader("Pre-User-Agent");//prerender带过来的原始爬虫agent
