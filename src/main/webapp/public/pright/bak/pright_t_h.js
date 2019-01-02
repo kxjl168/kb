@@ -234,6 +234,7 @@ var $scope = angular.element(ngSection).scope();
 			
 
 			var obj = new Object();
+			obj.show='1';
 			SZUMWS(
 					http + "kurl/getYQList.action",
 					JSON.stringify(obj),
@@ -250,9 +251,18 @@ var $scope = angular.element(ngSection).scope();
 							
 							var html="";
 							$.each($scope.yqlist,function(index,item){
+								
+								var icon=' <span class="glyphicon glyphicon-hand-right"></span>';
+								
+								if(typeof( item.icon)!="undefined")
+									icon='<img style="max-width:30px;" src="'+item.val2+item.icon+'" class="linkimg img-responsive" />';
+								
 								html+=' <a   href="'+item.url_val+'"   onclick="return gourl(this)" >  '
-								 +'    <div class="row col-xs-6"> '
-								 +' <span class="glyphicon glyphicon-hand-right"></span>'+item.url_name+' &nbsp; '
+								 +'    <div class="linka row col-xs-6"> '
+								 
+								 +icon//' <span class="glyphicon glyphicon-hand-right"></span>'
+								 
+								 +item.url_name+' &nbsp; '
 								 +' </div> '
 								 +' </a> ';
 							});

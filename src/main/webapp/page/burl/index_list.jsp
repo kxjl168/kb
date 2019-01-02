@@ -166,7 +166,7 @@
 										<th>URL</th>
 											
 										<th class="" >排序</th>
-										
+										<th class="" >图标</th>
 									
 										
 										<th class="">是否显示</th>
@@ -184,6 +184,8 @@
 										<td>{{ x.url_name }}</td>
 											<td class="">{{ x.url_val }}</td>
 											<td >{{ x.sort}}</td>
+											<td><img style="max-width:30px;" src="{{ x.val2 }}{{x.icon}}" class="img-responsive" /></td>
+										 
 												<td >{{ x.isshow|ft}}</td>
 									
 										<td  class="hide">

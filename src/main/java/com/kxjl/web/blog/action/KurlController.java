@@ -274,7 +274,7 @@ public class KurlController extends BaseController {
 
 			Kurl query = new Kurl();
 			query.setPage(curPage);
-			query.setPageCount(pageCount);
+			query.setPageCount(1000);
 			query.setVal1("1");
 
 			query.setIsshow("1");

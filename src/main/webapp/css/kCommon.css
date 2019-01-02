@@ -1720,3 +1720,15 @@ color:#ecb866!important;
     box-shadow: 0 0 10px rgba(0, 0, 0, .4);
     margin-bottom: 10px;
 }
+
+.linka{
+ line-height:30px;
+ }
+ .linkimg{
+ width:25px;
+ height:25px;
+ margin-right:5px;
+ float:left;
+ }
+  
+
