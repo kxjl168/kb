@@ -95,12 +95,36 @@
 										
 											<div ng-repeat="x in items.val" class="pgdiv" ng-cloak >
 										
-												<div class="col-sm-3 col-xs-11 ">
+												<div class="col-sm-3 col-xs-12 ">
+												
+												
+												
 												<div class='durl'>
-		 										<a ng-href={{x.url_val}} target="_blank"><i class="fa fa-user-o"></i><span>{{x.url_name}}</span></a>
-		 										<div class="udesc">{{x.desc_info}}</div>
-		 										<div class="hide ufoot">{{x.desc_info}}</div>
-		 										</div> 
+															<div class="row">
+															<div class=""><img style="max-width:30px;"  class="pull-left img-responsive" src="{{x.val2}}{{x.icon}}"></img></div>
+															<div class="col-xs-9">
+															
+															<a class="clear row" ng-href={{x.url_val}} target="_blank"><span>{{x.url_name}}</span></a>
+																
+																
+
+				
+				   											<div class="hide pull-left  {{x.isshow|ftc}}">{{x.isshow|ft}}</div>
+																<div class="hide pull-right">【 <a href="javascript:void(0)" class="text-info"
+																	ng-click="addOrModify(x)">修改</a> <a href="#"
+																	class="text-warning" ng-click="del(x)">删除</a> 】
+																	</div>
+															</div>
+															</div>
+
+
+												         
+																<div class="udesc">{{x.desc_info}}</div>
+															
+																
+															</div>
+												
+												
 		 										</div>
 											</div>
 										</div>

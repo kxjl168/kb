@@ -11,7 +11,7 @@ $(function() {
 	
 	init();
 	
-	 hljs.initHighlightingOnLoad();
+	// hljs.initHighlightingOnLoad();
 	
 	
 
@@ -130,7 +130,7 @@ function init() {
 					obj.month = $scope.month;
 					obj.blog_tag = $scope.blog_tag;
 					
-					obj.show ="-1"; //自己查看全部
+					obj.show ="1"; //自己查看全部
 					obj.page = $scope.page;
 					obj.rows = $scope.rows;
 
@@ -148,9 +148,15 @@ function init() {
 								
 									
 									
+									
 									$scope.datalist = eval(json.datalist);
-
+									
+									$.each( $scope.datalist ,function(index,item){
+										item.val=eval(item.val);
+										$scope.datalist[index]=item;
+									});
 								
+									$scope.$apply();
 
 								} else {
 									msg(message);
@@ -171,8 +177,22 @@ function init() {
 				$scope.getList();
 				
 
-};
+});
+}
 
+//filter
+app.filter("ft", [ '$sce', function($sce) {
+	return function(htmlCode) {
+		return htmlCode ==1?"可见":"不可见";
+	}
+}]);
+
+//filter
+app.filter("ftc", [ '$sce', function($sce) {
+	return function(htmlCode) {
+		return htmlCode ==1?"text-success":"text-danger";
+	}
+}]);
 
 
 app.filter("sanitize", [ '$sce', function($sce) {

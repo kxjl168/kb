@@ -44,6 +44,17 @@ public interface KurlDao {
 	public int deleteKurl(@Param(value="id")Integer id);
 
 	/**
+	 * 隐藏，设置标识
+	 * @param id
+	 * @return
+	 * @author zj
+	 * @date 2018年12月28日
+	 */
+	public int hideKurl(@Param(value="id")Integer id);
+
+	
+	
+	/**
 	 * 更新Kurl
 	 * @param Kurl
 	 * @return

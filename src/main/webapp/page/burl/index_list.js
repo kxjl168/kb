@@ -64,6 +64,128 @@ function changerows(option) {
 	});
 }
 
+
+
+function inittable(){
+// 初始化Table
+$('#table_detail').bootstrapTable({
+    url:http + "statistics/GetUserVisitDetailList.action", // 请求后台的URL（*）
+    method: 'post', // 请求方式（*）
+    contentType: 'application/x-www-form-urlencoded',
+    toolbar: '#toolbar', // 工具按钮用哪个容器
+
+    showHeader: true,
+    searchAlign: 'left',
+    buttonsAlign: 'left',
+    searchOnEnterKey: true,
+    striped: true, // 是否显示行间隔色
+    cache: false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+    pagination: true, // 是否显示分页（*）
+    sidePagination: "server", // 分页方式：client客户端分页，server服务端分页（*）
+    pageNumber: 1, // 初始化加载第一页，默认第一页
+    pageSize: 10, // 每页的记录行数（*）
+    pageList: [10, 25], // 可供选择的每页的行数（*）
+    search: false, // 是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+    detailView: false,
+    // showColumns: true, //是否显示所有的列
+    uniqueId: "id", // 每一行的唯一标识，一般为主键列
+    // queryParamsType : "limit",
+    queryParams: function queryParams(params) { // 设置查询参数
+    	
+    	var rows= params.limit; // 每页要显示的数据条数
+       var offset= params.offset; // 每页显示数据的开始行号
+       
+
+    	var page=1+ offset/rows;
+ 
+    	var sname= params.sort; // 要排序的字段
+    	if(sname=='blogname')
+    		sname="blog_id";
+    	
+        var param = {
+        		pageCount: params.limit, // 每页要显示的数据条数
+            offset: params.offset, // 每页显示数据的开始行号
+            page:page,
+            sortName: sname, // 要排序的字段
+            sortOrder:  params.order,
+            time1 : $("#effectDate").val(),
+            time2: $("#effectDate2").val(),
+            date_type : $("#dateType").val(),
+         // qName : $("#s_type ").find("option:selected").text(),
+         // date:cdate,
+            userid:$("#userid").val(),
+        };
+        return param;
+    },
+    columns: [
+    	{
+            field: 'id',
+            title: '订单编号',
+            align: 'center',
+            valign: 'middle',
+            visible:false
+        }, 
+        {
+            field: 'blogname',
+            title: '文章',
+            align: 'left',
+            valign: 'middle',
+            sortable : false,
+            formatter: function (value, row, index) {
+            	if(value==undefined)
+            		value="";
+                return "<a href='"+basePath+"/public/detail/?i="+row.blog_id+"'>"+value+"</a>";
+            }
+        },
+      
+      
+        {
+        field: 'userid',
+        title: '访问ip',
+        align: 'center',
+        sortable : false,
+        valign: 'middle' ,
+        formatter: function (value, row, index) {
+            return "<a href='javascript:void()' onclick='showdetail(\""+value+"\")'>"+value+"(访问详情)</a>";
+        }
+        }, 
+       
+        {
+        field: 'city',
+        title: '访问地市',
+        align: 'center',
+        valign: 'middle'
+        }, 
+        {
+        field: 'action_date',
+        title: '时间',
+        align: 'center',
+        valign: 'middle',
+        sortable : false,
+        },
+        {
+        	 field: 'referer',
+        title: '来源',
+        align: 'center',
+        sortable : false,
+        formatter: function (value, row, index) {
+        	if(value&&value.length>50)
+        		{
+        		return "<a href='javascript:void()' onclick='showdetail(\""+value+"\")'>"+value.substr(0,50)+"(访问详情)</a>";
+        		}
+        	else
+        		return "<a href='javascript:void()' onclick='showdetail(\""+value+"\")'>"+value+"(访问详情)</a>";
+        		
+            
+        }
+      
+        }
+    ],
+});
+
+}
+
+
 function init() {
 
 	initmenu($("#menuul"), "page/burl/index_list.jsp");
@@ -201,6 +323,11 @@ function init() {
 						$scope.fullurl = item.val2+item.val1;
 						$scope.val2 = item.val2;
 						
+						//$scope.isshow = item.isshow;
+						$("#isshow").val(item.isshow);
+						$scope.icon = item.icon;
+						$scope.url = item.icon;
+						$scope.fullurl = item.val2+item.icon;
 						//$("#s_dict_key").attr('disabled','');
 						$("#s_dict_key").removeAttr('disabled');
 
@@ -216,6 +343,10 @@ function init() {
 						$scope.desc_info="";
 						$scope.oldname="";						
 						$scope.s_sort = "";
+						$scope.fullurl = "";
+						
+						$("#isshow").val("1");
+						$("#url").val("");
 						$scope.fullurl = "";
 					}
 
@@ -237,7 +368,12 @@ function init() {
 						obj.sort = $scope.s_sort;
 						obj.desc_info = $scope.desc_info;
 						
-						obj.val1 = $("#url").val();
+						obj.isshow=$("#isshow").val();
+						obj.icon=$("#url").val();
+						
+						
+						
+						//obj.val1 = $("#url").val();
 						
 						
 					} else {
@@ -421,6 +557,13 @@ function init() {
 			
 
 };
+
+//filter
+app.filter("ft", [ '$sce', function($sce) {
+	return function(htmlCode) {
+		return htmlCode ==1?"可见":"不可见";
+	}
+}]);
 
 // filter
 app.filter("sanitize", [ '$sce', function($sce) {

@@ -169,7 +169,7 @@
 										
 									
 										
-										<th class="hide">出口IP刷新周期</th>
+										<th class="">是否显示</th>
 										<th class="hide">出口位置</th>
 										
 										<th>操作</th>
@@ -184,7 +184,7 @@
 										<td>{{ x.url_name }}</td>
 											<td class="">{{ x.url_val }}</td>
 											<td >{{ x.sort}}</td>
-											
+												<td >{{ x.isshow|ft}}</td>
 									
 										<td  class="hide">
 						
@@ -422,13 +422,14 @@
 					
 
 
-						<div class="form-group col-xs-12 row  hide">
-							<div class="control-label padding-top-0 col-xs-4 ">选择位置：</div>
+						<div class="form-group col-xs-12 row  ">
+							<div class="control-label padding-top-0 col-xs-4 ">可见：</div>
 						
 							<div class="col-xs-7 text-right ">
 						
-								<select class="form-control " id="s_city" ng-model="s_city">
-									<option  ng-repeat="x in citys_select ">{{x}}</option>
+								<select class="form-control " id="isshow" >
+									<option  value="1">可见</option>
+									<option  value="0">不可见</option>
 								</select>
 							</div>
 							

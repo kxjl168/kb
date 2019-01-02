@@ -78,7 +78,7 @@
 								<div class="panel panel-success urldv">
 									<div class="panel-heading urlhead" title="" href="#collapseOne">
 										<div class="row">
-											<h3 class="panel-title col-xs-10 " id="{{$index}}">
+											<h3 class="panel-title col-xs-12 " id="{{$index}}">
 												{{items.name}} &nbsp;<span><a href="#" class="urladd"
 													ng-click="addOrModify(null,items.name)">新增本类链接</a></span>
 											</h3>
@@ -96,16 +96,30 @@
 
 													<div ng-repeat="x in items.val" class="pgdiv" ng-cloak>
 
-														<div class="col-sm-3 col-xs-11 ">
+														<div class="col-sm-3 col-xs-12 ">
 															<div class='durl'>
-																<a ng-href={{x.url_val}} target="_blank"><i class="fa fa-user-o"></i><span>{{x.url_name}}</span></a>
+															<div class="row">
+															<div class=""><img style="max-width:30px;"  class="pull-left img-responsive" src="{{x.val2}}{{x.icon}}"></img></div>
+															<div class="col-xs-9">
+															
+															<a class="clear row" ng-href={{x.url_val}} target="_blank"><span>{{x.url_name}}</span></a>
+																
+																
 
-																【 <a href="javascript:void(0)" class="text-info"
+				
+				   											<div class="pull-left  {{x.isshow|ftc}}">{{x.isshow|ft}}</div>
+																<div class="pull-right">【 <a href="javascript:void(0)" class="text-info"
 																	ng-click="addOrModify(x)">修改</a> <a href="#"
 																	class="text-warning" ng-click="del(x)">删除</a> 】
+																	</div>
+															</div>
+															</div>
 
 
+												         
 																<div class="udesc">{{x.desc_info}}</div>
+															
+																
 															</div>
 														</div>
 													</div>
@@ -283,6 +297,27 @@
 							 </span> -->
 									</div>
 								</div>
+								
+								
+							
+						<div class="form-group col-xs-12 row  ">
+							<div class="control-label padding-top-0 col-xs-4 ">可见：</div>
+						
+							<div class="col-xs-7 text-right ">
+						
+								<select class="form-control " id="isshow" >
+									<option  value="1">可见</option>
+									<option  value="0">不可见</option>
+								</select>
+							</div>
+							
+							
+							
+						</div>
+								
+								
+								
+								
 
 								<div class="form-group col-xs-12 row ">
 									<div class="control-label padding-top-0 col-xs-4 ">图标：</div>

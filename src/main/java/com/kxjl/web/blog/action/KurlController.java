@@ -82,6 +82,7 @@ public class KurlController extends BaseController {
 			query.setPage(curPage);
 			query.setPageCount(1000);
 			query.setVal1("1");
+			
 
 			// query.setIp(ip);
 			// query.setCity(city);
@@ -155,6 +156,8 @@ public class KurlController extends BaseController {
 			//String url_type = jsonIN.optString("name");
 			// String dict_type = "url_type";
 
+			String show= parseStringParam(request, "show");
+			
 			int pageCount =0 ;//jsonIN.optInt("rows");// request.getParameter("pageCount");
 			int curPage =100;// jsonIN.optInt("page");
 
@@ -162,6 +165,7 @@ public class KurlController extends BaseController {
 			query.setPage(1);
 			query.setPageCount(100);
 			query.setVal1("2");
+			query.setIsshow(show);
 
 			// query.setIp(ip);
 			// query.setCity(city);
@@ -265,34 +269,42 @@ public class KurlController extends BaseController {
 
 			int pageCount = jsonIN.optInt("rows");// request.getParameter("pageCount");
 			int curPage = jsonIN.optInt("page");
+			
+			String show = jsonIN.optString("show");
 
 			Kurl query = new Kurl();
 			query.setPage(curPage);
 			query.setPageCount(pageCount);
 			query.setVal1("1");
 
-			// query.setIp(ip);
-			// query.setCity(city);
-			// query.setUrl_type(dict_type);// (url_title);// (id);
-			query.setUrl_name(url_type);// (url_name);
+			query.setIsshow("1");
+	
+						// query.setUrl_type(dict_type);// (url_title);// (id);
+						query.setUrl_name(url_type);// (url_name);
 
-			List<Kurl> infos = kurlService.getKurlPageList(query);
-			int total = kurlService.getKurlPageListCount(query);
-			String prepath = getImgHttpOutPath();
-			for (int i = 0; i < infos.size(); i++) {
-				Kurl d = infos.get(i);
-				d.setVal2(prepath);
+						String HTTP_PATH = ConfigReader.getInstance().getProperty("FILE_SVR_HTTP_OUTER_PATH");
+						String prepath = HTTP_PATH;
+						Map<String, List<Kurl>> datas=kurlService.getKurlItemPageList(query);
 
-			}
+						Gson gs = new Gson();
 
-			Gson gs = new Gson();
-			String jsStr = gs.toJson(infos);
+						JSONArray ja = new JSONArray();
+						for (List<Kurl> item : datas.values()) {
+							JSONObject jo=new JSONObject();
+							jo.put("name", item.get(0).getUrl_type());
+							jo.put("val", gs.toJson(item));
+							ja.put(jo);
+						}
 
-			jsonOut.put("val2", prepath);
-			jsonOut.put("ResponseCode", "200");
-			jsonOut.put("ResponseMsg", "");
-			jsonOut.put("total", total);
-			jsonOut.put("datalist", jsStr);
+						int total = kurlService.getKurlPageListCount(query);
+
+					//	String jsStr = gs.toJson(infos);
+
+						jsonOut.put("val2", prepath);
+						jsonOut.put("ResponseCode", "200");
+						jsonOut.put("ResponseMsg", "");
+						jsonOut.put("total", total);
+						jsonOut.put("datalist", ja.toString());
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -339,6 +351,9 @@ public class KurlController extends BaseController {
 			String val1 = jsonIN.optString("val1");
 			String desc_info = jsonIN.optString("desc_info");
 			String utype = jsonIN.optString("utype");
+			
+			String show = jsonIN.optString("isshow");
+			String icon = jsonIN.optString("icon");
 
 			Kurl blog = new Kurl();
 			blog.setId(recordid);// (accountid);
@@ -346,6 +361,7 @@ public class KurlController extends BaseController {
 			if (recordid == 0) {
 				Kurl query = new Kurl();
 				// query.setUrl_type(utype);// (accountid);
+				query.setVal1(val1);
 				query.setUrl_val(dic_key);
 				query.setPage(1);
 				query.setPageCount(10);
@@ -365,6 +381,8 @@ public class KurlController extends BaseController {
 
 			blog.setUrl_val(dic_key);// (title);// (pass);
 			blog.setUrl_name(dic_name);// (tags);
+			blog.setIcon(icon);
+			blog.setIsshow(show);
 			blog.setSort(sort);
 
 			blog.setVal1(val1);

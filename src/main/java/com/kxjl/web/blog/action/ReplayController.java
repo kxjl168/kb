@@ -329,7 +329,7 @@ public class ReplayController extends BaseController {
 						String url = "";
 						if (!imei.equals("about"))
 							url = ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn")
-									+ "/public/html/" + blog.getShowdate() + "/" + blog.getImei() + ".html#commet";
+									+ "/public/html/" + blog.getShowdate() + "/" + blog.getImei() + ".html";
 						else
 							url = ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn")
 									+ "/public/about/";
@@ -362,7 +362,7 @@ public class ReplayController extends BaseController {
 							Replay rqq = new Replay();
 							rqq.setRecordid(replay.getReplay_recordid());
 							Replay toReplay = replayService.getReplay(rqq);
-							String uid = xssEncode(JEscape.unescape(replay.getUserid()));
+							String uid = xssEncode(JEscape.unescape(toReplay.getUserid()));
 							String ucontent = xssEncode(JEscape.unescape(replay.getContent()));
 							if (toReplay.getEmail() != null && !toReplay.getEmail().equals("")) {
 								// 访客留言
@@ -375,7 +375,7 @@ public class ReplayController extends BaseController {
 								if (!imei.equals("about"))
 									url = ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn")
 											+ "/public/html/" + blog.getShowdate() + "/" + blog.getImei()
-											+ ".html#commet";
+											+ ".html";
 								else
 									url = ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn")
 											+ "/public/about/";

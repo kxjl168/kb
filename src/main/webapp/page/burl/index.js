@@ -251,10 +251,14 @@ function init() {
 						$scope.s_sort = parseInt( item.sort);
 						
 						$scope.desc_info=item.desc_info;
-						$scope.url = item.val1;
+						$scope.url = item.icon;
 						$scope.oldname = item.val1;
 						$scope.fullurl = item.val2+item.val1;
 						$scope.val2 = item.val2;
+						
+						//$scope.isshow = item.isshow;
+						$("#isshow").val(item.isshow);
+						$scope.icon = item.icon;
 						
 						//$("#s_dict_key").attr('disabled','');
 						$("#s_dict_key").removeAttr('disabled');
@@ -273,6 +277,10 @@ function init() {
 						$scope.desc_info="";
 						$scope.oldname="";						
 						$scope.s_sort = "";
+				
+						
+						$("#isshow").val("1");
+						$("#url").val("");
 						$scope.fullurl = "";
 					}
 
@@ -295,6 +303,9 @@ function init() {
 						obj.desc_info = $scope.desc_info;
 						
 						obj.val1 = $("#url").val();
+						
+						obj.isshow=$("#isshow").val();
+						obj.icon=$("#url").val();
 						
 						
 					} else {
@@ -372,7 +383,19 @@ function init() {
 	
 };
 
+//filter
+app.filter("ft", [ '$sce', function($sce) {
+	return function(htmlCode) {
+		return htmlCode ==1?"可见":"不可见";
+	}
+}]);
 
+//filter
+app.filter("ftc", [ '$sce', function($sce) {
+	return function(htmlCode) {
+		return htmlCode ==1?"text-success":"text-danger";
+	}
+}]);
 
 app.filter("sanitize", [ '$sce', function($sce) {
 	return function(htmlCode) {

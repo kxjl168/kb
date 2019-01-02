@@ -149,7 +149,12 @@ public class SysServiceImpl implements SysService {
 					"FILE_SVR_HTTP_OUTER_PATH");
 		
 			
-			jsonOut.put("visitData",new JSONObject(gs.toJson(sum)) );
+			try {
+				jsonOut.put("visitData",new JSONObject(gs.toJson(sum)) );
+			} catch (Exception e) {
+				
+			}
+			
 			jsonOut.put("httppath", HTTP_PATH);
 
 			jsonOut.put("ResponseCode", "200");

@@ -21,6 +21,9 @@ public class Kurl extends BaseModel {
 	private String desc_info;
 	private String val1;   //val1=1;普通 // val1=2 友情链接
 	
+	private String icon;//图标 相对路径
+	private String isshow;// 是否显示 1：显示 ，， 0 不显示
+	
 	//query
 	private String val2;
 
@@ -87,5 +90,23 @@ public class Kurl extends BaseModel {
 	public void setVal2(String val2) {
 		this.val2 = val2;
 	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	public String getIsshow() {
+		return isshow;
+	}
+
+	public void setIsshow(String isshow) {
+		this.isshow = isshow;
+	}
+
+
 
 }

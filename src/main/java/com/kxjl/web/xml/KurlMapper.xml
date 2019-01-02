@@ -16,6 +16,10 @@
 			and a.url_val =#{url_val}
 		</if>
 		
+			<if test='isshow != null and isshow != "" '>
+			and a.isshow =#{isshow}
+		</if>
+		
 		<if test='url_name != null and url_name != "" '>
 			and a.url_name like contact('%', #{url_name},'%')
 		</if>
@@ -36,6 +40,13 @@
 		</if>
 		<if test='url_val != null and url_val != "" '>
 			and a.url_val =#{url_val}
+		</if>
+			<if test='isshow != null and isshow != "" '>
+			and a.isshow =#{isshow}
+		</if>
+		
+		<if test='val1 != null and val1 != "" '>
+			and a.val1= #{val1}
 		</if>
 		
 		<if test='url_name != null and url_name != "" '>
@@ -59,9 +70,8 @@
 	    
 		insert into kurl_info 
 		(url_val,url_name,sort,url_type,
-		create_date,val1,desc_info )
-		values(#{url_val},#{url_name},#{sort},#{url_type}
-		,		now(),#{val1},#{desc_info})
+		create_date,val1,desc_info,isshow,icon )
+		values(#{url_val},#{url_name},#{sort},#{url_type},now(),#{val1},#{desc_info},#{isshow},#{icon})
 	</insert>
 	
 	<update id="updateKurl" parameterType="com.kxjl.web.blog.model.Kurl">
@@ -78,6 +88,15 @@
 			desc_info=#{desc_info},
 		</if>
 		
+		
+			<if test='isshow != null'>
+			isshow=#{isshow},
+		</if>
+		
+			<if test='icon != null'>
+			icon=#{icon},
+		</if>
+		
 		<if test='url_name != null'>
 			url_name=#{url_name},
 		</if>
@@ -89,6 +108,10 @@
 		</if>
 		
 		
+		
+		
+		
+		
 		</trim>
 		
 		where id=#{id}
@@ -98,6 +121,9 @@
 		delete from kurl_info where id = #{id}
 	</delete>
 	
+	<delete id="hideKurl"  parameterType="java.lang.Integer">
+		update  kurl_info set isshow='0' where id = #{id}
+	</delete>
 	
 </mapper>
   
