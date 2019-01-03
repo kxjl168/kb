@@ -46,6 +46,7 @@ import com.kxjl.web.system.service.MenuInfoService;
 
 /**
  * 权限控制!
+ * 
  * @author zj
  * @date 2018年7月2日
  *
@@ -101,22 +102,20 @@ public class PageFilter implements Filter {
 				logger.debug("request.getRequestURI(): " + curl);
 
 				if (curl.contains("public/detail/")) {
-					/*int xindex = curl.lastIndexOf("/");
-					int dotindex = curl.lastIndexOf(".");
-					int jindex = curl.lastIndexOf("#");
-
-					// request.get
-
-					String imei = curl.substring(xindex + 1, dotindex);
-					String nurl = "/public/detail/?i=" + imei;
-					if (imei.equals(""))
-						nurl = "../../" + imei;
-
-					RequestDispatcher dispathcer = request.getRequestDispatcher(nurl);
-					dispathcer.forward(request, response);
-
-					// wrapper.sendRedirect(nurl);
-					isDone = true;*/
+					/*
+					 * int xindex = curl.lastIndexOf("/"); int dotindex = curl.lastIndexOf("."); int
+					 * jindex = curl.lastIndexOf("#");
+					 * 
+					 * // request.get
+					 * 
+					 * String imei = curl.substring(xindex + 1, dotindex); String nurl =
+					 * "/public/detail/?i=" + imei; if (imei.equals("")) nurl = "../../" + imei;
+					 * 
+					 * RequestDispatcher dispathcer = request.getRequestDispatcher(nurl);
+					 * dispathcer.forward(request, response);
+					 * 
+					 * // wrapper.sendRedirect(nurl); isDone = true;
+					 */
 				} else if (curl.contains("public/index/")) {
 
 					String pretag = "i";
@@ -141,13 +140,12 @@ public class PageFilter implements Filter {
 
 					String imei = curl.substring(xindex + 1, dotindex);
 
-					//String nurl = cpath+"/public/index/?" + pretag + "=" + imei;
-					String nurl = cpath+"/public/index/?" + pretag + "=" + imei;
+					// String nurl = cpath+"/public/index/?" + pretag + "=" + imei;
+					String nurl = cpath + "/public/index/?" + pretag + "=" + imei;
 					RequestDispatcher dispathcer = request.getRequestDispatcher(nurl);
-					
-					
-					//request.removeAttribute("com.opensymphony.sitemesh.APPLIED_ONCE"); 
-					
+
+					// request.removeAttribute("com.opensymphony.sitemesh.APPLIED_ONCE");
+
 					dispathcer.forward(request, response);
 
 					// wrapper.sendRedirect(nurl);
@@ -251,24 +249,20 @@ public class PageFilter implements Filter {
 				if (!(localFile.exists())) {
 
 					if (curl.contains("public/detail/?i=")) {
-						/*if (!curl.contains("_escaped_fragment_")) {
-							String newurl = "";
-							if (curl.contains("?"))
-								newurl = curl + "&_escaped_fragment_";
-							else
-								newurl = curl + "?_escaped_fragment_";
-							// RequestDispatcher dispatcher = request.getRequestDispatcher(newurl);
-							// dispatcher.forward(request, response);
-							response.sendRedirect(newurl);
-							isDone = true;
-							return isDone;
-						}*/
+						/*
+						 * if (!curl.contains("_escaped_fragment_")) { String newurl = ""; if
+						 * (curl.contains("?")) newurl = curl + "&_escaped_fragment_"; else newurl =
+						 * curl + "?_escaped_fragment_"; // RequestDispatcher dispatcher =
+						 * request.getRequestDispatcher(newurl); // dispatcher.forward(request,
+						 * response); response.sendRedirect(newurl); isDone = true; return isDone; }
+						 */
 					}
 					if (Pattern.matches(pattern, curl)) {
-						//String newurl = request.getContextPath() + "/public/detail/?i=" + imei + "&_escaped_fragment_";
-						
+						// String newurl = request.getContextPath() + "/public/detail/?i=" + imei +
+						// "&_escaped_fragment_";
+
 						String newurl = request.getContextPath() + "/public/detail/?i=" + imei + "";
-						
+
 						response.sendRedirect(newurl);
 						isDone = true;
 						return isDone;
@@ -278,49 +272,49 @@ public class PageFilter implements Filter {
 					chain.doFilter(request, localCharResponseWrapper);
 					String str8 = localCharResponseWrapper.toString();
 					if (str8 != null) {
-						String fpath=FileProcessor.writeFile(str8, localFilePath, htmlName);
-						logger.info("write file done:"+fpath);
+						String fpath = FileProcessor.writeFile(str8, localFilePath, htmlName);
+						logger.info("write file done:" + fpath);
 						Thread.sleep(3600);
-						//RequestDispatcher dispatcher = request.getRequestDispatcher(htmlPath);
+						// RequestDispatcher dispatcher = request.getRequestDispatcher(htmlPath);
 						// dispatcher.forward(request, response);
-						
-						//RequestDispatcher dispatcher = request.getRequestDispatcher(htmlPath);
-						//dispatcher.forward(request, localCharResponseWrapper);
-						
+
+						// RequestDispatcher dispatcher = request.getRequestDispatcher(htmlPath);
+						// dispatcher.forward(request, localCharResponseWrapper);
+
 						response.sendRedirect(htmlPath);
 
 						isDone = true;
 					}
 				} else {
-					
-					Blog bq=new Blog();
+
+					Blog bq = new Blog();
 					bq.setImei(imei);
-					Blog detailitem=bservice.getBlogInfoById(bq);
-					
+					Blog detailitem = bservice.getBlogInfoById(bq);
+
 					Blog query = new Blog();
 					query.setImei(imei);
 					// 计数
 					SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
-					if (user==null||(user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin)) {
+					if (user == null || (user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin)) {
 						bservice.updateBlogReadTime(query);
 						Kdata.getInstance().cleanrBLogList("");
 					}
-					//记录直接访问html的日志，多为爬虫访问链接，页面js统计未执行.
-					
-					//无用户信息，爬虫
-					boolean isspider=false;
-					if (user==null)
-						isspider=true;
-					
-					logger.debug("isspider:"+isspider);
-					stasticService.saveStaticInfo(request, StasticTypeOne.DetailPage.toString(),detailitem.getBlog_type_name(), imei,isspider);
-					
-					//直接访问静态页面，其他filter不走了
-					//isDone = true;
-					
-					
-					//Thread.sleep(2000);
-					//logger.info("html "+htmlPath+" visited!");
+					// 记录直接访问html的日志，多为爬虫访问链接，页面js统计未执行.
+
+					// 无用户信息，爬虫
+					boolean isspider = false;
+					if (user == null)
+						isspider = true;
+
+					logger.debug("isspider:" + isspider);
+					stasticService.saveStaticInfo(request, StasticTypeOne.DetailPage.toString(),
+							detailitem.getBlog_type_name(), imei, isspider);
+
+					// 直接访问静态页面，其他filter不走了
+					// isDone = true;
+
+					// Thread.sleep(2000);
+					// logger.info("html "+htmlPath+" visited!");
 					// 不用重定向，直接访问html。
 					// response.sendRedirect(htmlPath);
 					// isDone = true;
@@ -333,7 +327,7 @@ public class PageFilter implements Filter {
 		} catch (
 
 		Exception e) {
-			logger.error("",e);
+			logger.error("", e);
 		}
 		return isDone;
 	}
@@ -355,20 +349,17 @@ public class PageFilter implements Filter {
 		/*
 		 * chain.doFilter(request, response); if(true) return;
 		 */
-		
-		String cpath= request.getContextPath();// ,
-		String curl= request.getRequestURI();
-		
-		if(curl.equals(cpath)||curl.equals(cpath+"/")) {
-		//	chain.doFilter(request, response);
-		//	return;
-			//wrapper.sendRedirect("public/index");
+
+		String cpath = request.getContextPath();// ,
+		String curl = request.getRequestURI();
+
+		if (curl.equals(cpath) || curl.equals(cpath + "/")) {
+			// chain.doFilter(request, response);
+			// return;
+			// wrapper.sendRedirect("public/index");
 			//
-			//return;
+			// return;
 		}
-		
-		
-		
 
 		// web.xml中读取
 		String excludedUrls = config.getInitParameter("excludedUrls");
@@ -390,13 +381,11 @@ public class PageFilter implements Filter {
 			}
 		}
 
-	
-		//if (StaticFilter(request, response2, chain))
-		//	return;
-		
-		// if (WeiStaticFilter(request, response2, chain))
+		// if (StaticFilter(request, response2, chain))
 		// return;
 
+		// if (WeiStaticFilter(request, response2, chain))
+		// return;
 
 		// 配置文件中读取
 		excludedUrls = ConfigReader.getInstance().getProperty("excludedUrls");
@@ -427,11 +416,10 @@ public class PageFilter implements Filter {
 		// System.out.println("pageFilter:" + request.getRequestURI());
 		if (user == null) {
 
-			//网页访问的肯定有user信息.
-			//没有的就是直接url访问或者爬虫
-			
-			
-		// 跟目录，放
+			// 网页访问的肯定有user信息.
+			// 没有的就是直接url访问或者爬虫
+
+			// 跟目录，放
 			if (request.getContextPath().equals("")) {
 				if (request.getRequestURI().equals("/")) {
 					logger.debug("pass:user is null but is / && request.getContextPath():" + request.getContextPath());
@@ -439,25 +427,56 @@ public class PageFilter implements Filter {
 					return;
 				}
 			}
-/*
-			logger.debug("request.getContextPath():" + request.getContextPath());// ,
-			// page!");
-			logger.debug("request.getRequestURI(): " + request.getRequestURI());
-			String loginPath = request.getContextPath() + "/login.jsp";
-			logger.debug("no userinfo, redirect to login page!");
-			wrapper.sendRedirect(loginPath);*/
+			/*
+			 * logger.debug("request.getContextPath():" + request.getContextPath());// , //
+			 * page!"); logger.debug("request.getRequestURI(): " + request.getRequestURI());
+			 * String loginPath = request.getContextPath() + "/login.jsp";
+			 * logger.debug("no userinfo, redirect to login page!");
+			 * wrapper.sendRedirect(loginPath);
+			 */
 
-			if ( request.getRequestURI().contains(".php")
-					||!(request.getRequestURI().startsWith("/public") || request.getRequestURI().startsWith("/page")|| request.getRequestURI().startsWith("/pown"))
-					|| !request.getRequestURI().startsWith("/xjs/_/js/k=")
-					) {
-				stasticService.saveStaticInfo(request, "attack","", request.getRequestURI(),true);
+			//直接后台调用接口、扫描等
+			//不用鉴权url+其他正常url， 全部正常请求.
+			excludedUrls+= ConfigReader.getInstance().getProperty("normalUrls",
+					"/public,/blog,/replay,/kurl,/UploadFileXhr,/todo,/user,/phoneaccount,/privilege,/Privilege,/search,/menu,.*.do,.*.action,/FileSvr,/xjs,/page,/file,/pown,/statistics,");
+			
+			String[] nurls = excludedUrls.split(",");
+
+			boolean isattack = true;
+			if (request.getRequestURI().contains(".php"))
+				isattack = true;
+
+			for (int i = 0; i < nurls.length; i++) {
+				if (nurls[i].trim().equals(""))
+					continue;
+				if (request.getRequestURI().startsWith(nurls[i])) {
+					isattack = false;
+					break;
+				}
+				
+
+				// *匹配
+				if (nurls[i].contains("*")) {
+					String pattern = nurls[i].trim();
+
+					boolean isMatch = Pattern.matches(pattern, request.getRequestURI());
+					if (isMatch) {
+						isattack = false;
+						break;
+					}
+				}
+			}
+
+			if (isattack) {
+				logger.error("attack: request.getContextPath():" + request.getRequestURI());
+				stasticService.saveStaticInfo(request, "attack", "", request.getRequestURI(), true);
 				return;
 			}
 
-			
 		} else {
 
+			//通过浏览器访问的，有用户信息，登陆或者没登陆。
+			
 			// 登录后，刷新过菜单时，访问根目录，直接跳转第一个菜单
 			if ((request.getRequestURI().equals(request.getContextPath()))
 					|| (request.getRequestURI().equals(request.getContextPath() + "/"))) {
@@ -475,54 +494,52 @@ public class PageFilter implements Filter {
 
 			}
 
-		/*	if (request.getRequestURI().endsWith("/")) {*/
+			/* if (request.getRequestURI().endsWith("/")) { */
 
-			//所有目录都要过滤
-				// zj 171215 直接访问url权限过滤
-				// System.out.println("filter:"+request.getRequestURI());
-				boolean inaccess = false;
+			// 所有目录都要过滤
+			// zj 171215 直接访问url权限过滤
+			// System.out.println("filter:"+request.getRequestURI());
+			boolean inaccess = false;
 
-				if (user.getMenus().size() == 0)
+			if (user.getMenus().size() == 0)
+				inaccess = true;
+			else
+				inaccess = false;
+
+			for (int i = 0; i < user.getMenus().size(); i++) {
+				if (user.getMenus().get(i) != null && user.getMenus().get(i).getMenuUrl() != null
+						&& request.getRequestURI().contains(user.getMenus().get(i).getMenuUrl())) {
 					inaccess = true;
-				else
-					inaccess = false;
-
-				for (int i = 0; i < user.getMenus().size(); i++) {
-					if (user.getMenus().get(i) != null && user.getMenus().get(i).getMenuUrl() != null
-							&& request.getRequestURI().contains(user.getMenus().get(i).getMenuUrl())) {
-						inaccess = true;
-						break;
-					}
+					break;
 				}
+			}
 
-				if (!inaccess) {
-					
-					
-					if(user.getUtype()==UserType.Root||user.getUtype()==UserType.Admin)
-					{
-						chain.doFilter(request, response);
-						return;
-					}
-					else
-					{
+			if (!inaccess) {
+
+				if (user.getUtype() == UserType.Root || user.getUtype() == UserType.Admin) {
+					chain.doFilter(request, response);
+					return;
+				} else {
 					String loginPath = request.getContextPath() + "/noaccess.jsp";
 					wrapper.sendRedirect(loginPath);
-					logger.debug("inaccess:" + inaccess);// ,
-					return ;
-					}
+					logger.error("inaccess:" + inaccess);// ,
+				
+						logger.error("attack: request.getContextPath():" + request.getRequestURI());
+						stasticService.saveStaticInfo(request, "attack", "inaccess", request.getRequestURI(), true);
+						return;
 					
 				}
-
-				
 
 			}
 
-			logger.debug("request.getContextPath():" + request.getContextPath());// ,
-			logger.debug("request.getRequestURI(): " + request.getRequestURI());
+		}
 
-			chain.doFilter(request, response);
-			return;
-		/*}*/
+		logger.debug("request.getContextPath():" + request.getContextPath());// ,
+		logger.debug("request.getRequestURI(): " + request.getRequestURI());
+
+		chain.doFilter(request, response);
+		return;
+		/* } */
 
 	}
 

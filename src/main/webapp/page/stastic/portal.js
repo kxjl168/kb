@@ -251,8 +251,8 @@ function init() {
 						
 						
 						
-					var data= "昨日独立访问："+ (ydata.userVisitNum||0)+ "(attack:"+(ydata.attackVisitNum||0)+") 页面访问："+ (ydata.pageVisitNum||0) +"(attack:"+(ydata.attackPageVisitNum||0)+")<br>";
-					data+= " / 今日独立访问："+ (ndata.userVisitNum||0)+ "(attack:"+(ndata.attackVisitNum||0)+") 页面访问："+ (ndata.pageVisitNum||0)  +"(attack:"+(ndata.attackPageVisitNum||0)+")";
+					var data= "昨日新增独立ip访问："+ (ydata.userVisitNum||0)+ "(attack:"+(ydata.attackVisitNum||0)+") 页面访问："+ (ydata.pageVisitNum||0) +"(attack:"+(ydata.attackPageVisitNum||0)+")<br>";
+					data+= " / 今日新增独立ip访问："+ (ndata.userVisitNum||0)+ "(attack:"+(ndata.attackVisitNum||0)+") 页面访问："+ (ndata.pageVisitNum||0)  +"(attack:"+(ndata.attackPageVisitNum||0)+")";
 
 $("#sdata").html(data);
 
