@@ -324,16 +324,20 @@ public class PublicController extends BaseController {
 
 		// List<MenuInfo> leftmenus = menuService.getLeftMenuTree(session, request);
 
-		setLeftUrls(maps);
+		setLeftUrls(maps,true);
 		return "/page/burl/index";
 	}
 
-	private void setLeftUrls(Map<String, Object> maps) {
+	private void setLeftUrls(Map<String, Object> maps,boolean showAll) {
 
 		Kurl query = new Kurl();
 		query.setPage(1);
-		query.setPageCount(100);
+		query.setPageCount(10000);
 		query.setVal1("1");
+		if(showAll)
+			query.setIsshow("");
+		else
+			query.setIsshow("1");
 
 		query.setUrl_name("");// (url_name);
 		Map<String, List<Kurl>> datas = kurlService.getKurlItemPageList(query);
@@ -358,7 +362,7 @@ public class PublicController extends BaseController {
 
 		// List<MenuInfo> leftmenus = menuService.getLeftMenuTree(session, request);
 
-		setLeftUrls(maps);
+		setLeftUrls(maps,false);
 		return "/pown/url/main";
 	}
 

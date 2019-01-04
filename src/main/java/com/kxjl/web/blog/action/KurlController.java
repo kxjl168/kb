@@ -80,7 +80,7 @@ public class KurlController extends BaseController {
 
 			Kurl query = new Kurl();
 			query.setPage(curPage);
-			query.setPageCount(1000);
+			query.setPageCount(10000);
 			query.setVal1("1");
 			
 
@@ -259,12 +259,12 @@ public class KurlController extends BaseController {
 
 			String show= parseStringParam(request, "show");
 			
-			int pageCount =0 ;//jsonIN.optInt("rows");// request.getParameter("pageCount");
-			int curPage =100;// jsonIN.optInt("page");
-
+			
+			int pageCount = parseIntegerParam(request,"rows");// request.getParameter("pageCount");
+			int curPage =parseIntegerParam(request,"page");
 			Kurl query = new Kurl();
-			query.setPage(1);
-			query.setPageCount(100);
+			query.setPage(curPage);
+			query.setPageCount(pageCount);
 			query.setVal1("2");
 			query.setIsshow(show);
 
@@ -362,7 +362,7 @@ public class KurlController extends BaseController {
 
 			Kurl query = new Kurl();
 			query.setPage(curPage);
-			query.setPageCount(1000);
+			query.setPageCount(10000);
 			query.setVal1("1");
 
 			query.setIsshow("1");
