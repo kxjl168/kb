@@ -240,7 +240,7 @@
 								<img class="nopaddding img-responsive col-xs-2"
 									style="width: 25px; height: 25px;" title="JAVA"
 									src="http://127.0.0.1:8081/kb/file/apk/201803/81242a02-fda0-41ea-959f-078af6a0e66d.jpg">
-									<div class="col-sm-8 col-xs-11 ptitle  ">123</div>
+									<div class="col-sm-8 col-xs-11 ptitle  ">我是测试的路人甲文章</div>
 
 
 
@@ -264,7 +264,7 @@
 						
 						
 						<div  class="postdiv row col-xs-12 margin-top-5 ">
-								发布于2018-10-17 14:16:14&nbsp; <span>已有<span id="rdnum">2</span>人围观&nbsp;
+								发布于2018-10-17 14:16:14&nbsp; <span>已有<span id="rdnum">3</span>人围观&nbsp;
 								</span> <span> <span id="rpnum">0</span>人吐槽&nbsp;</span>
 								<span id="spidernum"></span>
 							</div>
@@ -304,18 +304,242 @@
 							<div class="">
 								<div class=" pageText "
 									><div class="pct">
-<p>&#x1f600;sdf s&#x1f617;&#x1f928;&#x1f914;</p>
+<p>&#x1f606;先来点表情镇楼..&#x1f605;&#x1f929;&#x1f98a;&#x1f378;&#x1f613;&#x1f621;,本文使用ckeditor版本为4.11.1&nbsp;&#x1f47d;&nbsp;</p>
 
 <p>&nbsp;</p>
 
-<p>&#x1f922;</p>
+<p>之前就想给ckeditor添加表情的，一直没空下来，刚好最近抓到点时间，搞搞，</p>
 
-<p>给该数组中的两项前面拼接上"0x",得到一个新的数组</p>
+<p>结果这里倒是发现了一个大坑.</p>
 
-<pre>["0xd83d", "0xde2c"] &#x1f605;</pre>
+<p>&nbsp;</p>
 
-<p>接下来将数组中的两项直接传递进String.fromCharCode()方法中得到的结果双向绑定到界面即可显示出对应的emoji表情。<br>
-要注意的一点：如果该Unicode编码的emoji表情U+后面是四位，例如：U+2600或者U+26c4，则需要省去调用findSurrogatePair()方法这一步，即以U+2600为例，取到2600，拼接上0x得到0x2600，直接调用String.fromCharCode()方</p>
+<p>不过一番折腾，反而对cheditor的插件机制 及emoji 相关更了解了一点。</p>
+
+<p>而且后面还引发出了prerender的问题，折腾了一晚上加一早上，还学会了用vs code调试nodejs，还好找到问题了。</p>
+
+<p>&nbsp;</p>
+
+<p>好吧，这就是后话了，反正引出了好多东西，感觉不会的东西更多了。。&#x1f625;</p>
+
+<p>&nbsp;</p>
+
+<h1>Ckeditor版本及插件.</h1>
+
+<p>之前使用的ckeditor为4.8，而Eomji是从ckeditor4.10开始引入的，必须要更新下版本呢，</p>
+
+<p>本来想换位ckeditor5的，但是发现改动比较大，有些东西不好调,而且与目前的一些字段定义插件不兼容，</p>
+
+<p>那就罢了.直接更新4.11吧。</p>
+
+<p>&nbsp;</p>
+
+<p>之前的ckeditor都有点忘了是怎么下下来的，反正捣鼓了一堆插件也没用上。自己修改了config.js简化不少，</p>
+
+<h2>4.11 ckeditor更新</h2>
+
+<p>现在直接下一个完整版的4.11下来发现按钮各种多。。&#x1f644;，</p>
+
+<p>而且发现plugins目录下的插件都没有js,原来直接在官网build下来的插件，js都会集成压缩到ckeditor.js 中，</p>
+
+<p>这样虽然方便使用，但是及其不方便修改和查看。</p>
+
+<p>比如整合CKAwesome时，插件里面引用了select2,与我页面上的有冲突，非得改下代码才好。</p>
+
+<p>&nbsp;</p>
+
+<p><img fid="undefined" onclick="showOriImg()" orisrc="https://www.256kb.cn/kb/file/apk/201812/5826500a-7d21-48ab-9d78-e3f9cc1ed09e_orign.png" src="https://www.256kb.cn/kb/file/apk/201812/5826500a-7d21-48ab-9d78-e3f9cc1ed09e.png" class="img-responsive">在官方这个在线build界面发现右边点击每个插件，可以直接查看插件自己的网页，</p>
+
+<p>后来就一个个的把需要的插件下下来，在config.js中自己整合，</p>
+
+<p>&nbsp;</p>
+
+<p>整合了Emoji,smile,CKAwesome 三个。当然都有些小修改，这就是单独下载的好处了，可以随意修改。</p>
+
+<p><img fid="undefined" onclick="showOriImg()" orisrc="https://www.256kb.cn/kb/file/apk/201812/f7fb3105-0f4b-4992-a79b-8d7680b62322_orign.png" src="https://www.256kb.cn/kb/file/apk/201812/f7fb3105-0f4b-4992-a79b-8d7680b62322.png" class="img-responsive"></p>
+
+<p>这里增加了preview,可以预览.</p>
+
+<p><img fid="undefined" onclick="showOriImg()" orisrc="https://www.256kb.cn/kb/file/apk/201812/adbd7bff-4935-4746-8ca1-de6311296446_orign.png" src="https://www.256kb.cn/kb/file/apk/201812/adbd7bff-4935-4746-8ca1-de6311296446.png" class="img-responsive"></p>
+
+<h2>整合</h2>
+
+<p><a href="https://ckeditor.com/cke4/addon/emoji">https://ckeditor.com/cke4/addon/emoji</a></p>
+
+<p>下载集成就好，当然需要把依赖的其他插件&nbsp;autocomplete,textmatch,ajax,panelbutton,floatpanel</p>
+
+<p>都一个个下好。</p>
+
+<pre><code class="language-javascript">	CKEDITOR.plugins.add( 'emoji', {
+		requires: 'autocomplete,textmatch,ajax,panelbutton,floatpanel',
+		lang: 'en', // %REMOVE_LINE_CORE%
+		icons: 'emojipanel',
+		hidpi: true,</code></pre>
+
+<p><img fid="undefined" onclick="showOriImg()" orisrc="https://www.256kb.cn/kb/file/apk/201812/cda85118-aed4-4f92-96df-8be3fc63b935_orign.png" src="https://www.256kb.cn/kb/file/apk/201812/cda85118-aed4-4f92-96df-8be3fc63b935.png" class="img-responsive"></p>
+
+<h1>Emoji问题</h1>
+
+<h2>乱码</h2>
+
+<p>插件配置好后，编辑一点问题没有，cool~&#x1f609;</p>
+
+<p>保存，然后查看首页。。</p>
+
+<p>好家伙，直接乱码，显示 小方块，但是再编辑的时候是正常的。</p>
+
+<p><img fid="undefined" onclick="showOriImg()" orisrc="https://www.256kb.cn/kb/file/apk/201812/eb01aa8d-534a-43cb-b0ca-8d1dc2af2be5_orign.png" src="https://www.256kb.cn/kb/file/apk/201812/eb01aa8d-534a-43cb-b0ca-8d1dc2af2be5.png" class="img-responsive"></p>
+
+<h2>原因</h2>
+
+<p>研究一番后发现网上说的都不适用。</p>
+
+<p>本blog存储使用的unicode，所有文字输入都会escape转码存储.，数据库直接存储的</p>
+
+<p>&#x1f600;,是没有问题的.</p>
+
+<p>在Controller中取出来就是&#x1f600;符号了。但是到页面上就是乱码了。</p>
+
+<p>再研究一番发现，html中显示需要转化为对应的html实体 转义符号，例如 &amp;#x1f600; 这样。</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>其实就是&amp;#x +符号的unicode 16进制编码。</p>
+
+<p>Emoji符号说明&nbsp;<a href="http://unicode.org/emoji/charts/full-emoji-list.html">unicode.org</a>&nbsp;</p>
+
+<p><img fid="undefined" onclick="showOriImg()" orisrc="https://www.256kb.cn/kb/file/apk/201812/798d9126-7f55-4b7e-b2ec-22efe1f3aeb9_orign.png" src="https://www.256kb.cn/kb/file/apk/201812/798d9126-7f55-4b7e-b2ec-22efe1f3aeb9.png" class="img-responsive"></p>
+
+<p>&nbsp;</p>
+
+<h2>解决</h2>
+
+<p>就是页面显示的时候需要拼接&amp;#x+16进制unicode，那么为了方便统一处理，后台存储的时候肯定不能直接存储成&#x1f600; 这样了。</p>
+
+<p>其实也简单，<strong>存储的时候匹配所有的Emoji符号， 计算出 符号的 unicode 编码， 用统一标准存储，</strong></p>
+
+<p><strong>&nbsp;比如&#x1f600; --》统一加前缀 &amp;#x和后缀;&nbsp; &nbsp;变成&nbsp; &#x1f600;;</strong></p>
+
+<p><strong>前台呈现的时候,将&amp;#x 统一替换为 &amp;#x即可。 即&nbsp; &amp;#x1f600;&nbsp;&nbsp;</strong></p>
+
+<p>这样就是可以自动转换了。</p>
+
+<h2>问题点</h2>
+
+<p>那么问题也来了，怎么检查Emoji符号，怎么用js转化为 emoji对应的 unicode符号？</p>
+
+<p>Emoji符号基本上是两位16进制字符组成，根据unicode emoji网站说明及google的结果，我这里使用了如下的匹配</p>
+
+<pre><code class="language-javascript">/(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\u0023-\u0039]\ufe0f?\u20e3|\u3299|\u3297|\u303d|\u3030|\u24c2|\ud83c[\udd70-\udd71]|\ud83c[\udd7e-\udd7f]|\ud83c\udd8e|\ud83c[\udd91-\udd9a]|\ud83c[\udde6-\uddff]|[\ud83c\ude01-\ude02]|\ud83c\ude1a|\ud83c\ude2f|[\ud83c\ude32-\ude3a]|[\ud83c\ude50-\ude51]|\u203c|\u2049|[\u25aa-\u25ab]|\u25b6|\u25c0|[\u25fb-\u25fe]|\u00a9|\u00ae|\u2122|\u2139|\ud83c\udc04|[\u2600-\u26FF]|\u2b05|\u2b06|\u2b07|\u2b1b|\u2b1c|\u2b50|\u2b55|\u231a|\u231b|\u2328|\u23cf|[\u23e9-\u23f3]|[\u23f8-\u23fa]|\ud83c\udccf|\u2934|\u2935|[\u2190-\u21ff])/g;</code></pre>
+
+<p>关于计算 两位16进制Emoji字符转成 32位的unicode的方法，</p>
+
+<p>我这里参考了JDK中的Character.class 里面codePointAt 方法来实现。</p>
+
+<pre><code> // Optimized form of:
+        // return ((high - MIN_HIGH_SURROGATE) &lt;&lt; 10)
+        //         + (low - MIN_LOW_SURROGATE)
+        //         + MIN_SUPPLEMENTARY_CODE_POINT;</code></pre>
+
+<p>如下：</p>
+
+<pre><code class="language-javascript">function KChar(options){
+		
+		this.default={
+				    MIN_SUPPLEMENTARY_CODE_POINT : 0x010000,
+				     MIN_HIGH_SURROGATE : '\uD800'.charCodeAt(0),
+				     MIN_LOW_SURROGATE  : '\uDC00'.charCodeAt(0),
+				     MAX_HIGH_SURROGATE : '\uDBFF'.charCodeAt(0),
+				     MAX_LOW_SURROGATE  : '\uDFFF'.charCodeAt(0),
+				     MIN_CODE_POINT : 0x000000,
+				     MAX_CODE_POINT:0X10FFFF,
+		};
+	
+		
+	} ;
+	
+	KChar.prototype.isHighSurrogate=function(ch){
+		var me=this;
+		 return ch &gt;= me.default.MIN_HIGH_SURROGATE &amp;&amp; ch &lt; (me.default.MAX_HIGH_SURROGATE + 1);
+	}
+	
+	KChar.prototype. isLowSurrogate=function( ch) {
+		var me=this;
+	        return ch &gt;= me.default.MIN_LOW_SURROGATE &amp;&amp; ch &lt; (me.default.MAX_LOW_SURROGATE + 1);
+	    }
+
+	KChar.prototype.codePointAt=function(seq,index) {
+		var me=this;
+	        var c1 = seq.charCodeAt(index);
+	        if (me.isHighSurrogate(c1) &amp;&amp; ++index &lt; seq.length) {
+	            var c2 = seq.charCodeAt(index);
+	            if (me.isLowSurrogate(c2)) {
+	                return me.toCodePoint(c1, c2);
+	            }
+	        }
+	        return c1;
+	    }
+	
+	KChar.prototype.toCodePoint=function(high,low) {
+		var me=this;
+
+		 var codept= ((high &lt;&lt; 10) + low) + ( me.default.MIN_SUPPLEMENTARY_CODE_POINT
+	             - ( me.default.MIN_HIGH_SURROGATE &lt;&lt; 10)
+	             -  me.default.MIN_LOW_SURROGATE);
+	        return codept;
+	    }</code></pre>
+
+<p>&nbsp;</p>
+
+<p>然后将转化的数字转为16进制显示即可</p>
+
+<pre><code class="language-javascript">// 返回emoji表情的 unicoe 数字
+	window.$kchar.codePointAt=function(str){
+		
+		return kchar.codePointAt(str,0).toString(16);
+		
+	};</code></pre>
+
+<p>，</p>
+
+<p>这里我封装了一个JS，比较方便。</p>
+
+<p>下载&nbsp;&nbsp;<a href="https://www.256kb.cn/FileSvr/downFile.action?m5=fcc7ea60c604983455324ecabf45d3a1">点击这里下载</a></p>
+
+<p>使用如下：</p>
+
+<pre><code class="language-javascript">	
+var withemojihtml= $kchar. replaceEmoji(inputhtmldata);</code></pre>
+
+<p>&nbsp;</p>
+
+<p>github:</p>
+
+<p><a href="https://github.com/kxjl168/kchar">https://github.com/kxjl168/kchar</a></p>
+
+<p>&nbsp;</p>
+
+<h1>其他插曲</h1>
+
+<p>本来昨天就想写这个文章的，但是</p>
+
+<p>回家搞google验证搞了一晚上，没搞定！&#x1f631;。。</p>
+
+<p>google站点的认证，使用html认证，怎么返回的都是 带 &lt;html&gt;&lt;head&gt;...的数据。</p>
+
+<p>&nbsp;</p>
+
+<p>今天发现妈蛋的被prerender拦截了，prerender调用 chorme 来加载网页的时候，会与大部分浏览器一样自动加上</p>
+
+<p>&lt;html&gt;&lt;head&gt;。。。。&#x1f62d;&#x1f620;。。</p>
+
+<p>&nbsp;</p>
+
+<p>不过总算搞定了！</p>
+
+<p>而且发现nodejs 直接用vscode 打开就可以直接运行，调试，不得不说牛的一米，&#x1f60f;</p>
 </div></div>
 							</div>
 
@@ -330,7 +554,7 @@
 							</div>
 							
 							   <div  class="postdiv row col-xs-12 margin-top-5 left ">
-								最后更新于2018-12-20 17:59:22&nbsp; </span>
+								最后更新于2018-12-21 14:57:00&nbsp; </span>
 							</div>
 					</div>
 
@@ -366,7 +590,7 @@
 							<div id="license_information">
 
 								<p>
-									本文 [123]基于<a href="https://mit-license.org/"
+									本文 [我是测试的路人甲文章]基于<a href="https://mit-license.org/"
 										title="MIT License " target="_blank">MIT License </a>
 									许可协议发布,作者：野生的喵喵<a href="http://www.256kb.cn/">http://www.256kb.cn/</a>
 								</p>

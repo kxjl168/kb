@@ -75,6 +75,8 @@ function initDetailTable() {
                 date_type : $("#dateType").val(),
              // qName : $("#s_type ").find("option:selected").text(),
              // date:cdate,
+                type_first : $('#type_first').is(":checked")?"detail":"",
+                		type_second : $('#type_second').is(":checked")?"notshowmyown":"",
                 userid:$("#userid").val(),
             };
             return param;
@@ -96,6 +98,9 @@ function initDetailTable() {
                 formatter: function (value, row, index) {
                 	if(value==undefined)
                 		value="";
+                	if(value.indexOf('首页(')>-1)
+                		return "<a href='"+basePath+"/public/index?"+row.blog_id+"'>"+value+"</a>";
+                	else
                     return "<a href='"+basePath+"/public/detail/?i="+row.blog_id+"'>"+value+"</a>";
                 }
             },

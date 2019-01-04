@@ -81,6 +81,27 @@
 										</div>
 									</div>
 								</div>
+								
+								<div class="row  form-group margin-bottom-5">
+									<div class=" col-md-6  col-xs-12  ">
+										<div
+											class="control-label padding-top-0 col-xs-4 col-md-4 col-lg-4 ">不显示我的访问：</div>
+										<div class="col-md-6 col-xs-8 text-right ">
+											<input id="type_second" name="type_second"  checked="checked"
+												type="checkbox" class="mcheck form-control">
+										</div>
+									</div>
+
+									<div class=" col-md-6  col-xs-12  ">
+										<div
+											class="control-label padding-top-0 col-xs-4 col-md-4 col-lg-4 ">只显示详情页面访问：</div>
+										<div class="col-md-6 col-xs-8 text-right ">
+											<input id="type_first" name="type_first"  checked="checked"
+												type="checkbox" class="mcheck form-control">
+										</div>
+									</div>
+								</div>
+								
 
 								<div class="row  form-group margin-bottom-5">
 									<div class=" col-md-6  col-xs-12  ">

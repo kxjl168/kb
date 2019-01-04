@@ -140,10 +140,7 @@ function otherScroll3(){
 
 
 
- <script async
-		src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
-		
-		
+
 <div id='googleadcode_bottom' style='display: none'>
 
 	
@@ -191,30 +188,64 @@ function otherScroll3(){
 
 <script language='javascript'>
 	
+function include_js(jspath,callback) {
+    var _doc = document.getElementsByTagName('head')[0];
+    var js = document.createElement('script');
+    js.setAttribute('type', 'text/javascript');
+    js.setAttribute('src', jspath);
+    _doc.appendChild(js);
+    if (document.all) {
+        js.onreadystatechange = function() {
+            if (js.readyState == 'loaded' || js.readyState == 'complete') {
+            	if(typeof(callback)=='function')
+            	callback();// alert('IE6、IE7 support js.onreadystatechange');
+            }
+        }
+    } else {
+        js.onload = function() {
+            //alert('Firefox、chrome and others support js.onload');
+        	if(typeof(callback)=='function')
+            	callback();
+        }
+    }
+}
+//include_js('http://static2.baihe.com/js/finallyBaiheHead.js?time=20141120');
+	
+	
 $(document).ready(function(){
-	setTimeout(function() {
-		if (document.all.item('googlead3') != null) {
-			googlead3.innerHTML = googleadcode3.innerHTML;
-		}
+	  
+	
+	
+	var googleJs = "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+    
+	loadads();
+	include_js(googleJs);
 
-		if (document.all.item('googlead2') != null) {
-			googlead2.innerHTML = googleadcode_d_right.innerHTML;
-		}
+	
+	
+function loadads(){
+	if (document.all.item('googlead3') != null) {
+		googlead3.innerHTML = googleadcode3.innerHTML;
+	}
 
-		if (document.all.item('googlead') != null) {
-			googlead.innerHTML = googleadcode_bottom.innerHTML;
-		}
-		
-		if (document.all.item('googlead_link') != null) {
-			googlead_link.innerHTML = googleadcode_link.innerHTML;
-		}
-		
-		
-			(adsbygoogle = window.adsbygoogle || []).push({});
-			(adsbygoogle = window.adsbygoogle || []).push({});
-			(adsbygoogle = window.adsbygoogle || []).push({});
-			(adsbygoogle = window.adsbygoogle || []).push({});	
-	},500);	
+	if (document.all.item('googlead2') != null) {
+		googlead2.innerHTML = googleadcode_d_right.innerHTML;
+	}
+
+	if (document.all.item('googlead') != null) {
+		googlead.innerHTML = googleadcode_bottom.innerHTML;
+	}
+	
+	if (document.all.item('googlead_link') != null) {
+		googlead_link.innerHTML = googleadcode_link.innerHTML;
+	}
+	
+	
+		(adsbygoogle = window.adsbygoogle || []).push({});
+		(adsbygoogle = window.adsbygoogle || []).push({});
+		(adsbygoogle = window.adsbygoogle || []).push({});
+		(adsbygoogle = window.adsbygoogle || []).push({});	
+}
 	 	 
 	});
 	

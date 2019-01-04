@@ -484,7 +484,7 @@ function init() {
 					
 					
 					SZUMWS(
-							http + "kurl/getYQList.action",
+							http + "kurl/getYQListBack.action",
 							JSON.stringify(obj),
 							function succsess(json) {
 								// var json = JSON.parse(decryData);

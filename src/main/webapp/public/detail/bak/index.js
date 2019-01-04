@@ -131,6 +131,9 @@ function init() {
                     var scale = imgW / imgH;
                     if (imgW > winW) {
                         $(bigimg).css("width", "100%").css("height", "auto");
+                    	
+                    	// $(bigimg).css("width", winW + 'px').css("height", imgH + 'px');
+                    	
                         imgH = winW / scale;
                         var h = (winH - imgH) / 2;
                         $(indiv).css({ "left": 0, "top": h });
@@ -169,6 +172,72 @@ function init() {
                     })
 
                 });
+                
+                
+                 function mouseWheel() {
+                    function mousewheelIn(obj, upfun, downfun) {
+                        if (document.attachEvent) {
+                        	document.attachEvent("onmousewheel", scrollFn)
+                        } else {
+                            if (document.addEventListener) {
+                            	document.addEventListener("mousewheel", scrollFn, false);
+                            	document.addEventListener("DOMMouseScroll", scrollFn, false)
+                            }
+                        }
+                        function scrollFn(e) {
+                        	
+                        	if(!$(outdiv).is(":visible"))
+                        		return;
+                        	
+                            var ev = e || window.event;
+                            var dir = ev.wheelDelta || ev.detail;
+                            if (ev.preventDefault) {
+                                ev.preventDefault()
+                            } else {
+                                ev.returnValue = false
+                            }
+                            if (dir == -3 || dir == 120) {
+                                upfun()
+                            } else {
+                                downfun()
+                            }
+                        }
+                    }
+                    var that = this;
+                    mousewheelIn($(bigimg), function() {
+                       /* if ($(obj).innerWidth() > $("body").width() - 20) {
+                            alert("不能再放大了");
+                            return
+                        }
+                        if ($("." + that.bigimg).innerHeight() > $("body").height() - 50) {
+                            alert("不能再放大");
+                            return
+                        }*/
+                        var zoomHeight = $(bigimg).css("height").substr(0,$(bigimg).css("height").length-2) * 1.03;
+                        var zoomWidth = $(bigimg).css("width").substr(0,$(bigimg).css("width").length-2) * 1.03;
+                        $(bigimg).css({
+                            height: zoomHeight + "px",
+                            width: zoomWidth + "px"
+                        })
+                    }, function() {
+                       /* if ($("." + that.bigimg).innerWidth() < 100) {
+                            alert("不能再缩小了哦！");
+                            return
+                        }
+                        if ($("." + that.bigimg).innerHeight() < 100) {
+                            alert("不能再缩小了哦！");
+                            return
+                        }*/
+                        var zoomHeight = $(bigimg).css("height").substr(0,$(bigimg).css("height").length-2) / 1.03;
+                        var zoomWidth = $(bigimg).css("width").substr(0,$(bigimg).css("width").length-2) / 1.03;
+                        $(bigimg).css({
+                            height: zoomHeight + "px",
+                            width: zoomWidth + "px"
+                        })
+                    })
+                };
+                
+                mouseWheel();
 
 
 

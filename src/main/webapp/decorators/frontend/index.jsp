@@ -142,9 +142,9 @@ function otherScroll3(){
 
 
 
-<script async
+<!-- <script async
 	src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
+ -->
 
 <div id='googleadcode_bottom' style='display: none'>
 
@@ -192,7 +192,36 @@ function otherScroll3(){
 </div>
 
 <script language='javascript'>
-	setTimeout(function() {
+function include_js(jspath,callback) {
+    var _doc = document.getElementsByTagName('head')[0];
+    var js = document.createElement('script');
+    js.setAttribute('type', 'text/javascript');
+    js.setAttribute('src', jspath);
+    _doc.appendChild(js);
+    if (document.all) {
+        js.onreadystatechange = function() {
+            if (js.readyState == 'loaded' || js.readyState == 'complete') {
+            	if(typeof(callback)=='function')
+            	callback();// alert('IE6、IE7 support js.onreadystatechange');
+            }
+        }
+    } else {
+        js.onload = function() {
+            //alert('Firefox、chrome and others support js.onload');
+        	if(typeof(callback)=='function')
+            	callback();
+        }
+    }
+}
+
+$(document).ready(function(){
+	
+	var googleJs = "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+
+	loadads();
+	include_js(googleJs);
+	
+	function loadads(){
 		if (document.all.item('googlead3') != null) {
 			googlead3.innerHTML = googleadcode3.innerHTML;
 		}
@@ -213,7 +242,11 @@ function otherScroll3(){
 		(adsbygoogle = window.adsbygoogle || []).push({});
 		(adsbygoogle = window.adsbygoogle || []).push({});
 		(adsbygoogle = window.adsbygoogle || []).push({});
-	}, 500);
+	}
+
+});
+
+	
 </script>
 
 
