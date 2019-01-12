@@ -21,9 +21,12 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -50,6 +53,8 @@ import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -72,6 +77,7 @@ import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.tool.config.configWarthDog;
 import com.kxjl.tool.html.FileProcessor;
+import com.kxjl.tool.utils.DateUtil;
 import com.kxjl.tool.utils.JEscape;
 import com.kxjl.tool.utils.JsonUtil;
 
@@ -132,8 +138,6 @@ public class PublicController extends BaseController {
 		JsonUtil.responseOutWithJson(response, jStr);
 	}
 
-	
-
 	@RequestMapping(value = "/public/index/{type}/{value}.html")
 	public String listhtml(HttpServletRequest request, @PathVariable("type") String type,
 			@PathVariable("value") String value) {
@@ -155,25 +159,23 @@ public class PublicController extends BaseController {
 			view.addObject(v, request.getParameter(v));
 
 		}
-		
-		//logger.info("info test!");
-		//logger.debug("debug test!");
-		
-		if(ConfigReader.getInstance().getProperty("debug","false").equals("true"))
-		{
-		logger.info("/***********index visit************");
 
-		 Enumeration<String> headers= request.getHeaderNames();
-		 while(headers.hasMoreElements())
-		 {
-			 String key=headers.nextElement();
-				logger.info("*"+ key+":"+request.getHeader(key));
-		 }
-		
-		logger.info("*************index visit end*******/");
+		// logger.info("info test!");
+		// logger.debug("debug test!");
+
+		if (ConfigReader.getInstance().getProperty("debug", "false").equals("true")) {
+			logger.info("/***********index visit************");
+
+			Enumeration<String> headers = request.getHeaderNames();
+			while (headers.hasMoreElements()) {
+				String key = headers.nextElement();
+				logger.info("*" + key + ":" + request.getHeader(key));
+			}
+
+			logger.info("*************index visit end*******/");
 		}
-		
-		saveStaticInfo(request, StasticTypeOne.HomePage.toString(), "index",request.getQueryString());
+
+		saveStaticInfo(request, StasticTypeOne.HomePage.toString(), "index", request.getQueryString());
 
 		return view;
 	}
@@ -182,28 +184,24 @@ public class PublicController extends BaseController {
 	public ModelAndView about(HttpServletRequest request) {
 
 		ModelAndView view = getSysData();
-		
-		//获取文章id为0的内容， about
-		
-		Blog about= (Blog)Kdata.getInstance().getCommonList("about");
-		if(about==null)
-		{
-			Blog qry=new Blog();
+
+		// 获取文章id为0的内容， about
+
+		Blog about = (Blog) Kdata.getInstance().getCommonList("about");
+		if (about == null) {
+			Blog qry = new Blog();
 			qry.setImei("about");
-			about= bservice.getBlogInfoById(qry);
-			
+			about = bservice.getBlogInfoById(qry);
+
 			try {
-				about.setContent(JEscape.unescape(about.getContent()) .replace("[[","&#x"));	
+				about.setContent(JEscape.unescape(about.getContent()).replace("[[", "&#x"));
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-			
-			
-			Kdata.getInstance().SavedCommonList("about",about);
+
+			Kdata.getInstance().SavedCommonList("about", about);
 		}
-	
-		
-		
+
 		view.addObject("about", about);
 		view.setViewName("/public/about/main");
 
@@ -324,17 +322,17 @@ public class PublicController extends BaseController {
 
 		// List<MenuInfo> leftmenus = menuService.getLeftMenuTree(session, request);
 
-		setLeftUrls(maps,true);
+		setLeftUrls(maps, true);
 		return "/page/burl/index";
 	}
 
-	private void setLeftUrls(Map<String, Object> maps,boolean showAll) {
+	private void setLeftUrls(Map<String, Object> maps, boolean showAll) {
 
 		Kurl query = new Kurl();
 		query.setPage(1);
 		query.setPageCount(10000);
 		query.setVal1("1");
-		if(showAll)
+		if (showAll)
 			query.setIsshow("");
 		else
 			query.setIsshow("1");
@@ -362,7 +360,7 @@ public class PublicController extends BaseController {
 
 		// List<MenuInfo> leftmenus = menuService.getLeftMenuTree(session, request);
 
-		setLeftUrls(maps,false);
+		setLeftUrls(maps, false);
 		return "/pown/url/main";
 	}
 
@@ -465,7 +463,7 @@ public class PublicController extends BaseController {
 		HttpClientBuilder builder = HttpClients.custom().setConnectionManager(new PoolingHttpClientConnectionManager())
 				.disableRedirectHandling();
 		CloseableHttpClient httpClinet = builder.build();
-		
+
 		try {
 			prerenderServerResponse = httpClinet.execute(getMethod);
 
@@ -537,7 +535,7 @@ public class PublicController extends BaseController {
 
 		File localFile = new File(localFilePath + htmlName);
 
-		logger.debug("*************from:" + request.getHeader("Referer")+ " " + htmlPath);
+		logger.debug("*************from:" + request.getHeader("Referer") + " " + htmlPath);
 
 		if (!(localFile.exists())) {
 
@@ -602,13 +600,13 @@ public class PublicController extends BaseController {
 				blog.setBlog_type_url(prepath + blog.getBlog_type_url());
 			}
 
-			String ct=JEscape.unescape(details.get(0).getContent());
-			//emoji替换
+			String ct = JEscape.unescape(details.get(0).getContent());
+			// emoji替换
 			ct = ct.replace("[[", "&#x");
 			details.get(0).setContent(ct);
 
 			System.out.println(details.get(0).getContent());
-			
+
 			view.addObject("preurl", ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn"));
 
 			view.addObject("curBlog", details.get(0));
@@ -661,12 +659,12 @@ public class PublicController extends BaseController {
 		if (isNotBlank(moreAgents)) {
 			crawlerUserAgents.addAll(Arrays.asList(moreAgents.trim().split(",")));
 		}
-		
 
 		return crawlerUserAgents;
 	}
 
-	/**是否为爬虫
+	/**
+	 * 是否为爬虫
 	 * 
 	 * @param userAgent
 	 * @return
@@ -686,26 +684,21 @@ public class PublicController extends BaseController {
 		// 计数
 		SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
 
-		
-		if(ConfigReader.getInstance().getProperty("debug","false").equals("true"))
-		{
-		logger.info("/***********detail visit************");
+		if (ConfigReader.getInstance().getProperty("debug", "false").equals("true")) {
+			logger.info("/***********detail visit************");
 
-		 Enumeration<String> headers= request.getHeaderNames();
-		 while(headers.hasMoreElements())
-		 {
-			 String key=headers.nextElement();
-				logger.info("*"+ key+":"+request.getHeader(key));
-		 }
-		
-		logger.info("*************detail visit end*******/");
+			Enumeration<String> headers = request.getHeaderNames();
+			while (headers.hasMoreElements()) {
+				String key = headers.nextElement();
+				logger.info("*" + key + ":" + request.getHeader(key));
+			}
+
+			logger.info("*************detail visit end*******/");
 		}
-		
-		
-	
-			 String userAgent = request.getHeader("Pre-User-Agent");//prerender带过来的原始爬虫agent
-			if(userAgent==null||userAgent.equals(""))
-		  userAgent = request.getHeader("User-Agent");
+
+		String userAgent = request.getHeader("Pre-User-Agent");// prerender带过来的原始爬虫agent
+		if (userAgent == null || userAgent.equals(""))
+			userAgent = request.getHeader("User-Agent");
 
 		// 无用户信息，爬虫
 		boolean isspider = isInSearchUserAgent(userAgent);
@@ -720,9 +713,8 @@ public class PublicController extends BaseController {
 				bservice.updateBlogReadTime(query);
 				Kdata.getInstance().cleanrBLogList("");
 			}
-			
-		}
-		else {
+
+		} else {
 			bservice.updateBlogSpiderTime(query);
 			Kdata.getInstance().cleanrBLogList("");
 		}
@@ -765,9 +757,10 @@ public class PublicController extends BaseController {
 
 		return view;
 	}
-	
+
 	/**
 	 * 注意prerender的影响....坑爹了
+	 * 
 	 * @param request
 	 * @param response
 	 * @param value
@@ -776,52 +769,209 @@ public class PublicController extends BaseController {
 	 * @date 2018年12月21日
 	 */
 	@RequestMapping(value = "/google{value}.html")
-	public String google(HttpServletRequest request, HttpServletResponse response,@PathVariable("value") String value) {
+	public String google(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable("value") String value) {
 
-		return "google"+value;
-		
-		
-		
-	/*	String rootPath=ConfigReader.getInstance().getProperty("rootPath", "/usr/local/apache-tomcat-8.5.23/webapps/kb");
-		File f=new File(rootPath+"/google"+value+".html");
-		
-		String rst="";
-		try {
-			BufferedReader fr=new BufferedReader(new FileReader(f));
-			rst=fr.readLine();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		return "google" + value;
+
+		/*
+		 * String rootPath=ConfigReader.getInstance().getProperty("rootPath",
+		 * "/usr/local/apache-tomcat-8.5.23/webapps/kb"); File f=new
+		 * File(rootPath+"/google"+value+".html");
+		 * 
+		 * String rst=""; try { BufferedReader fr=new BufferedReader(new FileReader(f));
+		 * rst=fr.readLine(); } catch (IOException e) { // TODO Auto-generated catch
+		 * block e.printStackTrace(); } try {
+		 * 
+		 * 
+		 * //response.setHeader("Content-Length", "" +
+		 * rst.toString().getBytes("UTF-8").length);
+		 * 
+		 * 
+		 * response.setContentType("text/html;");
+		 * response.setCharacterEncoding("UTF-8"); System.out.println("!!!! "+rst);
+		 * response.getWriter().print(rst); response.getWriter().flush();
+		 * 
+		 * 
+		 * response.setCharacterEncoding("UTF-8");
+		 * response.setContentType("application/octet-stream");
+		 * response.setHeader("Content-Disposition", "attachment;filename="
+		 * +"google"+value+".html"); ServletOutputStream out =
+		 * response.getOutputStream();
+		 * 
+		 * out.write(rst.getBytes("utf-8"));
+		 * 
+		 * out.close();
+		 * 
+		 * } catch (Exception e) { // TODO: handle exception }
+		 * 
+		 * }
+		 */
+
+	}
+
+	/**
+	 * 返回blog文章的简介
+	 * @param blog
+	 * @return
+	 * @author zj
+	 * @date 2019年1月12日
+	 */
+	private String getDesc(Blog blog) {
+		String prepath = getImgHttpOutPath();
+		Integer maxshownum = ConfigReader.getInstance().getIntProperty("maxshownum", 1000);
+
+		blog.setBlog_type_url(prepath + blog.getBlog_type_url());
+
+		// 剔除文章中的图片img内容，截取长度
+		Pattern p = Pattern.compile("%3Cimg.*?%3E"); // %3Cimg %3E
+														// .*?最小匹配
+		// .*最大匹配
+		Matcher ms = p.matcher(blog.getContent());
+
+		String c = blog.getContent();
+		// 截取超出部分、减少页面返回数据
+		while (ms.find()) {
+
+			String img = ms.group();
+			String t = JEscape.unescape(img);
+			// System.out.println(t);
+			JEscape.unescape(blog.getContent());
+			c = c.replace(img, "");
+
 		}
-		try {
+		c = JEscape.unescape(c);
 
-			
-			//response.setHeader("Content-Length", "" + rst.toString().getBytes("UTF-8").length);
-			
-			
-			response.setContentType("text/html;");
-			response.setCharacterEncoding("UTF-8");
-			System.out.println("!!!! "+rst);
-			response.getWriter().print(rst);
-			response.getWriter().flush();
-			
-			
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("application/octet-stream");
-			response.setHeader("Content-Disposition",
-					"attachment;filename=" +"google"+value+".html");
-			ServletOutputStream out = response.getOutputStream();
+		if (c.length() > maxshownum) {
+			try {
+				String rc = c.substring(0, maxshownum);
+				// System.out.println(rc);
 
-			out.write(rst.getBytes("utf-8"));
+				// jsoup 自动补全标签
+				Document jd = Jsoup.parseBodyFragment(rc);
 
-			out.close();
+				c = jd.body().html();
 
-		} catch (Exception e) { // TODO: handle exception }
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
 
-		}*/
-		
+		// emoji替换 最后一步替换
+		c = c.replace("[[", "&#x");
+
+		return c;
+
+	}
+
+	@RequestMapping(value = "/feed")
+	@ResponseBody
+	public void feed(HttpServletRequest request, HttpServletResponse response) {
+		 rss(request,response);
 	}
 	
+	/**
+	 * rss订阅xml
+	 * 
+	 * @param request
+	 * @param response
+	 * @author zj
+	 * @date 2019年1月12日
+	 */
+	@RequestMapping(value = "/rss")
+	@ResponseBody
+	public void rss(HttpServletRequest request, HttpServletResponse response) {
+
+		/*
+		 * <urlset xmlns=“网页列表地址”> <url> <loc>网址</loc>
+		 * <lastmod>2005-06-03T04:20-08:00</lastmod> <changefreq>always</changefreq>
+		 * <priority>1.0</priority> </url> <url> <loc>网址</loc>
+		 * <lastmod>2005-06-02T20:20:36Z</lastmod> <changefreq>daily</changefreq>
+		 * <priority>0.8</priority> </url> </urlset>
+		 */
+
+		String domain = ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn");
+
+		Blog query = new Blog();
+		query.setPageCount(15);
+		query.setShowflag("1");
+		List<Blog> blogs = bservice.getBlogPageList(query);
+
+		SimpleDateFormat fm = new SimpleDateFormat("EEE,d MMM yyyy hh:mm:ss Z", Locale.CHINESE);
+		String date = fm.format(new Date()) + " GMT";
+
+		StringBuffer sb = new StringBuffer();
+		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+		sb.append("<rss version=\"2.0\"\n" + 
+				"	xmlns:content=\"http://purl.org/rss/1.0/modules/content/\"\n" + 
+				"	xmlns:wfw=\"http://wellformedweb.org/CommentAPI/\"\n" + 
+				"	xmlns:dc=\"http://purl.org/dc/elements/1.1/\"\n" + 
+				"	xmlns:atom=\"http://www.w3.org/2005/Atom\"\n" + 
+				"	xmlns:sy=\"http://purl.org/rss/1.0/modules/syndication/\"\n" + 
+				"	xmlns:slash=\"http://purl.org/rss/1.0/modules/slash/\"\n" + 
+				"	>");
+		sb.append(" <channel>\n" + "    <title>野生喵喵的个人站点</title>\n" + "    <link>" + domain + "</link>\n"
+				+ "    <description>KxのBook -256kb.cn | 野生的喵喵 的个人站点 | 分享工作及生活的点滴</description>\n"
+				+ "    <language>zh-CN</language>\n" + "    <pubDate>" + date + "</pubDate>\n" + "    <lastBuildDate>"
+				+ date + "</lastBuildDate>\n" +
+
+				"    <generator>KxのBook rss demo</generator>\n"
+				+ "    <managingEditor>kxjl168@foxmail.com</managingEditor>\n" + "<image>\n" + "	<url>" + domain
+				+ "/favicon.ico </url>\n" + "	<title>KxのBook</title>\n" + "	<link>" + domain + "</link>\n"
+				+ "	<width>32</width>\n" + "	<height>32</height>\n" + "</image> ");
+
+		
+
+		for (Blog blog : blogs) {
+
+			String dateb = fm.format(DateUtil.getDate(blog.getUpdate_date(), "")) + " GMT";
+
+			String desc=getDesc(blog);
+			// /public/html/${curBlog.showdate}/${curBlog.imei}.html
+			sb.append("<item>\n" 
+			+ "      <title>" + blog.getTitle() + "</title>\n" 
+					+ "      <link>" + domain+ "/public/html/" + blog.getShowdate() + "/" + blog.getImei() + ".html" + "</link>\n"
+					+ "      <description><![CDATA[" + desc+"]]></description>\n" 
+					+ "      <pubDate>" + dateb+ "</pubDate>\n" 
+					+ "     <guid isPermaLink=\"true\">" + domain + "/public/html/"
+					+ blog.getShowdate() + "/" + blog.getImei() + ".html</guid>\n");
+			
+			String tags=blog.getTags();
+			tags=	tags.replaceAll("，", ",");
+			String[] tagStr= tags.split(",");
+			for (String tg : tagStr) {
+				if(!tg.trim().equals(""))
+				sb.append( " <category><![CDATA["+tg+"]]></category>");
+			}
+			
+			String ct = JEscape.unescape(blog.getContent());
+			// emoji替换
+			ct = ct.replace("[[", "&#x");
+			
+			sb.append( " <content:encoded xml:lang=\"zh-CN\"><![CDATA["+ct+"]]></content:encoded>");
+			
+			
+		/*	<category><![CDATA[古龙]]></category>
+			<category><![CDATA[大人物]]></category>*/
+					
+					
+			sb.append( "    </item>");
+
+		}
+		sb.append(" </channel>\n");
+		sb.append(" </rss>\n");
+
+		try {
+
+			response.setHeader("content-type", "application/rss+xml; charset=UTF-8");
+			response.setHeader("Content-Length", "" + sb.toString().getBytes("UTF-8").length);
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().print(sb.toString());
+			response.getWriter().flush();
+		} catch (Exception e) { // TODO: handle exception }
+
+		}
+	}
 
 	@RequestMapping(value = "/sitemap.xml")
 	@ResponseBody
