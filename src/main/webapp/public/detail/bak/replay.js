@@ -23,7 +23,7 @@ $(function() {
 			
 			maxlength : 100,
 			email :true,
-			required : false,
+			required : true,
 		}
 
 	}, {
@@ -42,6 +42,7 @@ $(function() {
 
 		},
 		s_email : {
+			required : "留下邮箱呗~ ",
 			maxlength : "您的邮箱看起来非常非常的大... -_-!",
 		}
 	}, $scope.doupdate, "", "");
