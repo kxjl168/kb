@@ -221,7 +221,7 @@ function initReplayModel() {
 							$scope.s_email=uemail;
 							$scope.s_icon=json.uicon;
 						
-							if(uname!=null)
+							if(uname!=null&&uname!=''&&uemail!=null&&uemail!="")
 							{
 								$(".nameinfo").hide();
 								$(".ckdisplay").show();
