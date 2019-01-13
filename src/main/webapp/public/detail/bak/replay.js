@@ -166,6 +166,17 @@ beginReplay = function(e, mainid, preid) {
 };
 
 function initReplayModel() {
+	
+	
+	$("#btnChangeName").click(function(){
+		if($(".nameinfo").is(':visible'))
+			$(".nameinfo").hide();
+		else
+			$(".nameinfo").show();
+	});
+			
+	
+	
 	var $scope = angular.element(ngSection).scope();
 	$scope
 			.$apply(function() {
@@ -202,11 +213,23 @@ function initReplayModel() {
 							$("#s_uid").val(unescape(uname));
 							$("#s_ublog").val(unescape( usite));
 							$("#s_email").val(uemail);
+							$("#s_icon").val(json.uicon);
 							
 							$scope.s_uid=unescape(uname);
 							$scope.s_ublog=unescape( usite);
 							$scope.s_email=uemail;
+							$scope.s_icon=json.uicon;
 						
+							if(uname!=null)
+							{
+								$(".nameinfo").hide();
+								$(".ckdisplay").show();
+							}
+							else
+								{
+								$(".nameinfo").show();
+								$(".ckdisplay").hide();
+								}
 
 						} else {
 						//	msg(message);
@@ -269,6 +292,10 @@ function initReplayModel() {
 								$scope.$apply();
 								
 								$scope.getReplayList();
+								
+								$(".nameinfo").hide();
+								$(".ckdisplay").show();
+								
 							}, 10);
 
 						
@@ -347,6 +374,9 @@ function initReplayModel() {
 									$scope.rdatalist = eval(json.datalist);
 									$scope.rnum = $scope.rdatalist.length;
 									$scope.root = json.isRoot;
+									
+									
+									
 
 									$
 											.each(
@@ -354,9 +384,11 @@ function initReplayModel() {
 													function(index, item) {
 														$scope.rdatalist[index].content = unescape(item.content);
 														$scope.rdatalist[index].userid = unescape(item.userid);
+														//$scope.rdatalist[index].icon ="https://www.gravatar.com/avatar/"+item.icon+"?s=100&r=pg&d=identicon";//unescape(item.userid);
 														$scope.rdatalist[index].user_blog = item.user_blog ? unescape(item.user_blog)
 																: "";
-
+														
+														
 														$
 																.each(
 																		$scope.rdatalist[index].reback,
@@ -400,23 +432,39 @@ function initReplayModel() {
 					
 					$.each($scope.rdatalist,function(index,item){
 						
+						var isauthor=false;
+	            		var authorhtml="";
+	            		if(item.email=="kxjl168@foxmail.com")
+	            			{
+	            			isauthor=true;
+	            			authorhtml="<span class='author'>博主</span> ";
+	            			}
+	            		
+						var icon ="https://www.gravatar.com/avatar/"+item.icon+"?s=40&r=pg&d=identicon";//unescape(item.userid);
 						
 						html+='<div class="row col-xs-12 ">'
 						 
 
-			             +'    <div class="row col-lg-10 replayblock b1"> '
+			             +'    <div class="row col-lg-11 replayblock b1"> '
 
+			             +'<div class="pull-left">'
+			             +'<a id="f'+(item.recordid)+'"   href="'+item.user_blog+'"   onclick="return gourl(this);"  title="'+item.userid+'-'+item.user_blog+'"><img class="rheadpic" src="'+icon+'">'+' </a>'
+			             +'</div>'
+			             
+			             +'<div class="col-xs-11">'
+			             
+			           
 
 			             +'        <div class="hide" >'+($scope.rnum-index)+'楼&nbsp;<a  href="'+item.user_blog+'" title="'+item.user_blog+'">'+item.userid+'</a> <span class="pull-right text-right">&nbsp;'+item.create_date+'</span> </div> '
 
-			             +'        <div ><a id="f'+(item.recordid)+'"   href="'+item.user_blog+'"   onclick="return gourl(this);"  title="'+item.user_blog+'">'+item.userid+' </a> <span class=" text-right">&nbsp;'+item.create_date+' </span> ';
+			             +'        <div > <a id="f'+(item.recordid)+'"   href="'+item.user_blog+'"   onclick="return gourl(this);"  title="'+item.userid+'-'+item.user_blog+'">'+item.userid+authorhtml+' </a><span class="rptime text-right">&nbsp;'+item.create_date+' </span> ';
 			                    
 			             if($scope.root)
 			            	 {
 			            	 html+='       <span  >【  ';
 			            	  if(item.state!=1)
-			            		  html+='<a   href="#f'+(item.recordid)+'" class="   text-success margin-right-20" onclick="pass(this,\''+item.recordid+'\')">审核通过</a>&nbsp; ';
-			            	  html+='                          <a href="#f'+(item.recordid)+'" class="   text-warning margin-right-20" onclick="del(this,\''+item.recordid+'\')">删除</a>'
+			            		  html+='<a   href="javascript:void(0);" class="   text-success margin-right-20" onclick="pass(this,\''+item.recordid+'\')">审核通过</a>&nbsp; ';
+			            	  html+='                          <a href="javascript:void(0);" class="   text-warning margin-right-20" onclick="del(this,\''+item.recordid+'\')">删除</a>'
 				             +'】 '
 				             +'                           </span> ';	
 				            
@@ -437,16 +485,36 @@ function initReplayModel() {
 			             $.each(item.reback,function(iindex,t)
 			            		 {
 			            	 
-			            	   html+= '    <div  class="replayblock b2"> '
-					             +'                <div ><a id="f'+(t.recordid)+'"  href="'+t.user_blog+'"  onclick="return gourl(this)"   title="'+t.user_blog+'">'+t.userid+'</a> @ <a href="'+t.tuser_blog+'" title="'+t.tuser_blog+'">'
-					             +t.tuid+'</a> <span class=" text-right">&nbsp;'+t.create_date+'</span> ';
+			            		var ricon ="https://www.gravatar.com/avatar/"+t.icon+"?s=35&r=pg&d=identicon";//unescape(item.userid);
+			            		var authorhtmlReplay=" ";
+			            		var isauthorReplay=false;
+			            		
+			            		if(t.email=="kxjl168@foxmail.com")
+			            			{
+			            			isauthorReplay=true;
+			            			var authorhtmlReplay="<span class='author'>博主</span> ";
+			            			}
+			            			
+			            		
+			            		
+			            	   html+= '    <div  class="replayblock b2 row"> '
+			            		   
+			            		
+			            		   +'<div class="pull-left">'
+						             +'<a id="f'+(t.recordid)+'"  href="'+t.user_blog+'"  onclick="return gourl(this)"   title="'+t.userid+'"><img class="rheadpic" src="'+ricon+'">'+'</a> '
+						             +'</div>'
+						             
+						             +'<div class="col-xs-11">'
+			            		   
+					             +'                <div ><a id="f'+(t.recordid)+'"  href="'+t.user_blog+'"  onclick="return gourl(this)"   title="'+t.userid+'">'+t.userid+authorhtmlReplay+'</a> '
+					             +' <span class="rptime text-right">&nbsp;'+t.create_date+'</span> ';
 					         
 					             if($scope.root)
 				            	 {
 				            	 html+='       <span  >【  ';
 				            	  if(t.state!=1)
-				            		  html+='<a     href="#" class="   text-success margin-right-20" onclick="pass(this,\''+t.recordid+'\')">审核通过</a>&nbsp; ';
-				            	  html+='                          <a href="#" class="   text-warning margin-right-20" onclick="del(this,\''+t.recordid+'\')">删除</a>'
+				            		  html+='<a     href="javascript:void(0);" class="   text-success margin-right-20" onclick="pass(this,\''+t.recordid+'\')">审核通过</a>&nbsp; ';
+				            	  html+='                          <a href="javascript:void(0);" class="   text-warning margin-right-20" onclick="del(this,\''+t.recordid+'\')">删除</a>'
 					             +'】 '
 					             +'                           </span>';
 					          			
@@ -455,11 +523,12 @@ function initReplayModel() {
 					             
 					             
 			            	   html+= '       		</div>'
-					             +'              	<div class="rcct">'+t.content+'</div> '
+					             +'              	<div class="rcct"><span class="at">@</span> <a href="'+t.tuser_blog+'" title="'+t.tuser_blog+'-'+t.tuid+'">'+t.tuid+'</a>'+t.content+'</div> '
 					             +'              	 <div class="row  margin-bottom-5"> '
 
-					             +'                    <a href="#" class=" replaybtn text-info margin-right-20" onclick="beginReplay(this,\''+t.recordid+'\',\''+item.recordid+'\')">回复</a> '
+					             +'                    <a href="javascript:void(0)" class=" replaybtn text-info margin-right-20" onclick="beginReplay(this,\''+t.recordid+'\',\''+item.recordid+'\')">回复</a> '
 					                            
+					             +'                 	</div> '
 					             +'                 	</div> '
 					             +'            </div> ';
 					           
@@ -468,6 +537,7 @@ function initReplayModel() {
 			             
 			          
 			             html+= '     </div> '
+			            	  +"</div>"
 			             +'    </div> '
 			            +'    </div>  ';
 						
@@ -494,5 +564,7 @@ function initReplayModel() {
 	
 
 };
+
+
 
 

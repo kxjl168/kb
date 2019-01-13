@@ -7,8 +7,30 @@
 
     
       <!--   <div ng-repeat="x in rdatalist" id="cblock"> -->
+      
+      
        <div id="cblock"> 
+<div class="row col-lg-10 replayblock b1"> 
+       
+       <div class="pull-left">
+       <a id="f91" href="https://ddd.com" onclick="return gourl(this);" title="大虎-https://ddd.com">
+                <img class="rheadpic" src="https://www.gravatar.com/avatar/b50114d6569e96528aeca04430fe0a09?s=55&amp;r=pg&amp;d=identicon"> </a> 
+       </div>
 
+	<div class="col-xs-10"  >
+	<div>
+                <span>大虎</span><span class="rptime text-right">&nbsp;2019-01-13 17:26:45 </span>  
+                   </div>     	
+                   	<div class="rcct">好战的一部，好！！</div>    
+                         <div class="row  margin-bottom-5">    
+                               <a href="#f91" class="ba1 replaybtn  text-info margin-right-20" onclick="beginReplay(this,'91')">回复</a>     
+                                  	</div>    
+                                  			<div class=" rcblock">   
+                                  			   </div> 
+                                  			   
+                                  			       </div>
+	     
+                </div>
            <!-- <div class="row col-xs-12 ">
 
                 <div class="row col-lg-10 replayblock b1">
@@ -53,45 +75,33 @@
 
     <div id="rdivc"></div>
     <div class="row replay col-xs-12 margin-bottom-10" id="rpdiv">
+     <div class="row">
+       <span style="padding-left: 10px;line-height:30px ">发表新的评论</span>
+     </div>
         <div class="row">
             <form name="fm" id="fm" class=" padding-left-0 col-xs-12" style="min-width: 150px; ">
 
 
-                <div class="form-group col-xs-12 row ">
-                    <div class="control-label padding-left-0 padding-top-0 col-xs-12 ">留言：</div>
-                    <div class="col-sm-7 col-xs-12 text-right nopaddding ">
-                        <textarea required type="text" rows="3" class="form-control " name="s_text" id="s_text" ng-model="s_text" placeholder=" ">
-															 </textarea>
-                    </div>
-                    <div class="col-xs-12 col-xs-offset-4 row ">
-
-                    </div>
-                </div>
-
-                <div class="form-group col-xs-12 row ">
-                    <div class="control-label padding-top-0 padding-left-0 text-left col-xs-12 ">您的大名：</div>
-                    <div class="col-sm-7 col-xs-12 text-right nopaddding">
-                        <input required type="text" class="form-control " name="s_uid" id="s_uid" ng-model="s_uid" placeholder=" ">
-                    </div>
-                    <div class="col-xs-12 col-xs-offset-4 row ">
-
-                    </div>
-                </div>
-
-                <div class="form-group col-xs-12 row ">
-                    <div class="control-label padding-top-0 padding-left-0 text-left col-xs-12 ">您的Blog地址(欢迎互访)：</div>
-                    <div class="col-sm-7 col-xs-12 text-right nopaddding">
-                        <input  type="text" class="form-control " name="s_ublog" id="s_ublog" ng-model="s_ublog" placeholder=" ">
-                    </div>
-                    <div class="col-xs-12 col-xs-offset-4 row ">
-
-                    </div>
-                </div>
                 
                 
+                 <div class="ckdisplay form-group col-xs-12 row ">
+                  <div class="control-label padding-left-0 padding-top-0  "><img src="{{s_icon}}"><span class='gname'><span class=rname>{{s_uid}} </span>&nbsp;<span class="cmodify"><i class="fa fa-refresh" id="btnChangeName" title="修改信息"></i></span> ,&nbsp;欢迎回来. </span></div>
+</div>	
+
+<div class="nameinfo">
                 <div class="form-group col-xs-12 row ">
-                    <div class="control-label padding-top-0 padding-left-0 text-left col-xs-12 ">您的邮箱地址(您的邮箱地址不会公开,仅作为有回复后的消息通知手段)：</div>
-                    <div class="col-sm-7 col-xs-12 text-right nopaddding">
+                    <div class="control-label padding-top-0 padding-left-0 text-left col-xs-12 ">您的称呼(<span class='red'>*</span>必填)：</div>
+                    <div class="col-sm-9 col-xs-12 text-right nopaddding">
+                        <input required type="text" class="form-control " name="s_uid" id="s_uid" ng-model="s_uid" placeholder="您的称呼 ">
+                    </div>
+                    <div class="col-xs-12 col-xs-offset-4 row ">
+
+                    </div>
+                </div>
+
+				<div class="form-group col-xs-12 row ">
+                    <div class="control-label padding-top-0 padding-left-0 text-left col-xs-12 ">您的邮箱地址(<span class='red'>*</span>必填,您的邮箱地址不会公开,仅作为有回复后的消息通知手段)：</div>
+                    <div class="col-sm-9 col-xs-12 text-right nopaddding">
                         <input  type="text" class="form-control " name="s_email" id="s_email" ng-model="s_email" placeholder=" ">
                     </div>
                     <div class="col-xs-12 col-xs-offset-4 row ">
@@ -99,13 +109,30 @@
                     </div>
                 </div>
 
+                <div class="form-group col-xs-12 row ">
+                    <div class="control-label padding-top-0 padding-left-0 text-left col-xs-12 ">您的站点地址(选填)：</div>
+                    <div class="col-sm-9 col-xs-12 text-right nopaddding">
+                        <input  type="text" class="form-control " name="s_ublog" id="s_ublog" ng-model="s_ublog" placeholder=" 您的站点地址(欢迎互访)：">
+                    </div>
+                    <div class="col-xs-12 col-xs-offset-4 row ">
 
+                    </div>
+                </div>
+                
+               
+                
+                
+                
+                </div>
 
-
-                <div class="hide form-group col-xs-12 row ">
-                    <div class="control-label padding-top-0 col-xs-4 ">：</div>
-                    <div class="col-sm-7 col-xs-12 text-right ">
-                        <input required type="text" class="form-control " name="s_tags" id="s_tags" ng-model="s_tags" placeholder=" ">
+ <div class="form-group col-xs-12 row ">
+                    <div class="control-label padding-left-0 padding-top-0 col-xs-12 ">
+                   
+                    
+                    <span>留言：</span></div>
+                    <div class="col-sm-9 col-xs-12 text-right nopaddding ">
+                        <textarea required type="text" rows="4" class="form-control " name="s_text" id="s_text" ng-model="s_text" placeholder=您的留言会经过审核后才会显示出来. ">
+															 </textarea>
                     </div>
                     <div class="col-xs-12 col-xs-offset-4 row ">
 
@@ -113,12 +140,15 @@
                 </div>
 
 
+               
+
+
 
             </form>
         </div>
         <div class="col-lg-10 row">
-            <button id="sbtn" type="button " class="btn btn-primary  col-lg-2 " ng-click="replay() "> 回复 </button>
-            <button id="cbtn" type="button " class="hide btn btn-primary col-lg-offset-1 col-lg-2 " ng-click="canc() "> 取消 </button>
+            <button id="sbtn" type="button " class="btn btn-info  col-lg-2 " ng-click="replay() "> 回复 </button>
+            <button id="cbtn" type="button " class="hide btn btn-warning col-lg-offset-1 col-lg-2 " ng-click="canc() "> 取消 </button>
         </div>
     </div>
     

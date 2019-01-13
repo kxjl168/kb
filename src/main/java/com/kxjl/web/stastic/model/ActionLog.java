@@ -23,7 +23,9 @@ public class ActionLog extends BaseModel {
 		HomePage("homepage","首页"),
 		GSearch("gsearch","G搜索"),
 		AboutPage("about","关于"),
-		DetailPage("detailpag","详情页");
+		DetailPage("detailpag","详情页"),
+		
+		RssPage("rss","Rss订阅");
 		
 
 		private String value = "";

@@ -76,9 +76,9 @@ select r.*,
 	    
 		insert into replay_info 
 		(blogimei,replay_recordid,content,userid,
-		create_date,user_blog,ppid,email,state )
+		create_date,user_blog,ppid,email,state,ip,icon )
 		values(#{blogimei},#{replay_recordid},#{content},#{userid}
-			,#{create_date},#{user_blog},#{ppid},#{email},#{state})
+			,#{create_date},#{user_blog},#{ppid},#{email},#{state},#{ip},#{icon})
 	</insert>
 	
 	

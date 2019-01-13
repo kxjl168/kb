@@ -138,7 +138,7 @@
 							<c:if test="${preBlog!=null }">
 								<a
 								href="${basePath}/public/html/${preBlog.showdate}/${preBlog.imei}.html"
-								style="" class="for spider">${preBlog.title}</a>
+								style="" class="for spider">前一篇:${preBlog.title}</a>
 								</c:if>
 								</li>
 						</ul>
@@ -147,7 +147,7 @@
 								<c:if test="${nextBlog!=null }">
 								<a
 								href="${basePath}/public/html/${nextBlog.showdate}/${nextBlog.imei}.html"
-								style="" class="for spider">${nextBlog.title}</a>
+								style="" class="for spider">后一篇:${nextBlog.title}</a>
 								</c:if>
 							</li>
 						</ul>

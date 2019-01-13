@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.drew.lang.StringUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.kxjl.tool.common.Constant;
@@ -44,6 +45,7 @@ import com.kxjl.web.blog.model.Blog;
 import com.kxjl.web.blog.model.Replay;
 import com.kxjl.web.blog.service.BlogService;
 import com.kxjl.web.blog.service.ReplayService;
+import com.kxjl.web.stastic.service.StasticService;
 
 @Controller
 @RequestMapping(value = "/replay")
@@ -55,6 +57,9 @@ public class ReplayController extends BaseController {
 
 	@Autowired
 	BlogService blogService;
+	
+	@Autowired
+	StasticService stasticService;
 
 	@Autowired
 	CookieUtil cookieUtil;
@@ -130,6 +135,21 @@ public class ReplayController extends BaseController {
 				binfos = new ArrayList<Replay>();
 
 				for (Replay replay : infos) {
+					if(replay.getEmail()!=null&&!replay.getEmail().equals("")&&!replay.getEmail().equals("undefined"))
+					{
+						if(replay.getIcon()==null||replay.getIcon().equals(""))
+						{
+							replay.setIcon(com.kxjl.tool.utils.StringUtil.md5Hex(replay.getEmail()));
+						}
+						
+					}
+				}
+				
+				for (Replay replay : infos) {
+					
+					
+					
+					
 					if (replay.getReplay_recordid() == 0) {
 						List<Replay> childs = new ArrayList<Replay>();
 						for (Replay replay2 : infos) {
@@ -268,7 +288,11 @@ public class ReplayController extends BaseController {
 			replay.setUser_blog(ublog);
 			replay.setUserid(userid);
 			replay.setPpid(ppid);
+			replay.setIp(stasticService.getIpAddr(request));
+			if(email!=null&&!email.equals("")&&!email.equals("undefined")) {
 			replay.setEmail(email);
+			replay.setIcon(com.kxjl.tool.utils.StringUtil.md5Hex(email));
+			}
 
 			replay.setContent(content);// (desc);
 

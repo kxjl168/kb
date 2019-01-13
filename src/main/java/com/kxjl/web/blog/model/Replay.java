@@ -28,6 +28,26 @@ public class Replay extends BaseModel {
 	
 	private String email;//
 	
+	private String ip;
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	private String icon;//图标
+	
+	
 
 	// query 回复
 	private List<Replay> reback = new ArrayList<Replay>();

@@ -615,6 +615,12 @@ blockquote {
 	    */
 }
 
+.b1:hover a.replaybtn.ba1{
+	color:#316499!important;
+}
+.b2:hover a.replaybtn{
+	color:#316499!important;
+}
 
 .b2:hover a.ba1 {
   color: #bbb;
@@ -624,7 +630,7 @@ blockquote {
   padding-top: 3px;
 }
 .rcblock .replayblock {
-  border-left: 1px dotted #253269;
+ border-left: 0px solid #b5bcda;
   padding: 4px 10px;
   border-top: 1px dotted #e5e5e51f;
   border-bottom: 1px solid #fff;
@@ -668,6 +674,7 @@ hr {
 }
 .kfootend {
   padding-top: 5px;
+  color: #768490;
   /* height: 34px;*/
   border-top: 1px solid #e5e5e5;
   text-align: center;
@@ -947,7 +954,7 @@ font-size: 13px!important;
 .pageText {
 	    color: #565a5f;
   
-    font: 15px "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
+    font: 16px "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
 }
 
 
@@ -1591,7 +1598,8 @@ a:hover.yl {
 	background: #f9f9f9;
 	padding: 15px!important;
 	margin-bottom: 20px;
-	  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .3);
+	border-radius:4px;
+	  -webkit-box-shadow: 0 1px 8px rgba(0, 0, 0, .3);
  /*    -moz-box-shadow: 0 0 4px rgba(0, 0, 0, .4);
     box-shadow: 0 0 4px rgba(0, 0, 0, .4); */
 }
@@ -1741,4 +1749,57 @@ color:#ecb866!important;
     margin: 0 auto;
     float: left;
     margin-top: 5px;
+}
+.rheadpic{
+	margin-right: 5px;
+	 border-radius: 5px;
+}
+
+.rname{
+	    font-weight: bold;
+    padding-right: 2px;
+    color: #8e9092;
+    padding-left: 5px;
+}
+.cmodify{
+	    color: #5eacee;
+    font-size: 18px;
+}
+.author{
+	font-size: 12px;
+    background: #bf5314c9;
+    padding: 2px;
+    color: #fffdfd;
+    border-radius: 5px;
+    margin: 4px;
+}
+
+.at{
+	    font-size: 6px;
+    color: #42a4de;
+    font-style: italic;
+}
+.rptime{
+font-size: 13px;
+    color: #c4c4c5;
+}
+.replayblock a{
+	color:#42a4de;
+	padding-right: 5px;
+} 
+
+.replayblock a:hover,.replayblock a:visited{
+	color:#13276f;
+	text-decoration: underline;
+} 
+
+#cblock .rcct{
+	color: #7c7272;
+    font-size: 15px;
+}
+.b1{
+	margin-top: 5px;
+}
+.glink{
+	color:#1fd969;
 }

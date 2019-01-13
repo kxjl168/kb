@@ -42,14 +42,30 @@ public class test {
 		
 		//testGzip();
 		
-		testhtml();
+		//testhtml();
 
 		//update2();
 
 		//testl();
 		
 		//testlog4j();
+		
+		avtest();
 	}
+	
+	public static  void avtest()  {
+		String url="https://www.gravatar.com/avatar/ee2f5d239020af787b969557177d3df7?s=100";
+		
+try {
+	String responsedata = sendHttpData(url,"");
+	System.out.println("返回:" + responsedata);
+
+} catch (Exception e) {
+	// TODO: handle exception
+}
+	
+	}
+	
 	
 	static {
 		 BasicConfigurator.configure();

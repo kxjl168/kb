@@ -66,6 +66,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.drew.lang.StringUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.google.common.base.Predicate;
@@ -207,6 +208,22 @@ public class PublicController extends BaseController {
 
 		saveStaticInfo(request, StasticTypeOne.AboutPage.toString(), "");
 
+		Blog query = new Blog();
+		query.setImei("about");
+
+		String userAgent = request.getHeader("Pre-User-Agent");// prerender带过来的原始爬虫agent
+		if (userAgent == null || userAgent.equals(""))
+			userAgent = request.getHeader("User-Agent");
+
+		// 无用户信息，爬虫
+		boolean isspider = isInSearchUserAgent(userAgent);
+		SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
+
+		if (!isspider) {
+			if (user == null || (user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin)) {
+				bservice.updateBlogReadTime(query);
+			}
+		}
 		return view;
 	}
 
@@ -537,6 +554,11 @@ public class PublicController extends BaseController {
 
 		logger.debug("*************from:" + request.getHeader("Referer") + " " + htmlPath);
 
+		String domain2 = ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn");
+		String detailurl2 = domain2 + request.getContextPath() + "/public/detail/?i=" + imei;
+		// 第一次访问信息记录在/detail?i=xxx中
+		generateHtml(request, detailurl2, localFilePath, htmlName);
+
 		if (!(localFile.exists())) {
 
 			String domain = ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn");
@@ -547,13 +569,6 @@ public class PublicController extends BaseController {
 			generateHtml(request, detailurl, localFilePath, htmlName);
 
 			responseHtml(localFile, response);
-
-			/*
-			 * try { request.getRequestDispatcher("/public/detail/?i=" +
-			 * imei).forward(request, response); } catch (ServletException e) { // TODO
-			 * Auto-generated catch block e.printStackTrace(); } catch (IOException e) { //
-			 * TODO Auto-generated catch block e.printStackTrace(); }
-			 */
 
 		} else {
 
@@ -812,6 +827,7 @@ public class PublicController extends BaseController {
 
 	/**
 	 * 返回blog文章的简介
+	 * 
 	 * @param blog
 	 * @return
 	 * @author zj
@@ -867,9 +883,36 @@ public class PublicController extends BaseController {
 	@RequestMapping(value = "/feed")
 	@ResponseBody
 	public void feed(HttpServletRequest request, HttpServletResponse response) {
-		 rss(request,response);
+		rss(request, response);
 	}
-	
+
+	private void saveRssVisitInfo(HttpServletRequest request) {
+		// 计数
+		SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
+
+		if (ConfigReader.getInstance().getProperty("debug", "false").equals("true")) {
+			logger.info("/***********detail visit************");
+
+			Enumeration<String> headers = request.getHeaderNames();
+			while (headers.hasMoreElements()) {
+				String key = headers.nextElement();
+				logger.info("*" + key + ":" + request.getHeader(key));
+			}
+
+			logger.info("*************detail visit end*******/");
+		}
+
+		String userAgent = request.getHeader("Pre-User-Agent");// prerender带过来的原始爬虫agent
+		if (userAgent == null || userAgent.equals(""))
+			userAgent = request.getHeader("User-Agent");
+
+		// 无用户信息，爬虫
+		boolean isspider = isInSearchUserAgent(userAgent);
+
+		stasticService.saveStaticInfo(request, StasticTypeOne.RssPage.toString(), "rss", "", isspider);
+
+	}
+
 	/**
 	 * rss订阅xml
 	 * 
@@ -902,14 +945,12 @@ public class PublicController extends BaseController {
 
 		StringBuffer sb = new StringBuffer();
 		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-		sb.append("<rss version=\"2.0\"\n" + 
-				"	xmlns:content=\"http://purl.org/rss/1.0/modules/content/\"\n" + 
-				"	xmlns:wfw=\"http://wellformedweb.org/CommentAPI/\"\n" + 
-				"	xmlns:dc=\"http://purl.org/dc/elements/1.1/\"\n" + 
-				"	xmlns:atom=\"http://www.w3.org/2005/Atom\"\n" + 
-				"	xmlns:sy=\"http://purl.org/rss/1.0/modules/syndication/\"\n" + 
-				"	xmlns:slash=\"http://purl.org/rss/1.0/modules/slash/\"\n" + 
-				"	>");
+		sb.append("<rss version=\"2.0\"\n" + "	xmlns:content=\"http://purl.org/rss/1.0/modules/content/\"\n"
+				+ "	xmlns:wfw=\"http://wellformedweb.org/CommentAPI/\"\n"
+				+ "	xmlns:dc=\"http://purl.org/dc/elements/1.1/\"\n"
+				+ "	xmlns:atom=\"http://www.w3.org/2005/Atom\"\n"
+				+ "	xmlns:sy=\"http://purl.org/rss/1.0/modules/syndication/\"\n"
+				+ "	xmlns:slash=\"http://purl.org/rss/1.0/modules/slash/\"\n" + "	>");
 		sb.append(" <channel>\n" + "    <title>野生喵喵的个人站点</title>\n" + "    <link>" + domain + "</link>\n"
 				+ "    <description>KxのBook -256kb.cn | 野生的喵喵 的个人站点 | 分享工作及生活的点滴</description>\n"
 				+ "    <language>zh-CN</language>\n" + "    <pubDate>" + date + "</pubDate>\n" + "    <lastBuildDate>"
@@ -920,42 +961,37 @@ public class PublicController extends BaseController {
 				+ "/favicon.ico </url>\n" + "	<title>KxのBook</title>\n" + "	<link>" + domain + "</link>\n"
 				+ "	<width>32</width>\n" + "	<height>32</height>\n" + "</image> ");
 
-		
-
 		for (Blog blog : blogs) {
 
 			String dateb = fm.format(DateUtil.getDate(blog.getUpdate_date(), "")) + " GMT";
 
-			String desc=getDesc(blog);
+			String desc = getDesc(blog);
 			// /public/html/${curBlog.showdate}/${curBlog.imei}.html
-			sb.append("<item>\n" 
-			+ "      <title>" + blog.getTitle() + "</title>\n" 
-					+ "      <link>" + domain+ "/public/html/" + blog.getShowdate() + "/" + blog.getImei() + ".html" + "</link>\n"
-					+ "      <description><![CDATA[" + desc+"]]></description>\n" 
-					+ "      <pubDate>" + dateb+ "</pubDate>\n" 
-					+ "     <guid isPermaLink=\"true\">" + domain + "/public/html/"
+			sb.append("<item>\n" + "      <title>" + blog.getTitle() + "</title>\n" + "      <link>" + domain
+					+ "/public/html/" + blog.getShowdate() + "/" + blog.getImei() + ".html" + "</link>\n"
+					+ "      <description><![CDATA[" + desc + "]]></description>\n" + "      <pubDate>" + dateb
+					+ "</pubDate>\n" + "     <guid isPermaLink=\"true\">" + domain + "/public/html/"
 					+ blog.getShowdate() + "/" + blog.getImei() + ".html</guid>\n");
-			
-			String tags=blog.getTags();
-			tags=	tags.replaceAll("，", ",");
-			String[] tagStr= tags.split(",");
+
+			String tags = blog.getTags();
+			tags = tags.replaceAll("，", ",");
+			String[] tagStr = tags.split(",");
 			for (String tg : tagStr) {
-				if(!tg.trim().equals(""))
-				sb.append( " <category><![CDATA["+tg+"]]></category>");
+				if (!tg.trim().equals(""))
+					sb.append(" <category><![CDATA[" + tg + "]]></category>");
 			}
-			
+
 			String ct = JEscape.unescape(blog.getContent());
 			// emoji替换
 			ct = ct.replace("[[", "&#x");
-			
-			sb.append( " <content:encoded xml:lang=\"zh-CN\"><![CDATA["+ct+"]]></content:encoded>");
-			
-			
-		/*	<category><![CDATA[古龙]]></category>
-			<category><![CDATA[大人物]]></category>*/
-					
-					
-			sb.append( "    </item>");
+
+			sb.append(" <content:encoded xml:lang=\"zh-CN\"><![CDATA[" + ct + "]]></content:encoded>");
+
+			/*
+			 * <category><![CDATA[古龙]]></category> <category><![CDATA[大人物]]></category>
+			 */
+
+			sb.append("    </item>");
 
 		}
 		sb.append(" </channel>\n");
@@ -968,6 +1004,9 @@ public class PublicController extends BaseController {
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().print(sb.toString());
 			response.getWriter().flush();
+
+			saveRssVisitInfo(request);
+
 		} catch (Exception e) { // TODO: handle exception }
 
 		}
@@ -1042,6 +1081,10 @@ public class PublicController extends BaseController {
 		} catch (Exception e) { // TODO: handle exception }
 
 		}
+	}
+
+	public static void main(String[] args) {
+		System.out.println(com.kxjl.tool.utils.StringUtil.md5Hex("kxjl168@foxmail.com"));
 	}
 
 }
