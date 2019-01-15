@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxjl.web.autodata.dao.BlackIpListMapper">
+  <resultMap id="BaseResultMap" type="com.kxjl.web.autodata.pojo.BlackIpList">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="dtime" jdbcType="VARCHAR" property="dtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, ip, dtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from black_ip_list
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from black_ip_list
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kxjl.web.autodata.pojo.BlackIpList">
+    insert into black_ip_list (id, ip, dtime
+      )
+    values (#{id,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{dtime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kxjl.web.autodata.pojo.BlackIpList">
+    insert into black_ip_list
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="dtime != null">
+        dtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="dtime != null">
+        #{dtime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kxjl.web.autodata.pojo.BlackIpList">
+    update black_ip_list
+    <set>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="dtime != null">
+        dtime = #{dtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kxjl.web.autodata.pojo.BlackIpList">
+    update black_ip_list
+    set ip = #{ip,jdbcType=VARCHAR},
+      dtime = #{dtime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+
+
+<select id="selectList"
+	resultMap="BaseResultMap"
+	parameterType="com.kxjl.web.autodata.pojo.BlackIpList">
+	select
+	<include refid="Base_Column_List" />
+	from black_ip_list c
+
+	where 1=1
+	<if test=" id !=null and id !='' ">
+		and c.id = #{id}
+	</if>
+	
+		
+		<if test=" ip !=null and ip !='' ">
+		and c.ip like concat ('%', #{ip},'%')
+	</if>
+		
+			
+		
+		<if test=" dtime !=null and dtime !='' ">
+		and c.dtime like concat ('%', #{dtime},'%')
+	</if>
+		
+			
+
+
+</select>
+
+
+
+<delete id="delete"
+	parameterType="com.kxjl.web.autodata.pojo.BlackIpList">
+	delete from black_ip_list
+
+	where id = #{id,jdbcType=VARCHAR}
+
+</delete>
+
+</mapper>

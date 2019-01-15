@@ -253,12 +253,13 @@ function init() {
 						$scope.desc_info=item.desc_info;
 						$scope.url = item.icon;
 						$scope.oldname = item.val1;
-						$scope.fullurl = item.val2+item.val1;
+						$scope.fullurl = item.val2+item.icon;
 						$scope.val2 = item.val2;
 						
 						//$scope.isshow = item.isshow;
 						$("#isshow").val(item.isshow);
 						$scope.icon = item.icon;
+						
 						
 						//$("#s_dict_key").attr('disabled','');
 						$("#s_dict_key").removeAttr('disabled');

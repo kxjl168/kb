@@ -27,7 +27,17 @@
                          <ConfigName>excludedPrerenderUrls</ConfigName>
                          <ConfigValue>.*/public/html/(\\d+/\\d+)/.*.html,.*public/detail/?i=.*,.*google.*html</ConfigValue>
                           <ConfigDesc>不经过prerender的链接-白名单     </ConfigDesc>
-                   </ConfigItem>     
+                   </ConfigItem>   
+         
+         
+            <ConfigItem>     
+                         <ConfigName>normalUrls</ConfigName>
+                         <ConfigValue>/public,/blog,/replay,.*/file.*,/kurl,/UploadFileXhr,/todo,/user,/phoneaccount,/privilege,/Privilege,/search,/menu,.*.do,.*.action,/FileSvr,/xjs,/page,/file,/pown,/statistics</ConfigValue>
+                          <ConfigDesc>非attack名单     </ConfigDesc>
+                   </ConfigItem>            
+                   
+                   
+                     
 	
 	
 <ConfigItem>
@@ -200,5 +210,46 @@
 		<ConfigDesc>域名前缀</ConfigDesc>
 	</ConfigItem>
 	
+	
+	
+	<!-- generator config -->
+	
+
+	<ConfigItem>
+		<ConfigName>templatePath</ConfigName>
+		<ConfigValue>F:\kxjl\code\kb\src\main\resources\generator\</ConfigValue>
+		<ConfigDesc>模板路径</ConfigDesc>
+	</ConfigItem>
+	
+	<ConfigItem>
+		<ConfigName>javaScanPath</ConfigName>
+		<ConfigValue>F:\kxjl\code\kb\src\main\java\</ConfigValue>
+		<ConfigDesc>java文件扫描路径</ConfigDesc>
+	</ConfigItem>
+	
+	<ConfigItem>
+		<ConfigName>pageScanPath</ConfigName>
+		<ConfigValue>F:\kxjl\code\kb\src\main\webapp\page\</ConfigValue>
+		<ConfigDesc>页面及js扫描路径</ConfigDesc>
+	</ConfigItem>
+	
+	<ConfigItem>
+		<ConfigName>mysqljarPath</ConfigName>
+		<ConfigValue>E:\Program Files (x86)\Sybase\mysql-connector-java-5.1.44.jar</ConfigValue>
+		<ConfigDesc>mysqljarPath</ConfigDesc>
+	</ConfigItem>
+	
+	<ConfigItem>
+		<ConfigName>databaseSchema</ConfigName>
+		<ConfigValue>kb</ConfigValue>
+		<ConfigDesc>默认schema</ConfigDesc>
+	</ConfigItem>
+	
+		<ConfigItem>
+		<ConfigName>basePacakge</ConfigName>
+		<ConfigValue>com.kxjl.web.autodata</ConfigValue>
+		<ConfigDesc>默认生成包名</ConfigDesc>
+	</ConfigItem>
+	<!-- generator config end -->
 	
 </Config>

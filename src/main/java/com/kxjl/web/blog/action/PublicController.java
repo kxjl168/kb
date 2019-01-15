@@ -554,10 +554,10 @@ public class PublicController extends BaseController {
 
 		logger.debug("*************from:" + request.getHeader("Referer") + " " + htmlPath);
 
-		String domain2 = ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn");
+		/*String domain2 = ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn");
 		String detailurl2 = domain2 + request.getContextPath() + "/public/detail/?i=" + imei;
 		// 第一次访问信息记录在/detail?i=xxx中
-		generateHtml(request, detailurl2, localFilePath, htmlName);
+		generateHtml(request, detailurl2, localFilePath, htmlName);*/
 
 		if (!(localFile.exists())) {
 

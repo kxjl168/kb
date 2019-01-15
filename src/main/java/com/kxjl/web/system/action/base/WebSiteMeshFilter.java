@@ -26,6 +26,10 @@ public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
   
     	//builder.addDecoratorPath("/page/btype/*", "/decorators/backend/indexWithMenu.jsp");
     	builder.addDecoratorPath("/page/*", "/decorators/backend/indexWithMenu.jsp");
+    	builder.addDecoratorPath("/generator/*", "/decorators/backend/indexWithMenu.jsp");
+    	builder.addDecoratorPath("/manager/*", "/decorators/backend/indexWithMenu.jsp");
+    	
+    	
     	builder.addDecoratorPath("/statistics/userPage", "/decorators/backend/indexWithMenu.jsp");
     	
     

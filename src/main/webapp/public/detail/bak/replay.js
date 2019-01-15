@@ -446,13 +446,13 @@ function initReplayModel() {
 						html+='<div class="row col-xs-12 ">'
 						 
 
-			             +'    <div class="row col-lg-11 replayblock b1"> '
+			             +'    <div class="row col-lg-11 col-xs-12 replayblock b1"> '
 
 			             +'<div class="pull-left">'
 			             +'<a id="f'+(item.recordid)+'"   href="'+item.user_blog+'"   onclick="return gourl(this);"  title="'+item.userid+'-'+item.user_blog+'"><img class="rheadpic" src="'+icon+'">'+' </a>'
 			             +'</div>'
 			             
-			             +'<div class="col-xs-11">'
+			             +'<div class="col-xs-10 nopaddding">'
 			             
 			           
 
@@ -498,14 +498,14 @@ function initReplayModel() {
 			            			
 			            		
 			            		
-			            	   html+= '    <div  class="replayblock b2 row"> '
+			            	   html+= '    <div  class="replayblock b2 row nopaddding"> '
 			            		   
 			            		
 			            		   +'<div class="pull-left">'
 						             +'<a id="f'+(t.recordid)+'"  href="'+t.user_blog+'"  onclick="return gourl(this)"   title="'+t.userid+'"><img class="rheadpic" src="'+ricon+'">'+'</a> '
 						             +'</div>'
 						             
-						             +'<div class="col-xs-11">'
+						             +'<div class="col-xs-10">'
 			            		   
 					             +'                <div ><a id="f'+(t.recordid)+'"  href="'+t.user_blog+'"  onclick="return gourl(this)"   title="'+t.userid+'">'+t.userid+authorhtmlReplay+'</a> '
 					             +' <span class="rptime text-right">&nbsp;'+t.create_date+'</span> ';

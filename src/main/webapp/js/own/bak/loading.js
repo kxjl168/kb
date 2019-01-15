@@ -233,7 +233,7 @@ gdurl = function(e) {
 function cconfirm2(msg, donecallback, cancelcallback) {
 	
 		
-		$("#myModal_outurl").find (".msgtitle").html(msg);
+		$("#myModal_outurl").find (".msgtitle-md ").html(msg);
 		
 		$("#myModal_outurl").modal("show");
 		$("#btnconfirm_outurl").one("click", function() {

@@ -21,7 +21,7 @@
 		left join role_menu rm on mr.role_id=rm.role_id
 		where m.managerid =
 		#{userid} and password = #{password}
-
+	limit 1
 	</select>
 	
 
