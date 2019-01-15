@@ -1,7 +1,7 @@
 /*
  * @(#)BlackIpListController.java
  * @author: zhangJ
- * @Date: 2019-01-15 11:27:59
+ * @Date: 2019-01-15 17:14:05
  * Copyright (C),2017-2018, ZHONGTONGGUOMAI TECHNOLOGY NANJING
  * Co.,Ltd. All Rights Reserved.
  * GMWL PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,7 +42,7 @@ import java.util.Map;
  * 黑名单管理 BlackIpListController.java.
  * 
  * @author KAutoGenerator
- * @version 1.0.1 2019-01-15 11:27:59
+ * @version 1.0.1 2019-01-15 17:14:05
  * @since 1.0.0
  */
 @Controller

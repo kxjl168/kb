@@ -11,6 +11,8 @@ $(function() {
 	
 	init();
 	
+	initTypeSelect();
+	
 	// hljs.initHighlightingOnLoad();
 	
 	

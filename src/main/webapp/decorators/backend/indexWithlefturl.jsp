@@ -48,7 +48,12 @@
 	href="${basePath}/js/own/kpro.css"></link>
 
 
-
+	
+		<link rel="stylesheet"
+	href="${basePath}/js/plugin/select2/css/select2.min.css">
+	<link rel="stylesheet"
+	href="${basePath}/js/plugin/select2/css/select2.bootstrap.css">
+	
 	<script type="text/javascript"
 		src="${basePath}/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
 	
@@ -117,6 +122,8 @@
 				<script type="text/javascript" src="${basePath }/js/plugin/bootstrap-table/js/bootstrap-table-zh-CN.js"></script>
 				
 				<script type="text/javascript" src="${basePath }/js/plugin/bootstrapValidator/js/bootstrapValidator.js"></script>
+	<script type="text/javascript"
+	src="${basePath}/js/plugin/select2/js/select2.min.js"></script>
 
 				
 <script>

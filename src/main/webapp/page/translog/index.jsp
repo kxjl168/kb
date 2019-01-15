@@ -161,15 +161,18 @@
 						</div>
 					</div>
 
+<div class="col-xs-12 row ">
+<div class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
+										<button type="button" ng-click="getList()" class="btn btn-primary btn-query btn-block   ">查询</button>
+									</div>
+									</div>
 
 					<div class="col-xs-12 row ">
 						<div class="table-responsive">
 							<table class="table">
 								<caption>{{title}}
 
-									<div class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
-										<button type="button" ng-click="getList()" class="btn btn-primary btn-block   ">查询</button>
-									</div>
+									
 								</caption>
 								<thead>
 									<tr>
@@ -186,13 +189,13 @@
 								<tbody>
 
 									<tr ng-repeat="x in datalist">
-										<td>{{ x.spider_head }}</td>
-										<td>{{ x.request_url }}</td>
+										<td><span class='wrap'>{{ x.spider_head }}</span></td>
+										<td><span class='wrap'>{{ x.request_url }}</span></td>
 										<td>{{ x.title }}</td>
 										<td ><span ng-show="x.cool" class="background:green;">❤</span> <span ng-show="x.bad" class="background:red;">↓↓</span>  {{ x.request_ip }}</td>
 										
-										<td>{{ x.request_city }}</td>
-										<td>{{ x.city }}</td>
+										<td><span class='wrap'>{{ x.request_city }}</span></td>
+										<td><span class='wrap'>{{ x.city }}</span></td>
 										<td>{{ x.time }}</td>
 
 									</tr>

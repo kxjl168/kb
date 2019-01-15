@@ -52,7 +52,7 @@
 
 
 					<div class="col-xs-12">
-						<div class="panel panel-success">
+						<div class="panel panel-success pshodow">
 							<div class="panel-heading" title="点击显示/隐藏查询条件" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
 								<div class="row">
 									<h3 class="panel-title col-xs-4 col-lg-4 col-md-4 ">查询条件</h3>
@@ -109,10 +109,10 @@
 								<caption>
 									{{title}}
 									<div class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
-										<button type="button" ng-click="addOrModify()" class="btn btn-primary btn-block   ">新增附件</button>
+										<button type="button" ng-click="addOrModify()" class="btn btn-primary btn-add btn-block   ">新增附件</button>
 									</div>
 									<div class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
-										<button type="button" ng-click="getList()" class="btn btn-primary btn-block   ">查询</button>
+										<button type="button" ng-click="getList()" class="btn btn-primary btn-query btn-block   ">查询</button>
 									</div>
 								</caption>
 								<thead>
@@ -138,9 +138,9 @@
 											<td>{{x.old_name}}</td>
 										 
 										
-											<td class=""><a href="${basePath}{{ x.http_down_url}}">${basePath}{{ x.http_down_url}}</a></td>
+											<td class=""><a class="wrap" href="${basePath}{{ x.http_down_url}}">${basePath}{{ x.http_down_url}}</a></td>
 												<td class="">{{ x.down_nums}}</td>
-										<td class=""><a href="{{prepath}}{{ x.http_relative_path}}">{{prepath}}{{ x.http_relative_path}}</a></td>
+										<td class=""><a class="wrap" href="{{prepath}}{{ x.http_relative_path}}">{{prepath}}{{ x.http_relative_path}}</a></td>
 										<td class="">{{ x.save_date}}</td>
 										
 										<td>

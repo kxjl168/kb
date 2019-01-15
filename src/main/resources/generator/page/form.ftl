@@ -61,7 +61,7 @@
 						        startDate:new Date()
 						});
 						 $("${r'#'}${field.id}").data('datetimepicker')
-						 .setDate('${.now}');
+						 .setDate(new Date());
                             });
                             </script>
                             </#if>
@@ -97,9 +97,9 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal"
+					<button type="button" class="btn btn-info" data-dismiss="modal"
 						id="close">关闭</button>
-					<button type="button" class="btn btn-primary" id="btnSubmit_item">
+					<button type="button" class="btn btn-warning" id="btnSubmit_item">
 						提交更改</button>
 				</div>
 			</form>

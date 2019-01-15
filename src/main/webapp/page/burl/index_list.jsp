@@ -75,7 +75,7 @@
 
 
 					<div class="col-xs-12">
-						<div class="panel panel-success">
+						<div class="panel panel-success pshodow">
 							<div class="panel-heading" title="点击显示/隐藏查询条件" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
 								<div class="row">
 									<h3 class="panel-title col-xs-4 col-lg-4 col-md-4 ">查询条件</h3>
@@ -85,7 +85,7 @@
 									<span id="titlepic" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="glyphicon glyphicon-chevron-up pull-right "></span>
 								</div>
 							</div>
-							<div id="collapseOne" class="panel-collapse collapse ">
+							<div id="collapseOne" class="panel-collapse collapse  in">
 								<div class="panel-body">
 
 									<div class="container">
@@ -153,10 +153,10 @@
 								<caption>
 									{{title}}
 									<div class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
-										<button type="button" ng-click="addOrModify()" class="btn btn-primary btn-block   ">新增链接</button>
+										<button type="button" ng-click="addOrModify()" class="btn btn-primary btn-add btn-block   ">新增链接</button>
 									</div>
 									<div class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
-										<button type="button" ng-click="getList()" class="btn btn-primary btn-block   ">查询</button>
+										<button type="button" ng-click="getList()" class="btn btn-primary  btn-query btn-block   ">查询</button>
 									</div>
 								</caption>
 								<thead>
@@ -283,9 +283,9 @@
 						
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-warning" data-dismiss="modal">取消
+							<button type="button" class="btn btn-info" data-dismiss="modal">取消
 							</button>
-							<button type="button" class="btn btn-primary" data-dismiss="modal"> 确定 </button>
+							<button type="button" class="btn btn-primary btn-warning" data-dismiss="modal"> 确定 </button>
 						</div>
 					</div>
 				</div>
@@ -464,9 +464,9 @@
 					
 				</div>
 				<div class="modal-footer ">
-					<button type="button " class="btn btn-default btn-warning " data-dismiss="modal">取消
+					<button type="button " class="btn btn-default  btn-info" data-dismiss="modal">取消
 					</button>
-					                 <button type="button " class="btn btn-primary " ng-click="update() "> 确定 </button>
+					                 <button type="button " class="btn btn-warning " ng-click="update() "> 确定 </button>
 				</div>
 			</div>
 		</div>
@@ -532,9 +532,9 @@
 				</div>
 				
 						<div class="modal-footer ">
-							<button type="button " class="btn btn-default btn-warning " data-dismiss="modal">取消
+							<button type="button " class="btn btn-default btn-info " data-dismiss="modal">取消
 							</button>
-							<button  type="button " class=" hide btn btn-primary "  > 确定 </button>
+							<button  type="button " class=" hide btn btn-warning "  > 确定 </button>
 						</div>
 					</div>
 				</div>
@@ -559,47 +559,16 @@
 							</div>
 						</div>
 						<div class="modal-footer ">
-							<button type="button " class="btn btn-default btn-warning " data-dismiss="modal">取消
+							<button type="button " class="btn btn-default btn-info " data-dismiss="modal">取消
 							</button>
-							<button id="btnconfirm" type="button " class="btn btn-primary "> 确定 </button>
+							<button id="btnconfirm" type="button " class="btn btn-warning "> 确定 </button>
 						</div>
 					</div>
 				</div>
 			</div>
 
 			
-			
-				
-			
-<%-- 
-			<script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
-
-			
-
-
-			<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
-
-
-			<script type="text/javascript" src="../../js/plugin/jquery/jquery.noty.min.js"></script>
-			<script type="text/javascript" src="../../js/plugin/jquery/noty.layout.center.js"></script>
-			<script type="text/javascript" src="../../js/plugin/jquery/noty.themes.bootstrap.js"></script>
-<script type="text/javascript" src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
-
-			<script type="text/javascript" src="../../js/plugin/jquery/jquery-ui.js"></script>
-
-
-			    <script type="text/javascript"
-	src="../../js/plugin/jquery/jquery.validate.js"></script> 
-
-		<script type="text/javascript"
-	src="${basePath}/js/own/kvalidate.js"></script>
-	
-
-			
-				<script src="../../js/own/menu.js"></script>
-<script src="../../js/own/loading.js"></script>
- --%>
-			
+		
 			
 			<script type="text/javascript" src="${basePath }/page/burl/index_list.js"></script>
 	<script type="text/javascript" src="${basePath }/page/burl/upload.js"></script>

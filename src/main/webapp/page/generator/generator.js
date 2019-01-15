@@ -12,6 +12,9 @@ $(function() {
 
 
 	initValidate();
+	
+	initmenu($("#menuul"), "generator/index/");
+
 
 });
 	// modal 新增基本字段事件 关闭事件事件， 清空已有的值 恢复禁用

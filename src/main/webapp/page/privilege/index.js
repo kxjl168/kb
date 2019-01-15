@@ -18,6 +18,9 @@ $(function () {
 
 	init();
 	
+	initmenu($("#menuul"), "page/permission/");
+	
+	
 	var $scope = angular.element(ngSection).scope();
 	kvalidate.init(
 			$("#fm"),

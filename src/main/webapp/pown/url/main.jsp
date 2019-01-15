@@ -40,13 +40,12 @@
 
 		</head>
 
-		<body id="ngSection" ng-app="myApp" ng-controller="eduCtrl">
+		<body >
 
 
 			<div class="" id="content" style="">
 
-			<%@include file="../../public/phead.jsp"%>
-
+		
 
 
 
@@ -63,16 +62,30 @@
 							
 					
 				
+				
+
+
 					
 					
 					<div class="col-xs-12" id="srzt" style="min-height: 400px;">
 					
 					
+						
+						<div class="row">
+					<div class="pull-left " style="margin-top:5px;">分类：</div>
+					<div class="row col-lg-3 col-xs-6  margin-bottom-5 ">
 					
+						<select
+						class=" col-xs-12 form-control txt-select-building in-line selectdist "
+						id="q_type" name="q_type">
+
+					</select> 
+					</div>
+					</div>
 					
 
 					<div ng-repeat="items in datalist" class="pgdiv" ng-cloak >	
-					<div class="panel panel-success urldv">
+					<div class="panel panel-success urldv row">
 					   <div id="{{$index}}" ></div>
 							<div class="panel-heading urlhead" title="" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
 								<div class="row">
@@ -260,7 +273,8 @@
 
 	<script type="text/javascript" src="index.js"></script>
 		
-
+	<script type="text/javascript" src="urlSelect2.js"></script>
+	
 					
 
 

@@ -14,7 +14,7 @@
 				
 				
 				<h4 class="modal-title" id="myModal_itemLabel">
-					<span id="myModal_item_title">添加</span>	111
+					<span id="myModal_item_title">添加</span>	黑名单
 				</h4>
 
 			</div>
@@ -35,13 +35,13 @@
 
 
 									<div class="form-group">
-										<label for="name" class="col-lg-3 control-label">IP地址</label>
+										<label for="name" class="col-lg-3 control-label">ip地址</label>
 
 										<div class="col-lg-9">
 										<input type="text" name="ip" 
 											
 											class="form-control" id="ip"
-												placeholder="IP地址" >
+												placeholder="ip地址" >
 											<p class="help-block"></p>
 										</div>
 									</div>
@@ -51,6 +51,7 @@
 
 										<div class="col-lg-9">
 										<input type="text" name="dtime" 
+											  readonly="readonly"  
 											
 											class="form-control" id="dtime"
 												placeholder="时间" >
@@ -58,6 +59,18 @@
 										</div>
 									</div>
 									
+									<script>
+                            $(function() {
+						$("#dtime").datetimepicker({
+							 format: 'yyyy-mm-dd hh:ii:ss',
+							 language: 'zh-CN',
+							 autoclose:true,
+						        startDate:new Date()
+						});
+						 $("#dtime").data('datetimepicker')
+						 .setDate(new Date());
+                            });
+                            </script>
 
 
 
@@ -73,9 +86,9 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal"
+					<button type="button" class="btn btn-info" data-dismiss="modal"
 						id="close">关闭</button>
-					<button type="button" class="btn btn-primary" id="btnSubmit_item">
+					<button type="button" class="btn btn-warning" id="btnSubmit_item">
 						提交更改</button>
 				</div>
 			</form>

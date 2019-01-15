@@ -30,7 +30,7 @@
 		
 		
 			<div class="col-lg-12">
-				<div class="panel panel-default panel-success">
+				<div class="panel panel-default panel-success pshodow">
 					<div class="panel-heading" title="点击显示/隐藏查询条件" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
 								<div class="row">
 									<h3 class="panel-title col-xs-4 col-lg-4 col-md-4 ">查询条件</h3>
@@ -41,7 +41,7 @@
 								</div>
 							</div>
 				
-					<div id="collapseOne" class="panel-collapse collapse panel-body">
+					<div id="collapseOne" class="panel-collapse collapse in panel-body">
 
 						<div id="dataTables-example_wrapper"
 							class="dataTables_wrapper form-inline dt-bootstrap no-footer">
@@ -82,10 +82,10 @@
 								</div>
 								
 								<div class="col-sm-3 ">
-									<button type="button" class="btn btn-default zxys" id="btnQry"
+									<button type="button" class="btn btn-default btn-query zxys" id="btnQry"
 										onclick="doquery()">查询</button>
 
-									<button type="button" class="btn btn-default" id="btnAdd">新增</button>
+									<button type="button" class="btn btn-default btn-add" id="btnAdd">新增</button>
 								</div>
 							</div>
 
@@ -109,7 +109,7 @@
 		</div>
 
 		<!-- 模态框（Modal） -->
-		<div class="modal fade"  data-backdrop="static" id="myModal" tabindex="-1" role="dialog"
+		<div class="modal fade in"  data-backdrop="static" id="myModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true"
 			style="display: none;">
 			<div class="modal-dialog">
@@ -234,9 +234,9 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
+							<button type="button" class="btn btn-default btn-info"
 								data-dismiss="modal" id="close">关闭</button>
-							<button type="button" class="btn btn-primary" id="btnSubmit">
+							<button type="button" class="btn btn-primary btn-warning" id="btnSubmit">
 								提交更改</button>
 						</div>
 					</form>

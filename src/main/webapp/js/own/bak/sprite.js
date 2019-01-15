@@ -1,6 +1,53 @@
 (function(window) {
 	
 	 $.fn.extend({
+		 gotoabout:  function(me) {
+	            if (this[0]) {
+	                var b = this.click(function() {
+	                	 window.location.href= basePath+"/public/about";
+	                    me.hideActionPanel();
+	                });
+	                
+	                this.hover(function() {
+	                	 msgs = ["了解一下我的主人？","关于？"];
+	                     var i = Math.floor(Math.random() * msgs.length);
+	                     me.showMessage(msgs[i]);
+	                  
+	                });
+	            }
+	        },
+	        gotosearch:  function(me) {
+	            if (this[0]) {
+	                var b = this.click(function() {
+	                	 window.location.href= basePath+"/public/search/";
+	                    me.hideActionPanel();
+	                });
+	                
+	                this.hover(function() {
+	                	 msgs = ["开始翻墙？","Google？","度娘搞不定就找点我啦","当然你要能翻墙就自己玩咯"];
+	                     var i = Math.floor(Math.random() * msgs.length);
+	                     me.showMessage(msgs[i]);
+	                  
+	                });
+	            }
+	        },
+      	 getcat:  function(me) {
+            if (this[0]) {
+                var b = this.click(function() {
+                    
+                   window.location.href=basePath+"/public/cat/";
+                    
+                    me.hideActionPanel();
+                });
+                
+                this.hover(function() {
+                	   msgs = ["想来一只喵吗？", "卖喵咯~", "肚子饿呢,快来养一只吧", "喵！？~~~"];
+                     var i = Math.floor(Math.random() * msgs.length);
+                     me.showMessage(msgs[i]);
+                  
+                });
+            }
+        },
 	        returntop: function(me) {
 	            if (this[0]) {
 	                var b = this.click(function() {
@@ -11,11 +58,11 @@
 	                    msgs = ["坐火箭飞咯~~~", "哇，又飞走了啦~~", "老婆，快出来看月亮~", "嗖嗖嗖~~~", "还要继续飞嘛。。。", "飞上瘾了啊啊啊啊！？"];
 	                    var i = Math.floor(Math.random() * msgs.length);
 	                    me.showMessage(msgs[i]);
-	                    
+	                    me.hideActionPanel();
 	                });
 	                
 	                this.hover(function() {
-	                	 msgs = ["想体验嗖的感觉嘛>_<！", "免费过山车哦~", "试试吧", "Let's Go !"];
+	                	 msgs = ["点击返回顶部","想体验嗖的感觉嘛>_<！", "免费过山车哦~", "试试吧", "Let's Go !"];
 	                     var i = Math.floor(Math.random() * msgs.length);
 	                     me.showMessage(msgs[i]);
 	                  
@@ -29,32 +76,35 @@
     function Sprite(options) {
         this.default = {
             movetime: 40000,
-            /*ms随机移动间隔40s */
+            /* ms随机移动间隔40s */
             scontainer: "#spig",
             smsg: "#message",
             sid: "#mumu",
             initmsg: "欢迎访问～,偶是喵小喵-_-！",
             caturl: "/cat/",
+            searchurl: "/search/",
             indexurl: '/index/',
+            abouturl: '/about',
 
             s_text: "#s_text",
             s_uid: "#s_uid",
             s_ublog: "#s_ublog",
+            actionpanelshow:false,
 
         };
-        /*拖动 */
+        /* 拖动 */
         this._move = false;
-        this._ismove = false; /* 移动标记*/
-        this._x, this._y; /* 鼠标离控件左上角的相对位置*/
+        this._ismove = false; /* 移动标记 */
+        this._x, this._y; /* 鼠标离控件左上角的相对位置 */
         this.options = $.extend({}, this.default, options);
 
-        this._timer = null; /*动画*/
+        this._timer = null; /* 动画 */
 
     };
 
     Sprite.prototype.showMessage = function(a, b) {
 
-        /*显示消息函数*/
+        /* 显示消息函数 */
         if (b == null) b = 10000;
         jQuery(this.default.smsg).hide().stop();
         jQuery(this.default.smsg).html(a);
@@ -74,7 +124,7 @@
             me.initClick();
             me.initScroll();
             me.initScroll();
-            me.initRandomMove();
+           me.initRandomMove();
             me.helpcommet();
             me.initHit();
             me.initHover();
@@ -97,7 +147,7 @@
 
         me._timer = setInterval(function() {
 
-            /*循环切换css,css中切换png图片 1234-》4321*/
+            /* 循环切换css,css中切换png图片 1234-》4321 */
             $(me.default.sid).toggleClass("o" + index);
             if (isadd)
                 index++;
@@ -123,6 +173,7 @@
     };
     
     Sprite.prototype.showTop=function(){
+    	var me=this;
     	$("body").find('#gotop').css("visibility",'visible');
     	 $("body").find('#gotop').stop().animate({
 				color: "#A0410D",
@@ -131,16 +182,19 @@
 			 
 			 width:'37px',
 			}, 400,function(){
-			
+				me.default.actionpanelshow=true;
 		});
+    	 
+    	
     	 
     	 event.stopPropagation();
     	 return false;
     };
     
     Sprite.prototype.hideTop=function(){
+    	var me=this;
     	$("body").find('#gotop').stop().animate({
-			//color: "#A0410D",
+			// color: "#A0410D",
 		 right:'0px',
 		 opacity:0,
 		 
@@ -148,8 +202,140 @@
 		 
 		}, 400,function(){
 			$("body").find('#gotop').css("visibility",'collapse');
+			me.default.actionpanelshow=false;
 		});
     };
+    
+    
+    Sprite.prototype.showGetCat=function(){
+    	var me=this;
+    	$("body").find('#getonecat').css("visibility",'visible');
+    	 $("body").find('#getonecat').stop().animate({
+				color: "#A0410D",
+			 right:'-60px',
+			/* top:'-10px', */
+			 opacity:1,
+			 
+			 width:'37px',
+			}, 400,function(){
+				me.default.actionpanelshow=true;
+		});
+    	 
+    	
+    	 
+    	 event.stopPropagation();
+    	 return false;
+    };
+    
+    Sprite.prototype.hideGetCat=function(){
+    	var me=this;
+    	$("body").find('#getonecat').stop().animate({
+			// color: "#A0410D",
+		 right:'0px',
+	/* top:'0px', */
+		 opacity:0,
+		 
+		 width:'0px',
+		 
+		}, 400,function(){
+			$("body").find('#getonecat').css("visibility",'collapse');
+			me.default.actionpanelshow=false;
+		});
+    };
+    
+    
+    Sprite.prototype.showSearch=function(){
+    	var me=this;
+    	$("body").find('#gotosearch').css("visibility",'visible');
+    	 $("body").find('#gotosearch').stop().animate({
+				color: "#A0410D",
+			 right:'60px',
+			/* top:'-10px', */
+			 opacity:1,
+			 
+			 width:'37px',
+			}, 400,function(){
+				me.default.actionpanelshow=true;
+		});
+    	 
+    	
+    	 
+    	 event.stopPropagation();
+    	 return false;
+    };
+    
+    Sprite.prototype.hideSearch=function(){
+    	var me=this;
+    	$("body").find('#gotosearch').stop().animate({
+			// color: "#A0410D",
+		 right:'0px',
+	/* top:'0px', */
+		 opacity:0,
+		 
+		 width:'0px',
+		 
+		}, 400,function(){
+			$("body").find('#gotosearch').css("visibility",'collapse');
+			me.default.actionpanelshow=false;
+		});
+    };
+    
+    
+    
+    
+    Sprite.prototype.showAbout=function(){
+    	var me=this;
+    	$("body").find('#getabout').css("visibility",'visible');
+    	 $("body").find('#getabout').stop().animate({
+				color: "#A0410D",
+			 right:'-50px',
+			/* top:'-10px', */
+			 opacity:1,
+			 
+			 width:'37px',
+			}, 400,function(){
+				me.default.actionpanelshow=true;
+		});
+    	 
+    	
+    	 
+    	 event.stopPropagation();
+    	 return false;
+    };
+    
+    Sprite.prototype.hideAbout=function(){
+    	var me=this;
+    	$("body").find('#getabout').stop().animate({
+			// color: "#A0410D",
+		 right:'0px',
+	/* top:'0px', */
+		 opacity:0,
+		 
+		 width:'0px',
+		 
+		}, 400,function(){
+			$("body").find('#getabout').css("visibility",'collapse');
+			me.default.actionpanelshow=false;
+		});
+    };
+    
+    Sprite.prototype.showActionPanel=function(){
+    	var me=this;
+    	me.showGetCat();
+    	me.showTop();
+    	me.showAbout();
+    	me.showSearch();
+    };
+    
+    Sprite.prototype.hideActionPanel=function(){
+    	var me=this;
+    	me.hideGetCat();
+    	me.hideTop();
+    	me.hideAbout();
+    	me.hideSearch();
+    };
+    
+    
 
     Sprite.prototype.initHover = function() {
         var me = this;
@@ -166,8 +352,7 @@
 
 
             
-            me.showTop();
-           
+            me.showActionPanel();
 			
             
 
@@ -181,7 +366,7 @@
 		 $(this.default.scontainer).hover(function() {
 			 
 				},function() {
-					 me.hideTop();
+					me.hideActionPanel();
 			});
 		 
     };
@@ -191,7 +376,7 @@
 
         setTimeout(function() {
 
-            $('a.ptitle').click(function() { /* 标题被点击时*/
+            $('a.ptitle').click(function() { /* 标题被点击时 */
                 me.showMessage('正在用吃奶的劲加载《<span >' + $(this).text() + '</span>》请稍候');
             });
 
@@ -199,13 +384,11 @@
 
                 me.showMessage('要看看《<span style="">' + $(this).text() + '</span>》这篇文章么？');
             });
-            /*  $('#prev-page').mouseover(function() {
-                  showMessage('要翻到上一页吗?');
-              });
-              $('#next-page').mouseover(function() {
-                  showMessage('要翻到下一页吗?');
-              });
-              */
+            /*
+			 * $('#prev-page').mouseover(function() { showMessage('要翻到上一页吗?');
+			 * }); $('#next-page').mouseover(function() {
+			 * showMessage('要翻到下一页吗?'); });
+			 */
             $('.rblock a').mouseover(function() {
                 me.showMessage('看看 <span style="">' + $(this).text() + '</span> 的文章？ ');
             });
@@ -217,40 +400,22 @@
             });
         }, 1000);
         /*
-        $('#s').focus(function() {
-            showMessage('输入你想搜索的关键词再按Enter(回车)键就可以搜索啦!');
-        });
-        $('#go-prev').mouseover(function() {
-            showMessage('点它可以后退哦！');
-        });
-        $('#go-next').mouseover(function() {
-            showMessage('点它可以前进哦！');
-        });
-        $('#refresh').mouseover(function() {
-            showMessage('点它可以重新载入此页哦！');
-        });
-        $('#go-home').mouseover(function() {
-            showMessage('点它就可以回到首页啦！');
-        });
-        $('#addfav').mouseover(function() {
-            showMessage('点它可以把此页加入书签哦！');
-        });
-        $('#nav-two a').mouseover(function() {
-            showMessage('嘘，从这里可以进入控制面板的哦！');
-        });
-        $('.post-category a').mouseover(function() {
-            showMessage('点击查看此分类下得所有文章');
-        });
-        $('.post-heat a').mouseover(function() {
-            showMessage('点它可以直接跳到评论列表处.');
-        });
-        $('#tho-shareto span a').mouseover(function() {
-            showMessage('你知道吗?点它可以分享本文到' + $(this).attr('title'));
-        });
-        $('#switch-to-wap').mouseover(function() {
-            showMessage('点击可以切换到手机版博客版面');
-        });
-        */
+		 * $('#s').focus(function() {
+		 * showMessage('输入你想搜索的关键词再按Enter(回车)键就可以搜索啦!'); });
+		 * $('#go-prev').mouseover(function() { showMessage('点它可以后退哦！'); });
+		 * $('#go-next').mouseover(function() { showMessage('点它可以前进哦！'); });
+		 * $('#refresh').mouseover(function() { showMessage('点它可以重新载入此页哦！'); });
+		 * $('#go-home').mouseover(function() { showMessage('点它就可以回到首页啦！'); });
+		 * $('#addfav').mouseover(function() { showMessage('点它可以把此页加入书签哦！'); });
+		 * $('#nav-two a').mouseover(function() {
+		 * showMessage('嘘，从这里可以进入控制面板的哦！'); }); $('.post-category
+		 * a').mouseover(function() { showMessage('点击查看此分类下得所有文章'); });
+		 * $('.post-heat a').mouseover(function() {
+		 * showMessage('点它可以直接跳到评论列表处.'); }); $('#tho-shareto span
+		 * a').mouseover(function() { showMessage('你知道吗?点它可以分享本文到' +
+		 * $(this).attr('title')); }); $('#switch-to-wap').mouseover(function() {
+		 * showMessage('点击可以切换到手机版博客版面'); });
+		 */
     };
 
     Sprite.prototype.helpcommet = function() {
@@ -321,7 +486,14 @@
             }
         } else if (window.location.href.match(".*" + this.default.caturl + ".*", "i")) {
             me.showMessage('欢迎' + ',这就是喵喵的本尊了啦～～ ', 6000);
-        } else {
+        } 
+        else if (window.location.href.match(".*" + this.default.searchurl + ".*", "i")) {
+            me.showMessage('' + '可以翻墙的Google哦，试试吧～～ ', 6000);
+        } 
+        else if (window.location.href.match(".*" + this.default.abouturl + ".*", "i")) {
+            me.showMessage('' + '这就是偶的铲屎官咯，中年大叔一只,喵～～ ', 6000);
+        } 
+        else {
             me.showMessage('欢迎' + '访问<span style="">KxのBOOK</span> ', 6000);
         }
 
@@ -329,7 +501,7 @@
 
             top: (window.pageYOffset ||
                     document.documentElement.scrollTop || document.body.scrollTop || 0) + 250
-                /* top:$(window).scrollTop() + f +300*/
+                /* top:$(window).scrollTop() + f +300 */
         }, {
             queue: false,
             duration: 1000
@@ -369,16 +541,37 @@
     Sprite.prototype.createDom = function() {
 
         var dom = " <div id=\"spig\" class=\"spig\" style=\"top: 225px; left: 50.625px;\"> " +
-            " <div id=\"message\" style=\"display: block; opacity: 0.498272;\">" + this.default.initmsg + "</div> " +
-            
+        
         
             "<div class='mdiv'>" +
             
             "<div id='gotop' title='返回顶部'><span class='fa-stack fa-lg'> " +
-            ' <i class="fa fa-circle fa-stack-2x topcircle"></i> '+
+            ' <i class="fa fa-circle fa-stack-2x topcircle2"></i> '+
             '   <i class="fa fa-rocket fa-stack-1x fa-inverse"></i> '+
             '  </span> '+
             '</div>  ' +
+            
+            
+            "<div id='getonecat' title='领养一只吗？'><span class='fa-stack fa-lg'> " +
+            ' <i class="fa fa-circle fa-stack-2x topcircle"></i> '+
+            '   <i class="fa fa-paw fa-stack-1x fa-inverse"></i> '+
+            '  </span> '+
+            '</div>  ' +
+            
+            "<div id='gotosearch' title='Goooooogle？'><span class='fa-stack fa-lg'> " +
+            ' <i class="fa fa-circle fa-stack-2x topcircle4"></i> '+
+            '   <i class="fa fa-google fa-stack-1x fa-inverse"></i> '+
+            '  </span> '+
+            '</div>  ' +
+            
+            
+            "<div id='getabout' title='关于博主？'><span class='fa-stack fa-lg'> " +
+            ' <i class="fa fa-circle fa-stack-2x topcircle3"></i> '+
+            '   <i class="fa fa-info fa-stack-1x fa-inverse"></i> '+
+            '  </span> '+
+            '</div>  ' +
+            
+            " <div id=\"message\" style=\"display: block; opacity: 0.498272;\">" + this.default.initmsg + "</div> " +
             
             " <div id=\"mumu\" class=\"mumu\" style=\"opacity: 1;\"></div>" +
             "</div>"+
@@ -394,13 +587,16 @@
         this.default.smsg = $("body").find(this.default.smsg);
         this.default.mumu = $("body").find(this.default.mumu);
         
-        //回顶部
+        // 回顶部
         $("body").find('#gotop').returntop(this);
         
+        // about
+        $("body").find('#getabout').gotoabout(this);
         
+        // tocat
+        $("body").find('#getonecat').getcat(this);
+        $("body").find('#gotosearch').gotosearch(this);
         
-		
-
     };
     
     
@@ -421,7 +617,7 @@
 
                 top: (window.pageYOffset ||
                         document.documentElement.scrollTop || document.body.scrollTop || 0) + f + 250
-                    /* top:$(window).scrollTop() + f +300*/
+                    /* top:$(window).scrollTop() + f +300 */
             }, {
                 queue: false,
                 duration: 1000
@@ -435,7 +631,10 @@
         var me = this;
         $("body").find(me.default.sid).click(function() {
         	
-            me.showTop();
+        	if(!me.default.actionpanelshow)
+            me.showActionPanel();
+        	else
+        		me.hideActionPanel();
         	
             if (!me._ismove) {
                 stat_click++;
@@ -464,9 +663,9 @@
             }
         });
         
-        $('body').click(function(){
-        	me.hideTop();
-        });
+       /*
+		 * $('body').click(function(){ me.hideTop(); });
+		 */
     };
 
 
@@ -514,12 +713,12 @@
             me._move = false;
 
             /*
-             * $(document).off('mousemove', null, Move); $(document).off('mouseup',
-             * null, endMove);
-             * 
-             * $(me.default.scontainer).off('touchmove', null, Move); $(me.default.scontainer).off('touchend',
-             * null, endMove);
-             */
+			 * $(document).off('mousemove', null, Move);
+			 * $(document).off('mouseup', null, endMove);
+			 * 
+			 * $(me.default.scontainer).off('touchmove', null, Move);
+			 * $(me.default.scontainer).off('touchend', null, endMove);
+			 */
         };
         $(me.default.scontainer).on('mousedown', null, startMove);
         $(me.default.scontainer).on('touchstart', null, startMove);

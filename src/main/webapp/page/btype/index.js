@@ -381,9 +381,9 @@ function init() {
 				$scope.title = "文章类型管理";
 				// $scope.curpage=1;
 				$scope.page = 1;
-				$scope.rows = 10;
+				$scope.rows = 20;
 
-				$scope.rows_select = [ 5, 10, 20 ];
+				$scope.rows_select = [ 5, 10, 20,30 ];
 				setTimeout(function() {
 					$("div.tablefoot select").val($scope.rows);
 				}, 50);

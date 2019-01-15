@@ -52,6 +52,10 @@
 	<script type="text/javascript"
 		src="${basePath}/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
 	
+	<link rel="stylesheet"
+	href="${basePath}/js/plugin/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+	
+
 <sitemesh:write property='head' />
 
 
@@ -96,6 +100,10 @@
 	src="${basePath}/js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
 
+<script type="text/javascript"
+	src="${basePath}/js/plugin/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript"
+	src="${basePath}/js/plugin/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 
 
 <script type="text/javascript"

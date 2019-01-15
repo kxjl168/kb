@@ -64,6 +64,9 @@ function init() {
 
 	initmenu_p($("#menuul"), "pown/url/");
 
+	initTypeSelect();
+	
+	
 	$('#collapseOne').on(
 			'shown.bs.collapse',
 			function() {

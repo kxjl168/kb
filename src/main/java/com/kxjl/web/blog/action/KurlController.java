@@ -35,6 +35,7 @@ import com.kxjl.web.blog.service.KurlService;
 import com.kxjl.web.system.action.base.BaseController;
 import com.kxjl.web.system.model.DictInfo;
 import com.kxjl.web.system.model.SysUserBean;
+import com.kxjl.web.system.model.SysUserBean.UserType;
 
 import sun.util.logging.resources.logging;
 
@@ -112,6 +113,91 @@ public class KurlController extends BaseController {
 			jsonOut.put("ResponseMsg", "");
 			jsonOut.put("total", total);
 			jsonOut.put("datalist", ja.toString());
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			try {
+				jsonOut.put("ResponseCode", "201");
+				jsonOut.put("ResponseMsg", "");
+				jsonOut.put("total", 0);
+				jsonOut.put("datalist", "");
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+
+		}
+		rst = jsonOut.toString();
+		JsonUtil.responseOutWithJson(response, rst);
+
+	}
+	
+	
+	/**
+	 * select2 选择分类
+	 * @param request
+	 * @param response
+	 * @author zj
+	 * @date 2019年1月15日
+	 */
+	@RequestMapping(value = "/getSelectInfoList")
+	public void getSelectInfoList(HttpServletRequest request,
+			HttpServletResponse response,Kurl query  ) {
+		// String blogid = request.getParameter("blogid");
+
+		/*
+		 * int pageCount = Integer.parseInt(request.getParameter("rows"));//
+		 * request.getParameter("pageCount"); int curPage =
+		 * Integer.parseInt(request.getParameter("page"));
+		 */
+
+		String data = request.getParameter("data");
+		JSONObject jsonIN;
+		JSONObject jsonOut = new JSONObject();
+
+		String rst = "";
+		try {
+
+		
+			query.setPageCount(10000);
+			query.setVal1("1");
+			// 计数
+			SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
+			if (user == null || (user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin)) {
+				query.setIsshow("1");
+			}
+			
+			
+		
+
+			String HTTP_PATH = ConfigReader.getInstance().getProperty("FILE_SVR_HTTP_OUTER_PATH");
+			String prepath = HTTP_PATH;
+			
+			query.setStart(0);
+			Map<String, List<Kurl>> datas=kurlService.getKurlItemPageList(query);
+
+			Gson gs = new Gson();
+
+			JSONArray ja = new JSONArray();
+			int i=0;
+			for (List<Kurl> item : datas.values()) {
+				JSONObject jo=new JSONObject();
+				jo.put("name", item.get(0).getUrl_type());
+				jo.put("id",i );
+				ja.put(jo);
+				i++;
+			}
+
+			int total = kurlService.getKurlPageListCount(query);
+
+		//	String jsStr = gs.toJson(infos);
+
+			jsonOut.put("val2", prepath);
+			jsonOut.put("ResponseCode", "200");
+			jsonOut.put("ResponseMsg", "");
+			jsonOut.put("total", total);
+			jsonOut.put("rows", ja.toString());
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

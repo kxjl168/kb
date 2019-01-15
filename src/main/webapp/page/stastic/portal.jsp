@@ -71,7 +71,7 @@
 
 
 					<div class="col-xs-12 ">
-						<div class="panel panel-success">
+						<div class="panel panel-success pshodow">
 							<div class="panel-heading" title="点击显示/隐藏查询条件" data-toggle="collapse" data-target="#collapseOne">
 								<div class="row">
 									<h3 class="panel-title col-xs-4 col-lg-4 col-md-4 ">查询条件</h3>
@@ -160,7 +160,7 @@
 <div id="sdata" class=" col-xs-4  margin-bottom-10 padding-right-0 ">
 </div>
 <div class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
-										<button type="button" ng-click="getTList()" class="btn btn-primary btn-block   ">查询</button>
+										<button type="button" ng-click="getTList()" class="btn btn-primary btn-query btn-block   ">查询</button>
 									</div>
 		</div>
 									

@@ -144,10 +144,10 @@
 					</div>
 		
 		
-				<div class="modal-footer col-sm-10 col-xs-12 row nopadding ">
-					<button type="button " class="btn btn-default btn-warning " ng-click="cancel()">取消
+				<div class="modal-footer row col-sm-10 col-xs-12 row nopadding ">
+					<button type="button " class="btn btn-default btn-info " ng-click="cancel()">取消
 					</button>
-					                 <button type="button " class="btn btn-primary " ng-click="update() "> 确定 </button>
+					                 <button type="button " class="btn btn-warning " ng-click="update() "> 确定 </button>
 				</div>
 	
 
@@ -166,43 +166,6 @@
 		
 
 
-
-		
-		
-
-<%-- 
-			<script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
-
-	<script type="text/javascript" src="../../js/plugin/jquery/jquery-ui.js"></script>
-
-
-			<script type="text/javascript" src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
-
-		
-
-
-			<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
-			<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
-
-<script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>
-
-
-
-			<script type="text/javascript" src="../../js/plugin/jquery/jquery.noty.min.js"></script>
-			<script type="text/javascript" src="../../js/plugin/jquery/noty.layout.center.js"></script>
-			<script type="text/javascript" src="../../js/plugin/jquery/noty.themes.bootstrap.js"></script>
-
-
-			    <script type="text/javascript"
-	src="../../js/plugin/jquery/jquery.validate.js"></script> 
-
-		<script type="text/javascript"
-	src="${basePath}/js/own/kvalidate.js"></script>
-	
-
-			<script type="text/javascript" src="../../js/plugin/swiper/idangerous.swiper.min.js"></script>
-			<script src="../../js/own/menu.js"></script>
-<script src="../../js/own/loading.js"></script> --%>
 
 <script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>		
 			<script type="text/javascript" src="../../js/plugin/angular-xeditable-0.8.1/js/xeditable.js"></script>

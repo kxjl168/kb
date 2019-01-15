@@ -219,7 +219,10 @@ $(document).ready(function(){
 	var googleJs = "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
     
 	loadads();
-	include_js(googleJs);
+	setTimeout(() => {
+		include_js(googleJs);
+	}, 3000);
+	
 
 	
 	

@@ -67,10 +67,21 @@
 
 
 
-						<div class="row col-xs-3 margin-bottom-5 ">
+						
+							<div class="pull-left" style="margin-top:5px;">分类：</div>
+						<div class="row col-lg-3 col-xs-6  margin-bottom-5 ">
+					
+						<select
+						class=" col-xs-12 form-control txt-select-building in-line selectdist "
+						id="q_type" name="q_type">
+
+					</select> 
+					</div>
+					
+					<div class="row col-xs-4 col-lg-3 margin-bottom-5 ">
 
 							<button type="button" ng-click="addOrModify()"
-								class="btn btn-primary btn-block   ">新增链接</button>
+								class="btn btn-info btn-block   ">新增链接</button>
 						</div>
 
 						<div class="row col-xs-12">
@@ -79,7 +90,7 @@
 									<div class="panel-heading urlhead" title="" href="#collapseOne">
 										<div class="row">
 											<h3 class="panel-title col-xs-12 " id="{{$index}}">
-												{{items.name}} &nbsp;<span><a href="#" class="urladd"
+												{{items.name}} &nbsp;<span><a href="javascript:void(0);" class="urladd"
 													ng-click="addOrModify(null,items.name)">新增本类链接</a></span>
 											</h3>
 
@@ -409,9 +420,9 @@
 
 				</div>
 				<div class="modal-footer ">
-					<button type="button " class="btn btn-default btn-warning "
+					<button type="button " class="btn btn-info  "
 						data-dismiss="modal">取消</button>
-					<button type="button " class="btn btn-primary "
+					<button type="button " class="btn btn-warning "
 						ng-click="update() ">确定</button>
 				</div>
 			</div>
@@ -555,6 +566,7 @@
 
 
 	<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript" src="urlSelect2.js"></script>
 	<script type="text/javascript" src="upload.js"></script>
 
 

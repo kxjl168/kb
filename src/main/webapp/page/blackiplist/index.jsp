@@ -6,17 +6,12 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+			<meta name="description" content="">
+				<meta name="author" content="">
 
-<title>111管理</title>
-
-
-<link rel="stylesheet" type="text/css" href="${basePath}/css/iot.css">
-
-<link rel="stylesheet" href="${basePath}/js/ztree/zTreeStyle.css">
+					<title>黑名单管理</title>
 </head>
 
 <body>
@@ -27,144 +22,132 @@
 	<div class="" id="content" style="">
 
 
-		<div class=" row row-margin-top-70">
-
-	<div>
-
-		<div class="row hide">
-
-			<div class="col-lg-12 wzbj">
-				<div style="padding-top: 9px; float: left; padding-right: 4px;">
-					<embed src="${basePath}/img/zhuye.svg" type="image/svg+xml"></embed>
-				</div>
-				<h1 class="page-header">
-					首页&nbsp;><span>&nbsp;111列表</span>
-				</h1>
-			</div>
-		</div>
+		<div class=" row row-margin-top-70"></div>
 
 
-	<div class="modal-body">
-		<div class="row">
-		
-	
-		
-		<div class="queryclass">
-		
-			
+		<div class="col-xs-12 row nopaddding">
+			<div class="panel panel-success pshodow">
+				<div class="panel-heading" title="点击显示/隐藏查询条件"
+					data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+					aria-expanded="true">
+					<div class="row">
+						<h3 class="panel-title col-xs-4 col-lg-4 col-md-4 ">查询条件</h3>
 
 
 
-				<form class="form-inline">
-
-					<div class="form-group">
-						<label for="name" class="lb_text col-xs-5 control-label">IP地址:</label>
-
-						<div class="col-xs-7">
-							<input id="q_ip" type="text" name="q_ip"
-								class="form-control inputtxt" placeholder=""
-								aria-controls="dataTables-example">
-						</div>
-					</div>
-
-
-					<div class="form-group">
-						<label for="name" class="lb_text col-xs-5 control-label">时间:</label>
-
-						<div class="col-xs-7">
-							<input id="q_dtime" type="text" name="q_dtime"
-								class="form-control inputtxt" placeholder=""
-								aria-controls="dataTables-example">
-						</div>
-					</div>
-
-				</form>
-
-
-				<form class=" form-inline margin-top-10">
-					
-
-
-					<button type="button" id="btnQry" onclick="doSearch_item()"
-						class="btn  button-primary button-rounded button-small">
-						<i class="fa fa-search fa-lg"></i> <span>查询</span>
-					</button>
-
-				</form>
-
-			</div>
-		</div>
-
-
-		<div class="mainbody">
-			<div class="row">
-				<div class="col-xs-5" style="margin-top: 16px;">111列表</div>
-				<div class="col-xs-1 col-xs-push-6" style="padding-top: 10px;">
-
-
-					<button type="button" class="btn btn-default" id="btnAdd_item">新增</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-sm-12">
-
-					<div class="table-responsive" style="margin: 10px;">
-						<table id="table_list_item"
-							class="table table-bordered table-hover table-striped"></table>
+						<span id="titlepic" data-toggle="collapse"
+							data-parent="#accordion" href="#collapseOne"
+							class="glyphicon glyphicon-chevron-up pull-right"
+							aria-expanded="true"></span>
 					</div>
 				</div>
-			</div>
-
-		</div>
-
-
-
-		<div class="hide row">
-
-
-
-
-			<div class="col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<span class="header">111列表</span>
-					</div>
+				<div id="collapseOne" class="panel-collapse collapse in"
+					aria-expanded="true" style="">
 					<div class="panel-body">
 
-						<div id="dataTables-example_wrapper"
-							class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-							<div class="row ">
-								<div class=" col-sm-9"></div>
+						<div class="container">
 
-								<div class="col-sm-3 "></div>
+
+
+							<div class="row  form-group margin-bottom-5">
+
+								<div class=" col-md-6  col-xs-12  ">
+									<div
+										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">ip地址:</div>
+									<div class="col-md-6 col-xs-8 text-right ">
+										<input
+											class="form-control ng-pristine ng-untouched ng-valid ng-empty"
+											id="q_ip" type="text" name="q_ip"
+											placeholder="">
+									</div>
+
+
+
+
+								</div>
+
+
+								<div class=" col-md-6  col-xs-12  ">
+									<div
+										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">时间:</div>
+									<div class="col-md-6 col-xs-8 text-right ">
+										<input
+											class="form-control ng-pristine ng-untouched ng-valid ng-empty"
+											id="q_dtime" type="text" name="q_dtime"
+											placeholder="">
+									</div>
+
+
+
+
+								</div>
+
 							</div>
-
+							
 
 						</div>
+
+
+
 					</div>
-
-
 				</div>
 			</div>
+
 		</div>
-		
+
+
+
+		<div class="col-xs-12 row ">
+
+			<div id="sdata" class=" col-xs-4  margin-bottom-10 padding-right-0 ">
+			</div>
+			<div
+				class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
+				<button type="button" class="btn btn-primary btn-add btn-block"
+					id="btnAdd_item">新增</button>
+				
+
+
+			</div>
+			<div
+				class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
+				<button type="button" onclick="query()"
+					class="btn btn-primary btn-query btn-block   ">查询</button>
+
+			</div>
+
 		</div>
 
-</div>
-</div>
-		<!-- 模态框（Modal） -->
-	
-	   <jsp:include page="form.jsp"></jsp:include>
 
-		<script
-			src="${basePath}/page/blackiplist/blackiplist.js"></script>
-			
-			
-				<script type="text/javascript"
-			src="${basePath}/js/plugin/jquery/jquery.plugin.js"></script>
 
-	
-			
+
+		<div class="col-xs-12 row nopaddding">
+
+			<div class="table-responsive" style="margin: 1px;">
+				<table id="table_list_item" class="table  table-hover table-striped"></table>
+			</div>
+
+		</div>
+
+
+
+
+	</div>
+	</div>
+
+
+	<!-- 模态框（Modal） -->
+
+	<jsp:include page="form.jsp"></jsp:include>
+
+	<script
+		src="${basePath}/page/blackiplist/blackiplist.js"></script>
+
+
+	<script type="text/javascript"
+		src="${basePath}/js/plugin/jquery/jquery.plugin.js"></script>
+
+
+
 </body>
 </html>

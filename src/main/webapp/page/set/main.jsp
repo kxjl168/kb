@@ -48,7 +48,7 @@
 						class="glyphicon glyphicon-search   "></i></span> <input id="key"
 						type="text" class="form-control"> <span
 						class="input-group-btn"><input type="button"
-							class="btn btn-primary" ng-click="Search()" value="搜索"></span>
+							class="btn btn-info" ng-click="Search()" value="搜索"></span>
 				</div>
 			</form>
 
@@ -98,7 +98,7 @@
 
 									<div class="  col-sm-2 col-xs-12 ">
 										<button type="button" ng-click="cleanHtml()"
-											class="btn btn-primary btn-block   ">清除静态html缓存</button>
+											class="btn btn-info btn-block   ">清除静态html缓存</button>
 									</div>
 
 
@@ -189,7 +189,7 @@
 											class="control-label nopaddding padding-top-0 col-xs-4 col-sm-3  "></div>
 										<div class="  col-sm-5 col-xs-12 text-right ">
 											<button type="button" ng-click="cleanData()"
-												class="btn btn-primary btn-block   ">清除</button>
+												class="btn btn-info btn-block   ">清除</button>
 										</div>
 
 
@@ -325,7 +325,7 @@
 											class="control-label nopaddding padding-top-0 col-xs-4 col-sm-3  "></div>
 										<div class="  col-sm-5 col-xs-12 text-right ">
 											<button type="button" ng-click="setpswd()"
-												class="row  btn btn-primary btn-block   ">修改</button>
+												class="row  btn btn-info btn-block   ">修改</button>
 										</div>
 
 
@@ -406,7 +406,7 @@
 										<div
 											class="control-label nopaddding padding-top-0 col-xs-4 col-sm-3  "></div>
 										<div class="  col-sm-5 col-xs-12 text-right ">
-												<button type="button" ng-click="setsysinfo()" class="row  btn btn-primary btn-block   ">修改</button>
+												<button type="button" ng-click="setsysinfo()" class="row  btn btn-info btn-block   ">修改</button>
 										</div>
 
 

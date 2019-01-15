@@ -19,9 +19,9 @@
 							</div>
 						</div>
 						<div class="modal-footer ">
-							<button type="button" class="btn btn-default btn-warning " data-dismiss="modal">取消
+							<button type="button" class="btn btn-default btn-info " data-dismiss="modal">取消
 							</button>
-							<button id="btnconfirm_outurl"  type="button " class="btn btn-primary "> 确定 </button>
+							<button id="btnconfirm_outurl"  type="button " class="btn btn-warning "> 确定 </button>
 						</div>
 					</div>
 				</div>

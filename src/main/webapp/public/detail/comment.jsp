@@ -10,7 +10,7 @@
       
       
        <div id="cblock"> 
-<div class="row col-lg-10 replayblock b1"> 
+<div class="hide row col-lg-10 replayblock b1"> 
        
        <div class="pull-left">
        <a id="f91" href="https://ddd.com" onclick="return gourl(this);" title="大虎-https://ddd.com">
@@ -85,7 +85,7 @@
                 
                 
                  <div class="ckdisplay form-group col-xs-12 row ">
-                  <div class="control-label padding-left-0 padding-top-0  "><img src="{{s_icon}}"><span class='gname'><span class=rname>{{s_uid}} </span>&nbsp;<span class="cmodify"><i class="fa fa-refresh" id="btnChangeName" title="修改信息"></i></span> ,&nbsp;欢迎回来. </span></div>
+                  <div class="control-label padding-left-0 padding-top-0  " ng-cloak><img src="{{s_icon}}"><span class='gname'><span class='rname' ng-cloak>{{s_uid}} </span>&nbsp;<span class="cmodify"><i class="fa fa-refresh" id="btnChangeName" title="修改信息"></i></span> ,&nbsp;欢迎回来. </span></div>
 </div>	
 
 <div class="nameinfo">

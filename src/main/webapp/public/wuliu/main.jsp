@@ -60,7 +60,7 @@
 													<span class="glyphicon  glyphicon-arrow-left  " title="后退" ng-click="back();"></span>  
 											</div>
 												<div class="  col-sm-5 col-xs-12 text-right ">
-									 <button type="button" ng-click="search()" class="btn btn-primary btn-block   ">查询</button>
+									 <button type="button" ng-click="search()" class="btn btn-info btn-block   ">查询</button>
 												</div>
 												
 											

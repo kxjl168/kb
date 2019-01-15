@@ -44,7 +44,8 @@ $(function() {
 	groupTable();
 
 	initValidate();
-
+	initmenu($("#menuul"), "page/permission/");
+	
 	
 	/*showPopover($("#message"),
 			"xxxxx");*/

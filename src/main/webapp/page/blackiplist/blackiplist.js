@@ -34,7 +34,8 @@ $(function() {
 	InitQuery_item();
 
 
-
+	initmenu($("#menuul"), "manager/blackiplist/manager/");
+	
 	$("#btnAdd_item").click(function() {
 
 	
@@ -194,7 +195,7 @@ function InitQuery_item() {
 		},
 		 {
 				field : 'ip',
-				title : 'IP地址',
+				title : 'ip地址',
 				align : 'center',
 				valign : 'middle',
 				   
@@ -206,6 +207,9 @@ function InitQuery_item() {
 				align : 'center',
 				valign : 'middle',
 				   
+		 formatter: function (value, row, index) {
+             return new Date(value).Format("yyyy-MM-dd hh:mm:ss");
+         }
 				
 			},
 		

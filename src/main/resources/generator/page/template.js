@@ -34,7 +34,8 @@ ${r'$'}(function() {
 	InitQuery_item();
 
 
-
+	initmenu(${r'$'}("#menuul"), "manager/${ctrollerModelMapping}/manager/");
+	
 	${r'$'}("${r'#'}btnAdd_item").click(function() {
 
 	

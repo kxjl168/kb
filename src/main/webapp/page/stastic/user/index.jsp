@@ -40,7 +40,7 @@
 
 
 			<div class="col-xs-12">
-				<div class="panel panel-success">
+				<div class="panel panel-success pshodow">
 					<div class="panel-heading" title="点击显示/隐藏查询条件"
 						data-toggle="collapse" data-parent="#accordion"
 						href="#collapseOne">
@@ -164,7 +164,7 @@
 				<div
 					class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
 					<button type="button" onclick="query()"
-						class="btn btn-primary btn-block   ">查询</button>
+						class="btn btn-primary btn-query btn-block   ">查询</button>
 				</div>
 			</div>
 
@@ -218,7 +218,7 @@
 				<div class="modal-footer">
 
 					</button>
-					<button type="button " class="btn btn-primary "
+					<button type="button " class="btn btn-primary btn-warning "
 						data-dismiss="modal">确定</button>
 				</div>
 			</div>
