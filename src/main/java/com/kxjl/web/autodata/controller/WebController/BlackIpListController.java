@@ -1,7 +1,7 @@
 /*
  * @(#)BlackIpListController.java
  * @author: zhangJ
- * @Date: 2019-01-15 11:15:39
+ * @Date: 2019-01-15 11:27:59
  * Copyright (C),2017-2018, ZHONGTONGGUOMAI TECHNOLOGY NANJING
  * Co.,Ltd. All Rights Reserved.
  * GMWL PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -39,10 +39,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 111管理 BlackIpListController.java.
+ * 黑名单管理 BlackIpListController.java.
  * 
  * @author KAutoGenerator
- * @version 1.0.1 2019-01-15 11:15:39
+ * @version 1.0.1 2019-01-15 11:27:59
  * @since 1.0.0
  */
 @Controller
@@ -67,7 +67,7 @@ public class BlackIpListController {
 	
 
 	@RequestMapping("/blackiplistList")
-	//@ManagerActionLog(operateDescribe="查询111",operateFuncType=FunLogType.Query,operateModelClassName=BlackIpListMapper.class)
+	//@ManagerActionLog(operateDescribe="查询黑名单",operateFuncType=FunLogType.Query,operateModelClassName=BlackIpListMapper.class)
 	@ResponseBody
 	public String blackiplistList( BlackIpList item, HttpServletRequest request,PageCondition pageCondition) {
 
@@ -87,7 +87,7 @@ public class BlackIpListController {
 	}
 
 	@RequestMapping("/delete")
-	//@ManagerActionLog(operateDescribe="删除111",operateFuncType=FunLogType.Del,operateModelClassName=BlackIpListMapper.class)
+	//@ManagerActionLog(operateDescribe="删除黑名单",operateFuncType=FunLogType.Del,operateModelClassName=BlackIpListMapper.class)
 	@ResponseBody
 	public Message delete( BlackIpList item,HttpServletRequest request) {
 
@@ -117,7 +117,7 @@ public class BlackIpListController {
 	 * @return
 	 */
 	@RequestMapping("/saveOrUpdate")
-	//@ManagerActionLog(operateDescribe="保存修改111",operateFuncType=FunLogType.SaveOrUpdate,operateModelClassName=BlackIpListMapper.class)
+	//@ManagerActionLog(operateDescribe="保存修改黑名单",operateFuncType=FunLogType.SaveOrUpdate,operateModelClassName=BlackIpListMapper.class)
 	@ResponseBody
 	public String saveOrUpdate(BlackIpList blackiplist) {
 

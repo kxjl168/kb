@@ -92,8 +92,8 @@ public class MGeneratorUtil {
 			
 			
 			templatePath=ConfigReader.getInstance().getProperty("templatePath", "F:\\kxjl\\code\\kb\\src\\main\\resources\\generator");
-			path="";
-			path += templatePath+"../../java/" +data.getBasepackageName().replace(".", "/")+ File.separator + "dao" ;
+			pathmapper="";
+			pathmapper += templatePath+"../../java/" +data.getBasepackageName().replace(".", "/")+ File.separator + "dao" ;
 			
 			//清空dao内容，防止附加的内容重复
 			TemplateFileUtil.SaveFile(data.getModelClass() + "Mapper.java", pathmapper,"");
@@ -121,6 +121,12 @@ public class MGeneratorUtil {
 
 		String path = KGenerateServiceImpl.class.getResource("/").getPath();
 		path += "../../src/main/resources/generator/" + cfgfileName;
+		
+		String templatePath=ConfigReader.getInstance().getProperty("templatePath", "F:\\kxjl\\code\\kb\\src\\main\\resources\\generator");
+		path="";
+		path += templatePath+"/"+ cfgfileName  ;
+		
+		
 		File cfgFile = new File(path);
 
 		ConfigurationParser cfgParser = new ConfigurationParser(warnings);// 配置文件解析器
@@ -207,6 +213,12 @@ public class MGeneratorUtil {
 		String text =freeMarkUtil.getGeneratorContent(data);
 		String path = KGenerateServiceImpl.class.getResource("/").getPath();
 		path += "../../src/main/resources/generator/";
+		
+		String templatePath=ConfigReader.getInstance().getProperty("templatePath", "F:\\kxjl\\code\\kb\\src\\main\\resources\\generator");
+		path="";
+		path += templatePath+"/"  ;
+		
+		
 		TemplateFileUtil.SaveFile(cfgfileName, path, text);
 	}
 
