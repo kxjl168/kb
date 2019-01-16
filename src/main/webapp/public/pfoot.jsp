@@ -26,11 +26,16 @@
 </div>
 
 
+<script>
+$(function(){
+	$("#right_boot").html("KxのBook@Copyright 2017-"+new Date().getFullYear()+" All Rights Reserved");
+})
+</script>
 
 
 <div class="col-xs-12 row kfootend">
-	<span>KxのBook@Copyright 2017 All Rights Reserved</span> <br> <span>Designed
-		and theme by <a href="https://256kb.cn/">野生的喵喵</a>
+	<span id="right_boot">KxのBook@Copyright 2017- All Rights Reserved</span> <br> <span>Designed
+		and themed by <a href="https://256kb.cn/">野生的喵喵</a>
 	</span> &nbsp;<span><span
 		class=" " title="总访问量"><span class=" glyphicon glyphicon-eye-open"></span>&nbsp;<span class="pagevisit">${visitdata.pageVisitNum }</span></span>
 		&nbsp;<span class=" " title="访客数"><i class=" fa fa-user"></i>&nbsp;<span class="uservisit">${visitdata.userVisitNum }</span></span>
@@ -39,7 +44,7 @@
 </div>
 
 
-<script type="text/javascript" src="${basePath}/js/own/sprite.js"></script>
+<script type="text/javascript" src="${basePath}/js/own/sprite.js?a=1"></script>
 
 
 

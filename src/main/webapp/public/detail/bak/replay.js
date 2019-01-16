@@ -458,7 +458,7 @@ function initReplayModel() {
 
 			             +'        <div class="hide" >'+($scope.rnum-index)+'楼&nbsp;<a  href="'+item.user_blog+'" title="'+item.user_blog+'">'+item.userid+'</a> <span class="pull-right text-right">&nbsp;'+item.create_date+'</span> </div> '
 
-			             +'        <div > <a id="f'+(item.recordid)+'"   href="'+item.user_blog+'"   onclick="return gourl(this);"  title="'+item.userid+'-'+item.user_blog+'">'+item.userid+authorhtml+' </a><span class="rptime text-right">&nbsp;'+item.create_date+' </span> ';
+			             +'        <div > <a id="f'+(item.recordid)+'"   href="'+item.user_blog+'"   onclick="return gourl(this);"  title="'+item.userid+'-'+item.user_blog+'"> '+item.userid+'</a>'+authorhtml+'<span class="rptime text-right">&nbsp;'+item.create_date+' </span> ';
 			                    
 			             if($scope.root)
 			            	 {
@@ -483,7 +483,7 @@ function initReplayModel() {
 			             +'   		<div class=" rcblock"> ';
 			             
 			             
-			             $.each(item.reback,function(iindex,t)
+			             $.each(item.reback.reverse(),function(iindex,t)
 			            		 {
 			            	 
 			            		var ricon ="https://www.gravatar.com/avatar/"+t.icon+"?s=35&r=pg&d=identicon";//unescape(item.userid);
@@ -507,7 +507,7 @@ function initReplayModel() {
 						             
 						             +'<div class="col-xs-10">'
 			            		   
-					             +'                <div ><a id="f'+(t.recordid)+'"  href="'+t.user_blog+'"  onclick="return gourl(this)"   title="'+t.userid+'">'+t.userid+authorhtmlReplay+'</a> '
+					             +'                <div ><a id="f'+(t.recordid)+'"  href="'+t.user_blog+'"  onclick="return gourl(this)"   title="'+t.userid+'">'+t.userid+'</a> '+authorhtmlReplay
 					             +' <span class="rptime text-right">&nbsp;'+t.create_date+'</span> ';
 					         
 					             if($scope.root)

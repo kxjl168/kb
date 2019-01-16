@@ -9,9 +9,10 @@ function initTypeSelect() {
 		// dropdownParent : $("#myModal"),
 		placeholder : "选择分类",
 		minimumInputLength : 0,
-		maximumSelectionLength : 1,
+		maximumSelectionLength : 2,
+		 minimumResultsForSearch: Infinity,
 		theme : "bootstrap",
-		multiple : true,
+		multiple : false,
 		language : {
 			errorLoading : function() {
 				return "无法载入结果。"
@@ -102,11 +103,13 @@ function initTypeSelect() {
 	});
 
 	// Bind an event
-	$('#q_type').on('select2:close', function(e) {
+	$('#q_type').on('select2:select', function(e) {
 		
 		var cids = $("#q_type").val();
 		var id=(cids == null || cids.length == 0) ? ""
 				: cids[0];
+		
+		id=cids;
 		setTimeout(function() {
 			
 			window.location.hash="#"+id;
