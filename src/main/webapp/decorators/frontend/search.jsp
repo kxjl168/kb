@@ -56,7 +56,7 @@
 
 
 </head>
-<body id="ngSection" ng-app="myApp" ng-controller="eduCtrl" style="overflow: hidden">
+<body id="ngSection" ng-app="myApp" ng-controller="eduCtrl" style="overflow:">
 
 
 	<%@include file="../../public/phead.jsp"%>
