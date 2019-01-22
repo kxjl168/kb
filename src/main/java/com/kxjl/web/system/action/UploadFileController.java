@@ -26,7 +26,6 @@ import com.kxjl.tool.httpPost.FormFieldKeyValuePair;
 import com.kxjl.tool.httpPost.HttpPostEmulator;
 import com.kxjl.tool.utils.FileUtil;
 
-
 /**
  * 
  * @author zj
@@ -45,8 +44,8 @@ public class UploadFileController {
 		String uploadUrl = "205";
 		response.setCharacterEncoding("utf-8");
 		StringBuffer htmlBuffer = new StringBuffer();
-		htmlBuffer
-				.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">         ")
+		htmlBuffer.append(
+				"<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">         ")
 				.append("<html>                                                                                ")
 				.append("<head>                                                                                                                        ")
 				.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />                                                     ")
@@ -70,7 +69,8 @@ public class UploadFileController {
 	}
 
 	/**
-	 *xhr上传
+	 * xhr上传
+	 * 
 	 * @param receiveFile
 	 * @param request
 	 * @param response
@@ -80,7 +80,7 @@ public class UploadFileController {
 	 * @date 2018年6月8日
 	 */
 	@RequestMapping(value = "/UploadFileXhr")
-	public  void UploadFileXhr(@RequestParam(value = "fileUploadURL", required = false) MultipartFile receiveFile,
+	public void UploadFileXhr(@RequestParam(value = "fileUploadURL", required = false) MultipartFile receiveFile,
 			HttpServletRequest request, HttpServletResponse response, ModelMap model) {
 
 		String curDir = "apk"; // 使用配置的基础目录+ logo目录
@@ -90,7 +90,7 @@ public class UploadFileController {
 
 		String rst = doUploadToDirAjax(receiveFile, curDir, file_max_size);
 
-		//return rst;
+		// return rst;
 		try {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().println(rst);
@@ -99,36 +99,35 @@ public class UploadFileController {
 			e.printStackTrace();
 		}
 	}
+
 	/**
-	 * /**
-	 * 上传至指定目录 ,返回json数据,配合xhr使用
+	 * /** 上传至指定目录 ,返回json数据,配合xhr使用
 	 * 
 	 * @param receiveFile
 	 * @param curDir
-	 * @param MaxFileSize 字节大小
+	 * @param MaxFileSize
+	 *            字节大小
 	 * @return
 	 * @author zj
 	 * @date 2018年6月8日
 	 */
-	private  String doUploadToDirAjax(MultipartFile receiveFile, String curDir, Long MaxFileSize) {
+	private String doUploadToDirAjax(MultipartFile receiveFile, String curDir, Long MaxFileSize) {
 		String fileName = receiveFile.getOriginalFilename();
 		String returnCode = "200";
 		String returnMsg = "";
 		String NewfullName = ""; // 文件名
 		String md5 = "";
 		String httpURL = ""; // 下载路径
-		String fileid="";
-		JSONObject jsonRes =new JSONObject();
+		String fileid = "";
+		JSONObject jsonRes = new JSONObject();
 		try {
 			if (fileName != null && !"".equals(fileName)) {
 
-				if( receiveFile.getSize()==0)
-				{
+				if (receiveFile.getSize() == 0) {
 					returnCode = "201";
 					jsonRes.put("ResponseCode", "201");
 					jsonRes.put("ResponseMsg", "不能上传空文件！");
-				}
-				else if (MaxFileSize != 0 && receiveFile.getSize() <= MaxFileSize) {
+				} else if (MaxFileSize != 0 && receiveFile.getSize() <= MaxFileSize) {
 					// 将文件保存到文件服务器
 					String responsedata = "";
 					// String serverUrl =
@@ -141,12 +140,12 @@ public class UploadFileController {
 					fds.add(p1);
 
 					try {
-					
-						logger.info("begin to upload to "+serverUrl);
+
+						logger.info("begin to upload to " + serverUrl);
 						responsedata = HttpPostEmulator.sendHttpPostRequestByMutiPartFile(serverUrl, fds,
 								new MultipartFile[] { receiveFile });
-						
-						logger.info("upload success! "+responsedata);
+
+						logger.info("upload success! " + responsedata);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -158,7 +157,7 @@ public class UploadFileController {
 					// 解析responsedate
 					jsonRes = new JSONObject(responsedata);
 					if ((jsonRes.getString("ResponseCode")).equals("200")) {
-						
+
 					} else {
 						returnCode = "201";
 						returnMsg = jsonRes.optString("ResponseMsg");
@@ -190,15 +189,13 @@ public class UploadFileController {
 			} catch (Exception e2) {
 				// TODO: handle exception
 			}
-		
-		}
 
+		}
 
 		return jsonRes.toString();
 
 	}
-	
-	
+
 	/**
 	 * 存储图标文件
 	 * 
@@ -231,7 +228,7 @@ public class UploadFileController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 存储大图标文件，惠民首页大图标
 	 * 
@@ -279,8 +276,8 @@ public class UploadFileController {
 	public void UploadCKFile(@RequestParam(value = "upload", required = false) MultipartFile receiveFile,
 			HttpServletRequest request, HttpServletResponse response, ModelMap model) {
 
-		String CKEditorFuncNum=request.getParameter("CKEditorFuncNum");
-		
+		String CKEditorFuncNum = request.getParameter("CKEditorFuncNum");
+
 		String curDir = "pic"; // 使用配置的基础目录+ logo目录
 
 		double file_max_size = 10; // 10M
@@ -289,20 +286,48 @@ public class UploadFileController {
 		long size = (long) file_max_size;
 
 		String url = doUploadToDirCK(receiveFile, curDir, size);
+		//responseType=json
+		String rsType=request.getParameter("responseType");
+		if (rsType!=null&&rsType.equals("json")) {
+			//直接从word复制单张图片，或者直接拖拽上传图片
+			JSONObject json = new JSONObject();
+			json.put("uploaded", 1);
+			json.put("fileName", receiveFile.getName());
+			json.put("url", url);
+			
+			try {
 
+				response.setCharacterEncoding("utf-8");
+				response.getWriter().println(json.toString());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			/*{
+		    "uploaded": 1,
+		    "fileName": "foo(2).jpg",
+		    "url": "/files/foo(2).jpg",
+		    "error": {
+		        "message": "A file with the same name already exists. The uploaded file was renamed to \"foo(2).jpg\"."
+		    }
+		}*/
 		
-		
-	String rst=	"<script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction("+CKEditorFuncNum+", '"+url+"', 'OK');</script>"; 
-		if(!url.contains("http"))
-			rst=	"<script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction("+CKEditorFuncNum+", '"+url+"', 'FAIL');</script>";
-		try {
-			
-			
-			response.setCharacterEncoding("utf-8");
-			response.getWriter().println(rst);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} else {
+
+			//自带图片控件
+			String rst = "<script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum
+					+ ", '" + url + "', 'OK');</script>";
+			if (!url.contains("http"))
+				rst = "<script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum
+						+ ", '" + url + "', 'FAIL');</script>";
+			try {
+
+				response.setCharacterEncoding("utf-8");
+				response.getWriter().println(rst);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -423,7 +448,7 @@ public class UploadFileController {
 
 			String HTTP_PATH = ConfigReader.getInstance().getProperty("FILE_SVR_HTTP_OUTER_PATH");
 
-			htmlBuffer.append(HTTP_PATH+httpURL);
+			htmlBuffer.append(HTTP_PATH + httpURL);
 		} else {
 			htmlBuffer.append(returnMsg);
 
@@ -465,12 +490,12 @@ public class UploadFileController {
 					fds.add(p1);
 
 					try {
-					
-						logger.error("begin to upload to "+serverUrl);
+
+						logger.error("begin to upload to " + serverUrl);
 						responsedata = HttpPostEmulator.sendHttpPostRequestByMutiPartFile(serverUrl, fds,
 								new MultipartFile[] { receiveFile });
-						
-						logger.error("upload success! "+responsedata);
+
+						logger.error("upload success! " + responsedata);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -519,8 +544,8 @@ public class UploadFileController {
 		}
 
 		StringBuffer htmlBuffer = new StringBuffer();
-		htmlBuffer
-				.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">          ")
+		htmlBuffer.append(
+				"<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">          ")
 				.append("<html>                                                                                ")
 				.append("<head>                                                                                                                        ")
 				.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />                                                     ")
@@ -551,8 +576,8 @@ public class UploadFileController {
 			htmlBuffer.append("<input type='text' id='returnMsg' value='" + returnMsg + "'  >  ");
 		}
 
-		htmlBuffer
-				.append("</body>                                                                                                                       ")
+		htmlBuffer.append(
+				"</body>                                                                                                                       ")
 				.append("</html>                                                                                                                       ");
 
 		return htmlBuffer.toString();
@@ -668,8 +693,8 @@ public class UploadFileController {
 		}
 
 		StringBuffer htmlBuffer = new StringBuffer();
-		htmlBuffer
-				.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">          ")
+		htmlBuffer.append(
+				"<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">          ")
 				.append("<html>                                                                                ")
 				.append("<head>                                                                                                                        ")
 				.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />                                                     ")
@@ -695,8 +720,8 @@ public class UploadFileController {
 			htmlBuffer.append("<input type='text' id='returnMsg' value='" + returnMsg + "'  >  ");
 		}
 
-		htmlBuffer
-				.append("</body>                                                                                                                       ")
+		htmlBuffer.append(
+				"</body>                                                                                                                       ")
 				.append("</html>                                                                                                                       ");
 
 		return htmlBuffer.toString();

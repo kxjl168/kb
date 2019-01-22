@@ -466,11 +466,14 @@ function init() {
 									
 										$scope.s_recordid =item.recordid;
 										$scope.s_title=item.title;
+										$scope.imei=item.imei;
 										
 										setTimeout(function() {
 											 $("#s_type").val(item.blog_type);	
 											 $("#en_type").val(item.showflag);	
 											 $("#showtime").val(item.showtime);
+											 $("#ccid").val(item.ccid);
+											 
 										}, 30);
 										
 										$scope.s_tags =item.tags;
@@ -515,6 +518,10 @@ function init() {
 							
 							$("#en_type").get(0).selectedIndex = 1;
 							$scope.en_type = $("#en_type").val();
+							
+							
+							$("#ccid").get(0).selectedIndex = 1;
+							$scope.ccid = $("#ccid").val();
 						
 						}, 30);
 						
@@ -567,6 +574,14 @@ function init() {
 				$scope.save=function(fm, value,callback){
 					var obj = {};
 
+					if(!kvalidate.validate("#fm"))
+						{
+						error("字段验证失败!");
+						return;
+						}
+						
+					
+					
 					if (value==null||typeof (value) == "undefined") {
 						obj.recordid = $scope.s_recordid;
 						obj.title = $scope.s_title;
@@ -574,7 +589,9 @@ function init() {
 						obj.showtime =$("#showtime").val();
 						
 						obj.tags =$scope.s_tags;
-						obj.show =$("#en_type").val();
+						obj.showflag =$("#en_type").val();
+						obj.ccid=$("#ccid").val();
+						obj.imei=$scope.imei;
 						
 						var num=$($("#s_context"  ).val()).find(".pct").length;
 						var ct=$("<div class='pct'>"+$("#s_context"  ).val() +"</div>");
@@ -591,7 +608,7 @@ function init() {
 						
 						var withemojihtml= $kchar. replaceEmoji(ct[0].outerHTML);
 						
-						obj.context= escape(withemojihtml);
+						obj.content= escape(withemojihtml);
 						
 
 					} else {
@@ -619,15 +636,20 @@ function init() {
 						msg("网络异常!");
 					
 
-					}, false, false
+					}, false, 'json'
 
 					);
 				};
 
 				$scope.update = function() {
 
-				
-					kvalidate.validate("#fm");
+					if(!kvalidate.validate("#fm"))
+						{
+						error("字段验证失败!");
+						return;
+						}
+						
+					$scope.doupdate();
 
 				};
 
@@ -781,16 +803,25 @@ function init() {
 					},
 					s_context : "required",
 					
+					ccid : {
+						required : true,
+				
+					},
+					
+					
 				}, {
 					s_title : {
 						required : "标题必须填写",
 
 					},
-
+					ccid : {
+						required : "许可协议必选",
+				
+					},
 					s_context : "请输入内容",
 					
-				}, $scope.doupdate, "");
-			
+				},null , "");
+				//$scope.doupdate
 				//$scope.getList();
 				
 				

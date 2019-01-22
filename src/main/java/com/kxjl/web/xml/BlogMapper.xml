@@ -48,13 +48,15 @@ group by d.dict_key,d.dict_name,d.val1
 	
 	
 	<select id="getBlogDetailPageList" parameterType="com.kxjl.web.blog.model.Blog" resultMap="BlogMap">
-	<![CDATA[ 	select a.*,d.dict_name blog_type_name,d.val1 blog_type_url  from (
+	<![CDATA[ 	select a.*,d.dict_name blog_type_name,d.val1 blog_type_url , cc.name ccname,cc.link cclink,cc.icon ccicon from (
 	(select '1cur' t, a.* from blog_info a where   recordid=#{recordid})  
 union
 (select '2next' t, a.* from blog_info a where a.showflag='1' and  recordid>#{recordid}  order by recordid asc limit 1)
 union
 (select '3pre' t, a.* from blog_info a where a.showflag='1' and  recordid<#{recordid} order by recordid desc limit 1)
 ) a  left join dict_info d on (d.dict_type='blog_type' and a.blog_type=d.dict_key)
+ left join cc_list cc on a.ccid=cc.id
+	
 order by t asc
 
 
@@ -69,8 +71,10 @@ order by t asc
 	
 	
 	<select id="getBlogPageList" parameterType="com.kxjl.web.blog.model.Blog" resultMap="BlogMap">
-		select a.*,d.dict_name blog_type_name,d.val1 blog_type_url  from blog_info a left join dict_info d on (d.dict_type='blog_type' and a.blog_type=d.dict_key)
-	
+		select a.*,d.dict_name blog_type_name,d.val1 blog_type_url  
+		, cc.name ccname,cc.link cclink,cc.icon ccicon
+		from blog_info a left join dict_info d on (d.dict_type='blog_type' and a.blog_type=d.dict_key)
+		left join cc_list cc on a.ccid=cc.id
 		where 1=1 
 		<if test='title != null and title != "" '>
 				and a.title like CONCAT('%',#{title},'%')
@@ -131,8 +135,9 @@ order by t asc
 	</select>
 	
 <select id="getBlogInfoById" parameterType="java.lang.Integer" resultType="com.kxjl.web.blog.model.Blog">
-		select a.*,d.dict_name blog_type_name from blog_info a 
+		select a.*,d.dict_name blog_type_name, cc.name ccname,cc.link cclink,cc.icon ccicon from blog_info a 
 		left join dict_info d on (d.dict_type='blog_type' and a.blog_type=d.dict_key)
+		left join cc_list cc on a.ccid=cc.id
 		where 1=1
 		<if test='imei != null and imei != "" '>
 			and a.imei =#{imei}
@@ -153,9 +158,9 @@ order by t asc
 	    
 		insert into blog_info 
 		(title,blog_type,content,tags,
-		create_date ,imei,showflag,showtime)
+		create_date ,imei,showflag,showtime,ccid)
 		values(#{title},#{blog_type},#{content},#{tags}
-			,#{create_date},#{imei},#{showflag},#{showtime})
+			,#{create_date},#{imei},#{showflag},#{showtime},#{ccid})
 	</insert>
 	
 	<update id="updateBlog" parameterType="com.kxjl.web.blog.model.Blog">
@@ -194,6 +199,9 @@ order by t asc
 			imei=#{imei},
 		</if>
 		
+		<if test='ccid != null'>
+			ccid=#{ccid},
+		</if>
 		
 		</trim>
 		

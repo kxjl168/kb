@@ -276,8 +276,7 @@ public class BlogController extends BaseController {
 			// cur ,next, pre
 			Blog detail = blogService.getBlogInfoById(query);
 			
-			
-			//emoji替换
+//emoji替换
 			detail.setContent( JEscape.unescape( detail.getContent()) .replace("[[", "&#x"));
 
 			Gson gs = new Gson();
@@ -826,15 +825,15 @@ public class BlogController extends BaseController {
 	 * @author zj
 	 */
 	@RequestMapping(value = "/addOrUpdate")
-	public void addOrUpdate(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	public void addOrUpdate(HttpServletRequest request,Blog blog, HttpServletResponse response, HttpSession session) {
 		JSONObject jsonOut = new JSONObject();
 		String data = request.getParameter("data");
 		JSONObject jsonIN;
 
 		try {
 
-			jsonIN = new JSONObject(data);
-
+		//	jsonIN = new JSONObject(data);
+/*
 			int recordid = jsonIN.optInt("recordid");
 			String title = jsonIN.optString("title");
 			String blog_type = jsonIN.optString("blog_type");
@@ -845,12 +844,12 @@ public class BlogController extends BaseController {
 			String show = jsonIN.optString("show");
 			
 			String showtime = jsonIN.optString("showtime");
+			String ccid = jsonIN.optString("ccid");
 
 			Blog blog = new Blog();
 			blog.setRecordid(recordid);// (accountid);
 
-			if (recordid != 0)
-				blog = blogService.getBlogInfoById(blog);
+			
 
 			blog.setTitle(title);// (pass);
 			blog.setTags(tags);
@@ -862,24 +861,32 @@ public class BlogController extends BaseController {
 			// 过滤img 增加 class="img-responsive"
 
 			blog.setContent(content);// (desc);
-
+*/
+		
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String time = sdf.format(new Date());
 
-			String imei = blog.getImei();
-			if (imei == null || imei.equals("")) {
-				imei = UUID.randomUUID().toString();
-				blog.setImei(imei);
-				blog.setUpdate_date(time);
-			}
-
+			
+			String	imei ="";
+			int recordid = blog.getRecordid();
 			int rst = -1;
 
 			if (recordid != 0) {
+				
+			
+				
+				
+				imei=blog.getImei();
 				blog.setUpdate_date(time);
 				rst = blogService.updateBlog(blog);
 
 			} else {
+				
+				
+					imei = UUID.randomUUID().toString();
+					blog.setImei(imei);
+					blog.setUpdate_date(time);
+				
 				/*
 				 * if (blog != null) blog.setCreator(blog.getName());
 				 */
@@ -890,6 +897,10 @@ public class BlogController extends BaseController {
 
 			if (rst > 0) {
 
+					blog = blogService.getBlogInfoById(blog);
+				
+				
+				
 				// 本地缓存html文件删除
 				String localPath = ConfigReader.getInstance().getProperty("LOCAL_HTML_PATH");
 				String localFilePath = localPath + blog.getShowdate() + "/";

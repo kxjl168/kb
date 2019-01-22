@@ -7,6 +7,8 @@ public class BlackIpList {
 
     private String dtime;
 
+    private String desc;
+
     public String getId() {
         return id;
     }
@@ -29,5 +31,13 @@ public class BlackIpList {
 
     public void setDtime(String dtime) {
         this.dtime = dtime == null ? null : dtime.trim();
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc == null ? null : desc.trim();
     }
 }

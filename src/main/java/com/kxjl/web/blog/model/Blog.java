@@ -37,9 +37,13 @@ public class Blog extends BaseModel {
 	private String showtime;//显示过期警告 0不显示，1显示
 
 	private String[] tagStrs;
+	
+	private String ccid;//许可协议id
 
 	// query
-
+	private String ccname;//许可协议名称
+	private String cclink;//许可协议link
+	private String ccicon;//许可协议icon
 	// 静态链接日期前缀url
 	private String showdate;// /2018/01/ .html
 
@@ -229,6 +233,38 @@ public class Blog extends BaseModel {
 
 	public void setShowtime(String showtime) {
 		this.showtime = showtime;
+	}
+
+	public String getCcid() {
+		return ccid;
+	}
+
+	public void setCcid(String ccid) {
+		this.ccid = ccid;
+	}
+
+	public String getCcname() {
+		return ccname;
+	}
+
+	public void setCcname(String ccname) {
+		this.ccname = ccname;
+	}
+
+	public String getCclink() {
+		return cclink;
+	}
+
+	public void setCclink(String cclink) {
+		this.cclink = cclink;
+	}
+
+	public String getCcicon() {
+		return ccicon;
+	}
+
+	public void setCcicon(String ccicon) {
+		this.ccicon = ccicon;
 	}
 
 }

@@ -85,7 +85,7 @@
 								</select>
 							 </div>
 							 <div class="col-xs-12 col-xs-offset-4 row ">
-					
+					             
 							</div>
 						</div>
 						
@@ -110,11 +110,31 @@
 							
 						</div>
 						
-						<input type="hidden" id="httppath" value="${httppath } ">
+						
+						<div class="form-group   ">
+						
+						<div class=" nopadding">
+						   	<div class="control-label padding-top-0 col-sm-1 col-xs-12  ">发布协议：</div>
+							<div class="col-sm-9 col-xs-12  text-right ">
+							<select class="form-control " id="ccid" >
+								<c:forEach var="item" items="${cclist }">
+								<option value="${item.id }">${item.name}</option>
+								</c:forEach>
+								</select>
+							 </div>
+							 <div class="col-xs-12 col-xs-offset-4 row ">
+					
+							</div>
+						</div>
+						
+							
+						</div>
+						
+						<input type="hidden" id="httppath" value="${httppath }">
 						<div id="upimgs" class="hide"></div>
 					
 					
-					<div class="form-group   ">
+					   <div class="form-group   ">
 							<div class="control-label padding-top-0 col-sm-1 col-xs-12 ">文章标签：</div>
 							<div class="col-sm-9 col-xs-12 text-right ">
 						 <input required  type="text" class="form-control " name="s_tags" id="s_tags" ng-model="s_tags" placeholder=" ">

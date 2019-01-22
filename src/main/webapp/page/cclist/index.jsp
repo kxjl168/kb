@@ -11,14 +11,16 @@
 			<meta name="description" content="">
 				<meta name="author" content="">
 
-					<title>IP黑名单管理</title>
+					<title>文章许可管理</title>
+					  <link rel="stylesheet" href="${basePath}/js/own/FileUploadMuti.css">
+					
 </head>
 
 <body>
 
 
 
-
+	<input type="hidden" id="httppath" value="${httppath }">
 	<div class="" id="content" style="">
 
 
@@ -31,7 +33,7 @@
 					data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
 					aria-expanded="true">
 					<div class="row">
-						<h3 class="panel-title col-xs-4 col-lg-4 col-md-4 ">IP黑名单管理 - 查询条件</h3>
+						<h3 class="panel-title col-xs-4 col-lg-4 col-md-4 ">文章许可管理 - 查询条件</h3>
 
 
 
@@ -53,11 +55,11 @@
 
 								<div class=" col-md-6  col-xs-12  ">
 									<div
-										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">IP地址:</div>
+										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">许可名称:</div>
 									<div class="col-md-6 col-xs-8 text-right ">
 										<input
 											class="form-control ng-pristine ng-untouched ng-valid ng-empty"
-											id="q_ip" type="text" name="q_ip"
+											id="q_name" type="text" name="q_name"
 											placeholder="">
 									</div>
 
@@ -69,11 +71,11 @@
 
 								<div class=" col-md-6  col-xs-12  ">
 									<div
-										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">描述:</div>
+										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">许可链接:</div>
 									<div class="col-md-6 col-xs-8 text-right ">
 										<input
 											class="form-control ng-pristine ng-untouched ng-valid ng-empty"
-											id="q_desc" type="text" name="q_desc"
+											id="q_link" type="text" name="q_link"
 											placeholder="">
 									</div>
 
@@ -141,7 +143,9 @@
 	<jsp:include page="form.jsp"></jsp:include>
 
 	<script
-		src="${basePath}/page/blackiplist/blackiplist.js"></script>
+		src="${basePath}/page/cclist/cclist.js"></script>
+<script type="text/javascript"
+	src="${basePath}/js/own/FileUploadMuti.js"></script>
 
 
 	<script type="text/javascript"

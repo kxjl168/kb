@@ -167,8 +167,10 @@
 							<div id="license_information">
 
 								<p>
-									本文 [${curBlog.title}]基于<a href="https://mit-license.org/"
-										title="MIT License " target="_blank">MIT License </a>
+								
+				
+									本文 [${curBlog.title}]基于<a href="${curBlog.cclink}"
+										title="${curBlog.ccname}" target="_blank">${curBlog.ccname}</a>
 									许可协议发布,作者：野生的喵喵<a href="http://www.256kb.cn/">http://www.256kb.cn/</a>
 								</p>
 							</div>

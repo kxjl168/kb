@@ -16,7 +16,7 @@ CKEDITOR.editorConfig = function( config ) {
     //   editor.insertHtml( 'The current date and time is: <em>' + now.toString() + '</em>' );
    
 	//config.filebrowserImageUploadUrl = '/UploadCKFile.action';
-	config.filebrowserImageUploadUrl = '/kb/UploadCKFile.action';
+	config.filebrowserImageUploadUrl = '/kb/UploadCKFile.action?1=1';
    
 	//config.extraPlugins= 'codesnippet,colorbutton,font,justify,print,tableresize,pastefromword,liststyle',
 	
@@ -26,6 +26,8 @@ CKEDITOR.editorConfig = function( config ) {
 	else
 		config.extraPlugins=plugins;
 	
+	
+	config.allowedContent = true;
 	
 	//font-awesome 路径
 	config.fontawesomePath = basePath+'/css/font-awesome-4.7.0/css/font-awesome.min.css';

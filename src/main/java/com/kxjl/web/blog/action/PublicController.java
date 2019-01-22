@@ -84,6 +84,8 @@ import com.kxjl.tool.utils.JsonUtil;
 
 import com.kxjl.tool.utils.wuliu.WuliuHelper;
 import com.kxjl.web.autodata.dao.LikeInfoMapper;
+import com.kxjl.web.autodata.pojo.CcList;
+import com.kxjl.web.autodata.service.CcListService;
 import com.kxjl.web.blog.model.Blog;
 import com.kxjl.web.blog.model.Kurl;
 import com.kxjl.web.blog.service.BlogService;
@@ -114,6 +116,9 @@ public class PublicController extends BaseController {
 
 	@Autowired
 	MenuInfoService menuService;
+
+	@Autowired
+	CcListService ccListService;
 
 	@Autowired
 	WuliuHelper wuliuHelper;
@@ -317,6 +322,10 @@ public class PublicController extends BaseController {
 
 		maps.putAll(sysService.getSysInfo());
 		List<MenuInfo> leftmenus = menuService.getLeftMenuTree(session, request);
+
+		List<CcList> cclist = ccListService.selectCcListList(null);
+
+		maps.put("cclist", cclist);
 
 		maps.put("menus", leftmenus);
 		return "/page/blog/detail";
@@ -554,10 +563,13 @@ public class PublicController extends BaseController {
 
 		logger.debug("*************from:" + request.getHeader("Referer") + " " + htmlPath);
 
-		/*String domain2 = ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn");
-		String detailurl2 = domain2 + request.getContextPath() + "/public/detail/?i=" + imei;
-		// 第一次访问信息记录在/detail?i=xxx中
-		generateHtml(request, detailurl2, localFilePath, htmlName);*/
+		/*
+		 * String domain2 = ConfigReader.getInstance().getProperty("domain",
+		 * "http://www.256kb.cn"); String detailurl2 = domain2 +
+		 * request.getContextPath() + "/public/detail/?i=" + imei; //
+		 * 第一次访问信息记录在/detail?i=xxx中 generateHtml(request, detailurl2, localFilePath,
+		 * htmlName);
+		 */
 
 		if (!(localFile.exists())) {
 
@@ -591,12 +603,16 @@ public class PublicController extends BaseController {
 		try {
 
 			String imei = request.getParameter("i");
+			String imei2 = request.getParameter("imei");
 			if (imei.equals("null") || imei.equals("")) {
-				String url = request.getHeader("Referer");
-				try {
-					imei = url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf("."));
-				} catch (Exception e) {
-					// TODO: handle exception
+				imei = imei2;
+				if (imei.equals("null") || imei.equals("")) {
+					String url = request.getHeader("Referer");
+					try {
+						imei = url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf("."));
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
 				}
 
 				// http://127.0.0.1:8080/kb/public/detail/i/344f5834-fe93-49e8-835d-b07e1a1def96.html

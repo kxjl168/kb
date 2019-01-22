@@ -452,8 +452,10 @@
 			if (this.validators[selector] != null)
 				{
 				if(this.validators[selector].form())
-				this.validators[selector].settings.submitHandler.call(this.validators[selector], this.validators[selector].currentForm );
+					if(typeof(this.validators[selector].settings.submitHandler)=="function")
+						this.validators[selector].settings.submitHandler.call(this.validators[selector], this.validators[selector].currentForm );
 				}
+			return this.validators[selector].form();
 		};
 	window.kvalidate
 		.resetForm = function (selector) {

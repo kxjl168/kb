@@ -5,9 +5,10 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="ip" jdbcType="VARCHAR" property="ip" />
     <result column="dtime" jdbcType="VARCHAR" property="dtime" />
+    <result column="desc" jdbcType="VARCHAR" property="desc" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, ip, dtime
+    id, ip, dtime, desc
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -20,10 +21,10 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.kxjl.web.autodata.pojo.BlackIpList">
-    insert into black_ip_list (id, ip, dtime
-      )
-    values (#{id,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{dtime,jdbcType=VARCHAR}
-      )
+    insert into black_ip_list (id, ip, dtime, 
+      desc)
+    values (#{id,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{dtime,jdbcType=VARCHAR}, 
+      #{desc,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.kxjl.web.autodata.pojo.BlackIpList">
     insert into black_ip_list
@@ -37,6 +38,9 @@
       <if test="dtime != null">
         dtime,
       </if>
+      <if test="desc != null">
+        desc,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -47,6 +51,9 @@
       </if>
       <if test="dtime != null">
         #{dtime,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null">
+        #{desc,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -59,13 +66,17 @@
       <if test="dtime != null">
         dtime = #{dtime,jdbcType=VARCHAR},
       </if>
+      <if test="desc != null">
+        desc = #{desc,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.kxjl.web.autodata.pojo.BlackIpList">
     update black_ip_list
     set ip = #{ip,jdbcType=VARCHAR},
-      dtime = #{dtime,jdbcType=VARCHAR}
+      dtime = #{dtime,jdbcType=VARCHAR},
+      desc = #{desc,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   
@@ -90,8 +101,8 @@
 		
 			
 		
-		<if test=" dtime !=null and dtime !='' ">
-		and c.dtime like concat ('%', #{dtime},'%')
+		<if test=" desc !=null and desc !='' ">
+		and c.desc like concat ('%', #{desc},'%')
 	</if>
 		
 			

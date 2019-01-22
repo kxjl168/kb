@@ -31,7 +31,7 @@ public interface BlackIpListMapper {
      * @param record
      * @return
      * @author KAutoGenerator
-     * @date 2019-01-15 17:14:05
+     * @date 2019-01-22 15:28:15
      */
     int delete(BlackIpList item);
 }

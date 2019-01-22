@@ -63,6 +63,7 @@
 				httppath:'',
 				notnull:false,// 是否至少一个文件
 				notnullmsg:'',//缺少文件提示
+				uploaddonecallback:null,
 		// 
 		};
 	/*
@@ -150,7 +151,7 @@
 				});
 
 			
-					me.dropBox =$("body").find("#"+me.options.modal_id).find(".dropBox");
+					me.dropBox =$("body").find("#"+me.options.modal_id).find(".dropBox")[0];//原生dom
 					me.dropBox.ondragenter =me. ignoreDrag;
 					me.dropBox.ondragover = me.ignoreDrag;
 					me.dropBox.ondrop =function(e){ me.drop(e,me)};
@@ -186,12 +187,12 @@
 	    	
 
 
-	    		   +' 		<div class="row col-xs-12"> '
+	    		   +' 		<div class="row col-sm-12"> '
 	    		   +' 			<div class="control-label padding-top-0  flabetxt ">图标：</div> '
 	    		   +' 		</div> '
-	    		   +' 			<div class="row col-xs-11"> '
+	    		   +' 			<div class="row col-sm-11"> '
 
-	    		   +' 				<div class="col-xs-12 text-right "> '
+	    		   +' 				<div class="col-sm-12 text-right "> '
 								
 
 	    		   +' 					<div class="dropBox" > '
@@ -215,7 +216,7 @@
 
 	    		   +' 				</div> '
 	    		   +' 				<div class="row"> '
-	    		   +' 					<div class=" col-xs-5  "> '
+	    		   +' 					<div class=" col-sm-5 col-xs-6 "> '
 									
 	    		   +' 				<div tabindex="500"  class="btn btn-primary btn-file"> '
 	    		   +' 				<i class="glyphicon glyphicon-folder-open"></i>&nbsp;   '
@@ -230,7 +231,7 @@
 	    		   +' 				<button type="button" id="btnremoveimg" tabindex="500" title="清除选中文件" class="hide btn btn-default btn-secondary fileinput-remove fileinput-remove-button"> '
 	    		   +' 				<i class="glyphicon glyphicon-trash"></i>  <span class="hidden-xs">移除</span></button> '
 									
-	    		   +' 				<div class="col-xs-2  "> '
+	    		   +' 				<div class="col-sm-2 col-xs-6 "> '
 	    		   +' 					<button type="button " class="btn btn-primary" name="uploadSub" '
 	    		   +' 						id="uploadSub">上传</button> '
 	    		   +' 				</div> '
@@ -285,10 +286,16 @@
 	 */
 	FileUploadMuti.prototype.removedropimg=function(){
 		var me =this;
-		$("body").find("#"+me.options.modal_id).find("#imgpre").attr("src", "");
+		
 		me.hidepro();
 		
-		$("body").find("#"+me.options.modal_id).find(".imgtip").show();
+		if(me.options.cleanpic)
+			{
+			$("body").find("#"+me.options.modal_id).find("#imgpre").attr("src", "");	
+			$("body").find("#"+me.options.modal_id).find(".imgtip").show();
+			}
+		
+		
 		if(me.options.isimg)
 			{
 			$("body").find("#"+me.options.modal_id).find(".flabetxt" ).html("图片:");
@@ -348,7 +355,7 @@
 		
 		var add = $(' <div id="imgadd" class=" '
 				+ hide
-				+ 'col-xs-3  row margin-top-5 gdcontainer"> '
+				+ 'col-sm-3  row margin-top-5 gdcontainer"> '
 
 				+ ' <img src="/img/add.png"  class=" '+center+' img-responsive "></img> '
 
@@ -416,7 +423,7 @@
 		id = id || "";
 		url = url || "/img/default.jpg";
 
-		if (id != "") {
+		if (id != ""||url!='/img/default.jpg') {
 			var eitem = null;
 			var isexistnullimg = false;
 			
@@ -441,12 +448,12 @@
 		
 		var showtext=" hidevalidate hide ";
 		var showimg=" ";
-		var col=" col-xs-3 row ";
+		var col=" col-sm-3 row ";
 		if( !me.options.isimg)
 		{
 			 showtext=" ";
 			 showimg=" hide ";
-			 col=" col-xs-10 ";
+			 col=" col-sm-10 ";
 		}
 		
 		var downvisible=" hide ";
@@ -463,7 +470,7 @@
 				+ id
 				+ '"  placeholder=" "> '
 				+ '  <input   readonly="readonly" '
-				+ ' class=" form-control gdtext col-xs-10 '+showtext+' " '
+				+ ' class=" form-control gdtext col-sm-10 '+showtext+' " '
 				+ ' type="text" name="fileId" index="'+index+'"  id="fullurl'
 				+ index
 				+ '_oldname"  value="'
@@ -546,6 +553,12 @@
 		instance.processFiles(files);
 	}
 		
+	
+	FileUploadMuti.prototype.showpre=function(src){
+		var me=this;
+		$("#"+me.options.modal_id).find(".imgpre").attr("src", "" + src + "");
+	};
+	
 	/**
 	 * 文件预览
 	 */
@@ -697,7 +710,14 @@
 	
 	FileUploadMuti.prototype.uploaddone=function(jsonStr){
 		var me = this;
-		var obj = JSON.parse(jsonStr);
+		var obj ={};
+		try {
+			obj = JSON.parse(jsonStr);
+		} catch (e) {
+			me.error("上传失败！"+jsonStr); 
+			return ;
+		}
+		
 		
 		if(obj.ResponseCode!=200)
 			{me.error("上传失败！"+obj.ResponseMsg); 
@@ -739,6 +759,9 @@
 			
 
 		}
+		
+		if(typeof(me.options.uploaddonecallback)=="function") 
+		me.options.uploaddonecallback(obj);
 	}
 	
 	/**

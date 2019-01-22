@@ -16,7 +16,7 @@ function getRPath() {
 function test(){
 	
 	
-	var url = getRPath()+"/manager/blackiplist/test";
+	var url = getRPath()+"/manager/cclist/test";
 	
 	$.ajax({
 		type : "post",
@@ -33,12 +33,38 @@ function test(){
 $(function() {
 	InitQuery_item();
 
+	
+	
+	$kfile.init({
+		
+		httppath:$("#httppath").val(),  //img -static目录前缀
+		isimg:true,
+		filesufix:'png,jpg,gif,jpeg,',
+		maxFileSize:5*1024*1024,//5M
+		maximgupload : 1,//最多可上传图片数量
+		uploadurl:basePath + '/UploadFileXhr.action',//上传图片action url
+		container:$("body").find('#upimgs'), //图片容器
+		cleanpic:false,//再次弹出时是否清除图片显示
+		uploaddonecallback:function(obj){
+			
+			//var appEndData='<img src="'+obj.FileUrl+'" orisrc="'+obj.FileUrl2+'" fid="'+obj.fileid+'"  class="img-responsive " onclick="showOriImg()"  >';
+			
+			$("#icon").val(obj.relativeURL);
+			//CKEDITOR.instances.s_context.insertElement(ele);
+		}
+	});
 
-	initmenu($("#menuul"), "manager/blackiplist/manager/");
+
+	initmenu($("#menuul"), "manager/cclist/manager/");
 	
 	$("#btnAdd_item").click(function() {
 
-	
+		$kfile.get("upimgs").initFile(function(){
+			
+		});
+		
+		
+		
 		  $('#mform_item')[0].reset();
 		  
 		  $('#mform_item').find("#id").val("");
@@ -77,11 +103,16 @@ $(function() {
 		// flag = true/false
 		var flag = $("#mform_item").data("bootstrapValidator").isValid();
 
-		var url = getRPath()+"/manager/blackiplist/saveOrUpdate";
+		var url = getRPath()+"/manager/cclist/saveOrUpdate";
 
 		if (flag) {
 			var data = $("#mform_item").serialize();
 
+			  var imgs= eval($kfile.get("upimgs").getAllFileIds());
+		         var md5=$("#icon").val();//imgs[0].id;
+		         
+		         data+="&icon="+md5;
+			
 			/**/
 
 			$.ajax({
@@ -149,7 +180,7 @@ function initValidate_item() {
 function InitQuery_item() {
 	// 初始化Table
 	$('#table_list_item').bootstrapTable({
-		url : getRPath()+'/manager/blackiplist/blackiplistList', // 请求后台的URL（*）
+		url : getRPath()+'/manager/cclist/cclistList', // 请求后台的URL（*）
 		method : 'post', // 请求方式（*）
 		contentType : 'application/x-www-form-urlencoded',
 		toolbar : '#toolbar', // 工具按钮用哪个容器
@@ -182,8 +213,8 @@ function InitQuery_item() {
 				
 				
 				
-				ip : $("#q_ip").val(),
-				desc : $("#q_desc").val(),
+				name : $("#q_name").val(),
+				link : $("#q_link").val(),
 				
 				
 			};
@@ -194,16 +225,40 @@ function InitQuery_item() {
 			visible : false
 		},
 		 {
-				field : 'ip',
-				title : 'IP地址',
+				field : 'name',
+				title : '许可名称',
 				align : 'center',
 				valign : 'middle',
 				   
 				
 			},
 		 {
-				field : 'dtime',
-				title : '时间',
+				field : 'link',
+				title : '许可链接',
+				align : 'center',
+				valign : 'middle',
+				   
+				
+			},
+		 {
+				field : 'icon',
+				title : '图标',
+				align : 'center',
+				valign : 'middle',
+				   
+				
+			},
+		 {
+				field : 'remark',
+				title : '备注',
+				align : 'center',
+				valign : 'middle',
+				   
+				
+			},
+		 {
+				field : 'createDate',
+				title : '新建时间',
 				align : 'center',
 				valign : 'middle',
 				   
@@ -213,11 +268,14 @@ function InitQuery_item() {
 				
 			},
 		 {
-				field : 'desc',
-				title : '描述',
+				field : 'updateDate',
+				title : '更新时间',
 				align : 'center',
 				valign : 'middle',
 				   
+		 formatter: function (value, row, index) {
+             return new Date(value).Format("yyyy-MM-dd hh:mm:ss");
+         }
 				
 			},
 		
@@ -249,7 +307,7 @@ window.PersonnelInformationEvents_item = {
 	"click #update" : function(e, value, row, index) {
 		$.ajax({
 			type : "post",
-			url :getRPath()+ '/manager/blackiplist/load',
+			url :getRPath()+ '/manager/cclist/load',
 			data : {
 				id : row.id
 			},
@@ -260,6 +318,10 @@ window.PersonnelInformationEvents_item = {
 			   $("#mform_item").fill(response);
 			     
 	
+			   $kfile.get("upimgs").initFile(function(){
+				   $kfile.get("upimgs").addFile(response.icon,$("#httppath").val() +"/"+ response.icon);	
+				});
+			   
 			   
 			   $("#myModal_item_title").html("编辑");
 			   
@@ -273,7 +335,7 @@ window.PersonnelInformationEvents_item = {
 
 	"click #delete" : function(e, value, row, index) {
 		var msg = "您真的确定要删除吗？";
-		var url = getRPath()+"/manager/blackiplist/delete";
+		var url = getRPath()+"/manager/cclist/delete";
 		cconfirm(msg,function() {
 			$.ajax({
 				type : "post",
