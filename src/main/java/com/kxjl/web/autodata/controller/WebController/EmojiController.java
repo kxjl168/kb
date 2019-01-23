@@ -1,7 +1,7 @@
 /*
  * @(#)EmojiController.java
  * @author: zhangJ
- * @Date: 2019-01-23 17:10:55
+ * @Date: 2019-01-23 21:36:21
  * Copyright (C),2017-2018, ZHONGTONGGUOMAI TECHNOLOGY NANJING
  * Co.,Ltd. All Rights Reserved.
  * GMWL PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,7 +42,7 @@ import java.util.Map;
  * 表情管理 EmojiController.java.
  * 
  * @author KAutoGenerator
- * @version 1.0.1 2019-01-23 17:10:55
+ * @version 1.0.1 2019-01-23 21:36:21
  * @since 1.0.0
  */
 @Controller

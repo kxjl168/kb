@@ -183,7 +183,7 @@ function InitQuery_item() {
 				
 				
 				ip : $("#q_ip").val(),
-				desc : $("#q_desc").val(),
+				descInfo : $("#q_descInfo").val(),
 				
 				
 			};
@@ -195,13 +195,22 @@ function InitQuery_item() {
 		},
 		 {
 				field : 'ip',
-				title : 'IP地址',
+				title : 'ip地址',
 				align : 'center',
 				valign : 'middle',
 				   
 				
 			},
+		
 		 {
+				field : 'descInfo',
+				title : '备注',
+				align : 'center',
+				valign : 'middle',
+				   
+				
+			},
+			 {
 				field : 'dtime',
 				title : '时间',
 				align : 'center',
@@ -212,15 +221,6 @@ function InitQuery_item() {
          }
 				
 			},
-		 {
-				field : 'desc',
-				title : '描述',
-				align : 'center',
-				valign : 'middle',
-				   
-				
-			},
-		
 		
 		
 		{

@@ -154,7 +154,7 @@
 						<div class=""  >
 							<div class="row">
 								<h3 class="panel-title em_start  " data-toggle="collapse"
-							data-parent="#eemj" href="#collapseEmj" title="来点表情？" >oooo (๑•̀ㅂ•́)و✧ oooo</h3>
+							data-parent="#eemj" href="#collapseEmj" title="来点表情？" >∑( ° △ °|||)︴</h3>
 							</div>
 						</div>
 

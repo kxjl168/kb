@@ -196,10 +196,103 @@ function initCKPlugin()
 	});
 	
 	
+	var pluginname4="emojiPanel";
+	var cmd_name4="cmd_emojiPanel";
+	var btn_name4="btn_emojiPanel";
+	CKEDITOR.plugins.add( pluginname4, {
+		 
+	    init: function( editor ) {
+
+	    	renderEmojiPanel(function(htmlc){
+	    		editor.ui.add( btn_name4, CKEDITOR.UI_PANELBUTTON, {
+		        	 label: 'Emoji',
+		    		title: 'Emoji',
+		    		modes: { wysiwyg: 1 },
+		    		editorFocus: 0,
+		    		   toolbar: 'insert',
+		    		   icon: basePath+'/images/teeth_smile.png',
+
+		    		panel: {
+		    		css: getImUrl()+"page/blog/emoji.css",
+		    			attributes: { role: 'listbox', 'aria-label': 'Emoji' }
+		    		},
+
+		    		onBlock: function( panel, block ) {
+		    			panelBlock = block;
+
+		    			block.autoSize = true;
+		    			block.element.addClass( 'cke_kemojipanel' );
+		    			block.element.setHtml( htmlc+'	<div class="em_item catsay" title="耶！">(๑•̀ㅂ•́)و✧</div>');
+		    			// The block should not have scrollbars (https://dev.ckeditor.com/ticket/5933, https://dev.ckeditor.com/ticket/6056)
+		    			block.element.getDocument().getBody().setStyle( 'overflow', 'hidden' );
+
+		    			CKEDITOR.ui.fire( 'ready', this );
+
+		    		},
+
+		    		refresh: function() {
+		    			
+		    		},
+
+		    		// The automatic colorbox should represent the real color (https://dev.ckeditor.com/ticket/6010)
+		    		onOpen: function() {
+
+		    		}
+		    	} );
+	    	
+
+	    		
+	    	})
+	    	
+	  
+	        
+	        function renderEmojiPanel(callback){
+	        	var html='	<div  class="emjcontainer">';
+	        	
+	          	
+	    	    var clickFn = CKEDITOR.tools.addFunction( function add(str ) {
+
+	    	    			 var ele=CKEDITOR.dom.element.createFromHtml("<span>"+str+"</span>");
+	    	    				
+	    	    				CKEDITOR.instances.s_context.insertElement(ele);
+	    	    		});	
+	        	$.ajax({
+	        		type : "post",
+	        		url :getImUrl()+ "public/emoji.action",
+	        		async : false,
+	        		dataType : "json",
+	        		success : function(response) {
+	        			
+	        	
+	        			var htmlemoji="";
+	        			
+	        			if(response.rows)
+	        				{
+	        				$.each(response.rows,function(index,item){
+	        					html+='	<div class="em_item catsay" 	 onclick="CKEDITOR.tools.callFunction('+ clickFn+',\''+item.str+'\');return false;"   title="'+item.name+'">'+item.str+'</div> ';
+	        				});
+	        				
+	        			
+	        				}
+	        		}
+	        	});
+	        	html+='</div>';
+	        	if(typeof(callback)=="function")
+	        		callback(html);
+	        };
+	       
+	        
+	    }
+	});
+	
+	
+	
+	
+	
 	
 
 
-	CKEDITOR.morePluginnames=pluginname+","+pluginname2+","+pluginname3;
+	CKEDITOR.morePluginnames=pluginname+","+pluginname2+","+pluginname3+","+pluginname4;
 	CKEDITOR.removePlugins="image";
 	$("#s_context").ckeditor();
 	

@@ -6,9 +6,10 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="str" jdbcType="VARCHAR" property="str" />
     <result column="etype" jdbcType="VARCHAR" property="etype" />
+    <result column="enable" jdbcType="VARCHAR" property="enable" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, str, etype
+    id, name, str, etype, enable
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -22,9 +23,9 @@
   </delete>
   <insert id="insert" parameterType="com.kxjl.web.autodata.pojo.Emoji">
     insert into emoji (id, name, str, 
-      etype)
+      etype, enable)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{str,jdbcType=VARCHAR}, 
-      #{etype,jdbcType=VARCHAR})
+      #{etype,jdbcType=VARCHAR}, #{enable,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.kxjl.web.autodata.pojo.Emoji">
     insert into emoji
@@ -41,6 +42,9 @@
       <if test="etype != null">
         etype,
       </if>
+      <if test="enable != null">
+        enable,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -54,6 +58,9 @@
       </if>
       <if test="etype != null">
         #{etype,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null">
+        #{enable,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -69,6 +76,9 @@
       <if test="etype != null">
         etype = #{etype,jdbcType=VARCHAR},
       </if>
+      <if test="enable != null">
+        enable = #{enable,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -76,7 +86,8 @@
     update emoji
     set name = #{name,jdbcType=VARCHAR},
       str = #{str,jdbcType=VARCHAR},
-      etype = #{etype,jdbcType=VARCHAR}
+      etype = #{etype,jdbcType=VARCHAR},
+      enable = #{enable,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   

@@ -214,7 +214,21 @@ function InitQuery_item() {
 				title : '表情类型',
 				align : 'center',
 				valign : 'middle',
+				visible:false
 				   
+				
+			},
+		 {
+				field : 'enable',
+				title : '是否启用 1是，0否',
+				align : 'center',
+				valign : 'middle',
+				 formatter: function (value, row, index) {
+		                if(value=="1")
+		                	return "<span class='done'>是</span>";
+		                else
+		                	return "<span class='done'>否</span>";
+		            }
 				
 			},
 		

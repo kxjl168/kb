@@ -868,10 +868,10 @@ public class BlogController extends BaseController {
 
 			
 			String	imei ="";
-			int recordid = blog.getRecordid();
+			
 			int rst = -1;
 
-			if (recordid != 0) {
+			if ( blog.getRecordid()!=null) {
 				
 			
 				

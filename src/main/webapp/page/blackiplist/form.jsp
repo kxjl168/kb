@@ -14,7 +14,7 @@
 				
 				
 				<h4 class="modal-title" id="myModal_itemLabel">
-					<span id="myModal_item_title">添加</span>	IP黑名单
+					<span id="myModal_item_title">添加</span>	黑名单
 				</h4>
 
 			</div>
@@ -35,50 +35,26 @@
 
 
 									<div class="form-group">
-										<label for="name" class="col-lg-3 control-label">IP地址</label>
+										<label for="name" class="col-lg-3 control-label">ip地址</label>
 
 										<div class="col-lg-9">
 										<input type="text" name="ip" 
 											
 											class="form-control" id="ip"
-												placeholder="IP地址" >
+												placeholder="ip地址" >
 											<p class="help-block"></p>
 										</div>
 									</div>
 									
-									<div class="form-group hide">
-										<label for="name" class="col-lg-3 control-label">时间</label>
-
-										<div class="col-lg-9">
-										<input type="text" name="dtime" 
-											  readonly="readonly"  
-											
-											class="form-control" id="dtime"
-												placeholder="时间" >
-											<p class="help-block"></p>
-										</div>
-									</div>
 									
-									<script>
-                            $(function() {
-						$("#dtime").datetimepicker({
-							 format: 'yyyy-mm-dd hh:ii:ss',
-							 language: 'zh-CN',
-							 autoclose:true,
-						        startDate:new Date()
-						});
-						 $("#dtime").data('datetimepicker')
-						 .setDate(new Date());
-                            });
-                            </script>
 									<div class="form-group">
-										<label for="name" class="col-lg-3 control-label">描述</label>
+										<label for="name" class="col-lg-3 control-label">备注</label>
 
 										<div class="col-lg-9">
-										<input type="text" name="desc" 
+										<input type="text" name="descInfo" 
 											
-											class="form-control" id="desc"
-												placeholder="描述" >
+											class="form-control" id="descInfo"
+												placeholder="备注" >
 											<p class="help-block"></p>
 										</div>
 									</div>

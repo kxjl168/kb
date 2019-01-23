@@ -31,7 +31,7 @@ public interface EmojiMapper {
      * @param record
      * @return
      * @author KAutoGenerator
-     * @date 2019-01-23 17:10:55
+     * @date 2019-01-23 21:36:21
      */
     int delete(Emoji item);
 }

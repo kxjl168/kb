@@ -9,6 +9,8 @@ public class Emoji {
 
     private String etype;
 
+    private String enable;
+
     public String getId() {
         return id;
     }
@@ -39,5 +41,13 @@ public class Emoji {
 
     public void setEtype(String etype) {
         this.etype = etype == null ? null : etype.trim();
+    }
+
+    public String getEnable() {
+        return enable;
+    }
+
+    public void setEnable(String enable) {
+        this.enable = enable == null ? null : enable.trim();
     }
 }

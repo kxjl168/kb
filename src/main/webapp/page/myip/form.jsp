@@ -58,32 +58,7 @@
 										</div>
 									</div>
 									
-									<div class="form-group">
-										<label for="name" class="col-lg-3 control-label"></label>
-
-										<div class="col-lg-9">
-										<input type="text" name="createTime" 
-											  readonly="readonly"  
-											
-											class="form-control" id="createTime"
-												placeholder="" >
-											<p class="help-block"></p>
-										</div>
-									</div>
 									
-									<script>
-                            $(function() {
-						$("#createTime").datetimepicker({
-							 format: 'yyyy-mm-dd hh:ii:ss',
-							 language: 'zh-CN',
-							 autoclose:true,
-						        startDate:new Date()
-						});
-						 $("#createTime").data('datetimepicker')
-						 .setDate(new Date());
-                            });
-                            </script>
-
 
 
 

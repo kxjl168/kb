@@ -70,6 +70,21 @@
 										</div>
 									</div>
 									
+									
+								
+									
+									<div class="form-group">
+										<label for="name" class="col-lg-3 control-label">是否启用 1是，0否</label>
+
+										<div class="col-lg-9">
+											<select class="form-control " id="enable" >
+									<option  value="1">可见</option>
+									<option  value="0">不可见</option>
+								</select>
+											<p class="help-block"></p>
+										</div>
+									</div>
+									
 
 
 

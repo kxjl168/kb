@@ -1990,3 +1990,6 @@ font-size: 13px;
     border: 1px solid #f7f3f3;
     border-radius: 6px;
 }
+#content{
+	    overflow-x: hidden;
+}
