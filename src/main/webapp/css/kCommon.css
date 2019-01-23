@@ -1966,3 +1966,27 @@ font-size: 13px;
 	max-width: 850px;
 }
 }
+.em_start{
+	
+	float: left;
+	 margin: 5px 5px 0 2px;
+    height: 35px;
+    line-height: 35px;
+   
+        padding: 0 5px 0 5px;
+ 
+      border: 1px solid #7788dc;
+    background-color: #fffcfc;
+    color: #3572e4;
+    border-radius: 5px;
+}
+.em_item{
+	float: left;
+    margin: 5px 2px 0 2px;
+    height: 35px;
+    color: #69696d;
+    line-height: 35px;
+    padding: 0 5px 0 5px;
+    border: 1px solid #f7f3f3;
+    border-radius: 6px;
+}

@@ -46,8 +46,90 @@ $(function() {
 			maxlength : "您的邮箱看起来非常非常的大... -_-!",
 		}
 	}, $scope.doupdate, "", "");
+	
+	
+	initEmoji();
 
 });
+
+$(function() {
+    /*  在textarea处插入文本--Start */
+    (function($) {
+        $.fn.extend({
+                    insertContent : function(myValue, t) {
+                        var $t = $(this)[0];
+                        if (document.selection) { // ie
+                            this.focus();
+                            var sel = document.selection.createRange();
+                            sel.text = myValue;
+                            this.focus();
+                            sel.moveStart('character', -l);
+                            var wee = sel.text.length;
+                            if (arguments.length == 2) {
+                                var l = $t.value.length;
+                                sel.moveEnd("character", wee + t);
+                                t <= 0 ? sel.moveStart("character", wee - 2 * t
+                                        - myValue.length) : sel.moveStart(
+                                        "character", wee - t - myValue.length);
+                                sel.select();
+                            }
+                        } else if ($t.selectionStart
+                                || $t.selectionStart == '0') {
+                            var startPos = $t.selectionStart;
+                            var endPos = $t.selectionEnd;
+                            var scrollTop = $t.scrollTop;
+                            $t.value = $t.value.substring(0, startPos)
+                                    + myValue
+                                    + $t.value.substring(endPos,
+                                            $t.value.length);
+                            this.focus();
+                            $t.selectionStart = startPos + myValue.length;
+                            $t.selectionEnd = startPos + myValue.length;
+                            $t.scrollTop = scrollTop;
+                            if (arguments.length == 2) {
+                                $t.setSelectionRange(startPos - t,
+                                        $t.selectionEnd + t);
+                                this.focus();
+                            }
+                        } else {
+                            this.value += myValue;
+                            this.focus();
+                        }
+                    }
+                })
+    })(jQuery);
+    /* 在textarea处插入文本--Ending */
+});
+
+function initEmoji(){
+	$(".emj").on("click",".em_item",function(e){
+		$("#s_text").insertContent( $(e.target).html());
+
+	});
+	
+	
+	$.ajax({
+		type : "post",
+		url :getImUrl()+ "public/emoji.action",
+		//data : data,
+		async : true,
+		dataType : "json",
+		success : function(response) {
+			
+	
+			var htmlemoji="";
+			
+			if(response.rows)
+				{
+				$.each(response.rows,function(index,item){
+					htmlemoji+='	<div class="em_item catsay" title="'+item.name+'">'+item.str+'</div> ';
+				});
+				
+				$('.emjcontainer').html(htmlemoji);
+				}
+		}
+	});
+}
 
 pass = function(event, id) {
 
@@ -268,7 +350,7 @@ function initReplayModel() {
 
 					obj.imei = $scope.x.imei;
 					obj.userid = escape($scope.s_uid);
-					obj.context = escape($scope.s_text);
+					obj.context = escape($("#s_text").val());
 					obj.ublog = $scope.s_ublog ? escape($scope.s_ublog) : "";
 					obj.email = escape($scope.s_email);
 
@@ -286,6 +368,7 @@ function initReplayModel() {
 							setTimeout(function() {
 								//$scope.s_uid = "";
 								$scope.s_text = "";
+								$("s_text").val("");
 								//$scope.s_ublog = "";
 								//$scope.s_email = "";
 								$scope.canc();

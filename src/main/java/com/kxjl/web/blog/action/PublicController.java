@@ -81,11 +81,13 @@ import com.kxjl.tool.html.FileProcessor;
 import com.kxjl.tool.utils.DateUtil;
 import com.kxjl.tool.utils.JEscape;
 import com.kxjl.tool.utils.JsonUtil;
-
+import com.kxjl.tool.utils.PageUtil;
 import com.kxjl.tool.utils.wuliu.WuliuHelper;
 import com.kxjl.web.autodata.dao.LikeInfoMapper;
 import com.kxjl.web.autodata.pojo.CcList;
+import com.kxjl.web.autodata.pojo.Emoji;
 import com.kxjl.web.autodata.service.CcListService;
+import com.kxjl.web.autodata.service.EmojiService;
 import com.kxjl.web.blog.model.Blog;
 import com.kxjl.web.blog.model.Kurl;
 import com.kxjl.web.blog.service.BlogService;
@@ -128,7 +130,33 @@ public class PublicController extends BaseController {
 
 	@Autowired
 	LikeInfoMapper likemaper;
+	
+	@Autowired
+	EmojiService emojiService;
 
+	
+	@RequestMapping("/public/emoji")
+	@ResponseBody
+	public String emoji(Map<String, Object> map) {
+
+		String rst="";
+		Emoji query=new Emoji();
+		List<Emoji> emojis= emojiService.selectEmojiList(query);
+		
+		
+		Page page = new Page();
+		page.setTotal(emojis.size());
+
+		try {
+			rst = PageUtil.packageTableData(page, emojis);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return rst;
+	}
+	
+	
+	
 	@RequestMapping("/public/wuliu")
 	public String wuliu(Map<String, Object> map) {
 
@@ -563,13 +591,18 @@ public class PublicController extends BaseController {
 
 		logger.debug("*************from:" + request.getHeader("Referer") + " " + htmlPath);
 
-		/*
-		 * String domain2 = ConfigReader.getInstance().getProperty("domain",
-		 * "http://www.256kb.cn"); String detailurl2 = domain2 +
-		 * request.getContextPath() + "/public/detail/?i=" + imei; //
-		 * 第一次访问信息记录在/detail?i=xxx中 generateHtml(request, detailurl2, localFilePath,
-		 * htmlName);
-		 */
+		//本地测试使用，每次都生成html
+		String staticHtmlTest = ConfigReader.getInstance().getProperty("staticHtmlTest", "false");
+		if (staticHtmlTest.equals("true")) {
+			String domain = ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn");
+
+			String detailurl = domain + request.getContextPath() + "/public/detail/?i=" + imei;
+
+			// 第一次访问信息记录在/detail?i=xxx中
+			generateHtml(request, detailurl, localFilePath, htmlName);
+
+			responseHtml(localFile, response);
+		}
 
 		if (!(localFile.exists())) {
 
