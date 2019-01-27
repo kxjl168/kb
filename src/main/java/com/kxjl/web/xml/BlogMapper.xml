@@ -31,6 +31,7 @@ select a.*,d.dict_name blog_type_name,d.val1 blog_type_url from blog_info a left
 		select DATE_FORMAT(create_date,"%Y-%m") month ,count(*) view_nums from blog_info a
 		where a.showflag='1'
 		 group by DATE_FORMAT(create_date,"%Y-%m")
+		 order  by month desc
 		]]>
 		
 	</select>

@@ -1,6 +1,7 @@
 (function(window) {
 	
 	 $.fn.extend({
+		
 		 gotoabout:  function(me) {
 	            if (this[0]) {
 	                var b = this.click(function() {
@@ -25,6 +26,21 @@
 	                
 	                this.hover(function() {
 	                	 msgs = ["开始翻墙？","Google？","度娘搞不定就找点我啦","当然你要能翻墙就自己玩咯"];
+	                     var i = Math.floor(Math.random() * msgs.length);
+	                     me.showMessage(msgs[i]);
+	                  
+	                });
+	            }
+	        },
+	        gotohome:  function(me) {
+	            if (this[0]) {
+	                var b = this.click(function() {
+	                	 window.location.href= basePath+"/public/index/";
+	                    me.hideActionPanel();
+	                });
+	                
+	                this.hover(function() {
+	                	 msgs = ["点击返回首页","首页","回主页吗？"];
 	                     var i = Math.floor(Math.random() * msgs.length);
 	                     me.showMessage(msgs[i]);
 	                  
@@ -282,6 +298,44 @@
     
     
     
+    Sprite.prototype.showHome=function(){
+    	var me=this;
+    	$("body").find('#gotohome').css("visibility",'visible');
+    	 $("body").find('#gotohome').stop().animate({
+				color: "#A0410D",
+			 right:'60px',
+			/* top:'-10px', */
+			 opacity:1,
+			 
+			 width:'37px',
+			}, 400,function(){
+				me.default.actionpanelshow=true;
+		});
+    	 
+    	
+    	 
+    	 event.stopPropagation();
+    	 return false;
+    };
+    
+    Sprite.prototype.hideHome=function(){
+    	var me=this;
+    	$("body").find('#gotohome').stop().animate({
+			// color: "#A0410D",
+		 right:'0px',
+	/* top:'0px', */
+		 opacity:0,
+		 
+		 width:'0px',
+		 
+		}, 400,function(){
+			$("body").find('#gotohome').css("visibility",'collapse');
+			me.default.actionpanelshow=false;
+		});
+    };
+    
+    
+    
     
     Sprite.prototype.showAbout=function(){
     	var me=this;
@@ -325,6 +379,7 @@
     	me.showTop();
     	me.showAbout();
     	me.showSearch();
+    	me.showHome();
     };
     
     Sprite.prototype.hideActionPanel=function(){
@@ -333,6 +388,7 @@
     	me.hideTop();
     	me.hideAbout();
     	me.hideSearch();
+    	me.hideHome();
     };
     
     
@@ -384,6 +440,13 @@
 
                 me.showMessage('要看看《<span style="">' + $(this).text() + '</span>》这篇文章么？');
             });
+            
+            $('body').on("mouseover",".catsay",function(e) {
+
+                me.showMessage('' +$(this).text());
+            });
+            
+            
             /*
 			 * $('#prev-page').mouseover(function() { showMessage('要翻到上一页吗?');
 			 * }); $('#next-page').mouseover(function() {
@@ -424,7 +487,7 @@
             me.showMessage("留下你的尊姓大名！");
             $(me.default.scontainer).animate({
                 top: $(me.default.s_uid).offset().top - 70,
-                left: $(me.default.s_uid).offset().left + 170
+                left: $(me.default.s_uid).offset().left + 270
             }, {
                 queue: false,
                 duration: 1000
@@ -434,7 +497,7 @@
             me.showMessage("留下你的邮箱，不然你的头像是小怪物喽！");
             $(me.default.scontainer).animate({
                 top: $("#email").offset().top - 70,
-                left: $("#email").offset().left + 170
+                left: $("#email").offset().left + 270
             }, {
                 queue: false,
                 duration: 1000
@@ -445,7 +508,7 @@
             me.showMessage("快快告诉我你的家在哪里，好让我去参观参观！");
             $(me.default.scontainer).animate({
                 top: $(me.default.s_ublog).offset().top - 70,
-                left: $(me.default.s_ublog).offset().left + 170
+                left: $(me.default.s_ublog).offset().left + 270
             }, {
                 queue: false,
                 duration: 1000
@@ -455,7 +518,7 @@
             me.showMessage("认真填写哦！不然会被认作垃圾评论的！我的乖乖~");
             $(me.default.scontainer).animate({
                 top: $(me.default.s_text).offset().top - 70,
-                left: $(me.default.s_text).offset().left + 170
+                left: $(me.default.s_text).offset().left + 270
             }, {
                 queue: false,
                 duration: 1000
@@ -564,6 +627,12 @@
             '  </span> '+
             '</div>  ' +
             
+            "<div id='gotohome' title='主页？'><span class='fa-stack fa-lg'> " +
+            ' <i class="fa fa-circle fa-stack-2x topcircle5"></i> '+
+            '   <i class="fa fa-home fa-stack-1x fa-inverse"></i> '+
+            '  </span> '+
+            '</div>  ' +
+            
             
             "<div id='getabout' title='关于博主？'><span class='fa-stack fa-lg'> " +
             ' <i class="fa fa-circle fa-stack-2x topcircle3"></i> '+
@@ -596,7 +665,7 @@
         // tocat
         $("body").find('#getonecat').getcat(this);
         $("body").find('#gotosearch').gotosearch(this);
-        
+        $("body").find('#gotohome').gotohome(this);
     };
     
     

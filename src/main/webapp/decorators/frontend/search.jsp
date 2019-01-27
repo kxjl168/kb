@@ -62,7 +62,7 @@
 	<%@include file="../../public/phead.jsp"%>
 
 
-	<div class="" id="content" style="">
+	<div class="psearch" id="content" style="">
 
 
 

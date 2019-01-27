@@ -22,6 +22,10 @@ public class ActionLog extends BaseModel {
 		NIL("",""),
 		HomePage("homepage","首页"),
 		GSearch("gsearch","G搜索"),
+		Wuliu("wuliu","快递查询"),
+		Links("links","常用链接"),
+		Share("share","分享下载"),
+		Cat("cat","小平凡"),
 		AboutPage("about","关于"),
 		DetailPage("detailpag","详情页"),
 		

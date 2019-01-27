@@ -1,1 +1,329 @@
-eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('$(4(){5 $3=1H.1t(2b).3();$3.$t(4(){5 v=29();$3.I=27;$3.20=4(x){e(m.r.c.Z(\'b\')>0){10.1I(A,A,q+\'/l/b/\');$3.12();$3.J=x.J;$3.13()}f{m.r.c=q+"/l/b?1k="+x.J}};$3.1v=4(x){e(m.r.c.Z(\'b\')>0){10.1g(A,A,q+\'/l/b/\');$3.12();$3.s=x.s;$3.13()}f{m.r.c=q+"/l/b?h="+16(x.s)}};$3.23=4(x){$3.1f(x.Y)};$3.1f=4(x){e(m.r.c.Z(\'b\')>0){10.1g({1u:1},"",q+\'/\');$3.12();$3.21=x;$3.13()}f{m.r.c=q+"/l/b?1s="+16(x)}};$3.W=4(){5 d=N O();P(v+"T/W.R",Q.L(d),4 K(9){5 i=9.H;5 j=9.F;e(i==E){$3.17=D(9.C);5 8="";$.z($3.17,4(b,7){8+=\'<n o="11"> \'+\' <a c="\'+I+\'/l/b/1k/\'+7.J+\'.8"> \'+\' <w o="1B w-18 19-1a-2" 1b="M:1c; 1x:1c;" 1y="\'+7.1d+\'" 1e="\'+7.1G+\'"> \'+7.1d+\'&G; \'+\' <p>(\'+7.14+\')</p> \'+\'	 </a>\'+\'</n>\'});$("#25").8(8);$3.$t()}f{k(j)}},4 B(y){k("网络异常!")},g,g)};$3.W();$3.X=4(){5 d=N O();P(v+"T/X.R",Q.L(d),4 K(9){5 i=9.H;5 j=9.F;e(i==E){$3.1h=D(9.C);5 8="";$.z($3.1h,4(b,7){8+=\'<n o="11"> \'+\' <a c="\'+I+\'/l/b/h/\'+7.s+\'.8"> \'+\'	\'+7.s+\'&G;<p>(\'+7.14+\')</p> \'+\'	 </a> \'+\'</n>\'});$("#1w").8(8);$3.$t()}f{k(j)}},4 B(y){k("网络异常!")},g,g)};$3.X();$3.S=4(){5 d=N O();P(v+"T/S.R",Q.L(d),4 K(9){5 i=9.H;5 j=9.F;e(i==E){$3.1i=D(9.C);$3.$t();5 8="";$.z($3.1i,4(b,7){8+=\'  <a 1z="\'+7.1A+\'" c="\'+I+\'/l/b/1s/\'+7.Y+\'.8"> \'+\'	\'+7.Y+\'&G;, \'+\'	 </a> \'});$("#1j").8(8);$("#1j a").1C()}f{k(j)}},4 B(y){k("网络异常!")},g,g)};$3.S();$3.15=4(){5 d=N O();d.1D=\'1\';P(v+"1E/1F.R",Q.L(d),4 K(9){5 i=9.H;5 j=9.F;e(i==E){$3.1l=D(9.C);5 8="";$.z($3.1l,4(b,7){5 u=\' <p o="1m 1m-1J-1K"></p>\';e(1L(7.u)!="1M")u=\'<w 1b="1N-M:1O;" 1e="\'+7.1P+7.u+\'" o="1Q w-18" />\';8+=\' <a   c="\'+7.1R+\'"   1S="1T 1U(1V)" >  \'+\'    <n o="1W 11 19-1a-6"> \'+u+7.1X+\' &G; \'+\' </n> \'+\' </a> \'});$("#1Y").8(8);1Z(4(){5 1n=$(\'#V\').22().1o;$(m).24(4(){5 1p=$(m).26();e(1p>=1n){$(\'#V\').1q({1o:\'28\',1r:\'2a\',M:\'U\'})}f{$(\'#V\').1q({1r:\'U\',M:\'U\'})}})},2c);$3.$t()}f{k(j)}},4 B(y){k("网络异常!")},g,g)};$3.15()})});',62,137,'|||scope|function|var||item|html|json||index|href|obj|if|else|false||code|message|msg|public|window|div|class|span|basePath|location|month|apply|icon|http|img||data|each|null|error|datalist|eval|200|ResponseMsg|nbsp|ResponseCode|preurl|blog_type|succsess|stringify|width|new|Object|SZUMWS|JSON|action|getTgList|blog|inherit|googlead2|getTpList|getHList|tags|indexOf|History|row|clean|getList|view_nums|getYqList|encodeURI|tplist|responsive|col|xs|style|20px|blog_type_name|src|showtgs|pushState|hlist|tglist|tgdiv|bt|yqlist|glyphicon|fixmeTop|top|currentScroll|css|position|tg|element|state|showh|mdiv|height|title|rel|page|nopaddding|tagcloud|show|kurl|getYQList|blog_type_url|angular|replaceState|hand|right|typeof|undefined|max|30px|val2|linkimg|url_val|onclick|return|gourl|this|linka|url_name|yqdiv|setTimeout|showtp|blog_tag|offset|showtg|scroll|tpdiv|scrollTop|siteurl|100|getImUrl|fixed|ngSection|3000'.split('|'),0,{}))
+
+
+	
+	
+$(function() {
+	
+	
+
+
+var $scope = angular.element(ngSection).scope();
+	$scope.$apply(function() {
+	
+		var http = getImUrl();// "";
+		
+		//for spider
+		$scope.preurl=siteurl;//"https://www.256kb.cn";
+
+		
+		$scope.showtp=function(x){
+			
+			if(window.location.href.indexOf('index')>0)
+			{
+				//msg(1);
+				History.replaceState(null,null,basePath+'/public/index/'); // logs {}, '', "?state=4"
+				//msg(2);
+			//	History.replaceState(null, null, '?q='+1);
+			//history.pushState({},0,basePath+'/public/index/');
+			$scope.clean();
+			$scope.blog_type=x.blog_type;
+			
+			$scope.getList();
+		}
+		else{
+			window.location.href=basePath+"/public/index?bt="+x.blog_type;
+		}
+		};
+		
+	  $scope.showh=function(x){
+		if(window.location.href.indexOf('index')>0)
+		{
+		//window.history.pushState({},0,basePath+'/public/index/');
+			History.pushState(null, null,basePath+'/public/index/'); // logs {}, '', "?state=4"
+		  $scope.clean();
+			$scope.month=x.month;
+			
+			$scope.getList();
+		}
+		else{
+			window.location.href=basePath+"/public/index?h="+encodeURI( x.month);
+		}	
+		};
+	  $scope.showtg=function(x){
+		  $scope.showtgs(x.tags);
+		};
+	  
+	  $scope.showtgs=function(x){
+			if(window.location.href.indexOf('index')>0)
+			{
+			//window.history.pushState({},0,basePath+'/public/index/');
+				History.pushState({state:1}, "",basePath+'/'); // logs {}, '', "?state=4"
+			  $scope.clean();
+				$scope.blog_tag=x;
+				
+				$scope.getList();
+			}
+			else{
+				window.location.href=basePath+"/public/index?tg="+encodeURI( x);
+			}
+			};
+		
+		$scope.getTpList=function(){
+		
+		
+
+			var obj = new Object();
+			SZUMWS(
+					http + "blog/getTpList.action",
+					JSON.stringify(obj),
+					function succsess(json) {
+						// var json = JSON.parse(decryData);
+						var code = json.ResponseCode;
+						var message = json.ResponseMsg;
+						//console.log('-----return -code= ' + code
+						//		+ ';message= ' + message);
+						if (code == 200) {
+
+							$scope.tplist = eval(json.datalist);
+
+							var html="";
+							$.each($scope.tplist,function(index,item){
+								
+								html+='<div class="row"> ' 
+									+' <a href="'+preurl+'/public/index/bt/'+item.blog_type+'.html"> ' 
+								+' <img class="nopaddding img-responsive col-xs-2" style="width:20px; height:20px;" title="'+item.blog_type_name+'" src="'+item.blog_type_url+'"> '+item.blog_type_name+'&nbsp; '
+								+' <span>('+item.view_nums+')</span> '
+								 +'	 </a>'
+								 +'</div>';
+								
+								
+							});
+							
+							$("#tpdiv").html(html);
+							
+							
+
+							$scope.$apply();
+
+						
+
+						} else {
+							msg(message);
+						}
+
+					
+					
+
+					}, function error(data) {
+						msg("网络异常!");
+
+					
+
+					}, false, false
+
+			);
+		};
+		$scope.getTpList();
+		
+		$scope.getHList=function(){
+			var obj = new Object();
+			SZUMWS(
+					http + "blog/getHList.action",
+					JSON.stringify(obj),
+					function succsess(json) {
+						// var json = JSON.parse(decryData);
+						var code = json.ResponseCode;
+						var message = json.ResponseMsg;
+						//console.log('-----return -code= ' + code
+						//		+ ';message= ' + message);
+						if (code == 200) {
+
+							$scope.hlist = eval(json.datalist);
+
+							var html="";
+							$.each($scope.hlist,function(index,item){
+								
+								html+='<div class="row"> '   
+									+' <a href="'+preurl+'/public/index/h/'+item.month+'.html"> ' 
+								 +'	'+item.month+'&nbsp;<span>('+item.view_nums+')</span> '
+								 +'	 </a> '
+								 +'</div>';
+								
+							});
+							
+							$("#mdiv").html(html);
+							
+							
+
+							$scope.$apply();
+
+						
+
+						} else {
+							msg(message);
+						}
+
+					
+					
+
+					}, function error(data) {
+						msg("网络异常!");
+
+					
+
+					}, false, false
+
+			);
+		};
+		$scope.getHList();
+		
+		$scope.getTgList=function(){
+			var obj = new Object();
+			SZUMWS(
+					http + "blog/getTgList.action",
+					JSON.stringify(obj),
+					function succsess(json) {
+						// var json = JSON.parse(decryData);
+						var code = json.ResponseCode;
+						var message = json.ResponseMsg;
+						//console.log('-----return -code= ' + code
+						//		+ ';message= ' + message);
+						if (code == 200) {
+
+							$scope.tglist = eval(json.datalist);
+						
+
+							$scope.$apply();
+							
+							var html="";
+							$.each($scope.tglist,function(index,item){
+								
+								html+='  <a rel="'+item.page+'" href="'+preurl+'/public/index/tg/'+item.tags+'.html"> ' 
+								 +'	'+item.tags+'&nbsp; '
+								 +'	 </a> ,';
+							});
+							
+							$("#tgdiv").html(html);
+							$("#tgdiv a").tagcloud();
+							 
+
+						
+
+						} else {
+							msg(message);
+						}
+
+					
+					
+
+					}, function error(data) {
+						msg("网络异常!");
+
+					
+
+					}, false, false
+
+			);
+		};
+		$scope.getTgList();
+		
+		
+		
+		$scope.getYqList=function(){
+			
+			
+
+			var obj = new Object();
+			obj.show='1';
+			SZUMWS(
+					http + "kurl/getYQList.action",
+					JSON.stringify(obj),
+					function succsess(json) {
+						// var json = JSON.parse(decryData);
+						var code = json.ResponseCode;
+						var message = json.ResponseMsg;
+						//console.log('-----return -code= ' + code
+						//		+ ';message= ' + message);
+						if (code == 200) {
+
+							$scope.yqlist = eval(json.datalist);
+
+							
+							var html="";
+							$.each($scope.yqlist,function(index,item){
+								
+								var icon=' <span class="glyphicon glyphicon-hand-right"></span>';
+								
+								if(typeof( item.icon)!="undefined")
+									icon='<img style="max-width:30px;" src="'+item.val2+item.icon+'" class="linkimg img-responsive" />';
+								
+								html+=' <a   href="'+item.url_val+'" title="'+item.url_name+'"   onclick="return gourl(this)" >  '
+								 +'    <div class="linka row col-xs-6"> '
+								 
+								 +icon//' <span class="glyphicon glyphicon-hand-right"></span>'
+								 
+								 +item.url_name+' &nbsp; '
+								 +' </div> '
+								 +' </a> ';
+							});
+							
+							$("#yqdiv").html(html);
+							
+							 
+							
+							setTimeout(function() {
+								var fixmeTop = $('#googlead2').offset().top;
+								 $(window).scroll(function () {
+								        var currentScroll = $(window).scrollTop();
+								        if (currentScroll >= fixmeTop) {
+								            $('#googlead2').css({
+								                top: '100',
+								                position: 'fixed',
+								                width: 'inherit'
+								            });
+								          
+								        } else {
+								            $('#googlead2').css({
+								                position: 'inherit',
+								                width: 'inherit'
+								            });
+								           
+								        }
+								    });
+							}, 3000);
+							 
+							
+						
+
+							$scope.$apply();
+
+						
+
+						} else {
+							msg(message);
+						}
+
+					
+					
+
+					}, function error(data) {
+						msg("网络异常!");
+
+					
+
+					}, false, false
+
+			);
+		};
+		$scope.getYqList();
+		
+		
+		
+		
+		
+		
+		
+		
+	});
+	
+});

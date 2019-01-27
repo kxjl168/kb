@@ -7,6 +7,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 import javax.imageio.ImageIO;
+
+import com.drew.imaging.jpeg.JpegMetadataReader;
+import com.drew.metadata.Directory;
 /*
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
@@ -21,6 +24,9 @@ import com.drew.metadata.exif.ExifIFD0Directory;
 import com.drew.metadata.exif.ExifImageDirectory;
 import com.drew.metadata.exif.ExifReader;
 import com.drew.metadata.iptc.IptcReader;*/
+import com.drew.metadata.Metadata;
+import com.drew.metadata.exif.ExifIFD0Directory;
+import com.drew.metadata.exif.ExifImageDirectory;
 
 public class ImageRotateUtil {
 
@@ -148,7 +154,7 @@ public class ImageRotateUtil {
 
 	public static int getRotateAngleForPhoto(File file) {
 		int angel = 0;
-		/*Metadata metadata;
+		Metadata metadata;
 
 		try {
 
@@ -156,10 +162,10 @@ public class ImageRotateUtil {
 			// Directory directory = (ExifImageDirectory.class);
 
 			
-			 * for (Directory directory : metadata.getDirectories()) {
+		/*	 * for (Directory directory : metadata.getDirectories()) {
 			 * 
 			 * // // Each Directory stores values in Tag objects // for (Tag tag :
-			 * directory.getTags()) { System.out.println(tag); } }
+			 * directory.getTags()) { System.out.println(tag); } }*/
 			 
 
 			for (Directory directory : metadata.getDirectoriesOfType(ExifIFD0Directory.class)) {
@@ -190,7 +196,7 @@ public class ImageRotateUtil {
 
 		Exception e) {
 			e.printStackTrace();
-		} */
+		} 
 		System.out.println("图片旋转角度：" + angel);
 		return angel;
 	}

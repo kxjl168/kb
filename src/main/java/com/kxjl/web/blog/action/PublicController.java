@@ -135,6 +135,13 @@ public class PublicController extends BaseController {
 	EmojiService emojiService;
 
 	
+	/**
+	 * 获取表情列表
+	 * @param map
+	 * @return
+	 * @author zj
+	 * @date 2019年1月27日
+	 */
 	@RequestMapping("/public/emoji")
 	@ResponseBody
 	public String emoji(Map<String, Object> map) {
@@ -158,8 +165,11 @@ public class PublicController extends BaseController {
 	
 	
 	@RequestMapping("/public/wuliu")
-	public String wuliu(Map<String, Object> map) {
+	public String wuliu(HttpServletRequest request,Map<String, Object> map) {
 
+		saveStaticInfo(request, StasticTypeOne.Wuliu.toString(), "");
+		
+		
 		return "/public/wuliu/main";
 	}
 
@@ -240,6 +250,7 @@ public class PublicController extends BaseController {
 		view.setViewName("/public/about/main");
 
 		saveStaticInfo(request, StasticTypeOne.AboutPage.toString(), "");
+	
 
 		Blog query = new Blog();
 		query.setImei("about");
@@ -299,11 +310,14 @@ public class PublicController extends BaseController {
 	}
 
 	@RequestMapping(value = "/public/share")
-	public ModelAndView share() {
+	public ModelAndView share(HttpServletRequest request) {
 
 		ModelAndView view = getSysData();
 		view.setViewName("/public/share/main");
 
+		
+		saveStaticInfo(request, StasticTypeOne.Share.toString(), "");
+		
 		return view;
 	}
 
@@ -312,6 +326,8 @@ public class PublicController extends BaseController {
 		ModelAndView view = getSysData();
 		view.setViewName("/public/index/");
 
+		//统计在search里面
+		
 		return "/public/search/main";
 	}
 
@@ -407,12 +423,20 @@ public class PublicController extends BaseController {
 
 	}
 
+	
+	/**
+	 * 常用链接-公开
+	 * @param maps
+	 * @param session
+	 * @param request
+	 * @return
+	 * @author zj
+	 * @date 2019年1月27日
+	 */
 	@RequestMapping(value = "/pown/url/")
 	public String p_ourl(Map<String, Object> maps, HttpSession session, HttpServletRequest request) {
 
-		// maps.putAll(sysService.getSysInfo());
-
-		// List<MenuInfo> leftmenus = menuService.getLeftMenuTree(session, request);
+		saveStaticInfo(request, StasticTypeOne.Links.toString(), "");
 
 		setLeftUrls(maps, false);
 		return "/pown/url/main";
@@ -440,10 +464,13 @@ public class PublicController extends BaseController {
 	}
 
 	@RequestMapping(value = "/public/cat/")
-	public String cat() {
+	public String cat(HttpServletRequest request) {
 		ModelAndView view = getSysData();
 		view.setViewName("/public/index/");
 
+		
+		saveStaticInfo(request, StasticTypeOne.Cat.toString(), "");
+		
 		return "/public/cat/main";
 	}
 

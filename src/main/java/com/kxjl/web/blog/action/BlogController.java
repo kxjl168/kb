@@ -870,6 +870,10 @@ public class BlogController extends BaseController {
 			String	imei ="";
 			
 			int rst = -1;
+			
+			
+			blog.setTags(blog.getTags().replace("，",","));
+			
 
 			if ( blog.getRecordid()!=null) {
 				

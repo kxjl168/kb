@@ -240,6 +240,10 @@ public class FileUploadController {
 
 				// 计算md5,查看本地文件库中是否有相同的文件
 				if (!isExsit) {
+					
+					
+				
+					
 					// 没有，则上传
 					// 上传文件（服务器指定地址）
 					File uploaderFile = new File(absoluteURL);
@@ -255,6 +259,18 @@ public class FileUploadController {
 					; // 文件存放原始旋转过的图片
 					File orginFileData = new File(orginFile);
 					File oFileData = new File(oFile);
+					
+					
+					// 存储信息
+					SvrFileInfo finfo = new SvrFileInfo();
+					relativeURL = relativePath + fileName; // 文件相对路径
+					httpURL = http_path + relativeURL;
+					httpURL2 = http_path + relativePath + oriName;
+
+					downURL = "/FileSvr/downFile.action?m5=" + md5;
+					httpDownURL = http_path + downURL;
+					
+					
 					try {
 
 						if (extension.contains("gif") || extension.contains("png") || extension.contains("jpeg")
@@ -273,7 +289,15 @@ public class FileUploadController {
 							}
 							else
 							{
-								FileUtils.copyFile(orginFileData, uploaderFile);
+								//不压缩
+								//FileUtils.copyFile(orginFileData, uploaderFile);
+								
+								fileName=oriName;
+							
+								absoluteURL=uploadPath + relativePath +oriName;
+								relativeURL=relativePath +oriName;
+								httpURL = http_path + relativeURL;
+								
 							}
 
 						}
@@ -288,19 +312,14 @@ public class FileUploadController {
 
 					} catch (Exception e) {
 
+						logger.error(e);
 					}
 
 					logger.info("uploaderFile值:  " + uploaderFile);
 
-					relativeURL = relativePath + fileName; // 文件相对路径
-					httpURL = http_path + relativeURL;
-					httpURL2 = http_path + relativePath + oriName;
+				
+					
 
-					downURL = "/FileSvr/downFile.action?m5=" + md5;
-					httpDownURL = http_path + downURL;
-
-					// 存储信息
-					SvrFileInfo finfo = new SvrFileInfo();
 					finfo.setOld_name(value);
 					finfo.setSave_name(fileName);
 					finfo.setFull_path(absoluteURL);
@@ -310,6 +329,8 @@ public class FileUploadController {
 					finfo.setFile_md5(md5);
 					finfo.setFile_size(mfile.getSize());
 					finfo.setDown_nums(0);
+					
+				
 
 					fileService.SaveFileInfo(finfo);
 					efile = finfo;

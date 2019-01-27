@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxjl.web.autodata.dao.ReplayInfoMapper">
+  <resultMap id="BaseResultMap" type="com.kxjl.web.autodata.pojo.ReplayInfo">
+    <id column="recordid" jdbcType="INTEGER" property="recordid" />
+    <result column="blogimei" jdbcType="VARCHAR" property="blogimei" />
+    <result column="replay_recordid" jdbcType="INTEGER" property="replayRecordid" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="create_date" jdbcType="VARCHAR" property="createDate" />
+    <result column="user_blog" jdbcType="VARCHAR" property="userBlog" />
+    <result column="ppid" jdbcType="INTEGER" property="ppid" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="isvalid" jdbcType="VARCHAR" property="isvalid" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.kxjl.web.autodata.pojo.ReplayInfo">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    recordid, blogimei, replay_recordid, userid, create_date, user_blog, ppid, state, 
+    isvalid, email, ip, icon
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from replay_info
+    where recordid = #{recordid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from replay_info
+    where recordid = #{recordid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.kxjl.web.autodata.pojo.ReplayInfo">
+    insert into replay_info (recordid, blogimei, replay_recordid, 
+      userid, create_date, user_blog, 
+      ppid, state, isvalid, 
+      email, ip, icon, content
+      )
+    values (#{recordid,jdbcType=INTEGER}, #{blogimei,jdbcType=VARCHAR}, #{replayRecordid,jdbcType=INTEGER}, 
+      #{userid,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, #{userBlog,jdbcType=VARCHAR}, 
+      #{ppid,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, #{isvalid,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kxjl.web.autodata.pojo.ReplayInfo">
+    insert into replay_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="recordid != null">
+        recordid,
+      </if>
+      <if test="blogimei != null">
+        blogimei,
+      </if>
+      <if test="replayRecordid != null">
+        replay_recordid,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="userBlog != null">
+        user_blog,
+      </if>
+      <if test="ppid != null">
+        ppid,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="isvalid != null">
+        isvalid,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="recordid != null">
+        #{recordid,jdbcType=INTEGER},
+      </if>
+      <if test="blogimei != null">
+        #{blogimei,jdbcType=VARCHAR},
+      </if>
+      <if test="replayRecordid != null">
+        #{replayRecordid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="userBlog != null">
+        #{userBlog,jdbcType=VARCHAR},
+      </if>
+      <if test="ppid != null">
+        #{ppid,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="isvalid != null">
+        #{isvalid,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kxjl.web.autodata.pojo.ReplayInfo">
+    update replay_info
+    <set>
+      <if test="blogimei != null">
+        blogimei = #{blogimei,jdbcType=VARCHAR},
+      </if>
+      <if test="replayRecordid != null">
+        replay_recordid = #{replayRecordid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="userBlog != null">
+        user_blog = #{userBlog,jdbcType=VARCHAR},
+      </if>
+      <if test="ppid != null">
+        ppid = #{ppid,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="isvalid != null">
+        isvalid = #{isvalid,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where recordid = #{recordid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.kxjl.web.autodata.pojo.ReplayInfo">
+    update replay_info
+    set blogimei = #{blogimei,jdbcType=VARCHAR},
+      replay_recordid = #{replayRecordid,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      user_blog = #{userBlog,jdbcType=VARCHAR},
+      ppid = #{ppid,jdbcType=INTEGER},
+      state = #{state,jdbcType=VARCHAR},
+      isvalid = #{isvalid,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where recordid = #{recordid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kxjl.web.autodata.pojo.ReplayInfo">
+    update replay_info
+    set blogimei = #{blogimei,jdbcType=VARCHAR},
+      replay_recordid = #{replayRecordid,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      user_blog = #{userBlog,jdbcType=VARCHAR},
+      ppid = #{ppid,jdbcType=INTEGER},
+      state = #{state,jdbcType=VARCHAR},
+      isvalid = #{isvalid,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR}
+    where recordid = #{recordid,jdbcType=INTEGER}
+  </update>
+  
+
+
+<select id="selectList"
+	resultMap="BaseResultMap"
+	parameterType="com.kxjl.web.autodata.pojo.ReplayInfo">
+	select
+	  c.recordid, blogimei, replay_recordid, userid, c.create_date, user_blog, ppid, c.state, 
+    c.isvalid,c.content, email, ip, icon,  b.title 
+	from replay_info c left join blog_info b on c.blogimei=b.imei
+
+	where 1=1
+	and c.isvalid=0
+
+	<if test=" recordid !=null  ">
+		and c.recordid = #{recordid}
+	</if>
+	
+		
+		<if test=" content !=null and content !='' ">
+		and c.content like concat ('%', #{content},'%')
+	</if>
+		
+			
+		
+		<if test=" userid !=null and userid !='' ">
+		and c.userid like concat ('%', #{userid},'%')
+	</if>
+		
+			
+		
+		<if test=" userBlog !=null and userBlog !='' ">
+		and c.user_blog like concat ('%', #{userBlog},'%')
+	</if>
+		
+			
+		
+		<if test=" email !=null and email !='' ">
+		and c.email like concat ('%', #{email},'%')
+	</if>
+		
+			
+		
+		<if test=" ip !=null and ip !='' ">
+		and c.ip like concat ('%', #{ip},'%')
+	</if>
+		
+		order by c.blogimei,c.create_date desc	
+
+
+</select>
+
+
+
+<update id="delete"
+	parameterType="com.kxjl.web.autodata.pojo.ReplayInfo">
+	update replay_info
+set isvalid='1'
+	where recordid = #{recordid}
+
+</update>
+
+</mapper>

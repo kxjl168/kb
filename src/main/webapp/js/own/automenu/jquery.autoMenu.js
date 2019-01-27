@@ -199,13 +199,16 @@
 		  var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
 		  var page=$(".pageText").offset().top;
 		  var height=$(".autoMenu").height();
-		  if(scrollTop>page+height){
+		  if(browser&&!browser.versions.mobile)
+			  {
+		  if(scrollTop>height){
 			  //mobile, declare in other common js
-			  if(browser&&!browser.mobile)
+			
 			  $(".autoMenu").addClass('fix');
 		  }
 		  else{
 			  $(".autoMenu").removeClass('fix');
 		  }
+			  }
 	}
 

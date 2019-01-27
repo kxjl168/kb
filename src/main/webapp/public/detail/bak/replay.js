@@ -333,7 +333,8 @@ function initReplayModel() {
 				
 				
 				$scope.doupdate = function(fm) {
-
+					
+					
 					var obj = {};
 
 					if (typeof ($scope.preplay) == "undefined") {
@@ -368,19 +369,19 @@ function initReplayModel() {
 							setTimeout(function() {
 								//$scope.s_uid = "";
 								$scope.s_text = "";
-								$("s_text").val("");
+								$("#s_text").val("");
 								//$scope.s_ublog = "";
 								//$scope.s_email = "";
 								$scope.canc();
 
-								$scope.$apply();
+								//$scope.$apply();
 								
 								$scope.getReplayList();
 								
 								$(".nameinfo").hide();
 								$(".ckdisplay").show();
 								
-							}, 10);
+							}, 100);
 
 						
 

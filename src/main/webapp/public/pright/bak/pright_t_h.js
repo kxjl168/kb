@@ -199,8 +199,8 @@ var $scope = angular.element(ngSection).scope();
 							$.each($scope.tglist,function(index,item){
 								
 								html+='  <a rel="'+item.page+'" href="'+preurl+'/public/index/tg/'+item.tags+'.html"> ' 
-								 +'	'+item.tags+'&nbsp;, '
-								 +'	 </a> ';
+								 +'	'+item.tags+'&nbsp; '
+								 +'	 </a> ,';
 							});
 							
 							$("#tgdiv").html(html);
@@ -257,7 +257,7 @@ var $scope = angular.element(ngSection).scope();
 								if(typeof( item.icon)!="undefined")
 									icon='<img style="max-width:30px;" src="'+item.val2+item.icon+'" class="linkimg img-responsive" />';
 								
-								html+=' <a   href="'+item.url_val+'"   onclick="return gourl(this)" >  '
+								html+=' <a   href="'+item.url_val+'" title="'+item.url_name+'"   onclick="return gourl(this)" >  '
 								 +'    <div class="linka row col-xs-6"> '
 								 
 								 +icon//' <span class="glyphicon glyphicon-hand-right"></span>'

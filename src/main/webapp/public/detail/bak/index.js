@@ -130,14 +130,39 @@ function init() {
 
                     var scale = imgW / imgH;
                     if (imgW > winW) {
-                        $(bigimg).css("width", "100%").css("height", "auto");
                     	
-                    	// $(bigimg).css("width", winW + 'px').css("height", imgH + 'px');
+                    	var wrate= imgW/winW;
+                    	var hrate=imgH/winH;
                     	
-                        imgH = winW / scale;
-                        var h = (winH - imgH) / 2;
-                        $(indiv).css({ "left": 0, "top": h });
-                    } else {
+                    	
+                    	var pich=winH*0.8;
+                    	var picw= (imgW/imgH)*pich;
+                    	
+                    	var left= (winW-picw)/2+'px';
+                    	var top='10%';
+                    	
+                     	 top='10%';
+                         /*
+                    		 pich=winH*(winH/imgH-0.2);
+                        	 picw= (imgW/imgH)*pich;
+                        	
+                        	 left= (winW-picw)/2+'px';
+                 		}
+                    	else{ */
+                    		picw=winW*(0.65);
+                    		pich= (imgH/imgW)*picw;
+                    		left='10%';
+                    		top= (winH-pich)/2+'px';
+                    	//}
+                    	
+                    
+                    	
+                    	//var rwidth= 
+                        $(bigimg).css("width", picw+'px').css("height", pich+'px');
+  
+                        $(indiv).css({ "left": left, "top": top });
+                    
+                    } else  {
                         $(bigimg).css("width", imgW + 'px').css("height", imgH + 'px');
                         var w = (winW - imgW) / 2;
                         var h = (winH - imgH) / 2;
@@ -162,7 +187,9 @@ function init() {
                         var sufixIndex = url.lastIndexOf(".");
                         var pre = url.substr(0, sufixIndex);
                         var sufix = url.substr(sufixIndex);
-                        var bigurl = pre + "_orign" + sufix;
+                        var bigurl =  $(img).attr("orisrc");//;
+                        if(bigurl==null)
+                        	bigurl=pre + "_orign" + sufix;
 
 
 
@@ -196,7 +223,7 @@ function init() {
                             } else {
                                 ev.returnValue = false
                             }
-                            if (dir == -3 || dir == 120) {
+                            if (dir >0 ) {
                                 upfun()
                             } else {
                                 downfun()

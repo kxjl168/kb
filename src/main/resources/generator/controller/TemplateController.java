@@ -2,9 +2,9 @@
  * @(#)${modelClass}Controller.java
  * @author: zhangJ
  * @Date: ${generatedate}
- * Copyright (C),2017-2018, ZHONGTONGGUOMAI TECHNOLOGY NANJING
- * Co.,Ltd. All Rights Reserved.
- * GMWL PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * Copyright (C),2017-2018, kxjl 
+ *  All Rights Reserved.
+ * 
  */
 package ${basepackageName}.controller.WebController;
 
