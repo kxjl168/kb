@@ -2031,3 +2031,23 @@ font-size: 13px;
 	margin-right: 3px;
 }
 
+a.rsslinklist{
+ word-break: break-word;
+    min-width: 140px;
+    display: block;
+	
+}   
+.rsspagedetail{
+	padding: 5px;
+	line-height: 30px;
+	height: 30px;
+	font-size: 16px;
+	color:#717171;
+}
+.rsspagedetail img{
+	width: 100%;
+	padding: 5px;
+}
+.readdone{
+	color:#ddd8d8;
+}

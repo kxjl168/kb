@@ -11,7 +11,7 @@
 			<meta name="description" content="">
 				<meta name="author" content="">
 
-					<title>${pagetitle}管理</title>
+					<title>Rss订阅管理</title>
 </head>
 
 <body>
@@ -31,7 +31,7 @@
 					data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
 					aria-expanded="true">
 					<div class="row">
-						<h3 class="panel-title col-xs-4 col-lg-4 col-md-4 ">${pagetitle}管理 - 查询条件</h3>
+						<h3 class="panel-title col-xs-4 col-lg-4 col-md-4 ">Rss订阅管理 - 查询条件</h3>
 
 
 
@@ -49,17 +49,15 @@
 
 
 
-							<#if queryFields?size lte 2>
 							<div class="row  form-group margin-bottom-5">
-								<#list queryFields as field>
 
 								<div class=" col-md-6  col-xs-12  ">
 									<div
-										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">${field.displayName}:</div>
+										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">站点名称:</div>
 									<div class="col-md-6 col-xs-8 text-right ">
 										<input
 											class="form-control ng-pristine ng-untouched ng-valid ng-empty"
-											id="q_${field.id}" type="text" name="q_${field.id}"
+											id="q_name" type="text" name="q_name"
 											placeholder="">
 									</div>
 
@@ -68,40 +66,24 @@
 
 								</div>
 
-								</#list>
-							</div>
-							<#else> <#list 0..1 as it> <#assign field=queryFields[it]>
-							<div class=" col-md-6  col-xs-12  ">
-								<div
-									class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">${field.displayName}:</div>
-								<div class="col-md-6 col-xs-8 text-right ">
-									<input
-										class="form-control ng-pristine ng-untouched ng-valid ng-empty"
-										id="q_${field.id}" type="text" name="q_${field.id}"
-										placeholder="">
+
+								<div class=" col-md-6  col-xs-12  ">
+									<div
+										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">Rss链接:</div>
+									<div class="col-md-6 col-xs-8 text-right ">
+										<input
+											class="form-control ng-pristine ng-untouched ng-valid ng-empty"
+											id="q_link" type="text" name="q_link"
+											placeholder="">
+									</div>
+
+
+
+
 								</div>
 
-
-
-
 							</div>
-							</#list> <#list 2..queryFields?size-1 as it> <#assign
-							field=queryFields[it]>
-							<div class=" col-md-6  col-xs-12  ">
-								<div
-									class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">${field.displayName}:</div>
-								<div class="col-md-6 col-xs-8 text-right ">
-									<input
-										class="form-control ng-pristine ng-untouched ng-valid ng-empty"
-										id="q_${field.id}" type="text" name="q_${field.id}"
-										placeholder="">
-								</div>
-
-
-
-
-							</div>
-							</#list> </#if>
+							
 
 						</div>
 
@@ -127,13 +109,14 @@
 
 
 			</div>
-<div
+			<div
 				class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
 				<button type="button" onclick="query()"
 					class="btn btn-primary btn-query btn-block   ">查询</button>
 
 
 			</div>
+
 		</div>
 
 
@@ -159,11 +142,11 @@
 	<jsp:include page="form.jsp"></jsp:include>
 
 	<script
-		src="${r'$'}{basePath}/page/${ctrollerModelMapping}/${ctrollerModelMapping}.js"></script>
+		src="${basePath}/page/rssmanager/rssmanager.js"></script>
 
 
 	<script type="text/javascript"
-		src="${r'$'}{basePath}/js/plugin/jquery/jquery.plugin.js"></script>
+		src="${basePath}/js/plugin/jquery/jquery.plugin.js"></script>
 
 
 
