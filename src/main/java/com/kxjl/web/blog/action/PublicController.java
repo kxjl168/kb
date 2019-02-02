@@ -1021,18 +1021,18 @@ public class PublicController extends BaseController {
 
 		StringBuffer sb = new StringBuffer();
 		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-		sb.append("<rss version=\"2.0\"\n" + "	xmlns:content=\"http://purl.org/rss/1.0/modules/content/\"\n"
+		sb.append("<rss version=\"2.0\" \n " + "	xmlns:content=\"http://purl.org/rss/1.0/modules/content/\"\n"
 				+ "	xmlns:wfw=\"http://wellformedweb.org/CommentAPI/\"\n"
 				+ "	xmlns:dc=\"http://purl.org/dc/elements/1.1/\"\n"
 				+ "	xmlns:atom=\"http://www.w3.org/2005/Atom\"\n"
 				+ "	xmlns:sy=\"http://purl.org/rss/1.0/modules/syndication/\"\n"
-				+ "	xmlns:slash=\"http://purl.org/rss/1.0/modules/slash/\"\n" + "	>");
+				+ "	xmlns:slash=\"http://purl.org/rss/1.0/modules/slash/\"\n" + "	> \n\n");
 		sb.append(" <channel>\n" + "    <title>野生喵喵的个人站点</title>\n" + "    <link>" + domain + "</link>\n"
 				+ "    <description>KxのBook -256kb.cn | 野生的喵喵 的个人站点 | 分享工作及生活的点滴</description>\n"
 				+ "    <language>zh-CN</language>\n" + "    <pubDate>" + date + "</pubDate>\n" + "    <lastBuildDate>"
 				+ date + "</lastBuildDate>\n" +
 
-				"    <generator>KxのBook rss demo</generator>\n"
+				"    <generator>KxのBook rss generator</generator>\n"
 				+ "    <managingEditor>kxjl168@foxmail.com</managingEditor>\n" + "<image>\n" + "	<url>" + domain
 				+ "/favicon.ico </url>\n" + "	<title>KxのBook</title>\n" + "	<link>" + domain + "</link>\n"
 				+ "	<width>32</width>\n" + "	<height>32</height>\n" + "</image> ");

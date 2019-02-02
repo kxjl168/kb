@@ -46,15 +46,25 @@
 										</div>
 									</div>
 									
-									
+									<div class="form-group">
+										<label for="name" class="col-lg-3 control-label">名称</label>
+
+										<div class="col-lg-9">
+										<input type="text" name="mName" 
+											
+											class="form-control" id="mName"
+												placeholder="名称" >
+											<p class="help-block"></p>
+										</div>
+									</div>
 									
 									<div class="form-group">
 										<label for="name" class="col-lg-3 control-label">备注</label>
 
 										<div class="col-lg-9">
-										<input type="text" name="remark" 
+										<input type="text" name="mRemark" 
 											
-											class="form-control" id="remark"
+											class="form-control" id="mRemark"
 												placeholder="备注" >
 											<p class="help-block"></p>
 										</div>

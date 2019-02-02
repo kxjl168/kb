@@ -409,7 +409,7 @@ function init() {
                 	   "<div class='pbord' >"+
                        
                      
-                         "   <img class='img-responsive' src='https://res.zgboke.com/wp-content/themes/begin/img/wechat.jpg'></img>" +
+                         "   <img class='img-responsive' src=''></img>" +
                          
                            "<div class='ptip'>xxx</div>"+
                          "</div>";
@@ -454,6 +454,7 @@ function init() {
                              $scope.relatedlist = eval(json.datalist);
                              
                              
+                             //关联
                              var html="";
                              html+="   <ul class=\"col-xs-12 \">";
                              $.each($scope.relatedlist,function(index,item){
@@ -471,6 +472,46 @@ function init() {
                              });
                              html+="   </ul>";
                              $(".relatedLink").html(html);
+                             
+                             //前后文
+                             $scope.datalist = eval(json.prenextList);
+                             $scope.x=$scope.datalist[0];
+                             if ($scope.datalist.length > 1) {
+                                 if ($scope.datalist[1].recordid > $scope.x.recordid)
+                                     $scope.next = $scope.datalist[1];
+                                 else
+                                     $scope.pre = $scope.datalist[1];
+                             }
+                             if ($scope.datalist.length > 2) {
+
+                                 $scope.pre = $scope.datalist[2];
+                             }
+                             
+                           var prenexthtml='';
+                           
+                           if( $scope.pre!=null)
+                        	   prenexthtml+= ' <ul class="pagination pull-left"> '
+                        	   +' <li> '
+                        	   +'<a  '
+                        	   +'href="'+basePath+'/public/html/'+$scope.pre.showdate+'/'+$scope.pre.imei+'.html" '
+                        	   +'style="" class="for spider">前一篇:'+$scope.pre.title+'</a> '
+ 								
+ 								 +'</li>'
+ 								 +'</ul>';
+                           
+                           if( $scope.next!=null)
+                        	   prenexthtml+=' <ul class="pagination pull-right">'
+ 								+' 	<li>'
+ 								
+ 								+' <a '
+ 						 	   +'href="'+basePath+'/public/html/'+$scope.next.showdate+'/'+$scope.next.imei+'.html" '
+                        	   +'style="" class="for spider">后一篇:'+$scope.next.title+'</a> '
+ 								
+ 								+' </li>'
+ 								+' </ul>' ;
+                             
+                           $(".prenextlist").html(prenexthtml);
+                             
                              
 
                              

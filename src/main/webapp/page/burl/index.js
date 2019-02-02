@@ -113,6 +113,35 @@ function init() {
 
 				document.title=title;
 				
+				$scope.rss = function(item) {
+
+					var url = http+"manager/rssmanager/saveOrUpdate";
+
+					
+						var data = "link="+item.url_val+"/feed";
+
+						/**/
+
+						$.ajax({
+							type : "post",
+							url : url,
+							data : data,
+							async : true,
+							dataType : "json",
+							success : function(response) {
+								// debugger;
+								if (response.bol) {
+									//$('#myModal_item').modal("hide");
+									//doSearch_item();
+									success("操作成功！");
+								} else {
+									error( response.message);
+								}
+							}
+						});
+					
+				};
+				
 
 				$scope.getList = function(id, fucOnFinished, clear) {
 

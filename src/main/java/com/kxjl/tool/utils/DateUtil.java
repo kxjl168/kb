@@ -59,7 +59,7 @@ public class DateUtil {
 	 */
 	public static Date getDate(String strdate, String format) {
 		if (format == null || format.equals(""))
-			format = "yyyyMMddHHmmss";
+			format = defaultFormat;//"yyyyMMddHHmmss";
 		Date d=new Date();
 		try {
 			DateFormat dateFormat = new SimpleDateFormat(format);

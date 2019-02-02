@@ -54,7 +54,7 @@
 								<div class=" col-md-6  col-xs-12  ">
 									<div
 										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">文章标题:</div>
-									<div class="col-md-6 col-xs-8 text-right ">
+									<div class="col-md-6 col-xs-8  ">
 										<input
 											class="form-control ng-pristine ng-untouched ng-valid ng-empty"
 											id="q_title" type="text" name="q_title"
@@ -69,18 +69,37 @@
 
 								<div class=" col-md-6  col-xs-12  ">
 									<div
-										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">文章链接:</div>
+										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">订阅站点:</div>
 									<div class="col-md-6 col-xs-8 text-right ">
-										<input
-											class="form-control ng-pristine ng-untouched ng-valid ng-empty"
-											id="q_link" type="text" name="q_link"
-											placeholder="">
+												<select
+						class=" col-xs-12 form-control txt-select-building in-line selectdist "
+						id="q_rss_m_id" name="q_rss_m_id">
+						</select>
 									</div>
 
 
 
 
 								</div>
+
+							</div>
+							
+							<div class="row  form-group margin-bottom-5">
+
+								<div class=" col-md-6  col-xs-12  ">
+									<div
+										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">只显示未读:</div>
+									<div class="col-md-6 col-xs-8 text-right ">
+											<input id="isRead" name="isRead"  checked="checked"
+												type="checkbox" class="mcheck form-control">
+									</div>
+
+
+
+
+								</div>
+
+
 
 							</div>
 							
@@ -143,7 +162,9 @@
 	<script
 		src="${basePath}/page/rsspagelist/rsspagelist.js"></script>
 
-
+<script
+		src="${basePath}/page/rsspagelist/rssSelect2.js"></script>
+		
 	<script type="text/javascript"
 		src="${basePath}/js/plugin/jquery/jquery.plugin.js"></script>
 

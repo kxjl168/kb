@@ -161,9 +161,9 @@
 								</caption>
 								<thead>
 									<tr>
-									<th class="">分类</th>
+									<th class="hide">分类</th>
 									<th class="" >URL名称</th>
-										<th>URL</th>
+										<th  class="hide">URL</th>
 											
 										<th class="" >排序</th>
 										<th class="" >图标</th>
@@ -180,9 +180,9 @@
 
 
 									<tr ng-repeat="x in datalist">
-										<td >{{ x.url_type }}</td>
-										<td>{{ x.url_name }}</td>
-											<td class="">{{ x.url_val }}</td>
+										<td class='hide'>{{ x.url_type }}</td>
+										<td><a target="_blank" title='{{ x.url_name }}' href='{{ x.url_val }}'>{{ x.url_name }}</a></td>
+											<td class="hide">{{ x.url_val }}</td>
 											<td >{{ x.sort}}</td>
 											<td><img style="max-width:30px;" src="{{ x.val2 }}{{x.icon}}" class="img-responsive" /></td>
 										 
@@ -194,6 +194,7 @@
 									
 										<td>
 											<a href="#" class="text-info" ng-click="addOrModify(x)">修改</a>
+												<a href="#" class="text-info" ng-click="rss(x)">订阅</a>
 											<a href="#" class="text-warning" ng-click="del(x)">删除</a>
 
 										</td>

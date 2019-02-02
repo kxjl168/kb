@@ -12,9 +12,15 @@
     <result column="create_date" jdbcType="VARCHAR" property="createDate" />
     <result column="update_date" jdbcType="VARCHAR" property="updateDate" />
     <result column="last_rss_date" jdbcType="VARCHAR" property="lastRssDate" />
+    
+    <result column="m_remark" jdbcType="VARCHAR" property="mRemark" />
+    <result column="m_name" jdbcType="VARCHAR" property="mName" />
+    
+  
+    
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, link, icon, remark, auto_rss, has_error, create_date, update_date, last_rss_date
+    id, name, link, icon, remark, auto_rss, has_error, create_date, update_date, last_rss_date,m_remark,m_name
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -69,6 +75,12 @@
       <if test="lastRssDate != null">
         last_rss_date,
       </if>
+       <if test="mName != null">
+        m_name,
+      </if>
+       <if test="mRemark != null">
+        m_remark,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -100,6 +112,12 @@
       </if>
       <if test="lastRssDate != null">
         #{lastRssDate,jdbcType=VARCHAR},
+      </if>
+        <if test="mName != null">
+          #{mName,jdbcType=VARCHAR}, 
+      </if>
+       <if test="mRemark != null">
+          #{mRemark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -133,6 +151,12 @@
       <if test="lastRssDate != null">
         last_rss_date = #{lastRssDate,jdbcType=VARCHAR},
       </if>
+        <if test="mName != null">
+         m_name= #{mName,jdbcType=VARCHAR}, 
+      </if>
+       <if test="mRemark != null">
+          m_remark=#{mRemark,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -155,9 +179,30 @@
 <select id="selectList"
 	resultMap="BaseResultMap"
 	parameterType="com.kxjl.web.autodata.pojo.RssManager">
-	select
-	<include refid="Base_Column_List" />
+	
+select c.*,tp2.read,tp2.noread from rss_manager c
+left join 
+(
+select 
+id,
+max(
+case is_read 
+when "1" then num
+else 0
+end) 'read',
+max(case is_read 
+when 0 then num
+else 0
+end) 'noread'
+
+from (
+select
+	c.id,c.name,p.is_read,count(*) num
 	from rss_manager c
+left join rss_page_list  p on c.id=p.rss_manager_id
+group by p.is_read,c.id
+) tp group by id
+) tp2 on c.id=tp2.id
 
 	where 1=1
 	<if test=" id !=null and id !='' ">
@@ -176,6 +221,8 @@
 	</if>
 		
 			
+		
+		order by c.last_rss_date,tp2.noread desc
 
 
 </select>

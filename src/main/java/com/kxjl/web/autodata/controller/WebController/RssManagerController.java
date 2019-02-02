@@ -8,12 +8,13 @@
  */
 package com.kxjl.web.autodata.controller.WebController;
 
-
 import com.github.pagehelper.Page;
+import com.kxjl.tool.utils.IPUtils;
 //import com.ztgm.base.aopAspect.FunLogType;
 //import com.ztgm.base.aopAspect.ManagerActionLog;
 import com.kxjl.tool.utils.PageCondition;
 import com.kxjl.web.generator.pojo.Message;
+import com.kxjl.web.stastic.model.ActionLog;
 import com.kxjl.web.system.model.MenuInfo;
 import com.kxjl.web.system.service.MenuInfoService;
 import com.kxjl.tool.utils.PageUtil;
@@ -39,7 +40,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -57,27 +60,22 @@ public class RssManagerController {
 	private RssManagerService rssmanagerService;
 	@Autowired
 	MenuInfoService menuService;
-	
+
 	@Autowired
 	RssPageListService rssListService;
 
-
 	@RequestMapping("/manager")
-	public String manager(HttpServletRequest request, Model model,Map<String, Object> maps) {
+	public String manager(HttpServletRequest request, Model model, Map<String, Object> maps) {
 		List<MenuInfo> leftmenus = menuService.getLeftMenuTree(request.getSession(), request);
-		
+
 		maps.put("menus", leftmenus);
 		return "/page/rssmanager/index";
 	}
-	
-
-
-	
 
 	@RequestMapping("/rssmanagerList")
-	//@ManagerActionLog(operateDescribe="查询Rss订阅",operateFuncType=FunLogType.Query,operateModelClassName=RssManagerMapper.class)
+	// @ManagerActionLog(operateDescribe="查询Rss订阅",operateFuncType=FunLogType.Query,operateModelClassName=RssManagerMapper.class)
 	@ResponseBody
-	public String rssmanagerList( RssManager item, HttpServletRequest request,PageCondition pageCondition) {
+	public String rssmanagerList(RssManager item, HttpServletRequest request, PageCondition pageCondition) {
 
 		String rst = "";
 		List<RssManager> rssmanagers = new ArrayList<>();
@@ -95,14 +93,12 @@ public class RssManagerController {
 	}
 
 	@RequestMapping("/delete")
-	//@ManagerActionLog(operateDescribe="删除Rss订阅",operateFuncType=FunLogType.Del,operateModelClassName=RssManagerMapper.class)
+	// @ManagerActionLog(operateDescribe="删除Rss订阅",operateFuncType=FunLogType.Del,operateModelClassName=RssManagerMapper.class)
 	@ResponseBody
-	public Message delete( RssManager item,HttpServletRequest request) {
+	public Message delete(RssManager item, HttpServletRequest request) {
 
 		Message msg = new Message();
-		
-	
-		
+
 		int result = rssmanagerService.deleteRssManager(item);
 		if (result == 1) {
 			msg.setBol(true);
@@ -112,8 +108,8 @@ public class RssManagerController {
 
 	@RequestMapping("/load")
 	@ResponseBody
-	public String load( @RequestParam String id,HttpServletRequest request) {
-	
+	public String load(@RequestParam String id, HttpServletRequest request) {
+
 		RssManager rssmanagers = rssmanagerService.selectRssManagerById(id);
 		return JSONObject.fromObject(rssmanagers).toString();
 	}
@@ -125,62 +121,183 @@ public class RssManagerController {
 	 * @return
 	 */
 	@RequestMapping("/saveOrUpdate")
-	//@ManagerActionLog(operateDescribe="保存修改Rss订阅",operateFuncType=FunLogType.SaveOrUpdate,operateModelClassName=RssManagerMapper.class)
+	// @ManagerActionLog(operateDescribe="保存修改Rss订阅",operateFuncType=FunLogType.SaveOrUpdate,operateModelClassName=RssManagerMapper.class)
 	@ResponseBody
 	public String saveOrUpdate(RssManager rssmanager) {
 
 		JSONObject jsonObject = null;
 		try {
-			
-			
-			//解析
-			jsonObject=rssmanagerService.refreshRssAndUpdateList( rssmanager);
-			
+
+			// 解析
+			jsonObject = rssmanagerService.refreshRssAndUpdateList(rssmanager);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		assert jsonObject != null;
 		return jsonObject.toString();
 	}
-	
-	
+
 	/**
 	 * 刷新订阅
+	 * 
 	 * @param item
 	 * @return
 	 * @author zj
 	 * @date 2019年2月1日
 	 */
 	@RequestMapping("/rssfresh")
-	//@ManagerActionLog(operateDescribe="保存修改Rss订阅",operateFuncType=FunLogType.SaveOrUpdate,operateModelClassName=RssManagerMapper.class)
+	// @ManagerActionLog(operateDescribe="保存修改Rss订阅",operateFuncType=FunLogType.SaveOrUpdate,operateModelClassName=RssManagerMapper.class)
 	@ResponseBody
 	public String rssfresh(RssManager item) {
 
 		JSONObject jsonObject = null;
 		try {
-			
-			RssManager rssmanager=rssmanagerService.selectRssManagerById(item.getId());
-			
-			
-			jsonObject=rssmanagerService.refreshRssAndUpdateList( rssmanager);
-			
-			
-			
+
+			RssManager rssmanager = rssmanagerService.selectRssManagerById(item.getId());
+
+			jsonObject = rssmanagerService.refreshRssAndUpdateList(rssmanager);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//assert jsonObject != null;
+		// assert jsonObject != null;
+		return jsonObject.toString();
+	}
+
+	/**
+	 * 标记为已读
+	 * 
+	 * @param item
+	 * @return
+	 * @author zj
+	 * @date 2019年2月2日
+	 */
+	@RequestMapping("/readAllRss")
+	// @ManagerActionLog(operateDescribe="保存修改Rss订阅",operateFuncType=FunLogType.SaveOrUpdate,operateModelClassName=RssManagerMapper.class)
+	@ResponseBody
+	public String readAllRss(RssManager item) {
+
+		JSONObject jsonObject = new JSONObject();
+		try {
+
+			// RssManager rssmanager=rssmanagerService.selectRssManagerById(item.getId());
+
+			rssListService.readAllRss(item.getId());
+
+			jsonObject.put("bol", true);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// assert jsonObject != null;
+		return jsonObject.toString();
+	}
+
+	/**
+	 * 刷新全部订阅
+	 * 
+	 * @param item
+	 * @return
+	 * @author zj
+	 * @date 2019年2月2日
+	 */
+	@RequestMapping("/rssfreshAll")
+	// @ManagerActionLog(operateDescribe="保存修改Rss订阅",operateFuncType=FunLogType.SaveOrUpdate,operateModelClassName=RssManagerMapper.class)
+	@ResponseBody
+	public String rssfreshAll(RssManager item) {
+
+		JSONObject jsonObject = new JSONObject();
+		try {
+
+			// RssManager rssmanager=rssmanagerService.selectRssManagerById(item.getId());
+
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					try {
+
+						List<RssManager> rssMlist = rssmanagerService.selectRssManagerList(null);
+
+						for (int i = 0; i < rssMlist.size(); i++) {
+
+							//if (rssMlist.get(i).getAutoRss().equals("1")) {
+								rssmanagerService.refreshRssAndUpdateList(rssMlist.get(i));
+								if (jsonObject.optBoolean("bol")) {
+
+								}
+							//}
+						}
+
+					} catch (Exception e) {
+
+					}
+				}
+			}).run();
+
+			jsonObject.put("bol", true);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// assert jsonObject != null;
+		return jsonObject.toString();
+	}
+	
+	
+	/**
+	 * 定时任务，刷新
+	 * @return
+	 * @author zj
+	 * @date 2019年2月2日
+	 */
+	public String rssfreshAllAuto() {
+
+		JSONObject jsonObject = new JSONObject();
+		try {
+
+			// RssManager rssmanager=rssmanagerService.selectRssManagerById(item.getId());
+
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					try {
+
+						List<RssManager> rssMlist = rssmanagerService.selectRssManagerList(null);
+
+						for (int i = 0; i < rssMlist.size(); i++) {
+
+							if (rssMlist.get(i).getAutoRss().equals("1")) {
+								rssmanagerService.refreshRssAndUpdateList(rssMlist.get(i));
+								if (jsonObject.optBoolean("bol")) {
+
+								}
+							}
+						}
+
+					} catch (Exception e) {
+
+					}
+				}
+			}).run();
+
+			jsonObject.put("bol", true);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// assert jsonObject != null;
 		return jsonObject.toString();
 	}
 	
 	
 
-
-    @RequestMapping("/selectrssmanager")
-    @ResponseBody
-    public List<RssManager> selectrssmanager( RssManager item) {
-        return rssmanagerService.selectRssManagerList(item);
-    }
-
+	@RequestMapping("/selectrssmanager")
+	@ResponseBody
+	public List<RssManager> selectrssmanager(RssManager item) {
+		return rssmanagerService.selectRssManagerList(item);
+	}
 
 }

@@ -2051,3 +2051,9 @@ a.rsslinklist{
 .readdone{
 	color:#ddd8d8;
 }
+
+.breakall{
+	max-width: 120px;
+    word-break: break-all;
+    display: block;
+}

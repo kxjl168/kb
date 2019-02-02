@@ -120,7 +120,10 @@
 				
 				   											<div class="pull-left  {{x.isshow|ftc}}">{{x.isshow|ft}}</div>
 																<div class="pull-right">【 <a href="javascript:void(0)" class="text-info"
-																	ng-click="addOrModify(x)">修改</a> <a href="#"
+																	ng-click="addOrModify(x)">修改</a> 
+																	<a href="javascript:void(0)" class="text-info"
+																	ng-click="rss(x)">订阅</a> 
+																	<a href="javascript:void(0)"
 																	class="text-warning" ng-click="del(x)">删除</a> 】
 																	</div>
 															</div>

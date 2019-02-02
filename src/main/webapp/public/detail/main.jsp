@@ -132,7 +132,7 @@
 					</div>
 
 
-					<div class="  col-xs-12 row tablefoot">
+					<div class=" prenexlist col-xs-12 row tablefoot">
 						<ul class="pagination pull-left">
 							<li>
 							<c:if test="${preBlog!=null }">

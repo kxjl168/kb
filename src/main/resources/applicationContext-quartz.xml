@@ -32,6 +32,29 @@
 		<property name="cronExpression" value="50 59 * * * ?" /><!--  
 			秒 分 时 日 月 周 年 每隔1秒钟触发一次 -->
 	</bean>
+	
+	
+	
+	<bean id="rssUpdate"
+
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<bean class="com.kxjl.web.autodata.controller.WebController.RssManagerController" />
+		</property>
+		<property name="targetMethod" value="rssfreshAllAuto" />
+		<property name="concurrent" value="false" />
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+	</bean>
+
+
+
+	
+	<bean id="rssUpdateTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="rssUpdate" />
+		<property name="cronExpression" value="50 59 * * * ?" /><!--  
+			秒 分 时 日 月 周 年 每隔1秒钟触发一次 -->
+	</bean>
 
 
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
@@ -39,6 +62,7 @@
 			<list>
 
 				<ref bean="resetBlackIPListTrigger" />
+				<ref bean="rssUpdateTrigger" />
 				
 			</list>
 		</property>

@@ -84,6 +84,26 @@
 
 							</div>
 							
+							<div class="row  form-group margin-bottom-5 hide">
+
+								<div class=" col-md-6  col-xs-12  ">
+									<div
+										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">只看有新文章:</div>
+									<div class="col-md-6 col-xs-8 text-right ">
+										<input id="type_second" name="type_second"  checked="checked"
+												type="checkbox" class="mcheck form-control">
+									</div>
+
+
+
+
+								</div>
+
+
+								
+
+							</div>
+							
 
 						</div>
 
@@ -99,9 +119,6 @@
 
 		<div class="col-xs-12 row nopaddding">
 
-			<div id="sdata" class=" col-xs-4  margin-bottom-10 padding-right-0 ">
-			</div>
-			
 			<div
 				class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
 				<button type="button" class="btn btn-primary btn-add btn-block"
@@ -111,11 +128,20 @@
 			</div>
 			<div
 				class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
-				<button type="button" onclick="query()"
+				<button type="button" onclick="doSearch_item()"
 					class="btn btn-primary btn-query btn-block   ">查询</button>
 
 
 			</div>
+			
+			<div
+				class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
+				<button type="button" onclick="refreshAll()"
+					class="btn btn-primary btn-warning btn-block   ">全部刷新</button>
+
+
+			</div>
+			
 
 		</div>
 

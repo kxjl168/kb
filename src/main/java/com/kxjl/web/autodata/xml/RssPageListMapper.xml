@@ -157,7 +157,12 @@
 	<if test=" id !=null and id !='' ">
 		and c.id = #{id}
 	</if>
-	
+	<if test=" rssManagerId !=null and rssManagerId !='' ">
+	<![CDATA[	and c.rss_manager_id in ( ${rssManagerId} ) ]]>
+	</if>
+		<if test=" isRead !=null and isRead !='' ">
+		and c.is_read = '0'
+	</if>
 		
 		<if test=" title !=null and title !='' ">
 		and c.title like concat ('%', #{title},'%')
@@ -176,6 +181,12 @@
 
 </select>
 
+<update id="readAllRss" parameterType="java.lang.String" >
+    update 
+   rss_page_list
+   set is_read='1'
+    where rss_manager_id = #{id,jdbcType=VARCHAR}
+  </update>
 
 
 <delete id="delete"

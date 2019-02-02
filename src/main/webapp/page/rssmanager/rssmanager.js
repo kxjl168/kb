@@ -88,7 +88,7 @@ $(function() {
 				type : "post",
 				url : url,
 				data : data,
-				async : false,
+				async : true,
 				dataType : "json",
 				success : function(response) {
 					// debugger;
@@ -166,8 +166,8 @@ function InitQuery_item() {
 		sortOrder : "desc", // 排序方式
 		sidePagination : "server", // 分页方式：client客户端分页，server服务端分页（*）
 		pageNumber : 1, // 初始化加载第一页，默认第一页
-		pageSize : 10, // 每页的记录行数（*）
-		pageList : [ 10, 25 ], // 可供选择的每页的行数（*）
+		pageSize : 20, // 每页的记录行数（*）
+		pageList : [ 10,20 ,30 ], // 可供选择的每页的行数（*）
 		search : false, // 是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
 
 		// showColumns: true, //是否显示所有的列
@@ -198,7 +198,26 @@ function InitQuery_item() {
 				title : '站点名称',
 				align : 'center',
 				valign : 'middle',
-				   
+				 formatter: function (value, row, index) {
+					 var add="";
+					 if(row.mName)
+					  add=  "("+row.mName+")";
+			       return "<span title='"+row.remark+"'>"+value+add+"</span>";
+				 }
+				
+			},
+			
+			 {
+				field : 'noread',
+				title : '新文章',
+				align : 'center',
+				valign : 'middle',
+				 formatter: function (value, row, index) {
+			          if(value>0)
+			        	  return "<a href='"+basePath+"/manager/rsspagelist/manager/?s="+row.id+"&sn="+row.name+"'><span class='text-info'><b>"+value+"</b></span></a>";
+			          else 
+			        	  return value;
+			         }
 				
 			},
 		 {
@@ -206,23 +225,23 @@ function InitQuery_item() {
 				title : 'Rss链接',
 				align : 'center',
 				valign : 'middle',
-				   
+				 formatter: function (value, row, index) {
+				       return "<a target='_blank' href='"+value+"' >"+value+"</a>";
+					 }   
 				
 			},
+		
 		 {
-				field : 'icon',
-				title : '图标',
-				align : 'center',
-				valign : 'middle',
-				   
-				
-			},
-		 {
-				field : 'remark',
+				field : 'mRemark',
 				title : '备注',
 				align : 'center',
 				valign : 'middle',
-				   
+				 formatter: function (value, row, index) {
+			          if(row.hasError=="1")
+			        	  return "<span class='breakall' title='"+row.remark+"'>"+row.remark.substring(0,30)+"</span>";
+			          else 
+			        	  return value;
+			         } 
 				
 			},
 		 {
@@ -245,9 +264,9 @@ function InitQuery_item() {
 				valign : 'middle',
 				 formatter: function (value, row, index) {
 			          if(value==1)
-			        	  return "失败";
+			        	  return "<span class='text-danger'>失败</span>";
 			          else 
-			        	  return "成功";
+			        	  return "<span class='text-success'>成功</span>";
 			         } 
 				
 			},
@@ -280,7 +299,8 @@ function InitQuery_item() {
 function modifyAndDeleteButton_item(value, row, index) {
 	return [ '<div class="">'
 			+ '<button id = "update" type = "button" class = "btn btn-info"><i class="glyphicon glyphicon-pencil">修改</i> </button>&nbsp;'
-			+ '<button id = "updateRss" type = "button" class = "btn btn-info"><i class="glyphicon glyphicon-refresh">立即更新</i> </button>&nbsp;'
+			+ '<button id = "readAllRss" type = "button" class = "btn btn-success"><i class="glyphicon glyphicon-refresh">全部已读</i> </button>&nbsp;'
+			+ '<button id = "updateRss" type = "button" class = "btn btn-warning"><i class="glyphicon glyphicon-refresh">立即更新</i> </button>&nbsp;'
 			+ '<button id = "delete" type = "button" class = "btn btn-danger"><i class="glyphicon glyphicon-trash">删除</i> </button>'
 			+ '</div>' ].join("");
 }
@@ -314,6 +334,25 @@ window.PersonnelInformationEvents_item = {
 
 	},
 	
+	"click #readAllRss" : function(e, value, row, index) {
+		$.ajax({
+			type : "post",
+			url :getRPath()+ '/manager/rssmanager/readAllRss',
+			data : {
+				id : row.id
+			},
+			async : true,
+			dataType : "json",
+			success : function(response) {
+				
+			  info('成功!');
+			  
+			  doSearch_item();
+			}
+		});
+
+	},
+
 	"click #updateRss" : function(e, value, row, index) {
 		$.ajax({
 			type : "post",
@@ -326,6 +365,8 @@ window.PersonnelInformationEvents_item = {
 			success : function(response) {
 				
 			  info('刷新成功!');
+			  
+			  doSearch_item();
 			}
 		});
 
@@ -334,7 +375,7 @@ window.PersonnelInformationEvents_item = {
 	"click #delete" : function(e, value, row, index) {
 		var msg = "您真的确定要删除吗？";
 		var url = getRPath()+"/manager/rssmanager/delete";
-		cconfirm(msg,function() {
+		cconfirm2(msg,function() {
 			$.ajax({
 				type : "post",
 				url : url,
@@ -354,6 +395,26 @@ window.PersonnelInformationEvents_item = {
 		
 	}
 };
+
+function refreshAll(){
+
+	
+		$.ajax({
+			type : "post",
+			url :getRPath()+ '/manager/rssmanager/rssfreshAll',
+			data : {
+				
+			},
+			async : true,
+			dataType : "json",
+			success : function(response) {
+				
+			  info('已开始刷新');
+			}
+		});
+
+	
+}
 
 function doSearch_item() {
 	

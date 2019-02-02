@@ -46,6 +46,8 @@ public interface RssPageListService {
     RssPageList selectRssPageListById(String id);
 
 
+    
+    void readAllRss(String id);
 
 
 }

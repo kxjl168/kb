@@ -51,10 +51,9 @@ public class RssManagerServiceImpl implements RssManagerService {
 
 			item.setId(UUIDUtil.getUUID());
 
-			
 			item.setUpdateDate(DateUtil.getNowStr(""));
 			item.setLastRssDate(DateUtil.getNowStr(""));
-			
+
 			itemMapper.insertSelective(item);
 
 			rtn.put("bol", true);
@@ -98,15 +97,26 @@ public class RssManagerServiceImpl implements RssManagerService {
 
 	/**
 	 * 刷新rss订阅数据
+	 * 
 	 * @param rssmanager
 	 * @author zj
 	 * @date 2019年2月1日
 	 */
 	public JSONObject refreshRssAndUpdateList(RssManager rssmanager) {
 
-		JSONObject jsonObject = null;
+		JSONObject jsonObject = new JSONObject();
 
+		boolean isok = false;
 		try {
+
+			if (null == rssmanager.getId() || "".equals(rssmanager.getId())) {
+				RssManager rquery = new RssManager();
+				rquery.setLink(rssmanager.getLink());
+				List<RssManager> tps = selectRssManagerList(rquery);
+				if (tps != null && tps.size() != 0) {
+					rssmanager.setId(tps.get(0).getId());
+				}
+			}
 
 			// 解析
 			Document docrss = RssUtil.parse(new URL(rssmanager.getLink()));
@@ -118,24 +128,45 @@ public class RssManagerServiceImpl implements RssManagerService {
 				rssmanager.setRemark(rsstp.getRemark());
 			}
 
-			if (null == rssmanager.getId() || "".equals(rssmanager.getId())) {
-
-				jsonObject = saveRssManager(rssmanager);
-
-			} else {
-				jsonObject = updateRssManager(rssmanager);
-			}
-
 			List<RssPageList> plist = RssUtil.rssPagesParse(docrss);
 			for (RssPageList rssPageList : plist) {
-				rssPageList.setRssManagerId(rssmanager.getId());
-				rssListService.SaveOrUpdateRssPageList(rssPageList);
+				try {
+					rssPageList.setRssManagerId(rssmanager.getId());
+					rssListService.SaveOrUpdateRssPageList(rssPageList);	
+				} catch (Exception e) {
+					rssPageList.setContext("内容存储错误-"+e.getMessage());
+					rssListService.SaveOrUpdateRssPageList(rssPageList);
+					continue;
+				}
+				
 			}
 
+			rssmanager.setLastRssDate(DateUtil.getNowStr(""));
+
+			isok = true;
+
+			jsonObject.put("bol", true);
+
 		} catch (Exception e) {
-			// TODO: handle exception
+			jsonObject.put("bol", false);
+			log.error("error:" + e.getMessage());
+			rssmanager.setRemark(e.getMessage());
+			isok = false;
 		}
-		
+
+		if (!isok)
+			rssmanager.setHasError("1");
+		else
+			rssmanager.setHasError("0");
+
+		if (null == rssmanager.getId() || "".equals(rssmanager.getId())) {
+
+			jsonObject = saveRssManager(rssmanager);
+
+		} else {
+			jsonObject = updateRssManager(rssmanager);
+		}
+
 		return jsonObject;
 	}
 

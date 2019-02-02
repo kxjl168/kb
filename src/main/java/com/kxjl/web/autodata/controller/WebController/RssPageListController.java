@@ -74,6 +74,20 @@ public class RssPageListController {
 		String rst = "";
 		List<RssPageList> rsspagelists = new ArrayList<>();
 
+		if(item.getRssManagerId()!=null)
+		{
+			String[] ids=item.getRssManagerId().split(",");
+			String newstr="";
+			for (int i = 0; i < ids.length; i++) {
+				if(!ids[i].trim().equals(""))
+				newstr+= "'"+ids[i]+"',";
+			}
+			if(!newstr.equals(""))
+			newstr=newstr.substring(0,newstr.length()-1);
+			item.setRssManagerId(newstr);
+		}
+		
+		
 		Page page = PageUtil.getPage(pageCondition);
 		rsspagelists = rsspagelistService.selectRssPageListList(item);
 

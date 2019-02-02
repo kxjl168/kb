@@ -116,6 +116,7 @@ public class BlogController extends BaseController {
 		// JSONObject jsonIN;
 		JSONObject jsonOut = new JSONObject();
 		List<Blog> detail = new ArrayList<Blog>();
+		List<Blog> prenextList = new ArrayList<Blog>();
 		String rst = "";
 		try {
 
@@ -139,11 +140,19 @@ public class BlogController extends BaseController {
 
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(detail);
+			
+			
+			
+			//前后文
+			// cur ,next, pre
+			prenextList = blogService.getBlogDetailPageList(query);
+
 
 			jsonOut.put("ResponseCode", "200");
 			jsonOut.put("ResponseMsg", "");
 			jsonOut.put("total", detail.size());
 			jsonOut.put("datalist", jsStr);
+			jsonOut.put("prenextlist", prenextList);
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

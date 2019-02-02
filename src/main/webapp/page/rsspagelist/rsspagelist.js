@@ -30,10 +30,45 @@ function test(){
 	});
 }
 
+function InitSiteQuery(){
+	var site = GetQueryString("s");
+	var siteName = GetQueryString("sn");
+	
+	
+	
+	  $("#q_rss_m_id").html("");
+      if( site)
+		   {
+	   var option = new Option(siteName,site, true, true);
+	   
+	   
+	   
+	    $("#q_rss_m_id").append($(option)).trigger('change');
+
+	    // manually trigger the `select2:select` event
+	    $("#q_rss_m_id").trigger({
+	        type: 'select2:select',
+	        params: {
+	            data: {text:siteName, id:site}
+	        }
+	    });
+		   }
+      
+	
+}
+
 $(function() {
+	
+	initRssSelect();
+	
+	InitSiteQuery();
+	
+	
+	
 	InitQuery_item();
+	
 
-
+	
 	initmenu($("#menuul"), "manager/rsspagelist/manager/");
 	
 	$("#btnAdd_item").click(function() {
@@ -166,22 +201,27 @@ function InitQuery_item() {
 		sortOrder : "desc", // 排序方式
 		sidePagination : "server", // 分页方式：client客户端分页，server服务端分页（*）
 		pageNumber : 1, // 初始化加载第一页，默认第一页
-		pageSize : 10, // 每页的记录行数（*）
-		pageList : [ 10, 25 ], // 可供选择的每页的行数（*）
+		pageSize : 20, // 每页的记录行数（*）
+		pageList : [ 10,20,30 ], // 可供选择的每页的行数（*）
 		search : false, // 是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
 
 		// showColumns: true, //是否显示所有的列
 		uniqueId : "id", // 每一行的唯一标识，一般为主键列
 		// queryParamsType : "limit",
 		queryParams : function queryParams(params) { // 设置查询参数
+			
+			var cids = $("#q_rss_m_id").val();
+			var id=(cids == null || cids.length == 0) ? ""
+					: cids.toString();
+			
 			var param = {
 				pageSize : params.limit, // 每页要显示的数据条数
 				offset : params.offset, // 每页显示数据的开始行号
 				sortName : params.sort, // 要排序的字段
 				sortOrder : params.order, // 排序规则
 				
-				
-				
+				isRead : $('#isRead').is(":checked")?"1":"",
+				rssManagerId:id,
 				title : $("#q_title").val(),
 				link : $("#q_link").val(),
 				
@@ -223,7 +263,7 @@ function InitQuery_item() {
 				align : 'center',
 				valign : 'middle',
 				 formatter: function (value, row, index) {
-		             return value.substring(0,100)+"...";
+		             return value.substring(0,50)+"...";
 		         }  
 				
 			},
@@ -232,6 +272,7 @@ function InitQuery_item() {
 				field : 'link',
 				title : '文章链接',
 				align : 'center',
+				visible : false,
 				valign : 'middle',
 				 formatter: function (value, row, index) {
 		             return "<a target='_blank' class='rsslinklist' href='"+value+"'>"+value+"</a>";
@@ -240,9 +281,10 @@ function InitQuery_item() {
 			},
 		 {
 				field : 'isRead',
-				title : '已读(1/0未读）',
+				title : '状态',
 				align : 'center',
 				valign : 'middle',
+				visible : false,
 				 formatter: function (value, row, index) {
 		            if(value==1)
 					 return "已读";
@@ -321,7 +363,7 @@ window.PersonnelInformationEvents_item = {
 	"click #delete" : function(e, value, row, index) {
 		var msg = "您真的确定要删除吗？";
 		var url = getRPath()+"/manager/rsspagelist/delete";
-		cconfirm(msg,function() {
+		cconfirm2(msg,function() {
 			$.ajax({
 				type : "post",
 				url : url,

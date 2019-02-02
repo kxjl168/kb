@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxjl.web.autodata.dao.EmojiMapper">
+  <resultMap id="BaseResultMap" type="com.kxjl.web.autodata.pojo.Emoji">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="str" jdbcType="VARCHAR" property="str" />
+    <result column="etype" jdbcType="VARCHAR" property="etype" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, str, etype
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from emoji
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from emoji
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kxjl.web.autodata.pojo.Emoji">
+    insert into emoji (id, name, str, 
+      etype)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{str,jdbcType=VARCHAR}, 
+      #{etype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kxjl.web.autodata.pojo.Emoji">
+    insert into emoji
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="str != null">
+        str,
+      </if>
+      <if test="etype != null">
+        etype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="str != null">
+        #{str,jdbcType=VARCHAR},
+      </if>
+      <if test="etype != null">
+        #{etype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kxjl.web.autodata.pojo.Emoji">
+    update emoji
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="str != null">
+        str = #{str,jdbcType=VARCHAR},
+      </if>
+      <if test="etype != null">
+        etype = #{etype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kxjl.web.autodata.pojo.Emoji">
+    update emoji
+    set name = #{name,jdbcType=VARCHAR},
+      str = #{str,jdbcType=VARCHAR},
+      etype = #{etype,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+
+
+<select id="selectList"
+	resultMap="BaseResultMap"
+	parameterType="com.kxjl.web.autodata.pojo.Emoji">
+	select
+	<include refid="Base_Column_List" />
+	from emoji c
+
+	where 1=1
+	<if test=" id !=null and id !='' ">
+		and c.id = #{id}
+	</if>
+	
+		
+		<if test=" name !=null and name !='' ">
+		and c.name like concat ('%', #{name},'%')
+	</if>
+		
+			
+		
+		<if test=" str !=null and str !='' ">
+		and c.str like concat ('%', #{str},'%')
+	</if>
+		
+			
+
+
+</select>
+
+
+
+<delete id="delete"
+	parameterType="com.kxjl.web.autodata.pojo.Emoji">
+	delete from emoji
+
+	where id = #{id,jdbcType=VARCHAR}
+
+</delete>
+
+</mapper>

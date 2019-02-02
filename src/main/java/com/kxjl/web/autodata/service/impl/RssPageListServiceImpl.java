@@ -56,6 +56,9 @@ public class RssPageListServiceImpl implements RssPageListService {
 		}
 	}
 
+	
+	
+	
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public JSONObject updateRssPageList(RssPageList item) {
@@ -160,6 +163,15 @@ public class RssPageListServiceImpl implements RssPageListService {
 		}
 		return data;
 
+	}
+
+
+
+
+	@Override
+	public void readAllRss(String id) {
+		itemMapper.readAllRss(id);
+		
 	}
 
 }

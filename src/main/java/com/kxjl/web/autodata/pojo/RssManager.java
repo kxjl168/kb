@@ -20,6 +20,14 @@ public class RssManager {
     private String updateDate;
 
     private String lastRssDate;
+    
+    private String mName;
+    private String mRemark;
+    
+    //query
+    private String read;
+    
+    private String noread;
 
     public String getId() {
         return id;
@@ -100,4 +108,36 @@ public class RssManager {
     public void setLastRssDate(String lastRssDate) {
         this.lastRssDate = lastRssDate == null ? null : lastRssDate.trim();
     }
+
+	public String getRead() {
+		return read;
+	}
+
+	public void setRead(String read) {
+		this.read = read;
+	}
+
+	public String getNoread() {
+		return noread;
+	}
+
+	public void setNoread(String noread) {
+		this.noread = noread;
+	}
+
+	public String getmName() {
+		return mName;
+	}
+
+	public void setmName(String mName) {
+		this.mName = mName;
+	}
+
+	public String getmRemark() {
+		return mRemark;
+	}
+
+	public void setmRemark(String mRemark) {
+		this.mRemark = mRemark;
+	}
 }

@@ -36,4 +36,12 @@ public interface RssPageListMapper {
      * @date 2019-01-28 22:51:27
      */
     int delete(RssPageList item);
+    
+    /**
+     * 全部rss_manger_id已读
+     * @param id
+     * @author zj
+     * @date 2019年2月2日
+     */
+    void readAllRss(String id);
 }

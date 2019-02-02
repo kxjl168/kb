@@ -263,7 +263,7 @@ window.PersonnelInformationEvents_item = {
 	"click ${r'#'}delete" : function(e, value, row, index) {
 		var msg = "您真的确定要删除吗？";
 		var url = getRPath()+"/manager/${ctrollerModelMapping}/delete";
-		cconfirm(msg,function() {
+		cconfirm2(msg,function() {
 			${r'$'}.ajax({
 				type : "post",
 				url : url,

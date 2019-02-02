@@ -102,10 +102,16 @@ public class RssUtil {
 					node_link.getText().length() - 1));
 			
 			
+			if(node_content!=null)
+			{
 			String content= node_content.getText();
 			content=content.replaceAll("src=\"/", "src=\""+link+"/");
 			pageitem.setContext(content);
-
+			}
+			else
+			{
+				pageitem.setContext("未提供内容订阅");
+			}
 			
 			
 			
@@ -121,7 +127,7 @@ public class RssUtil {
 				} catch (Exception e2) {
 					// TODO: handle exception
 				}
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 
 			pagelist.add(pageitem);
