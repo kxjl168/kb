@@ -475,6 +475,30 @@
 	
 	<build>
 		<outputDirectory>${project.basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
+		
+		<finalName>kb</finalName>
+		<resources>
+			<!-- target下的properties 自动使用filter， 根据选择的profile 更新@参数@ -->
+			<resource>
+				<targetPath>${project.basedir}/src/main/webapp/WEB-INF/classes</targetPath>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+			<!-- 其他全部直接复制 -->
+			<resource>
+				<targetPath>${project.basedir}/src/main/webapp/WEB-INF/classes</targetPath>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<include>**/*.properties</include>
+				</excludes>
+			</resource>
+		</resources>
+		
+		
 		<plugins>
 			<!-- Compiler 插件, 设定JDK版本 -->
 			<!-- <plugin>
@@ -503,5 +527,41 @@
     
 		</plugins>
 	</build>
+	
+	
+	<profiles>
+		<!-- 初始化数据库 -->
+		<profile>
+			<id>dev-wk</id>
+			<!--可本地修改，避免影响其他开发 -->
+			<properties>
+			
+			 <jdbc.url><![CDATA[jdbc:mysql://192.168.100.42:3306/kb?useUnicode=true&characterEncoding=utf-8]]></jdbc.url>
+			
+			
+		
+
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		
+		<profile>
+			<id>dev-home</id>
+			<!--可本地修改，避免影响其他开发 -->
+			<properties>
+			
+			 <jdbc.url><![CDATA[jdbc:mysql://192.168.31.239:3306/kb?useUnicode=true&characterEncoding=utf-8]]></jdbc.url>
+			
+			
+
+			</properties>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+		</profile>
+	</profiles>
+	
 </project>
 

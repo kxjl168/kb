@@ -98,8 +98,7 @@ public class RssUtil {
 			pageitem.setTitle(noderssTitle.getText());
 			pageitem.setLink(node_link.getText());
 
-			pageitem.setId(node_link.getText().substring(node_link.getText().lastIndexOf("/"),
-					node_link.getText().length() - 1));
+			pageitem.setId(node_link.getText());
 			
 			
 			if(node_content!=null)
@@ -125,7 +124,8 @@ public class RssUtil {
 					Date pdate = fm.parse(node_pubDate.getText());
 					pageitem.setUpdateDate(DateUtil.getDateStr(pdate, ""));
 				} catch (Exception e2) {
-					// TODO: handle exception
+					pageitem.setTitle(pageitem.getTitle()+"(pubDate错误)");
+					pageitem.setUpdateDate(DateUtil.getNowStr(""));
 				}
 				//e.printStackTrace();
 			}
