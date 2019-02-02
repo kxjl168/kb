@@ -2047,6 +2047,7 @@ a.rsslinklist{
 .rsspagedetail img{
 	width: 100%;
 	padding: 5px;
+	height: auto;
 }
 .readdone{
 	color:#ddd8d8;
