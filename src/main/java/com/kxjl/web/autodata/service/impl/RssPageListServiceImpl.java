@@ -47,7 +47,7 @@ public class RssPageListServiceImpl implements RssPageListService {
 
 			return rtn;
 		} catch (Exception e) {
-			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			//TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			log.error("新增失败", e);
 			rtn.put("bol", false);
 			rtn.put("message", "新增失败");
