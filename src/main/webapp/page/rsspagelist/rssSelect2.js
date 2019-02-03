@@ -43,8 +43,8 @@ function initRssSelect() {
 
 		ajax : {
 			type : "post",
-			url : getImUrl()+"/manager/rssmanager/rssmanagerList.do",
-			//dataType : "json",
+			url : basePath+"/manager/rssmanager/rssmanagerList.do",
+			dataType : "json",
 			data : function(params) {
 
 				//var params=eval(strparams);
@@ -66,7 +66,7 @@ function initRssSelect() {
 			processResults : function(data, params) {
 				var selectdatas = [];
 				
-				data=eval("("+data+")");
+				//data=eval("("+data+")");
 				/*
 				 * if(typeof(params.page)=="undefined") selectdatas.push({ id :
 				 * -1, text : '新建属性' });

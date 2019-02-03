@@ -188,6 +188,12 @@
     where rss_manager_id = #{id,jdbcType=VARCHAR}
   </update>
 
+<delete id="delAllRssByMid" parameterType="java.lang.String" >
+    delete from  
+   rss_page_list
+    where rss_manager_id = #{id,jdbcType=VARCHAR}
+  </delete>
+
 
 <delete id="delete"
 	parameterType="com.kxjl.web.autodata.pojo.RssPageList">

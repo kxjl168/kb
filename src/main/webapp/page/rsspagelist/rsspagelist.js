@@ -184,7 +184,7 @@ function initValidate_item() {
 function InitQuery_item() {
 	// 初始化Table
 	$('#table_list_item').bootstrapTable({
-		url : getRPath()+'/manager/rsspagelist/rsspagelistList', // 请求后台的URL（*）
+		url : getRPath()+'/manager/rsspagelist/rsspagelistList.do', // 请求后台的URL（*）
 		method : 'post', // 请求方式（*）
 		contentType : 'application/x-www-form-urlencoded',
 		toolbar : '#toolbar', // 工具按钮用哪个容器
@@ -300,7 +300,8 @@ function InitQuery_item() {
 				valign : 'middle',
 				   
 		 formatter: function (value, row, index) {
-             return new Date(value).Format("yyyy-MM-dd hh:mm:ss");
+            // return new Date(value).Format("yyyy-MM-dd hh:mm:ss");
+			 return value.substr(0,value.length-2);
          }
 				
 			},
@@ -384,7 +385,7 @@ window.PersonnelInformationEvents_item = {
 	}
 };
 
-function query() {
+function doSearch_item() {
 	
 	
 	

@@ -222,6 +222,17 @@ $(document).ready(function(){
 	include_js(googleJs);
 	
 	function loadads(){
+		
+		
+		 (adsbygoogle = window.adsbygoogle || []).push({
+			            google_ad_client: "ca-pub-4823081228661631",  
+			             enable_page_level_ads: true 
+			         
+			         }); 
+			return ;         
+
+		
+		
 		if (document.all.item('googlead3') != null) {
 			googlead3.innerHTML = googleadcode3.innerHTML;
 		}

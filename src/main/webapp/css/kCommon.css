@@ -1457,6 +1457,7 @@ back-head
 .relatedLink li{
 	line-height: 45px;
 	height: 40px;
+	overflow: hidden;
 }
 
 /**related link*/

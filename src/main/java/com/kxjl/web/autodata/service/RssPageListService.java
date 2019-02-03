@@ -48,6 +48,14 @@ public interface RssPageListService {
 
     
     void readAllRss(String id);
+    
+    /**
+     * 删除所有该站点订阅文章
+     * @param id
+     * @author zj
+     * @date 2019年2月3日
+     */
+    void delAllRssByMid(String id);
 
 
 }

@@ -188,8 +188,12 @@ public class RssManagerServiceImpl implements RssManagerService {
 	public int deleteRssManager(RssManager item) {
 		int result = 0;
 		try {
-
+			//同时删除订阅文章列表
+			rssListService.delAllRssByMid(item.getId());
+			
 			result = itemMapper.delete(item);
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("删除出错");
