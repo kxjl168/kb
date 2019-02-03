@@ -92,9 +92,9 @@ $(function() {
 		if($(e.target).attr("type")) //日期选择等弹出框
 			return;
 		
-		  $('#mform_item')[0].reset();
+		 // $('#mform_item')[0].reset();
 
-		$("#mform_item").data('bootstrapValidator').resetForm();
+	//	$("#mform_item").data('bootstrapValidator').resetForm();
 
 	});
 
@@ -337,16 +337,16 @@ window.PersonnelInformationEvents_item = {
 			dataType : "json",
 			success : function(response) {
 				
-			   $("#mform_item").fill(response);
+			   //$("#mform_item").fill(response);
 			     
 			   
-			   $("#mform_item #title").html(response.title);
-			   $("#mform_item #link").html(response.link);
-			   $("#mform_item #link").attr('href',response.link);
+			   $("#title").html(response.title);
+			   $("#link").html(response.link);
+			   $("#link").attr('href',response.link);
 			   
 			   
-			   $("#mform_item #updateDate").html(response.updateDate);
-			   $("#mform_item #context").html(response.context);
+			   $("#updateDate").html(response.updateDate);
+			   $("#context").html(response.context);
 	
 			   
 			   $("#myModal_item_title").html("查看");
