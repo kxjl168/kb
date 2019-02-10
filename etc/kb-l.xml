@@ -259,6 +259,12 @@
 		<ConfigDesc>总是生成html</ConfigDesc>
 	</ConfigItem>
 
+<ConfigItem>
+		<ConfigName>rssfreshAll</ConfigName>
+		<ConfigValue>false</ConfigValue>
+		<ConfigDesc>定时刷新rss</ConfigDesc>
+	</ConfigItem>
+
 	<!-- generator config end -->
 
 </Config>

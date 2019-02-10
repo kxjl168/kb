@@ -346,14 +346,19 @@ window.PersonnelInformationEvents_item = {
 			   
 			   
 			   $("#updateDate").html(response.updateDate);
-			   $("#context").html(response.context);
+			   try {
+
+				   $("#context").html(response.context);
+			} catch (e) {
+				// TODO: handle exception
+			}
 	
 			   
 			   $("#myModal_item_title").html("查看");
 			   
 				$("#myModal_item").modal();
 				
-				query();
+				doSearch_item();
 				
 			
 			}

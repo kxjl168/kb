@@ -19,6 +19,7 @@ import com.kxjl.web.autodata.pojo.RssPageList;
 import com.kxjl.web.autodata.service.RssManagerService;
 import com.kxjl.web.autodata.service.RssPageListService;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.*;
 
@@ -132,9 +133,19 @@ public class RssManagerServiceImpl implements RssManagerService {
 			for (RssPageList rssPageList : plist) {
 				try {
 					rssPageList.setRssManagerId(rssmanager.getId());
+					
+					
+					String b_text=rssPageList.getContext();
+					//Emoji表情支持
+					String b_text_noemoj=fliterFourUnicode(b_text);
+					rssPageList.setContext(b_text_noemoj);
+					
+					rssPageList.setTitle(fliterFourUnicode(rssPageList.getTitle()));
+
 					rssListService.SaveOrUpdateRssPageList(rssPageList);	
 				} catch (Exception e) {
-					rssPageList.setContext("内容存储错误-"+e.getMessage());
+					rssPageList.setContext("内容存储错误-");
+					rssPageList.setTitle("title存储错误-");
 					rssListService.SaveOrUpdateRssPageList(rssPageList);
 					continue;
 				}
@@ -169,6 +180,54 @@ public class RssManagerServiceImpl implements RssManagerService {
 
 		return jsonObject;
 	}
+		
+	
+		/**
+		 * 过滤emoji
+		 * @param source
+		 * @return
+		 * @throws UnsupportedEncodingException
+		 * @author zj
+		 * @date 2019年2月4日
+		 */
+		public static String fliterFourUnicode(String source) throws UnsupportedEncodingException {
+			byte[] sourceBytes;
+		 
+			sourceBytes = source.getBytes("utf-8");
+			int subIndex = 0;
+			String str = "";
+			do {
+				int curByte = Byte.toUnsignedInt(sourceBytes[subIndex]);
+				if (curByte > 0x00 && curByte <= 0x7f) { //0xxxxxxx
+					str = str + (char) sourceBytes[subIndex];
+					subIndex++;
+				} else if (curByte >= 0xc0 && curByte <= 0xdf) { //110xxxxx
+					byte[] bytes = { sourceBytes[subIndex], sourceBytes[subIndex + 1] };
+					str = str + new String(bytes, "utf-8");
+					subIndex += 2;
+				} else if (curByte >= 0xe0 && curByte <= 0xef) { //1110xxxx
+					byte[] bytes = { sourceBytes[subIndex], sourceBytes[subIndex + 1], sourceBytes[subIndex + 2] };
+					str = str + new String(bytes, "utf-8");
+					subIndex += 3;
+				} else if (curByte >= 0xf0 && curByte <= 0xf7) { //11110xxx
+					str = str + "*";
+					subIndex += 4;
+				} else if (curByte >= 0xf8 && curByte <= 0xfb) { //111110xx
+					str = str + "*";
+					subIndex += 5;
+				} else if (curByte >= 0xfc && curByte <= 0xfd) { //1111110x
+					str = str + "*";
+					subIndex += 6;
+				} else if (curByte >= 0xfe) { //11111110
+					str = str + "*";
+					subIndex += 7;
+				} else { //解析失败不是UTF-8编码开头字符
+					return str + "*";
+				}
+		 
+			} while (subIndex < sourceBytes.length);
+			return str;
+		}
 
 	@Override
 	public List<RssManager> selectRssManagerList(RssManager item) {

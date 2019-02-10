@@ -571,6 +571,11 @@ function init() {
 										
 										$scope.s_tags =item.tags;
 										$scope.s_context =unescape(item.context);
+										//$("#s_context").val(unescape(item.context) );
+										
+										setTimeout(function() {
+											$("#s_context").val(unescape(item.context) );	
+										}, 250);
 										
 									
 										
