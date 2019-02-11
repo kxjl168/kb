@@ -147,7 +147,7 @@
 						<div class=" form-group   ">
 								<div class="control-label padding-top-0 col-sm-1 col-xs-12 ">内容：</div>
 								<div class="col-sm-9 col-xs-12 text-right ">
-								 <textarea   id="s_context" name= "s_context" ng-model="s_context"  placeholder=" ">{{s_context}}</textarea>
+								 <textarea   id="s_context" name= "s_context"   placeholder=" "></textarea>
 							</div>
 							 <div class="col-xs-12 col-xs-offset-4 row ">
 							

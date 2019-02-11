@@ -217,7 +217,8 @@ function InitQuery_item() {
 				valign : 'middle',
 				   
 		 formatter: function (value, row, index) {
-             return new Date(value).Format("yyyy-MM-dd hh:mm:ss");
+            // return new Date(value).Format("yyyy-MM-dd hh:mm:ss");
+			 return value.substr(0,value.length-2);
          }
 				
 			},

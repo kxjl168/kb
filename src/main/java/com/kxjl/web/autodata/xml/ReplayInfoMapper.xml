@@ -254,7 +254,7 @@
 		and c.ip like concat ('%', #{ip},'%')
 	</if>
 		
-		order by c.blogimei,c.create_date desc	
+		order by c.create_date desc,c.blogimei	
 
 
 </select>

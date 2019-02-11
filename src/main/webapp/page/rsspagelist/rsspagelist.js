@@ -92,9 +92,9 @@ $(function() {
 		if($(e.target).attr("type")) //日期选择等弹出框
 			return;
 		
-		  $('#mform_item')[0].reset();
+		 // $('#mform_item')[0].reset();
 
-		$("#mform_item").data('bootstrapValidator').resetForm();
+	//	$("#mform_item").data('bootstrapValidator').resetForm();
 
 	});
 
@@ -184,7 +184,7 @@ function initValidate_item() {
 function InitQuery_item() {
 	// 初始化Table
 	$('#table_list_item').bootstrapTable({
-		url : getRPath()+'/manager/rsspagelist/rsspagelistList', // 请求后台的URL（*）
+		url : getRPath()+'/manager/rsspagelist/rsspagelistList.do', // 请求后台的URL（*）
 		method : 'post', // 请求方式（*）
 		contentType : 'application/x-www-form-urlencoded',
 		toolbar : '#toolbar', // 工具按钮用哪个容器
@@ -300,7 +300,8 @@ function InitQuery_item() {
 				valign : 'middle',
 				   
 		 formatter: function (value, row, index) {
-             return new Date(value).Format("yyyy-MM-dd hh:mm:ss");
+            // return new Date(value).Format("yyyy-MM-dd hh:mm:ss");
+			 return value.substr(0,value.length-2);
          }
 				
 			},
@@ -336,23 +337,28 @@ window.PersonnelInformationEvents_item = {
 			dataType : "json",
 			success : function(response) {
 				
-			   $("#mform_item").fill(response);
+			   //$("#mform_item").fill(response);
 			     
 			   
-			   $("#mform_item #title").html(response.title);
-			   $("#mform_item #link").html(response.link);
-			   $("#mform_item #link").attr('href',response.link);
+			   $("#title").html(response.title);
+			   $("#link").html(response.link);
+			   $("#link").attr('href',response.link);
 			   
 			   
-			   $("#mform_item #updateDate").html(response.updateDate);
-			   $("#mform_item #context").html(response.context);
+			   $("#updateDate").html(response.updateDate);
+			   try {
+
+				   $("#context").html(response.context);
+			} catch (e) {
+				// TODO: handle exception
+			}
 	
 			   
 			   $("#myModal_item_title").html("查看");
 			   
 				$("#myModal_item").modal();
 				
-				query();
+				doSearch_item();
 				
 			
 			}
@@ -384,7 +390,7 @@ window.PersonnelInformationEvents_item = {
 	}
 };
 
-function query() {
+function doSearch_item() {
 	
 	
 	

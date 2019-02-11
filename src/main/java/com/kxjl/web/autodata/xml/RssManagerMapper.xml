@@ -222,7 +222,7 @@ group by p.is_read,c.id
 		
 			
 		
-		order by c.last_rss_date desc,tp2.noread desc
+		order by  tp2.noread desc,c.last_rss_date desc
 
 
 </select>

@@ -9,6 +9,7 @@
 package com.kxjl.web.autodata.controller.WebController;
 
 import com.github.pagehelper.Page;
+import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.tool.utils.IPUtils;
 //import com.ztgm.base.aopAspect.FunLogType;
 //import com.ztgm.base.aopAspect.ManagerActionLog;
@@ -29,6 +30,8 @@ import net.sf.json.JSONObject;
 
 import org.dom4j.Document;
 import org.json.JSONException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,6 +66,8 @@ public class RssManagerController {
 
 	@Autowired
 	RssPageListService rssListService;
+	
+	private Logger logger=LoggerFactory.getLogger(RssManagerController.class);
 
 	@RequestMapping("/manager")
 	public String manager(HttpServletRequest request, Model model, Map<String, Object> maps) {
@@ -208,6 +213,9 @@ public class RssManagerController {
 	public String rssfreshAll(RssManager item) {
 
 		JSONObject jsonObject = new JSONObject();
+		
+		
+	
 		try {
 
 			// RssManager rssmanager=rssmanagerService.selectRssManagerById(item.getId());
@@ -229,6 +237,8 @@ public class RssManagerController {
 								}
 							//}
 						}
+						
+					
 
 					} catch (Exception e) {
 
@@ -257,8 +267,8 @@ public class RssManagerController {
 		JSONObject jsonObject = new JSONObject();
 		try {
 
-			// RssManager rssmanager=rssmanagerService.selectRssManagerById(item.getId());
-
+			if(ConfigReader.getInstance().getProperty("rssfreshAll", "false").equals("false"))
+				return "";
 			new Thread(new Runnable() {
 
 				@Override
@@ -269,12 +279,24 @@ public class RssManagerController {
 
 						for (int i = 0; i < rssMlist.size(); i++) {
 
-							if (rssMlist.get(i).getAutoRss().equals("1")) {
+							try {
+								
+						
+								if (rssMlist.get(i).getAutoRss().equals("1")) {
 								rssmanagerService.refreshRssAndUpdateList(rssMlist.get(i));
 								if (jsonObject.optBoolean("bol")) {
 
 								}
 							}
+							} catch (Exception e) {
+								logger.error(e.getMessage());
+								continue;
+							}
+						}
+						
+						if (ConfigReader.getInstance().getProperty("debug", "false").equals("true"))
+						{
+							logger.info("定时刷新RSS完成！");
 						}
 
 					} catch (Exception e) {

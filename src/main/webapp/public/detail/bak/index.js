@@ -474,7 +474,7 @@ function init() {
                              $(".relatedLink").html(html);
                              
                              //前后文
-                             $scope.datalist = eval(json.prenextList);
+                             $scope.datalist = eval(json.prenextlist);
                              $scope.x=$scope.datalist[0];
                              if ($scope.datalist.length > 1) {
                                  if ($scope.datalist[1].recordid > $scope.x.recordid)
@@ -510,7 +510,7 @@ function init() {
  								+' </li>'
  								+' </ul>' ;
                              
-                           $(".prenextlist").html(prenexthtml);
+                           $(".prenexlist").html(prenexthtml);
                              
                              
 

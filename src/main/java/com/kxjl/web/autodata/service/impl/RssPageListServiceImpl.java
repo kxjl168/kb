@@ -47,7 +47,7 @@ public class RssPageListServiceImpl implements RssPageListService {
 
 			return rtn;
 		} catch (Exception e) {
-			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			//TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			log.error("新增失败", e);
 			rtn.put("bol", false);
 			rtn.put("message", "新增失败");
@@ -56,9 +56,6 @@ public class RssPageListServiceImpl implements RssPageListService {
 		}
 	}
 
-	
-	
-	
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public JSONObject updateRssPageList(RssPageList item) {
@@ -87,6 +84,7 @@ public class RssPageListServiceImpl implements RssPageListService {
 
 	/**
 	 * 保持或者修改
+	 * 
 	 * @param item
 	 * @return
 	 * @author zj
@@ -113,7 +111,7 @@ public class RssPageListServiceImpl implements RssPageListService {
 
 			return rtn;
 		} catch (Exception e) {
-			
+
 			log.error("更新出错", e);
 			rtn.put("bol", false);
 			rtn.put("message", "更新出错");
@@ -165,13 +163,21 @@ public class RssPageListServiceImpl implements RssPageListService {
 
 	}
 
-
-
-
 	@Override
 	public void readAllRss(String id) {
 		itemMapper.readAllRss(id);
-		
+
+	}
+
+	/**
+	 * 删除所有该站点订阅文章
+	 * 
+	 * @param id
+	 * @author zj
+	 * @date 2019年2月3日
+	 */
+	public void delAllRssByMid(String id) {
+		itemMapper.delAllRssByMid(id);
 	}
 
 }

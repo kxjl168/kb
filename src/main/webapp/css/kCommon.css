@@ -1457,6 +1457,7 @@ back-head
 .relatedLink li{
 	line-height: 45px;
 	height: 40px;
+	overflow: hidden;
 }
 
 /**related link*/
@@ -2040,7 +2041,7 @@ a.rsslinklist{
 .rsspagedetail{
 	padding: 5px;
 	line-height: 30px;
-	height: 30px;
+	
 	font-size: 16px;
 	color:#717171;
 }

@@ -237,7 +237,9 @@ function InitQuery_item() {
 				title : '回复时间',
 				align : 'center',
 				valign : 'middle',
-				   
+				 formatter: function (value, row, index) {
+				 return value.substr(0,value.length-2); 
+				 }
 				
 			},
 		
@@ -331,6 +333,29 @@ window.PersonnelInformationEvents_item = {
 		
 	
 
+	},
+	
+	"click #update" : function(e, value, row, index) {
+		//var msg = "您真的确定要删除吗？";
+		var url = getRPath()+"/manager/replayinfo/load";
+		
+			$.ajax({
+				type : "post",
+				url : url,
+				data : {
+					"recordid" : row.recordid
+				},
+				success : function(response) {
+					   $("#mform_item").fill(response);
+					     
+
+					   $("#myModal_item_title").html("编辑");
+					   
+						$("#myModal_item").modal();
+				}
+			});
+		
+		
 	},
 	
 

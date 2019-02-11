@@ -44,4 +44,14 @@ public interface RssPageListMapper {
      * @date 2019年2月2日
      */
     void readAllRss(String id);
+    
+    
+    /**
+     * 删除所有该站点订阅文章
+     * @param id
+     * @author zj
+     * @date 2019年2月3日
+     */
+    void delAllRssByMid(String id);
+
 }

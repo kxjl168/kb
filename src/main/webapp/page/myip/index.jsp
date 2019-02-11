@@ -103,7 +103,7 @@
 			</div>
 			<div
 				class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
-				<button type="button" onclick="query()"
+				<button type="button" onclick="doSearch_item()"
 					class="btn btn-primary btn-query btn-block   ">查询</button>
 
 
