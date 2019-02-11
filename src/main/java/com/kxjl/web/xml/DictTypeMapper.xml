@@ -7,7 +7,8 @@
 	
 	
 	<select id="getDictInfoPageList" parameterType="com.kxjl.web.system.model.DictInfo" resultMap="DictInfoMap">
-		select a.*  from dict_info a 
+		select a.*,p.dict_name parent_name  from dict_info a 
+		left join dict_info p on a.parent_id=p.id
 		where 1=1
 		<if test='dict_type != null and dict_type != "" '>
 			and a.dict_type = #{dict_type}
@@ -19,6 +20,20 @@
 		<if test='dict_name != null and dict_name != "" '>
 			and a.dict_name =#{dict_name}
 		</if>
+		<if test='dict_level != null and dict_level != "" '>
+			and a.dict_level =#{dict_level}
+		</if>
+		
+		
+<if test='parent_id != null and parent_id != "" '>
+			and a.parent_id =#{parent_id}
+		</if>
+		
+		
+			<if test='enable != null and enable != "" '>
+			and a.enable =#{enable}
+		</if>
+		
 		order by a.sort asc
 
 		limit #{start},#{pageCount}
@@ -38,6 +53,16 @@
 		
 		<if test='dict_name != null and dict_name != "" '>
 			and a.dict_name =#{dict_name}
+		</if>
+			<if test='dict_level != null and dict_level != "" '>
+			and a.dict_level =#{dict_level}
+		</if>
+		
+			<if test='enable != null and enable != "" '>
+			and a.enable =#{enable}
+		</if>
+		<if test='parent_id != null and parent_id != "" '>
+			and a.parent_id =#{parent_id}
 		</if>
 		
 		
@@ -59,9 +84,9 @@
 	    
 		insert into dict_info 
 		(dict_key,dict_name,sort,dict_type,
-		create_date,val1,desc_info )
+		create_date,val1,desc_info,enable,parent_id ,dict_level)
 		values(#{dict_key},#{dict_name},#{sort},#{dict_type}
-		,		now(),#{val1},#{desc_info})
+		,		now(),#{val1},#{desc_info},#{enable},#{parent_id} ,#{dict_level})
 	</insert>
 	
 	<update id="updateDictInfo" parameterType="com.kxjl.web.system.model.DictInfo">
@@ -88,6 +113,16 @@
 			dict_type=#{dict_type},
 		</if>
 		
+		<if test='enable != null'>
+			enable=#{enable},
+		</if>
+		<if test='parent_id != null'>
+			parent_id=#{parent_id},
+		</if>
+		<if test='dict_level != null'>
+			dict_level=#{dict_level},
+		</if>
+		 
 		
 		</trim>
 		

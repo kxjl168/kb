@@ -79,7 +79,7 @@
 
 									<div class=" col-md-6  col-xs-12  ">
 										<div
-											class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">文章类型：</div>
+											class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">收支类型：</div>
 										<div class="col-md-6 col-xs-8 text-right ">
 											<input type="text" class="form-control" id="q_name"
 												ng-model="q_name" placeholder="">
@@ -322,7 +322,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">{{edit}}文章类型</h4>
+					<h4 class="modal-title" id="myModalLabel">{{edit}}收支类型</h4>
 				</div>
 
 

@@ -11,6 +11,19 @@ import com.kxjl.web.system.model.DictInfo;
 
 
 public interface DictInfoService {
+	
+	
+	/**
+	 * 构造权限树数据
+	 * 
+	 * @param dict_type
+	 * @return
+	 * @author zj
+	 * @date 20190211
+	 */
+	public List<String> getDictTreeSecond(String dict_type);
+	
+	
 	/**
 	 * 分页获取banner列表
 	 * @param query

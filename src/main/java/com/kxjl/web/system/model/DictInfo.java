@@ -23,8 +23,15 @@ public class DictInfo extends BaseModel {
 	private String val1;
 	
 	
+	private String enable;
+	private String parent_id;
+	private String dict_level;
+	
+	
 	//query
 	private String val2;
+	
+	private String parent_name;
 	
 	public Integer getId() {
 		return id;
@@ -76,6 +83,30 @@ public class DictInfo extends BaseModel {
 	}
 	public void setVal2(String val2) {
 		this.val2 = val2;
+	}
+	public String getEnable() {
+		return enable;
+	}
+	public void setEnable(String enable) {
+		this.enable = enable;
+	}
+	public String getParent_id() {
+		return parent_id;
+	}
+	public void setParent_id(String parent_id) {
+		this.parent_id = parent_id;
+	}
+	public String getParent_name() {
+		return parent_name;
+	}
+	public void setParent_name(String parent_name) {
+		this.parent_name = parent_name;
+	}
+	public String getDict_level() {
+		return dict_level;
+	}
+	public void setDict_level(String dict_level) {
+		this.dict_level = dict_level;
 	}
 	
 	

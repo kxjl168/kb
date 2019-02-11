@@ -13,6 +13,7 @@ app.controller('eduCtrl', function($scope, eduSrv) {
  * console.log("deviceready2=======: "); init(); });
  */
 
+var dict_type='pay';
 $(function() {
 	/*
 	 * if (clinetType == "Android" || clinetType == "http") {
@@ -180,6 +181,7 @@ function loadMenuTree(role_id)
 		type : 'post',
 		data : {
 			//role_id : role_id
+			dict_type:dict_type
 		},
 		dataType : "json",
 		url :  basePath + '/blogtype/getTree.do',// 请求的action路径
@@ -224,7 +226,7 @@ function changerows(option) {
 function changeParentList(successCallback){
 	var type=$("#dict_level").val()-1;
 	
-	var data="dict_level="+type+"&pageSize=40";
+	var data="dict_type="+dict_type+"&dict_level="+type+"&pageSize=40";
 	$.ajax({
 		type : "post",
 		url : basePath+"/blogtype/listparent.action",
@@ -277,7 +279,7 @@ app.filter("fmt", ['$sce', function($sce) {
 
 function init() {
 
-	initmenu($("#menuul"), "page/btype/");
+	initmenu($("#menuul"), "page/ptype/");
 
 	$('#collapseOne').on(
 			'shown.bs.collapse',
@@ -475,11 +477,13 @@ function init() {
 						obj.enable = $("#enable").val();
 						obj.parent_id = $("#menuParentid").val();
 						obj.dict_level = $("#dict_level").val();
-						
+					
 						
 					} else {
 						obj = value;
 					}
+					
+					obj.dict_type = dict_type;
 
 					SZUMWS(http + "blogtype/addOrUpdate.action", JSON
 							.stringify(obj), function succsess(json) {
@@ -548,7 +552,7 @@ function init() {
 			
 				// $scope.getcompayList();
 
-				$scope.title = "文章类型管理";
+				$scope.title = "收支类型管理";
 				// $scope.curpage=1;
 				$scope.page = 1;
 				$scope.rows = 20;
@@ -587,6 +591,7 @@ function init() {
 						}
 					
 					obj.parent_id=menuids;
+					obj.dict_type=dict_type;
 					
 					obj.name = $scope.q_name;// "12345678";
 
