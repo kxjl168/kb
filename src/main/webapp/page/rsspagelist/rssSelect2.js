@@ -43,7 +43,7 @@ function initRssSelect() {
 
 		ajax : {
 			type : "post",
-			url : getImUrl()+"/manager/rssmanager/rssmanagerList.do",
+			url : getRPath()+"/manager/rssmanager/rssmanagerList.do",
 			//dataType : "json",
 			data : function(params) {
 
