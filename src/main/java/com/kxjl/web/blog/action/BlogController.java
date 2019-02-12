@@ -578,8 +578,14 @@ public class BlogController extends BaseController {
 			if (curPage == 0)
 				curPage = 1;
 
+			
+			SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
+			
+			String utype=user.getUtype().toString();
+			
+			
 			String key = "blog_getInfoList" + "_" + month + "_" + blog_type + "_" + blog_tag + "_" + pageCount + "_"
-					+ curPage + "_" + blog_title + show+"_"+sortName+"_"+sortOrder;
+					+ curPage + "_" + blog_title + show+"_"+sortName+"_"+sortOrder+"_"+utype;
 			List<Blog> infos = Kdata.getInstance().getBlogList(key);
 
 			Blog query = new Blog();
@@ -590,6 +596,14 @@ public class BlogController extends BaseController {
 			query.setShowflag(show);
 			query.setSortName(sortName);
 			query.setSortOrder(sortOrder);
+			
+			if(user.getUtype()==UserType.Admin||user.getUtype()==UserType.Root)
+			{
+			}
+			else{
+				query.setCreate_user(user.getUserid());
+				
+			}
 
 			// query.setIp(ip);
 			// query.setCity(city);
@@ -883,6 +897,10 @@ public class BlogController extends BaseController {
 			
 			blog.setTags(blog.getTags().replace("，",","));
 			
+			SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
+			
+			
+			
 
 			if ( blog.getRecordid()!=null) {
 				
@@ -899,6 +917,7 @@ public class BlogController extends BaseController {
 					imei = UUID.randomUUID().toString();
 					blog.setImei(imei);
 					blog.setUpdate_date(time);
+					blog.setCreate_user(user.getUserid());
 				
 				/*
 				 * if (blog != null) blog.setCreator(blog.getName());

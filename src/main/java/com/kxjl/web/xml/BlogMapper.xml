@@ -98,12 +98,18 @@ order by t asc
 		<if test='month != null and month != "" '>
 			and DATE_FORMAT(a.create_date,"%Y-%m") =#{month}
 		</if>
+		
+		  <if test=" create_user !=null and  create_user !='' ">
+           and a.create_user=#{create_user}
+        </if>
+		
 		 <if test=" sortName !=null and sortName !='' ">
             order by a.${sortName} ${sortOrder}
         </if>
          <if test=" sortName ==null or sortName =='' ">
            	order by a.create_date desc
         </if>
+        
 	
 		limit #{start},#{pageCount}
 	</select>
@@ -132,6 +138,9 @@ order by t asc
 		<if test='month != null and month != "" '>
 			and DATE_FORMAT(a.create_date,"%Y-%m") =#{month}
 		</if>
+		 <if test=" create_user !=null and  create_user !='' ">
+           and a.create_user=#{create_user}
+        </if>
 		
 	</select>
 	
@@ -159,9 +168,9 @@ order by t asc
 	    
 		insert into blog_info 
 		(title,blog_type,content,tags,
-		create_date ,imei,showflag,showtime,ccid)
+		create_date ,imei,showflag,showtime,ccid, create_user)
 		values(#{title},#{blog_type},#{content},#{tags}
-			,#{create_date},#{imei},#{showflag},#{showtime},#{ccid})
+			,#{create_date},#{imei},#{showflag},#{showtime},#{ccid},#{create_user})
 	</insert>
 	
 	<update id="updateBlog" parameterType="com.kxjl.web.blog.model.Blog">

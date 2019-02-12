@@ -39,6 +39,16 @@ public class Blog extends BaseModel {
 	private String[] tagStrs;
 	
 	private String ccid;//许可协议id
+	
+	private String create_user;//作者
+
+	public String getCreate_user() {
+		return create_user;
+	}
+
+	public void setCreate_user(String create_user) {
+		this.create_user = create_user;
+	}
 
 	// query
 	private String ccname;//许可协议名称

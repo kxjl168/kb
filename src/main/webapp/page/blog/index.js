@@ -193,6 +193,13 @@ function initDetailTable() {
                 visible:true
             }, 
             {
+                field: 'create_user',
+                title: '作者',
+                align: 'left',
+                valign: 'middle',
+                visible:true
+            }, 
+            {
                 field: 'action',
                 title: '操作',
                 align: 'left',
