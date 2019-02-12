@@ -11,6 +11,7 @@ import com.kxjl.web.system.model.base.BaseModel;
 public class DictInfo extends BaseModel {
 	
 	public static String  blog_type_str="blog_type";
+	public static String  money_type_str="pay";
 	
 	
 	private Integer id ;// int(11) NOT NULL,

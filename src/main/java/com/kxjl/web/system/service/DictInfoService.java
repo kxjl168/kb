@@ -14,6 +14,18 @@ public interface DictInfoService {
 	
 	
 	/**
+	 * 构造 select2 group数据
+	 * 
+	 * @param dict_type
+	 * @return
+	 * @author zj
+	 * @date 20190211
+	 */
+	public List<String> getDictTreeSelectSecond(String dict_type);
+	
+	
+	
+	/**
 	 * 构造权限树数据
 	 * 
 	 * @param dict_type

@@ -50,6 +50,8 @@
 		<link rel="stylesheet"
 	href="${basePath}/js/plugin/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
 	
+<link rel="stylesheet"
+	href="${basePath}/js/plugin/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
 	
 <%-- 
 <link rel="stylesheet" href="${basePath }/js/plugin/bootstrap-table/css/bootstrap-table.min.css"></script>
@@ -134,6 +136,14 @@
 	src="${basePath}/js/plugin/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript"
 	src="${basePath}/js/plugin/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+
+
+<script type="text/javascript"
+	src="${basePath}/js/plugin/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript"
+	src="${basePath}/js/plugin/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+
 
 
 	<script type="text/javascript"
