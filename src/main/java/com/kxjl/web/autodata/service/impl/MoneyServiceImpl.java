@@ -26,6 +26,18 @@ public class MoneyServiceImpl implements MoneyService {
 	@Autowired
 	private MoneyMapper itemMapper;
 
+    /**
+     * 月份统计
+     * @param item
+     * @return
+     * @author zj
+     * @date 2019年2月12日
+     */
+    public List<Money> selectTotal(Money item){
+    	return itemMapper.selectTotal(item);
+    }
+    
+	
 	/**
 	 * @param item
 	 * @return

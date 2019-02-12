@@ -185,7 +185,7 @@
 	resultMap="BaseResultMap"
 	parameterType="com.kxjl.web.autodata.pojo.Money">
 	select
-	<include refid="Base_Column_List" />, d.dict_name typeName,d.val1 typeIcon
+	c.*, d.dict_name typeName,d.val1 typeIcon
 	from money c
 	left join dict_info d on c.m_type=d.id
 
@@ -201,15 +201,36 @@
 		
 			
 		
-		<if test=" mType !=null and mType !='' ">
-		and c.m_type like concat ('%', #{mType},'%')
+		<if test=" mDate !=null and mDate !='' ">
+		and c.m_date like concat ('%', #{mDate},'%')
 	</if>
 		
+		order by c.m_date desc
 			
 
 
 </select>
 
+<select id="selectTotal"
+	resultMap="BaseResultMap"
+	parameterType="com.kxjl.web.autodata.pojo.Money">
+select sum(money) money,'in' m_type from money c where in_out=1
+	<if test=" mDate !=null and mDate !='' ">
+		and c.m_date like concat ('%', #{mDate},'%')
+	</if>
+union
+select sum(money) money, 'out' m_type from money c where in_out=2
+<if test=" mDate !=null and mDate !='' ">
+		and c.m_date like concat ('%', #{mDate},'%')
+	</if>
+union
+select sum(money) money,'totol' m_type from money c where 1=1
+<if test=" mDate !=null and mDate !='' ">
+		and c.m_date like concat ('%', #{mDate},'%')
+	</if>
+
+
+</select>
 
 
 <delete id="delete"

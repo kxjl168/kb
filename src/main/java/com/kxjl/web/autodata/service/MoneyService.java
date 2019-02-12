@@ -27,7 +27,14 @@ import com.kxjl.web.autodata.pojo.Money;
  */
 public interface MoneyService {
 
-
+	   /**
+     * 月份统计
+     * @param item
+     * @return
+     * @author zj
+     * @date 2019年2月12日
+     */
+    List<Money> selectTotal(Money item);
     /**
      * 新增
      */

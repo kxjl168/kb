@@ -21,6 +21,7 @@
 
 	<div class="" id="content" style="">
 
+<input type="hidden" id="httppath" value="${httppath }" /> 
 
 		<div class=" row row-margin-top-70"></div>
 
@@ -31,7 +32,7 @@
 					data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
 					aria-expanded="true">
 					<div class="row">
-						<h3 class="panel-title col-xs-4 col-lg-4 col-md-4 ">收支管理管理 - 查询条件</h3>
+						<h3 class="panel-title col-xs-4 col-lg-4 col-md-4 ">收支查询</h3>
 
 
 
@@ -53,11 +54,11 @@
 
 								<div class=" col-md-6  col-xs-12  ">
 									<div
-										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">事项:</div>
+										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">日期:</div>
 									<div class="col-md-6 col-xs-8 text-right ">
 										<input
 											class="form-control ng-pristine ng-untouched ng-valid ng-empty"
-											id="q_name" type="text" name="q_name"
+											id="q_month" type="text" name="q_month"
 											placeholder="">
 									</div>
 
@@ -67,7 +68,7 @@
 								</div>
 
 
-								<div class=" col-md-6  col-xs-12  ">
+								<div class=" col-md-6  col-xs-12  hide ">
 									<div
 										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">分类:</div>
 									<div class="col-md-6 col-xs-8 text-right ">
@@ -100,6 +101,9 @@
 		<div class="col-xs-12 row nopaddding">
 
 			<div id="sdata" class=" col-xs-4  margin-bottom-10 padding-right-0 ">
+			<div>收入:<span id="shouruspan" class="shouruspan">+55555</span></div>
+			<div>支出:<span id="zhichuspan" class='zhichuspan'>-12313</span></div>
+			<div>结余:<span id="totalspan" class="">2222</span></div>
 			</div>
 			
 			<div
@@ -123,7 +127,7 @@
 
 		<div class="col-xs-12 row nopaddding">
 
-			<div class="table-responsive" style="margin: 1px;">
+			<div class="table-responsive tablemoney" style="margin: 1px;">
 				<table id="table_list_item" class="table  table-hover table-striped"></table>
 			</div>
 

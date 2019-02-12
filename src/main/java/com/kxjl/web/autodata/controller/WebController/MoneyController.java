@@ -11,12 +11,15 @@ package com.kxjl.web.autodata.controller.WebController;
 
 import com.github.pagehelper.Page;
 import com.kxjl.tool.common.Constant;
+import com.kxjl.tool.config.ConfigReader;
 //import com.ztgm.base.aopAspect.FunLogType;
 //import com.ztgm.base.aopAspect.ManagerActionLog;
 import com.kxjl.tool.utils.PageCondition;
 import com.kxjl.web.generator.pojo.Message;
+import com.kxjl.web.system.model.DictInfo;
 import com.kxjl.web.system.model.MenuInfo;
 import com.kxjl.web.system.model.SysUserBean;
+import com.kxjl.web.system.service.DictInfoService;
 import com.kxjl.web.system.service.MenuInfoService;
 import com.kxjl.tool.utils.PageUtil;
 import com.kxjl.web.autodata.dao.MoneyMapper;
@@ -36,6 +39,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +58,9 @@ public class MoneyController {
 	private MoneyService moneyService;
 	@Autowired
 	MenuInfoService menuService;
+	
+	@Autowired
+	DictInfoService dictInfoService;
 
 
 	@RequestMapping("/manager")
@@ -61,11 +68,26 @@ public class MoneyController {
 		List<MenuInfo> leftmenus = menuService.getLeftMenuTree(request.getSession(), request);
 		
 		maps.put("menus", leftmenus);
+		maps.put("httppath", 	ConfigReader.getInstance().getProperty("FILE_SVR_HTTP_OUTER_PATH"));
+		
 		return "/page/money/index";
 	}
 	
 
+	@RequestMapping("/moneyTypeList")
+	//@ManagerActionLog(operateDescribe="查询收支管理",operateFuncType=FunLogType.Query,operateModelClassName=MoneyMapper.class)
+	@ResponseBody
+	public List<String> moneyTypeList( DictInfo item, HttpServletRequest request,PageCondition pageCondition) {
 
+		String rst = "";
+		List<String> moneys = new ArrayList<>();
+
+		
+		moneys = dictInfoService.getDictTreeSelectSecond(DictInfo.money_type_str);
+
+
+		return moneys;
+	}
 	
 
 	@RequestMapping("/moneyList")
@@ -86,6 +108,26 @@ public class MoneyController {
 		}
 
 		return rst;
+	}
+	
+	/**
+	 * 月统计
+	 * @param item
+	 * @param request
+	 * @return
+	 * @author zj
+	 * @date 2019年2月12日
+	 */
+	@RequestMapping("/total")
+	//@ManagerActionLog(operateDescribe="删除收支管理",operateFuncType=FunLogType.Del,operateModelClassName=MoneyMapper.class)
+	@ResponseBody
+	public List<Money> total( Money item,HttpServletRequest request) {
+
+		Message msg = new Message();
+		
+		List<Money> lst = moneyService.selectTotal(item);
+		
+		return lst;
 	}
 
 	@RequestMapping("/delete")
@@ -127,6 +169,14 @@ public class MoneyController {
 		try {
 			
 			SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
+			
+			if(money.getInOut().equals("1"))
+				money.setMoney( BigDecimal.valueOf( +money.getMoney().doubleValue()));
+			else
+			{
+				if(money.getMoney().doubleValue()>0)
+				money.setMoney( BigDecimal.valueOf( -money.getMoney().doubleValue()));
+			}
 			
 			
 			if (null == money.getId() || "".equals(money.getId())) {

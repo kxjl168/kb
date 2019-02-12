@@ -44,7 +44,7 @@ function initTypeSelect() {
 		ajax : {
 			type : "post",
 			url : basePath+"/manager/money/moneyTypeList.do",
-			//dataType : "json",
+			dataType : "json",
 			data : function(params) {
 
 				//var params=eval(strparams);
@@ -117,7 +117,7 @@ function initTypeSelect() {
 				return {
 					results : selectdatas,
 					pagination : {
-						more : (params.page * 10 >= data.total) ? false : true
+						more :false,// (params.page * 10 >= data.total) ? false : true
 					}
 				};
 			},
@@ -170,7 +170,7 @@ function formatRepo(repo) {
 	var markup = repo.text;
 
 	if (repo.id) {
-		markup = '<div class=" row"><img class="pull-left img-responsive" src="'+repo.icon+'">'
+		markup = '<div class=" row"><img class="pull-left img-responsive" style="max-width:25px;" src="'+repo.icon+'">'
 				+ '<div class="col-xs-10">'+repo.text +"</div><div>";
 	}
 

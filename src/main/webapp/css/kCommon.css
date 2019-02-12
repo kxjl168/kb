@@ -2059,3 +2059,44 @@ a.rsslinklist{
     word-break: break-all;
     display: block;
 }
+
+tr.shouru .moneyvalue, .shouruspan{
+	color:green;
+}
+tr.zhichu .moneyvalue, .zhichuspan{
+	color:red;
+}
+.moneydate{
+	min-width: 80px;
+}
+.ttxt{
+	padding-left: 5px;
+}
+.mtip{
+	color:#cecccc;
+}
+
+@media screen and (min-width: 768px) {
+	 
+	.mtip{
+	display: none;
+}
+}
+
+@media screen and (max-width: 768px) {
+	 
+	.tablemoney th[data-field="remark"],
+	.tablemoney td:nth-child(4) {
+	display: none;
+}
+}
+
+
+
+.mtip,.mtip2{
+	color:#cecccc;
+}
+
+.moneytype{
+	min-width: 100px;
+}

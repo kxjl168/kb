@@ -85,28 +85,9 @@
 									</div>
 									
 								<script>	
-                            $(function() {
+                           
         						
-       						 $.fn.datepicker.defaults.format = "yyyy-mm";
-       						 $('#mDate').datepicker({
-       						   language: "zh-CN",
-       						     endDate: new Date(),
-       						  format: "yyyy-mm",
-       						 autoclose: true,
-       						     minViewMode: "months",
-       						     defaultDate:new Date(),
-       						 });
        						
-       						 
-       						// num传入的数字，n需要的字符长度 ，批量添加房间数，房号计算，左加0
-       						 function PrefixInteger(num, n) {
-       						 	return (Array(n).join(0) + num).slice(-n);
-       						 }
-       						 
-       						 var date=new Date();
-       						 $('#mDate').val(date.getFullYear()+"-"+PrefixInteger((date.getMonth()+1),2));
-       						
-                            });
                             </script>
 									
 									

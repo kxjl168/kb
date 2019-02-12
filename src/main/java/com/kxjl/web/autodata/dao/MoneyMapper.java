@@ -27,6 +27,16 @@ public interface MoneyMapper {
     List<Money> selectList(Money item);
     
     /**
+     * 月份统计
+     * @param item
+     * @return
+     * @author zj
+     * @date 2019年2月12日
+     */
+    List<Money> selectTotal(Money item);
+    
+    
+    /**
      * 删除
      * @param record
      * @return

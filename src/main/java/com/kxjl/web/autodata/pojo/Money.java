@@ -1,5 +1,7 @@
 package com.kxjl.web.autodata.pojo;
 
+import java.math.BigDecimal;
+
 public class Money {
     private String id;
 
@@ -23,7 +25,7 @@ public class Money {
 
     private String updateDate;
 
-    private Long money;
+    private BigDecimal money;
     
     //query
     private String typeName;
@@ -117,11 +119,11 @@ public class Money {
         this.updateDate = updateDate == null ? null : updateDate.trim();
     }
 
-    public Long getMoney() {
+    public BigDecimal getMoney() {
         return money;
     }
 
-    public void setMoney(Long money) {
+    public void setMoney(BigDecimal money) {
         this.money = money;
     }
 

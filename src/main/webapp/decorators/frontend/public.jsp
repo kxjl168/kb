@@ -145,7 +145,7 @@ function otherScroll3(){
 
 	
 	<ins class="adsbygoogle bottom_detail_big" style="display: block"
-		data-ad-client="ca-pub-4546997533420825" data-ad-slot="3251638392"
+		data-ad-client="ca-pub-4823081228661631" data-ad-slot="2310500588"
 		data-ad-format="auto" data-full-width-responsive="true"></ins>
 	<script>
 		//(adsbygoogle = window.adsbygoogle || []).push({});
@@ -157,7 +157,7 @@ function otherScroll3(){
 
 	
 	<ins class="adsbygoogle" style="display: block"
-		data-ad-client="ca-pub-4546997533420825" data-ad-slot="3316337130"
+		data-ad-client="ca-pub-4823081228661631" data-ad-slot="2310500588"
 		data-ad-format="auto" data-full-width-responsive="true"></ins>
 	<script>
 		//(adsbygoogle = window.adsbygoogle || []).push({});
@@ -168,7 +168,7 @@ function otherScroll3(){
 	
 	
 	<ins class="adsbygoogle" style="display: block"
-		data-ad-client="ca-pub-4546997533420825" data-ad-slot="5098577692"
+		data-ad-client="ca-pub-4823081228661631" data-ad-slot="2310500588"
 		data-ad-format="auto" data-full-width-responsive="true"></ins>
 	<script>
 		//(adsbygoogle = window.adsbygoogle || []).push({});
@@ -179,7 +179,7 @@ function otherScroll3(){
 	
 	
 	<ins class="adsbygoogle" style="display: block"
-		data-ad-client="ca-pub-4546997533420825" data-ad-slot="6058206079"
+		data-ad-client="ca-pub-4823081228661631" data-ad-slot="2310500588"
 		data-ad-format="auto" data-full-width-responsive="true"></ins>
 	<script>
 		//(adsbygoogle = window.adsbygoogle || []).push({});
@@ -229,13 +229,13 @@ $(document).ready(function(){
 function loadads(){
 	
 	
-	
+	/* 
 	 (adsbygoogle = window.adsbygoogle || []).push({
          google_ad_client: "ca-pub-4823081228661631",  
           enable_page_level_ads: true 
       
       }); 
-return ;    
+return ;     */
 	
 	
 	
