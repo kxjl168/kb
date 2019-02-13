@@ -94,7 +94,7 @@ function setchartdata(jdata,title,ele) {
 		myChart.setOption(option);
 		myChart.on('click', function(params) {
 			// 控制台打印数据的名称
-			 msg(params.data.id);
+			// msg(params.data.id);
 			// getDetailList(1,params.name,id);
 			
 			
