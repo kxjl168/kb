@@ -66,12 +66,20 @@ $(function() {
 	InitQuery_item();
 
 	initTypeSelect();
+	//modal select输入
+	$.fn.modal.Constructor.prototype.enforceFocus = function () {};
 	
-	showTotal();
+	
 
 	initDatePicker("#mDate");
 	initDatePicker("#q_month", "month");
 
+	showTotal();
+	
+	
+	//test
+	setchartdata();
+	
 	initmenu($("#menuul"), "manager/money/manager/");
 
 	$("#btnAdd_item").click(

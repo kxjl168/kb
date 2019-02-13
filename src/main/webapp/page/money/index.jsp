@@ -98,6 +98,11 @@
 
 
 
+	<div class="col-xs-12 row nopaddding">
+	 <div id="pchart" style="min-height: 200px;"></div>
+	</div>
+
+
 		<div class="col-xs-12 row nopaddding">
 
 			<div id="sdata" class=" col-xs-4  margin-bottom-10 padding-right-0 ">
@@ -143,11 +148,17 @@
 	<!-- 模态框（Modal） -->
 
 	<jsp:include page="form.jsp"></jsp:include>
-
+ <script src="${basePath}/js/plugin/echart/echarts.js"></script>
+ 
+		
 	<script
 		src="${basePath}/page/money/money.js"></script>
 	<script
 		src="${basePath}/page/money/typeSelect2.js"></script>
+		
+		<script
+		src="${basePath}/page/money/chart.js"></script>
+		
 
 	<script type="text/javascript"
 		src="${basePath}/js/plugin/jquery/jquery.plugin.js"></script>
