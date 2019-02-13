@@ -35,6 +35,16 @@ public interface MoneyMapper {
      */
     List<Money> selectTotal(Money item);
     
+    /**
+     *  支出统计，饼图
+     * @param item
+     * @return
+     * @author zj
+     * @date 2019年2月13日
+     */
+    List<Money> selectZhichuStastic(Money item);
+    
+    
     
     /**
      * 删除

@@ -76,9 +76,8 @@ $(function() {
 
 	showTotal();
 	
-	
-	//test
-	setchartdata();
+
+
 	
 	initmenu($("#menuul"), "manager/money/manager/");
 
@@ -443,6 +442,29 @@ function doSearch_item() {
 	// success("test");
 }
 
+//刷新饼图
+function refreshBChart() {
+	var url=getRPath() + "/manager/money/zhichuStastic";
+	$.ajax({
+		type : "post",
+		url : url,
+		dataType : 'json',
+		data : {
+			mDate : $("#q_month").val(),
+		},
+		success : function(response) {
+			if (response) {
+
+				setchartdata(response);
+
+			} else {
+				// error(""+response.message);
+			}
+		}
+	});
+}
+
+
 function showTotal() {
 	var url=getRPath() + "/manager/money/total";
 	$.ajax({
@@ -470,6 +492,10 @@ function showTotal() {
 							$("#totalspan").removeClass('shouruspan').removeClass('zhichuspan').addClass('zhichuspan');
 					}
 				});
+				
+				
+				//刷新饼图
+				refreshBChart();
 
 			} else {
 				// error(""+response.message);

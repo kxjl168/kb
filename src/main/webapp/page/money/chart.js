@@ -52,23 +52,39 @@ function setchartdata(jdata,title,ele) {
 		option.title.text = "分类统计";
 		
 		
-		var sdata=[];
+		var sdata=[]; //数据
+		var ldata=[];//legend数据
+		var selected={};//选中数据
+		
 		sdata.push({name:"分类1",value:1});
 		sdata.push({name:"分类2",value:2});
 		sdata.push({name:"分类3",value:4});
 		option.series[0].data=sdata;
 		
-		var ldata=[];
+	
 		ldata.push("分类1");
 		ldata.push("分类2");
 		ldata.push("分类3");
 		option.legend.data =ldata;
 		
-		var selected={};
+	
 		selected["分类1"]=true;
 		selected["分类2"]=true;
 		selected["分类3"]=true;
 		option.legend.selected =selected;
+		
+		 sdata=[]; //数据
+		 ldata=[];//legend数据
+		 selected={};//选中数据
+		$.each(jdata,function(index,item){
+			
+			sdata.push({name:item.typeName,value:item.money,id:item.mType});
+			ldata.push(item.typeName);
+			selected[item.typeName]=true;
+		});
+		option.series[0].data=sdata;
+		option.legend.selected =selected;
+		option.legend.data =ldata;
 		
 		var id=ele||'pchart';
 		
@@ -78,8 +94,18 @@ function setchartdata(jdata,title,ele) {
 		myChart.setOption(option);
 		myChart.on('click', function(params) {
 			// 控制台打印数据的名称
-			 //msg(params.name);
+			 msg(params.data.id);
 			// getDetailList(1,params.name,id);
+			
+			
+			var opt = {
+					silent : true,
+					query:{
+					 mType:	params.data.id,
+					}
+				};
+				$("#table_list_item").bootstrapTable('refresh', opt);
+			
 		});
 	}
 

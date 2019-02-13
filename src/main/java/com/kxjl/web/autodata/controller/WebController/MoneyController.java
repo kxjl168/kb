@@ -110,6 +110,28 @@ public class MoneyController {
 		return rst;
 	}
 	
+	
+	/**
+	 * 月支出饼图统计
+	 * @param item
+	 * @param request
+	 * @return
+	 * @author zj
+	 * @date 2019年2月12日
+	 */
+	@RequestMapping("/zhichuStastic")
+	//@ManagerActionLog(operateDescribe="删除收支管理",operateFuncType=FunLogType.Del,operateModelClassName=MoneyMapper.class)
+	@ResponseBody
+	public List<Money> zhichuStastic( Money item,HttpServletRequest request) {
+
+		Message msg = new Message();
+		
+		List<Money> lst = moneyService.selectZhichuStastic(item);
+		
+		return lst;
+	}
+
+	
 	/**
 	 * 月统计
 	 * @param item

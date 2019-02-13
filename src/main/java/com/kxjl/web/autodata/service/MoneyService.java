@@ -27,6 +27,16 @@ import com.kxjl.web.autodata.pojo.Money;
  */
 public interface MoneyService {
 
+    /**
+     *  支出统计，饼图
+     * @param item
+     * @return
+     * @author zj
+     * @date 2019年2月13日
+     */
+    List<Money> selectZhichuStastic(Money item);
+    
+	
 	   /**
      * 月份统计
      * @param item
