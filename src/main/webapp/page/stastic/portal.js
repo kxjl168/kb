@@ -67,12 +67,159 @@ function showaction(userid){
 	});
 }
 
+var cType="";
+function refreshHourTable(id,date, ele){
+	
+	
+	var obj = new Object();
+	obj.date =date;// "12345678";
+
+	obj.date_type = $("#dateType").val();
+	obj.qName =$("#"+ele).attr("title");// $("#s_type ").find("option:selected").text();
+	
+	obj.qType =$("#"+ele).attr("type");//$("#s_type").val();
+
+
+	cdate=date;
+	cType=$("#"+ele).attr("type");
+		 var opt = {
+			       query:{
+			   		rows:10, // 每页要显示的数据条数
+	                page:1,
+			    	   date:date,
+			    	   date_type:$("#dateType").val(),
+			    	   qName:  $("#"+ele).attr("title"),
+			    	   qType:$("#"+ele).attr("type")
+			       }
+			    };
+			    $("#table_time_detail").bootstrapTable('refresh', opt);
+			  
+			    $('#myModal_time_detail').modal('show');
+			    
+}
+
 
 var cuserid='';
 function initDetailTable() {
 	
 	var http = getImUrl();// "";
 
+	
+
+    // 初始化Table
+    $('#table_time_detail').bootstrapTable({
+        url:http + "statistics/getDetailList.action", // 请求后台的URL（*）
+        method: 'post', // 请求方式（*）
+        contentType: 'application/x-www-form-urlencoded',
+        toolbar: '#toolbar', // 工具按钮用哪个容器
+    
+        showHeader: true,
+        searchAlign: 'left',
+        buttonsAlign: 'left',
+        searchOnEnterKey: true,
+        striped: true, // 是否显示行间隔色
+        cache: false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        pagination: true, // 是否显示分页（*）
+        sidePagination: "server", // 分页方式：client客户端分页，server服务端分页（*）
+        pageNumber: 1, // 初始化加载第一页，默认第一页
+        pageSize: 10, // 每页的记录行数（*）
+        pageList: [10, 25], // 可供选择的每页的行数（*）
+        search: false, // 是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+        detailView: false,
+        // showColumns: true, //是否显示所有的列
+        uniqueId: "id", // 每一行的唯一标识，一般为主键列
+        // queryParamsType : "limit",
+        queryParams: function queryParams(params) { // 设置查询参数
+        	
+        	var rows= params.limit; // 每页要显示的数据条数
+           var offset= params.offset; // 每页显示数据的开始行号
+           
+           
+        	var page=1+ offset/rows;
+        	
+     
+            var param = {
+            		rows: params.limit, // 每页要显示的数据条数
+                offset: params.offset, // 每页显示数据的开始行号
+                page:page,
+                sort: params.sort, // 要排序的字段
+             
+            /*    qType : "detailpag_",//$("#s_type").val(),
+                date_type : $("#dateType").val(),
+                qName : $("#s_type ").find("option:selected").text(),
+                date:cdate,
+                userid:cuserid,*/
+                qType :cType,
+                date_type:$("#dateType").val(),
+                date:cdate,
+            };
+            return param;
+        },
+        columns: [
+        	{
+                field: 'id',
+                title: '订单编号',
+                align: 'center',
+                valign: 'middle',
+                visible:false
+            }, 
+        	{
+            field: 'city',
+            title: '区域',
+            align: 'center',
+            valign: 'middle'
+        },
+        {
+            field: 'userid',
+            title: 'IP',
+            align: 'center',
+            valign: 'middle'
+        }, {
+            field: 'total_uv',
+            title: '次数',
+            align: 'center',
+            valign: 'middle',
+            	 formatter: function (value, row, index) {
+            		 
+            		 if(cType=="detailpag_"||
+            				 cType=="G搜索_"||
+            				 cType=="about_"
+            				)
+            	 
+                     return "<a href='javascript:void(0);' onclick='showaction(\""+row.userid+"\")' >"+value+"</a>";
+            		 else
+            			 return value;
+                 }
+            	
+        },  {
+            field: 'blogname',
+            title: '文章',
+            align: 'center',
+            visible:false,
+            valign: 'middle',
+            formatter: function (value, row, index) {
+                return "<a href='"+basePath+"/public/detail/?i="+row.blog_id+"'>"+value+"</a>";
+            }
+        },
+        {
+            field: 'spider_flag',
+            title: '爬虫',
+            align: 'center',
+            visible:false,
+            valign: 'middle'
+        },
+        /*{
+            title: '操作',
+            field: 'vehicleno',
+            align: 'center',
+            formatter: modifyAndDeleteButton,
+            events: PersonnelInformationEvents
+        }*/
+        ],
+    });
+	
+	
+	
 	
 	
 
@@ -178,6 +325,8 @@ function init() {
 	initmenu($("#menuul"),"page/portal/");
 	
 	initDetailTable();
+	
+	
 	
 	var $scope = angular.element(ngSection).scope();
 	$scope.$apply(function() {
@@ -520,7 +669,7 @@ $("#sdata").html(data);
 					$("#"+ele).attr("title",title);
 					
 
-					$scope.total = json.total;
+					/*$scope.total = json.total;
 					$scope.pageDataPre=[];
 					$scope.pageDataAft=[];
 					$scope.pageNum=Math.ceil( $scope.total/$scope.rows);// + ($scope.total%$scope.rows)>0?1:0;
@@ -532,7 +681,7 @@ $("#sdata").html(data);
 					for(var i =$scope.page+1;i<$scope.page+3;i++){
 						if(i<=$scope.pageNum)
 						   $scope.pageDataAft.push(i);
-					}
+					}*/
 				
 						
 						$scope.$apply();

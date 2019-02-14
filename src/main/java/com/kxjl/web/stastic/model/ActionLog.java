@@ -84,6 +84,9 @@ public class ActionLog extends BaseModel {
 	private Double total_click;
 	private Double total_uv;
 	
+	private Double user_click;
+	private Double user_uv;
+	
 	//query 
 	private String date_type;
 	private String time1;
@@ -242,6 +245,22 @@ public class ActionLog extends BaseModel {
 
 	public void setReferer(String referer) {
 		this.referer = referer;
+	}
+
+	public Double getUser_click() {
+		return user_click;
+	}
+
+	public void setUser_click(Double user_click) {
+		this.user_click = user_click;
+	}
+
+	public Double getUser_uv() {
+		return user_uv;
+	}
+
+	public void setUser_uv(Double user_uv) {
+		this.user_uv = user_uv;
 	}
 
 

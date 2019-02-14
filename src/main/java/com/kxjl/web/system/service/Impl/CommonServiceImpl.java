@@ -169,7 +169,7 @@ public class CommonServiceImpl implements CommonService {
 				userAgent = request.getHeader("User-Agent");
 			
 			if (inblack) {
-				logger.warn(ip + " is in blackiplist ,request url:" + request.getRequestURI() + " ");
+				logger.debug(ip + " is in blackiplist ,request url:" + request.getRequestURI() + " ");
 
 				// 在ip黑名单中，再过滤是否有爬虫标识
 				// 将google ip段加入黑名单。 如果访问不带google 请求标识，直接屏蔽返回.
@@ -179,6 +179,7 @@ public class CommonServiceImpl implements CommonService {
 					// 是否为屏蔽爬虫标识
 					if (isInBlackSearchUserAgent(userAgent)) {
 						inblack = true;
+						logger.warn(ip + " is in blackiplist and UserAgent inBlack ,no access!,request url:" + request.getRequestURI() + " ");
 					} else {
 						// 即使ip段在黑名单中，但是带了爬虫标识的,并且不再爬虫黑名单中，可以访问.
 						inblack = false;

@@ -1070,7 +1070,7 @@ public class StasticController extends BaseController {
 			jsonOut.put("ResponseCode", "200");
 			jsonOut.put("ResponseMsg", "");
 			jsonOut.put("total", total);
-			jsonOut.put("datalist", jsStr);
+			jsonOut.put("rows", new JSONArray(jsStr));
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -1131,6 +1131,10 @@ public class StasticController extends BaseController {
 
 					japp.put("pv", infos.get(i).getTotal_click());
 					japp.put("uv", infos.get(i).getTotal_uv());
+					
+					
+					japp.put("upv", infos.get(i).getUser_click());
+					japp.put("uuv", infos.get(i).getUser_uv());
 
 					japps.put(japp);
 				}

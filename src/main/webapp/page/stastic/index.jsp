@@ -458,7 +458,8 @@
  
  				<script type="text/javascript" src="../../js/plugin/bootstrap-table/js/bootstrap-table.min.js"></script>
 				<script type="text/javascript" src="../../js/plugin/bootstrap-table/js/bootstrap-table-zh-CN.js"></script>
- <script src="${basePath}/js/plugin/echart/echarts.js"></script>
+ <%-- <script src="${basePath}/js/plugin/echart/echarts.js"></script> --%>
+  <script src="${basePath}/js/plugin/echart/echart4/echarts.min.js"></script>
  
 			
 			

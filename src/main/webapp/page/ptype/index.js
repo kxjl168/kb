@@ -431,6 +431,7 @@ function init() {
 						
 						$("#s_dict_key").attr('disabled','');
 					
+						$("#dict_level").val(item.dict_level);
 						changeParentList(function(){
 							$('#menuParentid').val(item.parent_id);// get(0).selectedIndex = 1;
 						});

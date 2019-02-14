@@ -317,6 +317,38 @@
 
 
 
+<div class="modal fade" id="myModal_time_detail"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title " id="myModalLabel">时段详情</h4>
+				</div>
+
+
+
+				<div class="modal-body   container margin-top-10 " >
+					<div class="row " >
+					
+					   <div class="table-responsive" style="margin: 2px;">
+										<table id="table_time_detail"
+											class="table table-bordered table-hover"></table>
+						</div>
+						
+
+					</div>
+					
+				</div>
+				
+					<div class="modal-footer">
+					
+					</button>
+					                 <button type="button " class="btn btn-primary "  data-dismiss="modal" > 确定 </button>
+				</div>
+			</div>
+		</div>
+</div>
+
 
 <div class="modal fade" id="myModal_detail"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -331,7 +363,7 @@
 				<div class="modal-body   container margin-top-10 " >
 					<div class="row " >
 					
-					   <div class="table-responsive" style="margin: 10px;">
+					   <div class="table-responsive" style="margin: 2px;">
 										<table id="table_detail"
 											class="table table-bordered table-hover"></table>
 						</div>
@@ -383,7 +415,8 @@
  
  				<script type="text/javascript" src="../../js/plugin/bootstrap-table/js/bootstrap-table.min.js"></script>
 				<script type="text/javascript" src="../../js/plugin/bootstrap-table/js/bootstrap-table-zh-CN.js"></script>
- <script src="${basePath}/js/plugin/echart/echarts.js"></script>
+ <%-- <script src="${basePath}/js/plugin/echart/echarts.js"></script> --%>
+ <script src="${basePath}/js/plugin/echart/echart4/echarts.min.js"></script>
  
 			
 			
