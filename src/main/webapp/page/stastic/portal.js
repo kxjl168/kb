@@ -183,6 +183,7 @@ function initDetailTable() {
             		 
             		 if(cType=="detailpag_"||
             				 cType=="G搜索_"||
+            				 cType=="attack_"||
             				 cType=="about_"
             				)
             	 
@@ -260,7 +261,7 @@ function initDetailTable() {
                 page:page,
                 sort: params.sort, // 要排序的字段
              
-                qType : "detailpag_",//$("#s_type").val(),
+                qType : cType,//$("#s_type").val(),
                 date_type : $("#dateType").val(),
                 qName : $("#s_type ").find("option:selected").text(),
                 date:cdate,
@@ -291,7 +292,13 @@ function initDetailTable() {
             field: 'type_second',
             title: '分类二',
             align: 'center',
-            valign: 'middle'
+            valign: 'middle',
+            	 formatter: function (value, row, index) {
+            		 if(cType=='attack_')
+                     return row.blog_id;
+            		 else
+            			 return value;
+                 }
         },  {
             field: 'blogname',
             title: '文章',

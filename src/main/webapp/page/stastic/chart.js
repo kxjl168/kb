@@ -50,7 +50,7 @@ function setchartdata(jdata, title, ele) {
 		legend : {
 			data : [ '累计访问数据（pv）-9月1号', '累计访问数据（uv）-9月1号' ],
 			type : 'scroll',
-			top : 10,
+			top : 30,
 		},
 		xAxis : {
 
