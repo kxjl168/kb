@@ -77,6 +77,10 @@ $(function() {
 	showTotal();
 	
 
+	$("#q_month").change(function(){
+		doSearch_item();
+	});
+	
 
 	
 	initmenu($("#menuul"), "manager/money/manager/");
@@ -455,7 +459,7 @@ function refreshBChart() {
 		success : function(response) {
 			if (response) {
 
-				setchartdata(response);
+				setchartdata(response,$("#q_month").val());
 
 			} else {
 				// error(""+response.message);

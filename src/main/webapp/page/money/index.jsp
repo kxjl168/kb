@@ -114,14 +114,14 @@
 			<div
 				class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
 				<button type="button" class="btn btn-primary btn-add btn-block"
-					id="btnAdd_item">新增</button>
+					id="btnAdd_item"><i class="fa fa-edit"></i>记一笔</button>
 
 
 			</div>
 <div
 				class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
 				<button type="button" onclick="doSearch_item()"
-					class="btn btn-primary btn-query btn-block   ">查询</button>
+					class="btn btn-primary btn-query btn-block   "><i class="fa fa-refresh"></i>刷新</button>
 
 
 			</div>

@@ -50,7 +50,7 @@ function setchartdata(jdata,title,ele) {
 		//var queryDate1 = $("#effectDate").val();
 		//var queryDate2 = $("#effectDate2").val();
 		
-		option.title.text = "分类统计";
+		option.title.text = title+" 支出统计";
 		
 		
 		var sdata=[]; //数据
