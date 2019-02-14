@@ -1,3 +1,4 @@
+var myChart=null;
 function setchartdata(jdata,title,ele) {
 
 
@@ -88,24 +89,30 @@ function setchartdata(jdata,title,ele) {
 		
 		var id=ele||'pchart';
 		
-		$("#"+id).html('');
-		myChart = echarts.init(document.getElementById(id));
+		
+		if(!myChart)
+			{
+			$("#"+id).html('');
+			myChart = echarts.init(document.getElementById(id));
+			myChart.on('click', function(params) {
+				// 控制台打印数据的名称
+				// msg(params.data.id);
+				// getDetailList(1,params.name,id);
+				
+				
+				var opt = {
+						silent : true,
+						query:{
+						 mType:	params.data.id,
+						}
+					};
+					$("#table_list_item").bootstrapTable('refresh', opt);
+				
+			});
+			}
+	
 		// 使用刚指定的配置项和数据显示图表。
 		myChart.setOption(option);
-		myChart.on('click', function(params) {
-			// 控制台打印数据的名称
-			// msg(params.data.id);
-			// getDetailList(1,params.name,id);
-			
-			
-			var opt = {
-					silent : true,
-					query:{
-					 mType:	params.data.id,
-					}
-				};
-				$("#table_list_item").bootstrapTable('refresh', opt);
-			
-		});
+		
 	}
 
