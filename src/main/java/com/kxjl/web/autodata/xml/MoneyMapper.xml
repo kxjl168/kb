@@ -18,6 +18,9 @@
     <result column="typeName" jdbcType="DECIMAL" property="typeName" />
     <result column="typeIcon" jdbcType="DECIMAL" property="typeIcon" />
     
+    <result column="in_money" jdbcType="DECIMAL" property="in_money" />
+    <result column="out_money" jdbcType="DECIMAL" property="out_money" />
+    
   </resultMap>
   <sql id="Base_Column_List">
     id, name, m_type, m_date, in_out, spec, create_user, update_user, remark, create_date, 
@@ -179,6 +182,33 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
   
+
+<select id="selectYearList"
+	resultMap="BaseResultMap"
+	parameterType="com.kxjl.web.autodata.pojo.Money">
+select m_date,
+ 
+max( case in_out 
+  when 1 then money 
+end 
+) in_money,
+max( case in_out 
+  when 2 then money 
+end 
+) out_money
+
+ from
+(
+select  left(m_date,7) m_date, sum(money) money,in_out  from money c where 1=1
+
+	<if test=" mDate !=null and mDate !='' ">
+		and c.m_date like concat ('%', #{mDate},'%')
+	</if>
+group by  left(m_date,7),in_out
+) tp group by m_date
+order by m_date
+
+</select>
 
 
 <select id="selectList"

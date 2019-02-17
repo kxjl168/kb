@@ -639,7 +639,7 @@ public class SysBaseInfoController extends BaseController {
 
 		int result = 0;
 		SysParameter sysParam = systemService.getOneSysParams(name);
-		if (sysParam == null || sysParam.equals("")) {
+		if (sysParam == null ) {
 			SysParameter add_sysParam = new SysParameter();
 			add_sysParam.setParam_name(name);
 			add_sysParam.setParam_value(value);

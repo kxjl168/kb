@@ -269,6 +269,8 @@ public class RssManagerController {
 
 			if(ConfigReader.getInstance().getProperty("rssfreshAll", "false").equals("false"))
 				return "";
+			
+			logger.error("定时刷新RSS开始...");
 			new Thread(new Runnable() {
 
 				@Override
@@ -293,6 +295,8 @@ public class RssManagerController {
 								continue;
 							}
 						}
+						
+						logger.error("定时刷新RSS完成...");
 						
 						if (ConfigReader.getInstance().getProperty("debug", "false").equals("true"))
 						{

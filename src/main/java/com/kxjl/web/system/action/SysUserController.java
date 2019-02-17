@@ -240,7 +240,7 @@ public class SysUserController extends BaseController {
 	 * @param bean
 	 *            用户信息
 	 */
-	@SuppressWarnings("null")
+
 	private TokenBean createToken(HttpServletRequest request, SysUserBean bean,
 			String token) {
 		// logger.info("构造token并添加到内存和数据库中");

@@ -64,5 +64,13 @@ public interface MoneyService {
 
 
 
-
+    /**
+     * 年度月份统计
+     * @param item
+     * @return
+     * @author zj
+     * @date 2019年2月17日
+     */
+    List<Money> selectYearList(Money item);
+    
 }

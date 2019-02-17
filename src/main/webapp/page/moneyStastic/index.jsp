@@ -11,7 +11,7 @@
 			<meta name="description" content="">
 				<meta name="author" content="">
 
-					<title>收支统计</title>
+					<title>收支管理</title>
 </head>
 
 <body>
@@ -32,7 +32,7 @@
 					data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
 					aria-expanded="true">
 					<div class="row">
-						<h3 class="panel-title col-xs-4 col-lg-4 col-md-4 ">收支查询</h3>
+						<h3 class="panel-title col-xs-4 col-lg-4 col-md-4 ">收支统计</h3>
 
 
 
@@ -68,11 +68,11 @@
 								</div>
 
 
-								<div class=" col-md-6  col-xs-12   ">
+								<div class=" col-md-6  col-xs-12  hide ">
 									<div
 										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">年度查询:</div>
 									<div class="col-md-6 col-xs-8 text-right ">
-											<input id="q_year" name="q_year" 
+											<input id="q_year" name="q_year" checked="checked"
 												type="checkbox" class="mcheck form-control">
 									</div>
 
@@ -97,22 +97,20 @@
 
 
 	<div class="col-xs-12 row nopaddding">
-	 <div id="pchart" style="min-height: 200px;"></div>
+	
 	</div>
 
 
 		<div class="col-xs-12 row nopaddding">
 
 			<div id="sdata" class=" col-xs-4  margin-bottom-10 padding-right-0 ">
-			<div>收入:<span id="shouruspan" class="shouruspan">+55555</span></div>
-			<div>支出:<span id="zhichuspan" class='zhichuspan'>-12313</span></div>
-			<div>结余:<span id="totalspan" class="">2222</span></div>
-				<div class='yearMoneyChart'><i class="stastic fa fa-line-chart"></i> <a class="" href="javascript:void(0)" onclick="showYearList()">年度报表</a></span></div>
+			<div class='yearMoneyChart'><i class="detail fa fa-pie-chart"></i> <a class="" href="javascript:void(0)" onclick="showYearDetail()">年度详细</a></span></div>
+
 			</div>
 			
 			<div
-				class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
-				<button type="button" class="btn btn-primary btn-add btn-block"
+				class=" hide col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
+				<button type="button" class=" btn btn-primary btn-add btn-block"
 					id="btnAdd_item"><i class="fa fa-edit"></i>记一笔</button>
 
 
@@ -128,12 +126,10 @@
 
 
 
-
 		<div class="col-xs-12 row nopaddding">
 
-			<div class="table-responsive tablemoney" style="margin: 1px;">
-				<table id="table_list_item" class="table  table-hover table-striped"></table>
-			</div>
+
+			 <div id="pchart" style="min-height: 300px;"></div>
 
 		</div>
 
@@ -147,15 +143,14 @@
 	<!-- 模态框（Modal） -->
 
 	<jsp:include page="form.jsp"></jsp:include>
- <script src="${basePath}/js/plugin/echart/echart4/echarts.min.js"></script>
+ <script src="${basePath}/js/plugin/echart/echart4/echarts.js"></script>
  
-		<script
-		src="${basePath}/page/money/money.js"></script>
 		
+	<script
+		src="${basePath}/page/moneyStastic/money.js"></script>
+
 		<script
-		src="${basePath}/page/money/chart.js"></script>
-		<script
-		src="${basePath}/page/money/typeSelect2.js"></script>
+		src="${basePath}/page/moneyStastic/chart.js"></script>
 		
 
 	<script type="text/javascript"

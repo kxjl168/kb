@@ -2100,3 +2100,17 @@ tr.zhichu .moneyvalue, .zhichuspan{
 .moneytype{
 	min-width: 100px;
 }
+
+.yearMoneyChart .stastic{
+	color: #208e99;
+    font-size: 18px;
+}
+.yearMoneyChart .detail{
+	color: #208e99;
+    font-size: 18px;
+}
+ .yearMoneyChart a{
+	color: #1b59e6;
+	font-weight: bold;
+	text-decoration: underline;
+}

@@ -50,7 +50,9 @@ public class test {
 		
 		//testlog4j();
 		
-		avtest();
+		//avtest();
+		
+		deltest();
 	}
 	
 	public static  void avtest()  {
@@ -395,6 +397,46 @@ public static String convert16to32(String toConvert){
         }  
 }  
 	
+	private static void deltest() {
+
+		String url = "http://127.0.0.1:8081/kb/blog/del.do?JSESSIONID=13mnil3xuid3jomixwj5hmaw1&_ga=GA1.1.207268850.1545051326&_gid=GA1.1.421672797.1550384139";
+
+		// String url =
+		// "http://10.204.37.192:8080/gserver/version/getVersionInfo.action?type=2";
+
+		
+	
+		String data = "";
+
+		String responsedata = "";
+		try {
+			
+			JSONObject j=new JSONObject();
+			j.put("recordid","19");
+		
+		
+			int num=2;
+		//	for (int i = 0; i < num; i++) {
+				responsedata = sendHttpData(url+"&data="+URLEncoder.encode(j.toString()),"");
+				System.out.println("返回:" + responsedata);
+		//	}
+			
+
+		
+			// System.out.println("解密:" + out);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println(responsedata);
+		// ***********vmInstallApp*****************
+
+	}
+
+	
+	
 	private static void replaytest() {
 
 		String url = "http://127.0.0.1:8080/kb/replay/addOrUpdate.do";
@@ -628,7 +670,8 @@ public static String convert16to32(String toConvert){
 		InputStream is = new java.io.ByteArrayInputStream(str.getBytes("utf-8"));
 		client.setTimeout(60000);
 
-		httpPost.setRequestHeader("Content-type", "application/json");
+		//httpPost.setRequestHeader("Content-type", "application/json");
+		httpPost.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		httpPost.setRequestHeader("Accept", "application/json");
 		httpPost.setRequestHeader("Connection", "close");
 		httpPost.setRequestHeader("User-Agent",

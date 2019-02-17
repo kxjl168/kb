@@ -43,11 +43,11 @@
 		<ConfigDesc>请求淘宝获取ip对应地市		</ConfigDesc>
 	</ConfigItem>
 
-	<ConfigItem>
+ <ConfigItem>
 		<ConfigName>excludedUrls</ConfigName>
-		<ConfigValue>UploadFile.action,/kb/,.*/rss,.*/feed,.ico,.*/sitemap.xml,.*.zip,.*.xlsx,.*.doc,.*.docx,.*.rar,.*.xls,downFile.action,.*/bloglike/.*,.*.JPG,.*.txt,dosearch.action,.woff2,.woff,.tff,.svg,.eot,.js,.css,.*/pown/url/.*,ie8.jsp,null.jsp,404.jsp,index.jsp,noaccess.jsp,.jpg,.png,.ico,.jpeg,.gif,search/init.action,replay/addOrUpdate.action,.*/public/.*,.*/.*/get.*,.*/sysBaseInfo/get.*,.*/kurl/get.*,UploadCKFile.action,.html,login.jsp,exlogin.action,phonereg/,phonereg,done.jsp,getVersionInfo.action</ConfigValue>
+        <ConfigValue>UploadFile.action,.*/rss,.*/feed,.ico,.*/sitemap.xml,.*.zip,.*.xlsx,.*.doc,.*.docx,.*.rar,.*.xls,downFile.action,.*/bloglike/.*,.*.JPG,.*.txt,dosearch.action,.woff2,.woff,.tff,.svg,.eot,.js,.css,.*/pown/url/.*,ie8.jsp,null.jsp,404.jsp,index.jsp,noaccess.jsp,.jpg,.png,.ico,.jpeg,.gif,search/init.action,replay/addOrUpdate.action,.*/public/.*,.*/.*/get.*,.*/sysBaseInfo/get.*,.*/kurl/get.*,UploadCKFile.action,.html,login.jsp,exlogin.action,phonereg/,phonereg,done.jsp,getVersionInfo.action</ConfigValue>
 		<ConfigDesc>不需要鉴权也可访问的url后缀		</ConfigDesc>
-	</ConfigItem>
+	</ConfigItem> 
 
 	<ConfigItem>
 		<ConfigName>normalUrls</ConfigName>

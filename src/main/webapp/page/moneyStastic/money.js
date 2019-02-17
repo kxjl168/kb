@@ -79,26 +79,24 @@ function ChangeMonthQuery(callback){
 	if(typeof(callback)=='function')
 		callback();
 }
-
-function showYearList()
+function showYearDetail()
 {
-	loadmenu("manager/money/Stastic/");
+	loadmenu("manager/money/manager/");
 }
-
 $(function() {
-	InitQuery_item();
+	//InitQuery_item();
 
-	initTypeSelect();
+	//initTypeSelect();
 	//modal select输入
-	$.fn.modal.Constructor.prototype.enforceFocus = function () {};
+	//$.fn.modal.Constructor.prototype.enforceFocus = function () {};
 	
 	
 
-	initDatePicker("#mDate");
+	//initDatePicker("#mDate");
 	//initDatePicker("#q_month", "month");
-	ChangeMonthQuery();
+	ChangeMonthQuery(doSearch_item);
 	
-	showTotal();
+	//showTotal();
 	
 	
 	
@@ -115,7 +113,7 @@ $(function() {
 	
 
 	
-	initmenu($("#menuul"), "manager/money/manager/");
+	initmenu($("#menuul"), "manager/money/Stastic/");
 
 	$("#btnAdd_item").click(
 			function() {
@@ -236,7 +234,7 @@ function InitQuery_item() {
 	$('#table_list_item')
 			.bootstrapTable(
 					{
-						url : getRPath() + '/manager/money/moneyList', // 请求后台的URL（*）
+						url : getRPath() + '/manager/money/yearMoneyList', // 请求后台的URL（*）
 						method : 'post', // 请求方式（*）
 						contentType : 'application/x-www-form-urlencoded',
 						toolbar : '#toolbar', // 工具按钮用哪个容器
@@ -472,15 +470,17 @@ function doSearch_item() {
 	var opt = {
 		silent : true
 	};
-	$("#table_list_item").bootstrapTable('refresh', opt);
+	//$("#table_list_item").bootstrapTable('refresh', opt);
 
-	showTotal();
+	//showTotal();
 	// success("test");
+	
+	refreshBChart();
 }
 
 //刷新饼图
 function refreshBChart() {
-	var url=getRPath() + "/manager/money/zhichuStastic";
+	var url=getRPath() + "/manager/money/yearMoneyList";
 	$.ajax({
 		type : "post",
 		url : url,

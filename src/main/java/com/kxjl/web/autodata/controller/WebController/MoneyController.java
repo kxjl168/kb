@@ -63,6 +63,56 @@ public class MoneyController {
 	DictInfoService dictInfoService;
 
 
+	/**
+	 * 年度月份统计
+	 * @param request
+	 * @param model
+	 * @param maps
+	 * @return
+	 * @author zj
+	 * @date 2019年2月17日
+	 */
+	@RequestMapping("/Stastic")
+	public String managerStastic(HttpServletRequest request, Model model,Map<String, Object> maps) {
+		List<MenuInfo> leftmenus = menuService.getLeftMenuTree(request.getSession(), request);
+		
+		maps.put("menus", leftmenus);
+		maps.put("httppath", 	ConfigReader.getInstance().getProperty("FILE_SVR_HTTP_OUTER_PATH"));
+		
+		return "/page/moneyStastic/index";
+	}
+	
+	/**
+	 * 年度月份数据
+	 * @param item
+	 * @param request
+	 * @param pageCondition
+	 * @return
+	 * @author zj
+	 * @date 2019年2月17日
+	 */
+	@RequestMapping("/yearMoneyList")
+	//@ManagerActionLog(operateDescribe="查询收支管理",operateFuncType=FunLogType.Query,operateModelClassName=MoneyMapper.class)
+	@ResponseBody
+	public String yearMoneyList( Money item, HttpServletRequest request,PageCondition pageCondition) {
+
+		String rst = "";
+		List<Money> moneys = new ArrayList<>();
+
+		Page page = new Page<>(1,20);
+		moneys = moneyService.selectYearList(item);
+
+		try {
+			rst = PageUtil.packageTableData(page, moneys);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		return rst;
+	}
+	
+	
+	
 	@RequestMapping("/manager")
 	public String manager(HttpServletRequest request, Model model,Map<String, Object> maps) {
 		List<MenuInfo> leftmenus = menuService.getLeftMenuTree(request.getSession(), request);

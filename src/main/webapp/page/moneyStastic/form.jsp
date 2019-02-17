@@ -32,16 +32,30 @@
 
 
 
-
-
-									<div class="form-group">
-										<label for="name" class="col-lg-3 control-label">事项</label>
+								   <div class="form-group">
+										<label for="name" class="col-lg-3 control-label">收支类型</label>
 
 										<div class="col-lg-9">
-										<input type="text" name="name" 
+										<select name="inOut" class="form-control" id="inOut">
+
+										<option value="1" >收入</option>
+										<option value="2" selected="selected">支出</option>
+										
+									</select>
+										
+											<p class="help-block"></p>
+										</div>
+									</div>
+									
+
+									<div class="form-group">
+										<label for="name" class="col-lg-3 control-label">金额</label>
+
+										<div class="col-lg-9">
+										<input type="text" name="money" 
 											
-											class="form-control" id="name"
-												placeholder="事项" >
+											class="form-control" id="money"
+												placeholder="金额" >
 											<p class="help-block"></p>
 										</div>
 									</div>
@@ -71,44 +85,12 @@
 									</div>
 									
 								<script>	
-                            $(function() {
+                           
         						
-       						 $.fn.datepicker.defaults.format = "yyyy-mm";
-       						 $('#mDate').datepicker({
-       						   language: "zh-CN",
-       						     endDate: new Date(),
-       						  format: "yyyy-mm",
-       						 autoclose: true,
-       						     minViewMode: "months",
-       						     defaultDate:new Date(),
-       						 });
        						
-       						 
-       						// num传入的数字，n需要的字符长度 ，批量添加房间数，房号计算，左加0
-       						 function PrefixInteger(num, n) {
-       						 	return (Array(n).join(0) + num).slice(-n);
-       						 }
-       						 
-       						 var date=new Date();
-       						 $('#mDate').val(date.getFullYear()+"-"+PrefixInteger((date.getMonth()+1),2));
-       						
-                            });
                             </script>
 									
-									<div class="form-group">
-										<label for="name" class="col-lg-3 control-label">收支类型</label>
-
-										<div class="col-lg-9">
-										<select name="inOut" class="form-control" id="inOut">
-
-										<option value="1" >收入</option>
-										<option value="2" selected="selected">支出</option>
-										
-									</select>
-										
-											<p class="help-block"></p>
-										</div>
-									</div>
+									
 									
 									
 									

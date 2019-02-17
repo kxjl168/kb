@@ -245,7 +245,7 @@ public class K100TrackOfficial implements AbsWuliuTrack {
 	 *            请求的参数集合
 	 * @return 远程资源的响应结果
 	 */
-	@SuppressWarnings("unused")
+	
 	private String sendPost(String url, Map<String, String> params) {
 		OutputStreamWriter out = null;
 		BufferedReader in = null;

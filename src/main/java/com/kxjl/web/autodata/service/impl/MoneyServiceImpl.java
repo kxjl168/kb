@@ -37,6 +37,17 @@ public class MoneyServiceImpl implements MoneyService {
     	return itemMapper.selectZhichuStastic(item);
     }
     
+    /**
+     * 年度月份统计
+     * @param item
+     * @return
+     * @author zj
+     * @date 2019年2月17日
+     */
+    public List<Money> selectYearList(Money item){
+    	return itemMapper.selectYearList(item);
+    }
+    
 	
     /**
      * 月份统计

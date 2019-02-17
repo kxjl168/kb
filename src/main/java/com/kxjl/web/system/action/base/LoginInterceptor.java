@@ -110,6 +110,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 				for (int i = 0; i < user.getMenus().size(); i++) {
 					if (user.getMenus().get(i) != null && user.getMenus().get(i).getMenuUrl() != null
+							//&& !user.getMenus().get(i).getMenuUrl() .equals("")
+							//有漏洞！//TODO 监测用户类型，判断
 							&& request.getRequestURI().contains(user.getMenus().get(i).getMenuUrl())) {
 						inaccess = true;
 						break;

@@ -45,6 +45,17 @@ public interface MoneyMapper {
     List<Money> selectZhichuStastic(Money item);
     
     
+    /**
+     * 年度月份统计
+     * @param item
+     * @return
+     * @author zj
+     * @date 2019年2月17日
+     */
+    List<Money> selectYearList(Money item);
+    
+    
+    
     
     /**
      * 删除

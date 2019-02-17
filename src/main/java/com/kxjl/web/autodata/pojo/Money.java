@@ -30,6 +30,25 @@ public class Money {
     //query
     private String typeName;
     private String typeIcon;
+    
+    private BigDecimal in_money;
+    public BigDecimal getIn_money() {
+		return in_money;
+	}
+
+	public void setIn_money(BigDecimal in_money) {
+		this.in_money = in_money;
+	}
+
+	public BigDecimal getOut_money() {
+		return out_money;
+	}
+
+	public void setOut_money(BigDecimal out_money) {
+		this.out_money = out_money;
+	}
+
+	private BigDecimal out_money;
 
     public String getId() {
         return id;

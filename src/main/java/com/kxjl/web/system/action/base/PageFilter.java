@@ -438,7 +438,7 @@ public class PageFilter implements Filter {
 			//直接后台调用接口、扫描等
 			//不用鉴权url+其他正常url， 全部正常请求.
 			excludedUrls+= ConfigReader.getInstance().getProperty("normalUrls",
-					"/public,/blog,/replay,/kurl,/UploadFileXhr,/todo,/user,/phoneaccount,/privilege,/Privilege,/search,/menu,.*.do,.*.action,/FileSvr,/xjs,/page,/file,/pown,/statistics,");
+					".*/favicon.icon,/public,.*/file.*,/search,/xjs");
 			
 			String[] nurls = excludedUrls.split(",");
 
@@ -468,7 +468,7 @@ public class PageFilter implements Filter {
 			}
 
 			if (isattack) {
-				logger.error("attack: request.getContextPath():" + request.getRequestURI());
+				logger.debug("attack: request.getContextPath():" + request.getRequestURI());
 				stasticService.saveStaticInfo(request, "attack", "", request.getRequestURI(), true);
 				return;
 			}
@@ -501,13 +501,16 @@ public class PageFilter implements Filter {
 			// System.out.println("filter:"+request.getRequestURI());
 			boolean inaccess = false;
 
-			if (user.getMenus().size() == 0)
+	/*		if (user.getMenus().size() == 0)
 				inaccess = true;
 			else
-				inaccess = false;
+				inaccess = false;*/
 
 			for (int i = 0; i < user.getMenus().size(); i++) {
 				if (user.getMenus().get(i) != null && user.getMenus().get(i).getMenuUrl() != null
+						//有漏洞！//TODO 监测用户类型，判断
+						
+					//	&& !user.getMenus().get(i).getMenuUrl() .equals("")
 						&& request.getRequestURI().contains(user.getMenus().get(i).getMenuUrl())) {
 					inaccess = true;
 					break;
