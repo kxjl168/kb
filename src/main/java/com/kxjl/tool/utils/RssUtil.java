@@ -1,10 +1,12 @@
 package com.kxjl.tool.utils;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -12,6 +14,7 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.Node;
+import org.dom4j.XPath;
 import org.dom4j.io.SAXReader;
 
 import com.kxjl.web.autodata.pojo.RssManager;
@@ -22,7 +25,79 @@ public class RssUtil {
 	public static Document parse(URL url) throws DocumentException {
 		SAXReader reader = new SAXReader();
 		Document document = reader.read(url);
+		
+		
+		Node feed = document.selectSingleNode("/feed");
+		if(feed!=null)
+		{
+			return parseAtom(url);
+		}
+		
+		
+		
 		return document;
+	}
+	
+	public static Document parseAtom(URL url) throws DocumentException {
+		HashMap nsMap = new HashMap();
+		nsMap.put("ns", "http://www.w3.org/2005/Atom");
+
+		SAXReader reader = new SAXReader();
+
+		reader.getDocumentFactory().setXPathNamespaceURIs(nsMap);
+		
+	
+		Document document = reader.read(url);
+		return document;
+	}
+	
+	
+
+	public static void main(String[] args) {
+		String atomurl = "https://bwskyer.com/feed/atom";
+
+		try {
+	RssManager rssm = rssParse(parse(new URL(atomurl)));
+			
+			//RssManager rssm =rssAtomParse(atomurl);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
+
+	/**
+	 * 解析rss基本数据
+	 * 
+	 * @param document
+	 * @return
+	 * @author zj
+	 * @date 2019年1月28日
+	 */
+	public static RssManager rssAtomParse(String url) {
+
+		HashMap nsMap = new HashMap();
+		nsMap.put("ns", "http://www.w3.org/2005/Atom");
+
+		SAXReader reader = new SAXReader();
+
+		reader.getDocumentFactory().setXPathNamespaceURIs(nsMap);
+
+		RssManager rmanager = new RssManager();
+		try {
+			Document document = reader.read(new URL(url));
+
+			Node noderssTitle = document.selectSingleNode("/feed/ns:title");
+
+			Node node_remark = document.selectSingleNode("//channel/description");
+			rmanager.setName(noderssTitle.getText());
+			rmanager.setRemark(node_remark.getText());
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return rmanager;
 	}
 
 	/**
@@ -46,7 +121,15 @@ public class RssUtil {
 		try {
 
 			Node noderssTitle = document.selectSingleNode("//channel/title");
+			
+			if(noderssTitle==null)
+			 noderssTitle = document.selectSingleNode("/feed/ns:title");
+			
+
 			Node node_remark = document.selectSingleNode("//channel/description");
+			if(node_remark==null)
+				node_remark = document.selectSingleNode("/feed/ns:subtitle ");
+			
 			rmanager.setName(noderssTitle.getText());
 			rmanager.setRemark(node_remark.getText());
 		} catch (Exception e) {
@@ -89,7 +172,7 @@ public class RssUtil {
 			RssPageList pageitem = new RssPageList();
 
 			Node noderssTitle = ((Element) node).element("title");
-		
+
 			Node node_link = ((Element) node).element("link");
 			Node node_pubDate = ((Element) node).element("pubDate");
 
@@ -99,21 +182,15 @@ public class RssUtil {
 			pageitem.setLink(node_link.getText());
 
 			pageitem.setId(node_link.getText());
-			
-			
-			if(node_content!=null)
-			{
-			String content= node_content.getText();
-			content=content.replaceAll("src=\"/", "src=\""+link+"/");
-			pageitem.setContext(content);
-			}
-			else
-			{
+
+			if (node_content != null) {
+				String content = node_content.getText();
+				content = content.replaceAll("src=\"/", "src=\"" + link + "/");
+				pageitem.setContext(content);
+			} else {
 				pageitem.setContext("未提供内容订阅");
 			}
-			
-			
-			
+
 			SimpleDateFormat fm = new SimpleDateFormat("EEE,d MMM yyyy hh:mm:ss Z", Locale.ENGLISH);
 			try {
 				Date pdate = fm.parse(node_pubDate.getText());
@@ -124,10 +201,10 @@ public class RssUtil {
 					Date pdate = fm.parse(node_pubDate.getText());
 					pageitem.setUpdateDate(DateUtil.getDateStr(pdate, ""));
 				} catch (Exception e2) {
-					pageitem.setTitle(pageitem.getTitle()+"(pubDate错误)");
+					pageitem.setTitle(pageitem.getTitle() + "(pubDate错误)");
 					pageitem.setUpdateDate(DateUtil.getNowStr(""));
 				}
-				//e.printStackTrace();
+				// e.printStackTrace();
 			}
 
 			pagelist.add(pageitem);
