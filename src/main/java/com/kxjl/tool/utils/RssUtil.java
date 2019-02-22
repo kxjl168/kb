@@ -57,8 +57,10 @@ public class RssUtil {
 		String atomurl = "https://bwskyer.com/feed/atom";
 
 		try {
-	RssManager rssm = rssParse(parse(new URL(atomurl)));
+			Document dt= parse(new URL(atomurl));
+	RssManager rssm = rssParse(dt);
 			
+	rssAtomPagesParse(dt);
 			//RssManager rssm =rssAtomParse(atomurl);
 
 		} catch (Exception e) {
@@ -117,13 +119,16 @@ public class RssUtil {
 		 */
 
 		RssManager rmanager = new RssManager();
-
+		rmanager.setRtype("rss");
 		try {
 
 			Node noderssTitle = document.selectSingleNode("//channel/title");
 			
 			if(noderssTitle==null)
-			 noderssTitle = document.selectSingleNode("/feed/ns:title");
+			{
+				noderssTitle = document.selectSingleNode("/feed/ns:title");
+				rmanager.setRtype("atom");
+			}
 			
 
 			Node node_remark = document.selectSingleNode("//channel/description");
@@ -204,6 +209,77 @@ public class RssUtil {
 					pageitem.setTitle(pageitem.getTitle() + "(pubDate错误)");
 					pageitem.setUpdateDate(DateUtil.getNowStr(""));
 				}
+				// e.printStackTrace();
+			}
+
+			pagelist.add(pageitem);
+		}
+
+		return pagelist;
+	}
+	
+	/**
+	 * 解析rss atom文章数据
+	 * 
+	 * @param document
+	 * @return
+	 * @author zj
+	 * @date 2019年1月28日
+	 */
+	public static List<RssPageList> rssAtomPagesParse(Document document) {
+
+		/*
+		 * <item> <title>没有态度的态度</title>
+		 * <link>https://pewae.com/2019/01/my-attitude-is-no-attitude.html</link>
+		 * <comments>https://pewae.com/2019/01/my-attitude-is-no-attitude.html#comments<
+		 * /comments> <pubDate>Tue, 22 Jan 2019 05:32:29 +0000</pubDate>
+		 * 
+		 * <item> <title>组装一个聚合物锂电池充电宝</title>
+		 * <link>https://xsinger.me/diy/794.html</link>
+		 * <guid>https://xsinger.me/diy/794.html</guid> <pubDate>Sat, 26 Jan 2019
+		 * 22:55:00 +0800</pubDate> <dc:creator>山小炮</dc:creator>
+		 * <description><![CDATA[老婆的iPhone背夹充电宝的充电插头断了（如下图1），然后在网上买了个新的给她，后来发现蠢了，
+		 * 其实网上有卖这种背夹充电宝的主板的，买回来直接替换就行，一般价格也就10多块钱，但你买一个全新的背...]]></description>
+		 * <content:encoded xml:lang="zh-CN"><![CDATA[
+		 */
+
+		List<RssPageList> pagelist = new ArrayList<>();
+		List<Node> itemlist = document.selectNodes("//ns:entry");
+		String link = ((Element)document.selectSingleNode("/feed/ns:link[@rel='alternate']")).attributeValue("href");
+		for (Node node : itemlist) {
+
+			RssPageList pageitem = new RssPageList();
+
+			Node noderssTitle = ((Element) node).element("title");
+
+			Node node_link = ((Element) node).element("link");
+			Node node_pubDate = ((Element) node).element("updated");
+
+			Node node_content = ((Element) node).element("content");
+
+			pageitem.setTitle(noderssTitle.getText());
+			String url=((Element)node_link).attributeValue("href");
+			pageitem.setLink(url);
+
+			pageitem.setId(url);
+
+			if (node_content != null) {
+				String content = node_content.getText();
+				content = content.replaceAll("src=\"/", "src=\"" + link + "/");
+				pageitem.setContext(content);
+			} else {
+				pageitem.setContext("未提供内容订阅");
+			}
+
+			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z", Locale.ENGLISH);
+			
+			try {
+				String date = node_pubDate.getText().replace("T", " ").replace("Z", " UTC");
+				Date pdate = fm.parse(date);
+				pageitem.setUpdateDate(DateUtil.getDateStr(pdate, ""));
+			} catch (ParseException e) {
+				pageitem.setTitle(pageitem.getTitle() + "(pubDate错误)");
+				pageitem.setUpdateDate(DateUtil.getNowStr(""));
 				// e.printStackTrace();
 			}
 

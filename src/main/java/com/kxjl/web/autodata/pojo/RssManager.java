@@ -24,12 +24,25 @@ public class RssManager {
     private String mName;
     private String mRemark;
     
-    //query
+    private String rtype;//rss,atom
+    
+    public String getRtype() {
+		return rtype;
+	}
+
+	public void setRtype(String rtype) {
+		this.rtype = rtype;
+	}
+
+	//query
     private String read;
     
     private String noread;
+    
+   
 
-    public String getId() {
+
+	public String getId() {
         return id;
     }
 

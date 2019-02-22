@@ -484,9 +484,15 @@ public class PublicController extends BaseController {
 	 */
 	private void widthRealIp(HttpRequest proxyRequest, HttpServletRequest request) {
 
-		proxyRequest.addHeader("X-Prerender-Token", stasticService.getIpAddr(request));
+		proxyRequest.addHeader("X-Forwarded-For", stasticService.getIpAddr(request));
 		// 补充原始地址
 
+		
+		String userAgent = request.getHeader("Pre-User-Agent");// prerender带过来的原始爬虫agent
+		if (userAgent == null || userAgent.equals(""))
+			userAgent = request.getHeader("User-Agent");
+		
+		proxyRequest.setHeader("Pre-User-Agent",userAgent);
 	}
 
 	private static final HeaderGroup hopByHopHeaders;
@@ -1012,12 +1018,12 @@ public class PublicController extends BaseController {
 		String domain = ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn");
 
 		Blog query = new Blog();
-		query.setPageCount(15);
+		query.setPageCount(8);
 		query.setShowflag("1");
 		List<Blog> blogs = bservice.getBlogPageList(query);
 
-		SimpleDateFormat fm = new SimpleDateFormat("EEE,d MMM yyyy hh:mm:ss Z", Locale.CHINESE);
-		String date = fm.format(new Date()) + " GMT";
+		SimpleDateFormat fm = new SimpleDateFormat("EEE,d MMM yyyy hh:mm:ss Z", Locale.ENGLISH);
+		String date = fm.format(new Date()) + "";
 
 		StringBuffer sb = new StringBuffer();
 		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -1039,7 +1045,7 @@ public class PublicController extends BaseController {
 
 		for (Blog blog : blogs) {
 
-			String dateb = fm.format(DateUtil.getDate(blog.getUpdate_date(), "")) + " GMT";
+			String dateb = fm.format(DateUtil.getDate(blog.getUpdate_date(), "")) + "";
 
 			String desc = getDesc(blog);
 			// /public/html/${curBlog.showdate}/${curBlog.imei}.html

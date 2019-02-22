@@ -16,11 +16,12 @@
     <result column="m_remark" jdbcType="VARCHAR" property="mRemark" />
     <result column="m_name" jdbcType="VARCHAR" property="mName" />
     
+      <result column="rtype" jdbcType="VARCHAR" property="rtype" />
   
     
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, link, icon, remark, auto_rss, has_error, create_date, update_date, last_rss_date,m_remark,m_name
+    id, name, link, icon, remark, auto_rss, has_error, create_date, update_date, last_rss_date,m_remark,m_name,rtype
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -81,6 +82,10 @@
        <if test="mRemark != null">
         m_remark,
       </if>
+       <if test="rtype != null">
+        rtype,
+      </if>
+      
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -119,6 +124,9 @@
        <if test="mRemark != null">
           #{mRemark,jdbcType=VARCHAR},
       </if>
+         <if test="rtype != null">
+        #{rtype,jdbcType=VARCHAR}, 
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.kxjl.web.autodata.pojo.RssManager">
@@ -156,6 +164,9 @@
       </if>
        <if test="mRemark != null">
           m_remark=#{mRemark,jdbcType=VARCHAR},
+      </if>
+       <if test="rtype != null">
+        rtype=#{rtype,jdbcType=VARCHAR}, 
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}

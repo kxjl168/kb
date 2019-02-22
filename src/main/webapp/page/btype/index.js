@@ -224,7 +224,7 @@ function changerows(option) {
 function changeParentList(successCallback){
 	var type=$("#dict_level").val()-1;
 	
-	var data="dict_level="+type+"&pageSize=40";
+	var data="dict_level="+type+"&pageSize=40&pageCount=40";
 	$.ajax({
 		type : "post",
 		url : basePath+"/blogtype/listparent.action",
