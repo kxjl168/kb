@@ -127,6 +127,8 @@ public class RssManagerServiceImpl implements RssManagerService {
 			if (rsstp != null) {
 				rssmanager.setName(rsstp.getName());
 				rssmanager.setRemark(rsstp.getRemark());
+				rssmanager.setPage_link(rsstp.getPage_link());
+				rssmanager.setLastRssPageDate(rsstp.getLastRssPageDate());
 			}
 
 			List<RssPageList> plist = new ArrayList<>();

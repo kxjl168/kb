@@ -143,7 +143,30 @@ function initValidate_item() {
 	});
 
 }
+//两个时间相差天数 兼容firefox chrome
+function datedifference(sDate1, sDate2) {    //sDate1和sDate2是2006-12-18格式  
+    var dateSpan,
+        tempDate,
+        iDays;
+    sDate1 = Date.parse(sDate1);
+    sDate2 = Date.parse(sDate2);
+    dateSpan = sDate2 - sDate1;
+    dateSpan = Math.abs(dateSpan);
+    iDays = Math.floor(dateSpan / (24 * 3600 * 1000));
+    return iDays
+};
 
+function daybefore(sDate1) {    //sDate1和sDate2是2006-12-18格式  
+    var dateSpan,
+        tempDate,
+        iDays;
+    sDate1 = Date.parse(sDate1);
+    sDate2 = new Date();
+    dateSpan = sDate2 - sDate1;
+    dateSpan = Math.abs(dateSpan);
+    iDays = Math.floor(dateSpan / (24 * 3600 * 1000));
+    return iDays
+};
 
 
 function InitQuery_item() {
@@ -202,7 +225,7 @@ function InitQuery_item() {
 					 var add="";
 					 if(row.mName)
 					  add=  "("+row.mName+")";
-			       return "<span title='"+row.remark+"'>"+value+add+"</span>";
+			       return "<a target='_blank' title='"+row.remark+"' href='"+row.page_link+"'>"+value+add+"</a>";
 				 }
 				
 			},
@@ -226,7 +249,20 @@ function InitQuery_item() {
 				align : 'center',
 				valign : 'middle',
 				 formatter: function (value, row, index) {
-				       return "<a target='_blank' href='"+value+"' >"+value+"</a>";
+					 var addtime="";
+					 var days=0;
+					 var cls="text-success bold";
+					 if(row.lastRssPageDate)
+						 {
+						 addtime=row.lastRssPageDate.substr(0,row.lastRssPageDate.length-11);
+						 days =daybefore(addtime);
+						 if(days>10)
+							 cls='';
+						 addtime= "<span class='"+cls+"'>"+days+"天前</span>更新";
+						 }
+					
+					 
+				       return "<a target='_blank' href='"+value+"' >"+value+"</a><div class='small rsspagetime'>"+addtime+"</div>";
 					 }   
 				
 			},
@@ -278,7 +314,8 @@ function InitQuery_item() {
 				   
 		 formatter: function (value, row, index) {
              //return new Date(value).Format("yyyy-MM-dd hh:mm:ss");
-			 return value.substr(0,value.length-2);
+			
+			 return "<span class='small text-success'>"+value.substr(0,value.length-2)+ "</span>";
          }
 				
 			},

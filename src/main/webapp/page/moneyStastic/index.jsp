@@ -143,7 +143,7 @@
 	<!-- 模态框（Modal） -->
 
 	<jsp:include page="form.jsp"></jsp:include>
- <script src="${basePath}/js/plugin/echart/echart4/echarts.js"></script>
+ <script src="${basePath}/js/plugin/echart/echart4/echarts.min.js"></script>
  
 		
 	<script

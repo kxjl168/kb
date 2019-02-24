@@ -1,7 +1,12 @@
 package com.kxjl.tool.utils;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,28 +21,52 @@ import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.XPath;
 import org.dom4j.io.SAXReader;
+import org.xml.sax.InputSource;
 
 import com.kxjl.web.autodata.pojo.RssManager;
 import com.kxjl.web.autodata.pojo.RssPageList;
 
 public class RssUtil {
 
-	public static Document parse(URL url) throws DocumentException {
+	public static Document parse(URL url) throws Exception {
 		SAXReader reader = new SAXReader();
-		Document document = reader.read(url);
-		
-		
+
+		String rssStr = callUrlByGet(url, "utf-8");
+
+		//white space 统一使用byte读取
+		ByteArrayInputStream stringReader = new ByteArrayInputStream(rssStr.getBytes("utf-8"));
+		InputSource inputSource = new InputSource(stringReader);
+
+		Document document = reader.read(inputSource);
+		// Document document = reader.read(url);
+
 		Node feed = document.selectSingleNode("/feed");
-		if(feed!=null)
-		{
-			return parseAtom(url);
+		if (feed != null) {
+			return parseAtom(rssStr);
 		}
-		
-		
-		
+
 		return document;
 	}
-	
+
+	private static String callUrlByGet(URL url, String charset) {
+		String result = "";
+		try {
+			// URL url = new URL(callurl);
+			URLConnection connection = url.openConnection();
+			connection.connect();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), charset));
+			String line;
+			while ((line = reader.readLine()) != null) {
+				result += line;
+				result += "\n";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+		return result;
+	}
+
 	public static Document parseAtom(URL url) throws DocumentException {
 		HashMap nsMap = new HashMap();
 		nsMap.put("ns", "http://www.w3.org/2005/Atom");
@@ -45,28 +74,42 @@ public class RssUtil {
 		SAXReader reader = new SAXReader();
 
 		reader.getDocumentFactory().setXPathNamespaceURIs(nsMap);
-		
-	
+
 		Document document = reader.read(url);
 		return document;
 	}
+
+	public static Document parseAtom(String rssStr) throws Exception {
+		HashMap nsMap = new HashMap();
+		nsMap.put("ns", "http://www.w3.org/2005/Atom");
+
+		SAXReader reader = new SAXReader();
+		reader.getDocumentFactory().setXPathNamespaceURIs(nsMap);
+
+		//white space 统一使用byte读取
+				ByteArrayInputStream stringReader = new ByteArrayInputStream(rssStr.getBytes("utf-8"));
+				InputSource inputSource = new InputSource(stringReader);
+				
 	
-	
+		Document document = reader.read(inputSource);
+
+		return document;
+	}
 
 	public static void main(String[] args) {
 		String atomurl = "https://bwskyer.com/feed/atom";
 
 		try {
-			Document dt= parse(new URL(atomurl));
-	RssManager rssm = rssParse(dt);
-			
-	rssAtomPagesParse(dt);
-			//RssManager rssm =rssAtomParse(atomurl);
+			Document dt = parse(new URL(atomurl));
+			RssManager rssm = rssParse(dt);
+
+			rssAtomPagesParse(dt);
+			// RssManager rssm =rssAtomParse(atomurl);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	/**
@@ -123,20 +166,58 @@ public class RssUtil {
 		try {
 
 			Node noderssTitle = document.selectSingleNode("//channel/title");
-			
-			if(noderssTitle==null)
-			{
+
+			if (noderssTitle == null) {
 				noderssTitle = document.selectSingleNode("/feed/ns:title");
 				rmanager.setRtype("atom");
 			}
-			
 
 			Node node_remark = document.selectSingleNode("//channel/description");
-			if(node_remark==null)
-				node_remark = document.selectSingleNode("/feed/ns:subtitle ");
+			if (node_remark == null)
+				node_remark = document.selectSingleNode("/feed/ns:subtitle");
+			
+			Node node_lastdate = document.selectSingleNode("//channel/lastBuildDate");
+			if (node_lastdate == null)
+			{
+				node_lastdate = document.selectSingleNode("/feed/ns:updated");
+				SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z", Locale.ENGLISH);
+
+				try {
+					String date = node_lastdate.getText().replace("T", " ").replace("Z", " UTC");
+					Date pdate = fm.parse(date);
+					rmanager.setLastRssPageDate(DateUtil.getDateStr(pdate, ""));
+				}
+				catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+			else {
+
+				SimpleDateFormat fm = new SimpleDateFormat("EEE,d MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
+				try {
+					Date pdate = fm.parse(node_lastdate.getText().replaceAll("\n\t", ""));
+					rmanager.setLastRssPageDate(DateUtil.getDateStr(pdate, ""));
+				} catch (ParseException e) {
+					
+				}
+			}
+
+			
+			Node node_link = document.selectSingleNode("//channel/link");
+			String page_link="";
+			if (node_link == null)
+			{
+				page_link = ((Element) document.selectSingleNode("/feed/ns:link[@rel='alternate']")).attributeValue("href");
+			}
+			else {
+				page_link=node_link.getText();
+			}
+				
 			
 			rmanager.setName(noderssTitle.getText());
 			rmanager.setRemark(node_remark.getText());
+			rmanager.setPage_link(page_link);
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -196,13 +277,13 @@ public class RssUtil {
 				pageitem.setContext("未提供内容订阅");
 			}
 
-			SimpleDateFormat fm = new SimpleDateFormat("EEE,d MMM yyyy hh:mm:ss Z", Locale.ENGLISH);
+			SimpleDateFormat fm = new SimpleDateFormat("EEE,d MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
 			try {
 				Date pdate = fm.parse(node_pubDate.getText());
 				pageitem.setUpdateDate(DateUtil.getDateStr(pdate, ""));
 			} catch (ParseException e) {
 				try {
-					fm = new SimpleDateFormat("EEE,d MMM yyyy hh:mm:ss Z", Locale.CHINESE);
+					fm = new SimpleDateFormat("EEE,d MMM yyyy HH:mm:ss Z", Locale.CHINESE);
 					Date pdate = fm.parse(node_pubDate.getText());
 					pageitem.setUpdateDate(DateUtil.getDateStr(pdate, ""));
 				} catch (Exception e2) {
@@ -217,7 +298,7 @@ public class RssUtil {
 
 		return pagelist;
 	}
-	
+
 	/**
 	 * 解析rss atom文章数据
 	 * 
@@ -245,7 +326,7 @@ public class RssUtil {
 
 		List<RssPageList> pagelist = new ArrayList<>();
 		List<Node> itemlist = document.selectNodes("//ns:entry");
-		String link = ((Element)document.selectSingleNode("/feed/ns:link[@rel='alternate']")).attributeValue("href");
+		String link = ((Element) document.selectSingleNode("/feed/ns:link[@rel='alternate']")).attributeValue("href");
 		for (Node node : itemlist) {
 
 			RssPageList pageitem = new RssPageList();
@@ -258,7 +339,7 @@ public class RssUtil {
 			Node node_content = ((Element) node).element("content");
 
 			pageitem.setTitle(noderssTitle.getText());
-			String url=((Element)node_link).attributeValue("href");
+			String url = ((Element) node_link).attributeValue("href");
 			pageitem.setLink(url);
 
 			pageitem.setId(url);
@@ -272,7 +353,7 @@ public class RssUtil {
 			}
 
 			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z", Locale.ENGLISH);
-			
+
 			try {
 				String date = node_pubDate.getText().replace("T", " ").replace("Z", " UTC");
 				Date pdate = fm.parse(date);

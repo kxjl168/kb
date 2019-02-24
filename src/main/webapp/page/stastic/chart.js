@@ -1,3 +1,5 @@
+
+ var myCharts=[];
 function setchartdata(jdata, title, ele) {
 	// if (jdata == null)
 	// jdata = {
@@ -185,14 +187,25 @@ function setchartdata(jdata, title, ele) {
 
 	var id = ele || 'pchart';
 
-	$("#" + id).html('');
+	
+	
+	var myChart=myCharts[id];
+	if(!myChart)
+	{
+	$("#"+id).html('');
 	myChart = echarts.init(document.getElementById(id));
-	// 使用刚指定的配置项和数据显示图表。
-	myChart.setOption(option);
 	myChart.on('click', function(params) {
 		// 控制台打印数据的名称
-		// msg(params.name);
+		// msg(params.data.id);
 		// getDetailList(1,params.name,id);
+		
 		refreshHourTable(1, params.name, id);
+		
 	});
+	myCharts[id]=myChart;
+	
+	}
+
+// 使用刚指定的配置项和数据显示图表。
+myChart.setOption(option);
 }

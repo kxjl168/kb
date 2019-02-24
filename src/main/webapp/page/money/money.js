@@ -295,8 +295,21 @@ function InitQuery_item() {
 									valign : 'middle',
 									formatter : function(value, row, index) {
 
+										var addtime=row.createUser;
+										var cls="text-success";
+										if(addtime=='root')
+											addtime="大喵喵";
+										else if(addtime=='4')
+											{
+											addtime="小文子";
+											cls="text-warning";
+											}
+										
+										addtime='';
+											
+										
 										return "<div class='row moneydate'><div class=''>"
-												+ value + "</div></div>";
+												+ value + "</div>  </div><div class='"+cls+" small rsspagetime'>"+addtime+"</div>";
 
 									}
 

@@ -1022,8 +1022,8 @@ public class PublicController extends BaseController {
 		query.setShowflag("1");
 		List<Blog> blogs = bservice.getBlogPageList(query);
 
-		SimpleDateFormat fm = new SimpleDateFormat("EEE,d MMM yyyy hh:mm:ss Z", Locale.ENGLISH);
-		String date = fm.format(new Date()) + "";
+		SimpleDateFormat fm = new SimpleDateFormat("EEE,d MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
+		String date = fm.format(DateUtil.getDate(blogs.get(0).getUpdate_date(), "")) + "";
 
 		StringBuffer sb = new StringBuffer();
 		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");

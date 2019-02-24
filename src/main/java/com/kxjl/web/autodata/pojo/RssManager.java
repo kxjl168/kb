@@ -21,7 +21,19 @@ public class RssManager {
 
     private String lastRssDate;
     
-    private String mName;
+    private String lastRssPageDate;//文章最后更新日期
+    
+    private String page_link;
+    
+    public String getPage_link() {
+		return page_link;
+	}
+
+	public void setPage_link(String page_link) {
+		this.page_link = page_link;
+	}
+
+	private String mName;
     private String mRemark;
     
     private String rtype;//rss,atom
@@ -152,5 +164,13 @@ public class RssManager {
 
 	public void setmRemark(String mRemark) {
 		this.mRemark = mRemark;
+	}
+
+	public String getLastRssPageDate() {
+		return lastRssPageDate;
+	}
+
+	public void setLastRssPageDate(String lastRssPageDate) {
+		this.lastRssPageDate = lastRssPageDate;
 	}
 }

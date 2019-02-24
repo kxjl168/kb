@@ -12,16 +12,18 @@
     <result column="create_date" jdbcType="VARCHAR" property="createDate" />
     <result column="update_date" jdbcType="VARCHAR" property="updateDate" />
     <result column="last_rss_date" jdbcType="VARCHAR" property="lastRssDate" />
+     <result column="last_rss_page_date" jdbcType="VARCHAR" property="lastRssPageDate" />
+    
     
     <result column="m_remark" jdbcType="VARCHAR" property="mRemark" />
     <result column="m_name" jdbcType="VARCHAR" property="mName" />
     
       <result column="rtype" jdbcType="VARCHAR" property="rtype" />
   
-    
+       <result column="page_link" jdbcType="VARCHAR" property="page_link" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, link, icon, remark, auto_rss, has_error, create_date, update_date, last_rss_date,m_remark,m_name,rtype
+    id, name, link, icon, remark, auto_rss, has_error, create_date, update_date, last_rss_date,last_rss_page_date,m_remark,m_name,rtype,page_link
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -76,6 +78,9 @@
       <if test="lastRssDate != null">
         last_rss_date,
       </if>
+       <if test="lastRssPageDate != null">
+        last_rss_page_date,
+      </if>
        <if test="mName != null">
         m_name,
       </if>
@@ -85,6 +90,10 @@
        <if test="rtype != null">
         rtype,
       </if>
+       <if test="page_link != null">
+        page_link,
+      </if>
+      
       
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -118,6 +127,9 @@
       <if test="lastRssDate != null">
         #{lastRssDate,jdbcType=VARCHAR},
       </if>
+       <if test="lastRssPageDate != null">
+        #{lastRssPageDate,jdbcType=VARCHAR}, \
+      </if>
         <if test="mName != null">
           #{mName,jdbcType=VARCHAR}, 
       </if>
@@ -126,6 +138,9 @@
       </if>
          <if test="rtype != null">
         #{rtype,jdbcType=VARCHAR}, 
+      </if>
+         <if test="page_link != null">
+          #{page_link,jdbcType=VARCHAR}, 
       </if>
     </trim>
   </insert>
@@ -159,6 +174,9 @@
       <if test="lastRssDate != null">
         last_rss_date = #{lastRssDate,jdbcType=VARCHAR},
       </if>
+       <if test="lastRssPageDate != null">
+       last_rss_page_date = #{lastRssPageDate,jdbcType=VARCHAR},  
+      </if>
         <if test="mName != null">
          m_name= #{mName,jdbcType=VARCHAR}, 
       </if>
@@ -167,6 +185,9 @@
       </if>
        <if test="rtype != null">
         rtype=#{rtype,jdbcType=VARCHAR}, 
+      </if>
+        <if test="page_link != null">
+         page_link= #{page_link,jdbcType=VARCHAR}, 
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
