@@ -26,6 +26,8 @@
     <link rel="stylesheet" type="text/css" href="${basePath}/js/plugin/select2/css/select2.bootstrap.css">
 
   <style >
+  .select2-selection__rendered{
+  text-align: left}
 /*宽度全屏*/
 /* .modal-dialog{position:absolute;width:auto;margin:2.5vh auto;left:0;right:0;} */
 
@@ -62,7 +64,7 @@
 						
 						<div class="form-group   ">
 						
-						<div class=" nopadding">
+						<div class=" nopadding hide">
 							 <div class="control-label padding-top-0 col-sm-1 col-xs-12 ">文章类型：</div>
 							<div class="col-sm-9 col-xs-12 text-right ">
 							<select class="form-control " id="s_type" ng-model="s_type">
@@ -75,6 +77,28 @@
 						</div>
 						
 						</div>
+						
+						<div class="form-group   ">
+						
+						<div class=" nopadding">
+							 <div class="control-label padding-top-0 col-sm-1 col-xs-12 ">文章类型：</div>
+							<div class="col-sm-9 col-xs-12 text-right ">
+							<select  name="mType" 
+											
+											class="form-control col-xs-12" id="mType"
+												placeholder="分类" ></select>
+							 </div>
+							 <div class="col-xs-12 col-xs-offset-4 row ">
+							
+							</div>
+						</div>
+						
+						</div>
+						
+						
+						
+						
+						
 					<div class="form-group   ">
 						
 						<div class=" nopadding">
@@ -217,7 +241,7 @@
 
 			<script type="text/javascript" src="detail.js"></script>
 
-
+	<script type="text/javascript" src="blogSelect2.js"></script>
 			
 
 

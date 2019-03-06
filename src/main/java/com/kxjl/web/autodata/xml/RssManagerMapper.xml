@@ -128,7 +128,7 @@
         #{lastRssDate,jdbcType=VARCHAR},
       </if>
        <if test="lastRssPageDate != null">
-        #{lastRssPageDate,jdbcType=VARCHAR}, \
+        #{lastRssPageDate,jdbcType=VARCHAR}, 
       </if>
         <if test="mName != null">
           #{mName,jdbcType=VARCHAR}, 

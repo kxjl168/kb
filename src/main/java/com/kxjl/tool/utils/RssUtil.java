@@ -32,6 +32,9 @@ public class RssUtil {
 		SAXReader reader = new SAXReader();
 
 		String rssStr = callUrlByGet(url, "utf-8");
+		
+		//剔除最前面的空行等.
+		rssStr=rssStr.substring( rssStr.indexOf("<?xml"));
 
 		//white space 统一使用byte读取
 		ByteArrayInputStream stringReader = new ByteArrayInputStream(rssStr.getBytes("utf-8"));

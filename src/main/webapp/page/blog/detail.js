@@ -17,7 +17,7 @@ $(function() {
 
 	initCKPlugin();
 	
-	
+	initTypeSelect();
 	//alert( escape("$#x"));
 	
 	var smile='😀';
@@ -577,6 +577,23 @@ function init() {
 											$("#s_context").val(unescape(item.context) );	
 										}, 250);
 										
+										
+										//select2 类型
+										var option = new Option(item.blog_type_name, item.blog_type,
+												true, true);
+										$("#mType").append($(option)).trigger('change');
+
+										// manually trigger the `select2:select` event
+										$("#mType").trigger({
+											type : 'select2:select',
+											params : {
+												data : {
+													text : item.blog_type_name,
+													id : item.blog_type
+												}
+											}
+										});
+										
 									
 										
 										$scope.$apply();
@@ -683,7 +700,11 @@ function init() {
 					if (value==null||typeof (value) == "undefined") {
 						obj.recordid = $scope.s_recordid;
 						obj.title = $scope.s_title;
-						obj.blog_type =$("#s_type").val();
+						//obj.blog_type =$("#s_type").val();
+						
+						obj.blog_type =$("#mType").val();
+						
+						
 						obj.showtime =$("#showtime").val();
 						
 						obj.tags =$scope.s_tags;

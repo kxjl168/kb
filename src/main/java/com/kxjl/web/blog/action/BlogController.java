@@ -56,12 +56,15 @@ import com.kxjl.tool.html.FileProcessor;
 import com.kxjl.tool.utils.DateUtil;
 import com.kxjl.tool.utils.JEscape;
 import com.kxjl.tool.utils.JsonUtil;
+import com.kxjl.tool.utils.PageCondition;
 import com.kxjl.web.stastic.model.ActionLog.StasticTypeOne;
 import com.kxjl.web.stastic.service.StasticService;
 //import com.kxjl.web.system.action.base.BaseController;
 import com.kxjl.web.system.action.base.BaseController;
+import com.kxjl.web.system.model.DictInfo;
 import com.kxjl.web.system.model.SysUserBean;
 import com.kxjl.web.system.model.SysUserBean.UserType;
+import com.kxjl.web.system.service.DictInfoService;
 import com.kxjl.web.blog.action.Kdata.DataType;
 import com.kxjl.web.blog.action.Kdata.Enable;
 import com.kxjl.web.blog.model.Blog;
@@ -76,6 +79,10 @@ public class BlogController extends BaseController {
 	@Autowired
 	BlogService blogService;
 
+	@Autowired
+	DictInfoService dictInfoService;
+
+	
 	@RequestMapping(value = "/")
 	public ModelAndView GroupList() {
 		ModelAndView view = new ModelAndView();
@@ -84,6 +91,30 @@ public class BlogController extends BaseController {
 		return view;
 	}
 	
+	
+	/**
+	 * 文章分类select2 group
+	 * @param item
+	 * @param request
+	 * @param pageCondition
+	 * @return
+	 * @author zj
+	 * @date 2019年3月7日
+	 */
+	@RequestMapping("/blogTypeList")
+	//@ManagerActionLog(operateDescribe="查询收支管理",operateFuncType=FunLogType.Query,operateModelClassName=MoneyMapper.class)
+	@ResponseBody
+	public List<String> moneyTypeList( DictInfo item, HttpServletRequest request,PageCondition pageCondition) {
+
+		String rst = "";
+		List<String> moneys = new ArrayList<>();
+
+		
+		moneys = dictInfoService.getDictTreeSelectSecond(DictInfo.blog_type_str);
+
+
+		return moneys;
+	}
 	
 	
 	/**
@@ -282,7 +313,7 @@ public class BlogController extends BaseController {
 			Blog query = new Blog();
 			query.setImei(imei);
 
-			// cur ,next, pre
+			
 			Blog detail = blogService.getBlogInfoById(query);
 			
 //emoji替换

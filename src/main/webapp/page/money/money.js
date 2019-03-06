@@ -86,7 +86,7 @@ function showYearList()
 }
 
 $(function() {
-	InitQuery_item();
+	
 
 	initTypeSelect();
 	//modal select输入
@@ -100,7 +100,7 @@ $(function() {
 	
 	showTotal();
 	
-	
+	InitQuery_item();
 	
 
 	$("#q_month").change(function(){
@@ -528,7 +528,7 @@ function showTotal() {
 
 				$.each(response, function(index, item) {
 					if (item.mType == "in") {
-						$("#shouruspan").html("+" + item.money);
+						$("#shouruspan").html(item.money?("+" + item.money):'');
 					}
 					if (item.mType == "out") {
 						$("#zhichuspan").html( item.money);
