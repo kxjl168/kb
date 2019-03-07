@@ -251,11 +251,23 @@ group by p.is_read,c.id
 		<if test=" link !=null and link !='' ">
 		and c.link like concat ('%', #{link},'%')
 	</if>
+	
+		<if test=" noread !=null and noread !='' ">
+		<![CDATA[  and tp2.noread>0   ]]>
+	</if>
+		<if test=" hasError !=null and hasError !='' ">
+		and c.has_error=#{hasError}
+	</if>
+	
 		
+		 <if test=" sortName !=null and sortName !='' ">
+            order by ${sortName} ${sortOrder}
+        </if>
+         <if test=" sortName ==null or sortName =='' ">
+           	order by tp2.noread desc,c.last_rss_date desc
+        </if>
 			
-		
-		order by  tp2.noread desc,c.last_rss_date desc
-
+	
 
 </select>
 

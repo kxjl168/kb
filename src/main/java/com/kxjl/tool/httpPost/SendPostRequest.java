@@ -10,6 +10,7 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
@@ -29,9 +30,7 @@ public class SendPostRequest {
 		return sendHttpData(url, str, null, 0);
 	}
 
-	
-	public static String sendHttpXMLData(String url, String str, String proxyIP,
-			int proPort) throws Exception {
+	public static String sendHttpXMLData(String url, String str, String proxyIP, int proPort) throws Exception {
 
 		logger.info("HTTP Request URL:" + url + ",HTTP Request PARAM:" + str);
 		HttpClient client = new HttpClient();
@@ -63,10 +62,9 @@ public class SendPostRequest {
 			client.executeMethod(httpPost);
 			int resStatusCode = httpPost.getStatusCode();
 			if (resStatusCode == HttpStatus.SC_OK) {
-				BufferedReader br = new BufferedReader(new InputStreamReader(
-						httpPost.getResponseBodyAsStream(), "utf-8"));
-				logger.info("HTTP Request CHARSET:"
-						+ httpPost.getResponseCharSet());
+				BufferedReader br = new BufferedReader(
+						new InputStreamReader(httpPost.getResponseBodyAsStream(), "utf-8"));
+				logger.info("HTTP Request CHARSET:" + httpPost.getResponseCharSet());
 				String res = null;
 				StringBuffer sb = new StringBuffer();
 				while ((res = br.readLine()) != null) {
@@ -74,10 +72,8 @@ public class SendPostRequest {
 				}
 				responseData = sb.toString();
 			} else {
-				logger.error("http请求失败 " + resStatusCode + ":"
-						+ httpPost.getStatusText());
-				exception = new Exception("[SerialHttpSender] HttpErrorCode:"
-						+ resStatusCode);
+				logger.error("http请求失败 " + resStatusCode + ":" + httpPost.getStatusText());
+				exception = new Exception("[SerialHttpSender] HttpErrorCode:" + resStatusCode);
 			}
 			if (exception != null) {
 				throw exception;
@@ -91,8 +87,7 @@ public class SendPostRequest {
 			// java.net.SocketTimeoutException: Read timed out
 
 			String message = ex.getMessage();
-			if (message != null
-					&& message.toLowerCase().indexOf("read timed") > -1) {
+			if (message != null && message.toLowerCase().indexOf("read timed") > -1) {
 				throw new Exception(ex.getMessage());
 			} else {
 				ex.printStackTrace();
@@ -111,11 +106,10 @@ public class SendPostRequest {
 		logger.info("HTTP Request Result:" + responseData);
 		return responseData;
 	}
-	
-	public static String sendHttpData(String url, String str, String proxyIP,
-			int proPort) throws Exception {
 
-		//logger.info("HTTP Request URL:" + url + ",HTTP Request PARAM:" + str);
+	public static String sendHttpData(String url, String str, String proxyIP, int proPort) throws Exception {
+
+		// logger.info("HTTP Request URL:" + url + ",HTTP Request PARAM:" + str);
 		HttpClient client = new HttpClient();
 		// client.getHostConfiguration().setProxy("10.41.70.8", 80);
 		// client.getParams().setAuthenticationPreemptive(true);
@@ -126,7 +120,7 @@ public class SendPostRequest {
 
 		if (proxyIP != null && !proxyIP.equals("")) {
 			client.getHostConfiguration().setProxy(proxyIP, proPort);
-			 client.getParams().setAuthenticationPreemptive(true);
+			client.getParams().setAuthenticationPreemptive(true);
 		}
 
 		PostMethod httpPost = new PostMethod(url);
@@ -145,10 +139,9 @@ public class SendPostRequest {
 			client.executeMethod(httpPost);
 			int resStatusCode = httpPost.getStatusCode();
 			if (resStatusCode == HttpStatus.SC_OK) {
-				BufferedReader br = new BufferedReader(new InputStreamReader(
-						httpPost.getResponseBodyAsStream(), "utf-8"));
-				logger.debug("HTTP Request CHARSET:"
-						+ httpPost.getResponseCharSet());
+				BufferedReader br = new BufferedReader(
+						new InputStreamReader(httpPost.getResponseBodyAsStream(), "utf-8"));
+				logger.debug("HTTP Request CHARSET:" + httpPost.getResponseCharSet());
 				String res = null;
 				StringBuffer sb = new StringBuffer();
 				while ((res = br.readLine()) != null) {
@@ -156,10 +149,8 @@ public class SendPostRequest {
 				}
 				responseData = sb.toString();
 			} else {
-				logger.error("http请求失败 " + resStatusCode + ":"
-						+ httpPost.getStatusText());
-				exception = new Exception("[SerialHttpSender] HttpErrorCode:"
-						+ resStatusCode);
+				logger.error("http请求失败 " + resStatusCode + ":" + httpPost.getStatusText());
+				exception = new Exception("[SerialHttpSender] HttpErrorCode:" + resStatusCode);
 			}
 			if (exception != null) {
 				throw exception;
@@ -173,8 +164,7 @@ public class SendPostRequest {
 			// java.net.SocketTimeoutException: Read timed out
 
 			String message = ex.getMessage();
-			if (message != null
-					&& message.toLowerCase().indexOf("read timed") > -1) {
+			if (message != null && message.toLowerCase().indexOf("read timed") > -1) {
 				throw new Exception(ex.getMessage());
 			} else {
 				ex.printStackTrace();
@@ -194,12 +184,88 @@ public class SendPostRequest {
 		return responseData;
 	}
 
-	
-	
+	/**
+	 * 获取rss页面数据
+	 * 
+	 */
+	public static String sendHttpGetRssDataWithHeader(String url, String str, HashMap<String, String> headers)
+			throws Exception {
 
-	
-	public static String sendHttpDataWithToken(String url, String str,
-			String token) throws Exception {
+		HttpClient client = new HttpClient();
+
+		GetMethod httpPost = new GetMethod(url);
+		InputStream is = new java.io.ByteArrayInputStream(str.getBytes("utf-8"));
+		client.setTimeout(5000);
+		byte[] aa = null;
+		httpPost.setRequestHeader("user-agent",
+				"rssReader:256kb.cn ,Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36");
+		// httpPost.setRequestHeader("Content-type", "application/json");
+		httpPost.setRequestHeader("Accept",
+				"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
+		// httpPost.setRequestHeader("X-Auth-Token", token);
+		// httpPost.setRequestBody(is);
+
+		for (String key : headers.keySet()) {
+			httpPost.setRequestHeader(key, headers.get(key));
+		}
+
+		String responseData = null;
+		try {
+			Exception exception = null;
+			client.executeMethod(httpPost);
+			int resStatusCode = httpPost.getStatusCode();
+			System.out.println("resStatusCode:" + resStatusCode);
+			if (resStatusCode == HttpStatus.SC_OK || resStatusCode == 202) // 九洲云创建虚拟机接口返回202也是正确的
+			{
+				BufferedReader br = new BufferedReader(
+						new InputStreamReader(httpPost.getResponseBodyAsStream(), "utf-8"));
+				System.out.println(httpPost.getResponseCharSet());
+				String res = null;
+				StringBuffer sb = new StringBuffer();
+
+				while ((res = br.readLine()) != null) {
+					
+					sb.append(res+"\n");
+				}
+				responseData = sb.toString();
+				// System.out.println("br.readLine()=" + responseData);
+			} else {
+				// System.out.println(httpPost.getStatusText());
+				exception = new Exception("[SerialHttpSender] HttpErrorCode:" + resStatusCode);
+			}
+			if (exception != null) {
+				throw exception;
+			}
+		} catch (java.net.ConnectException ex) {
+			ex.printStackTrace();
+			throw ex;
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			// org.apache.commons.httpclient.HttpRecoverableException:
+			// java.net.SocketTimeoutException: Read timed out
+
+			String message = ex.getMessage();
+			if (message != null && message.toLowerCase().indexOf("read timed") > -1) {
+				throw new Exception(ex.getMessage());
+			} else {
+				ex.printStackTrace();
+				throw ex;
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw ex;
+
+		} finally {
+			httpPost.releaseConnection();
+
+		}
+
+		// System.out.println("return:" + responseData);
+		return responseData;
+	}
+
+	public static String sendHttpDataWithToken(String url, String str, String token) throws Exception {
 
 		logger.info("url:" + url + ",strParam:" + str + ",token:" + token);
 		HttpClient client = new HttpClient();
@@ -228,8 +294,8 @@ public class SendPostRequest {
 			System.out.println("resStatusCode:" + resStatusCode);
 			if (resStatusCode == HttpStatus.SC_OK || resStatusCode == 202) // 九洲云创建虚拟机接口返回202也是正确的
 			{
-				BufferedReader br = new BufferedReader(new InputStreamReader(
-						httpPost.getResponseBodyAsStream(), "utf-8"));
+				BufferedReader br = new BufferedReader(
+						new InputStreamReader(httpPost.getResponseBodyAsStream(), "utf-8"));
 				System.out.println(httpPost.getResponseCharSet());
 				String res = null;
 				StringBuffer sb = new StringBuffer();
@@ -241,8 +307,7 @@ public class SendPostRequest {
 				System.out.println("br.readLine()=" + responseData);
 			} else {
 				// System.out.println(httpPost.getStatusText());
-				exception = new Exception("[SerialHttpSender] HttpErrorCode:"
-						+ resStatusCode);
+				exception = new Exception("[SerialHttpSender] HttpErrorCode:" + resStatusCode);
 			}
 			if (exception != null) {
 				throw exception;
@@ -256,8 +321,7 @@ public class SendPostRequest {
 			// java.net.SocketTimeoutException: Read timed out
 
 			String message = ex.getMessage();
-			if (message != null
-					&& message.toLowerCase().indexOf("read timed") > -1) {
+			if (message != null && message.toLowerCase().indexOf("read timed") > -1) {
 				throw new Exception(ex.getMessage());
 			} else {
 				ex.printStackTrace();
@@ -288,9 +352,11 @@ public class SendPostRequest {
 		// String str =
 		// "{\"LoginId\":\"admin\",\"Password\":\"C8837B23FF8AAA8A2DDE915473CE0991\"}";
 		// String str =
-		// "{\"auth\": {\"tenantName\": \"admin\", \"passwordCredentials\": {\"username\": \"admin\", \"password\": \"admin\"}}}";
+		// "{\"auth\": {\"tenantName\": \"admin\", \"passwordCredentials\":
+		// {\"username\": \"admin\", \"password\": \"admin\"}}}";
 		// String str =
-		// "{\"auth\": {\"tenantName\": \"admin\", \"passwordCredentials\": {\"username\": \"admin\", \"password\": \"admin\"}}}";
+		// "{\"auth\": {\"tenantName\": \"admin\", \"passwordCredentials\":
+		// {\"username\": \"admin\", \"password\": \"admin\"}}}";
 		String str = "{\"auth\": {\"tenantName\": \"admin\", \"passwordCredentials\": {\"username\": \"admin\", \"password\": \"admin\" }}}";
 		sendHttpData(url, str, null, 0);
 	}

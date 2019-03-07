@@ -184,9 +184,8 @@ function InitQuery_item() {
 		striped : true, // 是否显示行间隔色
 		cache : false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
 		pagination : true, // 是否显示分页（*）
-		sortable : false, // 是否启用排序
-		sortName : 'id', // 排序字段
-		sortOrder : "desc", // 排序方式
+		sortable : true, // 是否启用排序
+	
 		sidePagination : "server", // 分页方式：client客户端分页，server服务端分页（*）
 		pageNumber : 1, // 初始化加载第一页，默认第一页
 		pageSize : 30, // 每页的记录行数（*）
@@ -197,18 +196,37 @@ function InitQuery_item() {
 		uniqueId : "id", // 每一行的唯一标识，一般为主键列
 		// queryParamsType : "limit",
 		queryParams : function queryParams(params) { // 设置查询参数
+			
+			
+			var sname= params.sort; // 要排序的字段
+			if(sname)
+			{
+        	if(sname=='noread')
+        		sname="tp2.noread";
+        	else if(sname=="hasError")
+        		sname="c.has_error";
+        	else if(sname=="createDate")
+        		sname="c.create_date";
+        	else 
+        		sname="c."+sname;
+			}
+			else
+				sname="";
+        	
+			
 			var param = {
 				pageSize : params.limit, // 每页要显示的数据条数
 				offset : params.offset, // 每页显示数据的开始行号
-				sortName : params.sort, // 要排序的字段
+				sortName :sname, // 要排序的字段
 				sortOrder : params.order, // 排序规则
 				
 				
 				
 				name : $("#q_name").val(),
 				link : $("#q_link").val(),
-				
-				
+			
+				hasError: $("#has_error").val(),
+				noread: $('#noread').is(":checked")?"1":"",
 			};
 			return param;
 		},
@@ -234,6 +252,7 @@ function InitQuery_item() {
 				field : 'noread',
 				title : '新文章',
 				align : 'center',
+				  sortable : true,
 				valign : 'middle',
 				 formatter: function (value, row, index) {
 			          if(value>0)
@@ -296,6 +315,7 @@ function InitQuery_item() {
 		 {
 				field : 'hasError',
 				title : '订阅状态',
+				sortable : true,
 				align : 'center',
 				valign : 'middle',
 				 formatter: function (value, row, index) {
@@ -307,15 +327,16 @@ function InitQuery_item() {
 				
 			},
 		 {
-				field : 'lastRssDate',
-				title : 'rss最后更新时间',
+				field : 'createDate',
+				title : 'rss最后获取时间',
 				align : 'center',
 				valign : 'middle',
-				   
+				sortable : true,
 		 formatter: function (value, row, index) {
              //return new Date(value).Format("yyyy-MM-dd hh:mm:ss");
 			
-			 return "<span class='small text-success'>"+value.substr(0,value.length-2)+ "</span>";
+			 return "<div>创建:<span class='small text-success'>"+row.createDate.substr(0,value.length-2)+ "</span></div>"
+			 + "<div>更新:<span class='small text-success'>"+row.lastRssDate.substr(0,value.length-2)+ "</span></div>";
          }
 				
 			},

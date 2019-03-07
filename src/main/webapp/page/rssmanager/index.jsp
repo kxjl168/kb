@@ -77,20 +77,33 @@
 											placeholder="">
 									</div>
 
+								</div>
+
+							</div>
+							
+							<div class="row  form-group margin-bottom-5 ">
+
+							<div class=" col-md-6  col-xs-12  ">
+									<div
+										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">订阅状态:</div>
+									<div class="col-md-6 col-xs-8 text-right ">
+										<select class="form-control " name="has_error" id="has_error" >
+											<option selected="selected" value="">全部</option>
+								<option value="1">订阅失败</option>
+								<option  value="0">订阅成功</option>
+								</select>
+									</div>
+
 
 
 
 								</div>
 
-							</div>
-							
-							<div class="row  form-group margin-bottom-5 hide">
-
 								<div class=" col-md-6  col-xs-12  ">
 									<div
 										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">只看有新文章:</div>
 									<div class="col-md-6 col-xs-8 text-right ">
-										<input id="type_second" name="type_second"  checked="checked"
+										<input id="noread" name="noread"  
 												type="checkbox" class="mcheck form-control">
 									</div>
 
@@ -98,6 +111,8 @@
 
 
 								</div>
+								
+								
 
 
 								

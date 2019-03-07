@@ -1,6 +1,8 @@
 package com.kxjl.web.autodata.pojo;
 
-public class RssManager {
+import com.kxjl.web.system.model.base.BaseModel;
+
+public class RssManager extends BaseModel {
     private String id;
 
     private String name;

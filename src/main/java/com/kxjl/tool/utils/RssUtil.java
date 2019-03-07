@@ -23,6 +23,7 @@ import org.dom4j.XPath;
 import org.dom4j.io.SAXReader;
 import org.xml.sax.InputSource;
 
+import com.kxjl.tool.httpPost.SendPostRequest;
 import com.kxjl.web.autodata.pojo.RssManager;
 import com.kxjl.web.autodata.pojo.RssPageList;
 
@@ -33,7 +34,12 @@ public class RssUtil {
 
 		String rssStr = callUrlByGet(url, "utf-8");
 		
+		
+		
+		
+		
 		//剔除最前面的空行等.
+		if(rssStr.indexOf("<?xml")>0)
 		rssStr=rssStr.substring( rssStr.indexOf("<?xml"));
 
 		//white space 统一使用byte读取
@@ -43,8 +49,9 @@ public class RssUtil {
 		Document document = reader.read(inputSource);
 		// Document document = reader.read(url);
 
-		Node feed = document.selectSingleNode("/feed");
-		if (feed != null) {
+		if (rssStr.contains("<entry>"))
+		{
+			//atom格式
 			return parseAtom(rssStr);
 		}
 
@@ -52,10 +59,61 @@ public class RssUtil {
 	}
 
 	private static String callUrlByGet(URL url, String charset) {
-		String result = "";
+
+		String rssData = "";
 		try {
-			// URL url = new URL(callurl);
-			URLConnection connection = url.openConnection();
+			
+			HashMap<String, String> headers=new HashMap<>();
+			 rssData=SendPostRequest.sendHttpGetRssDataWithHeader(url.toString(), "", headers);
+			
+			if(rssData.contains("<?xml")
+					||rssData.contains("<feed xmlns")
+					)
+			{
+				return rssData;
+			}
+			else {
+				
+				//此网站特殊处理- -！，验证key~
+				if(url.toString().contains("helingqi.com"))
+				{
+				//请求数据异常
+				if(rssData.contains("document.cookie"))
+				{
+					int varIndex=rssData.indexOf("var ");
+					int varEndIndex=rssData.indexOf(";");
+					//var aj=12, r=0.7;
+					String valparam=rssData.substring(varIndex+("var ".length()), varEndIndex);
+					String[] val1= valparam.split(",")[0].split("=");
+					String[] val2= valparam.split(",")[1].trim().split("=");
+					
+					int cookieStartIndex=rssData.indexOf("document.cookie='");
+					String cookie=rssData.substring(cookieStartIndex+("document.cookie='".length()), rssData.indexOf(";",cookieStartIndex));
+					
+					int urlIndex=rssData.indexOf("window.location.href='")+("window.location.href='").length();
+					
+					String newurl=rssData.substring(urlIndex, rssData.indexOf("'",urlIndex));
+					newurl+=Double.parseDouble(val1[1])+ Double.parseDouble(val2[1]);
+					if(cookie!=null&&!cookie.equals(""))
+					{
+						try {
+							//cookie=cookie.split("=")[1];
+							headers.put("cookie", cookie);
+							rssData=SendPostRequest.sendHttpGetRssDataWithHeader(newurl, "", headers);
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+						
+					}
+				}
+				}
+				//document.cookie='spm_key=3a79335d30b57ad70b688a07077bbe62;
+				
+			}
+					
+		
+			/*URLConnection connection = url.openConnection();
+			
 			connection.connect();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), charset));
 			String line;
@@ -63,11 +121,15 @@ public class RssUtil {
 				result += line;
 				result += "\n";
 			}
+			*/
+		
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "";
 		}
-		return result;
+		return rssData;
 	}
 
 	public static Document parseAtom(URL url) throws DocumentException {
@@ -210,7 +272,7 @@ public class RssUtil {
 			String page_link="";
 			if (node_link == null)
 			{
-				page_link = ((Element) document.selectSingleNode("/feed/ns:link[@rel='alternate']")).attributeValue("href");
+				page_link = ((Element) document.selectSingleNode("/feed/ns:link")).attributeValue("href");
 			}
 			else {
 				page_link=node_link.getText();
@@ -218,6 +280,7 @@ public class RssUtil {
 				
 			
 			rmanager.setName(noderssTitle.getText());
+			if(node_remark!=null)
 			rmanager.setRemark(node_remark.getText());
 			rmanager.setPage_link(page_link);
 			
@@ -329,7 +392,7 @@ public class RssUtil {
 
 		List<RssPageList> pagelist = new ArrayList<>();
 		List<Node> itemlist = document.selectNodes("//ns:entry");
-		String link = ((Element) document.selectSingleNode("/feed/ns:link[@rel='alternate']")).attributeValue("href");
+		String link = ((Element) document.selectSingleNode("/feed/ns:link")).attributeValue("href");
 		for (Node node : itemlist) {
 
 			RssPageList pageitem = new RssPageList();
@@ -340,18 +403,38 @@ public class RssUtil {
 			Node node_pubDate = ((Element) node).element("updated");
 
 			Node node_content = ((Element) node).element("content");
+			Node node_summary = ((Element) node).element("summary");
 
 			pageitem.setTitle(noderssTitle.getText());
 			String url = ((Element) node_link).attributeValue("href");
 			pageitem.setLink(url);
 
 			pageitem.setId(url);
-
+			String content ="";
 			if (node_content != null) {
-				String content = node_content.getText();
+				 content = node_content.getText();
+				 if(content.contains("src=\"//"))
+				 {
+					 //图片  双斜杠，子域名
+					 content = content.replaceAll("src=\"//", "src=\"" + "http:" + "//");
+				 }
+				 else
 				content = content.replaceAll("src=\"/", "src=\"" + link + "/");
 				pageitem.setContext(content);
 			} else {
+				if(node_summary!=null)
+				{
+					content = node_summary.getText();
+					 if(content.contains("src=\"//"))
+					 {
+						 //图片  双斜杠，子域名
+						 content = content.replaceAll("src=\"//", "src=\"" + "http:" + "//");
+					 }
+					 else
+					content = content.replaceAll("src=\"/", "src=\"" + link + "/");
+					pageitem.setContext(content);
+				}
+				else
 				pageitem.setContext("未提供内容订阅");
 			}
 
