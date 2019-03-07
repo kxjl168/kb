@@ -220,11 +220,12 @@ function initCKPlugin()
 		    		onBlock: function( panel, block ) {
 		    			panelBlock = block;
 
+		    		
 		    			block.autoSize = true;
 		    			block.element.addClass( 'cke_kemojipanel' );
-		    			block.element.setHtml( htmlc+'	<div class="em_item catsay" title="耶！">(๑•̀ㅂ•́)و✧</div>');
-		    			// The block should not have scrollbars (https://dev.ckeditor.com/ticket/5933, https://dev.ckeditor.com/ticket/6056)
-		    			block.element.getDocument().getBody().setStyle( 'overflow', 'hidden' );
+		    			block.element.setHtml( htmlc);
+		    			
+		    			//block.element.getDocument().getBody().setStyle( 'overflow', 'hidden' );
 
 		    			CKEDITOR.ui.fire( 'ready', this );
 
