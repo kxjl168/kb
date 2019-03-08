@@ -1,5 +1,6 @@
 package com.kxjl.web.blog.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.kxjl.tool.utils.DateUtil;
@@ -61,6 +62,10 @@ public class Blog extends BaseModel {
 	private String blog_type_url;
 	private String month;
 	private String showdesc;
+	
+	private String parent_id;//查询分类二级使用
+	private String dict_id;//key_id 
+	private List<Blog> childtypes=new ArrayList<Blog>();//子集分类
 	
 	private String days;
 
@@ -275,6 +280,30 @@ public class Blog extends BaseModel {
 
 	public void setCcicon(String ccicon) {
 		this.ccicon = ccicon;
+	}
+
+	public String getParent_id() {
+		return parent_id;
+	}
+
+	public void setParent_id(String parent_id) {
+		this.parent_id = parent_id;
+	}
+
+	public String getDict_id() {
+		return dict_id;
+	}
+
+	public void setDict_id(String dict_id) {
+		this.dict_id = dict_id;
+	}
+
+	public List<Blog> getChildtypes() {
+		return childtypes;
+	}
+
+	public void setChildtypes(List<Blog> childtypes) {
+		this.childtypes = childtypes;
 	}
 
 }

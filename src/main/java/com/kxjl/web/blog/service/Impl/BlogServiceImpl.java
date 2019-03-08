@@ -27,6 +27,58 @@ public class BlogServiceImpl implements BlogService {
 	SystemParamsDao sysDao;
 
 	/**
+	 * 文章分类总数列表-新
+	 * 包括父级分类及总数
+	 * @return
+	 * @author zj
+	 * @date 2019年3月9日
+	 */
+	public List<Blog> getBlogTypeGroupsNew(){
+		
+		String HTTP_PATH = ConfigReader.getInstance().getProperty("FILE_SVR_HTTP_OUTER_PATH");
+		String key = "getTpListNew";
+		List<Blog> infos = Kdata.getInstance().getBlogList(key);
+
+		if (infos == null || infos.size() == 0) {
+			infos =  blogDao.getBlogTypeGroupsNew();
+			String prepath =HTTP_PATH;
+			for (Blog blog : infos) {
+				blog.setBlog_type_url(prepath + blog.getBlog_type_url());
+			}
+			
+			
+			List<Blog> parentTypes=new ArrayList<>();
+			HashMap<String, Blog> keyParents=new HashMap<>();
+			for (Blog blog : infos) {
+				if(blog.getParent_id()!=null&&blog.getParent_id().equals("-1"))
+					{
+					parentTypes.add(blog);
+					keyParents.put(blog.getDict_id(), blog);
+					}
+			}
+			
+			for (Blog blog : infos) {
+				if(blog.getParent_id()!=null&&!blog.getParent_id().equals("-1"))
+				{
+					List<Blog> childs= keyParents.get(blog.getParent_id()).getChildtypes();
+					childs.add(blog);
+				}
+				
+			}
+			
+			for (Blog blog : parentTypes) {
+				blog=keyParents.get(blog.getDict_id());
+			}
+			
+
+			Kdata.getInstance().SavedBlogList(key, parentTypes);
+		}
+		
+		return infos;
+		
+	}
+	
+	/**
 	 * 关联文章
 	 * 
 	 * @param query

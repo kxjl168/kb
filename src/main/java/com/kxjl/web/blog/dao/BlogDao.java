@@ -43,6 +43,16 @@ public interface BlogDao {
 	 */
 	public List<Blog> getBlogMonthGroup();
 	
+	
+	/**
+	 * 文章分类总数列表-新
+	 * 包括父级分类及总数
+	 * @return
+	 * @author zj
+	 * @date 2019年3月9日
+	 */
+	public List<Blog> getBlogTypeGroupsNew();
+	
 	/**
 	 * 文章分类总数列表
 	 * 

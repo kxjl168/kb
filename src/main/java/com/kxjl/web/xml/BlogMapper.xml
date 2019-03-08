@@ -47,6 +47,43 @@ group by d.dict_key,d.dict_name,d.val1
 	]]>
 	</select>
 	
+	<select id="getBlogTypeGroupsNew"  resultMap="BlogMap">
+		<![CDATA[
+	select * from(
+
+select d2.id*1000 sort,1 rownum,
+ d2.parent_id, d2.val1 blog_type_url,d2.dict_key blog_type, d2.id dict_id ,d2.dict_name blog_type_name,tp2.view_nums
+from (
+
+select d.parent_id, count(*) view_nums from blog_info b
+LEFT JOIN (select * from dict_info where dict_type="blog_type") d on d.dict_key=b.blog_type
+where b.showflag='1'
+group by d.parent_id
+) tp2
+LEFT JOIN (select * from dict_info where dict_type="blog_type") d2 on d2.id=tp2.parent_id
+union
+
+select rownum+parent_id*1000 sort,tpall.* from (
+
+SELECT 
+  @rownum := @rownum +1 AS rownum,
+  a1.*
+FROM
+  (SELECT 
+    @rownum := 0) r,
+(select d.parent_id, d.val1 blog_type_url, d.dict_key blog_type ,d.id dict_id ,d.dict_name blog_type_name,count(*) view_nums from blog_info b
+LEFT JOIN (select * from dict_info where dict_type="blog_type") d on d.dict_key=b.blog_type
+where b.showflag='1'
+group by d.dict_key,d.dict_name,d.val1
+) a1
+) tpall
+
+
+) a order by sort
+	]]>
+	</select>
+	
+	
 	
 	<select id="getBlogDetailPageList" parameterType="com.kxjl.web.blog.model.Blog" resultMap="BlogMap">
 	<![CDATA[ 	select a.*,d.dict_name blog_type_name,d.val1 blog_type_url , cc.name ccname,cc.link cclink,cc.icon ccicon from (
@@ -75,6 +112,7 @@ order by t asc
 		select a.*,d.dict_name blog_type_name,d.val1 blog_type_url  
 		, cc.name ccname,cc.link cclink,cc.icon ccicon
 		from blog_info a left join dict_info d on (d.dict_type='blog_type' and a.blog_type=d.dict_key)
+		left join dict_info d2 on (d.parent_id=d2.id)
 		left join cc_list cc on a.ccid=cc.id
 		where 1=1 
 		<if test='title != null and title != "" '>
@@ -87,7 +125,8 @@ order by t asc
 			and a.content like CONCAT('%',#{content},'%')
 		</if>
 		<if test='blog_type != null and blog_type != "" '>
-			and a.blog_type=#{blog_type}
+			and( a.blog_type=#{blog_type} or d2.dict_key=#{blog_type} )
+			
 		</if>
 		<if test='tags != null and tags != "" '>
 			and a.tags like CONCAT('%',#{tags},'%')
@@ -115,8 +154,11 @@ order by t asc
 	</select>
 	
 	<select id="getBlogPageListCount" parameterType="com.kxjl.web.blog.model.Blog" resultType="java.lang.Integer">
-		select count(*) from blog_info a 
-		where 1=1  
+			select count(*)
+		from blog_info a left join dict_info d on (d.dict_type='blog_type' and a.blog_type=d.dict_key)
+		left join dict_info d2 on (d.parent_id=d2.id)
+		left join cc_list cc on a.ccid=cc.id
+		where 1=1 
 		<if test='title != null and title != "" '>
 				and a.title like CONCAT('%',#{title},'%')
 		</if>
@@ -127,7 +169,7 @@ order by t asc
 			and a.content like CONCAT('%',#{content},'%')
 		</if>
 		<if test='blog_type != null and blog_type != "" '>
-			and a.blog_type=#{blog_type}
+			and( a.blog_type=#{blog_type} or d2.dict_key=#{blog_type} )
 		</if>
 		<if test='tags != null and tags != "" '>
 			and a.tags like CONCAT('%',#{tags},'%')

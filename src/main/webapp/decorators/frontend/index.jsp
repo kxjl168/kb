@@ -219,6 +219,7 @@ $(document).ready(function(){
 	var googleJs = "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
 
 	loadads();
+	return;
 	include_js(googleJs);
 	
 	function loadads(){

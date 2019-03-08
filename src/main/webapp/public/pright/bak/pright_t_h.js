@@ -74,7 +74,7 @@ var $scope = angular.element(ngSection).scope();
 
 			var obj = new Object();
 			SZUMWS(
-					http + "blog/getTpList.action",
+					http + "blog/getTpListNew.action",
 					JSON.stringify(obj),
 					function succsess(json) {
 						// var json = JSON.parse(decryData);
@@ -92,9 +92,26 @@ var $scope = angular.element(ngSection).scope();
 								html+='<div class="row"> ' 
 									+' <a href="'+preurl+'/public/index/bt/'+item.blog_type+'.html"> ' 
 								+' <img class="nopaddding img-responsive col-xs-2" style="width:20px; height:20px;" title="'+item.blog_type_name+'" src="'+item.blog_type_url+'"> '+item.blog_type_name+'&nbsp; '
-								+' <span>('+item.view_nums+')</span> '
+							
 								 +'	 </a>'
+									+' <span>('+item.view_nums+')</span> '
 								 +'</div>';
+								
+								if(item.childtypes)
+									{
+								var citems=eval(item.childtypes);
+								$.each(citems,function(index2,item2){ 
+									
+									html+='<div class="row childtype"> ' 
+										+' <a href="'+preurl+'/public/index/bt/'+item2.blog_type+'.html"> ' 
+									+' <img class="nopaddding img-responsive col-xs-2" style="width:20px; height:20px;" title="'+item2.blog_type_name+'" src="'+item2.blog_type_url+'"> '+item2.blog_type_name+'&nbsp; '
+								
+									 +'	 </a>'
+										+' <span>('+item2.view_nums+')</span> '
+									 +'</div>';
+									
+								});
+									}
 								
 								
 							});
@@ -145,8 +162,9 @@ var $scope = angular.element(ngSection).scope();
 								
 								html+='<div class="row"> '   
 									+' <a href="'+preurl+'/public/index/h/'+item.month+'.html"> ' 
-								 +'	'+item.month+'&nbsp;<span>('+item.view_nums+')</span> '
+								 +'	'+item.month+'&nbsp;'
 								 +'	 </a> '
+								 +'<span>('+item.view_nums+')</span> '
 								 +'</div>';
 								
 							});

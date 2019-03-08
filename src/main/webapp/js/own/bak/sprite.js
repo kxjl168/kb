@@ -452,9 +452,22 @@
 			 * }); $('#next-page').mouseover(function() {
 			 * showMessage('要翻到下一页吗?'); });
 			 */
-            $('.rblock a').mouseover(function() {
+            $('.phistory a').mouseover(function() {
                 me.showMessage('看看 <span style="">' + $(this).text() + '</span> 的文章？ ');
             });
+            $('.ptag a').mouseover(function() {
+                me.showMessage('看看 <span style="">' + $(this).text() + '</span> 标签下的文章？ ');
+            });
+            $('.plink a').mouseover(function() {
+                me.showMessage('拜访下喵喵的朋友： <span style="">' + $(this).text() + '</span> 的站点？ ');
+            });
+            $('.ptype a').mouseover(function() {
+                me.showMessage('看看 <span style="">' + $(this).text() + '</span> 分类下的文章？ ');
+            });
+            
+            
+            
+            
             $('#rpdiv').mouseover(function() {
                 me.showMessage('<span style="">' + '</span> 向评论栏出发吧！');
             });

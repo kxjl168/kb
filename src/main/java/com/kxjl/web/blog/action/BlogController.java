@@ -869,6 +869,62 @@ public class BlogController extends BaseController {
 		JsonUtil.responseOutWithJson(response, rst);
 
 	}
+	
+	/**
+	 * 新分类列表
+	 * 
+	 * @param map
+	 * @return
+	 * @author zj
+	 * @date 2019-3-9
+	 */
+	@RequestMapping(value = "/getTpListNew")
+	public void getTpListNew(HttpServletRequest request, HttpServletResponse response) {
+
+		String data = request.getParameter("data");
+		JSONObject jsonIN;
+		JSONObject jsonOut = new JSONObject();
+
+		String rst = "";
+		try {
+
+			Blog query = new Blog();
+			query.setPage(1);
+			query.setPageCount(10000);
+
+			String key = "getTpList";
+			List<Blog> infos = blogService.getBlogTypeGroupsNew();
+
+			
+			
+			
+			
+			Gson gs = new Gson();
+			String jsStr = gs.toJson(infos);
+
+			jsonOut.put("ResponseCode", "200");
+			jsonOut.put("ResponseMsg", "");
+			jsonOut.put("total", infos.size());
+			jsonOut.put("datalist", jsStr);
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			try {
+				jsonOut.put("ResponseCode", "201");
+				jsonOut.put("ResponseMsg", "");
+				jsonOut.put("total", 0);
+				jsonOut.put("datalist", "");
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+
+		}
+		rst = jsonOut.toString();
+		JsonUtil.responseOutWithJson(response, rst);
+
+	}
 
 	/**
 	 * 添加或者更新blog信息
