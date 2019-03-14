@@ -55,6 +55,19 @@ public class RssPageListServiceImpl implements RssPageListService {
 			return rtn;
 		}
 	}
+	
+	  /**
+     * 清理大于指定月份的非收藏 文章内容
+     * @param delmonth
+     * @author zj
+     * @date 2019年3月14日
+     */
+    public void cleanAllRssByMonth(String delmonth) {
+    	itemMapper.cleanAllRssByMonth(delmonth);
+    }
+
+
+	
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)

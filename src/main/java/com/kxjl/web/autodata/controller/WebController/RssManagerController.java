@@ -256,6 +256,54 @@ public class RssManagerController {
 	}
 	
 	
+	
+	/**
+	 * 清理3个月以上的订阅数据，非收藏数据，直接删除内容
+	 * @param item
+	 * @return
+	 * @author zj
+	 * @date 2019年3月14日
+	 */
+	@RequestMapping("/rssCleanAll")
+	// @ManagerActionLog(operateDescribe="保存修改Rss订阅",operateFuncType=FunLogType.SaveOrUpdate,operateModelClassName=RssManagerMapper.class)
+	@ResponseBody
+	public String rssCleanAll(RssManager item) {
+
+		JSONObject jsonObject = new JSONObject();
+		
+		
+	
+		try {
+
+			// RssManager rssmanager=rssmanagerService.selectRssManagerById(item.getId());
+
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					try {
+
+						RssPageList query=new RssPageList();
+						String days=ConfigReader.getInstance().getProperty("deldays", "90" ); //默认三个月
+						rssListService.cleanAllRssByMonth(days);
+
+
+					} catch (Exception e) {
+
+					}
+				}
+			}).run();
+
+			jsonObject.put("bol", true);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// assert jsonObject != null;
+		return jsonObject.toString();
+	}
+	
+	
 	/**
 	 * 定时任务，刷新
 	 * @return

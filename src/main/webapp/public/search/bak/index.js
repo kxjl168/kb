@@ -14,6 +14,19 @@ $(function() {
 	 hljs.initHighlightingOnLoad();
 	
 	
+	 
+	 
+	 var key=GetQueryString("keyword")||$("#kwd").val();
+	 if(key)
+		 {
+	 var $scope = angular.element(ngSection).scope();
+		$scope.$apply(function() {
+			$scope.kwd=key;
+			$scope.search();
+		});
+		 };
+	 
+	 
 
 	var $scope = angular.element(ngSection).scope();
 	kvalidate.init($("#fm"), {

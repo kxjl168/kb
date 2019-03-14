@@ -52,8 +52,29 @@ public class test {
 		
 		//avtest();
 		
-		deltest();
+		//deltest();
+		
+		testprint();
+		
+		
+		
 	}
+	
+	
+	public static void testprint() {
+		
+		System.out.printf("%-20s    %-3.2f\n","价格",1.231);
+		System.out.printf("%-25s    \n","------------------");
+		System.out.printf("%-20s    %-3.2f\n","111",12.231);
+		System.out.printf("%-20s    %-3.2f\n","apple",1.231);
+		System.out.printf("%-20s    %-3.2f\n","苹果",1.231);
+		System.out.printf("%-20s    %-3.2f\n","苹果顶顶顶顶",1.231);
+		System.out.printf("%-20s    %-3.2f\n","苹1231",1.231);
+		
+		
+		System.out.printf("%-10s","abc");           //输出10列，左对齐(-号表示左对齐)
+	}
+	
 	
 	public static  void avtest()  {
 		String url="https://www.gravatar.com/avatar/ee2f5d239020af787b969557177d3df7?s=100";
@@ -340,12 +361,15 @@ public static String convert16to32(String toConvert){
 		  //http://256kb.cn:8888/kb/googleac882b1d52647127.html   //http://256kb.cn/googleac882b1d52647127.html
 		 // String u1="http://127.0.0.1:8081/kb/1231/1232"; //http://127.0.0.1:8080/kb/googleac882b1d52647127.html
 		  //String u1="https://www.256kb.cn/public/detail?i=0c4f3944-4355-40da-8096-05a32df1c8b9"; //http://127.0.0.1:8080/kb/googleac882b1d52647127.html
-		  String u1="http://256kb.cn/public/index/h/2018-01.html"; //http://127.0.0.1:8080/kb/googleac882b1d52647127.html
+		  String u1="https://biz.trace.ickd.cn/auto.php?mailNo=804446284517390475"; //http://127.0.0.1:8080/kb/googleac882b1d52647127.html
 		  
 		 // String u1="http://256kb.cn/kb/public/html/2018/09/bdc8c0b5-44fb-4723-b2c5-fcf721c24089.html";
 		// String u1="http://256kb.cn/public/index/";
 		  String u2="https://www.256kb.cn/public/search/";
 	        GetMethod getMethod = new GetMethod(u1);
+	        
+	        PostMethod pMethod=new PostMethod(u1);
+	        
 	       /* HttpMethodParams params = new HttpMethodParams();
 
 	        params.setContentCharset("UTF-8");
@@ -354,12 +378,13 @@ public static String convert16to32(String toConvert){
 	        try {  
 
 	                //getMethod.addRequestHeader("user-agent","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; Alexa Toolbar; Maxthon 2.0)");
-	                getMethod.addRequestHeader("user-agent","Mozilla/5.0 (compatible;google *****Baiduspider/2.0; +http://www.baidu.com/search/spider.html +zj test !!)");
+	               // getMethod.addRequestHeader("user-agent","Mozilla/5.0 (compatible;google *****Baiduspider/2.0; +http://www.baidu.com/search/spider.html +zj test !!)");
 
 	               // getMethod.addRequestHeader("Pre-User-Agent2"," +zj test !!)");
 	                
 	                Date d1=new Date();
-	                int result = httpClient.executeMethod(getMethod); 
+	                //int result = httpClient.executeMethod(getMethod); 
+	                int result = httpClient.executeMethod(pMethod);
 	                Date d2=new Date();
 	                if (result == 200) {
 	                	
@@ -666,6 +691,8 @@ public static String convert16to32(String toConvert){
 		// client.getHostConfiguration().setProxy("10.41.70.8", 80);
 		// client.getParams().setAuthenticationPreemptive(true);
 
+		
+		
 		PostMethod httpPost = new PostMethod(url);
 		InputStream is = new java.io.ByteArrayInputStream(str.getBytes("utf-8"));
 		client.setTimeout(60000);
@@ -683,6 +710,7 @@ public static String convert16to32(String toConvert){
 		try {
 			Exception exception = null;
 			client.executeMethod(httpPost);
+			
 			int resStatusCode = httpPost.getStatusCode();
 			if (resStatusCode == HttpStatus.SC_OK) {
 				BufferedReader br = new BufferedReader(new InputStreamReader(

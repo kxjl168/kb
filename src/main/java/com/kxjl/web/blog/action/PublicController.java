@@ -322,10 +322,19 @@ public class PublicController extends BaseController {
 	}
 
 	@RequestMapping(value = "/public/search")
-	public String search() {
+	public String search(HttpServletRequest request) {
 		ModelAndView view = getSysData();
 		view.setViewName("/public/index/");
 
+		
+		Enumeration paras = request.getParameterNames();
+		while (paras.hasMoreElements()) {
+
+			String v = (String) paras.nextElement();
+
+			view.addObject(v, request.getParameter(v));
+
+		}
 		//统计在search里面
 		
 		return "/public/search/main";

@@ -53,5 +53,15 @@ public interface RssPageListMapper {
      * @date 2019年2月3日
      */
     void delAllRssByMid(String id);
+    
+    /**
+     * 清理大于指定月份的非收藏 文章内容
+     * @param delmonth
+     * @author zj
+     * @date 2019年3月14日
+     */
+    void cleanAllRssByMonth(String delmonth);
+
+
 
 }

@@ -17,8 +17,14 @@ public class RssPageList {
 
     private String context;
     
+    private String plike;//1 收藏， 2其他
+    
     //query
     private String name;
+    
+    private String delmonth;//删除大于 几 个月的数据
+    
+    
     
   
 
@@ -93,4 +99,22 @@ public class RssPageList {
     public void setContext(String context) {
         this.context = context == null ? null : context.trim();
     }
+
+	
+
+	public String getDelmonth() {
+		return delmonth;
+	}
+
+	public void setDelmonth(String delmonth) {
+		this.delmonth = delmonth;
+	}
+
+	public String getPlike() {
+		return plike;
+	}
+
+	public void setPlike(String plike) {
+		this.plike = plike;
+	}
 }

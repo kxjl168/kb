@@ -20,6 +20,7 @@
 	<div class="c ">
 					
 					
+					
 						<div class="col-sm-12 col-xs-12 nopadding pleft">
 					
 							
@@ -50,7 +51,7 @@
 											<div class=" col-sm-8  col-xs-12 nopaddding row mar margin-bottom-5">
 											<div class="control-label nopaddding padding-top-0 col-xs-4 col-sm-3  ">GOOGLE：</div>
 												<div class="  col-sm-9 col-xs-8 text-right ">
-													<input id="kwd" placeholder="Google is cool!"  name="kwd" ng-model="kwd" type="text" class=" form-control">
+													<input id="kwd" value="${kwd }" placeholder="Google is cool!"  name="kwd" ng-model="kwd" type="text" class=" form-control">
 												</div>
 											</div>		
 

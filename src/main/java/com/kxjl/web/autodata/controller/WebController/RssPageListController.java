@@ -100,6 +100,33 @@ public class RssPageListController {
 		return rst;
 	}
 
+	
+	
+	/**
+	 * 收藏，不删除内容
+	 * @param item
+	 * @param request
+	 * @return
+	 * @author zj
+	 * @date 2019年3月14日
+	 */
+	@RequestMapping("/like")
+	//@ManagerActionLog(operateDescribe="删除Rss文章",operateFuncType=FunLogType.Del,operateModelClassName=RssPageListMapper.class)
+	@ResponseBody
+	public Message like( RssPageList item,HttpServletRequest request) {
+
+		Message msg = new Message();
+		
+		item.setPlike("1");//收藏
+		
+		JSONObject jsobj=rsspagelistService.updateRssPageList(item);
+		if (jsobj.optBoolean("bol")) {
+			msg.setBol(true);
+		}
+		return msg;
+	}
+	
+	
 	@RequestMapping("/delete")
 	//@ManagerActionLog(operateDescribe="删除Rss文章",operateFuncType=FunLogType.Del,operateModelClassName=RssPageListMapper.class)
 	@ResponseBody

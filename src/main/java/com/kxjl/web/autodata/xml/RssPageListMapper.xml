@@ -194,6 +194,15 @@
     where rss_manager_id = #{id,jdbcType=VARCHAR}
   </delete>
 
+<update id="cleanAllRssByMonth" parameterType="java.lang.String" >
+ <![CDATA[  update  rss_page_list r  set context=null where
+  str_to_date(create_date,'%Y-%m-%d %H:%i:%s')<DATE_SUB(CURDATE(), INTERVAL #{delmonth} DAY) 
+  and  plike !='1'
+  ]]>
+  </update>
+
+
+
 
 <delete id="delete"
 	parameterType="com.kxjl.web.autodata.pojo.RssPageList">
