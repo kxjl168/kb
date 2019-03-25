@@ -31,7 +31,7 @@
 						</div>
 					</div> -->
 					
-						<c:forEach items="${tplist }" var="x">
+					<!--	<c:forEach items="${tplist }" var="x">
 					<div  >
 						<div class="row">
 							<a href="${preurl}/public/index/bt/${x.blog_type}.html">
@@ -43,7 +43,7 @@
 						</div>
 					</div>
 					</c:forEach>
-					
+					-->
 				</div>
 
 

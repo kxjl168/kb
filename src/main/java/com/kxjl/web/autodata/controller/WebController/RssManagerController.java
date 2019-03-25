@@ -267,7 +267,7 @@ public class RssManagerController {
 	@RequestMapping("/rssCleanAll")
 	// @ManagerActionLog(operateDescribe="保存修改Rss订阅",operateFuncType=FunLogType.SaveOrUpdate,operateModelClassName=RssManagerMapper.class)
 	@ResponseBody
-	public String rssCleanAll(RssManager item) {
+	public String rssCleanAll() {
 
 		JSONObject jsonObject = new JSONObject();
 		

@@ -168,10 +168,18 @@ public class SysUserController extends BaseController {
 				msg = "用户名或密码错误";
 				sucess = 0;
 			} else {
+				
+				
+				
+				
 				sucess = 1;
 				usr = new SysUserBean();
 				usr.setUserid(String.valueOf( cusr.getRecordid()));
 				usr.setUtype(UserType.LoginUser);
+				
+//				if(cusr.getAccountid().equals("xsw"))
+//					usr.setUtype(UserType.xiaohuoban);
+				
 				usr.setName(cusr.getUser_name());
 				map.put("type", UserType.LoginUser.toString());
 				session.setAttribute(Constant.SESSION_USER, usr);

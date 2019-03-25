@@ -484,6 +484,13 @@ public class PageFilter implements Filter {
 				if (user.getMenus().size() == 0)
 					menuService.updateUserMenus(user);
 
+				
+				if(user.getUserid().equals("4"))
+				{
+					wrapper.sendRedirect("public/index/");
+					return;
+				}
+				
 				for (int i = 0; i < user.getMenus().size(); i++) {
 					if (user.getMenus().get(i).getMenuUrl() != null
 							&& !user.getMenus().get(i).getMenuUrl().trim().equals("")) {

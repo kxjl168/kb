@@ -322,19 +322,10 @@ public class PublicController extends BaseController {
 	}
 
 	@RequestMapping(value = "/public/search")
-	public String search(HttpServletRequest request) {
+	public String search() {
 		ModelAndView view = getSysData();
 		view.setViewName("/public/index/");
 
-		
-		Enumeration paras = request.getParameterNames();
-		while (paras.hasMoreElements()) {
-
-			String v = (String) paras.nextElement();
-
-			view.addObject(v, request.getParameter(v));
-
-		}
 		//统计在search里面
 		
 		return "/public/search/main";
@@ -1057,9 +1048,11 @@ public class PublicController extends BaseController {
 			String dateb = fm.format(DateUtil.getDate(blog.getUpdate_date(), "")) + "";
 
 			String desc = getDesc(blog);
+			
+			String url=domain
+					+ "/public/html/" + blog.getShowdate() + "/" + blog.getImei() + ".html";
 			// /public/html/${curBlog.showdate}/${curBlog.imei}.html
-			sb.append("<item>\n" + "      <title>" + blog.getTitle() + "</title>\n" + "      <link>" + domain
-					+ "/public/html/" + blog.getShowdate() + "/" + blog.getImei() + ".html" + "</link>\n"
+			sb.append("<item>\n" + "      <title>" + blog.getTitle() + "</title>\n" + "      <link>" + url + "</link>\n"
 					+ "      <description><![CDATA[" + desc + "]]></description>\n" + "      <pubDate>" + dateb
 					+ "</pubDate>\n" + "     <guid isPermaLink=\"true\">" + domain + "/public/html/"
 					+ blog.getShowdate() + "/" + blog.getImei() + ".html</guid>\n");
@@ -1075,6 +1068,27 @@ public class PublicController extends BaseController {
 			String ct = JEscape.unescape(blog.getContent());
 			// emoji替换
 			ct = ct.replace("[[", "&#x");
+			
+			//按钮
+			ct+="<div style=\"margin-top:10px;text-align:center;overflow:hidden\">\n" + 
+					"<a style=\"color:rgba(0,0,0,.35);\n" + 
+					"text-decoration:none;\n" + 
+					"display:inline-block;\n" + 
+					"min-height:30px;\n" + 
+					"line-height:30px;\n" + 
+					"background:#fff;\n" + 
+					"border:1px solid rgba(0,0,0,.35);\n" + 
+					"text-align:left;\n" + 
+					"font-style:normal;\n" + 
+					"font-weight:400;\n" + 
+					"vertical-align:bottom;\n" + 
+					"white-space:nowrap; \n" + 
+					"border-radius:2px;\n" + 
+					"padding-left:15px;\n" + 
+					"padding-right:15px;\n" + 
+					"padding-top:10px;\n" + 
+					"padding-bottom:10px;\" href=\""+url+"\">阅读全文</a>\n" + 
+					"</div>";
 
 			sb.append(" <content:encoded xml:lang=\"zh-CN\"><![CDATA[" + ct + "]]></content:encoded>");
 
