@@ -240,6 +240,7 @@ public class DictInfoServiceImpl implements DictInfoService {
 			query2.setParent_id(String.valueOf(menus.get(i).getId()));
 			query2.setEnable("1");
 			query2.setDict_type(dict_type);
+			query2.setPageCount(30); //默认最多30个子分类
 			List<DictInfo> all_menus = getDictInfoPageList(query2);
 
 			String level2list = gs.toJson(all_menus);
