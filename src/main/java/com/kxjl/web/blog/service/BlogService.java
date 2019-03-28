@@ -68,6 +68,16 @@ public interface BlogService {
 	 */
 	public void updateBlogReadTime(Blog query) ;
 	
+	
+	/**
+	 * 获取写日志的日期，用于日历显示
+	 * @param query
+	 * @return
+	 * @author zj
+	 * @date 2019年3月28日
+	 */
+	public List<Blog> getBlogdaysList(Blog query);
+	
 	/**
 	 * 分页获取banner列表
 	 * @param query

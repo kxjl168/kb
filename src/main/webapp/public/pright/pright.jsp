@@ -197,6 +197,12 @@
 
 
 
+
+	<script
+		src="${basePath}/js/own/cal/calendar2.js?b=1"></script>
+
+
+
 <div class=" panel panel-success lastright2">
 		<div class="panel-heading " title="" data-toggle=""
 			data-parent="#accordion" href="#collapseOner3">

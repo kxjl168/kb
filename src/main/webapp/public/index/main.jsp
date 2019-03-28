@@ -11,6 +11,8 @@
 	href="${basePath}/js/plugin/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" media="screen"
 		href="${basePath}/js/plugin/angular-xeditable-0.8.1/css/xeditable.min.css">
+			<link rel="stylesheet" type="text/css" media="screen"
+	href="${basePath}/js/own/cal/calendar2.css">
 
 </head>
 

@@ -105,7 +105,24 @@ order by t asc
 	
 	
 	
-	
+	<select id="getBlogdaysList" parameterType="com.kxjl.web.blog.model.Blog" resultMap="BlogMap">
+		select  distinct(DATE_FORMAT(a.create_date,"%Y-%m-%d")) title  
+		
+		from blog_info a
+		where 1=1 
+		
+		<if test='showflag != null and showflag != "" '>
+				and a.showflag=#{showflag} 
+		</if>
+		
+		<if test='month != null and month != "" '>
+			and DATE_FORMAT(a.create_date,"%Y-%m") =#{month}
+		</if>
+		
+		
+		
+        
+	</select>
 	
 	
 	<select id="getBlogPageList" parameterType="com.kxjl.web.blog.model.Blog" resultMap="BlogMap">

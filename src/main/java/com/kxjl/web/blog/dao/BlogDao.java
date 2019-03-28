@@ -13,7 +13,14 @@ public interface BlogDao {
 	
 	/*select DATE_FORMAT(create_date,"%Y-%m") ,count(*) from blog_info group by DATE_FORMAT(create_date,"%Y-%m")*/
 	
-	
+	/**
+	 * 获取写日志的日期，用于日历显示
+	 * @param query
+	 * @return
+	 * @author zj
+	 * @date 2019年3月28日
+	 */
+	public List<Blog> getBlogdaysList(Blog query);
 	
 	/**
 	 * 关联文章

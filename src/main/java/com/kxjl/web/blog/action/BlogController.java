@@ -57,6 +57,7 @@ import com.kxjl.tool.utils.DateUtil;
 import com.kxjl.tool.utils.JEscape;
 import com.kxjl.tool.utils.JsonUtil;
 import com.kxjl.tool.utils.PageCondition;
+import com.kxjl.tool.utils.PageUtil;
 import com.kxjl.web.stastic.model.ActionLog.StasticTypeOne;
 import com.kxjl.web.stastic.service.StasticService;
 //import com.kxjl.web.system.action.base.BaseController;
@@ -65,6 +66,7 @@ import com.kxjl.web.system.model.DictInfo;
 import com.kxjl.web.system.model.SysUserBean;
 import com.kxjl.web.system.model.SysUserBean.UserType;
 import com.kxjl.web.system.service.DictInfoService;
+import com.kxjl.web.autodata.pojo.RssManager;
 import com.kxjl.web.blog.action.Kdata.DataType;
 import com.kxjl.web.blog.action.Kdata.Enable;
 import com.kxjl.web.blog.model.Blog;
@@ -554,6 +556,48 @@ public class BlogController extends BaseController {
 		JsonUtil.responseOutWithJson(response, rst);
 
 	}
+	
+	/**
+	 * 获取当月有写日志的数据
+	 * @param item
+	 * @param request
+	 * @param pageCondition
+	 * @return
+	 * @author zj
+	 * @date 2019年3月28日
+	 */
+	@RequestMapping("/getblogdayslist")
+	// @ManagerActionLog(operateDescribe="查询Rss订阅",operateFuncType=FunLogType.Query,operateModelClassName=RssManagerMapper.class)
+	@ResponseBody
+	public String getblogdayslist(Blog item, HttpServletRequest request, PageCondition pageCondition) {
+
+		String rst = "";
+		List<Blog> days = new ArrayList<>();
+
+		
+		days = blogService.getBlogdaysList(item);
+
+		try {
+			String resultString = "";
+			Gson gs = new Gson();
+			JSONObject data = new JSONObject();
+			JSONObject rows = new JSONObject();
+			
+			for (Blog blog : days) {
+				rows.put(blog.getTitle(),true); //借用字段
+			}
+			
+			data.put("bol", true);
+			data.put("data", rows);
+			resultString = data.toString();
+			return resultString;
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		return rst;
+	}
+	
 	
 	/**
 	 * 页面-获取blog列表-后台接口

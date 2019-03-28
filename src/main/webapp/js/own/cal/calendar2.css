@@ -81,7 +81,7 @@ body {
 }
 
 .calendar {
-    border: 2px solid #8ec59b;
+  /*  border: 2px solid #8ec59b; */
 }
 
 
@@ -100,13 +100,20 @@ body {
 	height: 80px;
 }
 
+.calendar .week{
+	height: 50px;
+}
+.calendar .blogdays{
+	background: #f1d2bd;
+}
+
 .calendar .selectday{
 	background: rgb(255, 248, 230);
 	border: 1px solid rgb(255, 203, 64);
 }
 
 .calendar .today{
-	border:  1px solid red!important;
+	border:  2px solid #3c80a8!important;
 }
 
 .calendar .rest{
@@ -118,6 +125,7 @@ body {
 }
 
 /* 日历左边区域  头 */
+
 
 .calendar .leftArea .head {
     display: block;
@@ -132,10 +140,11 @@ body {
 /* 日历左边区域  头部的左右按钮 */
 
 .calendar .leftArea .head .btn {
+	padding:0px;
     float: left;
     height: 24px;
     width: 20px;
-    border: 1px solid #999;
+    border: 0px solid #999;
     background-color: #fafafa;
     text-align: center;
     line-height: 24px;
@@ -184,8 +193,8 @@ body {
     float: left;
     height: 24px;
     line-height: 24px;
-    margin-left: 4px;
-    margin-right: 20px;
+    margin-left: 2px;
+    margin-right: 4px;
 }
 
 
@@ -194,7 +203,7 @@ body {
 .calendar .leftArea .head select {
     float: left;
     height: 26px;
-    width: 75px;
+    min-width: 45px;
 }
 
 

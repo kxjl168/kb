@@ -92,6 +92,17 @@
             "12-8": "腊八节",
             "12-24": "小年" // 有的是23小年 有的算24小年
         },
+        
+        blogDays: {
+            "1-1": "春节",
+            "1-15": "元宵节",
+            "5-5": "端午节",
+            "7-7": "乞巧节",
+            "8-15": "中秋节",
+            "9-9": "重阳节",
+            "12-8": "腊八节",
+            "12-24": "小年" // 有的是23小年 有的算24小年
+        },
         /**
         * 公历节日
         */
@@ -483,36 +494,72 @@
             week: false,
             week_walue: "2016/9/17",
             isclick: false,
-            configDay: {}
+            configDay: {},
+            left:false,
         };
         var object = $.extend(true, {}, defaults, options);
         ToDay = object.date;
         isclick = object.isclick;
         configDay = object.configDay;
+        
+      
         createTable(object, e);
     };
+    
+    
+    function getBlogDays(options,callback){
+    
+    	var url = getImUrl()+"blog/getblogdayslist";
+
+    	   var Y = options.date.getFullYear();
+	        var M = options.date.getMonth() + 1;
+    	
+			$.ajax({
+				type : "post",
+				url : url,
+				data : {"month":Y+'-'+PrefixInteger(M,2),'showflag':1},
+				dataType : "json",
+				success : function(response) {
+					// debugger;
+					if (response.bol) {
+						
+						calendar.blogDays=response.data;
+					
+						
+					if(typeof(callback)=='function')
+						callback();
+					} 
+				}
+			});
+    }
+    
     /*************************主程序******************************/
 
     function createTable(options, e) {
-        var Y = options.date.getFullYear();
-        var M = options.date.getMonth() + 1;
-        /** 拷贝configDay对应本月的设置信息 */
-        setconfigDayM(Y, M);
-        ClickDays = options.date.getDate();
-        /** 创建时间表格 */
-        var datetable = new DateTable(Y, M, e);
-        datetable.create();
-        /** 设置样式 */
-        setLayer(options, datetable.count);
-        /** 设置触发事件 */
-        btnClick(options, e, datetable.count);
-        /** 设置单双休 */
-        if (options.week) {
-            setconfigDay(options, datetable.count, setWeek(options));
-        }
-        setconfigDay(options, datetable.count, configDayM);
-        $("#SY").val(Y);
-        $("#SM").val(M);
+    	
+    	  getBlogDays(options,function(){
+    			
+    	        var Y = options.date.getFullYear();
+    	        var M = options.date.getMonth() + 1;
+    	        /** 拷贝configDay对应本月的设置信息 */
+    	        setconfigDayM(Y, M);
+    	        ClickDays = options.date.getDate();
+    	        /** 创建时间表格 */
+    	        var datetable = new DateTable(Y, M, e);
+    	        datetable.create(options);
+    	        /** 设置样式 */
+    	        setLayer(options, datetable.count);
+    	        /** 设置触发事件 */
+    	        btnClick(options, e, datetable.count);
+    	        /** 设置单双休 */
+    	        if (options.week) {
+    	            setconfigDay(options, datetable.count, setWeek(options));
+    	        }
+    	        setconfigDay(options, datetable.count, configDayM);
+    	        $("#SY").val(Y);
+    	        $("#SM").val(M);
+    	  });
+    
     }
 
     /** 拷贝configDay对应本月的设置信息 */
@@ -595,16 +642,38 @@
 
     /** 创建表格 */
 
-    DateTable.prototype.create = function () {
-        this.html = "<div class=\"calendar col-xs-12\">";
-        this.html += "<div class=\"leftArea col-xs-12 col-lg-8\">";
-        this.leftHead();
-        this.leftWeek();
-        this.leftDay();
-        this.html += "</div>";
-        this.html += "<div class=\"rightArea col-xs-offset-1 col-xs-10  col-lg-offset-0 col-lg-4\">";
-        this.html += "</div>";
-        this.html += "</div>";
+    DateTable.prototype.create = function (options) {
+        this.html = "<div class=\"calendar col-xs-12 nopaddding\">";
+        if(options.left)
+        	{
+        	//mobile
+        	this.html += "<div class=\"rightArea col-xs-12  \">";
+            this.html += "</div>";
+         
+            
+            this.html += "<div class=\"leftArea col-xs-12 nopaddding \">";
+            this.leftHead();
+            this.leftWeek();
+            this.leftDay();
+            this.html += "</div>";
+            
+            this.html += "</div>";
+        	}
+        else{
+        	 this.html += "<div class=\"leftArea col-xs-12 col-lg-8\">";
+             this.leftHead();
+             this.leftWeek();
+             this.leftDay();
+             this.html += "</div>";
+             
+             this.html += "<div class=\"rightArea margin-top-10 col-xs-offset-1 col-xs-10  col-lg-offset-0 col-lg-4\">";
+             this.html += "</div>";
+             this.html += "</div>";
+        }
+        	
+        
+        
+        
         this.e.append(this.html);
         this.lunarDay();
         rightArea(this.Y, this.M);
@@ -618,19 +687,28 @@
 
     /** 获取左边区域的头部 */
     DateTable.prototype.leftHead = function () {
-        this.html += "<div class=\"head col-xs-12\">";
+        this.html += "<div class=\"head col-xs-12 nopaddding margin-top-10\">";
+        
+        this.html += "<div class=\" col-xs-6 nopaddding\">";
         this.html += "<div id=\"YL\" class=\"btn\"><</div>";
         this.html += "<select id=\"SY\">"
         for (var i = 1900; i < 2101; i++) this.html += "<option value=\"" + i + "\">" + i + "</option>";
         this.html += "</select>";
         this.html += "<div id=\"YR\" class=\"btn\">></div><div class=\"text\">年</div>";
+        this.html += "</div>";
+        
+        this.html += "<div class=\" col-xs-6 nopaddding\">";
         this.html += "<div id=\"ML\" class=\"btn\"><</div>";
         this.html += "<select id=\"SM\">"
         for (var i = 1; i < 13; i++) this.html += "<option value=\"" + i + "\">" + i + "</option>";
         this.html += "</select>"
         this.html += "<div id=\"MR\" class=\"btn\">></div><div class=\"text\">月</div>";
+        this.html += "</div>";
+        
+        this.html += "<div class=\" col-xs-12 nopaddding margin-top-10\">";
         this.html += "<input type=\"button\"  id=\"ReturnBtn\" value=\"返回今天\" class=\"btnreturn\"/>";
         this.html += "<div class=\"text\" style=\"margin-left:20px;\">" + this.Y + "年" + this.M + "月</div>";
+        this.html += "</div>";
         this.html += "</div>";
     };
 
@@ -665,6 +743,11 @@
         return (offDate.getUTCDate());
     }
 
+ // num传入的数字，n需要的字符长度 ，批量添加房间数，房号计算，左加0
+    function PrefixInteger(num, n) {
+    	return (Array(n).join(0) + num).slice(-n);
+    }
+    
     /** 获取对应的阴历日期 */
     DateTable.prototype.lunarDay = function () {
         //var lunar = calendar.calendarConvert(this.Y, this.M, 1);
@@ -697,6 +780,11 @@
             } else if (solarTerms !== "") {
                 $("#lunar" + (i + 1)).css("color", "green");
             }
+            
+            
+            //是否有更新文章
+            if (calendar.blogDays[this.Y + "-" +PrefixInteger(this.M,2)+'-'+PrefixInteger(i+1,2)] )
+            $("#days" + (i + 1)).addClass("blogdays");
 
 
             // 计算下个日期的农历
@@ -759,10 +847,10 @@
         $(".rightArea").empty();
         $(".rightArea").append(html);
         if (lunar[2] == 1 && lunar[3] == 1) {
-            $(".calendar").css("border", "2px solid #f44f23");
+           // $(".calendar").css("border", "2px solid #f44f23");
             $(".rightArea").css("background-color", "#f44f23");
         } else {
-            $(".calendar").css("border", "2px solid #8ec59b");
+          //  $(".calendar").css("border", "2px solid #8ec59b");
             $(".rightArea").css("background-color", "#e0f3e8");
         }
         if (isclick) getPushClick(Y, M);
@@ -1004,6 +1092,9 @@
       //  $(".days1").css("width", parseInt((width * rate - 16) / 7 - 2) + "px").css("height", parseInt((height - 16) / (count + 1) - 2.5) + "px");
        // $(".num").css("line-height", parseInt((height - 16) / (count + 1)) / 2 + "px");
        // $("#days" + ClickDays).css("background", "rgb(255, 248, 230);").css("border", "1px solid rgb(255, 203, 64)");
+        var Y = options.date.getFullYear();
+        var M = options.date.getMonth()+1;
+        if(Y==ToDay.getFullYear() && M == ToDay.getMonth() + 1 )
         $("#days" + ClickDays).addClass("today");
     }
 

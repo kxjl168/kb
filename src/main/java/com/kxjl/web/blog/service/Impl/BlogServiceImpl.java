@@ -27,6 +27,17 @@ public class BlogServiceImpl implements BlogService {
 	SystemParamsDao sysDao;
 
 	/**
+	 * 获取写日志的日期，用于日历显示
+	 * @param query
+	 * @return
+	 * @author zj
+	 * @date 2019年3月28日
+	 */
+	public List<Blog> getBlogdaysList(Blog query){
+		return blogDao.getBlogdaysList(query);
+	}
+	
+	/**
 	 * 文章分类总数列表-新
 	 * 包括父级分类及总数
 	 * @return

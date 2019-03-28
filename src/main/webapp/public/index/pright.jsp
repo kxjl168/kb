@@ -26,7 +26,7 @@
 
 		<div id="collapseOner1" class="panel-collapse collapse in  ">
 
-			<div class="panel-body" style="padding-right: 2px;">
+			<div class="panel-body nopaddding" style="padding-right: 2px;">
 
 
 
@@ -38,7 +38,7 @@
 
 					<div id="div1" style="margin: 0 auto"></div>
 
-			<div class="short-about">
+			<div class="short-about padding">
 			
 			<img class="phead" src="${httppath}${head.http_relative_path }"> 
 			
@@ -57,7 +57,7 @@
 
 
 
-<div id="nDate"> </div>
+
 					<!-- <input id="effectDate" readonly="readonly" name="effectDate" ng-model="effectDate" type="text" class=" form-control"> -->
 
 				</div>
@@ -75,7 +75,10 @@
 	</div>
 
 </div>
-	
+
+<div class="row panel">
+<div id="nDate"> </div>
+</div>
 
 	
 

@@ -51,7 +51,8 @@ function initCal(){
 	        week: true, // 是否开启单双休
 	        week_walue: "2016/9/17", // 双休对应的周六
 	        isclick: true,
-	        configDay: {} // 系统配置
+	        configDay: {}, // 系统配置
+	        left:false,
 	    });
 }
 
