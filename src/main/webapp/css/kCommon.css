@@ -1810,8 +1810,10 @@ color:#ecb866!important;
 }
 /** bootstraptable sort end*/	
 	
-	 .pageText img{
+	 .pageText img[fid]{
 	  cursor: pointer;
+	      border-radius: 1%;
+    box-shadow: 0 0 3px #939394;
 	 } 
 	 
 	 .timeinfo{
