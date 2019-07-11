@@ -64,12 +64,19 @@ public class SysUserController extends BaseController {
 	}
 
 	@RequestMapping(value ="/main")
-	public String main(HttpServletRequest request,HttpSession session) {
+	public void main(HttpServletRequest request,HttpServletResponse response, HttpSession session) {
 		SysUserBean user = (SysUserBean) session
 				.getAttribute(Constant.SESSION_USER);
 		request.setAttribute("loginUser", user.getName());
 		
-		return "/home/index";
+		
+		
+		//https 跳转，nginx https代理 http，防止页面跳回http zj 190711
+		response.setStatus(302);//或者303,兼容http1.1
+		response.setHeader("location", request.getContextPath()+"/home/index");
+		
+		
+		//return "/home/index";
 	}
 	
 
@@ -301,9 +308,16 @@ public class SysUserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/logout")
-	public String logout(HttpSession session) {
+	public void logout(HttpSession session,HttpServletRequest request,HttpServletResponse response) {
 		session.removeAttribute(Constant.SESSION_USER);
-		return "redirect:/";
+		
+		
+		//https 跳转，nginx https代理 http，防止页面跳回http zj 190711
+				response.setStatus(302);//或者303,兼容http1.1
+				response.setHeader("location", request.getContextPath()+"/");
+				
+		
+		//return "redirect:/";
 	}
 
 	/**
