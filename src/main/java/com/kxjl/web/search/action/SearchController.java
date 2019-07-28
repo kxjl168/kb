@@ -17,6 +17,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.http.Header;
 import org.apache.http.HeaderElement;
@@ -53,6 +54,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.gson.Gson;
+import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.tool.prerenderio.PrerenderConfig;
 import com.kxjl.tool.prerenderio.PrerenderSeoService;
@@ -61,6 +63,8 @@ import com.kxjl.web.device.model.Device;
 import com.kxjl.web.device.service.DeviceService;
 import com.kxjl.web.stastic.model.ActionLog.StasticTypeOne;
 import com.kxjl.web.system.action.base.BaseController;
+import com.kxjl.web.system.model.SysUserBean;
+import com.kxjl.web.system.model.SysUserBean.UserType;
 
 @Controller
 @RequestMapping(value = "/search")
@@ -341,6 +345,21 @@ public class SearchController extends BaseController {
 				//记录搜索关键词
 				saveStaticInfo(request, StasticTypeOne.GSearch.getDesc(), "",data);
 				
+				
+				//监测是否登录
+				//190728
+				boolean cansearch= checkCansearch(request);
+				if(!cansearch)
+				{
+					jsonOut.put("ResponseCode", "201");
+					jsonOut.put("ResponseMsg", "非常抱歉,鉴于多方考虑,本站搜索已关闭访客使用。");
+					rst = jsonOut.toString();
+					JsonUtil.responseOutWithJson(response, rst);
+					return ;
+				}
+				
+				
+				
 
 			} else if (url != null && !url.equals("")) {
 				// 替换自动附加的本站链接前缀
@@ -369,6 +388,24 @@ public class SearchController extends BaseController {
 		}
 		rst = jsonOut.toString();
 		JsonUtil.responseOutWithJson(response, rst);
+
+	}
+	
+	public boolean checkCansearch(HttpServletRequest request)
+	{
+		HttpSession session = request.getSession();
+		SysUserBean user = (SysUserBean) session.getAttribute(Constant.SESSION_USER);
+		if(user==null)
+			return false;
+		else {
+			if (user.getUtype() == UserType.Root || user.getUtype() == UserType.Admin) {
+				return true;
+			}
+			else 
+			{
+				return false;
+			}
+		}
 
 	}
 }
