@@ -378,7 +378,7 @@ float:left;
 
   .pall > .pleft {
     width: 73%;
-    border-right: solid 1px #e5e5e5;
+    border-right: solid 0px #e5e5e5;
     padding-left: 25px!important;
   }
   
@@ -488,7 +488,7 @@ float:left;
 }
 .urlbd,.card .panel-body,.panel-success .panel-body{
 	
-	background: #f9f9f9!important;
+	/* background: #f9f9f9!important; */
 }
 .urlbd a{
 	font-weight: bold;
@@ -517,10 +517,14 @@ color:#344F99!important;
   margin-bottom: -90px;
 }
 .more {
-  height: 90px;
-   	background: -moz-linear-gradient(bottom,rgba(255,255,255,0),#f9f9f9); 
+  height: 120px;
+/*    	background: -moz-linear-gradient(bottom,rgba(255,255,255,0),#f9f9f9); 
 background: -webkit-gradient(linear,0 top,0 bottom,from(rgba(255,255,255,0)),to(#f9f9f9));
-background: -o-linear-gradient(bottom,rgba(255,255,255,0),#f9f9f9); 
+background: -o-linear-gradient(bottom,rgba(255,255,255,0),#f9f9f9);  */
+
+   	background: -moz-linear-gradient(bottom,rgba(255,255,255,0),#fff); 
+background: -webkit-gradient(linear,0 top,0 bottom,from(rgba(255,255,255,0)),to(#fff));
+background: -o-linear-gradient(bottom,rgba(255,255,255,0),#fff); 
 }
 
 alldot::after {
@@ -561,9 +565,17 @@ blockquote {
   border-top-left-radius: 0px!important;
 }
 .ptitle {
-  font-size: 15pt;
+/*   font-size: 15pt;
   line-height: 1.5;
-  color: #534ed9;
+  color: #534ed9; */
+  
+      font-size: 17pt;
+    line-height: 1.5;
+    color: #534ed9;
+    color: #34495e;
+    /* font-size: 1.275em; */
+    letter-spacing: 2px;
+    margin-bottom: 5px;
 }
 .navbar-kindex,
 .navbar-kindex > li,
@@ -1027,7 +1039,7 @@ font-size: 13px!important;
     color: #8c8888;
     padding: 10px!important;
 }
-.pct p,.cke_editable p{
+.pct p,.cke_editable p,.pct div,.pct div>div{
 	line-height: 1.8em;
     word-break: break-all;
     /* padding: 10px; */
@@ -1040,7 +1052,10 @@ font-size: 13px!important;
 .pageText {
 	    color: #565a5f;
   
-    font: 16px "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
+    font: 15px "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
+        clear: both;
+    
+    padding: 10px 0 5px;
 }
 
 
@@ -1686,20 +1701,19 @@ a:hover.yl {
 }
 
 .pgblock{
-	background: #f9f9f9;
+	/* background: #f9f9f9; */
 	padding: 15px!important;
 	margin-bottom: 20px;
 	border-radius:4px;
-	  -webkit-box-shadow: 0 1px 8px rgba(0, 0, 0, .3);
+	border-bottom: 1px solid #eee;
+	/*   -webkit-box-shadow: 0 1px 8px rgba(0, 0, 0, .3);
 	 
 	   -moz-box-shadow: 0 1px 8px rgba(0, 0, 0, .3);
 	     -ms-box-shadow: 0 1px 8px rgba(0, 0, 0, .3);
 	       -o-box-shadow: 0 1px 8px rgba(0, 0, 0, .3);
-	       box-shadow: 0 1px 8px rgba(0, 0, 0, .3);
+	       box-shadow: 0 1px 8px rgba(0, 0, 0, .3); */
 	  
 	  
- /*    -moz-box-shadow: 0 0 4px rgba(0, 0, 0, .4);
-    box-shadow: 0 0 4px rgba(0, 0, 0, .4); */
 }
 .btn-danger {
   color: #fff;
