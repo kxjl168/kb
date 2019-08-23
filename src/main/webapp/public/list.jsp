@@ -7,12 +7,12 @@
 
 										<div class="nopadding-left">
 											<img class="nopaddding img-responsive col-xs-2" style="width:25px; height:25px;" title="{{x.blog_type_name}}"   ng-src="{{x.blog_type_url}}">
-											<div class="col-sm-8 col-xs-11  ptitle  "><a class="ptitle"ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html" >{{x.title}}</a>
+											<div class="col-sm-11 col-xs-11  ptitle  "><a class="ptitle"ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html" >{{x.title}}</a>
 											<a ng-href="{{preurl}}/public/html/{{x.showdate}}/{{x.imei}}.html" style="display: none;" class="for spider" >{{x.title}}</a>
 											</div>
 
 
-											<div class="tagcloud col-sm-3 col-xs-12 nopaddding  text-right">
+											<div class="tagcloud col-sm-8 col-xs-12 nopaddding pull-left ">
 										
 											<i class="fa fa-tags"></i>
 											<a class="color2" ng-repeat="t in x.tagStrs" title="t"  ng-click="showtgs(t)" >{{t}}&nbsp;,</a>

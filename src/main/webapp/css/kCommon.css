@@ -2141,3 +2141,7 @@ tr.zhichu .moneyvalue, .zhichuspan{
 .childtype{
 	padding-left: 20px;
 }
+
+.tagcloud a{
+	color:#ccc;
+}
