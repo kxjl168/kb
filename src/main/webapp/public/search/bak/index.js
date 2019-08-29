@@ -268,7 +268,7 @@ function init() {
 						
 
 						} else {
-							msg(message);
+							error(message);
 						}
 						
 

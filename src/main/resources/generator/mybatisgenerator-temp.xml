@@ -48,7 +48,7 @@
         </javaClientGenerator>
 
 
-  	<table tableName="rss_page_list" domainObjectName="RssPageList" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+  	<table tableName="calthings" domainObjectName="Calthings" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
 
 
 

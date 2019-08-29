@@ -20,7 +20,7 @@
 
         <!-- 数据库连接 -->
            <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.100.42:3306/kb?useUnicode=true&amp;characterEncoding=UTF-8"
+                        connectionURL="jdbc:mysql://192.168.31.239:3306/kb?useUnicode=true&amp;characterEncoding=UTF-8"
                         userId="root"
                         password="123456">
         </jdbcConnection>
