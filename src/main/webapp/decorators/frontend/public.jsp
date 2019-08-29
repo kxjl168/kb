@@ -32,6 +32,7 @@
 
 
 
+
 <script type="text/javascript"
 	src="${basePath}/js/plugin/angular/angular.min.js"></script>
 
@@ -53,6 +54,9 @@
 
 <script type="text/javascript" src="${basePath}/js/own/kvalidate.js"></script>
 
+
+
+
 	
 	  <link  rel="stylesheet"
 	href="${basePath}/js/own/kpro.css"></link>
@@ -67,6 +71,12 @@
 </head>
 <body id="ngSection" ng-app="myApp" ng-controller="eduCtrl" >
 <script type="text/javascript" src="${basePath}/js/own/kpro.js"></script>
+	
+	<script type="text/javascript" src="${basePath}/js/plugin/facybox3/jquery.fancybox.js"></script>
+
+	<link rel="stylesheet" href="${basePath}/js/plugin/facybox3/jquery.fancybox.min.css">
+	
+	
 	
 
 	<%@include file="../../public/phead.jsp"%>

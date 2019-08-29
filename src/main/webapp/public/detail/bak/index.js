@@ -4,7 +4,9 @@ app.controller('eduCtrl', function($scope,$sce) {
 
 });
 
-
+function showOriImg(){
+	
+}
 
 $(function() {
 
@@ -32,7 +34,7 @@ $(function() {
 
     var $scope = angular.element(ngSection).scope();
     $scope.$apply(function() {
-    	 $scope.initimg();
+    	// $scope.initimg();
     	 $scope.x={};
     	 $scope.x.imei=$("#imei").val();
     	 
@@ -41,8 +43,42 @@ $(function() {
    		}, 300);
     });
    
+    
+    initPic();
+    
 
 });
+
+function initPic(){
+	 
+    var items=[];
+    
+    $.each($('img[fid]'),function(index,item){
+    	
+    	var picitem={};
+    	picitem.src=$(item).attr('orisrc');
+    	picitem.opts={};
+    	
+    	
+    	var cap=$(item).attr('desc');
+    	if(cap!=null&&cap!="")
+    	    	picitem.opts.caption=cap;
+    	
+    	picitem.opts.thumb=$(item).attr('src');
+    	
+    	items.push(picitem);
+    	
+    });
+    
+    var opts={};
+   
+    $.each($('img[fid]'),function(index,item){
+    	$(item).click(function(){
+    		$.fancybox.open( items, opts, index );	
+    	})
+    	
+    });
+}
 
 
 

@@ -64,8 +64,12 @@ public class RssUtil {
 		try {
 			
 			HashMap<String, String> headers=new HashMap<>();
-			 rssData=SendPostRequest.sendHttpGetRssDataWithHeader(url.toString(), "", headers);
+			 //rssData=SendPostRequest.sendHttpGetRssDataWithHeader(url.toString(), "", headers);
 			
+			rssData=SendPostRequest.sendHttpGetRssDataWithHeaderNoSSL(url.toString(), "", headers);
+			 
+			 
+			 
 			if(rssData.contains("<?xml")
 					||rssData.contains("<feed xmlns")
 					)
