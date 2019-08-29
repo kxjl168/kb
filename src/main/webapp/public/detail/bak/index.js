@@ -70,7 +70,9 @@ function initPic(){
     	
     });
     
-    var opts={};
+    var opts={'transitionEffect':'slide',
+    		 'transitionDuration': 800,
+    		 'animationDuration': 500,};
    
     $.each($('img[fid]'),function(index,item){
     	$(item).click(function(){
