@@ -98,14 +98,44 @@ function initCKPlugin()
 		uploadurl:basePath + '/UploadFileXhr.action',//上传图片action url
 		container:$("body").find('#upimgs'), //图片容器
 		cleanpic:false,//再次弹出时是否清除图片显示
-		uploaddonecallback:function(obj){
+		uploaddonecallback:function(obj,align,width){
 			var htmlData=CKEDITOR.instances.s_context.getData();
 			var appEndData='<img src="'+obj.FileUrl+'" orisrc="'+obj.FileUrl2+'" fid="'+obj.fileid+'"  class="img-responsive " onclick="showOriImg()"  >';
 			//var theData=htmlData+appEndData;
 			 var ele=CKEDITOR.dom.element.createFromHtml(appEndData);
 			
 			CKEDITOR.instances.s_context.insertElement(ele);
-		}
+			
+			var fid=obj.fileid;
+			
+			setTimeout(function() {
+				var htmlData=CKEDITOR.instances.s_context.getData();
+				var eleData=$("<div>"+ htmlData+"</div>");
+				$(eleData).find('img[fid="'+fid+'"]').css("display","flex");
+				$(eleData).find('img[fid="'+fid+'"]').css("flex-grow",width/100);
+				$(eleData).find('img[fid="'+fid+'"]').css("width",width+"px");
+				$(eleData).find('img[fid="'+fid+'"]').attr("wd",width);
+				
+				$(eleData).find('img[fid="'+fid+'"]').parent().css("display","flex");
+			
+				
+				CKEDITOR.instances.s_context.setData(	$(eleData).html());
+			}, 40);
+			
+		},
+		okcallback:function(obj,align,width){
+		var htmlData=CKEDITOR.instances.s_context.getData();
+		var eleData=$("<div>"+ htmlData+"</div>");
+		$(eleData).find('img[fid="'+$(obj).val()+'"]').css("display","flex");
+		$(eleData).find('img[fid="'+$(obj).val()+'"]').css("flex-grow",width/100);
+		$(eleData).find('img[fid="'+$(obj).val()+'"]').css("width",width+"px");
+		$(eleData).find('img[fid="'+$(obj).val()+'"]').attr("wd",width);
+		
+		$(eleData).find('img[fid="'+$(obj).val()+'"]').parent().css("display","flex");
+	
+		
+		CKEDITOR.instances.s_context.setData(	$(eleData).html());
+	}
 	});
 	$kfile.get("upimgs").initFile(function(){
 		
@@ -139,9 +169,16 @@ function initCKPlugin()
 	        });
 	        editor.on("doubleclick", function(a) {
                 var b = a.data.element;
-                !b.is("img") || b.data("cke-realelement") || b.isReadOnly() || ( 
+                !b.is("img") || b.data("cke-realelement") || b.isReadOnly() || (
+                	
+                			
+                		$kfile.get("upimgs").initFile(function(){
                 		$kfile.get("upimgs").addFile($(b.$).attr("fid"), $(b.$).attr("src")),
                 		$kfile.get("upimgs").uploadimg( $kfile.get("upimgs").container.find(".gdimg") )
+                		})
+                		
+                	
+                		
                 				);
             },null, null, 1);//优先级1
 	        
@@ -552,7 +589,7 @@ function init() {
 										$scope.detailItem =JSON.parse(json.datalist);
 
 										$scope.detailItem.context= unescape( $scope.detailItem.content);
-										
+										CKEDITOR.instances.s_context.setData($scope.detailItem.context);
 									
 										item=$scope.detailItem;
 
@@ -725,7 +762,9 @@ function init() {
 						});
 						
 						
-						var withemojihtml= $kchar. replaceEmoji(ct[0].outerHTML);
+						//var withemojihtml= $kchar. replaceEmoji(ct[0].outerHTML);
+						var withemojihtml= $kchar. replaceEmoji(CKEDITOR.instances.s_context.getData());
+						
 						
 						obj.content= escape(withemojihtml);
 						

@@ -1835,6 +1835,7 @@ color:#ecb866!important;
 	
 	 .pageText img[fid]{
 	  cursor: pointer;
+	  margin:5px;
 	      border-radius: 1%;
     box-shadow: 0 0 3px #939394;
 	 } 

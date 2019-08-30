@@ -64,6 +64,7 @@
 				notnull:false,// 是否至少一个文件
 				notnullmsg:'',//缺少文件提示
 				uploaddonecallback:null,
+				okcallback:null,
 		// 
 		};
 	/*
@@ -215,7 +216,14 @@
 
 
 	    		   +' 				</div> '
-	    		   +' 				<div class="row"> '
+	    		   
+	    		   +' 				<div class="row col-xs-12 padding5"> '
+	    		   +' <div class="col-xs-6" > <input name="picalign" picalign="left" type="radio" >左对齐&nbsp; <input name="picalign" picalign="right" type="radio" >右对齐&nbsp;<input picalign="none"  checked="checked" name="picalign" type="radio" >居中&nbsp;  </div>' 
+	    		   +'<div class="col-xs-6"><input class=" form-control picwidth" value="100" />  </div>  ' 
+	    		   +'               </div>'
+	    		   
+	    		   
+	    		   +' 				<div class="row col-xs-12"> '
 	    		   +' 					<div class=" col-sm-5 col-xs-6 "> '
 									
 	    		   +' 				<div tabindex="500"  class="btn btn-primary btn-file"> '
@@ -242,7 +250,9 @@
 
 	    		   +' 	</div> '
 
-	    		   +' 	<div class="modal-footer "> '
+	    		   +' 	<div class="col-xs-12 row modal-footer "> '
+	    		   +' 			<button type="button " class="btnok btn btn-default btn-success " '
+	    		   +' 			>确定</button> '
 	    		   +' 			<button type="button " class="btn btn-default btn-warning " '
 	    		   +' 			data-dismiss="modal">取消</button> '
 
@@ -263,6 +273,22 @@
 	    	  $("body").find("#"+me.options.modal_id+" #fileUploadURL").off("change").on("change",function(e) {
 	   			me.processFiles(e.target.files);
 	   		});
+	    	  
+	    	  $("body").find("#"+me.options.modal_id+" .btnok").off("click").on("click",function(e) {
+		   			
+	    		  
+	    			$("body").find("#"+me.options.modal_id).modal('hide');
+	    		  
+	    			if(typeof(me.options.okcallback)=="function") 
+	    				
+	    				  var align=$("body").find("#"+me.options.modal_id +" input:radio[name='picalign']:checked").attr("picalign");
+	    				
+	    				 var width =$("body").find("#"+me.options.modal_id +" .picwidth").val();
+	    				
+	    				var pic=$(me.container).find(".gdfileid");
+	    				me.options.okcallback(pic,align,width);
+	    		  
+		   		});
 			
 		};
 	
@@ -761,7 +787,14 @@
 		}
 		
 		if(typeof(me.options.uploaddonecallback)=="function") 
-		me.options.uploaddonecallback(obj);
+			{
+			  var align=$("body").find("#"+me.options.modal_id +" input:radio[name='picalign']:checked").attr("picalign");
+				
+				 var width =$("body").find("#"+me.options.modal_id +" .picwidth").val();
+				
+				 me.options.uploaddonecallback(obj,align,width);	
+			}
+		
 	}
 	
 	/**
