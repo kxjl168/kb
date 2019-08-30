@@ -2,18 +2,22 @@ package com.kxjl.web.blog.service.Impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
 import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.web.blog.action.Kdata;
 import com.kxjl.web.blog.dao.KurlDao;
 import com.kxjl.web.blog.model.Kurl;
 import com.kxjl.web.blog.service.KurlService;
+import com.kxjl.web.system.model.DictInfo;
 
 @Service(value = "kurlService")
 public class KurlServiceImpl implements KurlService {
@@ -51,6 +55,49 @@ public class KurlServiceImpl implements KurlService {
 
 		}
 		return datas;
+	}
+	
+	public List<String> getUrlTreeSelectSecond(Kurl query) {
+
+		List<String> rst=new ArrayList<>();
+		
+		Map<String, List<Kurl>>  items=getKurlItemPageList(query);
+		 Iterator<String> keys= items.keySet().iterator();
+		// 一级分类
+		 List<Kurl> infos = new ArrayList<>();
+		 while(keys.hasNext())
+		{
+			Kurl parent=new Kurl();
+			parent.setUrl_name(keys.next());
+			infos.add(parent);
+		}
+		
+
+		Gson gs = new Gson();
+
+		for (int i = 0; i < infos.size(); i++) {
+			Kurl parent=infos.get(i);
+			JSONObject jsObj = new JSONObject();
+		
+			String pInfoStr = gs.toJson(parent);
+			jsObj = new JSONObject(pInfoStr);
+			
+			
+
+			List<Kurl> all_child = items.get(parent.getUrl_name());
+
+			String level2list = gs.toJson(all_child);
+
+		
+			jsObj.put("child", level2list);
+			jsObj.put("httppath", 	ConfigReader.getInstance().getProperty("FILE_SVR_HTTP_OUTER_PATH"));
+
+			rst.add(jsObj.toString());
+
+		}
+
+		return rst;
+
 	}
 	
 	

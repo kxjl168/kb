@@ -12,6 +12,16 @@ import com.kxjl.web.blog.model.Kurl;
 
 public interface KurlService {
 	
+	
+	/**
+	 * 链接select2 group
+	 * @param query
+	 * @return
+	 * @author zj
+	 * @date 2019年8月30日
+	 */
+	public List<String> getUrlTreeSelectSecond(Kurl query) ;
+	
 	/**
 	 * 链接分类数据
 	 * @param query

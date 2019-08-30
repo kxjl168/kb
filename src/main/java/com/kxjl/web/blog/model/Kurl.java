@@ -1,5 +1,8 @@
 package com.kxjl.web.blog.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.kxjl.web.system.model.base.BaseModel;
 
 /**
@@ -26,6 +29,7 @@ public class Kurl extends BaseModel {
 	
 	//query
 	private String val2;
+	private List<Kurl> childs=new ArrayList<>();
 
 	public Integer getId() {
 		return id;
@@ -105,6 +109,14 @@ public class Kurl extends BaseModel {
 
 	public void setIsshow(String isshow) {
 		this.isshow = isshow;
+	}
+
+	public List<Kurl> getChilds() {
+		return childs;
+	}
+
+	public void setChilds(List<Kurl> childs) {
+		this.childs = childs;
 	}
 
 

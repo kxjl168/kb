@@ -10,7 +10,7 @@ function initTypeSelect() {
 		placeholder : "选择分类",
 		minimumInputLength : 0,
 		maximumSelectionLength : 2,
-		 minimumResultsForSearch: Infinity,
+		// minimumResultsForSearch: Infinity,
 		theme : "bootstrap",
 		multiple : false,
 		language : {
@@ -43,8 +43,8 @@ function initTypeSelect() {
 
 		ajax : {
 			type : "post",
-			url : getImUrl()+"kurl/getSelectInfoList.do",
-			//dataType : "json",
+			url : getImUrl()+"kurl/getSelectGroupInfoList.do",
+			dataType : "json",
 			data : function(params) {
 
 				//var params=eval(strparams);
@@ -52,7 +52,7 @@ function initTypeSelect() {
 				var page = params.page || 0;
 
 				var query = {
-						name : params.term,
+						url_name : params.term,
 					page : page,
 
 					pageCount : 1000,
@@ -66,16 +66,31 @@ function initTypeSelect() {
 			processResults : function(data, params) {
 				var selectdatas = [];
 				
-				data=eval("("+data+")");
-				/*
-				 * if(typeof(params.page)=="undefined") selectdatas.push({ id :
-				 * -1, text : '新建属性' });
-				 */
-
-				$.each(eval( data.rows), function(index, item) {
+			
+				$.each( data, function(index, itemstr) {
+					
+					item=eval("("+itemstr+")");
+					
+					var clds= eval(item.child);
+					
+					var clditems=[];
+					
+					$.each( clds, function(index2, item2) {
+						
+						clditems.push({
+							id : item2.id,
+							text : item2.url_name,
+							icon: item.httppath+ item2.icon,
+						});
+					});
+					
+					
+					
 					selectdatas.push({
-						id : item.id,
-						text : item.name
+						
+						text : item.url_name,
+						children : clditems,
+						
 					});
 				});
 
@@ -110,9 +125,12 @@ function initTypeSelect() {
 				: cids[0];
 		
 		id=cids;
+		var text=$("#q_type").select2('data')[0].text;
 		setTimeout(function() {
 			
-			window.location.hash="#"+id;
+			//window.location.hash="#"+id;
+			window.location.hash="#"+text;
+			
 			//alert(location.hash);
 		}, 50);
 		

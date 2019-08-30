@@ -89,7 +89,8 @@
 								<div class="panel panel-success urldv">
 									<div class="panel-heading urlhead" title="" href="#collapseOne">
 										<div class="row">
-											<h3 class="panel-title col-xs-12 " id="{{$index}}">
+											<!-- <h3 class="panel-title col-xs-12 " id="{{$index}}"> -->
+											<h3 class="panel-title col-xs-12 " id="{{items.name}}">
 												{{items.name}} &nbsp;<span><a href="javascript:void(0);" class="urladd"
 													ng-click="addOrModify(null,items.name)">新增本类链接</a></span>
 											</h3>
@@ -107,33 +108,43 @@
 
 													<div ng-repeat="x in items.val" class="pgdiv" ng-cloak>
 
-														<div class="col-sm-3 col-xs-12 ">
+														<div id="{{x.url_name}}" class="col-sm-3 col-xs-12 ">
 															<div class='durl'>
-															<div class="row">
-															<div class=""><img style="max-width:30px;"  class="pull-left img-responsive" src="{{x.val2}}{{x.icon}}"></img></div>
-															<div class="col-xs-9">
-															
-															<a class="clear row" ng-href={{x.url_val}} target="_blank"><span>{{x.url_name}}</span></a>
-																
-																
-
-				
-				   											<div class="pull-left  {{x.isshow|ftc}}">{{x.isshow|ft}}</div>
-																<div class="pull-right">【 <a href="javascript:void(0)" class="text-info"
-																	ng-click="addOrModify(x)">修改</a> 
-																	<a href="javascript:void(0)" class="text-info"
-																	ng-click="rss(x)">订阅</a> 
-																	<a href="javascript:void(0)"
-																	class="text-warning" ng-click="del(x)">删除</a> 】
+																<div class="row">
+																	<div class="">
+																		<img style="max-width: 30px;padding-top: 10px;"
+																			class="pull-left img-responsive"
+																			src="{{x.val2}}{{x.icon}}"></img>
 																	</div>
-															</div>
-															</div>
+																	<div class="col-xs-10 padding5">
+
+																		<a class="clear row" ng-href={{x.url_val}}
+																			target="_blank"><span title="{{x.url_name}}"
+																			class='kutitle'>{{x.url_name}}</span></a>
 
 
-												         
+
+																		<div class="row ">
+																			<div class="pull-left  {{x.isshow|ftc}}">{{x.isshow|ft}}</div>
+																			<div class="pull-right">
+																				【 <a href="javascript:void(0)" class="text-info"
+																					ng-click="addOrModify(x)">修改</a> <a
+																					href="javascript:void(0)" class="text-info"
+																					ng-click="rss(x)">订阅</a> <a
+																					href="javascript:void(0)" class="text-warning"
+																					ng-click="del(x)">删除</a> 】
+																			</div>
+
+																		</div>
+
+																	</div>
+																</div>
+
+
+
 																<div class="udesc">{{x.desc_info}}</div>
-															
-																
+
+
 															</div>
 														</div>
 													</div>

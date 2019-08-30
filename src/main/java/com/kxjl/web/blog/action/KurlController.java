@@ -52,7 +52,79 @@ public class KurlController extends BaseController {
 	 * 
 	 * return view; }
 	 */
+	
+	
+	/**
+	 * select2 group查询
+	 * @param request
+	 * @param response
+	 * @author zj
+	 * @date 2019年8月30日
+	 */
+	@RequestMapping(value = "/getSelectGroupInfoList")
+	public void getSelectGroupInfoList(HttpServletRequest request,
+			HttpServletResponse response ,Kurl query  ) {
+		// String blogid = request.getParameter("blogid");
 
+		/*
+		 * int pageCount = Integer.parseInt(request.getParameter("rows"));//
+		 * request.getParameter("pageCount"); int curPage =
+		 * Integer.parseInt(request.getParameter("page"));
+		 */
+
+		String data = request.getParameter("data");
+		JSONObject jsonIN;
+		JSONObject jsonOut = new JSONObject();
+
+		String rst = "";
+		try {
+
+
+			query.setPageCount(10000);
+			query.setVal1("1");
+			// 计数
+			SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
+			if (user == null || (user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin)) {
+				query.setIsshow("1");
+			}
+			
+
+			String HTTP_PATH = ConfigReader.getInstance().getProperty("FILE_SVR_HTTP_OUTER_PATH");
+			String prepath = HTTP_PATH;
+			
+			query.setStart(0);
+			List<String> datas=kurlService.getUrlTreeSelectSecond(query);
+
+			Gson gs=new Gson();
+			rst=gs.toJson(datas);
+			
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			try {
+				jsonOut.put("ResponseCode", "201");
+				jsonOut.put("ResponseMsg", "");
+				jsonOut.put("total", 0);
+				jsonOut.put("datalist", "");
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+
+		}
+		//rst = jsonOut.toString();
+		JsonUtil.responseOutWithJson(response, rst);
+
+	}
+
+	/**
+	 * 查询接口
+	 * @param request
+	 * @param response
+	 * @author zj
+	 * @date 2019年8月30日
+	 */
 	@RequestMapping(value = "/getShowInfoList")
 	public void getShowInfoList(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -135,7 +207,7 @@ public class KurlController extends BaseController {
 	
 	
 	/**
-	 * select2 选择分类
+	 * select2 选择分类 初始列表查询
 	 * @param request
 	 * @param response
 	 * @author zj
@@ -159,7 +231,23 @@ public class KurlController extends BaseController {
 		String rst = "";
 		try {
 
-		
+		/*	String url_type = jsonIN.optString("name");
+			// String dict_type = "url_type";
+
+			int pageCount = jsonIN.optInt("rows");// request.getParameter("pageCount");
+			int curPage = jsonIN.optInt("page");
+
+			Kurl query = new Kurl();
+			query.setPage(curPage);
+			query.setPageCount(10000);
+			query.setVal1("1");*/
+			
+
+			// query.setIp(ip);
+			// query.setCity(city);
+			// query.setUrl_type(dict_type);// (url_title);// (id);
+			//query.setUrl_name(url_type);// (url_name);
+			
 			query.setPageCount(10000);
 			query.setVal1("1");
 			// 计数
