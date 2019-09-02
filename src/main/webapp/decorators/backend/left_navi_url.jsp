@@ -14,14 +14,14 @@
 
 
 			<c:forEach items="${menus}" var="menu" varStatus="status">
-				<li class='leftmenu'><a  href="#${status.index-1}"
+				<li class='leftmenu'><a  href="#${menu.menuName}"
 <c:choose> 
      	<c:when test="${menu.menuUrl!=null && menu.menuUrl!=''  }">   
      	onclick="javascript:loadmenu('${menu.menuUrl }')"  class="dropdown-toggle "
  		</c:when>      
      	<c:otherwise>  
      	class="dropdown-toggle"
-    	data-toggle="collapse" data-target="#${menu.menuId }" aria-expanded="true"
+    	data-toggle="collapse" data-target="#${menu.menuName }" aria-expanded="true"
   		</c:otherwise> 
 
 </c:choose>

@@ -1051,9 +1051,9 @@ font-size: 13px!important;
 .pct p,.cke_editable p,.pct div,.pct div>div{
 	line-height: 1.8em;
     word-break: break-all;
-    /* padding: 10px; */
+    /*  padding: 5px;  */
     margin-bottom: 2px;
-    padding: 0px!important;
+     padding: 0px!important; 
     margin-top: 0px;
 }
 
@@ -1065,6 +1065,9 @@ font-size: 13px!important;
         clear: both;
     
     padding: 10px 0 5px;
+}
+#aboutme .panel-body{
+	 padding: 10px!important;
 }
 
 
@@ -1840,6 +1843,21 @@ color:#ecb866!important;
     box-shadow: 0 0 3px #939394;
 	 } 
 	 
+	 
+	 @media screen and (min-width: 768px) {
+	  .pageText img[fid]{
+	  max-height: 400px;
+	  }
+	 }
+	 @media screen and (max-width: 768px) {
+	  .pageText img[fid]{
+	  max-height: 300px;
+	  }
+	 }
+	 
+	 
+	 
+	 
 	 .timeinfo{
     padding: 15px;
     width:auto;
@@ -2154,4 +2172,8 @@ tr.zhichu .moneyvalue, .zhichuspan{
 
 .tagcloud a{
 	color:#ccc;
+}
+
+canvas{
+	height: 1px;
 }

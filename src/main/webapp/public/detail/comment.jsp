@@ -147,7 +147,7 @@
 				<div class="col-sm-9 col-xs-12 text-right nopaddding ">
 					<textarea required type="text" rows="4" class="form-control "
 						name="s_text" id="s_text" ng-model="s_text"
-						placeholder=您的留言会经过审核后才会显示出来.">
+						placeholder=您的留言经过审核后才会显示出来.">
 															 </textarea>
 
 					<div class="  ">

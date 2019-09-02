@@ -228,9 +228,9 @@ $(document).ready(function(){
 	
 	var googleJs = "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
     
-	loadads();
+	//loadads();
 	setTimeout(function(){
-		include_js(googleJs);
+		//include_js(googleJs);
 	}, 3000);
 	
 

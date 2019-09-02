@@ -21,7 +21,7 @@
 		</if>
 		
 		<if test='url_name != null and url_name != "" '>
-			and (a.url_name like CONCAT('%', #{url_name},'%') or a.desc_info like CONCAT('%', #{url_name},'%') ) 
+			and (a.url_name like CONCAT('%', #{url_name},'%') or a.desc_info like CONCAT('%', #{url_name},'%')  ) 
 		</if>
 		<if test='val1 != null and val1 != "" '>
 			and a.val1= #{val1}
