@@ -125,8 +125,9 @@ function initTypeSelect() {
 		setTimeout(function() {
 			
 			//window.location.hash="#"+id;
-			window.location.hash="#"+text;
-			
+			//window.location.hash="#"+text;
+			$("html, body").animate({scrollTop: $("#"+text).offset().top -20+ "px"}, 500);
+
 			//alert(location.hash);
 		}, 50);
 		

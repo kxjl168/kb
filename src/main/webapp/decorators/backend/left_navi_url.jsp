@@ -82,7 +82,15 @@
 			}
 		});
 
-		
+		$('.leftmenu').find("a").on(
+				"click",
+				function(e)
+				{
+					 $("html, body").animate({scrollTop: $($(this).attr("href")).offset().top -20+ "px"}, 500);
+
+		    return false;//不要这句会有点卡顿
+				}
+	);
 		
 		$('.leftmenu-second').on(
 				'shown.bs.collapse',
