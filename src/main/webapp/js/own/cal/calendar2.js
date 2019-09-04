@@ -651,7 +651,7 @@
             this.html += "</div>";
          
             
-            this.html += "<div class=\"leftArea col-xs-12 nopaddding \">";
+            this.html += "<div class=\"leftArea col-xs-12  \">";
             this.leftHead();
             this.leftWeek();
             this.leftDay();
@@ -722,6 +722,7 @@
         var day = 0;
         var W = this.W;
         var color = "";
+        this.html +=" <div class=\"dayscontainer\" >";
         for (i = 0; i < this.count * 7; i += 1) {
             if (i < this.W - 1 || i >= this.days + this.W - 1) this.html += "<div class=\"days1\"></div>";
             else {
@@ -736,6 +737,8 @@
                 if (W == 8) W = 1;
             }
         }
+        
+        this.html +=" </div>";
     };
 
     function sTerm(y, n) {

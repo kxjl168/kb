@@ -51,9 +51,6 @@
 			
 			
 			
-	
-
-<hr>
 
 
 
@@ -76,7 +73,7 @@
 
 </div>
 
-<div class="row panel">
+<div class="row panel datepanel">
 <div id="nDate"> </div>
 </div>
 

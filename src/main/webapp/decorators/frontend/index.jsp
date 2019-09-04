@@ -218,7 +218,7 @@ $(document).ready(function(){
 	
 	var googleJs = "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
 
-	loadads();
+	//loadads();
 	return;
 	include_js(googleJs);
 	
