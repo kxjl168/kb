@@ -108,7 +108,7 @@
 										
 											<div ng-repeat="x in items.val" class="pgdiv" ng-cloak >
 										
-												<div class="col-sm-3 col-xs-12 " >
+												<div class="col-sm-2 col-xs-12 " >
 												
 												<div  id="{{x.url_name}}"></div>
 												
@@ -117,7 +117,7 @@
 															<div class=""><img style="max-width:30px;"  class="pull-left img-responsive" src="{{x.val2}}{{x.icon}}"></img></div>
 															<div class="col-xs-9 padding5">
 															
-															<a class="clear row" ng-href="{{x.url_val}}" target="_blank"><span class="kutitle" title="{{x.url_name}}">{{x.url_name}}</span></a>
+															<a class="clear row title" ng-href="{{x.url_val}}" target="_blank"><span class="kutitle" title="{{x.url_name}}">{{x.url_name}}</span></a>
 																
 																
 

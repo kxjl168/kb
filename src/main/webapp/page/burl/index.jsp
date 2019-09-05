@@ -118,7 +118,7 @@
 																	</div>
 																	<div class="col-xs-10 padding5">
 
-																		<a class="clear row" ng-href={{x.url_val}}
+																		<a class="clear row title" ng-href={{x.url_val}}
 																			target="_blank"><span title="{{x.url_name}}"
 																			class='kutitle'>{{x.url_name}}</span></a>
 
