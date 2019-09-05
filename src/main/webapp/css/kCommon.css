@@ -465,6 +465,9 @@ float:left;
 .durl .fa{
 	padding: 5px;
 }
+.durl img{
+	width: 30px!important;;
+}
 .urladd{
 	color:#FFE09F;
 }

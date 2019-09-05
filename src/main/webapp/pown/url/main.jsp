@@ -114,7 +114,9 @@
 												
 												<div  class='durl'>
 															<div class="row">
-															<div class=""><img style="max-width:30px;"  class="pull-left img-responsive" src="{{x.val2}}{{x.icon}}"></img></div>
+															<div class=""><img ng-if="x.icon!=null" style="max-width:30px;"  class="pull-left img-responsive" src="{{x.val2}}{{x.icon}}"></img>
+															
+															</div>
 															<div class="col-xs-9 padding5">
 															
 															<a class="clear row title" ng-href="{{x.url_val}}" target="_blank"><span class="kutitle" title="{{x.url_name}}">{{x.url_name}}</span></a>

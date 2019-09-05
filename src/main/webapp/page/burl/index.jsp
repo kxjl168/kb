@@ -112,7 +112,7 @@
 															<div class='durl'>
 																<div class="row">
 																	<div class="">
-																		<img style="max-width: 30px;padding-top: 10px;"
+																		<img ng-if="x.icon!=null" style="max-width: 30px;padding-top: 10px;"
 																			class="pull-left img-responsive"
 																			src="{{x.val2}}{{x.icon}}"></img>
 																	</div>
