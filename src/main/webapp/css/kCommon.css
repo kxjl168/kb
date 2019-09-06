@@ -1057,8 +1057,8 @@ a {
 }
 
 .pageText a:hover{
-	 color: #7673d9;
-	 text-decoration: none;
+	 color: #e1886a;
+	 text-decoration: underline;
 	
 }
 
@@ -2221,4 +2221,14 @@ tr.zhichu .moneyvalue, .zhichuspan{
 
 canvas{
 	height: 1px;
+}
+
+.pagetagdv a{
+	color:#ccc;
+	font-size: 14px;
+}
+.pagetagdv a:hover{
+	color:#9cbbf3;
+	font-size: 14px;
+	text-decoration: underline;
 }

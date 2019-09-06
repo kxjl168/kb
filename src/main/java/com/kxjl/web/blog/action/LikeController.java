@@ -145,12 +145,12 @@ public class LikeController extends BaseController {
 			
 			
 			SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
-			if (user == null || (user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin))
-			{
-				jsonOut.put("spider_num", "");
-			}else {
+			//if (user == null || (user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin))
+			//{
+			//	jsonOut.put("spider_num", "");
+			//}else {
 				jsonOut.put("spider_num", "爬虫访问"+tp.getSpider_nums()+"次");
-			}
+			//}
 			
 			
 			

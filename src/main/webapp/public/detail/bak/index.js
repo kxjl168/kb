@@ -94,6 +94,18 @@ function changerows(option) {
     });
 };
 
+/*刷新评论数字*/
+function refreshNum() {
+ 
+    var $scope = angular.element(ngSection).scope();
+    $scope.$apply(function() {
+       // $scope.rows = num;
+        $scope.getgoodnum();
+    });
+};
+
+
+
 
 function closepop(){
 	  $(".pbtn").popover('hide');

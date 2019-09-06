@@ -298,7 +298,7 @@ public class ReplayController extends BaseController {
 
 			if (isRoot) {
 				replay.setUser_blog("http://www.256kb.cn");
-				replay.setUserid("KxのBOOK");
+				replay.setUserid("野生的喵喵");
 				replay.setState("1");
 			} else {
 				replay.setState("0");
@@ -331,7 +331,7 @@ public class ReplayController extends BaseController {
 						Replay rqq = new Replay();
 						rqq.setBlogimei(imei);
 						int replay_nums = replayService.getReplayPageListCount(rqq);
-						blog.setReplay_nums(replay_nums + 1);
+						//blog.setReplay_nums(replay_nums + 1);
 						blogService.updateBlog(blog);
 					}
 				}
@@ -344,7 +344,7 @@ public class ReplayController extends BaseController {
 						String rtitle = "关于";
 						if (!imei.equals("about"))
 							rtitle = blog.getTitle();
-						final String title = "KxのBook上的[" + rtitle + "]的有了新的评论";
+						final String title = "KxのBook上的[" + rtitle + "]有了新的评论";
 						String uid = xssEncode(JEscape.unescape(userid));
 						String ucontent = xssEncode(JEscape.unescape(content));
 						// final String message = "From " + uid + ":\r\n<br>" + ucontent + "";
@@ -404,7 +404,7 @@ public class ReplayController extends BaseController {
 									url = ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn")
 											+ "/public/about/";
 
-								final String message = uid + "你好! 你在《 " + rtitle
+								final String message = uid + "您好! 您在《 " + rtitle
 										+ "》中的评论收到了来至 KxのBook[野生的喵喵]的新回复.<a href=\"" + url + "\">点击这里查看</a>"
 										+ "+\r\n<br><div>若上述链接无法打开,请将该地址复制到浏览器地址栏中访问<a href=\"" + url + "\">" + url
 										+ "</a></div>";
@@ -496,6 +496,13 @@ public class ReplayController extends BaseController {
 
 			if (replayService.updateReplay(r) > 0) {
 
+			/*	SysUserBean user = (SysUserBean) session.getAttribute(Constant.SESSION_USER);
+
+				boolean isRoot = false;
+				if (user != null && (user.getUtype() == UserType.Root || user.getUtype() == UserType.Admin))
+					isRoot = true;
+
+				if (!isRoot)*/
 				updateBlogCount(rp, true);
 
 				jsonOut.put("ResponseCode", "200");

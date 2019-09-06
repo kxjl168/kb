@@ -630,9 +630,11 @@ function initReplayModel() {
 					
 					$("#cblock").html(html);
 					setTimeout(function() {
-						var tp=window.location.hash;
-						window.location.hash="#1";
-						window.location.hash=tp;
+						//var tp=window.location.hash;
+						//window.location.hash="#1";
+						//window.location.hash=tp;
+						
+						refreshNum();
 						
 						//alert(location.hash);
 					}, 1000);
