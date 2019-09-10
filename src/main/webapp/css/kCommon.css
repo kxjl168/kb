@@ -1891,12 +1891,12 @@ color:#ecb866!important;
 	 
 	 @media screen and (min-width: 768px) {
 	  .pageText img[fid]{
-	  max-height: 400px;
+	  max-height: auto;
 	  }
 	 }
 	 @media screen and (max-width: 768px) {
 	  .pageText img[fid]{
-	  max-height: 300px;
+	  max-height: 350px;
 	  }
 	 }
 	 
@@ -2232,3 +2232,15 @@ canvas{
 	font-size: 14px;
 	text-decoration: underline;
 }
+
+.pageText p{
+    line-height: 1.8em;
+      word-break: break-all;
+          /* padding: 5px; */
+        margin-bottom: 2px;
+          padding: 0px!important;
+            margin-top: 0px;
+          }
+
+
+
