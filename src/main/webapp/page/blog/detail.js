@@ -53,6 +53,93 @@ $(function() {
 });
 
 
+/**
+ * 根据一组图片计算宽度比例
+ * @param imgs
+ * @returns
+ */
+function CacuwidthArray(ay,totalwidth){
+	
+	
+	
+	$.each(ay,function(index,item){
+
+		//整体占比
+		item.flexgrow= Math.floor((item.hpw/totalwidth) * 10000) / 10000;
+		//ay[index]=item;
+	});
+
+	return ay;
+	
+	
+}
+
+
+/**
+ * 计算一个图片组中图片的缩放，保持高度一致
+ */
+function reCacuPicWidth(fid,width,height)
+{
+	var htmlData=CKEDITOR.instances.s_context.getData();
+	var eleData=$("<div>"+ htmlData+"</div>");
+	
+	var imgs=$(eleData).find('img[fid="'+fid+'"]').parent().find("img[fid]")
+	
+	var  ay=[];
+	var totalwidth=0;
+	$.each(imgs,function(index,item){
+		
+		var data={};
+		
+		if($(item).attr("fid")==fid&&width!=0&&height!=0)
+			{
+			data.width=  width;
+			data.height= height;
+			}
+		else
+			{
+			data.width=  item.naturalWidth;
+			data.height= item.naturalHeight;
+			}
+			
+		data.index=index;
+		data.dataEle=item;
+		
+		
+		//自身宽高比-高度相同情况下，各自缩放比例
+		data.hpw=  Math.floor((data.width/data.height) * 10000) / 10000;
+		data.fid=$(item).attr('fid');
+		
+		
+		
+		totalwidth+=data.hpw;
+		
+		ay.push(data);
+		
+	});
+	
+	
+	
+	
+	var ay= CacuwidthArray(ay ,totalwidth  );
+	
+	$.each(ay,function(index,item){
+		
+		$(eleData).find('img[fid="'+item.fid+'"]').css("display","flex");
+		$(eleData).find('img[fid="'+item.fid+'"]').css("flex-grow",item.flexgrow);
+		$(eleData).find('img[fid="'+item.fid+'"]').css("width",item.flexgrow+"px");
+		$(eleData).find('img[fid="'+item.fid+'"]').attr("wd",item.flexgrow);
+		
+		$(eleData).find('img[fid="'+fid+'"]').parent().css("display","flex");
+		
+	})
+	
+	
+	CKEDITOR.instances.s_context.setData(	$(eleData).html());
+}
+
+
+
 function initCKPlugin()
 {
 	var pluginname="savedata";
@@ -98,7 +185,7 @@ function initCKPlugin()
 		uploadurl:basePath + '/UploadFileXhr.action',//上传图片action url
 		container:$("body").find('#upimgs'), //图片容器
 		cleanpic:false,//再次弹出时是否清除图片显示
-		uploaddonecallback:function(obj,align,width){
+		uploaddonecallback:function(obj,align,width,imgwidth,imgheight){
 			var htmlData=CKEDITOR.instances.s_context.getData();
 			var appEndData='<img src="'+obj.FileUrl+'" orisrc="'+obj.FileUrl2+'" fid="'+obj.fileid+'"  class="img-responsive " onclick="showOriImg()"  >';
 			//var theData=htmlData+appEndData;
@@ -109,7 +196,7 @@ function initCKPlugin()
 			var fid=obj.fileid;
 			
 			setTimeout(function() {
-				var htmlData=CKEDITOR.instances.s_context.getData();
+				/*var htmlData=CKEDITOR.instances.s_context.getData();
 				var eleData=$("<div>"+ htmlData+"</div>");
 				$(eleData).find('img[fid="'+fid+'"]').css("display","flex");
 				$(eleData).find('img[fid="'+fid+'"]').css("flex-grow",width/100);
@@ -119,12 +206,14 @@ function initCKPlugin()
 				$(eleData).find('img[fid="'+fid+'"]').parent().css("display","flex");
 			
 				
-				CKEDITOR.instances.s_context.setData(	$(eleData).html());
+				CKEDITOR.instances.s_context.setData(	$(eleData).html());*/
+				
+				reCacuPicWidth(fid,imgwidth,imgheight);
 			}, 40);
 			
 		},
 		okcallback:function(obj,align,width){
-		var htmlData=CKEDITOR.instances.s_context.getData();
+		/*var htmlData=CKEDITOR.instances.s_context.getData();
 		var eleData=$("<div>"+ htmlData+"</div>");
 		$(eleData).find('img[fid="'+$(obj).val()+'"]').css("display","flex");
 		$(eleData).find('img[fid="'+$(obj).val()+'"]').css("flex-grow",width/100);
@@ -134,7 +223,10 @@ function initCKPlugin()
 		$(eleData).find('img[fid="'+$(obj).val()+'"]').parent().css("display","flex");
 	
 		
-		CKEDITOR.instances.s_context.setData(	$(eleData).html());
+		CKEDITOR.instances.s_context.setData(	$(eleData).html());*/
+		
+		reCacuPicWidth($(obj).val(),0,0);
+		
 	}
 	});
 	$kfile.get("upimgs").initFile(function(){

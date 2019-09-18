@@ -6,8 +6,8 @@
 <div class="modal fade" data-backdrop="" id="myModal_item"
 	tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 	aria-hidden="true" style="display: none;">
-	<div class="modal-dialog">
-		<div class="modal-content ">
+	<div class="modal-dialog rssmodal">
+		<div class="modal-content  ">
 			<div class="modal-header row">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">&times;</button>

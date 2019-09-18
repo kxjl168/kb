@@ -207,6 +207,8 @@ function InitQuery_item() {
         		sname="c.has_error";
         	else if(sname=="createDate")
         		sname="c.create_date";
+        	else if(sname='link')
+        		sname="c.last_rss_page_date";
         	else 
         		sname="c."+sname;
 			}
@@ -264,8 +266,9 @@ function InitQuery_item() {
 			},
 		 {
 				field : 'link',
-				title : 'Rss链接',
+				title : 'Rss链接(站点更新)',
 				align : 'center',
+				 sortable : true,//排序站点更新
 				valign : 'middle',
 				 formatter: function (value, row, index) {
 					 var addtime="";
@@ -328,15 +331,15 @@ function InitQuery_item() {
 			},
 		 {
 				field : 'createDate',
-				title : 'rss最后获取时间',
+				title : 'rss更新时间',
 				align : 'center',
-				valign : 'middle',
+				valign : 'middle',//排序rss创建时间
 				sortable : true,
 		 formatter: function (value, row, index) {
              //return new Date(value).Format("yyyy-MM-dd hh:mm:ss");
 			
 			 return "<div>创建:<span class='small text-success'>"+row.createDate.substr(0,value.length-2)+ "</span></div>"
-			 + "<div>更新:<span class='small text-success'>"+row.lastRssDate.substr(0,value.length-2)+ "</span></div>";
+			 + "<div>rss更新:<span class='small text-success'>"+row.lastRssDate.substr(0,value.length-2)+ "</span></div>";
          }
 				
 			},
@@ -356,12 +359,28 @@ function InitQuery_item() {
 }
 
 function modifyAndDeleteButton_item(value, row, index) {
-	return [ '<div class="">'
-			+ '<button id = "update" type = "button" class = "btn btn-info"><i class="glyphicon glyphicon-pencil">修改</i> </button>&nbsp;'
-			+ '<button id = "readAllRss" type = "button" class = "btn btn-success"><i class="glyphicon glyphicon-refresh">全部已读</i> </button>&nbsp;'
-			+ '<button id = "updateRss" type = "button" class = "btn btn-warning"><i class="glyphicon glyphicon-refresh">立即更新</i> </button>&nbsp;'
-			+ '<button id = "delete" type = "button" class = "btn btn-danger"><i class="glyphicon glyphicon-trash">删除</i> </button>'
+	var html= [ '<div class="">'
+			+ '<button id = "update" type = "button"  data-tippy-content="修改" class = "tippy btn btn-info"><i class="glyphicon glyphicon-pencil"></i> </button>&nbsp;'
+			+ '<button id = "readAllRss" type = "button" data-tippy-content="全部已读" class = "tippy btn btn-success"><i class="fa fa-check"></i> </button>&nbsp;'
+			+ '<button id = "updateRss"  type = "button" data-tippy-content="立即更新" class = "tippy btn btn-warning"><i class="glyphicon glyphicon-refresh"></i> </button>&nbsp;'
+			+ '<button id = "delete" type = "button" data-tippy-content="删除" class = "tippy btn btn-danger"><i class="glyphicon glyphicon-trash"></i> </button>'
 			+ '</div>' ].join("");
+	
+	
+
+	setTimeout(function(){
+		tippy(".tippy",{
+				 arrow: true,
+				  arrowType: 'round', // or 'sharp' (default)
+				  animation: 'perspective',
+		}
+				)
+	},500);
+	
+	return html;
+	
+	
+	
 }
 
 

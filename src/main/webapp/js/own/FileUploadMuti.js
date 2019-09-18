@@ -42,7 +42,7 @@
  * @param window
  * @returns
  * @date 20180611
- * @ahuor zj
+ * @ahuor zj https://256kb.cn
  */
 
 ;(function(window) {
@@ -604,6 +604,14 @@
 					$("#"+me.options.modal_id).find(".filename").hide();
 					$("#"+me.options.modal_id).find(".imgpre").show();
 					$("#"+me.options.modal_id).find(".imgpre").attr("src", "" + e.target.result + "");
+					
+					var image = new Image();
+					   image.src = e.target.result;
+					   image.onload = function() {
+						  // alert("图片的宽度为"+this.width+",长度为"+this.height);
+						   me.filewidth=this.width;
+						   me.fileheight=this.height;
+					   };
 				}
 				else
 				{
@@ -618,6 +626,29 @@
 			// 读取图片
 			reader.readAsDataURL(me.fileObj);
 	}
+	
+	/**
+	 * 获取图片原始宽高
+	 */
+	FileUploadMuti.prototype.getImgNaturalDimensions=function(oImg, callback) {
+		var nWidth, nHeight;
+		if (!oImg.naturalWidth) { // 现代浏览器
+
+			nWidth = oImg.naturalWidth;
+			nHeight = oImg.naturalHeight;
+			callback({w: nWidth, h:nHeight});
+
+		}else{ // IE6/7/8
+			var nImg = new Image();
+
+		        nImg.onload = function() {
+		             var nWidth = nImg.width,
+		                 nHeight = nImg.height;
+		             callback({w: nWidth, h:nHeight});
+		        }
+		        nImg.src = oImg.src;
+		}
+		};
 	
 	
 	FileUploadMuti.prototype.error=function(msg){
@@ -792,7 +823,9 @@
 				
 				 var width =$("body").find("#"+me.options.modal_id +" .picwidth").val();
 				
-				 me.options.uploaddonecallback(obj,align,width);	
+				
+				 
+				 me.options.uploaddonecallback(obj,align,width, me.filewidth, me.fileheight);	
 			}
 		
 	}

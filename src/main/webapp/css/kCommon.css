@@ -1886,6 +1886,10 @@ color:#ecb866!important;
 	  margin:5px;
 	      border-radius: 1%;
     box-shadow: 0 0 3px #939394;
+    
+    -webkit-align-self: center;
+   align-self: center;
+ 
 	 } 
 	 
 	 
@@ -2243,4 +2247,169 @@ canvas{
           }
 
 
+
+@media screen and (min-width:900px) {
+	 
+	.rssmodal{
+	width: 850px;
+	
+    margin: 30px auto;
+}
+
+}
+
+
+
+
+.nav-left {
+	/* overflow: hidden; */
+}
+
+.zzbutn{
+/* 	position: absolute;
+	left: 210px;
+	height: 20px;
+	width:40px;
+background-color:#777;
+	    top: 50%;
+  
+    overflow: hidden;
+    cursor: pointer; */
+    
+        width: 20px;
+    height: 50px;
+    right: 0;
+    position: absolute;
+    top: 150px;
+    margin-top: -25px;
+    overflow: hidden;
+    cursor: pointer;
+    
+}
+
+.zz .zzbutn{
+	left:auto;
+	right:-20px;
+
+}
+
+.icon{
+	color:red;
+	position: absolute;
+    top: 50%;
+    font-size: 16px;
+    line-height: 16px;
+    height: 16px;
+    margin-top: -8px;
+    left: 7px;
+    
+    color: #546478;
+}
+.zz .icon{
+	color:red;
+	position: absolute;
+    top: 50%;
+    font-size: 16px;
+    line-height: 16px;
+    height: 16px;
+    margin-top: -8px;
+    right: 10px;
+    left:0px;
+    color: #546478;
+}
+
+.zz .fa-backward:before {
+    content: "\f04e"!important;
+}
+
+.zzbutn {
+	  transition-duration: .2s
+}
+
+.zz .nav-sidebar li a,.zz .nav-second-level li>a{font-size: 14px;height: 50px; line-height: 50px; color: #CCC; display: block; padding-left: 5px;}
+
+.zz .nav-sidebar li a ,.zz .nav-sidebar li a span{
+	display: none;
+}
+
+.zz .panel-title img{
+	width: 30px;
+    height: 30px;
+    padding: 5px;
+}
+.zz .panel-title h5{
+	
+    padding: 5px;
+}
+
+
+.zzbutn:hover {
+	
+}
+.shape{
+	right: 0;
+    left: auto;
+    height: 50px;
+    border-bottom: 9px solid transparent;
+    border-left: none;
+    border-right: 15px solid #f7f7f7;
+    border-top: 9px solid transparent;
+
+}
+
+.zz .shape{
+	left:0;
+	right:auto;
+    right: auto;
+    height: 50px;
+    border-bottom: 9px solid transparent;
+    border-right: none;
+    border-left: 15px solid #d9dee4;
+    border-top: 9px solid transparent;
+	
+}
+
+.nav-sidebar a:hover, .nav-sidebar a.active{
+	
+}
+
+
+.zzbutn:hover .shape{
+	border-right-width: 20px;
+}
+.zzbutn:hover .icon{
+	left:3px;
+}
+
+.zz .zzbutn:hover .shape{
+	border-left-width: 20px;
+}
+.zz .zzbutn:hover .icon{
+	right:3px;
+}
+
+.zz .panel-left{
+	width: 5px;
+}
+
+.zz .sidebar{
+	/* visibility: hidden; */
+}
+
+.zz .nav-sidebar ul{
+	left:30px;
+}
+
+@media screen and (min-width:900px) {
+	
+
+	
+	
+.zz .main-content{
+	margin-left: 30px;
+	width: 95%;
+}
+
+
+}
 
