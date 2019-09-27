@@ -181,6 +181,7 @@ function initDetailTable() {
                 sortOrder:  params.order,
                 blog_title : $("#q_name").val(),
                 blog_tag: $("#q_tags").val(),
+                
             };
             return param;
         },

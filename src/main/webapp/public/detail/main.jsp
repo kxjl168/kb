@@ -111,9 +111,9 @@
 				
 					
 
-						<div class="col-xs-12 row nopaddding">
-							<div class="">
-								<div class=" pageText "
+						<div class=" col-xs-12 row nopaddding">
+							<div class="pageText">
+								<div class="pct  "
 									>${curBlog .content}</div>
 							</div>
 

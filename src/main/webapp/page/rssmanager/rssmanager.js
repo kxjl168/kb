@@ -258,7 +258,7 @@ function InitQuery_item() {
 				valign : 'middle',
 				 formatter: function (value, row, index) {
 			          if(value>0)
-			        	  return "<a href='"+basePath+"/manager/rsspagelist/manager/?s="+row.id+"&sn="+row.name+"'><span class='text-info'><b>"+value+"</b></span></a>";
+			        	  return "<a href='"+basePath+"/manager/rsspagelist/manager/?s="+row.id+"&sn="+encodeURI(row.name)+"'><span class='text-info'><b>"+value+"</b></span></a>";
 			          else 
 			        	  return value;
 			         }

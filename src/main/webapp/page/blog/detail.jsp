@@ -67,11 +67,11 @@
 						<div class=" nopadding hide">
 							 <div class="control-label padding-top-0 col-sm-1 col-xs-12 ">文章类型：</div>
 							<div class="col-sm-9 col-xs-12 text-right ">
-							<select class="form-control " id="s_type" ng-model="s_type">
+							<select class="form-control col-xs-12" id="s_type" ng-model="s_type">
 								<option  ng-repeat="x in dicts " value="{{x.dict_key}}">{{x.dict_name}}</option>
 								</select>
 							 </div>
-							 <div class="col-xs-12 col-xs-offset-4 row ">
+							 <div class="hide col-xs-12 col-xs-offset-4 row ">
 							
 							</div>
 						</div>
@@ -88,7 +88,7 @@
 											class="form-control col-xs-12" id="mType"
 												placeholder="分类" ></select>
 							 </div>
-							 <div class="col-xs-12 col-xs-offset-4 row ">
+							 <div class="hide col-xs-12 col-xs-offset-4 row ">
 							
 							</div>
 						</div>
