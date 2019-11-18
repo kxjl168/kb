@@ -6,7 +6,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URLEncoder;
 import java.util.Date;
-
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,6 +21,7 @@ import org.apache.log4j.Logger;
 
 import org.json.JSONObject;
 
+import com.kxjl.tool.httpPost.HttpSendPost;
 import com.kxjl.tool.httpPost.SendPostRequest;
 import com.kxjl.tool.utils.JEscape;
 
@@ -54,10 +56,80 @@ public class test {
 		
 		//deltest();
 		
-		testprint();
+		//testprint();
 		
 		
+		//posttest();
 		
+		
+		//replaytest();
+		
+		//update();
+		
+		replaydeltest();
+	}
+	
+	private static void replaydeltest() {
+
+		String url = "http://127.0.0.1:8081/kb/replay/del.do";
+
+		// String url =
+		// "http://10.204.37.192:8080/gserver/version/getVersionInfo.action?type=2";
+
+		
+	
+		String data = "";
+
+		String responsedata = "";
+		try {
+			
+			JSONObject j=new JSONObject();
+			j.put("id","79");
+			j.put("state","1");
+			
+			
+			int num=2;
+			for (int i = 0; i < num; i++) {
+				//responsedata = sendHttpData(,"");
+				
+				String tpurl=url+"?data="+URLEncoder.encode(j.toString());
+				
+				String heads="JSESSIONID=111az628pw1s7l59mxwqajr; SSESSIONID=b3081d08-3e13-40ed-84f5-888184fa58ca; _ga=GA1.1.113603198.1571636541; _gid=GA1.1.559982730.1571636541; uemail=123123@1";
+				
+				HashMap<String,String> maps=new HashMap<String, String>();
+				maps.put("Cookie", heads);
+				
+				responsedata=HttpSendPost.sendHttpJSONDataNoSSL(null, false,"",true, tpurl,"", maps, null);
+			
+				
+				System.out.println(i+"返回:" + responsedata);
+			}
+			
+
+		
+			// System.out.println("解密:" + out);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println(responsedata);
+		// ***********vmInstallApp*****************
+
+	}
+	
+	public static  void posttest()  {
+		String url="https://www.gravatar.com/avatar/ee2f5d239020af787b969557177d3df7?s=100";
+		
+try {
+	String responsedata = sendHttpData(url,"");
+	System.out.println("返回:" + responsedata);
+
+} catch (Exception e) {
+	// TODO: handle exception
+}
+	
 	}
 	
 	
@@ -464,7 +536,7 @@ public static String convert16to32(String toConvert){
 	
 	private static void replaytest() {
 
-		String url = "http://127.0.0.1:8080/kb/replay/addOrUpdate.do";
+		String url = "http://127.0.0.1:8081/kb/replay/addOrUpdate.do";
 
 		// String url =
 		// "http://10.204.37.192:8080/gserver/version/getVersionInfo.action?type=2";
@@ -477,13 +549,24 @@ public static String convert16to32(String toConvert){
 		try {
 			
 			JSONObject j=new JSONObject();
-			j.put("imei","479d6e1f-ed72-4a9b-9cf0-38cd05360b1b");
+			j.put("imei","2c502053-3740-4ed3-b2b0-2d04a5650c6d");
 			j.put("userid","test");
 			j.put("context","contextcontextcontext");
 			
 			int num=2;
 			for (int i = 0; i < num; i++) {
-				responsedata = sendHttpData(url+"?data="+URLEncoder.encode(j.toString()),"");
+				//responsedata = sendHttpData(,"");
+				
+				String tpurl=url+"?data="+URLEncoder.encode(j.toString());
+				
+				String heads="JSESSIONID=1tilb1fvzqyfh1oqzgamw1fhgt; SSESSIONID=b3081d08-3e13-40ed-84f5-888184fa58ca; _ga=GA1.1.113603198.1571636541; _gid=GA1.1.559982730.1571636541";
+				
+				HashMap<String,String> maps=new HashMap<String, String>();
+				maps.put("Cookie", heads);
+				
+				responsedata=HttpSendPost.sendHttpJSONDataNoSSL(null, false,"",true, tpurl,"", maps, null);
+			
+				
 				System.out.println(i+"返回:" + responsedata);
 			}
 			
@@ -573,7 +656,7 @@ public static String convert16to32(String toConvert){
 
 	private static void update() {
 
-		String url = "http://127.0.0.1:8080/kb/blog/addOrUpdate.action";
+		String url = "http://127.0.0.1:8081/kb/blog/addOrUpdate.action";
 
 		// String url =
 		// "http://10.204.37.192:8080/gserver/version/getVersionInfo.action?type=2";
@@ -582,7 +665,16 @@ public static String convert16to32(String toConvert){
 
 		String responsedata = "";
 		try {
-			responsedata = sendHttpData(url, data);
+			
+			
+		String heads="JSESSIONID=1tilb1fvzqyfh1oqzgamw1fhgt; SSESSIONID=b3081d08-3e13-40ed-84f5-888184fa58ca; _ga=GA1.1.113603198.1571636541; _gid=GA1.1.559982730.1571636541";
+		
+		HashMap<String,String> maps=new HashMap<String, String>();
+		maps.put("Cookie", heads);
+		
+		responsedata=HttpSendPost.sendHttpJSONDataNoSSL(null, false,"",true, url,"", maps, null);
+			
+			//responsedata = sendHttpData(url, data);
 
 			System.out.println("返回:" + responsedata);
 			// System.out.println("解密:" + out);

@@ -64,7 +64,15 @@ select r.*,
 				
 		</if>
 		
+		<if test='content != null and content != "" '>
+				and t.content =#{content}
+				
+		</if>
 		
+		<if test='userid != null and userid != "" '>
+				and t.userid =#{userid}
+				
+		</if>
   
   </select>
 

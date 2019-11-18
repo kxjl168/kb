@@ -470,6 +470,9 @@ public class PageFilter implements Filter {
 			if (isattack) {
 				logger.debug("attack: request.getContextPath():" + request.getRequestURI());
 				stasticService.saveStaticInfo(request, "attack", "", request.getRequestURI(), true);
+				
+				response2.setStatus(403);
+				
 				return;
 			}
 

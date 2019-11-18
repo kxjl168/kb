@@ -310,10 +310,36 @@ public class ReplayController extends BaseController {
 			int rst = -1;
 
 			replay.setCreate_date(time);
+			
+			
+			
+			
+			//有重复提交数据,不处理
+			//已发布评论
+			 if(String.valueOf(Kdata.getInstance().getCommonList(imei+"_"+userid+"_"+content)).equals("true"))
+			 {
+				System.out.println(content+"评论重复~");
+				jsonOut.put("ResponseCode", 200);
+				jsonOut.put("ResponseMsg", "重复数据！");
+				JsonUtil.responseOutWithJson(response, jsonOut.toString());
+				
+				
+				Kdata.getInstance().cleanrCommonList(imei+"_"+userid);
+				
+				return ;
+			}
+				
+			
+			
 
 			rst = replayService.addReplay(replay);
 
 			if (rst > 0) {
+				
+				//已发布评论
+				 Kdata.getInstance().SavedCommonList(imei+"_"+userid+"_"+content, "true");
+				
+				
 
 				Kdata.getInstance().cleanrBLogList("");
 
