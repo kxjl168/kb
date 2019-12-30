@@ -113,7 +113,7 @@
 
 						<div class=" col-xs-12 row nopaddding">
 							<div class="pageText">
-								<div class="pct  "
+								<div class="pctnew  "
 									>${curBlog .content}</div>
 							</div>
 

@@ -16,6 +16,8 @@ import com.kxjl.tool.config.ConfigReader;
 //import com.ztgm.base.aopAspect.ManagerActionLog;
 import com.kxjl.tool.utils.PageCondition;
 import com.kxjl.web.generator.pojo.Message;
+import com.kxjl.web.system.action.base.OutApiAuthorization;
+import com.kxjl.web.system.action.base.OutApiAuthorization.UrlType;
 import com.kxjl.web.system.model.DictInfo;
 import com.kxjl.web.system.model.MenuInfo;
 import com.kxjl.web.system.model.SysUserBean;
@@ -72,6 +74,7 @@ public class MoneyController {
 	 * @author zj
 	 * @date 2019年2月17日
 	 */
+	@OutApiAuthorization(uType=UrlType.NeedAdmin)
 	@RequestMapping("/Stastic")
 	public String managerStastic(HttpServletRequest request, Model model,Map<String, Object> maps) {
 		List<MenuInfo> leftmenus = menuService.getLeftMenuTree(request.getSession(), request);
@@ -91,6 +94,7 @@ public class MoneyController {
 	 * @author zj
 	 * @date 2019年2月17日
 	 */
+	@OutApiAuthorization(uType=UrlType.NeedAdmin)
 	@RequestMapping("/yearMoneyList")
 	//@ManagerActionLog(operateDescribe="查询收支管理",operateFuncType=FunLogType.Query,operateModelClassName=MoneyMapper.class)
 	@ResponseBody
@@ -140,6 +144,7 @@ public class MoneyController {
 	}
 	
 
+	@OutApiAuthorization(uType=UrlType.NeedAdmin)
 	@RequestMapping("/moneyList")
 	//@ManagerActionLog(operateDescribe="查询收支管理",operateFuncType=FunLogType.Query,operateModelClassName=MoneyMapper.class)
 	@ResponseBody
@@ -169,6 +174,7 @@ public class MoneyController {
 	 * @author zj
 	 * @date 2019年2月12日
 	 */
+	@OutApiAuthorization(uType=UrlType.NeedAdmin)
 	@RequestMapping("/zhichuStastic")
 	//@ManagerActionLog(operateDescribe="删除收支管理",operateFuncType=FunLogType.Del,operateModelClassName=MoneyMapper.class)
 	@ResponseBody
@@ -190,6 +196,7 @@ public class MoneyController {
 	 * @author zj
 	 * @date 2019年2月12日
 	 */
+	@OutApiAuthorization(uType=UrlType.NeedAdmin)
 	@RequestMapping("/total")
 	//@ManagerActionLog(operateDescribe="删除收支管理",operateFuncType=FunLogType.Del,operateModelClassName=MoneyMapper.class)
 	@ResponseBody
@@ -202,6 +209,7 @@ public class MoneyController {
 		return lst;
 	}
 
+	@OutApiAuthorization(uType=UrlType.NeedAdmin)
 	@RequestMapping("/delete")
 	//@ManagerActionLog(operateDescribe="删除收支管理",operateFuncType=FunLogType.Del,operateModelClassName=MoneyMapper.class)
 	@ResponseBody
@@ -218,6 +226,7 @@ public class MoneyController {
 		return msg;
 	}
 
+	@OutApiAuthorization(uType=UrlType.NeedAdmin)
 	@RequestMapping("/load")
 	@ResponseBody
 	public String load( @RequestParam String id,HttpServletRequest request) {
@@ -232,6 +241,7 @@ public class MoneyController {
 	 * @param money
 	 * @return
 	 */
+	@OutApiAuthorization(uType=UrlType.NeedAdmin)
 	@RequestMapping("/saveOrUpdate")
 	//@ManagerActionLog(operateDescribe="保存修改收支管理",operateFuncType=FunLogType.SaveOrUpdate,operateModelClassName=MoneyMapper.class)
 	@ResponseBody
@@ -270,6 +280,7 @@ public class MoneyController {
 	}
 
 
+	@OutApiAuthorization(uType=UrlType.NeedAdmin)
     @RequestMapping("/selectmoney")
     @ResponseBody
     public List<Money> selectmoney( Money item) {

@@ -184,11 +184,11 @@ public class SysUserController extends BaseController {
 				usr.setUserid(String.valueOf( cusr.getRecordid()));
 				usr.setUtype(UserType.LoginUser);
 				
-//				if(cusr.getAccountid().equals("xsw"))
-//					usr.setUtype(UserType.xiaohuoban);
+				if(cusr.getAccountid().equals("xsw"))
+					usr.setUtype(UserType.xiaohuoban);
 				
 				usr.setName(cusr.getUser_name());
-				map.put("type", UserType.LoginUser.toString());
+				map.put("type", usr.getUtype().toString());
 				session.setAttribute(Constant.SESSION_USER, usr);
 				createToken(request, usr, "");
 				

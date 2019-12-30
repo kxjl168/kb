@@ -125,6 +125,14 @@ $(function() {
 				$('#mform_item').find("#id").val("");
 
 				$("#myModal_item_title").html("添加");
+				
+				
+				 $("#mType").select2().val(null).trigger("change");
+			   		$("#mType").select2("destroy");
+			   		$("#mType").html("");
+			   		initTypeSelect();
+				
+				
 
 				var date = new Date();
 				$('#mDate').val(
@@ -500,6 +508,7 @@ function refreshBChart() {
 		dataType : 'json',
 		data : {
 			mDate : $("#q_month").val(),
+			name : $("#q_name").val(),
 		},
 		success : function(response) {
 			if (response) {
@@ -522,6 +531,7 @@ function showTotal() {
 		dataType : 'json',
 		data : {
 			mDate : $("#q_month").val(),
+			name : $("#q_name").val(),
 		},
 		success : function(response) {
 			if (response) {

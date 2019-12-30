@@ -14,6 +14,8 @@ import com.github.pagehelper.Page;
 //import com.ztgm.base.aopAspect.ManagerActionLog;
 import com.kxjl.tool.utils.PageCondition;
 import com.kxjl.web.generator.pojo.Message;
+import com.kxjl.web.system.action.base.OutApiAuthorization;
+import com.kxjl.web.system.action.base.OutApiAuthorization.UrlType;
 import com.kxjl.web.system.model.MenuInfo;
 import com.kxjl.web.system.service.MenuInfoService;
 import com.kxjl.tool.utils.PageUtil;
@@ -66,6 +68,7 @@ public class RssPageListController {
 
 	
 
+	@OutApiAuthorization(uType=UrlType.NeedAdmin)
 	@RequestMapping("/rsspagelistList")
 	//@ManagerActionLog(operateDescribe="查询Rss文章",operateFuncType=FunLogType.Query,operateModelClassName=RssPageListMapper.class)
 	@ResponseBody
@@ -159,6 +162,7 @@ public class RssPageListController {
 	 * @param rsspagelist
 	 * @return
 	 */
+	@OutApiAuthorization(uType=UrlType.NeedAdmin)
 	@RequestMapping("/saveOrUpdate")
 	//@ManagerActionLog(operateDescribe="保存修改Rss文章",operateFuncType=FunLogType.SaveOrUpdate,operateModelClassName=RssPageListMapper.class)
 	@ResponseBody

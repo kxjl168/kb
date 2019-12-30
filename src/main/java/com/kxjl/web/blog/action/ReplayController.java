@@ -37,6 +37,8 @@ import com.kxjl.tool.utils.IPUtils;
 import com.kxjl.tool.utils.JEscape;
 import com.kxjl.tool.utils.JsonUtil;
 import com.kxjl.web.system.action.base.BaseController;
+import com.kxjl.web.system.action.base.OutApiAuthorization;
+import com.kxjl.web.system.action.base.OutApiAuthorization.UrlType;
 import com.kxjl.web.system.model.RequestInfo;
 import com.kxjl.web.system.model.SysUserBean;
 import com.kxjl.web.system.model.SysUserBean.UserType;
@@ -612,6 +614,7 @@ public class ReplayController extends BaseController {
 	 * @return
 	 * @date 2016-8-22
 	 */
+	@OutApiAuthorization(uType=UrlType.NeedAdmin)
 	@RequestMapping(value = "/del")
 	public @ResponseBody Map delBanner(HttpServletRequest request) {
 		Map res = new HashMap();

@@ -1,5 +1,6 @@
 package com.kxjl.web.system.action.base;
 
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,12 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.client.UserTokenHandler;
 import org.apache.log4j.Logger;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.config.ConfigReader;
+import com.kxjl.web.system.action.base.OutApiAuthorization.UrlType;
 import com.kxjl.web.system.model.SysUserBean;
 import com.kxjl.web.system.model.SysUserBean.UserType;
 
@@ -37,30 +41,30 @@ public class LoginInterceptor implements HandlerInterceptor {
 	}
 
 	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response,
-			Object arg2, ModelAndView arg3) throws Exception {
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object arg2, ModelAndView arg3)
+			throws Exception {
 		Cookie[] cookies = request.getCookies();
-		
+
 		if (cookies != null) {
 			Cookie cookie = cookies[0];
 			if (cookie != null) {
 				// serlvet 2.5 不支持在 Cookie 上直接设置 HttpOnly 属性.
 				String value = cookie.getValue();
-				
+
 				StringBuilder builder = new StringBuilder();
 				builder.append("JSESSIONID=" + value + "; ");
 				builder.append("Secure; ");
 				builder.append("HttpOnly; ");
-				
+
 				Calendar calendar = Calendar.getInstance();
 				calendar.add(Calendar.HOUR, 5);
-				Date date = calendar.getTime();  
-			    Locale locale = Locale.CHINA;
-			    
-			    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss",locale);  
-			    builder.append("Expires=" + sdf.format(date));  
-			    
-                response.setHeader("Set-Cookie", builder.toString());  
+				Date date = calendar.getTime();
+				Locale locale = Locale.CHINA;
+
+				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", locale);
+				builder.append("Expires=" + sdf.format(date));
+
+				response.setHeader("Set-Cookie", builder.toString());
 			}
 		}
 	}
@@ -69,8 +73,36 @@ public class LoginInterceptor implements HandlerInterceptor {
 	 * 请求前拦截
 	 */
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
 		// TODO Auto-generated method stub
+
+		UrlType authLeve = UrlType.EveryOne;
+		if (handler instanceof HandlerMethod) {
+
+			HandlerMethod handlerMethod = (HandlerMethod) handler;
+			Method method = handlerMethod.getMethod();
+
+			OutApiAuthorization tptype = method.getAnnotation(OutApiAuthorization.class);
+			if (tptype != null) {
+				authLeve = tptype.uType();
+			}
+		}
+		String loginPath = request.getContextPath() + "/login.jsp";
+		// logger.info("验证用户是否登录");
+		HttpSession session = request.getSession();
+
+		SysUserBean user = (SysUserBean) session.getAttribute(Constant.SESSION_USER);
+
+		if (authLeve == UrlType.NeedAdmin) {
+			if (user == null || (user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin
+					&& user.getUtype() != UserType.xiaohuoban)) {
+				// 强制检查，无法配置
+				logger.error("no userinfo needAdmin, redirect to login page!");
+				response.sendRedirect(loginPath);
+				return false;
+			}
+		}
 
 		String excludedUrls = ConfigReader.getInstance().getProperty("excludedUrls");
 		String[] urls = excludedUrls.split(",");
@@ -78,7 +110,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			if (urls[i].trim().equals(""))
 				continue;
 			if (request.getRequestURI().endsWith(urls[i])) {
-				//chain.doFilter(request, response);
+				// chain.doFilter(request, response);
 				return true;
 			}
 
@@ -88,7 +120,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 				boolean isMatch = Pattern.matches(pattern, request.getRequestURI());
 				if (isMatch) {
-					//chain.doFilter(request, response);
+					// chain.doFilter(request, response);
 					return true;
 				}
 			}
@@ -111,20 +143,16 @@ public class LoginInterceptor implements HandlerInterceptor {
 			return true;
 		}
 
-		// logger.info("验证用户是否登录");
-		HttpSession session = request.getSession();
-
-		SysUserBean user = (SysUserBean) session.getAttribute(Constant.SESSION_USER);
 		if (user == null || user.getUserid() == null || user.getUserid().isEmpty()) {
 
-			logger.warn(uri+"用户没有登录");
-			String loginPath = request.getContextPath() + "/login.jsp";
+			logger.warn(uri + "用户没有登录");
+
 			logger.debug("no userinfo, redirect to login page!");
 			response.sendRedirect(loginPath);
 			return false;
 		} else {
 
-			if (user.getUtype()==UserType.LoginUser) {
+			if (user.getUtype() == UserType.LoginUser) {
 
 				boolean inaccess = false;
 
@@ -135,8 +163,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 				for (int i = 0; i < user.getMenus().size(); i++) {
 					if (user.getMenus().get(i) != null && user.getMenus().get(i).getMenuUrl() != null
-							//&& !user.getMenus().get(i).getMenuUrl() .equals("")
-							//有漏洞！//TODO 监测用户类型，判断
+					// && !user.getMenus().get(i).getMenuUrl() .equals("")
+					// 有漏洞！//TODO 监测用户类型，判断
 							&& request.getRequestURI().contains(user.getMenus().get(i).getMenuUrl())) {
 						inaccess = true;
 						break;

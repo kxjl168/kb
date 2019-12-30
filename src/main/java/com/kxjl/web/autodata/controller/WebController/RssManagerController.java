@@ -16,6 +16,8 @@ import com.kxjl.tool.utils.IPUtils;
 import com.kxjl.tool.utils.PageCondition;
 import com.kxjl.web.generator.pojo.Message;
 import com.kxjl.web.stastic.model.ActionLog;
+import com.kxjl.web.system.action.base.OutApiAuthorization;
+import com.kxjl.web.system.action.base.OutApiAuthorization.UrlType;
 import com.kxjl.web.system.model.MenuInfo;
 import com.kxjl.web.system.service.MenuInfoService;
 import com.kxjl.tool.utils.PageUtil;
@@ -125,6 +127,7 @@ public class RssManagerController {
 	 * @param rssmanager
 	 * @return
 	 */
+	@OutApiAuthorization(uType=UrlType.NeedAdmin)
 	@RequestMapping("/saveOrUpdate")
 	// @ManagerActionLog(operateDescribe="保存修改Rss订阅",operateFuncType=FunLogType.SaveOrUpdate,operateModelClassName=RssManagerMapper.class)
 	@ResponseBody

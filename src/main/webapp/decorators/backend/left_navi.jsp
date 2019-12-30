@@ -7,9 +7,9 @@
 
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class=" sidebar" role="navigation">
+<div class="  sidebar" role="navigation">
 	<div class="sidebar-nav navbar-collapse nopaddding">
-		<ul class="nav-left " id="side-menu">
+		<ul class="nav-left nav-sidebar " id="side-menu">
 
 
 
@@ -51,6 +51,10 @@
 		</ul>
 	</div>
 </div>
+
+
+	<span class="zzbutn"  data-tippy-content="隐藏菜单" ><i class="icon fa fa-backward"></i><div class="shape"></div></span>
+	
 
 <script>
 	$(function() {
@@ -99,6 +103,64 @@
 					$(e.target).parent().find("span").attr("class",
 							"glyphicon glyphicon-chevron-down pull-right");
 				});
+	
+		
+		
+		   // 顶部菜单固定
+	    $('.zzbutn').click(function () {
+
+
+	    	  var fixednavbar = localStorage.getItem("fixednavbar");
+	    	
+		    
+	    	    if (fixednavbar == 'on') {
+	    	    	$("body").removeClass('zz');
+
+	    			$(".zzbutn").attr('data-tippy-content','收起菜单');
+	    	    	
+	    	    	 if (localStorageSupport) {
+			                localStorage.setItem("fixednavbar", 'off');
+			            }
+	    	    }
+	    	    else{
+	    	    	$("body").addClass('zz');
+	    	    	$(".zzbutn").attr('data-tippy-content','展开菜单');
+	    	    	
+	    	    	 if (localStorageSupport) {
+			                localStorage.setItem("fixednavbar", 'on');
+			            }
+		    	    }
+
+	   
+	    });
+
+	        if (localStorageSupport) {
+	            
+	            var fixednavbar = localStorage.getItem("fixednavbar");
+	          
+	            if (fixednavbar == 'on') {
+	                $('body').addClass("zz");
+	                $(".zzbutn").attr('data-tippy-content','收起菜单');
+	            }
+	            else
+		            {
+	            	$('body').removeClass("zz");
+	            	$(".zzbutn").attr('data-tippy-content','展开菜单');
+	            	}
+	        }
+		
+		
+		
+		
+		
+		
 		
 	})
+	
+	
+		  //判断浏览器是否支持html5本地存储
+			    function localStorageSupport() {
+			        return (('localStorage' in window) && window['localStorage'] !== null)
+			    }
+	
 </script>

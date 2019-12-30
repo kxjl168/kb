@@ -108,11 +108,11 @@
 										
 											<div ng-repeat="x in items.val" class="pgdiv" ng-cloak >
 										
-												<div class="col-sm-2 col-xs-12 " >
+												<div class="col-sm-2 col-xs-12 durl " >
 												
 												<div  id="{{x.url_name}}"></div>
 												
-												<div  class='durl'>
+												<div  class=''>
 															<div class="row">
 															<div class=""><img ng-if="x.icon!=null" style="max-width:30px;"  class="pull-left img-responsive" src="{{x.val2}}{{x.icon}}"></img>
 															

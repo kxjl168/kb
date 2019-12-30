@@ -66,8 +66,63 @@ public class test {
 		
 		//update();
 		
-		replaydeltest();
+		//replaydeltest();
+		
+		moneytest();
 	}
+	
+	private static void moneytest() {
+
+		String url = "http://127.0.0.1:8081/kb/manager/money/moneyList";
+
+		// String url =
+		// "http://10.204.37.192:8080/gserver/version/getVersionInfo.action?type=2";
+
+		
+	
+		String data = "";
+
+		String responsedata = "";
+		try {
+			
+			JSONObject j=new JSONObject();
+			j.put("id","111");
+			j.put("state","1");
+			
+			
+			int num=2;
+			for (int i = 0; i < num; i++) {
+				//responsedata = sendHttpData(,"");
+				
+				String tpurl=url+"?data="+URLEncoder.encode(j.toString());
+				
+				String heads="JSESSIONID=676hkg13l28r6gqubamcsg5s; _ga=GA1.1.1047426687.1574055195; AdminCode=JUqn; _gid=GA1.1.1715164123.1577688926; _gat_gtag_UA_126706596_1=1";
+				
+				//String heads="JSESSIONID=ef3xmfrnj1q1gj4yozh8x4ao; _ga=GA1.1.24081232.1577692939; _gid=GA1.1.1115868964.1577692939; _gat_gtag_UA_126706596_1=1";
+				
+				HashMap<String,String> maps=new HashMap<String, String>();
+				maps.put("Cookie", heads);
+				
+				responsedata=HttpSendPost.sendHttpJSONDataNoSSL(null, false,"",true, tpurl,"", maps, null);
+			
+				
+				System.out.println(i+"返回:" + responsedata);
+			}
+			
+
+		
+			// System.out.println("解密:" + out);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println(responsedata);
+		// ***********vmInstallApp*****************
+
+	}
+	
 	
 	private static void replaydeltest() {
 
@@ -84,7 +139,7 @@ public class test {
 		try {
 			
 			JSONObject j=new JSONObject();
-			j.put("id","79");
+			j.put("id","111");
 			j.put("state","1");
 			
 			
@@ -94,7 +149,7 @@ public class test {
 				
 				String tpurl=url+"?data="+URLEncoder.encode(j.toString());
 				
-				String heads="JSESSIONID=111az628pw1s7l59mxwqajr; SSESSIONID=b3081d08-3e13-40ed-84f5-888184fa58ca; _ga=GA1.1.113603198.1571636541; _gid=GA1.1.559982730.1571636541; uemail=123123@1";
+				String heads="JSESSIONID=676hkg13l28r6gqubamcsg5s; _ga=GA1.1.1047426687.1574055195; AdminCode=JUqn; _gid=GA1.1.1715164123.1577688926; _gat_gtag_UA_126706596_1=1";
 				
 				HashMap<String,String> maps=new HashMap<String, String>();
 				maps.put("Cookie", heads);

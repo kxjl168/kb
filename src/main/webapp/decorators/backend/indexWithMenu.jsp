@@ -67,6 +67,10 @@
 	href="${basePath}/js/plugin/select2/css/select2.bootstrap.css">
 	
 	
+	<script src="${basePath}/js/plugin/tippyjs/popper.min.js"></script>
+	<script src="${basePath}/js/plugin/tippyjs/tippy.js"></script>
+	
+	
 	
 <sitemesh:write property='head' />
 
@@ -76,7 +80,7 @@
 
 
 </head>
-<body id="ngSection" ng-app="myApp" ng-controller="eduCtrl" >
+<body id="ngSection" ng-app="myApp" class="zz" ng-controller="eduCtrl" >
  <script type="text/javascript" src="${basePath}/js/own/kpro.js"></script>
 	
 
@@ -93,14 +97,14 @@
 
 
 	<div 
-				class="col-sm-2 col-menu-left  ">
+				class=" panel-left col-sm-2 col-menu-left  ">
 				<%@include file="left_navi.jsp"%>
 
 			</div>
 
 
 			<div id="pgdiv" name="pgdiv"
-				class="col-sm-10 col-xs-12  ">
+				class=" main-content col-sm-10 col-xs-12  ">
 				<sitemesh:write property='body' />
 
 			</div>

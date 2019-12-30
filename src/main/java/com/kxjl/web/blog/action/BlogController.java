@@ -62,6 +62,8 @@ import com.kxjl.web.stastic.model.ActionLog.StasticTypeOne;
 import com.kxjl.web.stastic.service.StasticService;
 //import com.kxjl.web.system.action.base.BaseController;
 import com.kxjl.web.system.action.base.BaseController;
+import com.kxjl.web.system.action.base.OutApiAuthorization;
+import com.kxjl.web.system.action.base.OutApiAuthorization.UrlType;
 import com.kxjl.web.system.model.DictInfo;
 import com.kxjl.web.system.model.SysUserBean;
 import com.kxjl.web.system.model.SysUserBean.UserType;
@@ -978,6 +980,7 @@ public class BlogController extends BaseController {
 	 * @date 2016-6-22
 	 * @author zj
 	 */
+	@OutApiAuthorization(uType=UrlType.NeedAdmin)
 	@RequestMapping(value = "/addOrUpdate")
 	public void addOrUpdate(HttpServletRequest request,Blog blog, HttpServletResponse response, HttpSession session) {
 		JSONObject jsonOut = new JSONObject();

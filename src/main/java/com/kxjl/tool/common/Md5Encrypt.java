@@ -57,6 +57,6 @@ public class Md5Encrypt {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(MD5("72a4eb9f5b90451393cdc9c361920cf5特配版",false));
+		System.out.println(MD5("123321",false));
 	}
 }

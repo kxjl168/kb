@@ -226,7 +226,7 @@ order by m_date
 	
 		
 		<if test=" name !=null and name !='' ">
-		and c.name like concat ('%', #{name},'%')
+		and c.remark like concat ('%', #{name},'%')
 	</if>
 	
 		
@@ -255,6 +255,13 @@ select m_type,sum(money) money from money c where in_out=2
 <if test=" mDate !=null and mDate !='' ">
 		and 	 c.m_date like  concat ('%', #{mDate},'%')
 	</if>
+	
+		<if test=" name !=null and name !='' ">
+		and c.remark like concat ('%', #{name},'%')
+	</if>
+	
+	
+	
  group by m_type
 ) tp left join dict_info d on tp.m_type=d.id
 </select>
@@ -266,16 +273,31 @@ select sum(money) money,'in' m_type from money c where in_out=1
 	<if test=" mDate !=null and mDate !='' ">
 		and c.m_date like concat ('%', #{mDate},'%')
 	</if>
+	
+		<if test=" name !=null and name !='' ">
+		and c.remark like concat ('%', #{name},'%')
+	</if>
+	
+	
 union
 select sum(money) money, 'out' m_type from money c where in_out=2
 <if test=" mDate !=null and mDate !='' ">
 		and c.m_date like concat ('%', #{mDate},'%')
 	</if>
+		<if test=" name !=null and name !='' ">
+		and c.remark like concat ('%', #{name},'%')
+	</if>
+	
+	
 union
 select sum(money) money,'totol' m_type from money c where 1=1
 <if test=" mDate !=null and mDate !='' ">
 		and c.m_date like concat ('%', #{mDate},'%')
 	</if>
+		<if test=" name !=null and name !='' ">
+		and c.remark like concat ('%', #{name},'%')
+	</if>
+	
 
 
 </select>

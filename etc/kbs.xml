@@ -6,37 +6,92 @@
 		<ConfigName>taobaoip</ConfigName>
 		<ConfigValue>true</ConfigValue>
 		<ConfigDesc>请求淘宝获取ip对应地市		</ConfigDesc>
+	</ConfigItem>u
+<ConfigItem>
+		<ConfigName>debug</ConfigName>
+		<ConfigValue>false</ConfigValue>
+		<ConfigDesc>		</ConfigDesc>
 	</ConfigItem>
-	
+
+
+ <ConfigItem>
+          <ConfigName>crawlerUserAgents</ConfigName>
+                      <ConfigValue>opensiteexplorer,ahrefs,mj12bot,IndeedBot,SemrushBot,YandexBot,google,spider,grapeshot,yisou,Sogou,GrapeshotCrawler,sogou,YisouSpider,bingbot</ConfigValue>  
+          <ConfigDesc>爬虫标识     </ConfigDesc>
+  </ConfigItem>
+          
+          <ConfigItem>                                    
+                  <ConfigName>BlockcrawlerUserAgents</ConfigName>
+                     <!--           <ConfigValue>Googlebot</ConfigValue> -->
+                                  <ConfigValue>SemrushBot,opensiteexplorer,mj12bot</ConfigValue>  
+                    <ConfigDesc>屏蔽的爬虫标识     </ConfigDesc>    
+
+
+         </ConfigItem>
+
+                 <ConfigItem>     
+                       <ConfigName>excludedPrerenderUrls</ConfigName>
+                       <ConfigValue>.*/public/html/(\d+/\d+)/.*.html,.*public/detail/?i=.*,.*google.*html</ConfigValue>
+                        <ConfigDesc>不经过prerender的链接-白名单     </ConfigDesc>
+                 </ConfigItem>   
+                 
+     <ConfigItem>     
+                       <ConfigName>seologUrls</ConfigName>
+                       <ConfigValue>/public,/page,/pown</ConfigValue>
+                        <ConfigDesc>记录需要存储的爬虫访问路径     </ConfigDesc>
+                 </ConfigItem>   
+
+
+     
+                          
+                             <ConfigItem>     
+                                                          <ConfigName>normalUrls</ConfigName>
+                                                          <ConfigValue>.*/favicon.icon,/public,.*/file.*,/search,/xjs,</ConfigValue>
+                                                                                                             <ConfigDesc>非attack名单     </ConfigDesc>
+                                                                                                                                </ConfigItem>    
+
+
+
+ <ConfigItem>     
+                       <ConfigName>reloadMailTp</ConfigName>
+                       <ConfigValue>false</ConfigValue>
+                        <ConfigDesc>mail tp reload     </ConfigDesc>
+                 </ConfigItem>   
+
+
+
+
+
+
      <ConfigItem>
 		<ConfigName>excludedUrls</ConfigName>
-		<ConfigValue>.*/public/.*,.*/blog.*/get.*, UploadCKFile.action,.html,UploadFile.action,login.jsp,exlogin.action,phonereg/,phonereg,.do,done.jsp,getVersionInfo.action</ConfigValue>
+        <ConfigValue>UploadFile.action,.*/rss,.*/feed,.ico,.*/sitemap.xml,.*.zip,.*.xlsx,.*.doc,.*.docx,.*.rar,.*.xls,downFile.action,.*/bloglike/.*,.*.JPG,.*.txt,dosearch.action,.woff2,.woff,.tff,.svg,.eot,.js,.css,.*/pown/url/.*,ie8.jsp,null.jsp,404.jsp,index.jsp,noaccess.jsp,.jpg,.png,.ico,.jpeg,.gif,search/init.action,replay/addOrUpdate.action,.*/public/.*,.*/.*/get.*,.*/sysBaseInfo/get.*,.*/kurl/get.*,UploadCKFile.action,.html,login.jsp,exlogin.action,phonereg/,phonereg,done.jsp,getVersionInfo.action</ConfigValue>
 		<ConfigDesc>不需要鉴权也可访问的url后缀		</ConfigDesc>
 	</ConfigItem> 
             
 	<ConfigItem>
 		<ConfigName>HTTP_PATH</ConfigName>
-		<ConfigValue>http://www.256kb.cn/kb/file/</ConfigValue>
+		<ConfigValue>https://www.256kb.cn/kb/file/</ConfigValue>
 		<ConfigDesc>作为文件服务器时，外网下载目录地址-拼接图片url的地址
 		</ConfigDesc>
 	</ConfigItem>
 	
 		<ConfigItem>
 		<ConfigName>FILE_SAVE_PATH</ConfigName>
-		<ConfigValue>/usr/local/apache-tomcat-8.5.23/WebContent/file</ConfigValue>
+		<ConfigValue>/usr/local/apache-tomcat-8.5.23/webapps/kb/file/</ConfigValue>
 		<ConfigDesc>作为文件服务器时，本地存储路径	</ConfigDesc>
 	</ConfigItem>
 	
 	
 	<ConfigItem>
 		<ConfigName>FILE_SVR_PATH</ConfigName>
-		<ConfigValue>http://www.256kb.cn/kb/</ConfigValue>
+		<ConfigValue>https://www.256kb.cn/kb/</ConfigValue>
 		<ConfigDesc>本地使用的文件服务器地址-上传调用的action地址	</ConfigDesc>
 	</ConfigItem>
 	
 	<ConfigItem>
 		<ConfigName>FILE_SVR_HTTP_PATH</ConfigName>
-		<ConfigValue>http://www.256kb.cn/kb/file/</ConfigValue>
+		<ConfigValue>https://www.256kb.cn/kb/file/</ConfigValue>
 		<ConfigDesc>本地使用的文件服务器地址-拼接图片url链接前缀
 		</ConfigDesc>
 	</ConfigItem>
@@ -44,7 +99,7 @@
 	
 	<ConfigItem>
 		<ConfigName>FILE_SVR_HTTP_OUTER_PATH</ConfigName>
-		<ConfigValue>http://www.256kb.cn/kb/file/</ConfigValue>
+        <ConfigValue>https://www.256kb.cn/kb/file/</ConfigValue>
 		<ConfigDesc>本地使用的文件服务器外网地址-拼接图片url链接前缀		</ConfigDesc>
 	</ConfigItem>
 	
@@ -63,7 +118,9 @@
 		<ConfigValue>18000</ConfigValue>
 		<ConfigDesc>服务端路由器socket监听端口</ConfigDesc>
 	</ConfigItem>
-	
+
+
+
 	<ConfigItem>
 		<ConfigName>ROUTE_TIME_OUT_MIN</ConfigName>
 		<ConfigValue>2</ConfigValue>
@@ -87,22 +144,39 @@
 		<ConfigValue>false</ConfigValue>
 		<ConfigDesc>是否启用检查空闲路由器</ConfigDesc>
 	</ConfigItem>
+			
 	
-				<ConfigItem>
+ <ConfigItem>
+                <ConfigName>searchEngin</ConfigName>
+                <ConfigValue>https://www.google.com.hk</ConfigValue>
+                <ConfigDesc></ConfigDesc>
+            </ConfigItem>
+
+
+ <ConfigItem>
+                <ConfigName>preurl</ConfigName>
+                <ConfigValue>http://127.0.0.1:13333/</ConfigValue>
+                <ConfigDesc></ConfigDesc>
+        </ConfigItem>
+		
+	<ConfigItem>
 		<ConfigName>MAILHOSTSERVER</ConfigName>
-		<ConfigValue>smtp.163.com</ConfigValue>
+        <!-- 	<ConfigValue>smtp.163.com</ConfigValue> -->
+         <ConfigValue>smtp.qq.com</ConfigValue> 
 		<ConfigDesc>SMTP发送服务器名称</ConfigDesc>
 	</ConfigItem>
 	
 	<ConfigItem>
 		<ConfigName>MAILSENDER</ConfigName>
-		<ConfigValue>13815429446@163.com</ConfigValue>
+        <!--	<ConfigValue>13815429446@163.com</ConfigValue> -->
+        <ConfigValue>kxjl168@foxmail.com</ConfigValue> 
 		<ConfigDesc>发件人的邮箱</ConfigDesc>
 	</ConfigItem>
 	
 	<ConfigItem>
 		<ConfigName>MAILSENDERPASSWORD</ConfigName>
-		<ConfigValue>123456a</ConfigValue>
+ <!--		<ConfigValue>123456a</ConfigValue> -->
+  
 		<ConfigDesc>发件人的邮箱密码-授权码</ConfigDesc>
 	</ConfigItem>
 	
@@ -111,20 +185,52 @@
 		<ConfigValue>kxjl168@foxmail.com</ConfigValue>
 		<ConfigDesc>admin的邮箱</ConfigDesc>
 	</ConfigItem>
-		<ConfigItem>
+	
+	<ConfigItem>
 		<ConfigName>EnableMail</ConfigName>
 		<ConfigValue>true</ConfigValue>
 		<ConfigDesc>启用回复内容邮箱发送消息</ConfigDesc>
 	</ConfigItem>
-			
-	
 	
 	
 		<ConfigItem>
-		<ConfigName>domain</ConfigName>
-		<ConfigValue>http://www.256kb.cn/</ConfigValue>
-		<ConfigDesc>域名</ConfigDesc>
+		<ConfigName>SSL_SMTP</ConfigName>
+		<ConfigValue>true</ConfigValue>
+		<ConfigDesc>SSL</ConfigDesc>
 	</ConfigItem>
 	
+
+		<ConfigItem>
+		<ConfigName>SSL_SMTP_PORT</ConfigName>
+		<ConfigValue>465</ConfigValue>
+		<ConfigDesc>SSL端口</ConfigDesc>
+	</ConfigItem>
+	
+
+
+    <ConfigItem>
+        <ConfigName>LOCAL_HTML_PATH</ConfigName>
+        <ConfigValue>/usr/local/apache-tomcat-8.5.23/webapps/kb/public/html/</ConfigValue>
+        <ConfigDesc>html静态目录</ConfigDesc>
+    </ConfigItem>
+                    
+
+
+    <ConfigItem>
+        <ConfigName>domain</ConfigName>
+        <ConfigValue>https://www.256kb.cn</ConfigValue>
+        <ConfigDesc>域名前缀</ConfigDesc>
+    </ConfigItem>
+        
+   <ConfigItem>
+        <ConfigName>rssfreshAll</ConfigName>
+        <ConfigValue>true</ConfigValue>
+        <ConfigDesc>自动刷新rss</ConfigDesc>
+    </ConfigItem>
+  
+
+
+
+
 	
 </Config>

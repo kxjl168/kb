@@ -332,6 +332,16 @@ public class PageFilter implements Filter {
 		return isDone;
 	}
 
+	/**
+	 * filter1 -> hanlderInterceptor2
+	 * @param orequest
+	 * @param response
+	 * @param chain
+	 * @throws IOException
+	 * @throws ServletException
+	 * @author zj
+	 * @date 2019年12月30日
+	 */
 	public void doFilter(ServletRequest orequest, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 

@@ -21,7 +21,7 @@ $(function() {
     	 $(forele).addClass("active");
     });
     
-    $('.pct').autoMenu();
+    $('.pctnew').autoMenu();
     
 
     $("#title").html($(".ptitle").html());

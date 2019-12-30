@@ -66,6 +66,19 @@
 
 
 								</div>
+								
+								<div class=" col-md-6  col-xs-12   ">
+									<div
+										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">备注过滤:</div>
+									<div class="col-md-6 col-xs-8 text-right ">
+											<input id="q_name" name="q_name"  placeholder=""
+												type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty">
+									</div>
+
+
+
+
+								</div>
 
 
 								<div class=" col-md-6  col-xs-12   ">
