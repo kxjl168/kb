@@ -25,7 +25,7 @@ public class JsonUtil {
 		// String rst="{\"msg\":\""+responseObject+"\"}";
 
 		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=utf-8");
+		response.setContentType("text/json; charset=utf-8");
 		PrintWriter out = null;
 		try {
 			out = response.getWriter();
@@ -58,7 +58,7 @@ public class JsonUtil {
 		String rst = "{";
 
 		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=utf-8");
+		response.setContentType("text/json; charset=utf-8");
 		PrintWriter out = null;
 
 		Iterator<String> key = Map.keySet().iterator();

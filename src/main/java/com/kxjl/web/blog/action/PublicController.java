@@ -70,6 +70,7 @@ import com.drew.lang.StringUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.google.common.base.Predicate;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -130,13 +131,13 @@ public class PublicController extends BaseController {
 
 	@Autowired
 	LikeInfoMapper likemaper;
-	
+
 	@Autowired
 	EmojiService emojiService;
 
-	
 	/**
 	 * 获取表情列表
+	 * 
 	 * @param map
 	 * @return
 	 * @author zj
@@ -146,11 +147,10 @@ public class PublicController extends BaseController {
 	@ResponseBody
 	public String emoji(Map<String, Object> map) {
 
-		String rst="";
-		Emoji query=new Emoji();
-		List<Emoji> emojis= emojiService.selectEmojiList(query);
-		
-		
+		String rst = "";
+		Emoji query = new Emoji();
+		List<Emoji> emojis = emojiService.selectEmojiList(query);
+
 		Page page = new Page();
 		page.setTotal(emojis.size());
 
@@ -161,15 +161,12 @@ public class PublicController extends BaseController {
 		}
 		return rst;
 	}
-	
-	
-	
+
 	@RequestMapping("/public/wuliu")
-	public String wuliu(HttpServletRequest request,Map<String, Object> map) {
+	public String wuliu(HttpServletRequest request, Map<String, Object> map) {
 
 		saveStaticInfo(request, StasticTypeOne.Wuliu.toString(), "");
-		
-		
+
 		return "/public/wuliu/main";
 	}
 
@@ -250,7 +247,6 @@ public class PublicController extends BaseController {
 		view.setViewName("/public/about/main");
 
 		saveStaticInfo(request, StasticTypeOne.AboutPage.toString(), "");
-	
 
 		Blog query = new Blog();
 		query.setImei("about");
@@ -315,9 +311,8 @@ public class PublicController extends BaseController {
 		ModelAndView view = getSysData();
 		view.setViewName("/public/share/main");
 
-		
 		saveStaticInfo(request, StasticTypeOne.Share.toString(), "");
-		
+
 		return view;
 	}
 
@@ -326,8 +321,8 @@ public class PublicController extends BaseController {
 		ModelAndView view = getSysData();
 		view.setViewName("/public/index/");
 
-		//统计在search里面
-		
+		// 统计在search里面
+
 		return "/public/search/main";
 	}
 
@@ -423,9 +418,9 @@ public class PublicController extends BaseController {
 
 	}
 
-	
 	/**
 	 * 常用链接-公开
+	 * 
 	 * @param maps
 	 * @param session
 	 * @param request
@@ -468,9 +463,8 @@ public class PublicController extends BaseController {
 		ModelAndView view = getSysData();
 		view.setViewName("/public/index/");
 
-		
 		saveStaticInfo(request, StasticTypeOne.Cat.toString(), "");
-		
+
 		return "/public/cat/main";
 	}
 
@@ -487,12 +481,11 @@ public class PublicController extends BaseController {
 		proxyRequest.addHeader("X-Forwarded-For", stasticService.getIpAddr(request));
 		// 补充原始地址
 
-		
 		String userAgent = request.getHeader("Pre-User-Agent");// prerender带过来的原始爬虫agent
 		if (userAgent == null || userAgent.equals(""))
 			userAgent = request.getHeader("User-Agent");
-		
-		proxyRequest.setHeader("Pre-User-Agent",userAgent);
+
+		proxyRequest.setHeader("Pre-User-Agent", userAgent);
 	}
 
 	private static final HeaderGroup hopByHopHeaders;
@@ -624,7 +617,7 @@ public class PublicController extends BaseController {
 
 		logger.debug("*************from:" + request.getHeader("Referer") + " " + htmlPath);
 
-		//本地测试使用，每次都生成html
+		// 本地测试使用，每次都生成html
 		String staticHtmlTest = ConfigReader.getInstance().getProperty("staticHtmlTest", "false");
 		if (staticHtmlTest.equals("true")) {
 			String domain = ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn");
@@ -777,6 +770,26 @@ public class PublicController extends BaseController {
 		});
 	}
 
+	/**
+	 * 获取爬虫标识
+	 * @param userAgent
+	 * @return
+	 * @author zj
+	 * @date 2020年1月16日
+	 */
+	private String getSearchSpiderFlag(final String userAgent) {
+		FluentIterable<String> s = from(getCrawlerUserAgents()).filter(new Predicate<String>() {
+			@Override
+			public boolean apply(String item) {
+				return userAgent.toLowerCase().contains(item.toLowerCase());
+			}
+		});
+		String flag = "";
+		if (s.size() > 0)
+			flag = s.get(0);
+		return flag;
+	}
+
 	private void saveVisitInfo(Blog blog, HttpServletRequest request) {
 		// 计数
 		SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
@@ -800,7 +813,11 @@ public class PublicController extends BaseController {
 		// 无用户信息，爬虫
 		boolean isspider = isInSearchUserAgent(userAgent);
 
-		stasticService.saveStaticInfo(request, StasticTypeOne.DetailPage.toString(), blog.getBlog_type_name(),
+		String spiderflag="";
+		if(isspider)
+			spiderflag=getSearchSpiderFlag(userAgent);
+			
+		stasticService.saveStaticInfo(request, StasticTypeOne.DetailPage.toString(), spiderflag,
 				blog.getImei(), isspider);
 
 		Blog query = new Blog();
@@ -1048,9 +1065,8 @@ public class PublicController extends BaseController {
 			String dateb = fm.format(DateUtil.getDate(blog.getUpdate_date(), "")) + "";
 
 			String desc = getDesc(blog);
-			
-			String url=domain
-					+ "/public/html/" + blog.getShowdate() + "/" + blog.getImei() + ".html";
+
+			String url = domain + "/public/html/" + blog.getShowdate() + "/" + blog.getImei() + ".html";
 			// /public/html/${curBlog.showdate}/${curBlog.imei}.html
 			sb.append("<item>\n" + "      <title>" + blog.getTitle() + "</title>\n" + "      <link>" + url + "</link>\n"
 					+ "      <description><![CDATA[" + desc + "]]></description>\n" + "      <pubDate>" + dateb
@@ -1068,27 +1084,15 @@ public class PublicController extends BaseController {
 			String ct = JEscape.unescape(blog.getContent());
 			// emoji替换
 			ct = ct.replace("[[", "&#x");
-			
-			//按钮
-			ct+="<div style=\"margin-top:10px;text-align:center;overflow:hidden\">\n" + 
-					"<a style=\"color:rgba(0,0,0,.35);\n" + 
-					"text-decoration:none;\n" + 
-					"display:inline-block;\n" + 
-					"min-height:30px;\n" + 
-					"line-height:30px;\n" + 
-					"background:#fff;\n" + 
-					"border:1px solid rgba(0,0,0,.35);\n" + 
-					"text-align:left;\n" + 
-					"font-style:normal;\n" + 
-					"font-weight:400;\n" + 
-					"vertical-align:bottom;\n" + 
-					"white-space:nowrap; \n" + 
-					"border-radius:2px;\n" + 
-					"padding-left:15px;\n" + 
-					"padding-right:15px;\n" + 
-					"padding-top:10px;\n" + 
-					"padding-bottom:10px;\" href=\""+url+"\">阅读全文</a>\n" + 
-					"</div>";
+
+			// 按钮
+			ct += "<div style=\"margin-top:10px;text-align:center;overflow:hidden\">\n"
+					+ "<a style=\"color:rgba(0,0,0,.35);\n" + "text-decoration:none;\n" + "display:inline-block;\n"
+					+ "min-height:30px;\n" + "line-height:30px;\n" + "background:#fff;\n"
+					+ "border:1px solid rgba(0,0,0,.35);\n" + "text-align:left;\n" + "font-style:normal;\n"
+					+ "font-weight:400;\n" + "vertical-align:bottom;\n" + "white-space:nowrap; \n"
+					+ "border-radius:2px;\n" + "padding-left:15px;\n" + "padding-right:15px;\n" + "padding-top:10px;\n"
+					+ "padding-bottom:10px;\" href=\"" + url + "\">阅读全文</a>\n" + "</div>";
 
 			sb.append(" <content:encoded xml:lang=\"zh-CN\"><![CDATA[" + ct + "]]></content:encoded>");
 

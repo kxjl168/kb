@@ -126,7 +126,7 @@ li {
 }
 
 .container>div {
-    width: 100%;
+    /* width: 100%; */
 }
 
 .container .hm_header {

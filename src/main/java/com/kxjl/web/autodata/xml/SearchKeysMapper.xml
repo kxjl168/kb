@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxjl.web.autodata.dao.SearchKeysMapper">
+  <resultMap id="BaseResultMap" type="com.kxjl.web.autodata.pojo.SearchKeys">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="gkey" jdbcType="VARCHAR" property="gkey" />
+    <result column="use_time" jdbcType="VARCHAR" property="useTime" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    
+    <result column="create_date" jdbcType="VARCHAR" property="createDate" />
+    <result column="update_date" jdbcType="VARCHAR" property="updateDate" />
+    <result column="is_send_mail" jdbcType="VARCHAR" property="is_send_mail" />
+      <result column="context" jdbcType="VARCHAR" property="context" />
+    <result column="context2" jdbcType="VARCHAR" property="context2" />
+    
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.kxjl.web.autodata.pojo.SearchKeys">
+  
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, gkey, use_time, email, create_date, update_date,is_send_mail,  context,context2
+  </sql>
+  <sql id="Blob_Column_List">
+  
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from search_keys
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from search_keys
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kxjl.web.autodata.pojo.SearchKeys">
+    insert into search_keys (id, gkey, use_time, 
+      email, create_date, update_date, 
+      context)
+    values (#{id,jdbcType=VARCHAR}, #{gkey,jdbcType=VARCHAR}, #{useTime,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, #{updateDate,jdbcType=VARCHAR}, 
+      #{context,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kxjl.web.autodata.pojo.SearchKeys">
+    insert into search_keys
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="gkey != null">
+        gkey,
+      </if>
+      <if test="useTime != null">
+        use_time,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+   
+      <if test="context != null">
+        context,
+      </if>
+       <if test="context2 != null">
+        context2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="gkey != null">
+        #{gkey,jdbcType=VARCHAR},
+      </if>
+      <if test="useTime != null">
+        #{useTime,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+       <if test="nickname != null">
+         #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null">
+        #{context,jdbcType=LONGVARCHAR},
+      </if>
+       <if test="context2 != null">
+        #{context2,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kxjl.web.autodata.pojo.SearchKeys">
+    update search_keys
+    <set>
+      <if test="gkey != null">
+        gkey = #{gkey,jdbcType=VARCHAR},
+      </if>
+      <if test="useTime != null">
+        use_time = #{useTime,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null">
+        context = #{context,jdbcType=LONGVARCHAR},
+      </if>
+        <if test="context2 != null">
+        context = #{context2,jdbcType=LONGVARCHAR},
+      </if>
+        <if test="is_send_mail != null">
+        is_send_mail = #{is_send_mail,jdbcType=VARCHAR},
+      </if>
+      
+      
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.kxjl.web.autodata.pojo.SearchKeys">
+    update search_keys
+    set gkey = #{gkey,jdbcType=VARCHAR},
+      use_time = #{useTime,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR},
+      context = #{context,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kxjl.web.autodata.pojo.SearchKeys">
+    update search_keys
+    set gkey = #{gkey,jdbcType=VARCHAR},
+      use_time = #{useTime,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+
+
+<select id="selectList"
+	resultMap="BaseResultMap"
+	parameterType="com.kxjl.web.autodata.pojo.SearchKeys">
+	select
+	<include refid="Base_Column_List" />
+	from search_keys c
+
+	where 1=1
+	<if test=" id !=null and id !='' ">
+		and c.id = #{id}
+	</if>
+	
+		
+		<if test=" gkey !=null and gkey !='' ">
+		and c.gkey like concat ('%', #{gkey},'%')
+	</if>
+		
+			
+		
+		<if test=" useTime !=null and useTime !='' ">
+		and c.use_time like concat ('%', #{useTime},'%')
+	</if>
+		
+			
+		
+		<if test=" email !=null and email !='' ">
+		and c.email like concat ('%', #{email},'%')
+	</if>
+		
+			
+		
+		<if test=" context !=null and context !='' ">
+		and c.context like concat ('%', #{context},'%')
+	</if>
+		
+			
+
+
+</select>
+
+
+
+<delete id="delete"
+	parameterType="com.kxjl.web.autodata.pojo.SearchKeys">
+	delete from search_keys
+
+	where id = #{id,jdbcType=VARCHAR}
+
+</delete>
+
+</mapper>

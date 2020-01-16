@@ -42,7 +42,7 @@ public class test {
 		
 		//replaytest();
 		
-		//testGzip();
+		testGzip();
 		
 		//testhtml();
 
@@ -68,7 +68,7 @@ public class test {
 		
 		//replaydeltest();
 		
-		moneytest();
+		//moneytest();
 	}
 	
 	private static void moneytest() {
@@ -446,7 +446,7 @@ public static String convert16to32(String toConvert){
 	
 	private static void update2() {
 
-		String url = "https://www.256kb.cn/googleac882b1d52647127.html";
+		String url = "http://www.256kb.cn/googleac882b1d52647127.html";
 
 		// String url =
 		// "http://10.204.37.192:8080/gserver/version/getVersionInfo.action?type=2";
@@ -530,7 +530,7 @@ public static String convert16to32(String toConvert){
 	
 	public static void testGzip() {  
         HttpClient httpClient = new HttpClient();  
-        GetMethod getMethod = new GetMethod("http://www.256kb.cn/js/plugin/jquery/jquery.v1.11.3.js");  
+        GetMethod getMethod = new GetMethod("https://www.256kb.cn/js/plugin/jquery/jquery.v1.11.3.js");  
         try {  
                 getMethod.addRequestHeader("accept-encoding", "gzip,deflate");  
                 getMethod.addRequestHeader("user-agent","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; Alexa Toolbar; Maxthon 2.0)");  
