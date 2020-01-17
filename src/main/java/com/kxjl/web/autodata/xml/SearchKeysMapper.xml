@@ -128,7 +128,7 @@
         context = #{context,jdbcType=LONGVARCHAR},
       </if>
         <if test="context2 != null">
-        context = #{context2,jdbcType=LONGVARCHAR},
+        context2 = #{context2,jdbcType=LONGVARCHAR},
       </if>
         <if test="is_send_mail != null">
         is_send_mail = #{is_send_mail,jdbcType=VARCHAR},
