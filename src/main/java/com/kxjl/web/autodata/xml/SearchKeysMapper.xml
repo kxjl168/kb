@@ -19,7 +19,7 @@
   
   </resultMap>
   <sql id="Base_Column_List">
-    id, gkey, use_time, email, create_date, update_date,is_send_mail,  context,context2
+    id, gkey, use_time, email, create_date, update_date,is_send_mail,  context,context2,nickname
   </sql>
   <sql id="Blob_Column_List">
   
