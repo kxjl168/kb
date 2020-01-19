@@ -31,7 +31,7 @@ import com.google.common.collect.Lists;
 import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.tool.utils.DateUtil;
 import com.kxjl.tool.utils.IPUtils;
-
+import com.kxjl.tool.utils.SpiderUtil;
 import com.kxjl.web.system.dao.SystemParamsDao;
 import com.kxjl.web.system.model.DictInfo;
 
@@ -173,11 +173,16 @@ public class StasticServiceImpl implements StasticService {
 		if (userAgent == null || userAgent.equals(""))
 			userAgent = request.getHeader("User-Agent");
 
+
 		// 无用户信息，爬虫
-		boolean isspider = isInSearchUserAgent(userAgent);
-		
-		//System.out.println("**********************");
-		//System.out.println("userAgent:"+userAgent);
+		boolean isspider =SpiderUtil. isInSearchUserAgent(userAgent);
+
+		String spiderflag="";
+		if(isspider)
+		{
+			spiderflag=SpiderUtil.getSearchSpiderFlag(userAgent);
+			type2="spider_"+spiderflag;
+		}
 
 		saveStaticInfo(request, type1, type2, arctileId, isspider);
 	}

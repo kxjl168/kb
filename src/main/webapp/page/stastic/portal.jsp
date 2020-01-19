@@ -177,6 +177,21 @@
 			style="height: 400px; width: 100%"></div>
 				</div>
 				
+				
+						<div  class="col-sm-6 row col-xs-12" >
+				<div id="pchart6" data-options="region:'east'"
+			style="height: 400px; width: 100%"></div>
+				</div>
+				
+						<div  class="col-sm-6 row col-xs-12" >
+				<div id="pchart7" data-options="region:'east'"
+			style="height: 400px; width: 100%"></div>
+				</div>
+				
+				
+				
+				
+				
 				<div  class="col-sm-6 row col-xs-12" >
 				<div id="pchart3" data-options="region:'east'"
 			style="height: 400px; width: 100%"></div>
@@ -191,6 +206,12 @@
 				<div id="pchart5" data-options="region:'east'"
 			style="height: 400px; width: 100%"></div>
 				</div>
+				
+						<div  class="col-sm-6 row col-xs-12" >
+				<div id="pchart8" data-options="region:'east'"
+			style="height: 400px; width: 100%"></div>
+				</div>
+				
 			
 					
 					

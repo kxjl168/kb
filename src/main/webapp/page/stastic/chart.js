@@ -179,11 +179,72 @@ function setchartdata(jdata, title, ele) {
 			if (ele == "pchart1" || ele == "pchart2") {
 				option.series[2].data.push(i.upv);
 				option.series[3].data.push(i.uuv);
-
 			}
 
 		});
 	}
+	
+	
+	if(ele=="pchart8") //订阅
+		{
+		option.series.splice(1,1);//删除第二个
+		option.series[0].type="line";
+		}
+	
+	if(ele=="pchart6"||ele=="pchart7") //爬虫统计
+		{
+		
+		var xdatas=[];
+		var serialnames=[];
+		var lgselected={};
+		var lseries=[];
+		var attrs=[];
+		
+		$.each(jdata, function(index, data) {
+			
+			if(!contains(xdatas,data.typeName))
+				xdatas.push(data.typeName);
+			
+			var sname=data.type_second.substr(7);
+			if(!contains(serialnames,sname))
+				serialnames.push(sname);
+		
+		});
+		
+		
+		
+		$.each(serialnames,function(index,aitem){
+		var spidername=	aitem;
+			
+						
+			var seriesdata={};
+			
+			
+			seriesdata.data=[];
+			seriesdata.smooth=true;
+			seriesdata.name=spidername; //spider_
+			seriesdata.type="line";//  typeof(aitem.stype)=="undefined"?"line":aitem.stype;
+
+			$.each(xdatas, function(index, time) {
+				seriesdata.data.push(getSpiderData(jdata,time,"spider_"+aitem));
+			})
+			
+			lseries.push(seriesdata);
+
+		});
+		
+		option.xAxis.data=xdatas;
+		option.series=lseries;
+		option.legend.data = serialnames;
+		
+		
+		}
+	
+	
+	
+	
+	
+	
 
 	var id = ele || 'pchart';
 
@@ -208,4 +269,25 @@ function setchartdata(jdata, title, ele) {
 
 // 使用刚指定的配置项和数据显示图表。
 myChart.setOption(option);
+}
+
+
+function contains(arr, obj) {
+    var i = arr.length;
+    while (i--) {
+        if (arr[i] === obj) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function getSpiderData(data,time,name)
+{
+	var value="";
+  	$.each(data,function(index,item){
+  		if(item.typeName==time &&item.type_second==name)
+  			value=item.pv;
+  	});
+  	return value;
 }

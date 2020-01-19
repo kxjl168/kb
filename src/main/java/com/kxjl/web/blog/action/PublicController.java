@@ -83,6 +83,7 @@ import com.kxjl.tool.utils.DateUtil;
 import com.kxjl.tool.utils.JEscape;
 import com.kxjl.tool.utils.JsonUtil;
 import com.kxjl.tool.utils.PageUtil;
+import com.kxjl.tool.utils.SpiderUtil;
 import com.kxjl.tool.utils.wuliu.WuliuHelper;
 import com.kxjl.web.autodata.dao.LikeInfoMapper;
 import com.kxjl.web.autodata.pojo.CcList;
@@ -256,7 +257,7 @@ public class PublicController extends BaseController {
 			userAgent = request.getHeader("User-Agent");
 
 		// 无用户信息，爬虫
-		boolean isspider = isInSearchUserAgent(userAgent);
+		boolean isspider = SpiderUtil. isInSearchUserAgent(userAgent);
 		SysUserBean user = (SysUserBean) request.getSession().getAttribute(Constant.SESSION_USER);
 
 		if (!isspider) {
@@ -739,7 +740,7 @@ public class PublicController extends BaseController {
 		return view;
 	}
 
-	public List<String> getCrawlerUserAgents() {
+/*	public List<String> getCrawlerUserAgents() {
 		List<String> crawlerUserAgents = Lists.newArrayList("baiduspider", "facebookexternalhit", "twitterbot",
 				"rogerbot", "linkedinbot", "embedly", "quora link preview", "showyoubo", "outbrain", "pinterest",
 				"developers.google.com/+/web/snippet", "slackbot", "vkShare", "W3C_Validator", "redditbot", "Applebot");
@@ -753,14 +754,14 @@ public class PublicController extends BaseController {
 		return crawlerUserAgents;
 	}
 
-	/**
+	*//**
 	 * 是否为爬虫
 	 * 
 	 * @param userAgent
 	 * @return
 	 * @author zj
 	 * @date 2018年10月18日
-	 */
+	 *//*
 	private boolean isInSearchUserAgent(final String userAgent) {
 		return from(getCrawlerUserAgents()).anyMatch(new Predicate<String>() {
 			@Override
@@ -770,13 +771,13 @@ public class PublicController extends BaseController {
 		});
 	}
 
-	/**
+	*//**
 	 * 获取爬虫标识
 	 * @param userAgent
 	 * @return
 	 * @author zj
 	 * @date 2020年1月16日
-	 */
+	 *//*
 	private String getSearchSpiderFlag(final String userAgent) {
 		FluentIterable<String> s = from(getCrawlerUserAgents()).filter(new Predicate<String>() {
 			@Override
@@ -788,7 +789,7 @@ public class PublicController extends BaseController {
 		if (s.size() > 0)
 			flag = s.get(0);
 		return flag;
-	}
+	}*/
 
 	private void saveVisitInfo(Blog blog, HttpServletRequest request) {
 		// 计数
@@ -811,13 +812,13 @@ public class PublicController extends BaseController {
 			userAgent = request.getHeader("User-Agent");
 
 		// 无用户信息，爬虫
-		boolean isspider = isInSearchUserAgent(userAgent);
+		boolean isspider =SpiderUtil. isInSearchUserAgent(userAgent);
 
 		String spiderflag="";
 		if(isspider)
-			spiderflag=getSearchSpiderFlag(userAgent);
+			spiderflag=SpiderUtil.getSearchSpiderFlag(userAgent);
 			
-		stasticService.saveStaticInfo(request, StasticTypeOne.DetailPage.toString(), spiderflag,
+		stasticService.saveStaticInfo(request, StasticTypeOne.DetailPage.toString(), "spider_"+spiderflag,
 				blog.getImei(), isspider);
 
 		Blog query = new Blog();
@@ -1006,7 +1007,7 @@ public class PublicController extends BaseController {
 			userAgent = request.getHeader("User-Agent");
 
 		// 无用户信息，爬虫
-		boolean isspider = isInSearchUserAgent(userAgent);
+		boolean isspider = SpiderUtil.isInSearchUserAgent(userAgent);
 
 		stasticService.saveStaticInfo(request, StasticTypeOne.RssPage.toString(), "rss", "", isspider);
 

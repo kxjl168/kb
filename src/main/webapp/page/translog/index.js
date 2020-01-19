@@ -166,14 +166,24 @@ function init() {
 					$scope.pageDataAft=[];
 					$scope.pageNum=Math.ceil( $scope.total/$scope.rows);// + ($scope.total%$scope.rows)>0?1:0;
 					
-					for(var i =$scope.page-3;i<$scope.page;i++){
-						if(i>0)
-						   $scope.pageDataPre.push(i);
+					if($scope.page>1)
+					 $scope.pageDataPre.push(1);
+					 if($scope.page>2)
+						 {
+					for(var i =1;i<2;i++){
+						   $scope.pageDataPre.push($scope.page-i);
 					}
-					for(var i =$scope.page+1;i<$scope.page+3;i++){
+						 }
+					 
+					 if($scope.page<$scope.pageNum-1)
+					 {
+					for(var i =$scope.page+1;i<$scope.page+2;i++){
 						if(i<=$scope.pageNum)
 						   $scope.pageDataAft.push(i);
 					}
+					 }
+					 if($scope.page<$scope.pageNum-2)
+					  $scope.pageDataAft.push($scope.pageNum);
 					/*
 					for(var i =1;i <= $scope.pageNum;i++){
 						if(i<$scope.page)

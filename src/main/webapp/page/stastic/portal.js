@@ -331,7 +331,7 @@ function init() {
 	
 	initmenu($("#menuul"),"page/portal/");
 	
-	initDetailTable();
+	//initDetailTable();
 	
 	
 	
@@ -471,6 +471,11 @@ $("#sdata").html(data);
 							    $scope.getList("attack_","异常",'pchart4');
 							    $scope.getList("about_","关于",'pchart5');
 							    
+							    
+							    $scope.getList("homepage_spider","爬虫首页",'pchart6');
+							    $scope.getList("detailpag_spider","爬虫详情",'pchart7');
+							    $scope.getList("rss_rss","订阅",'pchart8');
+							    
 						   }, 30);
 						
 
@@ -495,7 +500,7 @@ $("#sdata").html(data);
 			);
 
 		}
-		$scope.getTypeList();
+		//$scope.getTypeList();
 		//$scope.getcompayList();
 		
 	$scope.showaction=function(id,date){
@@ -623,6 +628,10 @@ $("#sdata").html(data);
 		    $scope.getList("G搜索_","搜索",'pchart3');
 		    $scope.getList("attack_","异常",'pchart4');
 		    $scope.getList("about_","关于",'pchart5');
+		    
+		    $scope.getList("homepage_spider","爬虫首页",'pchart6');
+		    $scope.getList("detailpag_spider","爬虫详情",'pchart7');
+		    $scope.getList("rss_rss","订阅",'pchart8');
 		};
 		
 		$scope.getList = function(type,title,ele, id, fucOnFinished, clear) {
@@ -647,9 +656,9 @@ $("#sdata").html(data);
 			obj.date1 = $("#effectDate").val();// "12345678";
 			obj.date2 = $("#effectDate2").val();// "12345678";
 			obj.date_type = $("#dateType").val();
-			obj.qName = $("#s_type ").find("option:selected").text();
+			//obj.qName = $("#s_type ").find("option:selected").text();
 			
-			obj.qType =type || $("#s_type").val();
+			obj.qType =type;// || $("#s_type").val();
 			//obj.showall = $scope.showall?"false":"true";
 			
 			//msg(obj.showall);
@@ -718,7 +727,10 @@ $("#sdata").html(data);
 		}
 		//$scope.apply();
 		
-		//$scope.getList();
+		setTimeout(() => {
+			$scope.getTList();	
+		}, 50);
+		
 		
 		
 		return;

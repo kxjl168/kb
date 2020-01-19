@@ -1126,7 +1126,7 @@ public class StasticController extends BaseController {
 
 				for (int i = 0; i < infos.size(); i++) {
 					JSONObject japp = new JSONObject();
-					japp.put("Name", qName);
+					japp.put("type_second", infos.get(i).getType_second());
 					japp.put("typeName", infos.get(i).getAction_date());
 
 					japp.put("pv", infos.get(i).getTotal_click());
