@@ -609,7 +609,7 @@ function ajaxLoading() {
 				width : maskWidth,
 				height : maskHeight,
 				left : ($(document.body).outerWidth(true) - maskWidth) / 2,
-				top : ($(window).height() - maskHeight) / 2
+				top : $(window).scrollTop()+ ($(window).height() - maskHeight) / 2
 			});
 
 	loadingDiv.css({

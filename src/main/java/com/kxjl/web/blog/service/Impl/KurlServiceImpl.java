@@ -54,6 +54,9 @@ public class KurlServiceImpl implements KurlService {
 			datas.put(u.getUrl_type(), item);
 
 		}
+		
+		
+		
 		return datas;
 	}
 	

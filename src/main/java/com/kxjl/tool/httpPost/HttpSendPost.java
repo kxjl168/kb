@@ -1,9 +1,17 @@
 package com.kxjl.tool.httpPost;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
@@ -40,11 +48,8 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.drew.lang.ByteArrayReader;
 import com.eclipsesource.v8.V8;
-
-
-
-
 
 /**
  * HttpClient实现post请求
@@ -55,7 +60,9 @@ public class HttpSendPost {
 	private static final Logger logger = LoggerFactory.getLogger(HttpSendPost.class);
 
 	public static SSLContext createIgnoreVerifySSL() throws NoSuchAlgorithmException, KeyManagementException {
-		SSLContext sc = SSLContext.getInstance("SSLv3");
+		//SSLContext sc = SSLContext.getInstance("SSLv3");
+		SSLContext sc = SSLContext.getInstance("TLS");
+		 
 
 		// 实现一个X509TrustManager接口，用于绕过验证，不用修改里面的方法
 		X509TrustManager trustManager = new X509TrustManager() {
@@ -90,15 +97,19 @@ public class HttpSendPost {
 		PoolingHttpClientConnectionManager connManager = new PoolingHttpClientConnectionManager(socketFactoryRegistry);
 		HttpClients.custom().setConnectionManager(connManager);
 
-		if(agent!=null)
-		{
-		HttpHost host=new HttpHost(agent.getHost(),agent.getPort());
-		HttpClients.custom().setProxy(host);
-		System.out.println("代理:"+agent.getHost()+":"+agent.getPort());
+		if (agent != null) {
+			HttpHost host = new HttpHost(agent.getHost(), agent.getPort());
+			HttpClients.custom().setProxy(host);
+			System.out.println("代理:" + agent.getHost() + ":" + agent.getPort());
 		}
-		
+
+		SSLConnectionSocketFactory f = new SSLConnectionSocketFactory(
+				sslcontext,
+			    new String[]{"TLSv1", "TLSv1.1", "TLSv1.2"},   
+			    null,
+			    null);
 		// 创建自定义的httpclient对象
-		CloseableHttpClient client = HttpClients.custom().setConnectionManager(connManager).build();
+		CloseableHttpClient client = HttpClients.custom(). setConnectionManager(connManager).build();
 		return client;
 
 	}
@@ -106,29 +117,36 @@ public class HttpSendPost {
 	public static String sendHttpJSONDataNoSSL(String token, boolean jsonContent, String url, String str)
 			throws Exception {
 
-		return sendHttpJSONDataNoSSL(null,true, token, jsonContent, url, str, null, null);
+		return sendHttpJSONDataNoSSL(null, true, token, jsonContent, url, str, null, null);
 	}
 
-	
+	/**
+	 * 构造请求
+	 * 
+	 * @param agent
+	 * @param isGet
+	 * @param token
+	 * @param jsonContent
+	 * @param url
+	 * @param str
+	 * @param headerstrs
+	 * @param cks
+	 * @return
+	 * @throws Exception
+	 * @author zj
+	 * @date 2020年1月20日
+	 */
+	private static HttpUriRequest buildRequest(AgentAddress agent, boolean isGet, String token, boolean jsonContent,
+			String url, String str, HashMap<String, String> headerstrs, List<BasicClientCookie> cks) throws Exception {
 
-	
-	public static String sendHttpJSONDataNoSSL(AgentAddress agent, boolean isGet, String token, boolean jsonContent, String url,
-			String str, HashMap<String, String> headerstrs, List<BasicClientCookie> cks) throws Exception {
-
-		//logger.info("HTTP Request URL:" + url + ",HTTP Request PARAM:" + str);
-
-		CloseableHttpClient client = getClinet(agent);
-		
-		//HttpClient httpClient = HttpClientManager.getProxyHttpClient(host, port, useProxy);
-
-		
+		// HttpClient httpClient = HttpClientManager.getProxyHttpClient(host, port,
+		// useProxy);
 
 		HttpUriRequest httpPost = new HttpPost(url);
 		if (isGet)
 			httpPost = new HttpGet(url);
 		// InputStream is = new java.io.ByteArrayInputStream(str.getBytes("utf-8"));
 		// client.setTimeout(60000);
-
 
 		// 设置参数到请求对象中
 		if (!isGet) {
@@ -137,14 +155,13 @@ public class HttpSendPost {
 
 			httpPost = p;
 		}
-		
+
 		// PostMethod httpPost = new PostMethod(url);
 		InputStream is = new java.io.ByteArrayInputStream(str.getBytes("utf-8"));
 		// client.setTimeout(60000);
 
-		//httpPost.setHeader("Host", "www.gsxt.gov.cn");
-		
-		
+		// httpPost.setHeader("Host", "www.gsxt.gov.cn");
+
 		if (jsonContent)
 			httpPost.setHeader("Content-type", "application/json");
 		else {
@@ -161,7 +178,7 @@ public class HttpSendPost {
 					data2 = data2.substring(0, data2.length() - 1);
 			} catch (Exception e) {
 				logger.error(e.getMessage());
-				return "";
+				return null;
 			}
 
 			str = data2;
@@ -169,21 +186,18 @@ public class HttpSendPost {
 
 		httpPost.setHeader("Accept", "application/json");
 		httpPost.setHeader("Connection", "close");
-		//httpPost.setHeader("Token", token);
-		
-		//httpPost.setHeader("Referer", "http://www.gsxt.gov.cn");
-		
+		// httpPost.setHeader("Token", token);
 
-		
+		// httpPost.setHeader("Referer", "http://www.gsxt.gov.cn");
 
 		if (headerstrs != null && headerstrs.keySet().size() > 0) {
 			for (String key : headerstrs.keySet()) {
 				httpPost.setHeader(key, headerstrs.get(key));
 			}
 		}
-		
+
 		if (cks != null && cks.size() > 0) {
-			
+
 			String ck = "";
 			for (BasicClientCookie basicClientCookie : cks) {
 				ck += basicClientCookie.getName() + "=" + basicClientCookie.getValue() + "; ";
@@ -191,33 +205,15 @@ public class HttpSendPost {
 			System.out.println("index set-cookie:" + ck);
 			if (!ck.equals(""))
 				httpPost.setHeader("Cookie", ck);
-			//log.debug(ck);
+			// log.debug(ck);
 		}
-		
-	//	httpPost.setHeader("Cookie",
-		//    	"__jsluid_h=ff98057ff8e815927d02583503ca4523; __jsl_clearance=1571304495.958|0|I9XaAXksRSQ%2BdWaix8DtTHaG9EY%3D; UM_distinctid=16dd90bec95310-02659fc2e08667-386a410b-1fa400-16dd90bec9651a; gsxtBrowseHistory1=%0FS%04%06%1D%04%1D%10SNS%24%26%3B%22%3D%3A71%3A%3B01%3A%219GFDDDDGFDEDDDDDDDDDDEFCEAAGSXS%11%1A%00%1A%15%19%11SNS%E6%B0%AB%E8%8A%BB%E5%AE%8F%E6%A1%8D%E6%8B%A1%E8%B4%B0%E6%9D%BD%E9%98%A4%E5%84%98%E5%8E%8CSXS%11%1A%00%00%0D%04%11SNEEGDXS%02%1D%07%1D%00%00%1D%19%11SNEACEGD%40LD%40ABC%09; CNZZDATA1261033118=688658235-1571299632-http%253A%252F%252Fwww.gsxt.gov.cn%252F%7C1571305032; JSESSIONID=4E2E483D148DB46C7F403023D89F0E99-n1:1; tlb_cookie=S172.16.12.46");
-		
-		
+		return httpPost;
+	}
 
-		
+	private static void parseResponseHead(Header[] headers, List<BasicClientCookie> cks) {
+		for (Header header : headers) {
+			try {
 
-		// httpPost.setEntity(entity);(is);
-
-		String responseData = null;
-		try {
-			Exception exception = null;
-			CloseableHttpResponse response = client.execute(httpPost);
-			int resStatusCode = response.getStatusLine().getStatusCode();
-			
-			
-			Header[] headers = response.getHeaders("Set-Cookie");
-			// Set-Cookie:
-			// acw_tc=7ceef51c15706890714395903e2b002608f81e957669a4989349d965cf;path=/;HttpOnly;Max-Age=2678401
-			// Set-Cookie: QCCSESSID=g4oivaaqhu1ueoca87jtpbrr86; path=/; domain=qichacha.com
-			for (Header header : headers) {
-				try {
-					
-			
 				String[] cooks = header.getValue().substring(0, header.getValue().indexOf(";")).split("=");
 				String path = "";
 				if (header.getValue().contains("path=")) {
@@ -236,102 +232,206 @@ public class HttpSendPost {
 				ck.setPath(path);
 
 				cks.add(ck);
-				} catch (Exception e) {
+			} catch (Exception e) {
 				continue;
+			}
+
+		}
+	}
+
+	/**
+	 * 返回bytep[] 数据，下载文件等
+	 * @param agent
+	 * @param isGet
+	 * @param token
+	 * @param jsonContent
+	 * @param url
+	 * @param str
+	 * @param headerstrs
+	 * @param cks
+	 * @return
+	 * @throws Exception
+	 * @author zj
+	 * @date 2020年1月20日
+	 */
+	public static byte[] sendHttpJSONDataNoSSLBackByte(AgentAddress agent, boolean isGet, String token, boolean jsonContent,
+			String url, String str, HashMap<String, String> headerstrs, List<BasicClientCookie> cks) throws Exception {
+
+		// logger.info("HTTP Request URL:" + url + ",HTTP Request PARAM:" + str);
+		CloseableHttpClient client = getClinet(agent);
+
+		HttpUriRequest httpPost = buildRequest(agent, isGet, token, jsonContent, url, str, headerstrs, cks);
+
+	
+		try {
+			Exception exception = null;
+			CloseableHttpResponse response = client.execute(httpPost);
+			int resStatusCode = response.getStatusLine().getStatusCode();
+
+			Header[] headers = response.getHeaders("Set-Cookie");
+			// Set-Cookie:
+			// acw_tc=7ceef51c15706890714395903e2b002608f81e957669a4989349d965cf;path=/;HttpOnly;Max-Age=2678401
+			// Set-Cookie: QCCSESSID=g4oivaaqhu1ueoca87jtpbrr86; path=/; domain=qichacha.com
+
+			parseResponseHead(headers, cks);
+
+			if (resStatusCode == HttpStatus.SC_OK) {
+				/*
+				 * BufferedReader br = new BufferedReader( new
+				 * InputStreamReader(response.getEntity().getContent(), "utf-8")); String res =
+				 * null; StringBuffer sb = new StringBuffer(); while ((res = br.readLine()) !=
+				 * null) { sb.append(res); } responseData = sb.toString();
+				 */
+
+				// File f = new File("C:\\Users\\admin\\Pictures\\test.ico");//
+
+				byte[] datas = readInputStream(response.getEntity().getContent());
+				return datas;
+
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+
+	/**
+	 * 
+	 * 发送get 或者post请求 ，返回string数据
+	 * 
+	 * @param agent
+	 * @param isGet
+	 * @param token
+	 * @param jsonContent
+	 * @param url
+	 * @param str
+	 * @param headerstrs
+	 * @param cks
+	 * @return
+	 * @throws Exception
+	 * @author zj
+	 * @date 2020年1月20日
+	 */
+	public static String sendHttpJSONDataNoSSL(AgentAddress agent, boolean isGet, String token, boolean jsonContent,
+			String url, String str, HashMap<String, String> headerstrs, List<BasicClientCookie> cks) throws Exception {
+
+		// logger.info("HTTP Request URL:" + url + ",HTTP Request PARAM:" + str);
+		CloseableHttpClient client = getClinet(agent);
+
+		HttpUriRequest httpPost = buildRequest(agent, isGet, token, jsonContent, url, str, headerstrs, cks);
+
+		// httpPost.setHeader("Cookie",
+		// "__jsluid_h=ff98057ff8e815927d02583503ca4523;
+		// __jsl_clearance=1571304495.958|0|I9XaAXksRSQ%2BdWaix8DtTHaG9EY%3D;
+		// UM_distinctid=16dd90bec95310-02659fc2e08667-386a410b-1fa400-16dd90bec9651a;
+		// gsxtBrowseHistory1=%0FS%04%06%1D%04%1D%10SNS%24%26%3B%22%3D%3A71%3A%3B01%3A%219GFDDDDGFDEDDDDDDDDDDEFCEAAGSXS%11%1A%00%1A%15%19%11SNS%E6%B0%AB%E8%8A%BB%E5%AE%8F%E6%A1%8D%E6%8B%A1%E8%B4%B0%E6%9D%BD%E9%98%A4%E5%84%98%E5%8E%8CSXS%11%1A%00%00%0D%04%11SNEEGDXS%02%1D%07%1D%00%00%1D%19%11SNEACEGD%40LD%40ABC%09;
+		// CNZZDATA1261033118=688658235-1571299632-http%253A%252F%252Fwww.gsxt.gov.cn%252F%7C1571305032;
+		// JSESSIONID=4E2E483D148DB46C7F403023D89F0E99-n1:1; tlb_cookie=S172.16.12.46");
+
+		// httpPost.setEntity(entity);(is);
+
+		String responseData = null;
+		try {
+			Exception exception = null;
+			CloseableHttpResponse response = client.execute(httpPost);
+			int resStatusCode = response.getStatusLine().getStatusCode();
+
+			Header[] headers = response.getHeaders("Set-Cookie");
+			// Set-Cookie:
+			// acw_tc=7ceef51c15706890714395903e2b002608f81e957669a4989349d965cf;path=/;HttpOnly;Max-Age=2678401
+			// Set-Cookie: QCCSESSID=g4oivaaqhu1ueoca87jtpbrr86; path=/; domain=qichacha.com
+
+			parseResponseHead(headers, cks);
+
+			if (resStatusCode == HttpStatus.SC_OK) {
+				/*
+				 * BufferedReader br = new BufferedReader( new
+				 * InputStreamReader(response.getEntity().getContent(), "utf-8")); String res =
+				 * null; StringBuffer sb = new StringBuffer(); while ((res = br.readLine()) !=
+				 * null) { sb.append(res); } responseData = sb.toString();
+				 */
+
+				// File f = new File("C:\\Users\\admin\\Pictures\\test.ico");//
+
+				byte[] datas = readInputStream(response.getEntity().getContent());
+				
+				/*
+				 * FileOutputStream fos = new FileOutputStream(f); fos.write(datas);
+				 * fos.flush(); fos.close();
+				 */
+
+				responseData = new String(datas, "utf-8");
+
+				if (cks != null && cks.size() == 0) { // 传入空列表，同时服务器有返回则填入cookie
+
 				}
 
 			}
-			
-			
-			if (resStatusCode == HttpStatus.SC_OK) {
-				BufferedReader br = new BufferedReader(
-						new InputStreamReader(response.getEntity().getContent(), "utf-8"));
-				// logger.info("HTTP Request CHARSET:" +
-				// httpPost.getEntity().getContentEncoding().getName());
-				String res = null;
-				StringBuffer sb = new StringBuffer();
-				while ((res = br.readLine()) != null) {
-					sb.append(res);
-				}
-				responseData = sb.toString();
 
-				if (cks != null && cks.size() == 0) { // 传入空列表，同时服务器有返回则填入cookie
-					
-				}
+			// 拿到第一次请求返回的JS
+			else if (response.getStatusLine().getStatusCode() == 521) {
 
-			} 
-			
-			//拿到第一次请求返回的JS
-			else if(response.getStatusLine().getStatusCode()==521){
-				
-				
-				
-				
-				
 				HttpEntity entity = response.getEntity();
-				String html=EntityUtils.toString(entity,"utf-8");
+				String html = EntityUtils.toString(entity, "utf-8");
 				System.out.println(html);
-				//处理从服务器返回的JS，并执行
-				String js=html.trim().replace("<script>", "").replace("</script>", "").replace("eval(y.replace(/\\b\\w+\\b/g, function(y){return x[f(y,z)-1]||(\"_\"+y)}));","tp=y.replace(/\\b\\w+\\b/g, function(y){return x[f(y,z)-1]||(\"_\"+y)});tp;");
-				
+				// 处理从服务器返回的JS，并执行
+				String js = html.trim().replace("<script>", "").replace("</script>", "").replace(
+						"eval(y.replace(/\\b\\w+\\b/g, function(y){return x[f(y,z)-1]||(\"_\"+y)}));",
+						"tp=y.replace(/\\b\\w+\\b/g, function(y){return x[f(y,z)-1]||(\"_\"+y)});tp;");
+
 				V8 runtime = V8.createV8Runtime("window");
-				String result=runtime.executeStringScript(js);
+				String result = runtime.executeStringScript(js);
 				System.out.println(result);
-				//第二次处理JS并执行
-				result=result.substring(result.indexOf("document.cookie="),result.indexOf("+';Expires="))+" ;document.cookie;";
-				result=result.replace("document.cookie", "tpcookie");
+				// 第二次处理JS并执行
+				result = result.substring(result.indexOf("document.cookie="), result.indexOf("+';Expires="))
+						+ " ;document.cookie;";
+				result = result.replace("document.cookie", "tpcookie");
 				System.out.println(result);
-				
-				
-				String __jsl_clearance_cookie="";
-				if(result.contains("document.createElement"))
-				{
-					//验证1
-				int dvstart= result.indexOf("=document.createElement('div')");
-				int dvend= result.indexOf("toLowerCase();")+"toLowerCase();".length();
-				
-				int paramstart=result.indexOf(" ",dvstart-10)+1;
-				int paramend=result.indexOf("=",dvstart-10);
-				String vname=result.substring(paramstart,paramend);
-				String data="var "+vname+"="+"\"www.gsxt.gov.cn/\";";
-				
-				String lastrst=result.substring(0, dvstart-("var "+vname).length())+data+result.substring(dvend);
-				System.out.println(lastrst);
-//				var _1d=document.createElement('div');_1d.innerHTML='<a href=\'/\'>_1h</a>';_1d=_1d.firstChild.href;var _2o=_1d.match(/https?:\/\//)[0];_1d=_1d.substr(_2o.length).toLowerCase();
-						
-				String __jsl_clearance=runtime.executeStringScript(lastrst);
-				__jsl_clearance_cookie=__jsl_clearance.split("=")[1];
-				System.out.println(__jsl_clearance_cookie);
-				}
-				else
-				{
-					//验证2
-					//int dvstart= result.indexOf("|0|'+")+"|0|'+".length();
-					//int dvsend= result.indexOf("+';Expires=");
-					String lastrst=result;//.substring(dvstart,dvsend);
+
+				String __jsl_clearance_cookie = "";
+				if (result.contains("document.createElement")) {
+					// 验证1
+					int dvstart = result.indexOf("=document.createElement('div')");
+					int dvend = result.indexOf("toLowerCase();") + "toLowerCase();".length();
+
+					int paramstart = result.indexOf(" ", dvstart - 10) + 1;
+					int paramend = result.indexOf("=", dvstart - 10);
+					String vname = result.substring(paramstart, paramend);
+					String data = "var " + vname + "=" + "\"www.gsxt.gov.cn/\";";
+
+					String lastrst = result.substring(0, dvstart - ("var " + vname).length()) + data
+							+ result.substring(dvend);
 					System.out.println(lastrst);
-					String __jsl_clearance=runtime.executeStringScript(lastrst);
-					__jsl_clearance_cookie=__jsl_clearance.split("=")[1];
+					// var _1d=document.createElement('div');_1d.innerHTML='<a
+					// href=\'/\'>_1h</a>';_1d=_1d.firstChild.href;var
+					// _2o=_1d.match(/https?:\/\//)[0];_1d=_1d.substr(_2o.length).toLowerCase();
+
+					String __jsl_clearance = runtime.executeStringScript(lastrst);
+					__jsl_clearance_cookie = __jsl_clearance.split("=")[1];
+					System.out.println(__jsl_clearance_cookie);
+				} else {
+					// 验证2
+					// int dvstart= result.indexOf("|0|'+")+"|0|'+".length();
+					// int dvsend= result.indexOf("+';Expires=");
+					String lastrst = result;// .substring(dvstart,dvsend);
+					System.out.println(lastrst);
+					String __jsl_clearance = runtime.executeStringScript(lastrst);
+					__jsl_clearance_cookie = __jsl_clearance.split("=")[1];
 					System.out.println(__jsl_clearance_cookie);
 				}
-				
-				
-				
-				
+
 				runtime.release();
-				//__jsl_clearance
-				
-				
-				BasicClientCookie ck = new BasicClientCookie("__jsl_clearance",__jsl_clearance_cookie);
+				// __jsl_clearance
+
+				BasicClientCookie ck = new BasicClientCookie("__jsl_clearance", __jsl_clearance_cookie);
 				ck.setDomain("");
 				ck.setPath("/");
 
 				cks.add(ck);
-				
-				
-				responseData="503js-cookie";
+
+				responseData = "503js-cookie";
 			}
-			
+
 			else {
 				logger.error("http请求失败 " + resStatusCode);
 				exception = new Exception("[SerialHttpSender] HttpErrorCode:" + resStatusCode);
@@ -367,8 +467,23 @@ public class HttpSendPost {
 
 		}
 
-		//logger.info("HTTP Request Result:" + responseData);
+		// logger.info("HTTP Request Result:" + responseData);
 		return responseData;
+	}
+
+	private static byte[] readInputStream(InputStream inputStream) throws IOException {
+		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+		// 创建一个Buffer字符串
+		byte[] buffer = new byte[1024];
+		// 每次读取的字符串长度，如果为-1，代表全部读取完毕
+		int len = 0;
+		// 使用一个输入流从buffer里把数据读取出来
+		while ((len = inputStream.read(buffer)) != -1) {
+			// 用输出流往buffer里写入数据，中间参数代表从哪个位置开始读，len代表读取的长度
+			outStream.write(buffer, 0, len);
+		}
+		// 把outStream里的数据写入内存
+		return outStream.toByteArray();
 	}
 
 	/**

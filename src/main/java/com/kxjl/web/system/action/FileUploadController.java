@@ -3,6 +3,7 @@ package com.kxjl.web.system.action;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -240,10 +241,7 @@ public class FileUploadController {
 
 				// 计算md5,查看本地文件库中是否有相同的文件
 				if (!isExsit) {
-					
-					
-				
-					
+
 					// 没有，则上传
 					// 上传文件（服务器指定地址）
 					File uploaderFile = new File(absoluteURL);
@@ -259,8 +257,7 @@ public class FileUploadController {
 					; // 文件存放原始旋转过的图片
 					File orginFileData = new File(orginFile);
 					File oFileData = new File(oFile);
-					
-					
+
 					// 存储信息
 					SvrFileInfo finfo = new SvrFileInfo();
 					relativeURL = relativePath + fileName; // 文件相对路径
@@ -269,8 +266,7 @@ public class FileUploadController {
 
 					downURL = "/FileSvr/downFile.action?m5=" + md5;
 					httpDownURL = http_path + downURL;
-					
-					
+
 					try {
 
 						if (extension.contains("gif") || extension.contains("png") || extension.contains("jpeg")
@@ -280,24 +276,22 @@ public class FileUploadController {
 							mfile.transferTo(orginFileData);
 							// 图片旋转处理
 							ImageRotateUtil.rotateImg(orginFileData, orginFileData, extension);
-							
+
 							BufferedImage src = ImageIO.read(orginFileData);
 							if (orginFileData.length() > 1024 * 1024) {
 
 								// 使用压缩后的图片
 								ImageUtil.resize(orginFileData, uploaderFile);
-							}
-							else
-							{
-								//不压缩
-								//FileUtils.copyFile(orginFileData, uploaderFile);
-								
-								fileName=oriName;
-							
-								absoluteURL=uploadPath + relativePath +oriName;
-								relativeURL=relativePath +oriName;
+							} else {
+								// 不压缩
+								// FileUtils.copyFile(orginFileData, uploaderFile);
+
+								fileName = oriName;
+
+								absoluteURL = uploadPath + relativePath + oriName;
+								relativeURL = relativePath + oriName;
 								httpURL = http_path + relativeURL;
-								
+
 							}
 
 						}
@@ -317,9 +311,6 @@ public class FileUploadController {
 
 					logger.info("uploaderFile值:  " + uploaderFile);
 
-				
-					
-
 					finfo.setOld_name(value);
 					finfo.setSave_name(fileName);
 					finfo.setFull_path(absoluteURL);
@@ -329,8 +320,6 @@ public class FileUploadController {
 					finfo.setFile_md5(md5);
 					finfo.setFile_size(mfile.getSize());
 					finfo.setDown_nums(0);
-					
-				
 
 					fileService.SaveFileInfo(finfo);
 					efile = finfo;
@@ -408,4 +397,189 @@ public class FileUploadController {
 		JsonUtil.responseOutWithJson(response, jsonOut.toString());
 
 	}
+
+	/**
+	 * 存储获取的站点url图标,返回存储的json对象str
+	 * 
+	 * @param bytes
+	 * @param filefullname
+	 * @param imgPathPre
+	 * @author zj
+	 * @date 2020年1月20日
+	 */
+	public String uploadBytePng(byte[] bytes, String filefullname, String imgPathPre) {
+
+		JSONObject jsonOut = new JSONObject();
+
+		String curDir = imgPathPre;// "tmp"; // siteurl-默认 siteurl
+		if (imgPathPre == null || imgPathPre.equals(""))
+			imgPathPre = "siteurl";
+
+		// 设置图片类型
+		String extension = ".png";
+		// 获取 服务器上文件存储绝对路径
+		String uploadPath = ConfigReader.getInstance().getProperty("FILE_SAVE_PATH");
+		// web访问相对路径
+		String http_path = ConfigReader.getInstance().getProperty("HTTP_PATH");
+
+		String relativeURL = ""; // 文件相对路径
+		String httpURL = ""; // 文件http完整路径
+
+		String downURL = "";
+		String httpDownURL = "";
+		String httpURL2 = "";
+		String md5 = "";
+		String fileName = "";
+		String oriName = filefullname;
+		String os = System.getProperty("os.name");
+		SvrFileInfo efile = null;
+		try {
+
+			// 增加月份分级
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMM");
+			String formattedDate = formatter.format(new Date());
+
+			String relativePath = curDir + "/" + formattedDate + "/";
+			logger.info("uploadPath:  " + uploadPath + relativePath);
+
+			File dir = new File(uploadPath + relativePath);
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+
+			String value = filefullname;
+			// item.getName();
+
+			UUID uuid = UUID.randomUUID();
+			fileName = uuid.toString() + ".png"; // 随机生成的唯一文件名 压缩后的
+			// oriName = uuid.toString() + "_orign" + extension; // 随机生成的唯一文件名 原始
+			String absoluteURL = uploadPath + relativePath + fileName; // 文件存放的绝对路径
+			// logger.info("name:" + name);
+
+			md5 = Md5EncryptFile.getMD5(bytes);
+			boolean isExsit = false;
+
+			SvrFileInfo query = new SvrFileInfo();
+			query.setFile_md5(md5);
+			efile = fileService.getFileInfo(query);
+
+			if (efile != null)
+				isExsit = true;
+
+			// 计算md5,查看本地文件库中是否有相同的文件
+			if (!isExsit) {
+
+				// 没有，则上传
+				// 上传文件（服务器指定地址）
+				File uploaderFile = new File(absoluteURL);
+
+				logger.info("文件存放的绝对路径:" + absoluteURL);
+
+				// 存储信息
+				SvrFileInfo finfo = new SvrFileInfo();
+				relativeURL = relativePath + fileName; // 文件相对路径
+				httpURL = http_path + relativeURL;
+				httpURL2 = http_path + relativePath + fileName;
+
+				downURL = "/FileSvr/downFile.action?m5=" + md5;
+				httpDownURL = http_path + downURL;
+
+				try {
+					File orginFileData = new File(absoluteURL);
+					// File oFileData = new File(oFile);
+					FileOutputStream fos = new FileOutputStream(orginFileData);
+					fos.write(bytes);
+					fos.flush();
+					fos.close();
+
+				} catch (Exception e) {
+
+					logger.error(e);
+				}
+
+				logger.info("uploaderFile值:  " + uploaderFile);
+
+				finfo.setOld_name(value);
+				finfo.setSave_name(fileName);
+				finfo.setFull_path(absoluteURL);
+				finfo.setHttp_relative_path(relativeURL);
+				finfo.setHttp_relative_path2(relativePath + oriName);
+				finfo.setHttp_down_url(downURL);
+				finfo.setFile_md5(md5);
+				finfo.setFile_size((long) bytes.length);
+				finfo.setDown_nums(0);
+
+				fileService.SaveFileInfo(finfo);
+				efile = finfo;
+			} else {
+
+				absoluteURL = efile.getFull_path();// 之前上传的文件路径
+				logger.info("md5已存在，使用原有文件存放的绝对路径:" + absoluteURL);
+
+				relativeURL = efile.getHttp_relative_path();// curDir + "/"
+															// + fileName;
+															// // 文件相对路径
+				httpURL = http_path + efile.getHttp_relative_path();// curDir
+																	// + "/"
+																	// +
+																	// fileName;
+
+				String orpath = efile.getHttp_relative_path2();
+				if (orpath == null || orpath.equals(""))
+					orpath = relativeURL.substring(relativeURL.lastIndexOf(".")) + "_orign" + extension;
+				httpURL2 = http_path + orpath;
+
+				downURL = efile.getHttp_down_url();
+				httpDownURL = http_path + downURL;
+
+			}
+
+		} catch (Exception e) {
+			try {
+				jsonOut.put("ResponseCode", "201");
+				jsonOut.put("ResponseMsg", "FAILED:" + e.getMessage());
+				e.printStackTrace();
+			} catch (JSONException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+		}
+
+		if (relativeURL != null && !relativeURL.equals("")) {
+			try {
+				jsonOut.put("ResponseCode", "200");
+				jsonOut.put("ResponseMsg", "OK");
+				jsonOut.put("FileUrl", httpURL);
+				jsonOut.put("FileUrl2", httpURL2);
+
+				jsonOut.put("relativeURL", relativeURL);
+				jsonOut.put("downURL", downURL);
+				jsonOut.put("httpDownURL", httpDownURL);
+				jsonOut.put("md5", md5);
+				jsonOut.put("newname", fileName);
+				jsonOut.put("oldname", efile.getOld_name());
+				jsonOut.put("fileid", efile.getId());
+
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else {
+			try {
+				jsonOut.put("ResponseCode", "201");
+				jsonOut.put("ResponseMsg", "上传失败!");
+				jsonOut.put("FileUrl", "");
+				jsonOut.put("relativeURL", "");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return jsonOut.toString();
+
+	}
+
 }

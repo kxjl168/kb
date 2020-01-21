@@ -15,27 +15,7 @@
 
 				<meta name="description" content="常用链接- KxのBook Kx的个人站点" />
 				<meta name="author" content="ZHANGJIE">
-					<%-- <link rel="stylesheet" type="text/css" media="screen" href="../../js/plugin/bootstrap/css/bootstrap.min.css">
-
-			<link rel="stylesheet" href="../../css/kCommon.css">
-
-	
-			<link rel="stylesheet" href="../../css/common.css">
-
-			<script type="text/javascript" src="../../js/plugin/jquery/jquery.v1.11.3.js"></script>
-
-			<script type="text/javascript" src="../../js/plugin/bootstrap/js/bootstrap.min.js"></script>
-
-	
-	<script type="text/javascript" src="../../js/plugin/angular/angular.min.js"></script>
-			<script type="text/javascript" src="../../js/plugin/angular/angular-resource.min.js"></script>
-				<script type="text/javascript" src="../../js/plugin/angular/angular-sanitize.min.js"></script>
 				
-					
-				<link rel="stylesheet" href="../../js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/default.css">
-			<link rel="stylesheet" href="<c:out value="${basePath}"/>/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/obsidian.css">
-
- --%>
 </head>
 
 <body>
@@ -43,8 +23,6 @@
 
 	<div class="" id="content" style="">
 
-		<%-- 	<%@include file="../../public/phead.jsp"%>
- --%>
 
 
 
@@ -98,7 +76,7 @@
 										</div>
 									</div>
 									<div id="collapseOne" class="panel-collapse collapse in ">
-										<div class="panel-body urlbd">
+										<div class="panel-body urlbd nopaddding">
 
 											<div class="container">
 
@@ -108,15 +86,15 @@
 
 													<div ng-repeat="x in items.val" class="pgdiv" ng-cloak>
 
-														<div id="{{x.url_name}}" class="col-sm-3 col-xs-12 ">
+														<div id="{{x.url_name}}" class="col-sm-3 col-xs-6  padding5">
 															<div class='durl'>
 																<div class="row">
-																	<div class="">
-																		<img ng-if="x.icon!=null" style="max-width: 30px;padding-top: 10px;"
-																			class="pull-left img-responsive"
+																	<div class="col-sm-2 col-xs-3">
+																		<img ng-if="x.icon!=null" style="max-width: 30px;"
+																			class="pull-left img-responsive ulricon"
 																			src="{{x.val2}}{{x.icon}}"></img>
 																	</div>
-																	<div class="col-xs-10 padding5">
+																	<div class="col-sm-10 col-xs-9 padding5">
 
 																		<a class="clear row title" ng-href={{x.url_val}}
 																			target="_blank"><span title="{{x.url_name}}"
@@ -124,20 +102,41 @@
 
 
 
-																		<div class="row ">
+																		<div class="row computerEdit">
 																			<div class="pull-left  {{x.isshow|ftc}}">{{x.isshow|ft}}</div>
-																			<div class="pull-right">
-																				【 <a href="javascript:void(0)" class="text-info"
-																					ng-click="addOrModify(x)">修改</a> <a
+																			<div class="">
+																				【<a href="javascript:void(0)" class="text-info"
+																					ng-click="addOrModify(x)"><i title="修改" class="fa fa-edit"></i></a> <a
 																					href="javascript:void(0)" class="text-info"
-																					ng-click="rss(x)">订阅</a> <a
+																					ng-click="rss(x)"><i title="订阅" class="fa fa-rss"></i></a>
+<a
+																					href="javascript:void(0)" class="text-info"
+																					ng-click="img(x)"><i title="获取icon" class="fa fa-image text-success"></i></a>
+<a
 																					href="javascript:void(0)" class="text-warning"
-																					ng-click="del(x)">删除</a> 】
+																					ng-click="del(x)"><i title="删除" class="fa fa-trash text-error"></i></a>】
 																			</div>
 
 																		</div>
 
 																	</div>
+																	
+																	<div class="row mobileEdit">
+																			<div class="pull-left  {{x.isshow|ftc}}">{{x.isshow|ft}}</div>
+																			<div class="">
+																				【<a href="javascript:void(0)" class="text-info"
+																					ng-click="addOrModify(x)"><i title="修改" class="fa fa-edit"></i></a> <a
+																					href="javascript:void(0)" class="text-info"
+																					ng-click="rss(x)"><i title="订阅" class="fa fa-rss"></i></a>
+<a
+																					href="javascript:void(0)" class="text-info"
+																					ng-click="img(x)"><i title="获取icon" class="fa fa-image text-success"></i></a>
+<a
+																					href="javascript:void(0)" class="text-warning"
+																					ng-click="del(x)"><i title="删除" class="fa fa-trash text-error"></i></a>】
+																			</div>
+
+																		</div>
 																</div>
 
 

@@ -218,7 +218,68 @@ function init() {
 				
 
 				
+				$scope.img = function(item) {
+					if (item == null)
+						return;
+					
+					var id = item.id;
+					var url= item.url_val;
+					var obj = {};
+
+					obj.url = url;
+					SZUMWS(http + "kurl/getIcon", JSON
+							.stringify(obj), function succsess(json) {
+
+						var code = json.ResponseCode;
+						var data = json.ResponseMsg;
+						
+						if (code == 200) {
+
+							$("#url").val(data);
+							
+							$scope.s_recordid = item.id;
+							$scope.s_dict_key = item.url_val;
+							$scope.s_dict_name = item.url_name;
+							$scope.s_type = item.url_type;
+
+							$scope.s_sort = parseInt( item.sort);
+							
+							$scope.desc_info=item.desc_info;
+							$scope.url = item.icon;
+							$scope.oldname = item.val1;
+							$scope.fullurl = item.val2+item.icon;
+							$scope.val2 = item.val2;
+							
+							//$scope.isshow = item.isshow;
+							$("#isshow").val(item.isshow);
+							$scope.icon = item.icon;
+							
+							
+							$scope.doupdate();
+							
+							msg("获取成功");
+
+						} else {
+							msg(data);
+						}
+						/*
+						 * if (fucOnFinished != null) fucOnFinished();
+						 */
+
+					}, function error(data) {
+						msg("网络异常!");
+						// $("#myModal2").modal('hide');
+
+						/*
+						 * if (fucOnFinished != null) fucOnFinished();
+						 */
+
+					}, true, false
+
+					);
 				
+					
+				};
 				
 
 				$scope.del = function(item) {

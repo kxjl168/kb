@@ -87,7 +87,7 @@ public class CommonServiceImpl implements CommonService {
 		List<String> crawlerUserAgents = Lists.newArrayList("");
 
 		// kxjl
-		final String moreAgents = ConfigReader.getInstance().getProperty("BlackcrawlerUserAgents");
+		final String moreAgents = ConfigReader.getInstance().getProperty("BlockcrawlerUserAgents");
 		if (isNotBlank(moreAgents)) {
 			crawlerUserAgents.addAll(Arrays.asList(moreAgents.trim().split(",")));
 		}

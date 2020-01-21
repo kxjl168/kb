@@ -184,7 +184,9 @@ function initDetailTable() {
             		 if(cType=="detailpag_"||
             				 cType=="G搜索_"||
             				 cType=="attack_"||
-            				 cType=="about_"
+            				 cType=="about_"||
+            				 cType=="homepage_spider"||
+            				 cType=="detailpag_spider"
             				)
             	 
                      return "<a href='javascript:void(0);' onclick='showaction(\""+row.userid+"\")' >"+value+"</a>";
@@ -296,6 +298,8 @@ function initDetailTable() {
             	 formatter: function (value, row, index) {
             		 if(cType=='attack_')
                      return row.blog_id;
+            		 else if(cType=="G搜索_")
+            			 return row.blog_id;
             		 else
             			 return value;
                  }
@@ -331,7 +335,7 @@ function init() {
 	
 	initmenu($("#menuul"),"page/portal/");
 	
-	//initDetailTable();
+	initDetailTable();
 	
 	
 	

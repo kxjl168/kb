@@ -27,12 +27,15 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.config.ConfigReader;
+import com.kxjl.tool.utils.IconUtil;
 import com.kxjl.tool.utils.JEscape;
 import com.kxjl.tool.utils.JsonUtil;
 import com.kxjl.web.blog.model.Blog;
 import com.kxjl.web.blog.model.Kurl;
 import com.kxjl.web.blog.service.KurlService;
 import com.kxjl.web.system.action.base.BaseController;
+import com.kxjl.web.system.action.base.OutApiAuthorization;
+import com.kxjl.web.system.action.base.OutApiAuthorization.UrlType;
 import com.kxjl.web.system.model.DictInfo;
 import com.kxjl.web.system.model.SysUserBean;
 import com.kxjl.web.system.model.SysUserBean.UserType;
@@ -46,24 +49,26 @@ public class KurlController extends BaseController {
 	@Autowired
 	KurlService kurlService;
 
+	@Autowired
+	IconUtil iconUtil;
+
 	/*
-	 * @RequestMapping(value = "/") public ModelAndView GroupList() {
-	 * ModelAndView view = new ModelAndView(); view.setViewName("/blog/blog");
+	 * @RequestMapping(value = "/") public ModelAndView GroupList() { ModelAndView
+	 * view = new ModelAndView(); view.setViewName("/blog/blog");
 	 * 
 	 * return view; }
 	 */
-	
-	
+
 	/**
 	 * select2 group查询
+	 * 
 	 * @param request
 	 * @param response
 	 * @author zj
 	 * @date 2019年8月30日
 	 */
 	@RequestMapping(value = "/getSelectGroupInfoList")
-	public void getSelectGroupInfoList(HttpServletRequest request,
-			HttpServletResponse response ,Kurl query  ) {
+	public void getSelectGroupInfoList(HttpServletRequest request, HttpServletResponse response, Kurl query) {
 		// String blogid = request.getParameter("blogid");
 
 		/*
@@ -79,7 +84,6 @@ public class KurlController extends BaseController {
 		String rst = "";
 		try {
 
-
 			query.setPageCount(10000);
 			query.setVal1("1");
 			// 计数
@@ -87,17 +91,15 @@ public class KurlController extends BaseController {
 			if (user == null || (user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin)) {
 				query.setIsshow("1");
 			}
-			
 
 			String HTTP_PATH = ConfigReader.getInstance().getProperty("FILE_SVR_HTTP_OUTER_PATH");
 			String prepath = HTTP_PATH;
-			
-			query.setStart(0);
-			List<String> datas=kurlService.getUrlTreeSelectSecond(query);
 
-			Gson gs=new Gson();
-			rst=gs.toJson(datas);
-			
+			query.setStart(0);
+			List<String> datas = kurlService.getUrlTreeSelectSecond(query);
+
+			Gson gs = new Gson();
+			rst = gs.toJson(datas);
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -113,21 +115,21 @@ public class KurlController extends BaseController {
 			}
 
 		}
-		//rst = jsonOut.toString();
+		// rst = jsonOut.toString();
 		JsonUtil.responseOutWithJson(response, rst);
 
 	}
 
 	/**
 	 * 查询接口
+	 * 
 	 * @param request
 	 * @param response
 	 * @author zj
 	 * @date 2019年8月30日
 	 */
 	@RequestMapping(value = "/getShowInfoList")
-	public void getShowInfoList(HttpServletRequest request,
-			HttpServletResponse response) {
+	public void getShowInfoList(HttpServletRequest request, HttpServletResponse response) {
 		// String blogid = request.getParameter("blogid");
 
 		/*
@@ -155,7 +157,6 @@ public class KurlController extends BaseController {
 			query.setPage(curPage);
 			query.setPageCount(10000);
 			query.setVal1("1");
-			
 
 			// query.setIp(ip);
 			// query.setCity(city);
@@ -164,21 +165,32 @@ public class KurlController extends BaseController {
 
 			String HTTP_PATH = ConfigReader.getInstance().getProperty("FILE_SVR_HTTP_OUTER_PATH");
 			String prepath = HTTP_PATH;
-			Map<String, List<Kurl>> datas=kurlService.getKurlItemPageList(query);
+			Map<String, List<Kurl>> datas = kurlService.getKurlItemPageList(query);
 
 			Gson gs = new Gson();
 
 			JSONArray ja = new JSONArray();
+			int blogindex = 0;
+			int i = 0;
 			for (List<Kurl> item : datas.values()) {
-				JSONObject jo=new JSONObject();
+				JSONObject jo = new JSONObject();
 				jo.put("name", item.get(0).getUrl_type());
 				jo.put("val", gs.toJson(item));
 				ja.put(jo);
+
+				if (item.get(0).getUrl_type().equals("BLOG"))
+					blogindex = i;
+
+				i++;
 			}
+			// blog放到第一位
+			JSONObject blogDatas = (JSONObject) ja.get(blogindex);
+			ja.remove(blogindex);
+			ja.put(0, blogDatas);
 
 			int total = kurlService.getKurlPageListCount(query);
 
-		//	String jsStr = gs.toJson(infos);
+			// String jsStr = gs.toJson(infos);
 
 			jsonOut.put("val2", prepath);
 			jsonOut.put("ResponseCode", "200");
@@ -204,18 +216,17 @@ public class KurlController extends BaseController {
 		JsonUtil.responseOutWithJson(response, rst);
 
 	}
-	
-	
+
 	/**
 	 * select2 选择分类 初始列表查询
+	 * 
 	 * @param request
 	 * @param response
 	 * @author zj
 	 * @date 2019年1月15日
 	 */
 	@RequestMapping(value = "/getSelectInfoList")
-	public void getSelectInfoList(HttpServletRequest request,
-			HttpServletResponse response,Kurl query  ) {
+	public void getSelectInfoList(HttpServletRequest request, HttpServletResponse response, Kurl query) {
 		// String blogid = request.getParameter("blogid");
 
 		/*
@@ -231,23 +242,21 @@ public class KurlController extends BaseController {
 		String rst = "";
 		try {
 
-		/*	String url_type = jsonIN.optString("name");
-			// String dict_type = "url_type";
-
-			int pageCount = jsonIN.optInt("rows");// request.getParameter("pageCount");
-			int curPage = jsonIN.optInt("page");
-
-			Kurl query = new Kurl();
-			query.setPage(curPage);
-			query.setPageCount(10000);
-			query.setVal1("1");*/
-			
+			/*
+			 * String url_type = jsonIN.optString("name"); // String dict_type = "url_type";
+			 * 
+			 * int pageCount = jsonIN.optInt("rows");// request.getParameter("pageCount");
+			 * int curPage = jsonIN.optInt("page");
+			 * 
+			 * Kurl query = new Kurl(); query.setPage(curPage); query.setPageCount(10000);
+			 * query.setVal1("1");
+			 */
 
 			// query.setIp(ip);
 			// query.setCity(city);
 			// query.setUrl_type(dict_type);// (url_title);// (id);
-			//query.setUrl_name(url_type);// (url_name);
-			
+			// query.setUrl_name(url_type);// (url_name);
+
 			query.setPageCount(10000);
 			query.setVal1("1");
 			// 计数
@@ -255,31 +264,28 @@ public class KurlController extends BaseController {
 			if (user == null || (user.getUtype() != UserType.Root && user.getUtype() != UserType.Admin)) {
 				query.setIsshow("1");
 			}
-			
-			
-		
 
 			String HTTP_PATH = ConfigReader.getInstance().getProperty("FILE_SVR_HTTP_OUTER_PATH");
 			String prepath = HTTP_PATH;
-			
+
 			query.setStart(0);
-			Map<String, List<Kurl>> datas=kurlService.getKurlItemPageList(query);
+			Map<String, List<Kurl>> datas = kurlService.getKurlItemPageList(query);
 
 			Gson gs = new Gson();
 
 			JSONArray ja = new JSONArray();
-			int i=0;
+			int i = 0;
 			for (List<Kurl> item : datas.values()) {
-				JSONObject jo=new JSONObject();
+				JSONObject jo = new JSONObject();
 				jo.put("name", item.get(0).getUrl_type());
-				jo.put("id",i );
+				jo.put("id", i);
 				ja.put(jo);
 				i++;
 			}
 
 			int total = kurlService.getKurlPageListCount(query);
 
-		//	String jsStr = gs.toJson(infos);
+			// String jsStr = gs.toJson(infos);
 
 			jsonOut.put("val2", prepath);
 			jsonOut.put("ResponseCode", "200");
@@ -306,17 +312,16 @@ public class KurlController extends BaseController {
 
 	}
 
-	
 	/**
 	 * 友情链接-前台缓存
+	 * 
 	 * @param request
 	 * @param response
 	 * @author zj
 	 * @date 2018年5月21日
 	 */
 	@RequestMapping(value = "/getYQList")
-	public void getYQList(HttpServletRequest request,
-			HttpServletResponse response) {
+	public void getYQList(HttpServletRequest request, HttpServletResponse response) {
 
 		String data = request.getParameter("data");
 		JSONObject jsonIN;
@@ -325,15 +330,15 @@ public class KurlController extends BaseController {
 		String rst = "";
 		try {
 
-		//	jsonIN = new JSONObject(data);
+			// jsonIN = new JSONObject(data);
 
-			//String url_type = jsonIN.optString("name");
+			// String url_type = jsonIN.optString("name");
 			// String dict_type = "url_type";
 
-			String show= parseStringParam(request, "show");
-			
-			int pageCount =0 ;//jsonIN.optInt("rows");// request.getParameter("pageCount");
-			int curPage =100;// jsonIN.optInt("page");
+			String show = parseStringParam(request, "show");
+
+			int pageCount = 0;// jsonIN.optInt("rows");// request.getParameter("pageCount");
+			int curPage = 100;// jsonIN.optInt("page");
 
 			Kurl query = new Kurl();
 			query.setPage(1);
@@ -344,34 +349,27 @@ public class KurlController extends BaseController {
 			// query.setIp(ip);
 			// query.setCity(city);
 			// query.setUrl_type(dict_type);// (url_title);// (id);
-			//query.setUrl_name(url_type);// (url_name);
+			// query.setUrl_name(url_type);// (url_name);
 
-			
 			String key = "getYQList";
-		
-			List<Kurl> infos =(List<Kurl>)Kdata.getInstance().getCommonList(key);
-			
-			
+
+			List<Kurl> infos = (List<Kurl>) Kdata.getInstance().getCommonList(key);
 
 			if (infos == null || infos.size() == 0) {
 				try {
-					
-				infos = kurlService.getKurlPageList(query);
 
-				Kdata.getInstance().SavedCommonList(key, infos);
+					infos = kurlService.getKurlPageList(query);
+
+					Kdata.getInstance().SavedCommonList(key, infos);
 
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-			
-			
-			
-			
+
 			int total = kurlService.getKurlPageListCount(query);
-			//int total = infos.size();
-		
-		
+			// int total = infos.size();
+
 			String prepath = getImgHttpOutPath();
 			for (int i = 0; i < infos.size(); i++) {
 				Kurl d = infos.get(i);
@@ -406,18 +404,17 @@ public class KurlController extends BaseController {
 		JsonUtil.responseOutWithJson(response, rst);
 
 	}
-	
-	
+
 	/**
 	 * 友情链接-后台不缓存
+	 * 
 	 * @param request
 	 * @param response
 	 * @author zj
 	 * @date 2018年5月21日
 	 */
 	@RequestMapping(value = "/getYQListBack")
-	public void getYQListBack(HttpServletRequest request,
-			HttpServletResponse response) {
+	public void getYQListBack(HttpServletRequest request, HttpServletResponse response) {
 
 		String data = request.getParameter("data");
 		JSONObject jsonIN;
@@ -426,16 +423,15 @@ public class KurlController extends BaseController {
 		String rst = "";
 		try {
 
-		//	jsonIN = new JSONObject(data);
+			// jsonIN = new JSONObject(data);
 
-			//String url_type = jsonIN.optString("name");
+			// String url_type = jsonIN.optString("name");
 			// String dict_type = "url_type";
 
-			String show= parseStringParam(request, "show");
-			
-			
-			int pageCount = parseIntegerParam(request,"rows");// request.getParameter("pageCount");
-			int curPage =parseIntegerParam(request,"page");
+			String show = parseStringParam(request, "show");
+
+			int pageCount = parseIntegerParam(request, "rows");// request.getParameter("pageCount");
+			int curPage = parseIntegerParam(request, "page");
 			Kurl query = new Kurl();
 			query.setPage(curPage);
 			query.setPageCount(pageCount);
@@ -445,19 +441,15 @@ public class KurlController extends BaseController {
 			// query.setIp(ip);
 			// query.setCity(city);
 			// query.setUrl_type(dict_type);// (url_title);// (id);
-			//query.setUrl_name(url_type);// (url_name);
+			// query.setUrl_name(url_type);// (url_name);
 
-			
 			String key = "getYQList";
-		
-			List<Kurl>	infos = kurlService.getKurlPageList(query);
-			
-				
-			
+
+			List<Kurl> infos = kurlService.getKurlPageList(query);
+
 			int total = kurlService.getKurlPageListCount(query);
-			//int total = infos.size();
-		
-		
+			// int total = infos.size();
+
 			String prepath = getImgHttpOutPath();
 			for (int i = 0; i < infos.size(); i++) {
 				Kurl d = infos.get(i);
@@ -492,9 +484,7 @@ public class KurlController extends BaseController {
 		JsonUtil.responseOutWithJson(response, rst);
 
 	}
-	
-	
-	
+
 	/**
 	 * 页面-获取blog列表
 	 * 
@@ -507,8 +497,7 @@ public class KurlController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getInfoList")
-	public void getInfoList(HttpServletRequest request,
-			HttpServletResponse response) {
+	public void getInfoList(HttpServletRequest request, HttpServletResponse response) {
 		// String blogid = request.getParameter("blogid");
 
 		/*
@@ -531,7 +520,7 @@ public class KurlController extends BaseController {
 
 			int pageCount = jsonIN.optInt("rows");// request.getParameter("pageCount");
 			int curPage = jsonIN.optInt("page");
-			
+
 			String show = jsonIN.optString("show");
 
 			Kurl query = new Kurl();
@@ -540,33 +529,47 @@ public class KurlController extends BaseController {
 			query.setVal1("1");
 
 			query.setIsshow("1");
-	
-						// query.setUrl_type(dict_type);// (url_title);// (id);
-						query.setUrl_name(url_type);// (url_name);
 
-						String HTTP_PATH = ConfigReader.getInstance().getProperty("FILE_SVR_HTTP_OUTER_PATH");
-						String prepath = HTTP_PATH;
-						Map<String, List<Kurl>> datas=kurlService.getKurlItemPageList(query);
+			// query.setUrl_type(dict_type);// (url_title);// (id);
+			query.setUrl_name(url_type);// (url_name);
 
-						Gson gs = new Gson();
+			String HTTP_PATH = ConfigReader.getInstance().getProperty("FILE_SVR_HTTP_OUTER_PATH");
+			String prepath = HTTP_PATH;
+			Map<String, List<Kurl>> datas = kurlService.getKurlItemPageList(query);
 
-						JSONArray ja = new JSONArray();
-						for (List<Kurl> item : datas.values()) {
-							JSONObject jo=new JSONObject();
-							jo.put("name", item.get(0).getUrl_type());
-							jo.put("val", gs.toJson(item));
-							ja.put(jo);
-						}
+			Gson gs = new Gson();
 
-						int total = kurlService.getKurlPageListCount(query);
+			
+			JSONArray ja = new JSONArray();
+			int blogindex = 0;
+			int i = 0;
+			for (List<Kurl> item : datas.values()) {
+				JSONObject jo = new JSONObject();
+				jo.put("name", item.get(0).getUrl_type());
+				jo.put("val", gs.toJson(item));
+				ja.put(jo);
 
-					//	String jsStr = gs.toJson(infos);
+				if (item.get(0).getUrl_type().equals("BLOG"))
+					blogindex = i;
 
-						jsonOut.put("val2", prepath);
-						jsonOut.put("ResponseCode", "200");
-						jsonOut.put("ResponseMsg", "");
-						jsonOut.put("total", total);
-						jsonOut.put("datalist", ja.toString());
+				i++;
+			}
+			// blog放到第一位
+			JSONObject blogDatas = (JSONObject) ja.get(blogindex);
+			ja.remove(blogindex);
+			ja.put(0, blogDatas);
+			
+			
+
+			int total = kurlService.getKurlPageListCount(query);
+
+			// String jsStr = gs.toJson(infos);
+
+			jsonOut.put("val2", prepath);
+			jsonOut.put("ResponseCode", "200");
+			jsonOut.put("ResponseMsg", "");
+			jsonOut.put("total", total);
+			jsonOut.put("datalist", ja.toString());
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -595,9 +598,9 @@ public class KurlController extends BaseController {
 	 * @date 2016-6-22
 	 * @author zj
 	 */
+	@OutApiAuthorization(uType = UrlType.NeedAdmin)
 	@RequestMapping(value = "/addOrUpdate")
-	public void addOrUpdate(HttpServletRequest request,
-			HttpServletResponse response, HttpSession session) {
+	public void addOrUpdate(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		JSONObject jsonOut = new JSONObject();
 		String data = request.getParameter("data");
 		JSONObject jsonIN;
@@ -613,7 +616,7 @@ public class KurlController extends BaseController {
 			String val1 = jsonIN.optString("val1");
 			String desc_info = jsonIN.optString("desc_info");
 			String utype = jsonIN.optString("utype");
-			
+
 			String show = jsonIN.optString("isshow");
 			String icon = jsonIN.optString("icon");
 
@@ -627,6 +630,7 @@ public class KurlController extends BaseController {
 				query.setUrl_val(dic_key);
 				query.setPage(1);
 				query.setPageCount(10);
+				
 				int num = kurlService.getKurlPageListCount(query);
 				if (num > 0) {
 					// 一个type下的key是唯一的
@@ -635,6 +639,18 @@ public class KurlController extends BaseController {
 					JsonUtil.responseOutWithJson(response, jsonOut.toString());
 					return;
 				}
+				
+				//自动获取图标
+				if(icon==null||icon.equals(""))
+				{
+
+					int third = dic_key.indexOf("/", 8);// 第三个/
+					String realsiteurl = dic_key.substring(0, third);
+
+					String iconurl=iconUtil.getAndUploadSiteIcon(realsiteurl);
+					blog.setIcon(iconurl);
+				}
+				
 			}
 
 			if (recordid != 0) {
@@ -668,8 +684,6 @@ public class KurlController extends BaseController {
 			if (rst > 0) {
 
 				Kdata.getInstance().cleanrCommonList("");
-				
-				
 
 				jsonOut.put("ResponseCode", 200);
 				jsonOut.put("ResponseMsg", "OK");
@@ -701,9 +715,9 @@ public class KurlController extends BaseController {
 	 * @return
 	 * @date 2016-8-22
 	 */
+	@OutApiAuthorization(uType = UrlType.NeedAdmin)
 	@RequestMapping(value = "/del")
-	public @ResponseBody
-	Map delBanner(HttpServletRequest request) {
+	public @ResponseBody Map delBanner(HttpServletRequest request) {
 		Map res = new HashMap();
 		res.put("ResponseCode", "201");
 		res.put("ResponseMsg", "删除失败");
@@ -722,6 +736,52 @@ public class KurlController extends BaseController {
 			} else {
 				res.put("ResponseCode", "201");
 				res.put("ResponseMsg", "删除失败");
+			}
+		} catch (Exception e) {
+
+		}
+
+		return res;
+	}
+
+	/**
+	 * 获取链接icon
+	 * 
+	 * @param request
+	 * @return
+	 * @author zj
+	 * @date 2020年1月20日
+	 */
+	@OutApiAuthorization(uType = UrlType.NeedAdmin)
+	@RequestMapping(value = "/getIcon")
+	public @ResponseBody Map getIcon(HttpServletRequest request) {
+		Map res = new HashMap();
+		res.put("ResponseCode", "201");
+		res.put("ResponseMsg", "获取失败");
+		String siteurl = parseStringParam(request, "url");
+		JSONObject jsonIN;
+
+		try {
+			if (siteurl == null || !siteurl.startsWith("http")) {
+				res.put("ResponseCode", "201");
+				res.put("ResponseMsg", "获取失败,url为空");
+
+			} else {
+
+				// http://xxxx.com.cn/xxx
+
+				int third = siteurl.indexOf("/", 8);// 第三个/
+				siteurl = siteurl.substring(0, third);
+
+				String url = iconUtil.getAndUploadSiteIcon(siteurl);
+
+				if (url != null && !url.contains("fail")) {
+					res.put("ResponseCode", "200");
+					res.put("ResponseMsg", url);
+				} else {
+					res.put("ResponseCode", "201");
+					res.put("ResponseMsg", "获取失败");
+				}
 			}
 		} catch (Exception e) {
 

@@ -260,6 +260,9 @@ function setchartdata(jdata, title, ele) {
 		// msg(params.data.id);
 		// getDetailList(1,params.name,id);
 		
+		/*if(ele=="pchart6"||ele=="pchart7")
+			refreshHourTable(1, "spider_"+params.name, id);
+		else*/
 		refreshHourTable(1, params.name, id);
 		
 	});

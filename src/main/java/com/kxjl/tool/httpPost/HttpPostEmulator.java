@@ -195,6 +195,90 @@ public class HttpPostEmulator {
 		return strResponse;
 	}
 	
+	/**
+	 * 发送upload上传文件
+	 * @param serverUrl
+	 * @param generalFormFields
+	 * @param filedata
+	 * @param fileName
+	 * @return
+	 * @throws Exception
+	 * @author zj
+	 * @date 2020年1月20日
+	 */
+	public static String sendHttpPostRequestByInputStream(String serverUrl,
+			ArrayList<FormFieldKeyValuePair> generalFormFields,
+			byte[] filedata, String fileName) throws Exception {
+		// 向服务器发送post请求
+		URL url = new URL(serverUrl/* "http://127.0.0.1:8080/test/upload" */);
+		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+		// 发送POST请求必须设置如下两行
+		connection.setDoOutput(true);
+		connection.setDoInput(true);
+		connection.setUseCaches(false);
+		connection.setRequestMethod("POST");
+		connection.setRequestProperty("Connection", "Keep-Alive");
+		connection.setRequestProperty("Charset", "UTF-8");
+		connection.setRequestProperty("Content-Type",
+				"multipart/form-data; boundary=" + boundary);
+
+
+		OutputStream out = connection.getOutputStream();
+		
+	
+
+		// 1. 处理普通表单域(即形如key = value对)的POST请求
+		for (FormFieldKeyValuePair ffkvp : generalFormFields) {
+			out.write((twoHyphens + boundary + lineEnd).getBytes("utf-8"));
+			out.write(("Content-Disposition: form-data; name=\""+ffkvp.getKey()+"\""+ lineEnd).getBytes("utf-8"));
+			out.write((lineEnd).getBytes("utf-8"));
+			out.write((ffkvp.getValue()).getBytes("utf-8"));
+			out.write((lineEnd).getBytes("utf-8"));
+			
+			
+		}
+		// 2. 处理文件上传
+		//for (int i = 0; i < receiveFiles.length; i++) {
+			
+
+			//File mfile = receiveFiles[i];
+
+			out.write((twoHyphens + boundary + lineEnd).getBytes("utf-8"));
+			out.write(("Content-Disposition: form-data; name=\"file\";filename=\"" +fileName +"\"" + lineEnd).getBytes("utf-8"));
+			out.write(("Content-Type:application/octet-stream"+lineEnd).getBytes("utf-8"));
+			out.write((lineEnd).getBytes("utf-8"));
+		
+			int bytes = 0;
+			
+			out.write(filedata, 0, filedata.length);
+			
+			//mfile.getInputStream();
+			//out.write(mfile.getBytes(), 0, (int)mfile.getSize());
+		
+			out.write((lineEnd).getBytes("utf-8"));			
+
+		//}
+
+		// 3. 写结尾
+		out.write((twoHyphens + boundary + twoHyphens + lineEnd).getBytes("utf-8"));
+		out.flush();
+		out.close();
+
+		// 4. 从服务器获得回答的内容
+		String strLine = "";
+		String strResponse = "";
+
+		InputStream in = connection.getInputStream();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+		while ((strLine = reader.readLine()) != null) {
+			strResponse += strLine + "\n";
+		}
+		// System.out.print(strResponse);
+
+		return strResponse;
+	}
+	
 	
 	/**
 	 * 转发文件上传请求 ，

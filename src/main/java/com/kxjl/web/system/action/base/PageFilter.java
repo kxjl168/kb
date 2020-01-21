@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -354,7 +355,11 @@ public class PageFilter implements Filter {
 
 		// 黑名单过滤
 		if (commonService.isInBlackIPList(request))
+		{
+			//啥都不返回
+			//response2.setStatus(HttpStatus.SC_FORBIDDEN);
 			return;
+		}
 
 		/*
 		 * chain.doFilter(request, response); if(true) return;

@@ -23,9 +23,13 @@
 select log.*,b.title blogname  from user_action_log log left join blog_info b on log.blog_id=b.imei
  where
  type_first='${type_first}' 
-	<if test='type_second!=null and type_second!= "" '>
+
+ 	<if test='type_second!=null and type_second!= "spider" '>
  and type_second='${type_second}'
  </if>
+ 	<if test='type_second!=null and type_second == "spider" '>
+				and type_second like 'spider_%'
+		</if>
  
  <if test='userid !=null and userid != "" '>
  and userid=#{userid}
@@ -45,12 +49,19 @@ select log.*,b.title blogname  from user_action_log log left join blog_info b on
 
  where
  type_first='${type_first}' 
-	<if test='type_second!=null and type_second!= "" '>
+	
+ 	<if test='type_second!=null and type_second!= "spider" '>
  and type_second='${type_second}'
  </if>
+ 	<if test='type_second!=null and type_second == "spider" '>
+				and type_second like 'spider_%'
+		</if>
+ 
  <if test='userid !=null and userid != "" '>
  and userid=#{userid}
  </if>
+ 
+ 
 and 
 str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}')
 		
@@ -65,9 +76,12 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 		
 select city,userid,count(*) total_uv from user_action_log where
  type_first='${type_first}' 
-	<if test='type_second!=null and type_second!= "" '>
+	<if test='type_second!=null and type_second!= "spider" '>
  and type_second='${type_second}'
  </if>
+ 	<if test='type_second!=null and type_second == "spider" '>
+				and type_second like 'spider_%'
+		</if>
 
 and 
 str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}')
@@ -83,9 +97,12 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 	    select count(*) from (
 select city,userid,count(*) total_uv from user_action_log where 
 type_first='${type_first}' 
-	<if test='type_second!=null and type_second!= "" '>
+	<if test='type_second!=null and type_second!= "spider" '>
  and type_second='${type_second}'
  </if>
+ <if test='type_second!=null and type_second == "spider" '>
+				and type_second like 'spider_%'
+		</if>
  
 and 
 
