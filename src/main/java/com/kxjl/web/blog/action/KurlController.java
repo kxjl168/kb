@@ -539,7 +539,6 @@ public class KurlController extends BaseController {
 
 			Gson gs = new Gson();
 
-			
 			JSONArray ja = new JSONArray();
 			int blogindex = 0;
 			int i = 0;
@@ -558,8 +557,6 @@ public class KurlController extends BaseController {
 			JSONObject blogDatas = (JSONObject) ja.get(blogindex);
 			ja.remove(blogindex);
 			ja.put(0, blogDatas);
-			
-			
 
 			int total = kurlService.getKurlPageListCount(query);
 
@@ -630,7 +627,7 @@ public class KurlController extends BaseController {
 				query.setUrl_val(dic_key);
 				query.setPage(1);
 				query.setPageCount(10);
-				
+
 				int num = kurlService.getKurlPageListCount(query);
 				if (num > 0) {
 					// 一个type下的key是唯一的
@@ -639,18 +636,17 @@ public class KurlController extends BaseController {
 					JsonUtil.responseOutWithJson(response, jsonOut.toString());
 					return;
 				}
-				
-				//自动获取图标
-				if(icon==null||icon.equals(""))
-				{
+
+				// 自动获取图标
+				if (icon == null || icon.equals("")) {
 
 					int third = dic_key.indexOf("/", 8);// 第三个/
 					String realsiteurl = dic_key.substring(0, third);
 
-					String iconurl=iconUtil.getAndUploadSiteIcon(realsiteurl);
+					String iconurl = iconUtil.getAndUploadSiteIcon(realsiteurl);
 					blog.setIcon(iconurl);
 				}
-				
+
 			}
 
 			if (recordid != 0) {
@@ -770,8 +766,9 @@ public class KurlController extends BaseController {
 
 				// http://xxxx.com.cn/xxx
 
-				int third = siteurl.indexOf("/", 8);// 第三个/
-				siteurl = siteurl.substring(0, third);
+				int third = siteurl.indexOf("/", 8);// 第三个/ 不是根目录
+				if (third > 0)
+					siteurl = siteurl.substring(0, third);
 
 				String url = iconUtil.getAndUploadSiteIcon(siteurl);
 

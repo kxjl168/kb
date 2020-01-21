@@ -68,8 +68,8 @@ public class RssManagerController {
 
 	@Autowired
 	RssPageListService rssListService;
-	
-	private Logger logger=LoggerFactory.getLogger(RssManagerController.class);
+
+	private Logger logger = LoggerFactory.getLogger(RssManagerController.class);
 
 	@RequestMapping("/manager")
 	public String manager(HttpServletRequest request, Model model, Map<String, Object> maps) {
@@ -127,7 +127,7 @@ public class RssManagerController {
 	 * @param rssmanager
 	 * @return
 	 */
-	@OutApiAuthorization(uType=UrlType.NeedAdmin)
+	@OutApiAuthorization(uType = UrlType.NeedAdmin)
 	@RequestMapping("/saveOrUpdate")
 	// @ManagerActionLog(operateDescribe="保存修改Rss订阅",operateFuncType=FunLogType.SaveOrUpdate,operateModelClassName=RssManagerMapper.class)
 	@ResponseBody
@@ -216,9 +216,7 @@ public class RssManagerController {
 	public String rssfreshAll(RssManager item) {
 
 		JSONObject jsonObject = new JSONObject();
-		
-		
-	
+
 		try {
 
 			// RssManager rssmanager=rssmanagerService.selectRssManagerById(item.getId());
@@ -233,15 +231,13 @@ public class RssManagerController {
 
 						for (int i = 0; i < rssMlist.size(); i++) {
 
-							//if (rssMlist.get(i).getAutoRss().equals("1")) {
-								rssmanagerService.refreshRssAndUpdateList(rssMlist.get(i));
-								if (jsonObject.optBoolean("bol")) {
+							// if (rssMlist.get(i).getAutoRss().equals("1")) {
+							rssmanagerService.refreshRssAndUpdateList(rssMlist.get(i));
+							if (jsonObject.optBoolean("bol")) {
 
-								}
-							//}
+							}
+							// }
 						}
-						
-					
 
 					} catch (Exception e) {
 
@@ -257,11 +253,10 @@ public class RssManagerController {
 		// assert jsonObject != null;
 		return jsonObject.toString();
 	}
-	
-	
-	
+
 	/**
 	 * 清理3个月以上的订阅数据，非收藏数据，直接删除内容
+	 * 
 	 * @param item
 	 * @return
 	 * @author zj
@@ -273,9 +268,7 @@ public class RssManagerController {
 	public String rssCleanAll() {
 
 		JSONObject jsonObject = new JSONObject();
-		
-		
-	
+
 		try {
 
 			// RssManager rssmanager=rssmanagerService.selectRssManagerById(item.getId());
@@ -286,10 +279,9 @@ public class RssManagerController {
 				public void run() {
 					try {
 
-						RssPageList query=new RssPageList();
-						String days=ConfigReader.getInstance().getProperty("deldays", "90" ); //默认三个月
+						RssPageList query = new RssPageList();
+						String days = ConfigReader.getInstance().getProperty("deldays", "90"); // 默认三个月
 						rssListService.cleanAllRssByMonth(days);
-
 
 					} catch (Exception e) {
 
@@ -305,10 +297,10 @@ public class RssManagerController {
 		// assert jsonObject != null;
 		return jsonObject.toString();
 	}
-	
-	
+
 	/**
 	 * 定时任务，刷新
+	 * 
 	 * @return
 	 * @author zj
 	 * @date 2019年2月2日
@@ -318,9 +310,9 @@ public class RssManagerController {
 		JSONObject jsonObject = new JSONObject();
 		try {
 
-			if(ConfigReader.getInstance().getProperty("rssfreshAll", "false").equals("false"))
+			if (ConfigReader.getInstance().getProperty("rssfreshAll", "false").equals("false"))
 				return "";
-			
+
 			logger.error("定时刷新RSS开始...");
 			new Thread(new Runnable() {
 
@@ -333,24 +325,22 @@ public class RssManagerController {
 						for (int i = 0; i < rssMlist.size(); i++) {
 
 							try {
-								
-						
-								if (rssMlist.get(i).getAutoRss().equals("1")) {
-								rssmanagerService.refreshRssAndUpdateList(rssMlist.get(i));
-								if (jsonObject.optBoolean("bol")) {
 
+								if (rssMlist.get(i).getAutoRss().equals("1")) {
+									rssmanagerService.refreshRssAndUpdateList(rssMlist.get(i));
+									if (jsonObject.optBoolean("bol")) {
+
+									}
 								}
-							}
 							} catch (Exception e) {
 								logger.error(e.getMessage());
 								continue;
 							}
 						}
-						
+
 						logger.error("定时刷新RSS完成...");
-						
-						if (ConfigReader.getInstance().getProperty("debug", "false").equals("true"))
-						{
+
+						if (ConfigReader.getInstance().getProperty("debug", "false").equals("true")) {
 							logger.info("定时刷新RSS完成！");
 						}
 
@@ -368,8 +358,6 @@ public class RssManagerController {
 		// assert jsonObject != null;
 		return jsonObject.toString();
 	}
-	
-	
 
 	@RequestMapping("/selectrssmanager")
 	@ResponseBody

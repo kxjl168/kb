@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.Icon;
 
 import org.apache.http.impl.cookie.BasicClientCookie;
+
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +20,7 @@ import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.tool.httpPost.HttpSendPost;
 import com.kxjl.web.system.action.FileUploadController;
 
-import us.codecraft.webmagic.Page;
+
 import us.codecraft.webmagic.selector.Html;
 
 /**
@@ -36,7 +37,7 @@ public class IconUtil {
 	@Autowired
 	FileUploadController fileUploadController;
 	
-	private static Logger log=LoggerFactory.getLogger(Icon.class);
+	private static Logger log=LoggerFactory.getLogger(IconUtil.class);
 
 	public static void main(String[] args) {
 		IconUtil iu = new IconUtil();

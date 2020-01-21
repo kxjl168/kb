@@ -25,6 +25,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 import org.json.JSONObject;
+import org.slf4j.LoggerFactory;
 
 import com.kxjl.tool.httpPost.HttpSendPost;
 import com.kxjl.tool.httpPost.SendPostRequest;
@@ -32,6 +33,10 @@ import com.kxjl.tool.utils.JEscape;
 
 public class test {
 
+	private static Logger log1=Logger.getLogger(test.class);
+	private static org.slf4j.Logger log2=LoggerFactory.getLogger(test.class);
+	
+	
 	public static void main(String args[]) {
 		// testLogin();
 
@@ -73,7 +78,17 @@ public class test {
 
 		// moneytest();
 
-		testicon();
+		//testicon();
+		
+		log1.info("log1.info");
+		log1.warn("log1.warn");
+		log1.error("log1.error");
+		log1.debug("log1.debug");
+		
+		log2.info("log2.info");
+		log2.warn("log2.warn");
+		log2.error("log2.error");
+		log2.debug("info2.debug");
 	}
 
 	private static void moneytest() {
