@@ -57,14 +57,14 @@ function init() {
 	
 	});
 
-	initQuery();
+/*	initQuery();*/
 	
 	
 	setTimeout(function() {
 		var tp=window.location.hash;
 		window.location.hash="";
 		window.location.hash=tp;
-	}, 50);
+	}, 750);
 	
 
 };
