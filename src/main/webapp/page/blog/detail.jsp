@@ -31,6 +31,8 @@
 /*宽度全屏*/
 /* .modal-dialog{position:absolute;width:auto;margin:2.5vh auto;left:0;right:0;} */
 
+/*blog 编辑 icon选择被遮盖*/
+
   </style>
 
 		</head>
@@ -78,7 +80,7 @@
 						
 						</div>
 						
-						<div class="form-group   ">
+						<div class="form-group blogtypeselect  ">
 						
 						<div class=" nopadding">
 							 <div class="control-label padding-top-0 col-sm-1 col-xs-12 ">文章类型：</div>
@@ -168,7 +170,7 @@
 							</div>
 						</div>
 
-						<div class=" form-group   ">
+						<div class=" form-group editor   ">
 								<div class="control-label padding-top-0 col-sm-1 col-xs-12 ">内容：</div>
 								<div class="col-sm-9 col-xs-12 text-right ">
 								 <textarea   id="s_context" name= "s_context"   placeholder=" "></textarea>
@@ -242,8 +244,25 @@
 			<script type="text/javascript" src="detail.js"></script>
 
 	<script type="text/javascript" src="blogSelect2.js"></script>
-			
+	
+	
+	<script type="text/javascript" src="mediaPlugin.js"></script>
 
+			
+<style>
+/*blog 编辑 icon选择被遮盖*/
+.select2-drop, .select2-dropdown, .select2-container 
+{
+	z-index: 12000!important;
+}
+
+
+.blogtypeselect .select2-drop,.blogtypeselect .select2-dropdown,.blogtypeselect .select2-container 
+{
+z-index:10!important;
+}
+
+</style>
 
 </body >
 </html >

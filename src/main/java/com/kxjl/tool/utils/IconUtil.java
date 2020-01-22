@@ -147,8 +147,16 @@ public class IconUtil {
 			headers.put("Content-type", "image/x-icon");
 			headers.put("Accept", "image/webp,image/apng,image/*,*/*;q=0.8");
 
-			byte[] picDats = HttpSendPost.sendHttpJSONDataNoSSLBackByte(null, true, "", true, imgurl, "", headers, cks);
+			
+			byte[] picDats =null;
+			
+			try {
+				picDats=HttpSendPost.sendHttpJSONDataNoSSLBackByte(null, true, "", true, imgurl, "", headers, cks);
 
+			} catch (Exception e) {
+				return "fail:无图标";
+			}
+			
 			for (byte b : picDats) {
 				// System.out.print(b + ",");
 			}

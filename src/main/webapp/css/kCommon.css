@@ -1988,7 +1988,7 @@ color:#ecb866!important;
     border: 0px;
     padding: 0px;
     margin: 0 auto;
-    float: left;
+  /*   float: left; */
     margin-top: 5px;
 }
 .rheadpic{
@@ -2503,4 +2503,5 @@ background-color:#777;
 .padding5{
 	padding: 5px!important;
 }
+
 

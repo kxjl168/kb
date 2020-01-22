@@ -58,14 +58,15 @@ function init() {
 	});
 
 	initQuery();
+	
+	
+	setTimeout(function() {
+		var tp=window.location.hash;
+		window.location.hash="";
+		window.location.hash=tp;
+	}, 50);
+	
 
-	/*  var http = getImUrl();
-	SZUMWS(http + "blog/sabout.action","",
-			function succsess(json) {
-			}, function error(data) {
-			}, false, false
-
-	);*/
 };
 
 

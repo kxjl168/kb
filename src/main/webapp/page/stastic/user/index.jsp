@@ -85,7 +85,7 @@
 								<div class="row  form-group margin-bottom-5">
 									<div class=" col-md-6  col-xs-12  ">
 										<div
-											class="control-label padding-top-0 col-xs-4 col-md-4 col-lg-4 ">不显示我的访问：</div>
+											class="control-label padding-top-0 col-xs-4 col-md-4 col-lg-4 ">不显示我：</div>
 										<div class="col-md-6 col-xs-8 text-right ">
 											<input id="type_second" name="type_second"  checked="checked"
 												type="checkbox" class="mcheck form-control">
@@ -94,10 +94,19 @@
 
 									<div class=" col-md-6  col-xs-12  ">
 										<div
-											class="control-label padding-top-0 col-xs-4 col-md-4 col-lg-4 ">只显示详情页面访问：</div>
+											class="control-label padding-top-0 col-xs-4 col-md-4 col-lg-4 ">显示访问：</div>
 										<div class="col-md-6 col-xs-8 text-right ">
-											<input id="type_first" name="type_first"  checked="checked"
-												type="checkbox" class="mcheck form-control">
+											<input id="type_first1" name="type_first"  
+												type="checkbox" value="homepage" class="type_first mcheck form-control">首页&nbsp;
+												<input id="type_first2" name="type_first"  checked="checked"
+												type="checkbox" value="detailpag" class="type_first mcheck form-control">详情&nbsp;
+												<input id="type_first3" name="type_first"  checked="checked"
+												type="checkbox" value="G搜索" class="type_first mcheck form-control">搜索&nbsp;
+												<input id="type_first4" name="type_first"  checked="checked"
+												type="checkbox" value="about" class="type_first mcheck form-control">关于&nbsp;
+												<input id="type_first5" name="type_first"  
+												type="checkbox" value="rss" class="type_first mcheck form-control">Rss&nbsp;
+												
 										</div>
 									</div>
 								</div>

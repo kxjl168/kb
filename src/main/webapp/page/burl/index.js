@@ -260,14 +260,14 @@ function init() {
 							msg("获取成功");
 
 						} else {
-							msg(data);
+							error(data);
 						}
 						/*
 						 * if (fucOnFinished != null) fucOnFinished();
 						 */
 
 					}, function error(data) {
-						msg("网络异常!");
+						error("网络异常!");
 						// $("#myModal2").modal('hide');
 
 						/*

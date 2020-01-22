@@ -114,7 +114,7 @@
 																					ng-click="img(x)"><i title="获取icon" class="fa fa-image text-success"></i></a>
 <a
 																					href="javascript:void(0)" class="text-warning"
-																					ng-click="del(x)"><i title="删除" class="fa fa-trash text-error"></i></a>】
+																					ng-click="del(x)"><i title="删除" class="fa fa-trash  text-danger"></i></a>】
 																			</div>
 
 																		</div>

@@ -53,10 +53,10 @@ CKEDITOR.editorConfig = function( config ) {
 	
 	config.toolbarGroups = [
 	                		{ name: 'links', groups: [ 'links' ] },
-	                		
+	                		{ name: 'insert', groups: [ 'insert' ] },
 	                		/*{ name: 'forms', groups: [ 'forms' ] },*/
 	                		{ name: 'others', groups: [ 'others' ] },
-	                		{ name: 'insert', groups: [ 'insert' ] },
+	                	
 	                		{ name: 'colors', groups: [ 'colors' ] },
 	                		{ name: 'styles', groups: [ 'styles' ] },
 	                		'/',

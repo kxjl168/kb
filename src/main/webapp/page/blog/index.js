@@ -188,7 +188,7 @@ function initDetailTable() {
         columns: [
         	{
                 field: 'title',
-                title: '文章标题',
+                title: '标题',
                 align: 'left',
                 valign: 'middle',
                 visible:true
@@ -221,7 +221,7 @@ function initDetailTable() {
             },
             {
                 field: 'blog_type_name',
-                title: '文章类型',
+                title: '类型',
                 align: 'left',
                 valign: 'middle',
               
@@ -235,7 +235,7 @@ function initDetailTable() {
             },
             {
                 field: 'view_nums',
-                title: '点击次数',
+                title: '点击',
                 align: 'left',
                 valign: 'middle',
                 sortable : true
@@ -243,7 +243,7 @@ function initDetailTable() {
             },
             {
                 field: 'spider_nums',
-                title: '爬取次数',
+                title: '爬取',
                 align: 'left',
                 valign: 'middle',
                 sortable : true
@@ -251,7 +251,7 @@ function initDetailTable() {
             },
             {
                 field: 'replay_nums',
-                title: '评论次数',
+                title: '评论',
                 align: 'left',
                 valign: 'middle',
                 sortable : true
@@ -275,8 +275,8 @@ function initDetailTable() {
 
 
 function modifyAndDeleteButton(value, row, index) {
-	 var html='<a href="javascript:void(0)" id="modify" class="text-info" >修改</a>';
-     html+='<a href="javascript:void(0)"  id="delete" class="text-warning" >删除</a>';
+	 var html='<a href="javascript:void(0)" id="modify" class="text-info" ><i class="fa fa-edit" title="修改"></i></a>&nbsp;';
+     html+='<a href="javascript:void(0)"  id="delete" class="text-danger" ><i class="fa fa-trash text-danger" title="删除"></i></a>';
      
     return html;
 };

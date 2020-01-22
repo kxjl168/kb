@@ -641,7 +641,9 @@ public class KurlController extends BaseController {
 				if (icon == null || icon.equals("")) {
 
 					int third = dic_key.indexOf("/", 8);// 第三个/
-					String realsiteurl = dic_key.substring(0, third);
+					String realsiteurl = dic_key;
+					if (third > 0)
+						realsiteurl = dic_key.substring(0, third);
 
 					String iconurl = iconUtil.getAndUploadSiteIcon(realsiteurl);
 					blog.setIcon(iconurl);
@@ -772,9 +774,17 @@ public class KurlController extends BaseController {
 
 				String url = iconUtil.getAndUploadSiteIcon(siteurl);
 
-				if (url != null && !url.contains("fail")) {
-					res.put("ResponseCode", "200");
-					res.put("ResponseMsg", url);
+				if (url != null) {
+					if (url.contains("fail")) {
+						res.put("ResponseCode", "201");
+						res.put("ResponseMsg", url);
+					} else if (url.equals("")) {
+						res.put("ResponseCode", "201");
+						res.put("ResponseMsg", "未获取到图标:"+url);
+					} else {
+						res.put("ResponseCode", "200");
+						res.put("ResponseMsg", url);
+					}
 				} else {
 					res.put("ResponseCode", "201");
 					res.put("ResponseMsg", "获取失败");

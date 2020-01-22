@@ -18,33 +18,29 @@ $(function() {
 	initCKPlugin();
 	
 	initTypeSelect();
-	//alert( escape("$#x"));
+	// alert( escape("$#x"));
 	
 	var smile='😀';
 	
-	//alert( $kchar.codePointAt(smile));
+	// alert( $kchar.codePointAt(smile));
 	
-	/*var high=smile.charCodeAt(0);
-	var low=smile.charCodeAt(1);
-	// alert(CKEDITOR.tools.htmlEncode('😀'));
-	
-	//alert(high+" "+low); 
-	
-	//d83d de00
-	//alert(high.toString(16)+" "+low.toString(16)); 
-	
-	   var MIN_SUPPLEMENTARY_CODE_POINT = 0x010000;
-	    var MIN_HIGH_SURROGATE = '\uD800'.charCodeAt(0);
-	    var MIN_LOW_SURROGATE  = '\uDC00'.charCodeAt(0);
-	 var codept= ((high << 10) + low) + (MIN_SUPPLEMENTARY_CODE_POINT
-             - (MIN_HIGH_SURROGATE << 10)
-             - MIN_LOW_SURROGATE);
-	 
-	 alert(codept.toString(16));
-	
-	 
-//	alert(unescape('😀'));
-*/
+	/*
+	 * var high=smile.charCodeAt(0); var low=smile.charCodeAt(1); //
+	 * alert(CKEDITOR.tools.htmlEncode('😀'));
+	 * 
+	 * //alert(high+" "+low);
+	 * 
+	 * //d83d de00 //alert(high.toString(16)+" "+low.toString(16));
+	 * 
+	 * var MIN_SUPPLEMENTARY_CODE_POINT = 0x010000; var MIN_HIGH_SURROGATE =
+	 * '\uD800'.charCodeAt(0); var MIN_LOW_SURROGATE = '\uDC00'.charCodeAt(0);
+	 * var codept= ((high << 10) + low) + (MIN_SUPPLEMENTARY_CODE_POINT -
+	 * (MIN_HIGH_SURROGATE << 10) - MIN_LOW_SURROGATE);
+	 * 
+	 * alert(codept.toString(16));
+	 * 
+	 *  // alert(unescape('😀'));
+	 */
 
 	var $scope = angular.element(ngSection).scope();
 	
@@ -55,6 +51,7 @@ $(function() {
 
 /**
  * 根据一组图片计算宽度比例
+ * 
  * @param imgs
  * @returns
  */
@@ -64,9 +61,9 @@ function CacuwidthArray(ay,totalwidth){
 	
 	$.each(ay,function(index,item){
 
-		//整体占比
+		// 整体占比
 		item.flexgrow= Math.floor((item.hpw/totalwidth) * 10000) / 10000;
-		//ay[index]=item;
+		// ay[index]=item;
 	});
 
 	return ay;
@@ -106,7 +103,7 @@ function reCacuPicWidth(fid,width,height)
 		data.dataEle=item;
 		
 		
-		//自身宽高比-高度相同情况下，各自缩放比例
+		// 自身宽高比-高度相同情况下，各自缩放比例
 		data.hpw=  Math.floor((data.width/data.height) * 10000) / 10000;
 		data.fid=$(item).attr('fid');
 		
@@ -156,7 +153,7 @@ function initCKPlugin()
 	            	
 	            	$scope.save(null,null,function(){
 						
-						//$scope.getList();
+						// $scope.getList();
 						msg("保存成功！");
 					});
 	            	});	
@@ -176,19 +173,19 @@ function initCKPlugin()
 	
 	
 	$kfile.init({
-		fileUploadname:"fileUploadURL", //上传文件的name
-		httppath:$("#httppath").val(),  //img -static目录前缀
+		fileUploadname:"fileUploadURL", // 上传文件的name
+		httppath:$("#httppath").val(),  // img -static目录前缀
 		isimg:true,
 		filesufix:'png,jpg,gif,jpeg,',
-		maxFileSize:5*1024*1024,//5M
-		maximgupload : 1,//最多可上传图片数量
-		uploadurl:basePath + '/UploadFileXhr.action',//上传图片action url
-		container:$("body").find('#upimgs'), //图片容器
-		cleanpic:false,//再次弹出时是否清除图片显示
+		maxFileSize:5*1024*1024,// 5M
+		maximgupload : 1,// 最多可上传图片数量
+		uploadurl:basePath + '/UploadFileXhr.action',// 上传图片action url
+		container:$("body").find('#upimgs'), // 图片容器
+		cleanpic:false,// 再次弹出时是否清除图片显示
 		uploaddonecallback:function(obj,align,width,imgwidth,imgheight){
 			var htmlData=CKEDITOR.instances.s_context.getData();
 			var appEndData='<img src="'+obj.FileUrl+'" orisrc="'+obj.FileUrl2+'" fid="'+obj.fileid+'"  class="img-responsive " onclick="showOriImg()"  >';
-			//var theData=htmlData+appEndData;
+			// var theData=htmlData+appEndData;
 			 var ele=CKEDITOR.dom.element.createFromHtml(appEndData);
 			
 			CKEDITOR.instances.s_context.insertElement(ele);
@@ -196,34 +193,38 @@ function initCKPlugin()
 			var fid=obj.fileid;
 			
 			setTimeout(function() {
-				/*var htmlData=CKEDITOR.instances.s_context.getData();
-				var eleData=$("<div>"+ htmlData+"</div>");
-				$(eleData).find('img[fid="'+fid+'"]').css("display","flex");
-				$(eleData).find('img[fid="'+fid+'"]').css("flex-grow",width/100);
-				$(eleData).find('img[fid="'+fid+'"]').css("width",width+"px");
-				$(eleData).find('img[fid="'+fid+'"]').attr("wd",width);
-				
-				$(eleData).find('img[fid="'+fid+'"]').parent().css("display","flex");
-			
-				
-				CKEDITOR.instances.s_context.setData(	$(eleData).html());*/
+				/*
+				 * var htmlData=CKEDITOR.instances.s_context.getData(); var
+				 * eleData=$("<div>"+ htmlData+"</div>");
+				 * $(eleData).find('img[fid="'+fid+'"]').css("display","flex");
+				 * $(eleData).find('img[fid="'+fid+'"]').css("flex-grow",width/100);
+				 * $(eleData).find('img[fid="'+fid+'"]').css("width",width+"px");
+				 * $(eleData).find('img[fid="'+fid+'"]').attr("wd",width);
+				 * 
+				 * $(eleData).find('img[fid="'+fid+'"]').parent().css("display","flex");
+				 * 
+				 * 
+				 * CKEDITOR.instances.s_context.setData( $(eleData).html());
+				 */
 				
 				reCacuPicWidth(fid,imgwidth,imgheight);
 			}, 40);
 			
 		},
 		okcallback:function(obj,align,width){
-		/*var htmlData=CKEDITOR.instances.s_context.getData();
-		var eleData=$("<div>"+ htmlData+"</div>");
-		$(eleData).find('img[fid="'+$(obj).val()+'"]').css("display","flex");
-		$(eleData).find('img[fid="'+$(obj).val()+'"]').css("flex-grow",width/100);
-		$(eleData).find('img[fid="'+$(obj).val()+'"]').css("width",width+"px");
-		$(eleData).find('img[fid="'+$(obj).val()+'"]').attr("wd",width);
-		
-		$(eleData).find('img[fid="'+$(obj).val()+'"]').parent().css("display","flex");
-	
-		
-		CKEDITOR.instances.s_context.setData(	$(eleData).html());*/
+		/*
+		 * var htmlData=CKEDITOR.instances.s_context.getData(); var eleData=$("<div>"+
+		 * htmlData+"</div>");
+		 * $(eleData).find('img[fid="'+$(obj).val()+'"]').css("display","flex");
+		 * $(eleData).find('img[fid="'+$(obj).val()+'"]').css("flex-grow",width/100);
+		 * $(eleData).find('img[fid="'+$(obj).val()+'"]').css("width",width+"px");
+		 * $(eleData).find('img[fid="'+$(obj).val()+'"]').attr("wd",width);
+		 * 
+		 * $(eleData).find('img[fid="'+$(obj).val()+'"]').parent().css("display","flex");
+		 * 
+		 * 
+		 * CKEDITOR.instances.s_context.setData( $(eleData).html());
+		 */
 		
 		reCacuPicWidth($(obj).val(),0,0);
 		
@@ -245,10 +246,10 @@ function initCKPlugin()
 	            exec: function( editor ) {
 	            	
 	            	var selection = CKEDITOR.instances.s_context.getSelection();
-	            	//if(selection.getType()==3){
-	            	//var img=$( selection.getSelectedElement().$ );
-	            	//$kfile.get("upimgs").showpre(img.attr("src"));
-	            	//}
+	            	// if(selection.getType()==3){
+	            	// var img=$( selection.getSelectedElement().$ );
+	            	// $kfile.get("upimgs").showpre(img.attr("src"));
+	            	// }
 	            	
 	            	$kfile.get("upimgs").uploadimg( $kfile.get("upimgs").container.find(".gdimg") );
 	            }
@@ -272,7 +273,7 @@ function initCKPlugin()
                 	
                 		
                 				);
-            },null, null, 1);//优先级1
+            },null, null, 1);// 优先级1
 	        
 	    }
 	});
@@ -289,7 +290,8 @@ function initCKPlugin()
 	CKEDITOR.plugins.add( pluginname3, {
 		 
 	    init: function( editor ) {
-	    	//editor.addContentsCss && editor.addContentsCss(basePath+"/css/kCommon.css");
+	    	// editor.addContentsCss &&
+			// editor.addContentsCss(basePath+"/css/kCommon.css");
 	    	editor.addCommand( cmd_name3, {
 	            exec: function( editor ) {
 	            	
@@ -354,7 +356,8 @@ function initCKPlugin()
 		    			block.element.addClass( 'cke_kemojipanel' );
 		    			block.element.setHtml( htmlc);
 		    			
-		    			//block.element.getDocument().getBody().setStyle( 'overflow', 'hidden' );
+		    			// block.element.getDocument().getBody().setStyle(
+						// 'overflow', 'hidden' );
 
 		    			CKEDITOR.ui.fire( 'ready', this );
 
@@ -364,7 +367,8 @@ function initCKPlugin()
 		    			
 		    		},
 
-		    		// The automatic colorbox should represent the real color (https://dev.ckeditor.com/ticket/6010)
+		    		// The automatic colorbox should represent the real color
+					// (https://dev.ckeditor.com/ticket/6010)
 		    		onOpen: function() {
 
 		    		}
@@ -418,25 +422,66 @@ function initCKPlugin()
 	
 	
 	
+	var pluginnameMedia="kmedia";
+	var cmd_nameMedia="cmd_media";
+	var btn_nameMedia="btn_media";
+	CKEDITOR.plugins.add( pluginnameMedia, {
+		 
+	    init: function( editor ) {
+
+	      /*
+			 * editor.addCommand( cmd_nameMedia, { exec: function( editor ) {
+			 * 
+			 * //CKEDITOR.dialog.add( 'k_mediadiag',this.path +
+			 * "mediaPlugin.js");
+			 * 
+			 * new CKEDITOR.dialogCommand( 'k_mediadiag' ) } });
+			 */
+	        
+	    	editor.addCommand(cmd_nameMedia, new CKEDITOR.dialogCommand( 'k_mediadiag' ) );
+	        
+	        
+	        editor.ui.addButton( btn_nameMedia, {
+	            label: '嵌入音频',
+	            command:cmd_nameMedia,
+	            toolbar: 'insert',
+	            icon: basePath+'/images/gita.jpg',
+	        });
+	        
+	        CKEDITOR.dialog.add( 'k_mediadiag','' );
+	        
+	     /*   editor.on("doubleclick", function(a) {
+                var element = a.data.element;
+                
+               // if(element.getAscendant('audio', true)){
+                	  return { abbrItem: CKEDITOR.TRISTATE_OFF };
+               // }
+	        });*/
+	        
+	    }
+	});
+	
+	
+	
 	
 	
 
 
-	CKEDITOR.morePluginnames=pluginname+","+pluginname2+","+pluginname3+","+pluginname4;
+	CKEDITOR.morePluginnames=pluginname+","+pluginname2+","+pluginname3+","+pluginname4+","+pluginnameMedia;
 	CKEDITOR.removePlugins="image";
 	$("#s_context").ckeditor();
 	
-/*	
-	if(CKEDITOR.instances.s_context.addContentsCss)
-		{
-		CKEDITOR.instances.s_context.addContentsCss(basePath+"/kb/css/KCommon.css");
-		}
-	*/
+/*
+ * if(CKEDITOR.instances.s_context.addContentsCss) {
+ * CKEDITOR.instances.s_context.addContentsCss(basePath+"/kb/css/KCommon.css"); }
+ */
 
-	//CKEDITOR.config.extraPlugins= pluginname+',codesnippet,colorbutton,font,liststyle,copyformatting';
-	/*CKEDITOR.replace( 's_context', {
-		extraPlugins: pluginname+',codesnippet,colorbutton,font,liststyle,copyformatting',
-	});*/
+	// CKEDITOR.config.extraPlugins=
+	// pluginname+',codesnippet,colorbutton,font,liststyle,copyformatting';
+	/*
+	 * CKEDITOR.replace( 's_context', { extraPlugins:
+	 * pluginname+',codesnippet,colorbutton,font,liststyle,copyformatting', });
+	 */
 	
 	
 };
@@ -549,7 +594,7 @@ function init() {
 								$('#en_type').get(0).selectedIndex = 1;
 						
 								$scope.en_type = $("#en_type").val();
-								//changetype();
+								// changetype();
 						
 							}, 30);
 
@@ -701,19 +746,21 @@ function init() {
 										
 										$scope.s_tags =item.tags;
 										$scope.s_context =unescape(item.context);
-										//$("#s_context").val(unescape(item.context) );
+										// $("#s_context").val(unescape(item.context)
+										// );
 										
 										setTimeout(function() {
 											$("#s_context").val(unescape(item.context) );	
 										}, 250);
 										
 										
-										//select2 类型
+										// select2 类型
 										var option = new Option(item.blog_type_name, item.blog_type,
 												true, true);
 										$("#mType").append($(option)).trigger('change');
 
-										// manually trigger the `select2:select` event
+										// manually trigger the `select2:select`
+										// event
 										$("#mType").trigger({
 											type : 'select2:select',
 											params : {
@@ -730,7 +777,7 @@ function init() {
 										
 									
 
-									//	$("#myModal2").modal('show');
+									// $("#myModal2").modal('show');
 
 									} else {
 										msg(message);
@@ -800,18 +847,17 @@ function init() {
 							window.location.href=http2+"page/blog/";
 							
 						}, 200);
-						//$("#myModal2").modal('hide');
+						// $("#myModal2").modal('hide');
 
-						//$scope.getList();
-						/*setTimeout(function() {
-							$scope.s_recordid = "";
-							$scope.s_dict_key = "";
-							$scope.s_dict_name = "";
-
-							$scope.s_sort = "";
-
-							$scope.$apply();
-						}, 10);*/
+						// $scope.getList();
+						/*
+						 * setTimeout(function() { $scope.s_recordid = "";
+						 * $scope.s_dict_key = ""; $scope.s_dict_name = "";
+						 * 
+						 * $scope.s_sort = "";
+						 * 
+						 * $scope.$apply(); }, 10);
+						 */
 					});
 
 				};
@@ -830,7 +876,7 @@ function init() {
 					if (value==null||typeof (value) == "undefined") {
 						obj.recordid = $scope.s_recordid;
 						obj.title = $scope.s_title;
-						//obj.blog_type =$("#s_type").val();
+						// obj.blog_type =$("#s_type").val();
 						
 						obj.blog_type =$("#mType").val();
 						
@@ -854,7 +900,8 @@ function init() {
 						});
 						
 						
-						//var withemojihtml= $kchar. replaceEmoji(ct[0].outerHTML);
+						// var withemojihtml= $kchar.
+						// replaceEmoji(ct[0].outerHTML);
 						var withemojihtml= $kchar. replaceEmoji(CKEDITOR.instances.s_context.getData());
 						
 						
@@ -927,14 +974,15 @@ function init() {
 
 							$scope.$apply();
 							
-						/*	setTimeout(function() {
-
-						
-								$('#q_type').get(0).selectedIndex = 1;
-							
-								$scope.q_type = $("#q_type").val();
-							
-							}, 30);*/
+						/*
+						 * setTimeout(function() {
+						 * 
+						 * 
+						 * $('#q_type').get(0).selectedIndex = 1;
+						 * 
+						 * $scope.q_type = $("#q_type").val();
+						 *  }, 30);
+						 */
 
 						if(typeof(callback)=="function")
 							{
@@ -1071,8 +1119,8 @@ function init() {
 					s_context : "请输入内容",
 					
 				},null , "");
-				//$scope.doupdate
-				//$scope.getList();
+				// $scope.doupdate
+				// $scope.getList();
 				
 				
 				$scope.getdictList(function(){
@@ -1098,14 +1146,13 @@ function init() {
 
 function GetQueryStringO(name) {
 
-/*    var index = window.location.href.lastIndexOf("/");
-    var indexj = window.location.href.lastIndexOf("#");
-
-    // 最后一个/开始 截取#前面的，兼容history.js html4 url
-    var searchpath = window.location.href.substr(index + 1);
-    if (indexj > 0)
-        searchpath = window.location.href.substr(index + 1, indexj - index - 1);
-*/
+/*
+ * var index = window.location.href.lastIndexOf("/"); var indexj =
+ * window.location.href.lastIndexOf("#");
+ *  // 最后一个/开始 截取#前面的，兼容history.js html4 url var searchpath =
+ * window.location.href.substr(index + 1); if (indexj > 0) searchpath =
+ * window.location.href.substr(index + 1, indexj - index - 1);
+ */
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$|#)", "i");
 
     var r = window.location.search.substr(1).match(reg);

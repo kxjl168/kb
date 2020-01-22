@@ -24,7 +24,7 @@ select log.*,b.title blogname  from user_action_log log left join blog_info b on
  where
  type_first='${type_first}' 
 
- 	<if test='type_second!=null and type_second!= "spider" '>
+ 	<if test='type_second!=null  and type_second!= "" and type_second!= "spider" '>
  and type_second='${type_second}'
  </if>
  	<if test='type_second!=null and type_second == "spider" '>
@@ -50,7 +50,7 @@ select log.*,b.title blogname  from user_action_log log left join blog_info b on
  where
  type_first='${type_first}' 
 	
- 	<if test='type_second!=null and type_second!= "spider" '>
+ 	<if test='type_second!=null  and type_second!= "" and type_second!= "spider" '>
  and type_second='${type_second}'
  </if>
  	<if test='type_second!=null and type_second == "spider" '>
@@ -76,7 +76,7 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 		
 select city,userid,count(*) total_uv from user_action_log where
  type_first='${type_first}' 
-	<if test='type_second!=null and type_second!= "spider" '>
+	<if test='type_second!=null and type_second!= "" and type_second!= "spider" '>
  and type_second='${type_second}'
  </if>
  	<if test='type_second!=null and type_second == "spider" '>
@@ -97,7 +97,7 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 	    select count(*) from (
 select city,userid,count(*) total_uv from user_action_log where 
 type_first='${type_first}' 
-	<if test='type_second!=null and type_second!= "spider" '>
+	<if test='type_second!=null  and type_second!= "" and type_second!= "spider" '>
  and type_second='${type_second}'
  </if>
  <if test='type_second!=null and type_second == "spider" '>
@@ -274,7 +274,7 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 		where 1=1
 		and
 		type_first=#{type_first}
-			<if test='type_second!=null and type_second == "spider" '>
+			<if test='type_second!=null  and type_second!= "" and type_second == "spider" '>
 				and type_second like 'spider_%'
 		</if>
 		<if test='type_second!=null and type_second != "spider" '>
@@ -296,7 +296,7 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 		and
 		type_first=#{type_first}
 		
-				<if test='type_second!=null and type_second == "spider" '>
+				<if test='type_second!=null  and type_second!= "" and type_second == "spider" '>
 				and type_second like 'spider_%'
 		</if>
 		<if test='type_second!=null and type_second != "spider" '>
@@ -319,7 +319,7 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 		and
 		type_first=#{type_first}
 	
-				<if test='type_second!=null and type_second == "spider" '>
+				<if test='type_second!=null  and type_second!= "" and type_second == "spider" '>
 				and type_second like 'spider_%'
 		</if>
 		<if test='type_second!=null and type_second != "spider" '>
@@ -405,7 +405,7 @@ where 1=1
 and spider_flag='false'
 
 <if test=" type_first !=null and type_first !='' ">
- and type_first='detailpag' 
+ and type_first in( ${type_first}) 
  </if>
  
 and userid!='127.0.0.1' 

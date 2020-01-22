@@ -64,6 +64,13 @@ function initDetailTable() {
         	if(sname=='blogname')
         		sname="blog_id";
         	
+        	var type_first="";
+        	  $("input[name='type_first']:checked").each(function(i){//把所有被选中的复选框的值存入数组
+        		  type_first+= "'"+$(this).val()+"',";
+        		  });
+        	  if(type_first.length>0)
+        		  type_first=type_first.substr(0,type_first.length-1);
+        	
             var param = {
             		pageCount: params.limit, // 每页要显示的数据条数
                 offset: params.offset, // 每页显示数据的开始行号
@@ -75,7 +82,7 @@ function initDetailTable() {
                 date_type : $("#dateType").val(),
              // qName : $("#s_type ").find("option:selected").text(),
              // date:cdate,
-                type_first : $('#type_first').is(":checked")?"detail":"",
+                type_first : type_first,
                 		type_second : $('#type_second').is(":checked")?"notshowmyown":"",
                 userid:$("#userid").val(),
             };
