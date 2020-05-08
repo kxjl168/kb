@@ -103,22 +103,57 @@ function reCacuPicWidth(fid,width,height)
 		data.dataEle=item;
 		
 		
-		// 自身宽高比-高度相同情况下，各自缩放比例
-		data.hpw=  Math.floor((data.width/data.height) * 10000) / 10000;
-		data.fid=$(item).attr('fid');
-		
-		
-		
-		totalwidth+=data.hpw;
+		//图片重新加载，计算原始大小
+		var oImg= new Image();
+		oImg.src = $(item).attr("src");
+		oImg.onload=function(){
+			data.width=  oImg.naturalWidth;
+			data.height= oImg.naturalHeight;
+			
+
+			
+			// 自身宽高比-高度相同情况下，各自缩放比例
+			data.hpw=  Math.floor((data.width/data.height) * 10000) / 10000;
+			data.fid=$(item).attr('fid');
+			
+			
+			
+			totalwidth+=data.hpw;
+			
+		}
 		
 		ay.push(data);
+		
+		
 		
 	});
 	
 	
+	var ticker=setInterval(() => {
+		var isok=true;
+		for (var i = 0; i < ay.length; i++) {
+			if(ay[i].width==0)
+				{
+				isok=false
+				break;
+				}
+		}
+		
+		if(isok)
+			{
+			clearInterval(ticker);
+			replaceImage(ay,totalwidth,eleData);
+			}
+		
+	}, 50);	
 	
 	
-	var ay= CacuwidthArray(ay ,totalwidth  );
+	
+}
+
+
+function replaceImage(ay,totalwidth,eleData){
+var ay= CacuwidthArray(ay ,totalwidth  );
 	
 	$.each(ay,function(index,item){
 		
@@ -127,7 +162,7 @@ function reCacuPicWidth(fid,width,height)
 		$(eleData).find('img[fid="'+item.fid+'"]').css("width",item.flexgrow+"px");
 		$(eleData).find('img[fid="'+item.fid+'"]').attr("wd",item.flexgrow);
 		
-		$(eleData).find('img[fid="'+fid+'"]').parent().css("display","flex");
+		$(eleData).find('img[fid="'+item.fid+'"]').parent().css("display","flex");
 		
 	})
 	
