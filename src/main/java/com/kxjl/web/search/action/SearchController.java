@@ -447,6 +447,12 @@ public class SearchController extends BaseController {
 			if (!desturl.equals("")) {
 				String htmldata = proxyPrerenderedPageResponse(desturl, request, response);
 
+				//200204 html前缀问题
+				if(htmldata.startsWith("html"))
+				{
+					htmldata=htmldata.substring(4);
+				}
+				
 				refreshCansearchTime(request,key);
 				
 				jsonOut.put("ResponseCode", "200");
