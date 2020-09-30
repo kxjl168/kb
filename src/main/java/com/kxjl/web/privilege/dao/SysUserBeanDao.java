@@ -8,6 +8,35 @@ import org.apache.ibatis.annotations.Param;
 import com.kxjl.web.system.model.SysUserBean;
 
 public interface SysUserBeanDao {
+	
+	/**
+	 * token 获取用户  包括角色role_id,role_name
+	 * @param user
+	 * @return
+	 * @author:kxjl
+	 * @date 2020年9月29日
+	 */
+	public SysUserBean getUserByToken(SysUserBean user);
+	
+	
+	/**
+	 * appid获取用户  包括角色role_id,role_name
+	 * @param user
+	 * @return
+	 * @author:kxjl
+	 * @date 2020年9月29日
+	 */
+	public SysUserBean selectManagerByAccessKey(SysUserBean user);
+	
+	/**
+	 * 获取用户信息，包括角色role_id,role_name
+	 * @param user
+	 * @return
+	 * @author:kxjl
+	 * @date 2020年9月29日
+	 */
+	public SysUserBean getLoginUserByUserId(SysUserBean user);
+	
 
 	/**
 	 * 添加SysUserBean

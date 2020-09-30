@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.kxjl.admin.persistence.adapter.dao.KgEditDataMapperAdapter">
+<!-- 	<resultMap id="BaseResultMap"
+		type="com.kxjl.admin.persistence.entity.KgEditData"
+		extends="com.kxjl.admin.persistence.dao.KgEditDataMapper.BaseResultMap">
+	</resultMap>
+	在此编写自己的sql, 生成的sql文件不需要编辑
+
+	<select id="selectByCondition"
+		parameterType="com.kxjl.admin.persistence.entity.KgEditData"
+		resultMap="BaseResultMap">
+
+	</select> -->
+
+	
+	
+	
+	<select id="selectToAudit"  databaseId="mysql" 	parameterType="com.kxjl.admin.persistence.entity.KgEditData"
+		resultMap="BaseResultMap">
+	
+	select tp1.editDataName,tp1. newDataName,tp1.sort, tpdata.* from (
+select  EDIT_ORI_DATA_ID,DATA_TYPE,editDataName,sort,GROUP_CONCAT(newDataName) newDataName  from (
+
+ <include refid="querylist" />
+	AND c.AUDIT_STATE = '2'
+
+
+) c group by EDIT_ORI_DATA_ID,DATA_TYPE,editDataName,sort
+) tp1 
+
+left join 
+(
+
+SELECT
+	tp.EDIT_ORI_DATA_ID,
+	tp.DATA_TYPE,
+	GROUP_CONCAT(tp.id ORDER  BY tp.edit_date) Id,
+	GROUP_CONCAT(
+		DATE_FORMAT(
+			tp.edit_date,
+			'%Y-%m-%d %H:%i:%s'
+		)
+		ORDER 
+			BY tp.edit_date
+	) editUserDate,
+	GROUP_CONCAT(
+		uu.user_name
+		ORDER 
+			BY tp.edit_date
+	) editUserName,
+	GROUP_CONCAT(
+		tp.edit_user
+		ORDER 
+			BY tp.edit_date
+	) edit_user,
+	GROUP_CONCAT(
+		tp.edit_action
+		ORDER 
+			BY tp.edit_date
+	) edit_action,
+	GROUP_CONCAT(
+		tp.edit_data_id
+		ORDER 
+			BY tp.edit_date
+	) edit_data_id
+FROM
+	KG_EDIT_DATA tp
+LEFT JOIN pf_user uu ON TP.EDIT_USER = uu.user_id
+WHERE
+	1 = 1
+AND tp.AUDIT_STATE = '2'
+GROUP BY
+	tp.EDIT_ORI_DATA_ID,
+	tp.DATA_TYPE
+ 
+ 
+) tpdata on (tp1.EDIT_ORI_DATA_ID=tpdata.EDIT_ORI_DATA_ID and tp1.DATA_TYPE=tpdata.DATA_TYPE)
+	
+
+	
+	order by tp1.sort asc
+	
+		
+	</select>
+
+
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxjl.admin.persistence.adapter.dao.KgObjectSubGroupMapperAdapter">
+    <resultMap id="BaseResultMap"
+               type="com.kxjl.admin.persistence.entity.KgObjectSubGroup"
+               extends="com.kxjl.admin.persistence.dao.KgObjectSubGroupMapper.BaseResultMap">
+    </resultMap>
+     <!--在此编写自己的sql, 生成的sql文件不需要编辑-->
+
+
+ <delete id="deleteByObjectId" parameterType="com.kxjl.admin.persistence.entity.KgObjectSubGroup">
+ 	delete from KG_OBJECT_SUB_GROUP   where 1=1 AND obj_id = #{objId}
+ 	
+ </delete>
+
+</mapper>

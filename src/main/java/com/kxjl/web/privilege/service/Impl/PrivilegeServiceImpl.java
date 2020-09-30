@@ -129,13 +129,18 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 		else if (query.getUtype() == UserType.LoginUser)
 			return managerRoleDao.getUserRoleList(query);
 		else {
-			// 未登陆用户
-			Role r = new Role();
-			r.setRole_en(query.getUtype().toString());
-			Role nologerRole = roleDao.getRoleInfoById(r);
-			List<Role> roles = new ArrayList<>();
-			roles.add(nologerRole);
-			return roles;
+			
+			return managerRoleDao.getManagerRoleList(query);
+			
+			//modify zj 2020-9-29
+//			
+//			// 未登陆用户
+//			Role r = new Role();
+//			r.setRole_en(query.getUtype().toString());
+//			Role nologerRole = roleDao.getRoleInfoById(r);
+//			List<Role> roles = new ArrayList<>();
+//			roles.add(nologerRole);
+//			return roles;
 		}
 
 	}

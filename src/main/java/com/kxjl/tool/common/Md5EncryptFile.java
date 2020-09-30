@@ -22,6 +22,7 @@ public class Md5EncryptFile {
 		InputStream fis = null;
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
+			
 			fis = file.getInputStream();
 			byte[] buffer = new byte[2048];
 			int length = -1;

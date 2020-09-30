@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxjl.admin.persistence.adapter.dao.KgEditObjectToObjectMapperAdapter">
+    <resultMap id="BaseResultMap"
+               type="com.kxjl.admin.persistence.entity.KgEditObjectToObject"
+               extends="com.kxjl.admin.persistence.dao.KgEditObjectToObjectMapper.BaseResultMap">
+    </resultMap>
+     <!--在此编写自己的sql, 生成的sql文件不需要编辑-->
+
+    <select id="selectByCondition" parameterType="com.kxjl.admin.persistence.entity.KgEditObjectToObject" resultMap="BaseResultMap">
+
+
+
+
+    </select>
+    
+    
+    	<delete id="deleteByEDataId">
+    	delete from kg_edit_object_to_object where edit_data_id=#{id}
+    	</delete>
+    
+    	<select id="selectList"
+		parameterType="com.kxjl.admin.persistence.entity.KgEditObjectToObject"
+		resultMap="BaseResultMap">
+		
+		
+		select * from kg_edit_object_to_object c where 1=1 
+		
+		
+		<if test="editDataId != null and editDataId !='' ">
+
+			AND c.edit_data_id= #{editDataId}
+
+		</if>
+		
+		<if test="deleted!=null and deleted!='' " >
+			and c.deleted=#{deleted}
+		</if>
+		
+		
+			<if test="fromId != null and fromId!='' ">
+
+			AND c.FROMID= #{fromId}
+
+		</if>
+		
+		</select>
+		
+
+</mapper>

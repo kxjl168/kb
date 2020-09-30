@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxjl.admin.persistence.adapter.dao.KgDataAuditDetailMapperAdapter">
+    <resultMap id="BaseResultMap"
+               type="com.kxjl.admin.persistence.entity.KgDataAuditDetail"
+               extends="com.kxjl.admin.persistence.dao.KgDataAuditDetailMapper.BaseResultMap">
+    </resultMap>
+     <!--在此编写自己的sql, 生成的sql文件不需要编辑-->
+
+    <select id="selectByCondition" parameterType="com.kxjl.admin.persistence.entity.KgDataAuditDetail" resultMap="BaseResultMap">
+
+    </select>
+
+</mapper>

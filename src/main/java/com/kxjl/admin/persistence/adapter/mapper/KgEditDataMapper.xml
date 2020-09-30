@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.kxjl.admin.persistence.adapter.dao.KgEditDataMapperAdapter">
+	<resultMap id="BaseResultMap"
+		type="com.kxjl.admin.persistence.entity.KgEditData"
+		extends="com.kxjl.admin.persistence.dao.KgEditDataMapper.BaseResultMap">
+	</resultMap>
+	<!--在此编写自己的sql, 生成的sql文件不需要编辑 -->
+
+	<select id="selectByCondition"
+		parameterType="com.kxjl.admin.persistence.entity.KgEditData"
+		resultMap="BaseResultMap">
+
+	</select>
+
+	
+	<update id="toaudit" parameterType="java.lang.String">
+	
+	<if test="_databaseId =='oracle' " >
+		update KG_EDIT_DATA set audit_state='2',submit_date=sysdate where id=#{id}
+		</if>
+		
+		<if test="_databaseId =='mysql' " >
+		update KG_EDIT_DATA set audit_state='2',submit_date=now() where id=#{id}
+		</if>
+		
+		
+	</update>
+	
+		<update id="auditfullpass" parameterType="com.kxjl.admin.persistence.entity.KgEditData" >
+	<if test="_databaseId =='oracle' " >
+		update KG_EDIT_DATA set audit_state='3' ,audit_date=sysdate where id=#{id}
+			<if test="auditInfo != null and auditInfo!='' ">
+
+			AND c.audit_Info= #{auditInfo}
+
+		</if>
+		</if>
+		
+		<if test="_databaseId =='mysql' " >
+		update KG_EDIT_DATA set audit_state='3' ,audit_date=now() where id=#{id}
+			<if test="auditInfo != null and auditInfo!='' ">
+
+			AND c.audit_Info= #{auditInfo}
+
+		</if>
+		</if>
+		
+		
+		
+	</update>
+		<update id="auditpass" parameterType="com.kxjl.admin.persistence.entity.KgEditData" >
+	
+	<if test="_databaseId =='oracle' " >
+		update KG_EDIT_DATA set audit_state='4' ,audit_date=sysdate where id=#{id}
+		<if test="auditInfo != null and auditInfo!='' ">
+
+			AND c.audit_Info= #{auditInfo}
+
+		</if>
+		</if>
+		
+		<if test="_databaseId =='mysql' " >
+		update KG_EDIT_DATA set audit_state='4' ,audit_date=now() where id=#{id}
+		<if test="auditInfo != null and auditInfo!='' ">
+
+			AND c.audit_Info= #{auditInfo}
+
+		</if>
+		</if>
+		
+		
+	</update>
+	
+		<update id="auditfail" parameterType="com.kxjl.admin.persistence.entity.KgEditData" >
+	
+	<if test="_databaseId =='oracle' " >
+	
+		update KG_EDIT_DATA set audit_state='5'  ,audit_date=sysdate where id=#{id}
+		<if test="auditInfo != null and auditInfo!='' ">
+
+			AND c.audit_Info= #{auditInfo}
+
+		</if>
+		</if>
+		
+		<if test="_databaseId =='mysql' " >
+	
+		update KG_EDIT_DATA set audit_state='5'  ,audit_date=now() where id=#{id}
+		<if test="auditInfo != null and auditInfo!='' ">
+
+			AND c.audit_Info= #{auditInfo}
+
+		</if>
+		</if>
+		
+		
+	</update>
+	
+	<delete id="deleteByEditDataId" parameterType="java.lang.String">
+		delete from  KG_EDIT_DATA  where edit_data_id=#{id}
+	</delete>
+	
+	
+	<delete id="deleteByOriDataIdAndUserId" parameterType="com.kxjl.admin.persistence.entity.KgEditData">
+		delete from  KG_EDIT_DATA  where edit_user=#{editUser} and edit_Ori_Data_Id =#{editOriDataId}
+		and audit_state='1'
+		
+		
+	</delete>
+	
+	
+
+<sql id="querylist">
+
+select * from (
+select c.*,u.user_name auditUserName from (
+		select
+		c.*,sub.name editDataName,esub.name newDataName
+		from KG_EDIT_DATA c
+left join KG_EDIT_SUB_GROUP esub on c.EDIT_DATA_ID=esub.id
+left join KG_SUB_GROUP sub  on esub.ori_id=sub.id
+
+		where 1=1 and c.DATA_TYPE='1'
+
+union
+(
+select 
+		c.*,sub.dir_name editDataName,esub.dir_name newDataName
+		from KG_EDIT_DATA c
+left join KG_EDIT_DIR_TREE esub on c.EDIT_DATA_ID=esub.id
+left join KG_DIR_TREE sub  on esub.ori_id=sub.id
+
+		where 1=1 and c.DATA_TYPE='2'
+)
+
+union
+(
+select 
+		c.*,sub.cls_name editDataName,esub.cls_name newDataName
+		from KG_EDIT_DATA c
+left join KG_EDIT_CLASS esub on c.EDIT_DATA_ID=esub.id
+left join KG_CLASS sub  on esub.ori_id=sub.id
+
+		where 1=1 and c.DATA_TYPE='3'
+)
+
+
+union
+(
+select 
+		c.*,sub.name editDataName,esub.name newDataName
+		from KG_EDIT_DATA c
+left join KG_EDIT_PROPERTY esub on c.EDIT_DATA_ID=esub.id
+left join KG_PROPERTY sub  on esub.ori_id=sub.id
+
+		where 1=1 and c.DATA_TYPE='4'
+)
+
+union
+(
+select 
+		c.*,sub.name editDataName,esub.name newDataName
+		from KG_EDIT_DATA c
+left join KG_EDIT_RELATION esub on c.EDIT_DATA_ID=esub.id
+left join KG_RELATION sub  on esub.ori_id=sub.id
+
+		where 1=1 and c.DATA_TYPE='5'
+)
+
+union
+(
+select 
+		c.*,sub.name editDataName,esub.name newDataName
+		from KG_EDIT_DATA c
+left join KG_EDIT_ENTITY esub on c.EDIT_DATA_ID=esub.id
+left join KG_ENTITY sub  on esub.ori_id=sub.id
+
+		where 1=1 and c.DATA_TYPE='6'
+)
+
+union
+(
+select 
+		c.*,cls.cls_name editDataName,entity.name newDataName
+		from KG_EDIT_DATA c
+left join KG_Class cls on c.EDIT_ORI_DATA_ID like concat('%:',cls.id)
+left join kg_entity entity  on c.EDIT_ORI_DATA_ID like concat('%:',entity.id)
+
+		where 1=1 and c.DATA_TYPE='7'
+)
+
+
+
+) c left join pf_user u on c.audit_user=u.user_id 
+
+) c  where 1=1
+
+</sql>
+
+
+
+	<select id="selectList"  
+		parameterType="com.kxjl.admin.persistence.entity.KgEditData"
+		resultMap="BaseResultMap">
+		<!-- WARNING - @mbg.generated This element is automatically generated by 
+			MyBatis Generator, do not modify. This element was generated on Mon Jun 08 
+			11:51:06 CST 2020. -->
+	
+	
+	 <include refid="querylist" />
+
+
+
+<if test="editDataName != null and editDataName !='' ">
+
+			AND (c.editDataName like '%${editDataName}%' or  c.newDataName like '%${editDataName}%')
+
+		</if>
+
+		<if test="dataType != null and dataType !='' ">
+
+			AND c.data_Type = #{dataType}
+
+		</if>
+
+		<if test="editUser != null and editUser !='' ">
+
+			AND c.EDIT_USER = #{editUser}
+
+		</if>
+
+		<if test="editAction != null and editAction !='' ">
+
+			AND c.EDIT_ACTION = #{editAction}
+
+		</if>
+
+		<if test="editDataId != null and editDataId !='' ">
+
+			AND c.EDIT_DATA_ID = #{editDataId}
+
+		</if>
+		
+			<if test="editOriDataId != null and editOriDataId !='' ">
+
+			AND c.EDIT_ORI_DATA_ID = #{editOriDataId}
+
+		</if>
+		
+		
+		<if test="auditState != null and auditState !='' ">
+
+			AND c.AUDIT_STATE = #{auditState}
+
+		</if>
+		
+		
+		<if test="auditUser != null and auditUser !='' ">
+
+			AND c.AUDIT_USER = #{auditUser}
+
+		</if>
+		
+		<if test="queryStates != null and queryStates !='' ">
+
+AND c.AUDIT_STATE in 
+	<foreach collection="queryStates" item="id" index="index" open="(" close=")" separator=" , ">
+					
+	${id}
+	</foreach>
+
+			
+
+		</if>
+		
+		
+	
+
+		order by c.edit_Date DESC
+	</select>
+	
+	
+	<select id="selectToAudit"  databaseId="oracle" 	parameterType="com.kxjl.admin.persistence.entity.KgEditData"
+		resultMap="BaseResultMap">
+	
+	select tp1.editDataName,tp1. newDataName,tp1.sort, tpdata.* from (
+select  EDIT_ORI_DATA_ID,DATA_TYPE,editDataName,sort,WMSYS.WM_CONCAT (newDataName) newDataName  from (
+
+ <include refid="querylist" />
+	AND c.AUDIT_STATE = '2'
+
+
+) c group by EDIT_ORI_DATA_ID,DATA_TYPE,editDataName,sort
+) tp1 
+
+left join 
+(
+select EDIT_ORI_DATA_ID,DATA_TYPE,max(edit_id) Id,max(edit_date) editUserDate,max(user_name) editUserName,max(edit_user) edit_user,max(edit_action) edit_action,max(edit_data_id) edit_data_id from (
+
+
+select tp1.*,TP2.EDIT_ACTION,TP2.USER_NAME,tp3.edit_date,tp3.edit_data_id from (
+select 
+ EDIT_ORI_DATA_ID,DATA_TYPE,
+	  WMSYS.WM_CONCAT (tp. edit_user) over(partition by EDIT_ORI_DATA_ID order by  tp.edit_date) edit_user,
+
+WMSYS.WM_CONCAT (tp. id) over(partition by EDIT_ORI_DATA_ID order by tp.edit_date) edit_id
+ from KG_EDIT_DATA tp
+left join pf_user uu on TP.EDIT_USER=uu.user_id
+where 1=1 AND tp.AUDIT_STATE = '2'
+) tp1 left join 
+(
+select 
+ EDIT_ORI_DATA_ID,
+
+  WMSYS.WM_CONCAT (uu. user_name) over(partition  by EDIT_ORI_DATA_ID order by  tp.edit_date) user_name,
+  WMSYS.WM_CONCAT (tp. edit_action) over( partition by EDIT_ORI_DATA_ID order by tp.edit_date) edit_action
+
+ from KG_EDIT_DATA tp
+left join pf_user uu on TP.EDIT_USER=uu.user_id
+where 1=1 AND tp.AUDIT_STATE = '2'
+) tp2 on TP1.EDIT_ORI_DATA_ID=tp2.EDIT_ORI_DATA_ID
+left join 
+(
+select 
+ EDIT_ORI_DATA_ID,
+	
+ WMSYS.WM_CONCAT (to_char( tp.edit_date,'YYYY-MM-DD HH24:MI:SS')) over( partition by EDIT_ORI_DATA_ID order by tp.edit_date) edit_date,
+  WMSYS.WM_CONCAT (tp. edit_data_id) over(partition by EDIT_ORI_DATA_ID order by tp.edit_date) edit_data_id
+
+ from KG_EDIT_DATA tp
+left join pf_user uu on TP.EDIT_USER=uu.user_id
+where 1=1 AND tp.AUDIT_STATE = '2'
+) tp3 on tp1.EDIT_ORI_DATA_ID=tp3.EDIT_ORI_DATA_ID
+ ) tp  where 1=1   group by EDIT_ORI_DATA_ID,DATA_TYPE
+ 
+) tpdata on (tp1.EDIT_ORI_DATA_ID=tpdata.EDIT_ORI_DATA_ID and tp1.DATA_TYPE=tpdata.DATA_TYPE)
+	
+
+	
+	order by tp1.sort asc
+	
+		
+	</select>
+
+
+</mapper>

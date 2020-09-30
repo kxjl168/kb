@@ -74,7 +74,7 @@ FROM
 (select d.parent_id, d.val1 blog_type_url, d.dict_key blog_type ,d.id dict_id ,d.dict_name blog_type_name,count(*) view_nums from blog_info b
 LEFT JOIN (select * from dict_info where dict_type="blog_type") d on d.dict_key=b.blog_type
 where b.showflag='1'
-group by d.dict_key,d.dict_name,d.val1
+group  by d.parent_id,d.val1,d.dict_key,d.dict_name,d.id
 ) a1
 ) tpall
 

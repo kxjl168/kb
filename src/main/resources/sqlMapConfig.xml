@@ -1,20 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
+	<properties resource="config.properties">
+
+	</properties>
+
+
 	<typeAliases>
 
 
 
-<!-- <typeAlias alias="actionLog" type="com.zteict.web.stastic.model.ActionLog" /> -->
+		<!-- <typeAlias alias="actionLog" type="com.zteict.web.stastic.model.ActionLog" 
+			/> -->
 
 
-		
+
 	</typeAliases>
-	
+
 	<plugins>
-    <plugin interceptor="com.github.pagehelper.PageInterceptor">
-        <!-- config params as the following -->
-        <property name="param1" value="value1"/>
-	</plugin>
-</plugins>
+		<plugin interceptor="com.github.pagehelper.PageInterceptor">
+			<!-- config params as the following -->
+			<property name="param1" value="value1" />
+		</plugin>
+	</plugins>
+
+
+
+
+
+	<environments default="demo">
+
+		<environment id="demo">
+			<!-- 事务管理器的配置 -->
+			<transactionManager type="JDBC" />
+			<!-- 数据源的配置 UNPOOLED : 不使用连接池，POOLED：使用连接池 -->
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.username}" />
+				<property name="password" value="${jdbc.password}" />
+			</dataSource>
+		</environment>
+	</environments>
+
+
+	<databaseIdProvider
+		type="com.kxjl.base.util.MyDbProvider">
+		<property name="SQL Server" value="sqlserver" />
+		<property name="DB2" value="db2" />
+		<property name="Oracle" value="oracle" />
+		<property name="MySQL" value="mysql" />
+	</databaseIdProvider>
+	
 </configuration>	

@@ -7,57 +7,62 @@ import com.kxjl.web.system.model.base.BaseModel;
 
 /**
  * 后台登录用户
+ * 
  * @date 2016-7-29
  * @author zj
  *
  */
 public class SysUserBean extends BaseModel {
-	
-	
-	
-	public enum UserType{
-		
-		Root("root"),Admin("admin"),UnLoginUser("normal_user"),LoginUser("normal_login_user"),xiaohuoban("xiaohuoban");
-		
-		
-		private String val="";
-		
-		private UserType(String name)
-		{
-			val=name;
+
+	public enum UserType {
+
+		Root("root"), Admin("admin"), UnLoginUser("normal_user"), LoginUser("normal_login_user"), xiaohuoban(
+				"xiaohuoban");
+
+		private String val = "";
+
+		private UserType(String name) {
+			val = name;
 		}
-		
+
 		@Override
 		public String toString() {
 			// TODO Auto-generated method stub
 			return val;
 		}
 	}
-	
-	
-	
+
 	private String userid;// 用户名
 	private String name;// 用户名
 
 	private String password;// 密码
 
-	
 	private String createby; // 创建者
 	private String createdate; // 创建时间
 	private String updatedby; // 更新者
 	private String updateddate;// 更新时间
 
 	private UserType utype;
+
+	private List<MenuInfo> menus = new ArrayList<MenuInfo>();
+
+	// add 200907
+	private List<String> roles;
+
+	private String oauthUserId;// oauthid
+
+	private String accessKey;
 	
-	
-	private List<MenuInfo> menus=new ArrayList<MenuInfo>();
-	
-	
-	//查询字段
-	private String role_id;   //角色
+	private String token;
+
+	private String accessSecret;
+	// end
+
+	// 查询字段
+	private String role_id; // 角色
 	private String role_name;
 
-	private String menu_ids; //可见菜单
+	private String menu_ids; // 可见菜单
 
 	public String getUserid() {
 		return userid;
@@ -155,5 +160,44 @@ public class SysUserBean extends BaseModel {
 		this.menus = menus;
 	}
 
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+
+	public String getOauthUserId() {
+		return oauthUserId;
+	}
+
+	public void setOauthUserId(String oauthUserId) {
+		this.oauthUserId = oauthUserId;
+	}
+
+	public String getAccessKey() {
+		return accessKey;
+	}
+
+	public void setAccessKey(String accessKey) {
+		this.accessKey = accessKey;
+	}
+
+	public String getAccessSecret() {
+		return accessSecret;
+	}
+
+	public void setAccessSecret(String accessSecret) {
+		this.accessSecret = accessSecret;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
 
 }

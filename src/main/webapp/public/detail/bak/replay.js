@@ -636,7 +636,7 @@ function initReplayModel() {
 						
 						refreshNum();
 						
-						alert(location.hash);
+						//alert(location.hash);
 					}, 1000);
 					
 					

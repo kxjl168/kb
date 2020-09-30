@@ -15,6 +15,12 @@
 		<result column="updateddate" property="updateddate" />
 
 
+<result column="appid" property="accessKey" />
+<result column="appsecret" property="accessSecret" />
+
+<result column="token" property="token" />
+
+
 	</resultMap>
 
 
@@ -44,13 +50,63 @@
 		<if test='name != null and name!="" '>
 			,managername=#{name}
 		</if>
-		<if test='password != null'>
+		<if test='password != null and password!="" '>
 			,password=#{password}
+		</if>
+		
+		<if test='token != null and token!="" '>
+			,token=#{token}
 		</if>
 
 	
 		where managerid=#{userid}
 	</update>
+
+
+<select id="getUserByToken" parameterType="com.kxjl.web.system.model.SysUserBean"
+		resultMap="ManagerResMap">
+		select * from (
+	select  distinct m.*, GROUP_CONCAT(r.role_zh) role_name,GROUP_CONCAT(r.role_en) role_id from manager m
+		left join manager_role mr on m.managerid=mr.manager_id
+		left join role r on mr.role_id=r.role_en
+		where 1=1
+		
+			and m.token =#{token}
+		
+		group by m.managerid
+		) tp
+		 limit 1
+	</select>
+	
+<select id="selectManagerByAccessKey" parameterType="com.kxjl.web.system.model.SysUserBean"
+		resultMap="ManagerResMap">
+		select * from (
+	select  distinct m.*, GROUP_CONCAT(r.role_zh) role_name,GROUP_CONCAT(r.role_en) role_id from manager m
+		left join manager_role mr on m.managerid=mr.manager_id
+		left join role r on mr.role_id=r.role_en
+		where 1=1
+		
+			and m.appid =#{accessKey}
+		
+		group by m.managerid
+		) tp
+		 limit 1
+	</select>
+	
+	<select id="getLoginUserByUserId" parameterType="com.kxjl.web.system.model.SysUserBean"
+		resultMap="ManagerResMap">
+		select * from (
+		select  distinct m.*, GROUP_CONCAT(r.role_zh) role_name,GROUP_CONCAT(r.role_en) role_id from manager m
+		left join manager_role mr on m.managerid=mr.manager_id
+		left join role r on mr.role_id=r.role_en
+		where 1=1
+		
+			and m.managerid=#{userid}
+		
+		group by m.managerid
+		) tp
+		 limit 1
+	</select>
 
 
 	<!-- public List<SysUserBean> getSysUserBeanPageList(SysUserBean query); -->
