@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxjl.web.autodata.dao.LinkRelationMapper">
+  <resultMap id="BaseResultMap" type="com.kxjl.web.autodata.pojo.LinkRelation">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="fromurl" jdbcType="VARCHAR" property="fromurl" />
+    <result column="tourl" jdbcType="VARCHAR" property="tourl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, fromurl, tourl
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from link_relation
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from link_relation
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kxjl.web.autodata.pojo.LinkRelation">
+    insert into link_relation (id, fromurl, tourl
+      )
+    values (#{id,jdbcType=VARCHAR}, #{fromurl,jdbcType=VARCHAR}, #{tourl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kxjl.web.autodata.pojo.LinkRelation">
+    insert into link_relation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="fromurl != null">
+        fromurl,
+      </if>
+      <if test="tourl != null">
+        tourl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="fromurl != null">
+        #{fromurl,jdbcType=VARCHAR},
+      </if>
+      <if test="tourl != null">
+        #{tourl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kxjl.web.autodata.pojo.LinkRelation">
+    update link_relation
+    <set>
+      <if test="fromurl != null">
+        fromurl = #{fromurl,jdbcType=VARCHAR},
+      </if>
+      <if test="tourl != null">
+        tourl = #{tourl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kxjl.web.autodata.pojo.LinkRelation">
+    update link_relation
+    set fromurl = #{fromurl,jdbcType=VARCHAR},
+      tourl = #{tourl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+
+
+<select id="selectList"
+	resultMap="BaseResultMap"
+	parameterType="com.kxjl.web.autodata.pojo.LinkRelation">
+	select
+	<include refid="Base_Column_List" />
+	from link_relation c
+
+	where 1=1
+	<if test=" id !=null and id !='' ">
+		and c.id = #{id}
+	</if>
+	
+		
+		<if test=" fromurl !=null and fromurl !='' ">
+		
+			<if test=" fullurlquery !=null and fullurlquery !='' ">
+				and c.fromurl =  #{fromurl}
+			</if>
+			
+		<if test=" fullurlquery ==null ">
+		and c.fromurl like concat ('%', #{fromurl},'%')
+		</if>
+	</if>
+		
+			
+		
+		<if test=" tourl !=null and tourl !='' ">
+		and c.tourl like concat ('%', #{tourl},'%')
+	</if>
+		
+			
+
+
+</select>
+
+
+
+<delete id="delete"
+	parameterType="com.kxjl.web.autodata.pojo.LinkRelation">
+	delete from link_relation
+
+	where id = #{id,jdbcType=VARCHAR}
+
+</delete>
+
+<delete id="deleteByFromLink"
+	parameterType="com.kxjl.web.autodata.pojo.LinkRelation">
+	delete from link_relation
+
+	where fromurl = #{fromurl,jdbcType=VARCHAR}
+
+</delete>
+
+
+</mapper>

@@ -68,7 +68,13 @@ public interface KurlService {
 	public int updateKurl(Kurl Kurl);
 	
 	
-
+	/**
+	 * 通过所有blog
+	 * 
+	 * @author:kxjl
+	 * @date 2020年10月29日
+	 */
+	public void passallBlogKurl();
 	
 	/**
 	 * 根据ID获取Kurl信息

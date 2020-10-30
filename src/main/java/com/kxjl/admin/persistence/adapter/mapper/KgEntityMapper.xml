@@ -16,6 +16,37 @@
 
 
 
+
+	<select id="selectByBlogUrl"
+		resultType="com.kxjl.admin.persistence.entity.KgEntity">
+		select
+		c.*
+		from KG_ENTITY c
+		<!-- left join KG_CLASS k on c.CLS_ID=k.ID -->
+
+
+		where 1=1 and c.deleted='0'
+
+	<if test="url != null and url!='' ">
+	    <bind name="url" value="'%' + url + '%'" />
+
+			AND c.PROPERTIES LIKE #{url}
+		</if>
+		
+	
+		order by c.CREATED_TIME DESC
+		
+				
+
+		<![CDATA[ 
+		limit 1 
+		]]>
+	
+	</select>
+
+
+
+
 	<select id="selectByName"
 		parameterType="com.kxjl.admin.persistence.entity.KgEntity"
 		resultMap="BaseResultMap">
@@ -323,6 +354,13 @@ and e.audit_state in ('1','2')
 			<bind name="fullName" value="'%' + fullName + '%'" />
 
 			AND c.full_Name LIKE #{fullName}
+
+		</if>
+		
+			<if test="tags != null and tags !='' ">
+
+			AND ( c.tags like '%${tags}%' )
+
 
 		</if>
 

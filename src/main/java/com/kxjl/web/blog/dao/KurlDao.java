@@ -21,6 +21,16 @@ public interface KurlDao {
 	 */
 	public List<Kurl> getKurlPageList(Kurl query);
 
+	
+	/**
+	 * 通过所有blog
+	 * 
+	 * @author:kxjl
+	 * @date 2020年10月29日
+	 */
+	public void passallBlogKurl();
+	
+	
 	/**
 	 * 获取banner总条数
 	 * @param query

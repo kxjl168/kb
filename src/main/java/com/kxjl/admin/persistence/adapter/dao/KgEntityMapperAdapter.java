@@ -8,6 +8,9 @@ import com.kxjl.admin.persistence.entity.KgTags;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+import org.junit.runners.Parameterized.Parameter;
+
 /**
 * @author Generator
 * @description 自定义的sql接口
@@ -35,5 +38,8 @@ public interface KgEntityMapperAdapter extends KgEntityMapper {
        * @date 2020年6月23日
        */
       KgEntity selectByName(KgEntity kgTags);
+      
+      //url 唯一
+      KgEntity selectByBlogUrl(@Param(value="url") String url);
       
 }

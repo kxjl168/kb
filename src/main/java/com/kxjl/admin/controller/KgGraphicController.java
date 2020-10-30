@@ -43,6 +43,7 @@ import com.kxjl.admin.common.Pagination;
 import com.kxjl.admin.common.WZResponseEntity;
 import com.kxjl.admin.common.LoginUser;
 import com.kxjl.base.aopAspect.CurrentUser;
+import com.kxjl.base.aopAspect.NoNeedAuthorization;
 import com.kxjl.admin.util.Page;
 import com.kxjl.admin.util.PageUtil;
 import com.kxjl.admin.persistence.entity.KgClass;
@@ -173,6 +174,7 @@ public class KgGraphicController {
 	 * @author:kxjl
 	 * @date 2020年6月16日
 	 */
+	@NoNeedAuthorization
 	@PostMapping("/getontology")
 	@ResponseBody
 	public WZResponseEntity<String> getontology(@CurrentUser LoginUser user,KgClass data, Integer level,String showEdit) {

@@ -12,6 +12,12 @@
 		<if test='url_type != null and url_type != "" '>
 			and a.url_type = #{url_type}
 		</if>
+		
+		
+		<if test='id != null  '>
+			and a.id = #{id}
+		</if>
+		
 		<if test='url_val != null and url_val != "" '>
 			and a.url_val =#{url_val}
 		</if>
@@ -21,13 +27,13 @@
 		</if>
 		
 		<if test='url_name != null and url_name != "" '>
-			and (a.url_name like CONCAT('%', #{url_name},'%') or a.desc_info like CONCAT('%', #{url_name},'%')  ) 
+			and (a.url_name like CONCAT('%', #{url_name},'%') or a.desc_info like CONCAT('%', #{url_name},'%') or a.url_val like CONCAT('%', #{url_name},'%')  ) 
 		</if>
 		<if test='val1 != null and val1 != "" '>
 			and a.val1= #{val1}
 		</if>
 		
-		order by a.url_type,a.sort asc
+		order by a.url_type,a.sort asc,a.create_date  desc
 
 		limit #{start},#{pageCount}
 	</select>
@@ -35,6 +41,10 @@
 	<select id="getKurlPageListCount" parameterType="com.kxjl.web.blog.model.Kurl" resultType="java.lang.Integer">
 		select count(*) from kurl_info a 
 		where 1=1
+			<if test='id != null  '>
+			and a.id = #{id}
+		</if>
+		
 			<if test='url_type != null and url_type != "" '>
 			and a.url_type = #{url_type}
 		</if>
@@ -73,6 +83,11 @@
 		create_date,val1,desc_info,isshow,icon )
 		values(#{url_val},#{url_name},#{sort},#{url_type},now(),#{val1},#{desc_info},#{isshow},#{icon})
 	</insert>
+		<update id="passallBlogKurl">
+		
+		update kurl_info set isshow='1' where isshow is null and url_type="BLOG"
+		</update>
+	
 	
 	<update id="updateKurl" parameterType="com.kxjl.web.blog.model.Kurl">
 		update kurl_info 

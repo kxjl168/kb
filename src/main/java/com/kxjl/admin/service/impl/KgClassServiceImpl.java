@@ -132,6 +132,18 @@ public class KgClassServiceImpl implements KgClassService {
 	@Autowired
 	KgDataLogMapperAdapter kgDataLogMapperAdapter;
 
+	
+	   /**
+     * 查询名称是否存在
+     * @param item
+     * @return
+     * @author:kxjl
+     * @date 2020年6月23日
+     */
+    public KgClass selectByName(KgClass item) {
+    	return kgClassMapperAdapter.selectByName(item);
+    }
+    
 	/**
 	 * <p>
 	 * New Info

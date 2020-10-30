@@ -42,6 +42,7 @@ import com.kxjl.admin.common.Pagination;
 import com.kxjl.admin.common.WZResponseEntity;
 import com.kxjl.admin.common.LoginUser;
 import com.kxjl.base.aopAspect.CurrentUser;
+import com.kxjl.base.aopAspect.NoNeedAuthorization;
 import com.kxjl.admin.util.Constants;
 import com.kxjl.admin.util.Page;
 import com.kxjl.admin.persistence.entity.KgEditData;
@@ -138,6 +139,7 @@ public class KgEntityController {
 	 * @author:kxjl
 	 * @date 2020年6月9日
 	 */
+	@NoNeedAuthorization
 	@RequestMapping("/list")
 	@ResponseBody
 	public WZResponseEntity<List<KgEntity>> getListByPage(@CurrentUser LoginUser user,KgEntity query, Pagination pageCondition) {

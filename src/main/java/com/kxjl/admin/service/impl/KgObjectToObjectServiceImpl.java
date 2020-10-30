@@ -1075,7 +1075,7 @@ public class KgObjectToObjectServiceImpl implements KgObjectToObjectService {
 					line.put("heightRate", i + 1);// 曲线高度
 
 					if (i == 0)
-						line.put("updown", 0);// 曲线上湾1，下湾-1
+						line.put("updown", -1);// 曲线上湾1，下湾-1
 					else
 						line.put("updown", i % 2 == 0 ? 1 : -1);// 曲线上湾1，下湾-1
 

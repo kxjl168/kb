@@ -8,7 +8,7 @@
     <!-- <classPathEntry location="C:\Users\nico\.m2\repository\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar"/> -->
 
  <!--<classPathEntry location="E:\\Program Files (x86)\\Sybase\\mysql-connector-java-5.1.44.jar"/>-->
-    <classPathEntry location="\\VBOXSVR\share\git\lib\mysql-connector-java-5.1.28.jar"/>
+    <classPathEntry location="F:\kxjl\kb\lib\mysql-connector-java-5.1.28.jar"/>
 
 
     <context id="mysql_tables" targetRuntime="MyBatis3">
@@ -20,7 +20,7 @@
 
         <!-- 数据库连接 -->
            <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.31.239:3306/kb?useUnicode=true&amp;characterEncoding=UTF-8"
+                        connectionURL="jdbc:mysql://192.168.1.177:3306/kb?useUnicode=true&amp;characterEncoding=UTF-8"
                         userId="root"
                         password="123456">
         </jdbcConnection>
@@ -48,7 +48,7 @@
         </javaClientGenerator>
 
 
-  	<table tableName="calthings" domainObjectName="Calthings" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+  	<table tableName="link_relation" domainObjectName="LinkRelation" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
 
 
 

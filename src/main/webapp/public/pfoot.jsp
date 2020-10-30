@@ -13,8 +13,9 @@
 			<li><a href="http://www.256kb.cn"><i class="fa fa-home"></i>&nbsp;首页</a></li>
 
 			<li><a href="http://www.256kb.cn/public/search/"><i class="glink fa fa-google"></i>&nbsp;Google搜索</a></li>
-			<li><a href="http://www.256kb.cn/public/wuliu/"><i class="fa fa-truck"></i>&nbsp;快递查询</a></li>
-			<li><a href="http://www.256kb.cn/pown/url/"><i class="fa fa-link"></i>&nbsp;常用链接</a></li>
+			<!-- <li><a href="http://www.256kb.cn/public/wuliu/"><i class="fa fa-truck"></i>&nbsp;快递查询</a></li> -->
+			<li><a href="http://kg.256kb.cn/s/search/"><i class="fa fa-link"></i>&nbsp;个站搜索</a></li>
+			<li><a href="http://kg.256kb.cn/s/url/"><i class="fa fa-link"></i>&nbsp;常用链接</a></li>
 			<li><a href="http://www.256kb.cn/rss"><i class="fa fa-rss"></i>&nbsp;订阅RSS</a></li>
 			<li><a href="http://www.256kb.cn/public/about/"><i class="fa fa-info-circle"></i>&nbsp;关于</a></li>
 

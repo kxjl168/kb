@@ -26,6 +26,7 @@ import com.kxjl.admin.common.Pagination;
 import com.kxjl.admin.common.WZResponseEntity;
 import com.kxjl.admin.common.LoginUser;
 import com.kxjl.admin.util.Page;
+import com.kxjl.web.blog.model.Kurl;
 import com.kxjl.admin.persistence.entity.KgClass;
 import com.kxjl.admin.persistence.entity.KgEditData;
 import com.kxjl.admin.persistence.entity.KgEntity;
@@ -41,7 +42,13 @@ import org.springframework.transaction.annotation.Transactional;
 * @author 具体开发人员请在此补充上本人名称拼音
 */
 public interface KgEntityService {
-
+	/**
+	 * 更新url- >entity /relation
+	 * @param kurlItem 留空，同步10000条，全部，否则更新指定id url数据
+	 * @author:kxjl
+	 * @date 2020年10月29日
+	 */
+	public void rebuildEntityAndRelationByUrl(Kurl kurlItem) ;
 
     /**
      * <p>New Info</p>
@@ -57,6 +64,36 @@ public interface KgEntityService {
      */
 	WZResponseEntity<?> modify(LoginUser user,KgEntity kgEntity);
     
+	
+	/**
+	 * blog url like
+	 * @param url
+	 * @return
+	 * @author:kxjl
+	 * @date 2020年10月23日
+	 */
+	KgEntity selectByBlogUrl(String url);
+	
+
+	/**
+	 * blogdata
+	 * @param item
+	 * @param url
+	 * @return
+	 * @author:kxjl
+	 * @date 2020年10月23日
+	 */
+	public WZResponseEntity<?> saveOrmodifyByUrl( KgEntity item,String url) ;
+	
+	   /**
+  * 查询名称是否存在
+  * @param kgTags
+  * @return
+  * @author:kxjl
+  * @date 2020年6月23日
+  */
+ KgEntity selectByName(KgEntity item);
+
     /**
      * <p>Delete</p>
      * @param id

@@ -11,7 +11,7 @@
 			<meta name="description" content="">
 				<meta name="author" content="">
 
-					<title>收支统计</title>
+					<title>链接发现关系管理</title>
 </head>
 
 <body>
@@ -21,18 +21,17 @@
 
 	<div class="" id="content" style="">
 
-		<input type="hidden" id="httppath" value="${httppath }" />
 
 		<div class=" row row-margin-top-70"></div>
 
 
 		<div class="col-xs-12 row">
-			<div class="panel panel-success pshodow">
+			<div class="panel panel-success pshodow" >
 				<div class="panel-heading" title="点击显示/隐藏查询条件"
 					data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
 					aria-expanded="true">
 					<div class="row">
-						<h3 class="panel-title col-xs-4 col-lg-4 col-md-4 ">收支查询</h3>
+						<h3 class="panel-title col-xs-4 col-lg-4 col-md-4 ">链接发现关系管理 - 查询条件</h3>
 
 
 
@@ -54,24 +53,12 @@
 
 								<div class=" col-md-6  col-xs-12  ">
 									<div
-										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">日期:</div>
+										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">表情说明:</div>
 									<div class="col-md-6 col-xs-8 text-right ">
 										<input
 											class="form-control ng-pristine ng-untouched ng-valid ng-empty"
-											id="q_month" type="text" name="q_month" placeholder="">
-									</div>
-
-
-
-
-								</div>
-
-								<div class=" col-md-6  col-xs-12   ">
-									<div
-										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">备注过滤:</div>
-									<div class="col-md-6 col-xs-8 text-right ">
-										<input id="q_name" name="q_name" placeholder="" type="text"
-											class="form-control ng-pristine ng-untouched ng-valid ng-empty">
+											id="q_fromurl" type="text" name="q_fromurl"
+											placeholder="">
 									</div>
 
 
@@ -80,12 +67,14 @@
 								</div>
 
 
-								<div class=" col-md-6  col-xs-12   ">
+								<div class=" col-md-6  col-xs-12  ">
 									<div
-										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">年度查询:</div>
+										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">表情串:</div>
 									<div class="col-md-6 col-xs-8 text-right ">
-										<input id="q_year" name="q_year" type="checkbox"
-											class="mcheck form-control">
+										<input
+											class="form-control ng-pristine ng-untouched ng-valid ng-empty"
+											id="q_tourl" type="text" name="q_tourl"
+											placeholder="">
 									</div>
 
 
@@ -94,7 +83,7 @@
 								</div>
 
 							</div>
-
+							
 
 						</div>
 
@@ -109,43 +98,21 @@
 
 
 		<div class="col-xs-12 row nopaddding">
-			<div id="pchart" style="min-height: 200px;"></div>
-		</div>
-
-
-		<div class="col-xs-12 row nopaddding">
 
 			<div id="sdata" class=" col-xs-4  margin-bottom-10 padding-right-0 ">
-				<div>
-					收入:<span id="shouruspan" class="shouruspan">+55555</span>
-				</div>
-				<div>
-					支出:<span id="zhichuspan" class='zhichuspan'>-12313</span>
-				</div>
-				<div>
-					结余:<span id="totalspan" class="">2222</span>
-				</div>
-				<div class='yearMoneyChart'>
-					<i class="stastic fa fa-line-chart"></i> <a class=""
-						href="javascript:void(0)" onclick="showYearList()">年度报表</a></span>
-				</div>
 			</div>
-
+			
 			<div
 				class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
 				<button type="button" class="btn btn-primary btn-add btn-block"
-					id="btnAdd_item">
-					<i class="fa fa-edit"></i>记一笔
-				</button>
+					id="btnAdd_item">新增</button>
 
 
 			</div>
-			<div
+<div
 				class=" col-lg-2 col-md-2 col-xs-4 pull-right margin-bottom-10 padding-right-0 ">
 				<button type="button" onclick="doSearch_item()"
-					class="btn btn-primary btn-query btn-block   ">
-					<i class="fa fa-refresh"></i>刷新
-				</button>
+					class="btn btn-primary btn-query btn-block   ">查询</button>
 
 
 			</div>
@@ -156,7 +123,7 @@
 
 		<div class="col-xs-12 row nopaddding">
 
-			<div class="table-responsive tablemoney" style="margin: 1px;">
+			<div class="table-responsive" style="margin: 1px;">
 				<table id="table_list_item" class="table  table-hover table-striped"></table>
 			</div>
 
@@ -172,12 +139,9 @@
 	<!-- 模态框（Modal） -->
 
 	<jsp:include page="form.jsp"></jsp:include>
-	<script src="${basePath}/js/plugin/echart/echart4/echarts.min.js"></script>
 
-	<script src="${basePath}/page/money/money.js"></script>
-
-	<script src="${basePath}/page/money/chart.js"></script>
-	<script src="${basePath}/page/money/typeSelect2.js"></script>
+	<script
+		src="${basePath}/page/linkrelation/linkrelation.js"></script>
 
 
 	<script type="text/javascript"

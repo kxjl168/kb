@@ -22,11 +22,16 @@
  */
 package com.kxjl.admin.service.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kxjl.admin.persistence.entity.KgEntityExample;
 import com.kxjl.admin.persistence.entity.KgEntityKey;
@@ -50,7 +55,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.kxjl.admin.common.Pagination;
 import com.kxjl.admin.common.WZResponseEntity;
 import com.kxjl.admin.common.LoginUser;
+import com.kxjl.base.aopAspect.NoNeedAuthorization;
 import com.kxjl.base.util.UUIDUtil;
+import com.kxjl.web.autodata.pojo.LinkRelation;
+import com.kxjl.web.autodata.service.LinkRelationService;
+import com.kxjl.web.blog.model.Kurl;
+import com.kxjl.web.blog.service.KurlService;
 import com.kxjl.admin.util.Constants;
 import com.kxjl.admin.util.O2oUtil;
 import com.kxjl.admin.util.Page;
@@ -98,6 +108,25 @@ public class KgEntityServiceImpl implements KgEntityService {
 
 	@Autowired
 	KgEditEntityService kgEditEntityService;
+
+	@Autowired
+	KurlService kurlService;
+
+	
+	@Autowired
+	LinkRelationService linkRelationService;
+	
+	/**
+	 * 查询名称是否存在
+	 * 
+	 * @param item
+	 * @return
+	 * @author:kxjl
+	 * @date 2020年6月23日
+	 */
+	public KgEntity selectByName(KgEntity item) {
+		return kgEntityMapper.selectByName(item);
+	}
 
 	/**
 	 * <p>
@@ -226,6 +255,215 @@ public class KgEntityServiceImpl implements KgEntityService {
 		kgEntity.setProperties(jarray.toJSONString());
 	}
 
+	public KgEntity selectByBlogUrl(String url) {
+		return kgEntityMapper.selectByBlogUrl(url);
+	}
+
+	public void rebuildRelationByUrl(Kurl kurl) {
+		
+		KgEntity entity = selectByBlogUrl(kurl.getUrl_val());
+		if (entity == null) {
+			
+			return;
+		}
+		
+		
+		LinkRelation q = new LinkRelation();
+		q.setFromurl(kurl.getUrl_val());
+		// q.setFullurlquery("true");
+		List<LinkRelation> rels = linkRelationService.selectLinkRelationList(q);
+
+		// 目标id
+		List<String> ids = new ArrayList<>();
+
+		if (rels.size() < 3) {
+			System.out.println(kurl.getUrl_name() + " nums: " + rels.size());
+		}
+		if (rels.size() > 20) {
+			System.out.println("-----" +kurl.getUrl_name()  + " nums: " + rels.size());
+		}
+
+		KgObjectToObject kq = new KgObjectToObject();
+		kq.setFromId(entity.getId());
+		kgObjectToObjectService.deleteByFromClsId(kq);
+
+		for (LinkRelation linkRelation : rels) {
+
+			KgEntity target = selectByBlogUrl(linkRelation.getTourl());
+			if (target != null && !entity.getId().equals(target.getId())) {
+
+				if (ids.contains(target.getId()))
+					continue;
+
+				// 重新添加
+
+				KgObjectToObject relation = new KgObjectToObject();
+				relation.setRelationId("66887e67819e4eb4b1a86fb15208a1f6");
+				relation.setRelationName("发现链接");
+				relation.setFromId(entity.getId());
+				relation.setFromName(entity.getName());
+				relation.setFromType("1");
+				relation.setToId(target.getId());
+				relation.setToType("1");
+				relation.setToName(target.getName());
+
+				Random r = new Random(new Date().getTime());
+
+				JSONObject frompoint = new JSONObject();
+				frompoint.put("x", String.valueOf((r.nextDouble() * 500.0)));
+				frompoint.put("y", String.valueOf((r.nextDouble() * 500.0)));
+				relation.setFromData(frompoint.toJSONString());
+
+				JSONObject topoint = new JSONObject();
+				topoint.put("x", String.valueOf((r.nextDouble() * 500.0)));
+				topoint.put("y", String.valueOf((r.nextDouble() * 500.0)));
+				relation.setToData(topoint.toJSONString());
+
+				kgObjectToObjectService.add(relation);
+
+				ids.add(target.getId());
+
+			}
+
+		}
+	}
+
+	public void rebuildEntityByUrl(Kurl kurl) {
+
+		KgEntity e = new KgEntity();
+		e.setId(UUIDUtil.get32UUID());
+		e.setClsId("b3384edb93524717a7c323347872378d"); // 个站
+		e.setName(kurl.getUrl_name());
+		e.setFullName(kurl.getUrl_name());
+		e.setDirId("0084dd00ec724680bef7e6a9012ea225"); // 测试站点领域
+
+		JSONArray jprops = new JSONArray();
+		addattr(jprops, "76a12143-cb1e-4e79-9a58-a3cea9d19547", kurl.getUrl_val());// url
+		// [{"rule":"{\"code\":\"1003\",\"enableEmpty\":\"1\",\"errorTip\":\"请输入文本类型内容\",\"example\":\"示例:
+		// 内容不限\",\"id\":\"fbd11933-1e3c-48f6-aca4-a24cf7c67083\",\"name\":\"文本类型\",\"saveType\":\"1\",\"versionId\":\"1.0.0\"}","label":"URL","value":"http://mindhacks.cn/"},{"rule":"{\"saveType\":\"1\",\"versionId\":\"1.0.0\",\"code\":\"1003\",\"errorTip\":\"请输入文本类型内容\",\"name\":\"文本类型\",\"id\":\"fbd11933-1e3c-48f6-aca4-a24cf7c67083\",\"enableEmpty\":\"1\",\"example\":\"示例:
+		// 内容不限\"}","label":"名称","value":"刘未鹏blog"},{"FileUrl":"http://256kb.cn/kb/file/siteurl/202001/cdbac16b-557f-48e7-92dd-5facad5aebae.png","rule":"{\"saveType\":\"2\",\"versionId\":\"1.0.0\",\"code\":\"1012\",\"errorTip\":\"请上传正确的图片,支持png,jpeg\",\"name\":\"图片类型\",\"id\":\"5\",\"enableEmpty\":\"1\"}","label":"图片","value":"siteurl/202001/cdbac16b-557f-48e7-92dd-5facad5aebae.png"},{"rule":"{\"code\":\"1003\",\"enableEmpty\":\"1\",\"errorTip\":\"请输入文本类型内容\",\"example\":\"示例:
+		// 内容不限\",\"id\":\"fbd11933-1e3c-48f6-aca4-a24cf7c67083\",\"name\":\"文本类型\",\"saveType\":\"1\",\"versionId\":\"1.0.0\"}","label":"描述","value":"刘未鹏"},{"name":"编码","rule":"{\"saveType\":\"1\",\"versionId\":\"1.0.0\",\"code\":\"1003\",\"errorTip\":\"请输入文本类型内容\",\"name\":\"文本类型\",\"id\":\"fbd11933-1e3c-48f6-aca4-a24cf7c67083\",\"enableEmpty\":\"1\",\"example\":\"示例:
+		// 内容不限\"}","label":"编码","id":"d04e3cf1-acbe-48c3-a637-4afbbeaa0ca6","value":"8cb44b517f9d426ba88e46181f0e2b8a"}]
+		addattr(jprops, "07a8b4a5-e105-4e80-aaaa-5cbc58106610", kurl.getUrl_name());// 名称
+		addattr(jprops, "5e150d15-a674-4145-8786-1802d769a026", kurl.getIcon());// 图片
+		addattr(jprops, "c8ede051-c401-490c-83ee-78f01845fcfd", kurl.getDesc_info());// desc
+		// img
+
+		e.setProperties(jprops.toJSONString());
+
+		// [{"label":"左先生","text":"左先生","value":"左先生-#1ccb19","key":"左先生-#1ccb19"},{"label":"其他","text":"其他","value":"其他-#0c0ab6","key":"其他"}]
+		// tag
+		JSONArray jtags = new JSONArray();
+		addtag(jtags, "个人站点");
+		e.setTags(jtags.toJSONString());
+
+		saveOrmodifyByUrl(e, kurl.getUrl_val());
+	}
+
+	
+	/**
+	 * 更新url- >entity /relation
+	 * @param kurlItem 留空，同步10000条，全部，否则更新指定id url数据
+	 * @author:kxjl
+	 * @date 2020年10月29日
+	 */
+	public void rebuildEntityAndRelationByUrl(Kurl kurlItem) {
+
+		LoginUser user = new LoginUser();
+		user.setRoleId(Constants.DEFAULT_ADMIN_ROLEID);
+
+		Kurl query = new Kurl();
+		query.setUrl_type("BLOG");
+		query.setPageCount(10000);
+		
+		if(kurlItem!=null)
+			query.setId(kurlItem.getId());
+		
+		
+		List<Kurl> urls = kurlService.getKurlPageList(query);
+		for (Kurl kurl : urls) {
+
+			rebuildEntityByUrl(kurl);
+
+		}
+
+		// 关系
+
+		for (Kurl kurl : urls) {
+				rebuildRelationByUrl(kurl);
+
+		}
+
+	}
+
+	private void addtag(JSONArray jprops, String label) {
+		// [{"label":"左先生","text":"左先生","value":"左先生-#1ccb19","key":"左先生-#1ccb19"},{"label":"其他","text":"其他","value":"其他-#0c0ab6","key":"其他"}]
+
+		JSONObject entityAttr = new JSONObject();
+		entityAttr.put("label", label);
+		entityAttr.put("text", label);
+		entityAttr.put("value", label + "-#123");
+		entityAttr.put("key", label + "-#123");
+
+		jprops.add(entityAttr);
+
+	}
+
+	private void addattr(JSONArray jprops, String attrid, String value) {
+		KgProperty pro = kgPropertyService.getOne(attrid, "1.0.0");
+
+		if (pro != null) {
+			JSONObject entityAttr = new JSONObject();
+			entityAttr.put("rule", pro.getDataTypeRule());
+			entityAttr.put("label", pro.getName());
+			entityAttr.put("name", pro.getName());
+			entityAttr.put("value", value);
+
+			if (pro.getId().equals("5e150d15-a674-4145-8786-1802d769a026")) {
+				JSONArray jfiles = new JSONArray();
+
+				JSONObject jfile = new JSONObject();
+
+				jfile.put("FileUrl", "http://256kb.cn/kb/file/" + value);
+
+				jfiles.add(jfile);
+
+				entityAttr.put("value", jfiles);
+			}
+
+			jprops.add(entityAttr);
+		}
+	}
+
+	public WZResponseEntity<?> saveOrmodifyByUrl(KgEntity item, String url) {
+		WZResponseEntity<?> rst = new WZResponseEntity<>();
+		rst.setIsSuccess(false);
+
+		LoginUser user = new LoginUser();
+		user.setRoleId(Constants.DEFAULT_ADMIN_ROLEID);
+
+		KgEntity tp = kgEntityMapper.selectByBlogUrl(url);
+
+		KgEntity tp2 = kgEntityMapper.selectByName(item);
+
+		if (tp != null) {
+			item.setId(tp.getId());
+
+			item.setVersionId(tp.getVersionId());
+
+			rst = modify(user, item);
+		} else if (tp2 != null) {
+			item.setId(tp2.getId());
+
+			item.setVersionId(tp2.getVersionId());
+
+			rst = modify(user, item);
+		} else {
+			rst = add(user, item);
+		}
+		return rst;
+	}
+
 	@Transactional
 	public WZResponseEntity<?> saveOrmodify(LoginUser user, KgEntity item) {
 		WZResponseEntity<?> rst = new WZResponseEntity<>();
@@ -321,7 +559,7 @@ public class KgEntityServiceImpl implements KgEntityService {
 			// rst.setErrorMsg("名称重复!");
 			// } else {
 
-			if (kgEntity.getSubKgId() != null&&!kgEntity.getSubKgId().equals("")) {
+			if (kgEntity.getSubKgId() != null && !kgEntity.getSubKgId().equals("")) {
 				kgEntity.setSubIds(kgEntity.getSubKgId());
 				kgEntity.setSubKgId("");
 				// 处理领域
@@ -423,12 +661,11 @@ public class KgEntityServiceImpl implements KgEntityService {
 			return lst.get(0);
 		else {
 			KgEditEntity editOne = kgEditEntityService.getOne(id);
-			if (editOne != null)
-			{
-				//编辑中
+			if (editOne != null) {
+				// 编辑中
 				editOne.setMyEdit("true");
 				return editOne;
-				
+
 			}
 
 			return null;

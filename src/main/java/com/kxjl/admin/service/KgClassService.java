@@ -54,6 +54,15 @@ public interface KgClassService {
      * @return
      */
 	WZResponseEntity<?> modify(LoginUser user,KgClass kgClass);
+    /**
+     * 查询名称是否存在
+     * @param item
+     * @return
+     * @author:kxjl
+     * @date 2020年6月23日
+     */
+    KgClass selectByName(KgClass item);
+    
     
     /**
      * <p>Delete</p>

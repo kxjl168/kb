@@ -24,6 +24,9 @@ public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
       	builder.addDecoratorPath("/pown/url*", "/decorators/backend/indexWithlefturl.jsp");
     	
   
+      	
+    	builder.addDecoratorPath("/page/react*", "/decorators/backend/indexWithMenuReact.jsp");
+      	
     	//builder.addDecoratorPath("/page/btype/*", "/decorators/backend/indexWithMenu.jsp");
     	builder.addDecoratorPath("/page/*", "/decorators/backend/indexWithMenu.jsp");
     	builder.addDecoratorPath("/generator/*", "/decorators/backend/indexWithMenu.jsp");

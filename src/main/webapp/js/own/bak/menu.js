@@ -1,5 +1,8 @@
 function loadmenu(url) {
 
+	if(url.indexOf('http')>-1)
+		window.open(url,'_blank');
+	else
 	window.location.href = getImUrl() + url;
 };
 

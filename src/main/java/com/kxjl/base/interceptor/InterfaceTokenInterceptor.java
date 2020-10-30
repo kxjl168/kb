@@ -58,52 +58,53 @@ public class InterfaceTokenInterceptor implements HandlerInterceptor {
 
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
-		//ApplicationContext ctx = WebApplicationContextUtils
-		//		.getRequiredWebApplicationContext(request.getServletContext());
+		// ApplicationContext ctx = WebApplicationContextUtils
+		// .getRequiredWebApplicationContext(request.getServletContext());
 		// UserServiceImpl userService = (UserServiceImpl) ctx.getBean("userService");
 
 		// System.out.println(request.getRequestURL());
-
 
 		// web端 token验证
 		if (!(handler instanceof HandlerMethod)) {
 			return true;
 		}
-		HandlerMethod handlerMethod = (HandlerMethod) handler;
-		Method method = handlerMethod.getMethod();
-		if (method.getAnnotation(NoNeedAuthorization.class) != null) {
-			// 如果验证token失败，但是方法注明了NoNeedAuthorization，正常请求
-			// response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return true;
-		}
-		
-		
 
-		// api keyid sign 检查
-		Enumeration paras = request.getParameterNames();
 		Map<String, String> datas = new HashMap<>();
-		while (paras.hasMoreElements()) {
+		String appid ="";
+		
+		// 文件上传
+		if (request.getRequestURI().contains("UploadFile"))
+			checkSign = false;
 
-			String v = (String) paras.nextElement();
-			String d = (String) request.getParameter(v);
+		else {
 
-			// logger.info("*" + v + ":" + request.getParameter(v));
-			// logger.debug("*" + v + ":" + request.getParameter(v));
-			datas.put(v, d);
+			// api keyid sign 检查
+			Enumeration paras = request.getParameterNames();
+		
+			while (paras.hasMoreElements()) {
 
+				String v = (String) paras.nextElement();
+				String d = (String) request.getParameter(v);
+
+				// logger.info("*" + v + ":" + request.getParameter(v));
+				// logger.debug("*" + v + ":" + request.getParameter(v));
+				datas.put(v, d);
+
+			}
+
+			 appid = datas.get(SignConstants.FIELD_KEY);
+			if (appid == null || appid.equals("")) {
+				response.setStatus(HttpStatus.SC_UNAUTHORIZED);
+				return false;
+			}
+			
+			if (appid.equals("sdf922233ce10fa47a1af8491d2fbd20ac6"))
+				checkSign = false;
+			else
+				checkSign = true;
 		}
 
-		String appid = datas.get(SignConstants.FIELD_KEY);
-		if (appid == null || appid.equals("")) {
-			response.setStatus(HttpStatus.SC_UNAUTHORIZED);
-			return false;
-		}
 		
-		
-		if(appid.equals("sdf922233ce10fa47a1af8491d2fbd20ac6"))
-			checkSign=false;
-		else
-			checkSign=true;
 
 		if (checkSign) {
 
@@ -147,10 +148,9 @@ public class InterfaceTokenInterceptor implements HandlerInterceptor {
 		}
 		// end
 
-	
-
 		// head token检查
 		String token = request.getHeader(SysConst.AUTHORIZATION);
+		boolean tokenOk = false;
 		if (token != null && !token.equals("")) {
 			tokeUtils = (TokeUtils) SpringUtils.getBean(TokeUtils.class);
 
@@ -158,7 +158,8 @@ public class InterfaceTokenInterceptor implements HandlerInterceptor {
 			if (isExpire) {
 				response.setStatus(4000);// token过期
 				System.out.println("token过期..");
-				return false;
+				tokenOk = false;
+				// return false;
 			} else {
 				SysUserBean mquery = new SysUserBean();
 				mquery.setToken(token);
@@ -173,6 +174,8 @@ public class InterfaceTokenInterceptor implements HandlerInterceptor {
 					curUser.setRoles(roles);
 
 					tokeUtils.setCurrentUser(curUser);
+
+					tokenOk = true;
 				} else {
 					// tokeUtils.setCurrentUser(null);
 				}
@@ -183,7 +186,23 @@ public class InterfaceTokenInterceptor implements HandlerInterceptor {
 			tokeUtils.setCurrentUser(null);
 		}
 
-		return true;
+		HandlerMethod handlerMethod = (HandlerMethod) handler;
+		Method method = handlerMethod.getMethod();
+		if (method.getAnnotation(NoNeedAuthorization.class) != null) {
+			// 如果验证token失败，但是方法注明了NoNeedAuthorization，正常请求
+			// response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return true;
+		}
+
+		else {
+			if (tokenOk)
+				return true;
+
+			
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return false;
+		}
+
 	}
 
 	@Override

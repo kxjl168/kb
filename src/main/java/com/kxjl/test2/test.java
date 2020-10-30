@@ -80,15 +80,237 @@ public class test {
 
 		//testicon();
 		
-		log1.info("log1.info");
-		log1.warn("log1.warn");
-		log1.error("log1.error");
-		log1.debug("log1.debug");
+//		log1.info("log1.info");
+//		log1.warn("log1.warn");
+//		log1.error("log1.error");
+//		log1.debug("log1.debug");
+//		
+//		log2.info("log2.info");
+//		log2.warn("log2.warn");
+//		log2.error("log2.error");
+//		log2.debug("info2.debug");
 		
-		log2.info("log2.info");
-		log2.warn("log2.warn");
-		log2.error("log2.error");
-		log2.debug("info2.debug");
+		
+		testurl();
+		
+		
+		//getLinkSpider();
+		
+		//rebuildBlogRelation();
+	}
+	
+	private static void testurl() {
+		
+			String url = "http://192.168.1.194:8081/kb/kg/kurl/searchurl?AccessKeyId=xxxxyyy&random=9aqgfgj4jok&sign_type=HMAC-SHA256&user_name=&sign=2622F28E51D157D2E646A08E77B2C1A78B66DB58A8F178E715392E244303CD0B";
+	//String url = "http://www.256kb.cn/kb/file/apk/202001/3afb1d2c-7e3b-470c-96ed-8cce29be1cd0_orign.jpg";
+
+			// String url =
+			// "http://10.204.37.192:8080/gserver/version/getVersionInfo.action?type=2";
+
+			String data = "";
+
+			String responsedata = "";
+			try {
+
+				JSONObject j = new JSONObject();
+				j.put("id", "111");
+				j.put("state", "1");
+
+				int num = 2;
+				//for (int i = 0; i < num; i++) {
+					// responsedata = sendHttpData(,"");
+
+					//String tpurl = url + "?data=" + URLEncoder.encode(j.toString());
+					
+
+					String heads = "JSESSIONID=676hkg13l28r6gqubamcsg5s; _ga=GA1.1.1047426687.1574055195; AdminCode=JUqn; _gid=GA1.1.1715164123.1577688926; _gat_gtag_UA_126706596_1=1";
+
+					// String heads="JSESSIONID=ef3xmfrnj1q1gj4yozh8x4ao;
+					// _ga=GA1.1.24081232.1577692939; _gid=GA1.1.1115868964.1577692939;
+					// _gat_gtag_UA_126706596_1=1";
+
+					HashMap<String, String> maps = new HashMap<String, String>();
+					maps.put("Cookie", heads);
+					maps.put("User-Agent", "Mozilla/5.0 baidu (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36");
+					
+
+					responsedata = HttpSendPost.sendHttpJSONDataNoSSL(null, false, "", true, url, "", maps, null);
+
+					//System.out.println(i + "返回:" + responsedata);
+			//	}
+
+				// System.out.println("解密:" + out);
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			System.out.println(responsedata);
+	}
+	
+	
+private static void getLinkSpider() {
+
+		
+		String url = "http://127.0.0.1:8081/kb/kg/kg-search/spider";
+		//String url = "http://www.256kb.cn/kb/file/apk/202001/3afb1d2c-7e3b-470c-96ed-8cce29be1cd0_orign.jpg";
+
+				// String url =
+				// "http://10.204.37.192:8080/gserver/version/getVersionInfo.action?type=2";
+
+				String data = "";
+
+				String responsedata = "";
+				try {
+
+					JSONObject j = new JSONObject();
+					j.put("id", "111");
+					j.put("state", "1");
+
+					int num = 2;
+					//for (int i = 0; i < num; i++) {
+						// responsedata = sendHttpData(,"");
+
+						//String tpurl = url + "?data=" + URLEncoder.encode(j.toString());
+						
+
+						String heads = "JSESSIONID=676hkg13l28r6gqubamcsg5s; _ga=GA1.1.1047426687.1574055195; AdminCode=JUqn; _gid=GA1.1.1715164123.1577688926; _gat_gtag_UA_126706596_1=1";
+
+						// String heads="JSESSIONID=ef3xmfrnj1q1gj4yozh8x4ao;
+						// _ga=GA1.1.24081232.1577692939; _gid=GA1.1.1115868964.1577692939;
+						// _gat_gtag_UA_126706596_1=1";
+
+						HashMap<String, String> maps = new HashMap<String, String>();
+						maps.put("Cookie", heads);
+						maps.put("User-Agent", "Mozilla/5.0 baidu (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36");
+						
+
+						responsedata = HttpSendPost.sendHttpJSONDataNoSSL(null, false, "", true, url, "", maps, null);
+
+						//System.out.println(i + "返回:" + responsedata);
+				//	}
+
+					// System.out.println("解密:" + out);
+
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				System.out.println(responsedata);
+				// ***********vmInstallApp*****************
+
+	}
+	
+	private static void stopspider() {
+
+		
+		String url = "http://127.0.0.1:8081/kb/kg/kg-search/stopspider";
+		
+		
+		//String url = "http://www.256kb.cn/kb/file/apk/202001/3afb1d2c-7e3b-470c-96ed-8cce29be1cd0_orign.jpg";
+
+		// String url =
+		// "http://10.204.37.192:8080/gserver/version/getVersionInfo.action?type=2";
+
+		String data = "";
+
+		String responsedata = "";
+		try {
+
+			JSONObject j = new JSONObject();
+			j.put("id", "111");
+			j.put("state", "1");
+
+			int num = 2;
+			//for (int i = 0; i < num; i++) {
+				// responsedata = sendHttpData(,"");
+
+				//String tpurl = url + "?data=" + URLEncoder.encode(j.toString());
+				
+
+				String heads = "JSESSIONID=676hkg13l28r6gqubamcsg5s; _ga=GA1.1.1047426687.1574055195; AdminCode=JUqn; _gid=GA1.1.1715164123.1577688926; _gat_gtag_UA_126706596_1=1";
+
+				// String heads="JSESSIONID=ef3xmfrnj1q1gj4yozh8x4ao;
+				// _ga=GA1.1.24081232.1577692939; _gid=GA1.1.1115868964.1577692939;
+				// _gat_gtag_UA_126706596_1=1";
+
+				HashMap<String, String> maps = new HashMap<String, String>();
+				maps.put("Cookie", heads);
+				maps.put("User-Agent", "Mozilla/5.0 baidu (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36");
+				
+
+				responsedata = HttpSendPost.sendHttpJSONDataNoSSL(null, false, "", true, url, "", maps, null);
+
+				//System.out.println(i + "返回:" + responsedata);
+		//	}
+
+			// System.out.println("解密:" + out);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println(responsedata);
+		// ***********vmInstallApp*****************
+
+	}
+	
+	private static void rebuildBlogRelation() {
+
+	
+		String url = "http://127.0.0.1:8081/kb/kg/kg-search/rebuildBlogRelation";
+		
+		
+		//String url = "http://www.256kb.cn/kb/file/apk/202001/3afb1d2c-7e3b-470c-96ed-8cce29be1cd0_orign.jpg";
+
+		// String url =
+		// "http://10.204.37.192:8080/gserver/version/getVersionInfo.action?type=2";
+
+		String data = "";
+
+		String responsedata = "";
+		try {
+
+			JSONObject j = new JSONObject();
+			j.put("id", "111");
+			j.put("state", "1");
+
+			int num = 2;
+			//for (int i = 0; i < num; i++) {
+				// responsedata = sendHttpData(,"");
+
+				//String tpurl = url + "?data=" + URLEncoder.encode(j.toString());
+				
+
+				String heads = "JSESSIONID=676hkg13l28r6gqubamcsg5s; _ga=GA1.1.1047426687.1574055195; AdminCode=JUqn; _gid=GA1.1.1715164123.1577688926; _gat_gtag_UA_126706596_1=1";
+
+				// String heads="JSESSIONID=ef3xmfrnj1q1gj4yozh8x4ao;
+				// _ga=GA1.1.24081232.1577692939; _gid=GA1.1.1115868964.1577692939;
+				// _gat_gtag_UA_126706596_1=1";
+
+				HashMap<String, String> maps = new HashMap<String, String>();
+				maps.put("Cookie", heads);
+				maps.put("User-Agent", "Mozilla/5.0 baidu (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36");
+				
+
+				responsedata = HttpSendPost.sendHttpJSONDataNoSSL(null, false, "", true, url, "", maps, null);
+
+				//System.out.println(i + "返回:" + responsedata);
+		//	}
+
+			// System.out.println("解密:" + out);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println(responsedata);
+		// ***********vmInstallApp*****************
+
 	}
 
 	private static void moneytest() {

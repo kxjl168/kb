@@ -26,6 +26,19 @@ public class KurlServiceImpl implements KurlService {
 	private KurlDao dictInfoDao;
 
 	
+	
+	/**
+	 * 通过所有blog
+	 * 
+	 * @author:kxjl
+	 * @date 2020年10月29日
+	 */
+	public void passallBlogKurl()
+	{
+		dictInfoDao.passallBlogKurl();
+	}
+	
+	
 	/**
 	 * 获取链接分类数据
 	 * @param query

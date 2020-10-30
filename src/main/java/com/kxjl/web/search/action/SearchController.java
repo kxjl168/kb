@@ -305,7 +305,7 @@ public class SearchController extends BaseController {
 		
 		SearchKeys skey=new SearchKeys();
 		skey.setEmail(email);
-		skey.setContext(txt);
+		skey.setContext(JEscape.unescape(txt));
 		skey.setNickname(nickname);
 		skey.setGkey(UUIDUtil.getUUID());
 		skey.setContext2("感谢您的申请");
@@ -373,41 +373,37 @@ public class SearchController extends BaseController {
 		}).start();
 	}
 	
-
+	
 	/**
-	 * 页面-获取banner列表
 	 * 
-	 * @param clientType
-	 * @param packageName
-	 * @param curPage
-	 *            当前页
-	 * @param pageCount
-	 *            每页多少条
+	 * @param engin
+	 * @param data
+	 * @param key
+	 * @param url
+	 * @param request
+	 * @param response
 	 * @return
+	 * @author:kxjl
+	 * @date 2020年10月15日
 	 */
-	@RequestMapping(value = "/dosearch")
-	public void dosearch(HttpServletRequest request, HttpServletResponse response) {
-
-		// String deviceid = request.getParameter("deviceid");
-
-		/*
-		 * int pageCount = Integer.parseInt(request.getParameter("rows"));//
-		 * request.getParameter("pageCount"); int curPage =
-		 * Integer.parseInt(request.getParameter("page"));
-		 */
-
-		String data = parseStringParam(request, "keyword");
-		String url = parseStringParam(request, "url");
-		String key= parseStringParam(request, "gkey");
+	public String realSearch(String engin,String data,String key,String url,HttpServletRequest request, HttpServletResponse response) {
 		JSONObject jsonOut = new JSONObject();
-
 		String rst = "";
 		try {
 
+			
 			// searengin="https://www.google.co.jp";
-			searengin = "https://www.google.com.hk";
+			 String searengin = "https://www.google.com.hk";
 
-			searengin = ConfigReader.getInstance().getProperty("searchEngin", searengin);
+			 searengin = ConfigReader.getInstance().getProperty("searchEngin", searengin);
+			 
+			 if(engin!=null&&!engin.equals(""))
+			 {
+				 //参数输入
+				 searengin=engin;
+			 }
+			 
+			 
 
 			preurl = ConfigReader.getInstance().getProperty("preurl", preurl);
 
@@ -422,6 +418,9 @@ public class SearchController extends BaseController {
 				// 记录搜索关键词
 				saveStaticInfo(request, StasticTypeOne.GSearch.getDesc(), "", data+" key:"+key);
 
+				if(engin==null||engin.equals(""))
+				{//默认检查
+					
 				// 监测是否登录
 				// 190728
 				int cansearch = checkCansearch(request,key);
@@ -435,12 +434,14 @@ public class SearchController extends BaseController {
 						jsonOut.put("ResponseMsg", "非常抱歉,您的授权码已达使用上限.");
 					rst = jsonOut.toString();
 					JsonUtil.responseOutWithJson(response, rst);
-					return;
+					return "";
+				}
 				}
 
 			} else if (url != null && !url.equals("")) {
+				//后续 翻页链接
 				// 替换自动附加的本站链接前缀
-				url = url.replace("http://" + request.getHeader("Host"), "");
+				url = url.replace(ConfigReader.getInstance().getProperty("domainSearch", request.getHeader("Host")), "");
 				desturl = geturl(url);
 			}
 
@@ -471,7 +472,38 @@ public class SearchController extends BaseController {
 			closeQuietly(httpClient);
 		}
 		rst = jsonOut.toString();
-		JsonUtil.responseOutWithJson(response, rst);
+		return rst;
+	}
+
+	/**
+	 * 页面-获取banner列表
+	 * 
+	 * @param clientType
+	 * @param packageName
+	 * @param curPage
+	 *            当前页
+	 * @param pageCount
+	 *            每页多少条
+	 * @return
+	 */
+	@RequestMapping(value = "/dosearch")
+	public void dosearch(HttpServletRequest request, HttpServletResponse response) {
+
+		// String deviceid = request.getParameter("deviceid");
+
+		/*
+		 * int pageCount = Integer.parseInt(request.getParameter("rows"));//
+		 * request.getParameter("pageCount"); int curPage =
+		 * Integer.parseInt(request.getParameter("page"));
+		 */
+
+		String data = parseStringParam(request, "keyword");
+		String url = parseStringParam(request, "url");
+		String key= parseStringParam(request, "gkey");
+	
+		String searchdata=realSearch("", data, key, url, request, response);
+		
+		JsonUtil.responseOutWithJson(response, searchdata);
 
 	}
 
