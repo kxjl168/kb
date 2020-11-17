@@ -99,6 +99,13 @@
 		<if test='val1 != null'>
 			val1=#{val1},
 		</if>
+		<if test='level != null'>
+			level=#{level},
+		</if>
+			<if test='tags != null'>
+			tags=#{tags},
+		</if>
+		
 			<if test='desc_info != null'>
 			desc_info=#{desc_info},
 		</if>

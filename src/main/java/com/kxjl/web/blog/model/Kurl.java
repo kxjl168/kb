@@ -27,6 +27,9 @@ public class Kurl extends BaseModel {
 	private String icon;//图标 相对路径
 	private String isshow;// 是否显示 1：显示 ，， 0 不显示
 	
+	private String level;//level
+	private String tags;//tag
+	
 	//query
 	private String val2;
 	private List<Kurl> childs=new ArrayList<>();
@@ -117,6 +120,22 @@ public class Kurl extends BaseModel {
 
 	public void setChilds(List<Kurl> childs) {
 		this.childs = childs;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
 	}
 
 

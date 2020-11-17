@@ -57,7 +57,20 @@ public class InterfaceTokenInterceptor implements HandlerInterceptor {
 		managerService = (ManagerService) SpringUtils.getBean(ManagerService.class);
 
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=utf-8");
+		response.setContentType("text/json;charset=utf-8");
+		
+		
+//		
+//		
+//		response.setHeader("Access-Control-Allow-Credentials","true");
+//		response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+//		response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//		response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS, PATCH");
+//		
+//		
+		
+		
+		
 		// ApplicationContext ctx = WebApplicationContextUtils
 		// .getRequiredWebApplicationContext(request.getServletContext());
 		// UserServiceImpl userService = (UserServiceImpl) ctx.getBean("userService");
@@ -156,9 +169,11 @@ public class InterfaceTokenInterceptor implements HandlerInterceptor {
 
 			boolean isExpire = tokeUtils.checkIsExpireToken(token);
 			if (isExpire) {
-				response.setStatus(4000);// token过期
-				System.out.println("token过期..");
+				//response.setStatus(4000);// token过期
+				//response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+				//System.out.println("token过期..");
 				tokenOk = false;
+				//return false;
 				// return false;
 			} else {
 				SysUserBean mquery = new SysUserBean();
@@ -177,6 +192,9 @@ public class InterfaceTokenInterceptor implements HandlerInterceptor {
 
 					tokenOk = true;
 				} else {
+					tokenOk = false;
+					//token已清除
+					//response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 					// tokeUtils.setCurrentUser(null);
 				}
 
@@ -197,9 +215,10 @@ public class InterfaceTokenInterceptor implements HandlerInterceptor {
 		else {
 			if (tokenOk)
 				return true;
-
 			
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			response.setStatus(HttpServletResponse.SC_OK);
+			//response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			response.getWriter().write("{\"errorCode\":\"-1\",\"errorMsg\":\"session time out\"}");
 			return false;
 		}
 

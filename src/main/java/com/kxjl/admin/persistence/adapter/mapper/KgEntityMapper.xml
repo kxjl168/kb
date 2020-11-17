@@ -199,7 +199,43 @@ and e.audit_state in ('1','2')
 		)
 	</sql>
 	
+<sql id="selectAllChildClsId" >
+	
+	
+select C1.id from  <include refid="selectAllClassTable" /> c1 left join  <include refid="selectAllClassTable" /> c2 ON
+				c1.id=c2.parent_id
+				where C1.id=#{clsId}
+union  
 
+select C2.id from  <include refid="selectAllClassTable" /> c1 left join  <include refid="selectAllClassTable" /> c2 ON
+				c1.id=c2.parent_id
+				where C1.id=#{clsId}
+
+union  
+select C3.id from  <include refid="selectAllClassTable" /> c1 left join  <include refid="selectAllClassTable" /> c2 ON
+				c1.id=c2.parent_id
+				left join  <include refid="selectAllClassTable" /> c3 ON c2.id=c3.parent_id
+				where C1.id=#{clsId}
+		
+union  
+
+select C4.id from  <include refid="selectAllClassTable" /> c1 left join  <include refid="selectAllClassTable" /> c2 ON
+				c1.id=c2.parent_id
+				left join  <include refid="selectAllClassTable" /> c3 ON c2.id=c3.parent_id
+					left join  <include refid="selectAllClassTable" /> c4 ON c3.id=c4.parent_id
+				where C1.id=#{clsId}
+
+union  
+
+select C5.id from  <include refid="selectAllClassTable" /> c1 left join  <include refid="selectAllClassTable" /> c2 ON
+				c1.id=c2.parent_id
+				left join  <include refid="selectAllClassTable" /> c3 ON c2.id=c3.parent_id
+				left join  <include refid="selectAllClassTable" /> c4 ON c3.id=c4.parent_id
+				left join  <include refid="selectAllClassTable" /> c5 ON c4.id=c5.parent_id
+				where C1.id=#{clsId}
+			
+			
+	</sql>
 
 	<select id="selectList"
 		parameterType="com.kxjl.admin.persistence.entity.KgEntity"
@@ -288,7 +324,10 @@ and e.audit_state in ('1','2')
 
 				<!-- 查询6级子目录 -->
 				AND c.cls_id in (
-				select DISTINCT C1.id from <include refid="selectAllClassTable" /> c1 left join <include refid="selectAllClassTable" /> c2 ON
+				
+					<include refid="selectAllChildClsId" />
+				
+			<!-- 	select DISTINCT C1.id from <include refid="selectAllClassTable" /> c1 left join <include refid="selectAllClassTable" /> c2 ON
 				c1.id=c2.parent_id
 				left join <include refid="selectAllClassTable" /> c3 ON c3.id=c2.parent_id
 				left join <include refid="selectAllClassTable" /> c4 ON c4.id=c3.parent_id
@@ -299,7 +338,7 @@ and e.audit_state in ('1','2')
 				or c3.PARENT_ID=#{clsId}
 				or c4.PARENT_ID=#{clsId}
 				or c5.PARENT_ID=#{clsId}
-				or c6.PARENT_ID=#{clsId}
+				or c6.PARENT_ID=#{clsId} -->
 				)
 			</if>
 

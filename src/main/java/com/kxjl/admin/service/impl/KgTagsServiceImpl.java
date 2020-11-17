@@ -26,6 +26,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.kxjl.admin.common.Pagination;
+import com.kxjl.admin.common.WZResponseEntity;
 import com.kxjl.base.util.UUIDUtil;
 import com.kxjl.admin.util.Constants;
 import com.kxjl.admin.util.Page;
@@ -40,6 +41,7 @@ import com.kxjl.admin.service.KgTagsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -145,8 +147,11 @@ public class KgTagsServiceImpl implements KgTagsService {
 		Boolean rst = false;
 		if (data != null && !data.equals("")) {
 
-			JSONObject jo=JSON.parseObject(data);
-			JSONArray jarray = jo.getJSONArray("data");
+//			JSONObject jo=JSON.parseObject(data);
+//			JSONArray jarray = jo.getJSONArray("data");
+			
+			JSONArray jarray=JSON.parseArray(data);
+			//JSONArray jarray = jo.getJSONArray("data");
 			
 			//JSONArray jarray = JSON.parseArray(data);
 			for (int i = 0; i < jarray.size(); i++) {

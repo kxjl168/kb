@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kxjl.base.interceptor.TokeUtils;
+import com.kxjl.base.service.ManagerService;
 import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.common.Md5Encrypt;
 import com.kxjl.tool.config.ConfigReader;
@@ -36,10 +40,6 @@ import com.kxjl.web.system.service.TokenService;
 import com.kxjl.web.user.model.User;
 import com.kxjl.web.user.service.UserService;
 
-
-
-
-
 /**
  * 后台用户登录
  * 
@@ -52,7 +52,6 @@ public class SysUserController extends BaseController {
 	// 日志打印对象
 	private Logger logger = Logger.getLogger(SysUserController.class);
 
-
 	/**
 	 * 登录
 	 * 
@@ -63,22 +62,17 @@ public class SysUserController extends BaseController {
 		return "/home/login";
 	}
 
-	@RequestMapping(value ="/main")
-	public void main(HttpServletRequest request,HttpServletResponse response, HttpSession session) {
-		SysUserBean user = (SysUserBean) session
-				.getAttribute(Constant.SESSION_USER);
+	@RequestMapping(value = "/main")
+	public void main(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		SysUserBean user = (SysUserBean) session.getAttribute(Constant.SESSION_USER);
 		request.setAttribute("loginUser", user.getName());
-		
-		
-		
-		//https 跳转，nginx https代理 http，防止页面跳回http zj 190711
-		response.setStatus(302);//或者303,兼容http1.1
-		response.setHeader("location", request.getContextPath()+"/home/index");
-		
-		
-		//return "/home/index";
+
+		// https 跳转，nginx https代理 http，防止页面跳回http zj 190711
+		response.setStatus(302);// 或者303,兼容http1.1
+		response.setHeader("location", request.getContextPath() + "/home/index");
+
+		// return "/home/index";
 	}
-	
 
 	@Autowired
 	private TokenService tokenService;
@@ -87,8 +81,13 @@ public class SysUserController extends BaseController {
 	private SysUserService sysUserService;
 
 	@Autowired
+	ManagerService managerService;
+
+	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private TokeUtils tokeUtils;
 
 	/**
 	 * 后台登录请求,验证用户
@@ -104,17 +103,14 @@ public class SysUserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = { "/exlogin" })
-	public @ResponseBody
-	Map<String, Object> exclogin(HttpServletRequest request,
-			HttpServletResponse response, HttpSession session,
-			@RequestParam("username") String userid,
-			@RequestParam("password") String password) {
+	public @ResponseBody Map<String, Object> exclogin(HttpServletRequest request, HttpServletResponse response,
+			HttpSession session, @RequestParam("username") String userid, @RequestParam("password") String password) {
 		String msg = "";
 		int sucess = 0;
 		HashMap<String, Object> map = new HashMap();
-		
-		String actiontype="admin_login";
-		
+
+		String actiontype = "admin_login";
+
 		// 计算ip
 		String ip = "";
 		try {
@@ -129,32 +125,23 @@ public class SysUserController extends BaseController {
 		rquery.setIp(ip);
 
 		// 可以再次评论的时间间隔
-		int sec = ConfigReader.getInstance().getIntProperty(
-				"login_cando_sec", 60);
+		int sec = ConfigReader.getInstance().getIntProperty("login_cando_sec", 60);
 		rquery.setSec(sec);
 
-		int rqstnum = requestInfoService
-				.getRequestCountByCondition(rquery);
+		int rqstnum = requestInfoService.getRequestCountByCondition(rquery);
 		// 单位时间内允许评论的次数
-		int maxnum = ConfigReader.getInstance().getIntProperty(
-				"login_maxnum_p_sec", 10);
+		int maxnum = ConfigReader.getInstance().getIntProperty("login_maxnum_p_sec", 10);
 		if (rqstnum >= maxnum) {
-			
+
 			map.put("url", "/");
-			
-			map.put("sucess",0);
-			
+
+			map.put("sucess", 0);
+
 			map.put("msg", "非法操作!");
-			saveRequestInfo(request, actiontype,"登陆次数过多");
+			saveRequestInfo(request, actiontype, "登陆次数过多");
 			return map;
 		}
-		
-		
-		
-		
-		
-		
-		
+
 		String md5password = Md5Encrypt.MD5(password);
 		// 用户名不区分大小写
 		userid = userid.toLowerCase();
@@ -165,33 +152,28 @@ public class SysUserController extends BaseController {
 
 		SysUserBean usr = sysUserService.getUserInfoByUseridAndPwd(userInfo);
 
-	
 		if (usr == null) {
 
 			//
-			User cusr = userService.getUserInfoByAccountAndPass(
-					userid, password);
+			User cusr = userService.getUserInfoByAccountAndPass(userid, password);
 			if (cusr == null) {
 				msg = "用户名或密码错误";
 				sucess = 0;
 			} else {
-				
-				
-				
-				
+
 				sucess = 1;
 				usr = new SysUserBean();
-				usr.setUserid(String.valueOf( cusr.getRecordid()));
+				usr.setUserid(String.valueOf(cusr.getRecordid()));
 				usr.setUtype(UserType.LoginUser);
-				
-				if(cusr.getAccountid().equals("xsw"))
+
+				if (cusr.getAccountid().equals("xsw"))
 					usr.setUtype(UserType.xiaohuoban);
-				
+
 				usr.setName(cusr.getUser_name());
 				map.put("type", usr.getUtype().toString());
 				session.setAttribute(Constant.SESSION_USER, usr);
 				createToken(request, usr, "");
-				
+
 			}
 		} else {
 			msg = "";
@@ -201,29 +183,58 @@ public class SysUserController extends BaseController {
 			map.put("type", UserType.Admin.toString());
 
 			usr.setUtype(UserType.Admin);
-			
+
 			createToken(request, usr, "");
+
+			//cookie共享token
+			Cookie ckToken = refreshReactTokenToSession(usr);
+			response.addCookie(ckToken);
 
 			session.setAttribute(Constant.SESSION_USER, usr);
 		}
-		
-		
-		if(request.getContextPath().contains("/kb"))
+
+		if (request.getContextPath().contains("/kb"))
 			map.put("url", "/kb");
 		else
-		map.put("url", "/");
-		
+			map.put("url", "/");
+
 		map.put("sucess", Integer.valueOf(sucess));
-		
+
 		map.put("msg", msg);
-	
-		String info= sucess==1?"登录成功":"登录失败";
-		
-		saveRequestInfo(request, actiontype,info);
-		
+
+		String info = sucess == 1 ? "登录成功" : "登录失败";
+
+		saveRequestInfo(request, actiontype, info);
+
 		return map;
 	}
-	
+
+	/**
+	 *  设置token 写入cookie, 使react 获取token,验证登录<br/>
+	 *  二级域名，从cookie中获取ktoken字段，带入head请求
+	 * @param usr
+	 * @return
+	 * @author:kxjl
+	 * @date 2020年11月17日
+	 */
+	private Cookie refreshReactTokenToSession(SysUserBean usr) {
+		// 设置token 写入cookie, 使react 获取token,验证登录
+		String usertoken = UUID.randomUUID().toString();
+		if (usr.getToken() != null && !usr.getToken().equals("")) {
+			usertoken=usr.getToken();
+		}
+		usertoken = tokeUtils.refreshOrgenerateNewToken(usertoken);
+		
+		usr.setToken(usertoken);
+		managerService.updateToken(usr.getUserid(), usertoken);
+
+		Cookie ckToken = new Cookie("ktoken", usertoken);
+		ckToken.setPath("/");
+		ckToken.setDomain(ConfigReader.getInstance().getProperty("cookieDomain", "256kb.cn"));
+		return ckToken;
+		// token end
+	}
+
 	/**
 	 * 构造登录令牌
 	 * 
@@ -231,14 +242,12 @@ public class SysUserController extends BaseController {
 	 *            HttpServletRequest
 	 * @return 登录令牌
 	 */
-	private TokenBean constructTokenBean(HttpServletRequest request,
-			SysUserBean bean) {
+	private TokenBean constructTokenBean(HttpServletRequest request, SysUserBean bean) {
 		TokenBean tokenBean = null;
 		HttpSession session = request.getSession();
 		String info = bean.getUserid() + "|" + "2";
 		if (bean != null) {
-			tokenBean = new TokenBean(session.getId(), bean.getUserid(),
-					new Date(System.currentTimeMillis()), info);
+			tokenBean = new TokenBean(session.getId(), bean.getUserid(), new Date(System.currentTimeMillis()), info);
 		}
 		return tokenBean;
 	}
@@ -256,8 +265,7 @@ public class SysUserController extends BaseController {
 	 *            用户信息
 	 */
 
-	private TokenBean createToken(HttpServletRequest request, SysUserBean bean,
-			String token) {
+	private TokenBean createToken(HttpServletRequest request, SysUserBean bean, String token) {
 		// logger.info("构造token并添加到内存和数据库中");
 		// 构造token
 		TokenBean tokenBean = constructTokenBean(request, bean);
@@ -271,31 +279,29 @@ public class SysUserController extends BaseController {
 		 * 写入token到数据库
 		 */
 		// logger.info("去数据库中查询是否有token记录");
-		TokenBean hasBean = tokenService
-				.hasTokenbyUserId(tokenBean.getUserId());
+		TokenBean hasBean = tokenService.hasTokenbyUserId(tokenBean.getUserId());
 		/**
 		 * 如果存在 则直接更新最新的Token记录
 		 */
 		if (hasBean != null) {
-			logger.info("用户" + tokenBean.getUserId() + "在数据库中的token存在:"
-					+ hasBean);
-			
-			tokenService.deleteTokenInfo( tokenBean.getToken());
-			
+			logger.info("用户" + tokenBean.getUserId() + "在数据库中的token存在:" + hasBean);
+
+			tokenService.deleteTokenInfo(tokenBean.getToken());
+
 			tokenService.updateTokenInfo(tokenBean);
-			logger.info("用户" + tokenBean.getUserId() + "在数据库中的token值更新为:"
-					+ tokenBean.getToken());
+			logger.info("用户" + tokenBean.getUserId() + "在数据库中的token值更新为:" + tokenBean.getToken());
 		} else {
 
 			String tokens = tokenBean.getToken();
-			
+
 			tokenService.deleteTokenInfo(tokens);
-		
-			
+
 			tokenService.insertTokenInfo(tokenBean);
 		}
-		/*logger.info(tokenBean.getUserId() + "-向客户端返回的token值为:"
-				+ tokenBean.getToken());*/
+		/*
+		 * logger.info(tokenBean.getUserId() + "-向客户端返回的token值为:" +
+		 * tokenBean.getToken());
+		 */
 		return tokenBean;
 
 	}
@@ -308,16 +314,21 @@ public class SysUserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/logout")
-	public void logout(HttpSession session,HttpServletRequest request,HttpServletResponse response) {
+	public void logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+	
+		
+		//更新token，前台登录失效
+		SysUserBean usr = (SysUserBean) session.getAttribute(Constant.SESSION_USER);
+		String usertoken = UUID.randomUUID().toString();
+		usr.setToken(usertoken);
+		managerService.updateToken(usr.getUserid(), usertoken);
+		
 		session.removeAttribute(Constant.SESSION_USER);
-		
-		
-		//https 跳转，nginx https代理 http，防止页面跳回http zj 190711
-				response.setStatus(302);//或者303,兼容http1.1
-				response.setHeader("location", request.getContextPath()+"/");
-				
-		
-		//return "redirect:/";
+		// https 跳转，nginx https代理 http，防止页面跳回http zj 190711
+		response.setStatus(302);// 或者303,兼容http1.1
+		response.setHeader("location", request.getContextPath() + "/");
+
+		// return "redirect:/";
 	}
 
 	/**
@@ -332,20 +343,16 @@ public class SysUserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/adminPwdSet", method = RequestMethod.POST)
-	public @ResponseBody
-	String setAdminPwd(HttpServletRequest request,
-			HttpServletResponse response, HttpSession session, String userid,
-			String opwd, String npwd) {
-		SysUserBean user = (SysUserBean) session
-				.getAttribute(Constant.SESSION_USER);
+	public @ResponseBody String setAdminPwd(HttpServletRequest request, HttpServletResponse response,
+			HttpSession session, String userid, String opwd, String npwd) {
+		SysUserBean user = (SysUserBean) session.getAttribute(Constant.SESSION_USER);
 		if (Md5Encrypt.MD5(opwd).equals(user.getPassword())) {
 			user.setPassword(Md5Encrypt.MD5(npwd));
-			
-			
-			SysUserBean data=new SysUserBean();
+
+			SysUserBean data = new SysUserBean();
 			data.setUserid(user.getUserid());
 			data.setPassword(Md5Encrypt.MD5(npwd));
-			
+
 			int res = sysUserService.updateSysuer(data);
 			if (res > 0) {
 				logger.info(user.getName() + "密码修改成功！");

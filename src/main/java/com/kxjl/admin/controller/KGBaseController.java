@@ -19,7 +19,6 @@ import com.kxjl.base.aopAspect.CurrentUser;
 import com.kxjl.base.aopAspect.NoNeedAuthorization;
 import com.kxjl.base.interceptor.TokeUtils;
 
-
 import com.kxjl.base.service.ManagerService;
 
 import com.kxjl.tool.common.Md5Encrypt;
@@ -27,7 +26,6 @@ import com.kxjl.web.privilege.model.Role;
 import com.kxjl.web.privilege.service.PrivilegeService;
 import com.kxjl.web.system.model.SysUserBean;
 import com.kxjl.web.system.model.SysUserBean.UserType;
-
 
 @RestController
 @RequestMapping("/kg/auths")
@@ -46,45 +44,46 @@ public class KGBaseController {
 
 	@PostMapping("/login")
 	@NoNeedAuthorization
-	public WZResponseEntity<?> login( String username,String password) {
+	public WZResponseEntity<?> login(String username, String password) {
 
-		//String username = userIn.getUsername();
-		//String password = userIn.getPassword();
+		// String username = userIn.getUsername();
+		// String password = userIn.getPassword();
 
 		SysUserBean manager = new SysUserBean();
 		manager.setUserid(username);
 		manager.setPassword(password);
 
-		//46,20
+		// 46,20
 		SysUserBean user = managerService.getLoginUserByUserId(username);
-		
-		if (user!=null&&(user.getPassword().equals(password)
-				|| user.getPassword().equals(	 Md5Encrypt.MD5(password))) ) {
 
-					String usertoken = UUID.randomUUID().toString();
+		if (user != null
+				&& (user.getPassword().equals(password) || user.getPassword().equals(Md5Encrypt.MD5(password)))) {
+
+			String usertoken = UUID.randomUUID().toString();
 
 			if (user.getToken() != null && !user.getToken().equals(""))
-				usertoken = tokeUtils.refreshOrgenerateNewToken(user.getToken());
+				usertoken = user.getToken();
+
+			usertoken = tokeUtils.refreshOrgenerateNewToken(usertoken);
 
 			user.setToken(usertoken);
-//			// 更新pass，加密存储,token
-			managerService.updateToken(username,usertoken);
-			
-			//特定manager表登录管理
+			// // 更新pass，加密存储,token
+			managerService.updateToken(username, usertoken);
+
+			// 特定manager表登录管理
 			user.setUtype(UserType.Admin);
-			
-			String roleids="";
+
+			String roleids = "";
 			List<Role> roleList = roleService.getManagerRoleList(user);
 			List<String> roles = new ArrayList<>();
 			for (Role item : roleList) {
-				if(roleids.equals(""))
-					roleids+=""+item.getRole_en();
+				if (roleids.equals(""))
+					roleids += "" + item.getRole_en();
 				else
-				roleids+=","+item.getRole_en();
+					roleids += "," + item.getRole_en();
 			}
-		
+
 			user.setRole_id(roleids);
-			
 
 			return new WZResponseEntity<>(user);
 		} else {
@@ -107,7 +106,6 @@ public class KGBaseController {
 
 	}
 
-	
 	@GetMapping("/currentUser")
 	public WZResponseEntity<?> getCurrentUser(@CurrentUser LoginUser user) {
 
@@ -118,18 +116,30 @@ public class KGBaseController {
 		// if(true)
 		// return new WZResponseEntity<>(u);
 
-//		SysUserBean m = new SysUserBean();
-//		m.setUsername(user.getUserId());
+		// SysUserBean m = new SysUserBean();
+		// m.setUsername(user.getUserId());
 
-		if(user.getUserName()!=null&&user.getUserName().equals("访客"))
+		if (user.getUserName() != null && user.getUserName().equals("访客"))
 			return new WZResponseEntity<>(user);
-		
-		
+
 		SysUserBean currUser = managerService.getLoginUserByUserId(user.getUserId());
 		if (currUser != null) {
+
+			String roleids = "";
+			List<Role> roleList = roleService.getManagerRoleList(currUser);
+			List<String> roles = new ArrayList<>();
+			for (Role item : roleList) {
+				if (roleids.equals(""))
+					roleids += "" + item.getRole_en();
+				else
+					roleids += "," + item.getRole_en();
+			}
+
+			currUser.setRole_id(roleids);
+
 			return new WZResponseEntity<>(currUser);
 		} else {
-			SysUserBean youke=new SysUserBean();
+			SysUserBean youke = new SysUserBean();
 			youke.setName("游客");
 			youke.setUserid("test");
 			return new WZResponseEntity<>(youke);

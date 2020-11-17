@@ -148,6 +148,44 @@ public class KgUrlController {
 
 	}
 
+	
+	/**
+	 * 级别
+	 * 
+	 * @param user
+	 * @param request
+	 * @param response
+	 * @param queryData
+	 * @return
+	 * @author:kxjl
+	 * @date 2020年10月28日
+	 */
+	@RequestMapping("/level")
+	@ResponseBody
+	public WZResponseEntity<?> level(@CurrentUser LoginUser user, HttpServletRequest request,
+			HttpServletResponse response, String id,String level) {
+
+		WZResponseEntity<Map> rst = new WZResponseEntity<>();
+
+		Map<String, Object> jsonOut = new HashMap<>();
+
+		// String rst = "";
+		try {
+			Kurl queryData = new Kurl();
+			queryData.setId(Integer.parseInt(id));
+
+			queryData.setLevel(level);
+			kurlService.updateKurl(queryData);
+			rst.setIsSuccess(true);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return rst;
+
+	}
+	
+	
+	
 	/**
 	 * 可见
 	 * 
@@ -265,7 +303,7 @@ public class KgUrlController {
 	@RequestMapping("/updateurl")
 	@ResponseBody
 	public WZResponseEntity<?> updateurl(@CurrentUser LoginUser user, HttpServletRequest request, String id,
-			String icon, String url_name, String url_val,String url_type, String desc_info, HttpServletResponse response) {
+			String icon, String url_name,String tags, String url_val,String level,String url_type, String desc_info, HttpServletResponse response) {
 
 		WZResponseEntity<Map> rst = new WZResponseEntity<>();
 
@@ -281,6 +319,8 @@ public class KgUrlController {
 			queryData.setDesc_info(desc_info);
 			queryData.setUrl_type(url_type);
 			queryData.setVal1("1");
+			queryData.setLevel(level);
+			queryData.setTags(tags);
 			
 			
 

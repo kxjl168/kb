@@ -1,5 +1,7 @@
 package com.kxjl.base.resolver;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,6 +9,7 @@ import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
@@ -15,8 +18,8 @@ import com.kxjl.base.aopAspect.CurrentUser;
 import com.kxjl.base.interceptor.TokeUtils;
 
 import com.kxjl.base.service.ManagerService;
+import com.kxjl.tool.common.Constant;
 import com.kxjl.web.system.model.SysUserBean;
-
 
 public class CurrentUserResolver implements HandlerMethodArgumentResolver
 
@@ -36,31 +39,45 @@ public class CurrentUserResolver implements HandlerMethodArgumentResolver
 			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 
 		SysUserBean m = tokeUtils.getCurrentUser();
-		if(m!=null)
-		{
-			LoginUser user=new LoginUser();
+		if (m != null) {
+			LoginUser user = new LoginUser();
 			user.setUserId(m.getUserid());
-			
-			String roleids="";
+
+			String roleids = "";
 			for (String r : m.getRoles()) {
-				if(roleids.equals(""))
-					roleids+=""+r;
+				if (roleids.equals(""))
+					roleids += "" + r;
 				else
-				roleids+=","+r;
+					roleids += "," + r;
 			}
-			
+
 			user.setRoleId(roleids);
 			user.setUserName(m.getName());
-			
+
 			return user;
 		}
-		
-		//访客
-		LoginUser user=new LoginUser();
+
+//		HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
+//		request.getCookies();
+//		HttpSession session = request.getSession();
+//		
+//		
+//		
+//		SysUserBean suser = (SysUserBean) session.getAttribute(Constant.SESSION_USER);
+//		if (suser != null) {
+//			// web 直接登录
+//			LoginUser user = new LoginUser();
+//			user.setUserId(suser.getUserid());
+//			user.setUserName(suser.getName());
+//
+//			return user;
+//		}
+
+		// 访客
+		LoginUser user = new LoginUser();
 		user.setUserName("访客");
-		user.setUserId("test"); //内置测试
+		user.setUserId("test"); // 内置测试
 		user.setRoleId("null");
-		
 
 		return user;
 

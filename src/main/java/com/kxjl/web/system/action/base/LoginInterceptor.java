@@ -66,6 +66,22 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 				response.setHeader("Set-Cookie", builder.toString());
 			}
+//			cookie.setPath("/");
+//			cookie.setDomain("k.com");
+//			response.addCookie(cookie);
+			
+			
+//			for (Cookie ck : cookies) {
+//				if(ck.getName().equals("ktoken"))
+//				{
+//					
+//					Cookie ckToken=new Cookie("ktoken", ck.getValue());
+//					ckToken.setPath("/");
+//					ckToken.setDomain("k.com");
+//					response.addCookie(ckToken);
+//				}
+//			}
+		
 		}
 	}
 
