@@ -62,10 +62,11 @@
 
 <link rel="stylesheet" href="${basePath}/css/kCommon.css">
 <link rel="stylesheet" href="${basePath}/css/common.css">
+<link rel="stylesheet" href="${basePath}/css/k2020.css">
 
 
 </head>
-<body id="ngSection" ng-app="myApp" ng-controller="eduCtrl" >
+<body   class="k2020" id="ngSection" ng-app="myApp" ng-controller="eduCtrl" >
  <script type="text/javascript" src="${basePath}/js/own/kpro.js"></script>
 	
 

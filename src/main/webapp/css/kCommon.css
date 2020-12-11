@@ -1574,6 +1574,14 @@ back-head
 	padding: 0px;
 }
 
+.relatedLink img
+{
+	line-height: 45px;
+	height: 30px;
+	width:30px;
+	margin-right: 5px;
+}
+
 .relatedLink li{
 	line-height: 45px;
 	height: 40px;
@@ -1582,14 +1590,14 @@ back-head
 
 /**related link*/
 .relatedLink a{
-	 font: 15px "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
-	 color: #3c77d4;
+	 font:  "14px open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
+	
     word-wrap: break-word;
 	 text-decoration: underline!important;
 }
 
 .relatedLink a:hover{
-	 color: #33983b;
+	 /* color: #33983b; */
 	 text-decoration: none;
 	
 }
@@ -1823,6 +1831,7 @@ a:hover.yl {
   background-color: #d9534f;
   border-color: #d43f3a;
 }
+
 .detailbtn:hover,
 .detailbtn:focus,
 .detailbtn:active,

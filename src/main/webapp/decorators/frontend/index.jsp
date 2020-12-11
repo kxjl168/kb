@@ -58,9 +58,11 @@
 <link rel="stylesheet" href="${basePath}/css/kCommon.css">
 <link rel="stylesheet" href="${basePath}/css/common.css">
 
+<link rel="stylesheet" href="${basePath}/css/k2020.css">
+
 
 </head>
-<body id="ngSection" ng-app="myApp" ng-controller="eduCtrl">
+<body class="k2020" id="ngSection" ng-app="myApp" ng-controller="eduCtrl">
 	<script type="text/javascript" src="${basePath}/js/own/kpro.js"></script>
 
 
@@ -263,14 +265,14 @@ $(document).ready(function(){
 
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126706596-1"></script>
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126706596-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
   gtag('config', 'UA-126706596-1');
-</script>
+</script> -->
 
 </html>
 

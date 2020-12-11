@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="ahot-aplus" content="1">
+    <meta name="aplus-rate-ahot" content="0.5">
+    <title>阿里云登录 - 欢迎登录阿里云，安全稳定的云计算服务平台</title>
+
+    <!-- TRACK 埋点-->
+    <meta name="data-spm" content="5176" />
+    <meta name="description" content="欢迎登录阿里云，全球领先的云计算及人工智能科技公司，阿里云为200多个国家和地区的企业、开发者和政府机构提供云计算基础服务及解决方案。阿里云云计算、安全、大数据、人工智能、企业应用、物联网等云计算服务。">
+    <meta name="keyword" content="云服务器、云主机、弹性计算、云存储、开放存储、OSS、ACE、数据库、mysql、RDS、SQLSERVER、开发者、负载均衡、防攻击、防DDOS攻击、云监控、云浏览器、云地图、云邮箱、phpwind、阿里云、云产品、云计算、多线带宽、BGP、服务器环境配置、渲染云、云手机、云盾、应用托管、云引擎、解决方案">
+    <meta property="og:title" content="阿里云登录 - 欢迎登录阿里云，安全稳定的云计算服务平台" />
+    <meta property="og:description" content="欢迎登录阿里云，全球领先的云计算及人工智能科技公司，阿里云为200多个国家和地区的企业、开发者和政府机构提供云计算基础服务及解决方案。阿里云云计算、安全、大数据、人工智能、企业应用、物联网等云计算服务。" />
+    <meta property="og:image" content="https://img.alicdn.com/tfs/TB1Ly5oS3HqK1RjSZFPXXcwapXa-238-54.png" />
+    <script nonce="d2RGWTADzG" src="https://www.aliyun.com/assets/publish/ace-base-assets?nonce=d2RGWTADzG"></script>
+</head>
+
+<body data-spm="12901015"><script type="text/javascript" 
+    id="beacon-aplus" 
+    src="//g.alicdn.com/alilog/mlog/aplus_v2.js" 
+    exparams="category=&userid=&aplus&yunid=&yunpk=&channel=&cps=" 
+    nonce="d2RGWTADzG" 
+    cspx="d2RGWTADzG" 
+    async>
+</script>
+
+    <script nonce="d2RGWTADzG" type="text/javascript">
+        (function (d) {
+            var t = d.createElement("script"); t.type = "text/javascript"; t.async = true; t.id = "tb-beacon-aplus";
+            t.setAttribute("exparams", "category=&userid=&aplus&yunid=&yunpk=1380609071654613&channel=&cps=");
+            t.src = "//g.alicdn.com/alilog/mlog/aplus_v2.js";
+            d.getElementsByTagName("head")[0].appendChild(t);
+        })(document);
+    </script>
+    <script nonce="d2RGWTADzG" src="https://www.aliyun.com/ace-lego/core/login-page-2019?nonce=d2RGWTADzG"></script>
+    <script nonce="d2RGWTADzG">
+        !(function (c, b, d, a) {
+            c[a] || (c[a] = {}); c[a].config = { pid: "eqaf0lj5rb@c6546d8b7c78af1", appType: "web", imgUrl: "https://arms-retcode.aliyuncs.com/r.png?", useFmp: true, sendResource: true, disableHook: true };
+            with (b) with (body) with (insertBefore(createElement("script"), firstChild)) setAttribute("crossorigin", "", src = d)
+        })(window, document, "https://retcode.alicdn.com/retcode/bl.js", "__bl");
+    </script>
+    <script nonce="d2RGWTADzG">
+        var q = (window.goldlog_queue || (window.goldlog_queue = []));
+        q.push({
+            action: "goldlog.record",
+            arguments: ['/aliyun.exposure.page-exp', 'EXP', '']
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk2312">
+<title>指定的页面不存在</title>
+</head>
+
+<body style="   padding:0; margin:0; font:14px/1.5 Microsoft Yahei, 宋
+体,sans-serif; color:#555;">
+
+<div style="margin:0 auto;width:980px;">
+      <div style="background: url('http://404.safedog.cn/images/safedogsite/head.png') no-repeat;height:300px;">
+      	<div style="width:300px;height:300px;cursor:pointer;background:#f00;filter: alpha(opacity=0); opacity: 0;float:left;" onclick="location.href='http://www.safedog.cn'">
+      	</div>
+      	<div style="float:right;width:430px;height:100px;padding-top:90px;padding-right:90px;font-size:22px;">
+      		<p id="error_code_p"><a id="eCode">404</a>错误<span style="font-size:16px;padding-left:15px;">(可在服务器上查看具体错误信息)</span></p>
+      		<p id="eMsg">指定的页面不存在</p>
+      	<a href="http://bbs.safedog.cn/thread-60693-1-1.html?from=stat" target="_blank" style="color:#139ff8; font-size:16px; text-decoration:none">站长请点击</a>
+	      <a href="#" onclick="redirectToHost();" style="color:#139ff8; font-size:16px; text-decoration:none;padding-left: 20px;">返回上一级&gt;&gt;</a>
+      	</div>
+      </div>	
+</div>
+
+
+
+<div style="width:1000px; margin:0 auto; "> 
+    <div style=" width:980px; margin:0 auto;">
+  <div style="width:980px; height:600px; margin:0 auto;">
+   <iframe allowtransparency=" true" src="http://404.safedog.cn/sitedog_stat_new.html" frameborder="no" border="0" scrolling="no" style="width:980px;  height:720px;"></iframe>
+ </div>
+  </div>
+</div>
+
+
+
+
+</body></html>

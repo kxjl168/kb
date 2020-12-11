@@ -38,10 +38,12 @@
 
 <link rel="stylesheet" href="${basePath}/css/kCommon.css">
 <link rel="stylesheet" href="${basePath}/css/common.css">
+<link rel="stylesheet" href="${basePath}/css/k2020.css">
+
 
 
 </head>
-	<body id="ngSection" ng-app="myApp" ng-controller="eduCtrl" style="overflow: hidden">
+	<body  class="k2020" id="ngSection" ng-app="myApp" ng-controller="eduCtrl" style="overflow: hidden">
 
 
 	

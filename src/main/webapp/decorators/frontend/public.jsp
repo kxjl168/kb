@@ -66,10 +66,11 @@
 
 <link rel="stylesheet" href="${basePath}/css/kCommon.css">
 <link rel="stylesheet" href="${basePath}/css/common.css">
+<link rel="stylesheet" href="${basePath}/css/k2020.css">
 
 
 </head>
-<body id="ngSection" ng-app="myApp" ng-controller="eduCtrl" >
+<body   class="k2020" id="ngSection" ng-app="myApp" ng-controller="eduCtrl" >
 <script type="text/javascript" src="${basePath}/js/own/kpro.js"></script>
 	
 	<script type="text/javascript" src="${basePath}/js/plugin/facybox3/jquery.fancybox.js"></script>
@@ -82,13 +83,13 @@
 	<%@include file="../../public/phead.jsp"%>
 
 
-	<div class="" id="content" style="">
+	<div class="pdcontent" id="content" style="">
 
 
 
 		<div class=" row row-margin-top-70">
 
-		<div class=" pall col-xs-12 " style="min-height: 500px;">
+		<div class=" pall col-xs-12 is-open" style="min-height: 500px;">
 
 			<div id="pgdiv" name="pgdiv"
 				class="col-sm-9 col-xs-12 pleft rightline">

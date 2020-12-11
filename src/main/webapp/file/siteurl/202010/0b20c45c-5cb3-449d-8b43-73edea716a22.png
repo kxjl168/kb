@@ -1,0 +1,832 @@
+<!doctype html>
+<html>
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+  <meta name="language" content="zh-CN"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"> 
+  <meta name="renderer" content="webkit"> 
+  <script>
+            var standId = 1357510;
+            var MtaH5={
+                clickShare:function(){},
+                clickStat:function(){},
+                hack:function(){},
+                pgv:function(){}
+            };
+            var getCookie = function(name){
+                var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+                if(arr=document.cookie.match(reg))
+                return unescape(arr[2]);
+                else
+                return null;
+            };
+            var _mtac= {"performanceMonitor":1,"senseQuery":1};     
+            (function() { 
+                var mta=document.createElement("script"); 
+                mta.src="//pingjs.qq.com/h5/stats.js?v2.0.4"; 
+                mta.setAttribute("name", "MTAH5");
+                /*mta.setAttribute("sid", "500628441");
+                mta.setAttribute("cid", "500628444");*/
+                mta.setAttribute("sid", "500626642");
+                mta.setAttribute("cid", "500626643");
+
+                var s=document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(mta, s);     
+            })(); 
+            // DTK统计代码
+            (function() {
+                var script = document.createElement("script");
+                var time = new Date(),FullYear = time.getFullYear(),Month = time.getMonth(),getDate = time.getDate();
+                script.src = "https://public.ffquan.cn/satc/dtksatc.js?v=20200910184000";
+                script.setAttribute("name", "DTKSATC");
+                script.setAttribute("tid", "dtk-cms-1357510"); // 站点id
+                script.setAttribute("uid", getCookie("user_id")); // 登录用户id
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(script, s); 
+            })(); 
+        </script> 
+  <script src="https://cmsstatic.ffquan.cn//wap_new/lib/md5.js?v=202009041731"></script> 
+  <link href="https://sr.ffquan.cn/cms_pic/20200903/bt85imcq57brs7dj20dg0.ico" rel="SHORTCUT ICON"> 
+  <link rel="stylesheet" type="text/css" href="https://cmsstatic.ffquan.cn//css/reset.css?v=202009041731"> 
+  <link rel="stylesheet" type="text/css" href="https://cmsstatic.ffquan.cn//css/footer.css?v=202009041731"> 
+  <link rel="stylesheet" type="text/css" href="https://cmsstatic.ffquan.cn//css/pager.css?v=202009041731"> 
+  <link rel="stylesheet" type="text/css" href="https://cmsstatic.ffquan.cn//css/swiper.min.css?v=202009041731"> 
+  <link rel="stylesheet" type="text/css" href="https://cmsstatic.ffquan.cn//css/dtk.css?v=202009041731"> 
+  <link rel="stylesheet" type="text/css" href="https://cmsstatic.ffquan.cn//css/new_home.css?v=202009041731"> 
+  <link rel="stylesheet" type="text/css" href="https://cmsstatic.ffquan.cn//css/share.css?v=202009041731"> 
+  <link rel="stylesheet" type="text/css" href="https://cmsstatic.ffquan.cn//web/css/cms_ggw.css?v=202009041731"> 
+  <!-- 皮肤 S--> 
+  <link href="https://cmsstatic.ffquan.cn//web/css/cms_skin/pink.css?v=202009041731" rel="stylesheet"> 
+  <!-- 皮肤 E--> 
+  <link rel="stylesheet" href="https://cmsstatic.ffquan.cn//css/iconfont.css?v=202009041731"> 
+  <link rel="stylesheet" type="text/css" href="https://cmsstatic.ffquan.cn//web/css/skin/blue.monday/css/jplayer.blue.monday.min.css?v=202009041731"> 
+  <link rel="stylesheet" type="text/css" href="https://cmsstatic.ffquan.cn//css/detail.css?v=202009041731"> 
+  <link rel="stylesheet" type="text/css" href="https://cmsstatic.ffquan.cn//css/detail_new.css?v=202009041731"> 
+  <title>瑞典被丢坟场视频</title> 
+  <meta name="keywords" content="去哪儿买贝婴奇注水保温碗婴儿不锈钢吸盘碗瑞典被丢坟场视频,贝婴奇注水保温碗婴儿不锈钢吸盘碗瑞典被丢坟场视频去哪儿买,瑞典被丢坟场视频"> 
+  <meta name="description" content="贝婴奇注水保温碗,瑞典被丢坟场视频瑞典被丢坟场视频婴儿不锈钢吸盘碗餐具套装，吃饭辅食碗防摔防烫"> 
+  <meta name="api" content="//cmsjapi.ffquan.cn"> 
+  <script src="https://cmsstatic.ffquan.cn/other/jquery/1.12.4/jquery.min.js?v=202009041731"></script> 
+  <script src="https://cmsstatic.ffquan.cn//js/layer/layer.js?v=202009041731"></script> 
+  <script src="https://cmsstatic.ffquan.cn//js/dtk.js?v=202009041731"></script> 
+  <script src="https://cmsstatic.ffquan.cn//js/swiper.min.js?v=202009041731"></script> 
+  <script src="https://cmsstatic.ffquan.cn//js/clipboard.min.js?v=202009041731"></script> 
+  <script src="https://cmsstatic.ffquan.cn//js/ZeroClipboard.js?v=202009041731"></script> 
+  <script src="https://cmsstatic.ffquan.cn/other/jquery-cookie/1.4.1/jquery.cookie.min.js?v=202009041731"></script> 
+  <script src="https://cmsstatic.ffquan.cn//js/jquery.qrcode.min.js?v=202009041731"></script> 
+  <style>
+        .ios-qr-code-i{
+            width: 100px; height: 100px; margin: 15px auto 0;
+        }
+        .ios-qr-code-i canvas{
+            margin: auto; display: block;
+        }
+    </style> 
+  <script>
+    var site_uid = '1357510';
+    var RESOURCE_HOST = "https://cmsstatic.ffquan.cn/";
+    var HOST_VERSIONS = "202009041731";
+    var ActivityConfig='{"56":{"base_end_time":"2020-09-11 23:59:59","base_start_time":"2020-09-09 00:00:00","market_id":"56","front_money_type":"1","base_price_text":"\u5238\u540e","base_price":"\u6d3b\u52a8\u4ef7","base_sale_num_text":"\u5df2\u62a2","single_pc_label_switch":"1","not_column_label":"https:\/\/img.alicdn.com\/imgextra\/i1\/2053469401\/O1CN01irYKFy2JJi2GvmpRF_!!2053469401.png","small_label":"https:\/\/img.alicdn.com\/imgextra\/i3\/2053469401\/O1CN01MdoITQ2JJi2FmjrmV_!!2053469401.png","normal_label":"https:\/\/img.alicdn.com\/imgextra\/i1\/2053469401\/O1CN01irYKFy2JJi2GvmpRF_!!2053469401.png","long_label":"https:\/\/img.alicdn.com\/imgextra\/i1\/2053469401\/O1CN01irYKFy2JJi2GvmpRF_!!2053469401.png","single_pc_detail_switch":"1","goods_label":"99\u5212\u7b97\u8282","goods_label_img":"https:\/\/img.alicdn.com\/imgextra\/i3\/2053469401\/O1CN01xyhCoh2JJi2BkveXC_!!2053469401.png","mj_switch":"1","tm_discount_text":"\u8d2d\u7269\u6d25\u8d34\uff0c\u6ee1[\u6ee1\u51cf\u6761\u4ef6\u91d1\u989d]\u51cf[\u51cf\u514d\u91d1\u989d]","tb_discount_text":"\u8de8\u5e97\u6ee1\u51cf\uff0c\u6ee1[\u6ee1\u51cf\u6761\u4ef6\u91d1\u989d]\u51cf[\u51cf\u514d\u91d1\u989d]","single_mb_list_lable_img":"https:\/\/img.alicdn.com\/imgextra\/i4\/2053469401\/O1CN01Xml6zf2JJi2F8B91b_!!2053469401.png","single_mb_list_lable_px":null,"name":"99\u5212\u7b97\u8282\u7cbe\u9009","jh_pc_index_switch":"1","column_index_one":"https:\/\/img.alicdn.com\/imgextra\/i2\/2053469401\/O1CN01lYynh62JJi23OaQIp_!!2053469401.gif","column_index_two":"https:\/\/img.alicdn.com\/imgextra\/i2\/2053469401\/O1CN01lYynh62JJi23OaQIp_!!2053469401.gif","dressing_index_name":"99\u5212\u7b97\u8282\u7cbe\u9009","dressing_index":"https:\/\/img.alicdn.com\/imgextra\/i3\/2053469401\/O1CN01SohUhz2JJi2CHrMuS_!!2053469401.png","bd_index_style":"","bd_pc_time_switch":"0","bd_pc_day_switch":"0","bd_pc_all_switch":"0","rank_data":[]}}';
+    var open_red='0';
+    var timer = setInterval(function() {
+        if(typeof $().qrcode){
+            clearInterval(timer)
+            $('.ios-qr-code-i').qrcode({
+                render: "canvas",
+                width:100,
+                height:100, 
+                text: "http://apphtml.ffquan.com/index.php?r=index/ios-share-down-v2&app_id=" + site_uid
+            });
+        }
+    }, 100);
+    
+</script> 
+ </head> 
+ <body data-appid="1357510" data-in="1"> 
+  <!--顶部推荐位s--> 
+  <div id="content" data-ggwurl="/index.php?r=index/recomd&amp;t=47"> 
+   <div id="testTop"></div> 
+  </div> 
+  <!--顶部推荐位e--> 
+  <div class="new_home"> 
+   <div id="headNav"> 
+    <div id="header"> 
+     <a class="header_logo" href="/index.php?r=index/index&amp;u=1357510" style=" background: url('https://sr.ffquan.cn/cms_pic/20200903/bt85ftkq57brhfs51e100.png')left top no-repeat;"> </a> 
+     <div id="showList"> 
+      <div id="search"> 
+       <input type="hidden" name="h_kw" id="h_kw" value="输入商品名或粘贴宝贝标题搜索"> 
+       <input type="hidden" name="h_url" id="h_url" value="/index.php?r=l"> 
+       <input type="hidden" name="m_url" id="m_url" value="/index.php?r=index/index&amp;introduce=1"> 
+       <form action="/index.php?r=index/index" method="get"> 
+        <input type="hidden" name="input" value="2"> 
+        <input type="hidden" name="r" value="l"> 
+        <input type="text" autocomplete="off" class="theme-border-color-1 my-src-input" value="" name="kw" placeholder="输入商品名或粘贴宝贝标题搜索"> 
+        <span class="src-close-btn"></span> 
+        <button class="theme-bg-color-1 my-src-btn">搜 索</button> 
+       </form> 
+       <div class="rec_word"> 
+        <a href="/index.php?r=l&amp;kw=%E6%B4%97%E8%A1%A3%E6%B6%B2&amp;hot=0" style="">洗衣液</a> 
+        <a href="/index.php?r=l&amp;kw=%E6%95%B0%E6%8D%AE%E7%BA%BF&amp;hot=1" style="">数据线</a> 
+        <a href="/index.php?r=l&amp;kw=%E8%80%B3%E6%9C%BA&amp;hot=2" style="color:red;">耳机</a> 
+        <a href="/index.php?r=l&amp;kw=%E9%9B%B6%E9%A3%9F&amp;hot=3" style="">零食</a> 
+        <a href="/index.php?r=l&amp;kw=%E5%8F%A3%E7%BD%A9&amp;hot=4" style="color:red;">口罩</a> 
+        <a href="/index.php?r=l&amp;kw=%E8%A1%8C%E6%9D%8E%E7%AE%B1&amp;hot=5" style="">行李箱</a> 
+        <a href="/index.php?r=l&amp;kw=%E5%8F%A3%E7%BA%A2&amp;hot=6" style="">口红</a> 
+        <a href="/index.php?r=nine&amp;hot=7" style="">低价专区</a> 
+       </div> 
+       <ul class="search-land"> 
+        <li></li> 
+        <li></li> 
+        <li></li> 
+        <li></li> 
+        <li></li> 
+        <li></li> 
+        <li></li> 
+        <li></li> 
+        <li></li> 
+        <li></li> 
+        <p>关闭</p> 
+       </ul> 
+      </div> 
+     </div> 
+     <img class="head_group fr" src="https://cmsstatic.ffquan.cn//images/home/headgrup.png?v=202009041731" alt=""> 
+    </div> 
+    <!--悬浮搜索框s--> 
+    <!--悬浮搜索框e--> 
+   </div> 
+   <div id="baner" class="theme-bg-color-1"> 
+    <div id="nav"> 
+     <a data-dtk-satc="{desc:'首页',name:'CmsPcPartEvent'}" href="/index.php?r=index/index" class="theme-hover-bg-color-8 iconM active"> 首页 </a> 
+     <a class="theme-hover-bg-color-8 iconM double_eleven_presell_entry" href="/index.php?r=l&amp;at56=1&amp;s=t&amp;u=1"><img src="https://img.alicdn.com/imgextra/i2/2053469401/O1CN01lYynh62JJi23OaQIp_!!2053469401.gif"></a> 
+     <a data-dtk-satc="{desc:'疯抢榜',name:'CmsPcPartEvent'}" class="theme-hover-bg-color-8  " data-ca="l/d----p/index" href="/index.php?r=p"> 疯抢榜 
+      <!-- 榜单角标 --> </a> 
+     <a data-dtk-satc="{desc:'9块9包邮',name:'CmsPcPartEvent'}" class="theme-hover-bg-color-8  " data-ca="l/d----nine/index" href="/index.php?r=nine"> 9块9包邮 </a> 
+     <a data-dtk-satc="{desc:'咚咚抢',name:'CmsPcPartEvent'}" class="theme-hover-bg-color-8  " data-ca="l/d----ddq/index" href="/index.php?r=ddq"> 咚咚抢 </a> 
+     <a data-dtk-satc="{desc:'每日半价',name:'CmsPcPartEvent'}" class="theme-hover-bg-color-8  " data-ca="l/d----activity/achalf" href="/index.php?r=activity/achalf"> 每日半价 <i class="new">New!</i> </a> 
+     <a data-dtk-satc="{desc:'折上折',name:'CmsPcPartEvent'}" class="theme-hover-bg-color-8  " data-ca="l/d----realtime/zsz" href="/index.php?r=realtime/zsz"> 折上折 <i class="new">New!</i> </a> 
+     <a class="fr theme-hover-bg-color-8 app_download " href="javascript:void(0)"> <i></i>手机版 
+      <div class="app-pop"> 
+       <div class="adr-cent cent"> 
+        <img class="" src="//dis.dataoke.com/tools/qrcode?name=https%3A%2F%2F19a18.kuaizhan.com%2F%3Fid%3D6QBzb3DMR" width="100" alt=""> 
+        <div class="jhm">
+          邀请码：696246 
+        </div> 
+        <p>Android 版下载</p> 
+       </div> 
+      </div> </a> 
+     <!--                需要显示加群--> 
+     <a class="group theme-hover-bg-color-8 "> <i></i>板栗小二 
+      <div class="group_pop"> 
+       <img src="https://sr.ffquan.cn/cms_pic/20200908/btbjv8ehfhes201dm4q00.png" width="110" alt=""> 
+       <p>扫描联系小二</p> 
+      </div> </a> 
+    </div> 
+   </div> 
+   <div id="dtk_mian"> 
+    <div class="year-bg"> 
+     <script src="https://cmsstatic.ffquan.cn//web/js/lazyload.js?v=202009041731"></script> 
+     <link rel="stylesheet" href="//at.alicdn.com/t/font_653505_5n4yx71wjwt.css"> 
+     <style>
+    html body {
+        background-color: #fff;
+    }
+    .goods-list ul li:hover {
+        border: 1px solid #de366e;
+    }
+</style> 
+     <div class="detail_new"> 
+      <div class="top-block"> 
+       <!--当前位置导航start--> 
+       <div class="nav-wrap"> 
+        <div class="text"> 
+         <a href="/index.php?r=index/index&amp;u=1357510">首页</a> 
+         <i></i> 
+         <a href="/index.php?r=l&amp;u=1357510">领券直播</a> 
+         <i></i> 
+         <a href="/index.php?r=l&amp;cid=2&amp;u=1357510">母婴</a> 
+         <i></i> 
+         <span>优惠详情</span> 
+        </div> 
+       </div> 
+       <!--当前位置导航end--> 
+       <div class="detail-wrap main-container"> 
+        <!--大图显示start--> 
+        <div class="detail-row clearfix"> 
+         <div class="img-block"> 
+          <a rel="nofollow" data-dtk-satc="{gid:'626111409729',desc:'领券购买',name:'DetailGoodsEvent'}" href="https://uland.taobao.com/coupon/edetail?activityId=7c67dda444ea4b198be42b693594149a&amp;pid=mm_114214798_2026400045_110826150436&amp;itemId=626111409729&amp;src=qhkj_dtkp&amp;dx=1" target="_blank" class="img  shop_link" data-gid="28952718"> <img class="lg-img" src="https://img.alicdn.com/imgextra/i3/12590764/O1CN01PCT9Nw1HVxDQiJCmD_!!12590764.jpg_400x400.jpg" data-gid="28952718" alt="贝婴奇注水保温碗婴儿不锈钢吸盘碗"> 
+           <ul class="sm-img"> 
+            <li><img src="https://img.alicdn.com/imgextra/i3/12590764/O1CN01PCT9Nw1HVxDQiJCmD_!!12590764.jpg_400x400.jpg" alt=""></li> 
+            <li><img src="https://img.alicdn.com/imgextra/i2/3177307132/O1CN01IjQwHc22YVMMFSj1k_!!3177307132-0-lubanu-s.jpg_400x400.jpg" alt=""></li> 
+            <li><img src="https://img.alicdn.com/imgextra/i2/3177307132/O1CN015fK4E422YVMOj2fPf_!!3177307132-0-lubanu-s.jpg_400x400.jpg" alt=""></li> 
+            <li><img src="https://img.alicdn.com/imgextra/i1/3177307132/O1CN01Lu3Srp22YVMU2e97u_!!3177307132-0-lubanu-s.jpg_400x400.jpg" alt=""></li> 
+            <li><img src="https://img.alicdn.com/imgextra/i3/3177307132/O1CN01gHuvHp22YVMOOh9Mw_!!3177307132-0-lubanu-s.jpg_400x400.jpg" alt=""></li> 
+           </ul> </a> 
+         </div> 
+         <!--大图显示end--> 
+         <div class="detail-col"> 
+          <a class="title clearfix   shop_link" rel="nofollow" data-gid="28952718" href="https://uland.taobao.com/coupon/edetail?activityId=7c67dda444ea4b198be42b693594149a&amp;pid=mm_114214798_2026400045_110826150436&amp;itemId=626111409729&amp;src=qhkj_dtkp&amp;dx=1" target="_blank"> <span class="tmall"></span> <span class="title">贝婴奇注水保温碗婴儿不锈钢吸盘碗瑞典被丢坟场视频瑞典被丢坟场视频</span> </a> 
+          <div class="active-type"> 
+           <div class="act-bg"> 
+            <!--淘抢购--> 
+            <span class="tit fl"></span> 
+            <span class="des"></span> 
+            <!--疯抢榜文案--> 
+            <div class="rank fr"> 
+             <span class="rank-num">近24小时， <i></i>人已抢</span> 
+             <span class="rank-list">疯抢排名 <i>No.<b></b></i></span> 
+            </div> 
+            <!--淘抢购 聚划算 咚咚呛文案--> 
+            <div class="last-time tjd fr"> 
+             <span>距离结束仅剩</span> 
+             <i class="h">00</i> : 
+             <i class="m">00</i> : 
+             <i class="s">00</i> 
+            </div> 
+            <!--3.8节文案--> 
+            <div class="last-time women fr"> 
+             <span class="soe"></span> 
+             <i class="h">00</i> : 
+             <i class="m">00</i> : 
+             <i class="s">00</i> 
+            </div> 
+            <!--618--> 
+            <div class="last-time activity_3 fr"></div> 
+            <div class="last-time activity_4 fr"></div> 
+            <!--99大促预告--> 
+            <div class="promotion last-time"> 
+             <span class="dj_text" style="display:none">定金<b class="dj"></b>元<span style="display:none">立减<b class="lj">0</b>元</span></span> 
+             <span class="fr lq-text">领券再减</span> 
+             <span class="fr time-text">距离结束仅剩 <i class="h">00</i> : <i class="m">00</i> : <i class="s">00</i></span> 
+            </div> 
+            <!--99大促正场--> 
+            <div class="promotion_start last-time"> 
+             <span class="fr time-text-start">距离结束仅剩 <i class="h">00</i> : <i class="m">00</i> : <i class="s">00</i></span> 
+            </div> 
+            <!--定金商品--> 
+            <!-- 非定金商品 --> 
+            <div class="streamer_wrapper"> 
+             <div class="info">
+               领券折上折 
+             </div> 
+             <div class="promotion_start last-time" style="display: block" goods_start="2020-09-09 00:00:00" data-now="1599734871" data-end_time="1599839999"> 
+              <span class="time-text-start"><p class="text">距离结束还剩</p> <i class="h">00</i> : <i class="m">00</i> : <i class="s">00</i></span> 
+             </div> 
+            </div> 
+           </div> 
+          </div> 
+          <!--上新时间  累计销量--> 
+          <div class="time-num"> 
+           <span class="time">上新时间：09-08 17:04</span> 
+           <span class="num"> 累计已抢 ： <i style="color:#FF2E54 ">226</i> 件 </span> 
+          </div> 
+          <!--独家优惠--> 
+          <div class="coupon">
+            独家优惠： 
+           <span class="quan">10元券</span> 
+          </div> 
+          <!--商品标签--> 
+          <div class="goods-label">
+            商品标签： 
+           <span class="label">99划算节</span> 
+           <span class="label">天猫</span> 
+           <span class="label">包邮</span> 
+           <span class="label purple"> 跨店满减，满300减30 </span> 
+          </div> 
+          <div class="price">
+            ¥ 
+           <i>29.9</i> 
+           <b>¥<i>39.9</i></b> 
+          </div> 
+          <div class="buy-share"> 
+           <a data-dtk-satc="{gid:'28952718',desc:'领券购买',name:'DetailGoodsEvent'}" data-gid="28952718" rel="nofollow" class="buy shop_link orange " href="https://uland.taobao.com/coupon/edetail?activityId=7c67dda444ea4b198be42b693594149a&amp;pid=mm_114214798_2026400045_110826150436&amp;itemId=626111409729&amp;src=qhkj_dtkp&amp;dx=1" target="_blank"> 领券抢购 </a> 
+           <button class="share fr" onclick="DetailLayerImage(this,28952718,goods)"><i class="iconfont icon-fenxiang"></i> <span>分享</span> 
+            <!--分享链接s--> 
+            <!-- <div class="text2">
+                                <div class="bdshare">
+                                    <div class="share-platform">
+                                        <div class="share-platform-r">
+                                             <div class="bshare-custom bdsharebuttonbox bdshare-button-style1-32">         
+                                                <a title="分享到微信" class="bshare-weixin bds_weixin"></a>
+                                                <a title="分享到新浪微博" class="bshare-sinaminiblog bds_tsina"></a>
+                                                <a title="分享到QQ好友" class="bshare-qqim bds_sqq"></a>
+                                                <a title="分享到QQ空间" class="bshare-qzone bds_qzone"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> --> 
+            <!--分享链接e--> </button> 
+          </div> 
+         </div>  
+         <div class="goods-desc cf"> 
+          <div style="background-color: ;width: 820px;height: 120px;display: inline-block;"> 
+           <script type="text/javascript" src="//bd1.click.com.cn/source/e/resource/zy/rii/w/ar.js"></script> 
+           <div> 
+           </div>
+          </div>
+         </div>
+         <div class="goods-desc cf" style="display: block"> 
+          <div class="tit">
+            推荐理由 
+          </div> 
+          <div class="rec-text"> 
+           <span>贝婴奇注水保温碗,瑞典被丢坟场视频瑞典被丢坟场视频婴儿不锈钢吸盘碗餐具套装，吃饭辅食碗防摔防烫</span> 
+          </div> 
+          <div class="content"> 
+           <p>此款商品正在进行限时活动，原来天猫售价39.9元，现有10元优惠券，到手仅需29.9元，绝对超值，有需要可速度下单哦！</p> 
+           <!--                        <div class="last-time"> <i>1</i> 天 <i>20</i> 时 <i>59</i> 分 <i>36</i> 秒 后结束</div>--> 
+          </div> 
+          <div class="feedback">
+            我要举报： 
+           <a href="javascript:;" class="err" data-id="1">价格错误</a> 
+           <a href="javascript:;" class="err" data-id="2">优惠券失效</a> 
+           <a href="/index.php?r=index/feedbackpc&amp;id=28952718" class="">其他</a> 
+          </div> 
+         </div> 
+        </div>  
+        <div class="goods-desc cf"> 
+         <div style="background-color: ;width: 410px;height: 120px;display: inline-block;"> 
+          <script type="text/javascript" src="//bd1.click.com.cn/site/d/yxq/static/hhv_z_n.js"></script> 
+         </div> 
+        </div> 
+        <div class="shop-msg"> 
+         <div class="tit"> 
+          <span>店铺信息</span> 
+         </div> 
+         <div class="shop-block"> 
+          <img class="shop-img fl" src="https://img.alicdn.com/imgextra//9c/a4/TB1qDcrQVXXXXbYXXXXSutbFXXX.jpg" alt="" width="60" height="60"> 
+          <div class="shop-name fl"> 
+           <p>贝婴奇旗舰店</p> 
+           <p class="iconfont icon-detail_tmall"></p> 
+          </div> 
+          <ul class="shop-score fr"> 
+           <li><p>宝贝描述</p><span>4.8 <i class="ico high">高</i></span></li> 
+           <li><p>卖家服务</p><span>4.8 <i class="ico high">高</i></span></li> 
+           <li><p>物流服务</p><span>4.8 <i class="ico high">高</i></span></li> 
+          </ul> 
+         </div> 
+        </div> 
+        <script type="text/javascript" src="//bd1.click.com.cn/common/hcb_rei/k_ul.js"></script> 
+        <div class="shop-msg" style="height:170px"> 
+         <div class="tit"> 
+          <span>猜你喜欢大家都在看</span> 
+         </div> 
+         <div class="shop-block"> 
+          <a style="display:inline-block;width:250px;height:23px;line-height:23px;color:red;" href="http://1.click.com.cn/index.php?r=l&amp;at59=1&amp;s=t&amp;u=1">瑞典被丢坟场视频</a>&nbsp; 
+          <a style="display:inline-block;width:250px;height:23px;line-height:23px" href="http://1.click.com.cn/index.php?r=p">瑞典大使采访视频</a>&nbsp; 
+          <a style="display:inline-block;width:250px;height:23px;line-height:23px" href="http://1.click.com.cn/index.php?r=ddq">瑞典坟场游客视频</a> 
+          <br> 
+          <a style="display:inline-block;width:250px;height:23px;line-height:23px" href="http://1.click.com.cn/index.php?r=every/half">瑞典警察游客视频</a>&nbsp; 
+          <a style="display:inline-block;width:250px;height:23px;line-height:23px" href="http://1.click.com.cn/index.php?r=realtime/zsz">瑞典警方事件视频</a>&nbsp; 
+          <a style="display:inline-block;width:250px;height:23px;line-height:23px" href="http://1.click.com.cn/index.php?r=nine">瑞典旅客被打视频</a> 
+          <br> 
+          <a style="display:inline-block;width:250px;height:23px;line-height:23px" href="http://1.click.com.cn/index.php?r=l&amp;u=1357510&amp;cid=1">瑞典媒体曝光视频</a>&nbsp; 
+          <a style="display:inline-block;width:250px;height:23px;line-height:23px" href="http://1.click.com.cn/index.php?r=l&amp;u=1357510&amp;cid=2">瑞典辱华视频地址</a>&nbsp; 
+          <a style="display:inline-block;width:250px;height:23px;line-height:23px" href="http://1.click.com.cn/index.php?r=l&amp;u=1357510&amp;cid=3">瑞典辱华视频主持</a> 
+          <br> 
+          <a style="display:inline-block;width:250px;height:23px;line-height:23px" href="http://1.click.com.cn/index.php?r=l&amp;u=1357510&amp;cid=4">瑞典新闻辱华视频</a>&nbsp; 
+          <a style="display:inline-block;width:250px;height:23px;line-height:23px" href="http://1.click.com.cn/index.php?r=l&amp;u=1357510&amp;cid=5">瑞典游客坟场视频</a>&nbsp; 
+          <a style="display:inline-block;width:250px;height:23px;line-height:23px" href="http://1.click.com.cn/index.php?r=l&amp;u=1357510&amp;cid=6">瑞典游客完整视频</a> 
+          <br> 
+         </div> 
+        </div> 
+        <div class="goods-detail"> 
+         <div class="tit"> 
+          <span>商品详情</span> 
+         </div> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i3/3177307132/O1CN0162iBln22YVMMESl5d_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i2/3177307132/O1CN01ZC4JpQ22YVMOkAlUH_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i3/3177307132/O1CN019P1bX422YVMOhyL61_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i3/3177307132/O1CN01bHLKmm22YVMPGP5ji_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i2/3177307132/O1CN01W1jQkv22YVMPOmVmN_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i3/3177307132/O1CN01yk7JZE22YVMMEQkKv_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i4/3177307132/O1CN01tpF8Wa22YVMU1ZHcA_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i2/3177307132/O1CN01PWIthV22YVMR5QSKB_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i3/3177307132/O1CN01FbHyAx22YVMMiFE4g_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i4/3177307132/O1CN01yL2EdQ22YVMGWSqXU_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i4/3177307132/O1CN017A5KGj22YVMOhwvno_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i4/3177307132/O1CN017A5KGj22YVMOhwvno_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i2/3177307132/O1CN01XsdcOp22YVMTgThWm_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i4/3177307132/O1CN01YeGNOX22YVMRPXsgk_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i3/3177307132/O1CN01EV8KGZ22YVMR6omsQ_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i1/3177307132/O1CN012RmpDR22YVMThnwOA_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i4/3177307132/O1CN01R5jKJG22YVMPQ2j7u_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i4/3177307132/O1CN01AOYFnn22YVMSu8xAe_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i4/3177307132/O1CN01RtqktC22YVMMERkiT_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i3/3177307132/O1CN01toby6V22YVMONgqrI_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i1/3177307132/O1CN01fxvxkA22YVMSsoRl7_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i4/3177307132/O1CN01RBbIXt22YVMPGQAFf_!!3177307132.jpg" alt=""> 
+         <img class="lazy img check_img_show" src="https://cmsstatic.ffquan.cn//web/images/rolling.gif?v=202009041731" data-original="http://img.alicdn.com/imgextra/i1/3177307132/O1CN01DetPsj22YVMOk9UV9_!!3177307132.jpg" alt=""> 
+        </div> 
+        <script src="http://item.qunaermai.com/dopa_acc.js"></script> 
+       </div> 
+       <div style="float:right"> 
+        <script type="text/javascript" src="//bd1.click.com.cn/source/lg-fvo/resource/v-yvo.js"></script> 
+       </div> 
+       <div class="right-container"> 
+        <div class="rec-block fav"> 
+         <div class="tit"> 
+          <span>可能喜欢</span> 
+          <input type="hidden" class="cur-page" value="1"> 
+          <ul class="pagination"> 
+           <li class="prev iconfont icon-houtui btn"></li> 
+           <li class="next iconfont icon-qianjin btn"></li> 
+          </ul> 
+         </div> 
+         <a href="/index.php?r=l/d&amp;id=28987244&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/i1/2206391582696/O1CN01UeG3PA1VmoOeQbune_!!2206391582696.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>【蓝奇宝贝】儿童筷子训练筷</p> 
+           <span class="coupon">券后 <i>¥ 5.9</i></span> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=28989537&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="//img.alicdn.com/imgextra/i1/2206391582696/O1CN01M9favT1VmoO2tYX9U_!!2206391582696.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>【轻松学吃饭】婴儿辅食训练弯曲叉勺</p> 
+           <span class="coupon">券后 <i>¥ 6.9</i></span> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=29000567&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/imgextra/i1/794486930/O1CN0111n9eJ213zJE4MbmB_!!794486930.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>美国满趣健儿童宝宝辅食餐具套餐</p> 
+           <span class="coupon">券后 <i>¥ 104</i></span> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=28995168&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/imgextra/i1/2114897106/O1CN018FVcOO22Mb3fwncR9_!!2114897106.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>宝宝舔舔勺硅胶辅食叉勺</p> 
+           <span class="coupon">券后 <i>¥ 9.9</i></span> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=29000317&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/imgextra/i3/3841668231/O1CN01zNS9Bh2AfqbdXzrIt_!!3841668231.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>宝宝吸盘碗餐盘分格吸管碗硅胶餐具</p> 
+           <span class="coupon">券后 <i>¥ 44</i></span> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=29003118&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/imgextra/i3/2839801600/O1CN01Y3Q94e1NgqKMVHWII_!!2839801600.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>【宝宝吃饭神器】多功能吸管碗</p> 
+           <span class="coupon">券后 <i>¥ 20.8</i></span> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=28969454&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/imgextra/i1/3323347443/O1CN01jkgNWh24qwX5ErTin_!!3323347443.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>【好孩子】儿童餐具保温辅食碗</p> 
+           <span class="coupon">券后 <i>¥ 44</i></span> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=29002017&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="//img.alicdn.com/imgextra/i3/4075193454/O1CN01aUxVDL1bNycbjfnTl_!!4075193454.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>poubi儿童抗菌不锈钢叉勺套装</p> 
+           <span class="coupon">券后 <i>¥ 9</i></span> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=28997517&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="//img.alicdn.com/imgextra/i1/2200709236407/O1CN01QI2AUt1xCS5qwxZkx_!!2200709236407.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>munchkin满趣健感温勺</p> 
+           <span class="coupon">券后 <i>¥ 39</i></span> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=29002101&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="//img.alicdn.com/imgextra/i2/2207357524283/O1CN01Rx2G0Z1hVexJWkYgl_!!2207357524283.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>【轻松学吃饭】婴儿辅食训叉勺套装</p> 
+           <span class="coupon">券后 <i>¥ 9.9</i></span> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=28997846&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://gd2.alicdn.com/imgextra/i2/1714729904/O1CN01DDVEVJ2N25BuBiTrk_!!1714729904.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>加拿大MARCUS儿童叉勺餐具套装</p> 
+           <span class="coupon">券后 <i>¥ 50</i></span> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=28997493&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/imgextra/i4/1849303992/O1CN01qpjvwn1fMNdkGTvHR_!!1849303992.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>麦肯齐儿童餐具婴儿宝宝辅食吸盘碗</p> 
+           <span class="coupon">券后 <i>¥ 68</i></span> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=28979980&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="//img.alicdn.com/imgextra/i4/379833581/O1CN018wGjob1cK8rdVKgO2_!!379833581.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>gb好孩子儿童硅胶餐盘笑脸餐垫卡通吸盘</p> 
+           <span class="coupon">券后 <i>¥ 50</i></span> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=28997468&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/bao/uploaded/TB1l8xAFNz1gK0jSZSgXXavwpXa.png_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>麦肯齐满趣健儿童餐具婴儿宝宝辅食碗</p> 
+           <span class="coupon">券后 <i>¥ 78</i></span> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=29003581&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/imgextra/i1/2832454353/O1CN01dN3iWw1i1ifKeknPC_!!2832454353.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>婴儿硅胶勺子套装儿童感温勺子</p> 
+           <span class="coupon">券后 <i>¥ 15.9</i></span> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=28967870&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/imgextra/i4/3744790925/O1CN01dfUtfZ1IhgyfXsXZR_!!3744790925.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>婴儿刮泥勺不锈钢辅食工具</p> 
+           <span class="coupon">券后 <i>¥ 7.9</i></span> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=28994342&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/imgextra/i1/1885220928/O1CN01LM9uJZ1Ij4AYX3hfe_!!1885220928.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>澳洲小宝宝短柄辅食叉勺子餐具</p> 
+           <span class="coupon">券后 <i>¥ 28.8</i></span> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=28994486&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/i2/2208845711765/O1CN019JzbMP1OuPfjidgoL_!!2208845711765.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>chibobaby防卡喉叉勺餐具</p> 
+           <span class="coupon">券后 <i>¥ 41</i></span> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=28991761&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/imgextra/i1/1099621035/O1CN01JtNV1r1JW4Xn3ZOgE_!!1099621035.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>【三个奶爸】宝宝喝汤喝粥神器三合一吸管碗</p> 
+           <span class="coupon">券后 <i>¥ 15.8</i></span> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=28962847&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/imgextra/i4/2177470404/O1CN01L2AuDd1Er4bJuDTol_!!2177470404.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>【宝露露】儿童餐具筷子勺盒子套装</p> 
+           <span class="coupon">券后 <i>¥ 9</i></span> 
+          </div> </a> 
+        </div> 
+        <div class="_tlq86jef8m"></div> 
+        <script type="text/javascript">
+    (window.slotbydup = window.slotbydup || []).push({
+        id: "u6280757",
+        container: "_tlq86jef8m",
+        async: true
+    });
+</script> 
+        <!-- 多条广告如下脚本只需引入一次 --> 
+        <script type="text/javascript" src="//cpro.baidustatic.com/cpro/ui/cm.js" async defer>
+</script> 
+        <div class="rec-block receive"> 
+         <div class="tit"> 
+          <span>今日热销</span> 
+         </div> 
+         <a href="/index.php?r=l/d&amp;id=29001883&amp;u=1357510" class="rec-list" target="_blank"> 
+          <div class="fl"> 
+           <span class="tabs i0">1</span> 
+           <img class="fl" src="https://img.alicdn.com/imgextra/i1/1047071676/O1CN01C9hDJJ1OFeQdmxRTz_!!1047071676.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          </div> 
+          <div class="content"> 
+           <p>【恒霸】碳性干电池5号7号共20粒</p> 
+           <span class="coupon">券后 <i>¥ 5.9</i></span> 
+           <div class="received">
+             近2小时疯抢 
+            <i>0</i> 件 
+           </div> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=29002633&amp;u=1357510" class="rec-list" target="_blank"> 
+          <div class="fl"> 
+           <span class="tabs i1">2</span> 
+           <img class="fl" src="https://img.alicdn.com/imgextra/i3/3067485398/O1CN01YoNCaE1pkKZSH9tiX_!!3067485398.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          </div> 
+          <div class="content"> 
+           <p>【1双装】网眼运动透气减震鞋垫</p> 
+           <span class="coupon">券后 <i>¥ 5.1</i></span> 
+           <div class="received">
+             近2小时疯抢 
+            <i>5000</i> 件 
+           </div> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=29002439&amp;u=1357510" class="rec-list" target="_blank"> 
+          <div class="fl"> 
+           <span class="tabs i2">3</span> 
+           <img class="fl" src="https://img.alicdn.com/bao/uploaded/i4/2208810804320/O1CN01hyX1lQ1hmbcZuDwiq_!!0-item_pic.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          </div> 
+          <div class="content"> 
+           <p>上赏纯肉手工烤肠火山石烤香肠500g</p> 
+           <span class="coupon">券后 <i>¥ 14.9</i></span> 
+           <div class="received">
+             近2小时疯抢 
+            <i>0</i> 件 
+           </div> 
+          </div> </a> 
+         <!--  <div class="tab_info_con" style="">
+                        <ul class="ninePicBox">
+                                                            <li class=""><a href="/index.php?r=l/d&id=29001883&u=1357510" title="【恒霸】碳性干电池5号7号共20粒" target="_blank" >
+                                        <img src="https://img.alicdn.com/imgextra/i1/1047071676/O1CN01C9hDJJ1OFeQdmxRTz_!!1047071676.jpg" alt="【恒霸】碳性干电池5号7号共20粒" style="width:85px; height:85px;">
+                                        <div class="tabCon">
+                                            <p>【恒霸】碳性干电池5号7号共20粒</p>
+                                            <span>￥5.9</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                                            <li class=""><a href="/index.php?r=l/d&id=29002633&u=1357510" title="【1双装】网眼运动透气减震鞋垫" target="_blank" >
+                                        <img src="https://img.alicdn.com/imgextra/i3/3067485398/O1CN01YoNCaE1pkKZSH9tiX_!!3067485398.jpg" alt="【1双装】网眼运动透气减震鞋垫" style="width:85px; height:85px;">
+                                        <div class="tabCon">
+                                            <p>【1双装】网眼运动透气减震鞋垫</p>
+                                            <span>￥5.1</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                                            <li class="gogo"><a href="/index.php?r=l/d&id=29002439&u=1357510" title="上赏纯肉手工烤肠火山石烤香肠500g" target="_blank" >
+                                        <img src="https://img.alicdn.com/bao/uploaded/i4/2208810804320/O1CN01hyX1lQ1hmbcZuDwiq_!!0-item_pic.jpg" alt="上赏纯肉手工烤肠火山石烤香肠500g" style="width:85px; height:85px;">
+                                        <div class="tabCon">
+                                            <p>上赏纯肉手工烤肠火山石烤香肠500g</p>
+                                            <span>￥14.9</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                                    </ul>
+                    </div> --> 
+        </div> 
+        <script type="text/javascript">
+var sogou_ad_id=1131903;
+var sogou_ad_height=410;
+var sogou_ad_width=310;
+</script> 
+        <script type="text/javascript" src="http://images.sohu.com/cs/jsfile/js/c.js"></script> 
+        <div class="rec-block receive"> 
+         <div class="tit"> 
+          <span>大家都在领</span> 
+         </div> 
+         <a href="/index.php?r=l/d&amp;id=28972534&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/imgextra/i1/1961721390/O1CN01NkyK4r1M8f9X3ONZC_!!1961721390.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>有赠品【红地球旗舰店】日本进口草本粉底液</p> 
+           <span class="coupon">券后 <i>¥ 108</i></span> 
+           <div class="received">
+             已领取 
+            <i>53000</i> 张 
+           </div> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=29000238&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/imgextra/i4/1096790920/O1CN01oWnD6d1IfOwKZZTik_!!1096790920.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>【南极人】榻榻米加厚学生床垫床褥子</p> 
+           <span class="coupon">券后 <i>¥ 19</i></span> 
+           <div class="received">
+             已领取 
+            <i>57000</i> 张 
+           </div> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=28958533&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/imgextra/i3/3520412557/O1CN01AxO1RG1Ul9MCkRuWu_!!3520412557.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>冬朵黑色九分打底魔术裤</p> 
+           <span class="coupon">券后 <i>¥ 33</i></span> 
+           <div class="received">
+             已领取 
+            <i>52000</i> 张 
+           </div> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=28877866&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/bao/uploaded/TB1Jt2eCAzoK1RjSZFlXXai4VXa.png_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>【拍2件】3CE丝绒唇釉口红</p> 
+           <span class="coupon">券后 <i>¥ 170</i></span> 
+           <div class="received">
+             已领取 
+            <i>83000</i> 张 
+           </div> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=28954994&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="//img.alicdn.com/imgextra/i4/2201514537486/O1CN01yN6T2925AdXglDw2O_!!2201514537486.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>拍2件39.9！！泰国4.0天然乳胶文胸</p> 
+           <span class="coupon">券后 <i>¥ 39</i></span> 
+           <div class="received">
+             已领取 
+            <i>80000</i> 张 
+           </div> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=28986252&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/imgextra/i3/752144829/O1CN01rUP3GN1lXjB2DIahj_!!752144829.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>【蒛一】男女自发热保暖内衣套装</p> 
+           <span class="coupon">券后 <i>¥ 29</i></span> 
+           <div class="received">
+             已领取 
+            <i>75000</i> 张 
+           </div> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=28920263&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/imgextra/i3/3962528240/O1CN01lhfhSm2Ajy9YNfnAo_!!3962528240.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>【认养一头牛】酸奶牛奶12瓶*2箱</p> 
+           <span class="coupon">券后 <i>¥ 84</i></span> 
+           <div class="received">
+             已领取 
+            <i>97000</i> 张 
+           </div> 
+          </div> </a> 
+         <a href="/index.php?r=l/d&amp;id=28994303&amp;u=1357510" class="rec-list" target="_blank"> <img class="fl" src="https://img.alicdn.com/imgextra/i3/899107167/O1CN0162VOKO22oXDDp2zmS_!!899107167.jpg_310x310.jpg" alt="" width="90" height="90" style="background: #ccc"> 
+          <div class="content"> 
+           <p>【萃植轩旗舰店】洁净柔顺洗衣液4斤</p> 
+           <span class="coupon">券后 <i>¥ 6.9</i></span> 
+           <div class="received">
+             已领取 
+            <i>55000</i> 张 
+           </div> 
+          </div> </a> 
+        </div> 
+        <script>
+var mediav_ad_pub = 'BxBnaQ_2379716';
+var mediav_ad_width = '300';
+var mediav_ad_height = '100';
+</script> 
+        <script type="text/javascript" language="javascript" charset="utf-8" src="//static.mediav.com/js/mvf_g2.js"></script> 
+       </div> 
+       <div class="cf"></div> 
+      </div> 
+      <div style="font-family: SimSun;width:1200px;margin: 45px auto 30px;font-size: 12px;line-height: 26px;color: #aaa"> 
+       <p style="color: #666;font-weight: bold;font-size: 14px;margin-bottom: 10px;font-family: '宋体';">内容声明：</p> 
+       <p class="void_border"> 本网站是一家中立的导购网站，网站中的商品信息均来自于互联网。如商品信息不同，可能是商品信息未及时更新引起，所有商品信息请以淘宝/天猫店铺内为准。网站提醒用户，购买商品前注意谨慎核实相关信息。如用户对商品/服务的标题 、价格、详情等任何信息有任何疑问的，请在购买前与商品所属店铺经营者沟通确认。网站存在海量商品信息，如用户发现商品中有任何违法/违规信息，请<a href="/index.php?r=index/feedbackpc&amp;id=28952718" style="color: #5384ff">立即反馈</a></p> 
+      </div> 
+      <!--精品推荐商品列表e--> 
+     </div> 
+     <script>
+    var third_link = '//three.ffquan.com/api/detail.html?p=NjDOcXufwD%2B6qp5%2B3T3sIWYjw%2BHpXngMoTsEW%2FSYynTufmbE81qAMxsYaL5Uw1VwFw14X95fD3YjH7EYVaDOQHsuAimD6mNSIRoPVBqizZgUX6eLIfUIOJHWWPu1K1SotqxG1Nhu%2BNQyQxl9Qcz%2BBj%2Bh3b%2BjzU64nIuFXLUBlvhVjdjbHMmYlD5NEYTn2bEaUFmjQ4xBuPaZC1SeEfxVy8iIXzI0vUsUI%2BQ4waLD7AThqrhRq3FxhrGNyJIW5gMpT1IeYCCDKxtXV%2B9Pul%2BHVxLfFsD%2BDZN4kmxEo0bB%2FPx%2F0xWa2KbTprGRhsGgmIgHFVbBnq7lhRaYT1cMjocg1jB6AB6Qgm92QP2mycCZdR6uZkm60sDa40eUgTHh29mwcAMtux8DdLpIFueUtReizBKw%2F%2FDnEU2baR2KTwEx9uyvMnuf6fWoge6Vuytwzzh1%2FaEQbvahhOmhNjo3HsB5NZm6e7%2BPodXHUVgOsRnmVrEfpAp1QxPuWQetAsX0fGho8kiUjn63LzAybjXUTj4x2JcnEC5pds2h7vkaYoDZGG2icsmp5b4PKuAI13XTQacOZEI79wYvUegUmr%2Ba2mFhGA%3D%3D';
+    var default_link = 'https://uland.taobao.com/coupon/edetail?activityId=7c67dda444ea4b198be42b693594149a&pid=mm_114214798_2026400045_110826150436&itemId=626111409729&src=qhkj_dtkp&dx=1';
+    var quan_jine = "10";
+    var bottomPicture ='';
+</script> 
+     <script>
+    var activity = {"type":11,"now":1599734871,"data":{"base_end_time":"2020-09-11 23:59:59","base_start_time":"2020-09-09 00:00:00","market_id":"56","front_money_type":"1","base_price_text":"\u5238\u540e","base_price":"\u6d3b\u52a8\u4ef7","base_sale_num_text":"\u5df2\u62a2","single_pc_label_switch":"1","not_column_label":"https:\/\/img.alicdn.com\/imgextra\/i1\/2053469401\/O1CN01irYKFy2JJi2GvmpRF_!!2053469401.png","small_label":"https:\/\/img.alicdn.com\/imgextra\/i3\/2053469401\/O1CN01MdoITQ2JJi2FmjrmV_!!2053469401.png","normal_label":"https:\/\/img.alicdn.com\/imgextra\/i1\/2053469401\/O1CN01irYKFy2JJi2GvmpRF_!!2053469401.png","long_label":"https:\/\/img.alicdn.com\/imgextra\/i1\/2053469401\/O1CN01irYKFy2JJi2GvmpRF_!!2053469401.png","single_pc_detail_switch":"1","goods_label":"99\u5212\u7b97\u8282","goods_label_img":"https:\/\/img.alicdn.com\/imgextra\/i3\/2053469401\/O1CN01xyhCoh2JJi2BkveXC_!!2053469401.png","mj_switch":"1","tm_discount_text":"\u8d2d\u7269\u6d25\u8d34\uff0c\u6ee1[\u6ee1\u51cf\u6761\u4ef6\u91d1\u989d]\u51cf[\u51cf\u514d\u91d1\u989d]","tb_discount_text":"\u8de8\u5e97\u6ee1\u51cf\uff0c\u6ee1[\u6ee1\u51cf\u6761\u4ef6\u91d1\u989d]\u51cf[\u51cf\u514d\u91d1\u989d]","single_mb_list_lable_img":"https:\/\/img.alicdn.com\/imgextra\/i4\/2053469401\/O1CN01Xml6zf2JJi2F8B91b_!!2053469401.png","single_mb_list_lable_px":null,"name":"99\u5212\u7b97\u8282\u7cbe\u9009","jh_pc_index_switch":"1","column_index_one":"https:\/\/img.alicdn.com\/imgextra\/i2\/2053469401\/O1CN01lYynh62JJi23OaQIp_!!2053469401.gif","column_index_two":"https:\/\/img.alicdn.com\/imgextra\/i2\/2053469401\/O1CN01lYynh62JJi23OaQIp_!!2053469401.gif","dressing_index_name":"99\u5212\u7b97\u8282\u7cbe\u9009","dressing_index":"https:\/\/img.alicdn.com\/imgextra\/i3\/2053469401\/O1CN01SohUhz2JJi2CHrMuS_!!2053469401.png","bd_index_style":"","bd_pc_time_switch":"0","bd_pc_day_switch":"0","bd_pc_all_switch":"0","rank_data":[],"quan_m_link":null,"hz_quan_over":"0","red_packet":0}};
+    var goods = {"activity":"0","activity_end_time":null,"activity_type":"0","addtime":"2020-09-08 17:04:07","category_id":"50009529","cid":"2","copy_pic":null,"d_title":"\u8d1d\u5a74\u5947\u6ce8\u6c34\u4fdd\u6e29\u7897\u5a74\u513f\u4e0d\u9508\u94a2\u5438\u76d8\u7897","discount_cut":"30","discount_full":"300","discount_type":"2","goodsid":"626111409729","huodong_type":"1","hz_quan_over":"0","is_delete":"0","is_haitao":"0","is_online":"1","is_pinpai":"0","is_video":"0","istmall":"1","jiage":"29.90","jihua_link":"","jinpaimaijia":"0","jipin":"0","market_id":"56","miaoshu":"\u8d1d\u5a74\u5947\u6ce8\u6c34\u4fdd\u6e29\u7897\uff0c\u5a74\u513f\u4e0d\u9508\u94a2\u5438\u76d8\u7897\u9910\u5177\u5957\u88c5\uff0c\u5403\u996d\u8f85\u98df\u7897\u9632\u6454\u9632\u70eb","neirong":null,"pic":"https:\/\/img.alicdn.com\/imgextra\/i3\/12590764\/O1CN01PCT9Nw1HVxDQiJCmD_!!12590764.jpg","pic_list":"https:\/\/img.alicdn.com\/imgextra\/i2\/3177307132\/O1CN01IjQwHc22YVMMFSj1k_!!3177307132-0-lubanu-s.jpg,https:\/\/img.alicdn.com\/imgextra\/i2\/3177307132\/O1CN015fK4E422YVMOj2fPf_!!3177307132-0-lubanu-s.jpg,https:\/\/img.alicdn.com\/imgextra\/i1\/3177307132\/O1CN01Lu3Srp22YVMU2e97u_!!3177307132-0-lubanu-s.jpg,https:\/\/img.alicdn.com\/imgextra\/i3\/3177307132\/O1CN01gHuvHp22YVMOOh9Mw_!!3177307132-0-lubanu-s.jpg,https:\/\/img.alicdn.com\/imgextra\/i1\/3177307132\/O1CN01lyQDfP22YVMR6VrAO_!!3177307132-0-lubanu-s.jpg","qq_pic":null,"quan_id":"7c67dda444ea4b198be42b693594149a","quan_jine":"10.00","quan_link":"https:\/\/uland.taobao.com\/quan\/detail?sellerId=3177307132&activityId=7c67dda444ea4b198be42b693594149a","quan_m_link":null,"quan_num":"99975","quan_over":"25","quan_tiaojian":"39","quan_time":"2020-09-14 23:59:59","red_packet":null,"seller_id":"3177307132","sellnum":"0","shoufa":"0","start_time":"2020-09-09 00:00:00","super_pic":null,"tid":"28952718","title":"\u8d1d\u5a74\u5947\u6ce8\u6c34\u4fdd\u6e29\u7897\u5a74\u513f\u4e0d\u9508\u94a2\u5438\u76d8\u7897\u9910\u5177\u5957\u88c5\u5403\u996d\u8f85\u98df\u7897\u9632\u6454\u9632\u70eb","tk_zs_id":"32184844","video_url":null,"xiaoliang":"226","yongjin":"20.00","yongjin_jihua":"20.00","yongjin_que":"0.00","yuanjia":"39.90","yunfeixian":"0","zhongfen":"0.00","zt":"0","tj_content":"\u6b64\u6b3e\u5546\u54c1\u6b63\u5728\u8fdb\u884c\u9650\u65f6\u6d3b\u52a8\uff0c\u539f\u6765\u5929\u732b\u552e\u4ef739.9\u5143\uff0c\u73b0\u670910\u5143\u4f18\u60e0\u5238\uff0c\u5230\u624b\u4ec5\u970029.9\u5143\uff0c\u7edd\u5bf9\u8d85\u503c\uff0c\u6709\u9700\u8981\u53ef\u901f\u5ea6\u4e0b\u5355\u54e6\uff01"};
+    var eleven_ks = '2019-09-09 00:00:00';
+    var eleven_ke = '2019-09-10 23:59:59';
+    var gid = "28952718";
+    var quanhoujia =  $('.price').find('i').eq(0).text();
+    var feedbacksaveUrl = "/index.php?r=index/feedbacksave";   
+
+</script> 
+     <script src="https://cmsstatic.ffquan.cn//js/clipboard.min.js?v=202009041731"></script> 
+     <script src="https://cmsstatic.ffquan.cn//js/jquery.qrcode.min.js?v=202009041731"></script> 
+     <script src="https://cmsstatic.ffquan.cn//web/js/cms_pc_detail.js?v=202009041731" type="text/javascript"></script> 
+    </div> 
+   </div> 
+   <script>
+    // 工具栏加入收藏
+    function addFavorite() {
+        var url = window.location;
+        var title = document.title;
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.indexOf("msie 8") > -1) {
+            external.AddToFavoritesBar(url, title, '');//IE8
+        } else {
+            try {
+                window.external.addFavorite(url, title);
+            } catch (e) {
+                try {
+                    window.sidebar.addPanel(title, url, "");//firefox
+                } catch (e) {
+                    layer.msg("加入收藏失败，请使用Ctrl+D进行添加");
+                }
+            }
+        }
+    }
+
+
+</script> 
+   <ul class="float-tool"> 
+    <li onclick="shoucang('我的网站',location.href)"><img src="https://cmsstatic.ffquan.cn//images/home/sc.png?v=202009041731" alt=""><p>收藏</p></li> 
+    <li class="ft-share"><img src="https://cmsstatic.ffquan.cn//images/home/share.png?v=202009041731" alt=""><p>分享</p> 
+     <div class="share-platform"> 
+      <div class="share-platform-r"> 
+       <div class="bshare-custom bdsharebuttonbox bdshare-button-style1-32"> 
+        <a title="分享到微信" class="bshare-weixin bds_weixin"></a> 
+        <a title="分享到新浪微博" class="bshare-sinaminiblog bds_tsina"></a> 
+        <a title="分享到QQ好友" class="bshare-qqim bds_sqq"></a> 
+        <a title="分享到QQ空间" class="bshare-qzone bds_qzone"></a> 
+       </div> 
+      </div> 
+     </div> <script type="text/javascript" charset="utf-8" src="https://cmsstatic.ffquan.cn//lib/bshare/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=3&amp;lang=zh"></script> <script type="text/javascript" charset="utf-8" src="https://static.bshare.cn/b/bshareC0.js"></script> </li> 
+    <li><a href="/index.php?r=index/feedbackpc" target="_blank"><img src="https://cmsstatic.ffquan.cn//images/home/feedback.png?v=202009041731" alt=""><p>反馈</p></a></li> 
+    <li class="to_top" onclick=" $('body,html').animate({scrollTop:0},1000);"><img style="padding-top: 12px;" src="https://cmsstatic.ffquan.cn//images/home/top.png?v=202009041731" alt=""></li> 
+   </ul> 
+   <script type="text/javascript">
+    var kw_url = "/index.php?r=index/index";
+    var _url = "/index.php?r=index/kwarr";   
+</script> 
+   <script src="https://cmsstatic.ffquan.cn//js/new_home.js?v=202009041731"></script> 
+   <div id="footer" class="com-footer" style="height: auto"> 
+    <div class="footer-wrapper" style="padding: 45px 0 10px;"> 
+     <ul> 
+      <li>网站导航</li> 
+      <li><a href="/index.php?r=index/index">首页</a></li> 
+      <li><a href="/index.php?r=l">好货精选</a></li> 
+      <li><a href="/index.php?r=p">疯抢榜</a></li> 
+      <li><a href="/index.php?r=ddq">咚咚抢</a></li> 
+      <li><a href="/index.php?r=nine">9.9包邮</a></li> 
+     </ul> 
+     <p>去哪儿买是一家中立的导购网站，网站中的商品信息均来自于互联网。如商品信息不同，可能是商品信息未及时更新，所有商品信息请以天猫/淘宝店铺内为准。</p> 
+     <div class="text"> 
+      <span>版权所有 本站内容未经书面许可,禁止一切形式的转载</span> 
+      <span class="ml"><script type="text/javascript" src="https://s4.cnzz.com/z_stat.php?id=1279240298&amp;web_id=1279240298"></script>© CopyRight&nbsp;2020</span> 
+      <a class="ml" href="//pc.qunaermai.com" target="_blank" rel="nofollow"> 去哪儿买http://pc.qunaermai.com </a> 
+      <a class="miitbeian ml" href="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank" rel="nofollow"> 浙ICP备20018420号-4 </a> 
+      <a href="/index.php?r=index/feedbackpc" target="_blank" style="margin-left: 20px;text-decoration: underline;">我要反馈</a> 
+      <p class="ml" style="text-algin:center;margin: 15px auto;"></p> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <script type="text/javascript" src="https://cmsstatic.ffquan.cn//web/js/jquery.jplayer.min.js?v=202009041731"></script> 
+  <script type="text/javascript" src="https://cmsstatic.ffquan.cn//js/scrollTop2.js?v=202009041731"></script> 
+  <script>
+    function addAdvertisingTpl () {
+        var advertisingTpl = '<div class="advertising">'+
+        '    <a href="'+ jumpUrl +'"><img src="'+ bottomPicture +'" alt=""></a>'+
+        '    <div class="close"><svg t="1591868289994" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2145" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="40"><defs><style type="text/css"></style></defs><path d="M509.866667 32C245.333333 32 32 247.466667 32 512s213.333333 480 477.866667 480S987.733333 776.533333 987.733333 512 774.4 32 509.866667 32z m0 896C281.6 928 96 742.4 96 512S281.6 96 509.866667 96 923.733333 281.6 923.733333 512s-185.6 416-413.866666 416z" fill="#ffffff" p-id="2146"></path><path d="M693.333333 330.666667c-12.8-12.8-32-12.8-44.8 0L512 467.2l-136.533333-136.533333c-12.8-12.8-32-12.8-44.8 0-12.8 12.8-12.8 32 0 44.8l136.533333 136.533333-136.533333 136.533333c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 14.933333 8.533333 23.466666 8.533334s17.066667-2.133333 23.466667-8.533334l136.533333-136.533333 136.533334 136.533333c6.4 6.4 14.933333 8.533333 23.466666 8.533334s17.066667-2.133333 23.466667-8.533334c12.8-12.8 12.8-32 0-44.8L556.8 512l136.533333-136.533333c12.8-12.8 12.8-32 0-44.8z" fill="#ffffff" p-id="2147"></path></svg></div>'+
+        '</div>';
+        var advertisingStyle = '<style>.advertising{position: fixed; bottom:0; width:100%; height:120px;background: rgba(0,0,0,.5);z-index:999;transform: translate3d(0px, 120px, 0px);transition: transform .2s;}.advertising img{height: 120px; position:absolute; left:0; right:0;margin:auto; display:block;}.close{position:absolute; left:80%; top: 5%;cursor:pointer;}.advertising.active{transform: translate3d(0px, 0px, 0px);}</style>'
+        $('body').append(advertisingTpl, advertisingStyle);
+        $('.close').on('click', function(e){
+            e.stopPropagation();
+            $('.advertising').remove();
+        })
+    }
+    if(bottomPicture){
+        addAdvertisingTpl ()
+        $(window).scroll(function(e){
+            if($('html').scrollTop() > 10){
+                $(window).unbind('scroll')
+                $('.advertising').addClass('active')
+            }
+        })
+    }
+</script> 
+  <script src="https://cmsstatic.ffquan.cn//wap_new/common/models/models-jsencrypt.js?v=202009041731"></script>  
+ </body>
+</html>

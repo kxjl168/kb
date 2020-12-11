@@ -34,6 +34,12 @@ function initQuery() {
 					$scope.month = "";
 					$scope.blog_tag = "";
 				};
+				
+				$scope.tourl=function(x){
+					var url=$scope.preurl+"/public/html/"+x.showdate+"/"+x.imei+".html";
+					window.location.href=url;
+				}
+			
 
 				$scope.getList = function(id, fucOnFinished, clear) {
 
@@ -177,17 +183,17 @@ function initQuery() {
 									     });
 										 
 										 
-										 jQuery(".pgdiv a.ptitle ").hover(function() {
-												jQuery(this).stop().animate({
-													//color: "#A0410D",
-													marginLeft: '15px'
-												}, 400);
-												},function() {
-													jQuery(this).stop().animate({
-													//color: "#444444",
-														marginLeft: '0px'
-												}, 400);
-											});
+//										 jQuery(".pgdiv a.ptitle ").hover(function() {
+//												jQuery(this).stop().animate({
+//													//color: "#A0410D",
+//													marginLeft: '15px'
+//												}, 400);
+//												},function() {
+//													jQuery(this).stop().animate({
+//													//color: "#444444",
+//														marginLeft: '0px'
+//												}, 400);
+//											});
 										 
 									},100);
 									  

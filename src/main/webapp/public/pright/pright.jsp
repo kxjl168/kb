@@ -5,7 +5,7 @@
 		<div class="panel-heading" title="" data-toggle="collapse"
 			data-parent="#accordion" href="#collapseOner11">
 			<div class="row">
-				<h3 class="panel-title  col-xs-10">文章分类</h3>
+				<h3 class="panel-title  col-xs-10"><i class="fa fa-cube" ></i>文章分类</h3>
 
 
 
@@ -56,7 +56,7 @@
 		<div class="panel-heading" title="" data-toggle="collapse"
 			data-parent="#accordion" href="#collapseOner2">
 			<div class="row">
-				<h3 class="panel-title col-xs-10">文章归档</h3>
+				<h3 class="panel-title col-xs-10"><i class="fa fa-folder-open" ></i>文章归档</h3>
 
 
 
@@ -104,7 +104,7 @@
 		<div class="panel-heading " title="" data-toggle=""
 			data-parent="#accordion" href="#collapseOner3">
 			<div class="row">
-				<h3 class="panel-title col-xs-10  ">标签</h3>
+				<h3 class="panel-title col-xs-10  "><i class="fa fa-tags" ></i>标签</h3>
 
 
 
@@ -146,7 +146,7 @@
 		<div class="panel-heading " title="" data-toggle=""
 			data-parent="#accordion" href="#collapseOner3">
 			<div class="row">
-				<h3 class="panel-title col-xs-10  ">友情链接&nbsp;<a class="yl" href="${basePath}/public/about#faq">申请友链</a></h3>
+				<h3 class="panel-title col-xs-10  "><i class="fa fa-link" ></i>友情链接&nbsp;<a class="yl" href="${basePath}/public/about#faq">申请友链</a></h3>
 
 
 
@@ -198,6 +198,8 @@
 
 
 
+
+
 	<script
 		src="${basePath}/js/own/cal/calendar2.js?b=1"></script>
 
@@ -207,7 +209,7 @@
 		<div class="panel-heading " title="" data-toggle=""
 			data-parent="#accordion" href="#collapseOner3">
 			<div class="row">
-				<h3 class="panel-title col-xs-10  ">可能喜欢&nbsp;</h3>
+				<h3 class="panel-title col-xs-10  "><i class="fa fa-leaf" ></i>可能喜欢&nbsp;</h3>
 
 
 

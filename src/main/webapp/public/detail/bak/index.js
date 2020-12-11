@@ -50,6 +50,9 @@ $(function() {
 });
 
 function initPic(){
+	
+	 $("img[data-original]").lazyload({effect: "fadeIn"});
+	
 	 
     var items=[];
     
@@ -512,12 +515,14 @@ function init() {
                             	 
                             	+' <li >  '
 
-                            	+' 	<img class="nopaddding img-responsive col-xs-2" '
-                            	+' 	style="width: 25px; height: 25px;" '
-                            	+' 	title="'+item.blog_type_name+'" '
-                            	+' 	src="'+item.blog_type_url+'"> <a '
+                            	+' 	 <a '
                             	+' 		href="'+basePath+'/public/html/'+item.showdate+'/'+item.imei+'.html"  '
-                            	+' 		class="col-sm-8 col-xs-11 ">'+item.title+'</a> '
+                            	+' 		class="col-sm-8 col-xs-11 ">'
+                            	+'<img class=" rimg " '
+                                	
+                                	+' 	title="'+item.blog_type_name+'" '
+                                	+' 	src="'+item.blog_type_url+'">'
+                            	+item.title+'</a> '
                             	+' </li> ' ;
                              });
                              html+="   </ul>";
@@ -540,22 +545,22 @@ function init() {
                            var prenexthtml='';
                            
                            if( $scope.pre!=null)
-                        	   prenexthtml+= ' <ul class="pagination pull-left"> '
+                        	   prenexthtml+= ' <ul class="prenext pull-left"> '
                         	   +' <li> '
                         	   +'<a  '
                         	   +'href="'+basePath+'/public/html/'+$scope.pre.showdate+'/'+$scope.pre.imei+'.html" '
-                        	   +'style="" class="for spider">前一篇:'+$scope.pre.title+'</a> '
+                        	   +'style="" title="前一篇" class="for spider"><i class="fa fa-arrow-circle-left"></i>&nbsp;'+$scope.pre.title+'</a> '
  								
  								 +'</li>'
  								 +'</ul>';
                            
                            if( $scope.next!=null)
-                        	   prenexthtml+=' <ul class="pagination pull-right">'
+                        	   prenexthtml+=' <ul class="prenext pull-right">'
  								+' 	<li>'
  								
  								+' <a '
  						 	   +'href="'+basePath+'/public/html/'+$scope.next.showdate+'/'+$scope.next.imei+'.html" '
-                        	   +'style="" class="for spider">后一篇:'+$scope.next.title+'</a> '
+                        	   +'style="" class="for spider">'+$scope.next.title+'&nbsp;<i class="fa fa-arrow-circle-right"></i></a> '
  								
  								+' </li>'
  								+' </ul>' ;

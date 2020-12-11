@@ -149,7 +149,7 @@ public class LikeController extends BaseController {
 			//{
 			//	jsonOut.put("spider_num", "");
 			//}else {
-				jsonOut.put("spider_num", "爬虫访问"+tp.getSpider_nums()+"次");
+				jsonOut.put("spider_num", ""+tp.getSpider_nums()+"");
 			//}
 			
 			

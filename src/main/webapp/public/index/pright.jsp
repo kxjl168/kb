@@ -10,7 +10,7 @@
 
 			<div class="row">
 
-				<h3 class="panel-title  col-xs-10">Hello World !</h3>
+				<h3 class="panel-title  col-xs-10"><i class="fa fa-home" ></i>Hello World !</h3>
 
 
 

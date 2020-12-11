@@ -106,6 +106,7 @@ import com.sun.glass.ui.View;
 import com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex.KeyIndexIterator;
 
 import sun.util.logging.resources.logging;
+import us.codecraft.webmagic.selector.Html;
 
 @Controller
 @RequestMapping(value = "/")
@@ -695,8 +696,15 @@ public class PublicController extends BaseController {
 			// emoji替换
 			ct = ct.replace("[[", "&#x");
 			details.get(0).setContent(ct);
+			
+			
+			//2020.11.24增加图片异步加载，处理<img src="" fid='' orisrc="" /> ==> <img data-original="" fid='' orisrc="" />
+			//Html htmlpage=new Html(ct);
+			String newhtml= ct.replace(" src="," data-original=").toString();
+			details.get(0).setContent(newhtml);
+			//end
 
-			System.out.println(details.get(0).getContent());
+			//System.out.println(details.get(0).getContent());
 
 			view.addObject("preurl", ConfigReader.getInstance().getProperty("domain", "http://www.256kb.cn"));
 
