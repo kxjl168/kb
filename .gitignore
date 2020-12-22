@@ -1,3 +1,5 @@
 /target/
 /src/main/webapp/WEB-INF/classes/
 *.classes
+
+/src/main/webapp/file/siteurl/*

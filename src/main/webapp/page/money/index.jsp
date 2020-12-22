@@ -92,6 +92,19 @@
 
 
 								</div>
+								
+								<div class=" col-md-6  col-xs-12   ">
+									<div
+										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">包括房子:</div>
+									<div class="col-md-6 col-xs-8 text-right ">
+										<input id="q_house" name="q_house" type="checkbox"
+											class="mcheck form-control">
+									</div>
+
+
+
+
+								</div>
 
 							</div>
 
@@ -117,13 +130,13 @@
 
 			<div id="sdata" class=" col-xs-4  margin-bottom-10 padding-right-0 ">
 				<div>
-					收入:<span id="shouruspan" class="shouruspan">+55555</span>
+					收入:<span id="shouruspan" class="shouruspan">+0</span>
 				</div>
 				<div>
-					支出:<span id="zhichuspan" class='zhichuspan'>-12313</span>
+					支出:<span id="zhichuspan" class='zhichuspan'>-0</span>
 				</div>
 				<div>
-					结余:<span id="totalspan" class="">2222</span>
+					结余:<span id="totalspan" class="">0</span>
 				</div>
 				<div class='yearMoneyChart'>
 					<i class="stastic fa fa-line-chart"></i> <a class=""

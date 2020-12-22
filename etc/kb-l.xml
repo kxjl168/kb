@@ -45,13 +45,13 @@
 
  <ConfigItem>
 		<ConfigName>excludedUrls</ConfigName>
-        <ConfigValue>UploadFile.action,.*/rss,.*/feed,.ico,.*/sitemap.xml,.*.zip,.*.xlsx,.*.doc,.*.docx,.*.rar,.*.xls,downFile.action,.*/bloglike/.*,.*.JPG,.*.txt,dosearch.action,.woff2,.woff,.tff,.svg,.eot,.js,.css,.*/pown/url/.*,ie8.jsp,null.jsp,404.jsp,index.jsp,noaccess.jsp,.jpg,.png,.ico,.jpeg,.gif,search/init.action,replay/addOrUpdate.action,.*/public/.*,.*/.*/get.*,.*/sysBaseInfo/get.*,.*/kurl/get.*,UploadCKFile.action,.html,login.jsp,exlogin.action,phonereg/,phonereg,done.jsp,getVersionInfo.action</ConfigValue>
+        <ConfigValue>/kb/,.*/kg/.*,UploadFile.action,.*/rss,.*/feed,.ico,.*/sitemap.xml,.*.zip,.*.xlsx,.*.doc,.*.docx,.*.rar,.*.xls,downFile.action,.*/bloglike/.*,.*.JPG,.*.txt,dosearch.action,.woff2,.woff,.tff,.svg,.eot,.js,.css,.*/pown/url/.*,ie8.jsp,null.jsp,404.jsp,index.jsp,noaccess.jsp,.*.jpg,.png,.ico,.jpeg,.gif,search/init.action,replay/addOrUpdate.action,.*/public/.*,.*/.*/get.*,.*/sysBaseInfo/get.*,.*/kurl/get.*,UploadCKFile.action,.html,login.jsp,exlogin.action,phonereg/,phonereg,done.jsp,getVersionInfo.action</ConfigValue>
 		<ConfigDesc>不需要鉴权也可访问的url后缀		</ConfigDesc>
 	</ConfigItem> 
 
 	<ConfigItem>
 		<ConfigName>normalUrls</ConfigName>
-		<ConfigValue>/public,.*/file.*,/search,/xjs,</ConfigValue>
+		<ConfigValue>/kg,/public,.*/file.*,/search,/xjs,</ConfigValue>
 		<ConfigDesc>直接调用接口可以通过的路径，非attack名单     </ConfigDesc>
 	</ConfigItem>
 
@@ -65,7 +65,7 @@
 	<ConfigItem>
 		<ConfigName>FILE_SAVE_PATH</ConfigName>
 		<!-- <ConfigValue>F:\kxjl\code\kb\src\main\webapp\file\</ConfigValue> -->
-		<ConfigValue>H:\git\kb\src\main\webapp\file\</ConfigValue>
+		<ConfigValue>F:\kxjl\kb\kb\src\main\webapp\file\</ConfigValue>
 
 		<ConfigDesc>作为文件服务器时，本地存储路径	</ConfigDesc>
 	</ConfigItem>
@@ -200,44 +200,48 @@
 
 	<ConfigItem>
 		<ConfigName>LOCAL_HTML_PATH</ConfigName>
-		<!--<ConfigValue> F:\kxjl\code\kb\src\main\webapp\public\html\ </ConfigValue> -->
+		<ConfigValue>F:\kxjl\kb\kb\src\main\webapp\public\html\</ConfigValue> 
 
-		<ConfigValue>\\VBOXSVR\share\git\kb\src\main\webapp\public\html\</ConfigValue>
+		<!-- <ConfigValue>\\VBOXSVR\share\git\kb\src\main\webapp\public\html\</ConfigValue> -->
 		<ConfigDesc>html静态目录</ConfigDesc>
 	</ConfigItem>
 
 	<ConfigItem>
 		<ConfigName>domain</ConfigName>
-		<ConfigValue>http://127.0.0.1:8081</ConfigValue>
+		<ConfigValue>http://127.0.0.1:8081/</ConfigValue>
 		<ConfigDesc>域名前缀</ConfigDesc>
 	</ConfigItem>
 
-
+<ConfigItem>
+		<ConfigName>domainSearch</ConfigName>
+		<ConfigValue>http://127.0.0.1:8001</ConfigValue>
+		<ConfigDesc>查询域名前缀</ConfigDesc>
+	</ConfigItem>
 
 	<!-- generator config -->
 
 
 	<ConfigItem>
 		<ConfigName>templatePath</ConfigName>
-		<ConfigValue>\\VBOXSVR\share\git\kb\src\main\resources\generator\</ConfigValue>
+		<ConfigValue>F:\kxjl\kb\kb\src\main\resources\generator\</ConfigValue>
 		<ConfigDesc>模板路径</ConfigDesc>
 	</ConfigItem>
 
 	<ConfigItem>
 		<ConfigName>javaScanPath</ConfigName>
-		<ConfigValue>\\VBOXSVR\share\git\kb\src\main\java\</ConfigValue>
+		<ConfigValue>F:\kxjl\kb\kb\src\main\java\</ConfigValue>
 		<ConfigDesc>java文件扫描路径</ConfigDesc>
 	</ConfigItem>
 
 	<ConfigItem>
 		<ConfigName>pageScanPath</ConfigName>
-		<ConfigValue>\\VBOXSVR\share\git\kb\src\main\webapp\page\</ConfigValue>
+		<ConfigValue>F:\kxjl\kb\kb\src\main\webapp\page\</ConfigValue>
 		<ConfigDesc>页面及js扫描路径</ConfigDesc>
 	</ConfigItem>
 
 	<ConfigItem>
 		<ConfigName>mysqljarPath</ConfigName>
-		<ConfigValue>\\VBOXSVR\share\git\lib\mysql-connector-java-5.1.28.jar</ConfigValue>
+		<ConfigValue>F:\kxjl\kb\lib\mysql-connector-java-5.1.28.jar</ConfigValue>
 		<ConfigDesc>mysqljarPath</ConfigDesc>
 	</ConfigItem>
 
@@ -264,6 +268,15 @@
 		<ConfigValue>false</ConfigValue>
 		<ConfigDesc>定时刷新rss</ConfigDesc>
 	</ConfigItem>
+	
+	
+	<ConfigItem>
+		<ConfigName>cookieDomain</ConfigName>
+		<ConfigValue>k.com</ConfigValue>
+		<!-- <ConfigValue>256kb.cn</ConfigValue> -->
+		<ConfigDesc>域名cookie共享</ConfigDesc>
+	</ConfigItem>
+	
 
 	<!-- generator config end -->
 

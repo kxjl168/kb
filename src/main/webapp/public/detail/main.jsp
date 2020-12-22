@@ -13,9 +13,9 @@
 <script type="text/javascript"
 	src="${basePath}/js/plugin/angular/angular-resource.min.js"></script>
 
-<script type="text/javascript"
+<%-- <script type="text/javascript"
 	src="${basePath}/js/plugin/angular/angular-sanitize.min.js"></script>
-
+ --%>
 
 <link rel="stylesheet"
 	href="${basePath}/js/plugin/ckeditor4.8/plugins/codesnippet/lib/highlight/styles/default.css">
@@ -123,35 +123,35 @@
 					</div>
 
 					<br>
-					<div class="postdiv row col-xs-12 margin-top-5 left ">
-						<span title="最后更新于"><i class="fa fa-pencil-square "></i>&nbsp;${curBlog .update_date}&nbsp;
-						</span>
-					</div>
-
-					<div class="row col-xs-12 margin-top-10">
-						<div class="good">
-							<span class="sout"> <span class="fa fa-stack fa-lg"
-								ng-click="good() "> <i
-									class="fa fa-circle fa-stack-2x topcircle2"></i> <i
-									class=" zan fa fa-thumbs-up fa-stack-1x fa-inverse"
-									title="写的不错"></i> <span>&nbsp;<span id="gdnum" class="goodnum"
-										ng-bind-html="goodnum|sanitize">${goodnum}</span></span>
-
-							</span> <span>赞</span>
-							</span> <span class="sout"> <span class="fa fa-stack fa-lg"
-								ng-click="pay() "> <i
-									class="fa fa-circle fa-stack-2x topcircle3"></i> <i
-									class="pay fa fa-dollar fa-stack-1x fa-inverse" title=" 我要打赏"></i>
-
-							</span> <span>赏</span>
+						<div class="postdiv row col-xs-12 margin-top-5 left ">
+							<span title="最后更新于"><i class="fa fa-pencil-square "></i>&nbsp;${curBlog .update_date}&nbsp;
 							</span>
 						</div>
-					</div>
+
+						<div class="row col-xs-12 margin-top-10">
+							<div class="good">
+								<span class="sout"> <span class="fa fa-stack fa-lg"
+									ng-click="good() "> <i
+										class="fa fa-circle fa-stack-2x topcircle2"></i> <i
+										class=" zan fa fa-thumbs-up fa-stack-1x fa-inverse"
+										title="写的不错"></i> <span>&nbsp;<span id="gdnum"
+											class="goodnum" ng-bind-html="goodnum|sanitize">${goodnum}</span></span>
+
+								</span> <span>赞</span>
+								</span> <span class="sout"> <span class="fa fa-stack fa-lg"
+									ng-click="pay() "> <i
+										class="fa fa-circle fa-stack-2x topcircle3"></i> <i
+										class="pay fa fa-dollar fa-stack-1x fa-inverse" title=" 我要打赏"></i>
+
+								</span> <span>赏</span>
+								</span>
+							</div>
+						</div>
 
 
-					<div class="row col-xs-12">
-						<hr></hr>
-					</div>
+						<div class="row col-xs-12">
+							<hr></hr>
+						</div>
 				</div>
 
 
@@ -160,14 +160,17 @@
 						<li><c:if test="${preBlog!=null }">
 								<a
 									href="${basePath}/public/html/${preBlog.showdate}/${preBlog.imei}.html"
-									title="上一篇" style="" class="for spider"><i class="fa fa-arrow-circle-left"></i>&nbsp;${preBlog.title}</a>
+									title="上一篇" style="" class="for spider"><i
+									class="fa fa-arrow-circle-left"></i>&nbsp;${preBlog.title}</a>
 							</c:if></li>
 					</ul>
 					<ul class="pagination pull-right">
 						<li><c:if test="${nextBlog!=null }">
 								<a
 									href="${basePath}/public/html/${nextBlog.showdate}/${nextBlog.imei}.html"
-									title="下一篇" style="" class="for spider">${nextBlog.title} &nbsp;<i class="fa fa-arrow-circle-right"></i>&nbsp;</a>
+									title="下一篇" style="" class="for spider">${nextBlog.title}
+									&nbsp;<i class="fa fa-arrow-circle-right"></i>&nbsp;
+								</a>
 							</c:if></li>
 					</ul>
 
@@ -191,7 +194,8 @@
 								<i class="fa fa-hand-o-right"></i>&nbsp; 本文基于<a
 									href="${curBlog.cclink}" title="${curBlog.ccname}"
 									target="_blank">${curBlog.ccname}</a> 许可协议发布,作者：<a
-									href="http://www.256kb.cn/" class="authorf">野生的喵喵</a>。 <span> 固定链接： <a class="pagelink"
+									href="http://www.256kb.cn/" class="authorf">野生的喵喵</a>。 <span>
+									固定链接： <a class="pagelink"
 									href="${preurl}/public/html/${curBlog.showdate}/${curBlog.imei}.html">【${curBlog.title}】</a>
 									转载请注明
 								</span>
@@ -225,20 +229,20 @@
 					<hr></hr>
 				</div>
 				<div class="row  col-xs-12 ">
-					<p><i class="fa fa-puzzle-piece"></i>&nbsp;相关文章:</p>
+					<p>
+						<i class="fa fa-puzzle-piece"></i>&nbsp;相关文章:
+					</p>
 					<div class="nopadding-left row relatedLink">
 
 						<ul class="col-xs-12 ">
 
 							<c:forEach items="${relatedBLogs }" var="relateblog">
-								<li><span class="col-xs-2"><img class="rimg nopaddding img-responsive "
-									
-									title="${relateblog.blog_type_name}"
-									src="${relateblog.blog_type_url}"> 
-									</span>
-									<a
-										href="${basePath}/public/html/${relateblog.showdate}/${relateblog.imei}.html"
-										class="col-sm-8 col-xs-11 ">${relateblog.title}</a></li>
+								<li><span class="col-xs-2"><img
+										class="rimg nopaddding img-responsive "
+										title="${relateblog.blog_type_name}"
+										src="${relateblog.blog_type_url}"></span> <a
+									href="${basePath}/public/html/${relateblog.showdate}/${relateblog.imei}.html"
+									class="col-sm-8 col-xs-11 ">${relateblog.title}</a></li>
 							</c:forEach>
 
 
@@ -350,12 +354,6 @@
 
 	<script type="text/javascript"
 		src="${basePath}/js/own/automenu/jquery.autoMenu.js"></script>
-
-
-
-
-
-
 
 
 

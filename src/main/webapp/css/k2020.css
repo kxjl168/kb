@@ -327,7 +327,7 @@ div.ptitle:hover  a.ptitle{
 }
 
 .pdcontent{
-	overflow-x:hidden;
+	/* overflow-x:hidden; */
 	 
 }
 

@@ -66,6 +66,18 @@
 
 
 								</div>
+								<div class=" col-md-6  col-xs-12   ">
+									<div
+										class="control-label padding-top-0 col-xs-4 col-md-3 col-lg-3">包括房子:</div>
+									<div class="col-md-6 col-xs-8 text-right ">
+										<input id="q_house" name="q_house" type="checkbox"
+											class="mcheck form-control">
+									</div>
+
+
+
+
+								</div>
 
 
 								<div class=" col-md-6  col-xs-12  hide ">

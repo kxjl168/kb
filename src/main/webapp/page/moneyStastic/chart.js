@@ -121,9 +121,9 @@ function setchartdata(jdata,title,ele) {
 			
 			
 			
-			sdata.push({name:item.mDate,value:Math.abs(item.in_money)});
+			sdata.push({name:item.month,value:Math.abs(item.in_money)});
 
-			zhichudata.push({name:item.mDate,value:Math.abs(item.out_money)});
+			zhichudata.push({name:item.month,value:Math.abs(item.out_money)});
 			
 			option.xAxis.data.push(item.mDate);
 			

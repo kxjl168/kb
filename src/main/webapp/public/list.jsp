@@ -101,7 +101,7 @@
 		<div>
 			 <a
 				href="https://promotion.aliyun.com/ntms/act/ambassador/sharetouser.html?userCode=2pgttaay&productCode=vm&utm_source=2pgttaay">
-				<img src="${basePath}/file/aliyun.jpg"/>
+				<img src="${basePath}/kb/file/aliyun.jpg"/>
 				</a>
 		</div>
 

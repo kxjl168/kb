@@ -645,6 +645,8 @@ public class PublicController extends BaseController {
 
 		} else {
 
+			responseHtml(localFile, response);
+			
 			Blog bq = new Blog();
 			bq.setImei(imei);
 			Blog detailitem = bservice.getBlogInfoById(bq);
@@ -652,7 +654,7 @@ public class PublicController extends BaseController {
 			// 后续静态页面的访问信息记录
 			saveVisitInfo(detailitem, request);
 
-			responseHtml(localFile, response);
+		
 
 			// return "/public/html/"+year+"/"+month+"/"+imei;
 		}
@@ -700,7 +702,7 @@ public class PublicController extends BaseController {
 			
 			//2020.11.24增加图片异步加载，处理<img src="" fid='' orisrc="" /> ==> <img data-original="" fid='' orisrc="" />
 			//Html htmlpage=new Html(ct);
-			String newhtml= ct.replace(" src="," data-original=").toString();
+			String newhtml= ct.replace(" src="," src=\"data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=\" data-original=").toString();
 			details.get(0).setContent(newhtml);
 			//end
 

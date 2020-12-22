@@ -80,6 +80,12 @@ function ChangeMonthQuery(callback){
 		callback();
 }
 
+
+function getShowHouse(){
+	var showhouse= $('#q_house').is(":checked")?"true":'false';
+	return showhouse;
+}
+
 function showYearList()
 {
 	loadmenu("manager/money/Stastic/");
@@ -111,6 +117,12 @@ $(function() {
 	$("#q_year").change(function(){
 		ChangeMonthQuery(doSearch_item);
 	});
+	
+
+	$("#q_house").change(function(){
+		doSearch_item();
+	});
+	
 	
 	
 
@@ -277,7 +289,7 @@ function InitQuery_item() {
 
 								name : $("#q_name").val(),
 								mDate : $("#q_month").val(),
-
+								showhouse:getShowHouse(),
 							};
 							return param;
 						},
@@ -509,6 +521,7 @@ function refreshBChart() {
 		data : {
 			mDate : $("#q_month").val(),
 			name : $("#q_name").val(),
+			showhouse:getShowHouse(),
 		},
 		success : function(response) {
 			if (response) {
@@ -532,6 +545,7 @@ function showTotal() {
 		data : {
 			mDate : $("#q_month").val(),
 			name : $("#q_name").val(),
+			showhouse:getShowHouse(),
 		},
 		success : function(response) {
 			if (response) {

@@ -31,6 +31,14 @@ public class Money {
     private String typeName;
     private String typeIcon;
     
+    private String[] mDatelst;//多选年份统计
+    
+    
+    private String month;
+    private String year;
+    //是否显示房屋相关记录
+    private String showhouse;//true,false
+    
     private BigDecimal in_money;
     public BigDecimal getIn_money() {
 		return in_money;
@@ -160,5 +168,37 @@ public class Money {
 
 	public void setTypeIcon(String typeIcon) {
 		this.typeIcon = typeIcon;
+	}
+
+	public String getShowhouse() {
+		return showhouse;
+	}
+
+	public void setShowhouse(String showhouse) {
+		this.showhouse = showhouse;
+	}
+
+	public String[] getmDatelst() {
+		return mDatelst;
+	}
+
+	public void setmDatelst(String[] mDatelst) {
+		this.mDatelst = mDatelst;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
 	}
 }

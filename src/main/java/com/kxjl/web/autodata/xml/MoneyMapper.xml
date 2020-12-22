@@ -186,7 +186,7 @@
 <select id="selectYearList"
 	resultMap="BaseResultMap"
 	parameterType="com.kxjl.web.autodata.pojo.Money">
-select m_date,
+select month,year,
  
 max( case in_out 
   when 1 then money 
@@ -197,16 +197,35 @@ max( case in_out
 end 
 ) out_money
 
+
  from
 (
-select  left(m_date,7) m_date, sum(money) money,in_out  from money c where 1=1
+select  left(m_date,7) m_date, sum(money) money,in_out ,left(m_date,4) year,SUBSTRING(m_date,6,2) month from money c where 1=1
 
-	<if test=" mDate !=null and mDate !='' ">
+	<!-- <if test=" mDate !=null and mDate !='' ">
 		and c.m_date like concat ('%', #{mDate},'%')
+	</if> -->
+	
+	<if test=" mDatelst !=null and mDatelst !='' ">
+	AND (
+
+			<foreach collection="mDatelst" item="id" index="index"
+				open="" close="" separator=" or ">
+
+				 c.m_date   like '%${id}%'
+			</foreach>
+			 )
+		</if>
+	
+	
+		<if test=" showhouse !=null and showhouse =='false' ">
+		and c.m_type not in ('1166') 
 	</if>
-group by  left(m_date,7),in_out
-) tp group by m_date
-order by m_date
+	
+	
+group by month,in_out,year
+) tp group by month,year
+order by month,year
 
 </select>
 
@@ -233,6 +252,11 @@ order by m_date
 		<if test=" mType !=null and mType !='' ">
 		and c.m_type = #{mType}
 	</if>
+	
+		<if test=" showhouse !=null and showhouse =='false' ">
+		and c.m_type not in ('1166') 
+	</if>
+	
 		
 			
 		
@@ -259,6 +283,9 @@ select m_type,sum(money) money from money c where in_out=2
 		<if test=" name !=null and name !='' ">
 		and c.remark like concat ('%', #{name},'%')
 	</if>
+		<if test=" showhouse !=null and showhouse =='false' ">
+		and c.m_type not in ('1166') 
+	</if>
 	
 	
 	
@@ -277,6 +304,10 @@ select sum(money) money,'in' m_type from money c where in_out=1
 		<if test=" name !=null and name !='' ">
 		and c.remark like concat ('%', #{name},'%')
 	</if>
+		<if test=" showhouse !=null and showhouse =='false' ">
+		and c.m_type not in ('1166') 
+	</if>
+	
 	
 	
 union
@@ -286,6 +317,9 @@ select sum(money) money, 'out' m_type from money c where in_out=2
 	</if>
 		<if test=" name !=null and name !='' ">
 		and c.remark like concat ('%', #{name},'%')
+	</if>
+		<if test=" showhouse !=null and showhouse =='false' ">
+		and c.m_type not in ('1166') 
 	</if>
 	
 	
@@ -297,6 +331,10 @@ select sum(money) money,'totol' m_type from money c where 1=1
 		<if test=" name !=null and name !='' ">
 		and c.remark like concat ('%', #{name},'%')
 	</if>
+		<if test=" showhouse !=null and showhouse =='false' ">
+		and c.m_type not in ('1166') 
+	</if>
+	
 	
 
 

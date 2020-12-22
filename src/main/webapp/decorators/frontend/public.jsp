@@ -99,7 +99,7 @@
 
 			<div class="col-sm-3 col-xs-12 pright">
 
-				<%@include file="../../public/pright/pright.jsp"%>
+			<%-- 	<%@include file="../../public/pright/pright.jsp"%> --%>
 
 			</div>
 			</div>

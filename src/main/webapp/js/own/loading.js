@@ -1,1 +1,638 @@
-eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('3 23=1b;6 1F(k,n,1p){3J(23);k.1q("N-2L-1r",n);$(\'[N-3K="13"]\').13();3 3L=k.13(\'1G\');$($(y.v).o(".13")[0]).1s("1c").1s("1t");7(K(1p)!="1u")$($(y.v).o(".13")[0]).1H(1p);$($(y.v).o(".13")[0]).1I("z-14",3M);k.3N();23=3O(6(){k.1q("N-2L-1r","");k.13(\'15\')},3P)};24.3Q.3R=6(2M){3 f=2M;3 2N=[\'日\',\'一\',\'二\',\'三\',\'四\',\'五\',\'六\'];f=f.A(/O|3S/,j.2O());f=f.A(/3T|3U/,(j.26()%27)>9?(j.26()%27).Z():\'0\'+(j.26()%27));f=f.A(/P/,j.1v()+1>9?(j.1v()+1).Z():\'0\'+(j.1v()+1));f=f.A(/M/g,j.1v()+1);f=f.A(/w|W/g,2N[j.3V()]);f=f.A(/17|3W/,j.1w()>9?j.1w().Z():\'0\'+j.1w());f=f.A(/d|D/g,j.1w());f=f.A(/3X|18/,j.1J()>9?j.1J().Z():\'0\'+j.1J());f=f.A(/h|H/g,j.1J());f=f.A(/28/,j.1K()>9?j.1K().Z():\'0\'+j.1K());f=f.A(/m/g,j.1K());f=f.A(/29|3Y/,j.1L()>9?j.1L().Z():\'0\'+j.1L());f=f.A(/s|S/g,j.1L());q f};6 2P(f){3 1M="";3Z(i=0;i<f.1N;i++){3 c=f.40(i);1M+=2a(c>>8&2Q);1M+=2a(c&2Q)}q 1M};6 2a(b){7(b<41)q"0"+b.Z(16);B q b.Z(16)};6 42(2b){3 2c=$("#"+2b)[0];3 2e=2c.43(\'2d\');2e.44=\'#45\';2e.46(0,0,8,10);3 2R=2c.47().A("N:48/49;4a,","");3 2S=l.4b(2R);3 2T=2P(2S.4c(-16,-12));$("#"+2b).15();q 2T};6 4d(n,1d,1O){4e({1r:\'确定执行操作吗？\',2f:n,1p:\'4f\',4g:1P,4h:\'#4i\',4j:\'#4k\',4l:\'确定\',4m:\'取消\',4n:\'1Q 1Q-1c\',4o:\'1Q 1Q-4p\',4q:1P,4r:Q,4s:Q,4t:Q,}).4u(6(2g){7(2g.4v){7(K(1d)=="6")1d()}7(2g.4w){7(K(1O)=="6")1O()}})};6 1c(n){3 k=$(\'<t E="1x x-R-12 1e ">\'+\'<J E="x-1f-5 x-R-4"></J>\'+\'<J 1g="T"  E="x-1f-1 x-R-2" 1y="1R-1z: 2h;"></J>\'+\'</t> \');3 1h=$("v").o(".1e").1N;7(1h!=0)k=$("#T");B{$("v").2i(k);k=$($(k).o("#T")[0])}1F($(k),n,"1c")};6 n(n){1c(n)};6 4x(n){3 k=$(\'<t E="1x x-R-12 1e ">\'+\'<J E="x-1f-5 x-R-4"></J>\'+\'<J 1g="T"  E="x-1f-1 x-R-2" 1y="1R-1z: 2h;"></J>\'+\'</t> \');3 1h=$("v").o(".1e").1N;7(1h!=0)k=$("#T");B{$("v").2i(k);k=$($(k).o("#T")[0])};1F($(k),n)};6 1t(n){3 k=$(\'<t E="1x x-R-12 1e ">\'+\'<J E="x-1f-5 x-R-4"></J>\'+\'<J 1g="T"  E="x-1f-1 x-R-2" 1y="1R-1z: 2h;"></J>\'+\'</t> \');3 1h=$("v").o(".1e").1N;7(1h!=0)k=$("#T");B{$("v").2i(k);k=$($(k).o("#T")[0])};1F($(k),n,"1t")};4y=6(e){3 V=$(e).1q("1A");3 1x=$("#2U");$("#L").o(".11-1r").Y("操作确认");$("#L").o(".2j-2k").Y("确认要访问该网站吗？");7(V.C("1i")>-1){$("#L").11("1G");$("#2l").2m("2n",6(){$("#L").11("15");l.2V(V,\'1j\',"")});q Q}B{q Q}};4z=6(e){3 V=$(e).1q("4A");3 1x=$("#2U");$("#L").o(".11-1r").Y("下载确认");$("#L").o(".2j-2k").Y("点击确认开始下载~~");7(V.C("1i")>-1){$("#L").11("1G");$("#2l").2m("2n",6(){$("#L").11("15");l.2V(V,\'1j\',"")});q Q}B{q Q}};6 4B(n,1d,1O){$("#L").o(".2j-2k ").Y(n);$("#L").11("1G");$("#2l").2m("2n",6(){$("#L").11("15");7(K(1d)=="6")1d()});q Q}6 2W(1B){3 $2o=$("#4C");3 $2p=$(".1S.4D-4E.4F");l.4G=6(){3 G=y.1T.G+y.v.G;7(!!1B.2X.1S||$(l).1U()<4H){7(G>=4I){$2o.1H("1C")}B{$2o.1s("1C")}7(G>=4J){$2p.1s("15").1H("1C")}B{$2p.1H("15").1s("1C")}}7(K(2Y)=="6")2Y();7(K(2Z)=="6")2Z();7(K(30)=="6")30()}}3 1B=1b;$(6(){1B={2X:6(){3 u=l.4K.4L;q{4M:u.C(\'4N\')>-1,4O:u.C(\'4P\')>-1,4Q:u.C(\'4R\')>-1,4S:u.C(\'4T\')>-1&&u.C(\'4U\')==-1,1S:!!u.2q(/1S|4V|31|32|2r|4W|4X|4Y/i),4Z:!!u.2q(/\\(i[^;]+;( U;)? 50.+33 51 X/),32:u.C(\'31\')>-1||u.C(\'52\')>-1,2r:u.C(\'2r\')>-1||u.C(\'33\')>-1,34:u.C(\'34\')>-1,53:u.C(\'54\')==-1,55:u.C(\'56\')==-1}}()};2W(1B);3 1i=35();3 36=1j 57();37(1i+"58/59.5a",38.5b(36),6 5c(I){3 39=I.5d;3 3a=I.5e;7(39==3b){7(I.3c){3 2s=I.3c;$(".5f").Y(2s.5g);$(".5h").Y(2s.5i)}7(I.3d){3 3e=I.3d;$(".5j").1q("3f",I.5k+3e.5l)}7(I.3g)$(".5m-5n p").Y(I.3g)}B{n(3a)}},6 1t(N){},Q,"I")});(6(l){l.$w={G:6(1k){7(K 1k==\'1u\'){q l.2t||y.1T.G||y.v.G||0}B{7(K(l.2t)!=\'1u\')l.2t=1k;7(K(y.1T.G)!=\'1u\')y.1T.G=1k;7(K(y.v.G)!=\'1u\')y.v.G=1k}}}})(l);6 5o(3h){3 14=l.1V.1A.3i("/");3 2u=l.1V.1A.3i("#");3 2v=l.1V.1A.2w(14+1);7(2u>0)2v=l.1V.1A.2w(14+1,2u-14-1);3 3j=1j 5p("(^|&)"+3h+"=([^&]*)(&|$|#)","i");3 r=2v.2w(1).2q(3j);7(r!=1b)q 5q(r[2]);q 1b}6 3k(e){3 1W=e?e:l.5r;7(1W.3l){1W.3l()}B{1W.3k=1P}}6 5s(1g,2x,2y){3 1l=$("#5t").1k();3 19=\'%O-%P-%17 %18\';3 1a=\'O-P-17 18\';1l="3m";7(1l=="5u"){19=\'%O-%P-%17 %18\';1a=\'O-P-17 18\'}B 7(1l=="3m"){19=\'%O-%P-%17\';1a=\'O-P-17\'}B 7(1l=="5v"){19=\'%O-%P\';1a=\'O-P\'}B 7(1l=="5w"){19=\'%18:%28:%29\';1a=\'18:28:29\'}3 1X={19:19,1a:1a,5x:1g};7(2x!=1b)1X.5y=\'#F{$3n.$D(\\\'\'+2x+\'\\\')}\';7(2y!=1b)1X.5z=\'#F{$3n.$D(\\\'\'+2y+\'\\\')}\';5A(1X)}6 5B(){3 3o=1j 24();3 1Y=1j 24(3o.5C());3 2z="-";3 5D=":";3 1m=1Y.1v()+1;3 1n=1Y.1w();7(1m>=1&&1m<=9){1m="0"+1m}7(1n>=0&&1n<=9){1n="0"+1n}3 3p=1Y.2O()+2z+1m+2z+1n;q 3p}3 5E=5F;6 35(){3 1i=5G+"/";q 1i}6 37(V,1Z,3q,3r,3s,2A){3 5H=1Z;3 2B={N:1Z};7(2A&&2A=="I")2B=38.5I(1Z);3 3t=V;7(3s)3u();$.5J({1p:"5K",V:3t,N:2B,5L:"I",1c:6(N){2C();3q(N)},1t:6(a,b,c){2C();3r(a)}})}6 3u(){3 20=l.3v.y;3 1o=$("<t 1g=\'1o\' E=\'3w\'></t>");3 3x=$(20).1U();3 3y=$(20).21();1o.1I({\'1U\':3x,\'21\':3y,\'2D\':"1C",\'3z\':0,\'1z\':0,"z-14":5M,"3A-3B":"#5N","3C":"0.3D","-2E-3C":"0.3D",\'2D\':"3E"});3 2F=3b;3 2G=5O;3 2H=$("<t E=\\"5P-5Q-n 3w \\"></t>").Y("<t E=\'5R\'><t 3f=\'1\'  1D=\'0\' 5S=\'\' 1y=\'1R:5T 5U;\' E=\'5V\'></t></t><t 1y=\'3B:#5W;2f-5X:5Y;\'>正在处理，请稍候...</t>").1I({5Z:"60",3A:\'#61\',1U:2F,21:2G,1z:($(y.v).62(1P)-2F)/2,3z:$(l).G()+($(l).21()-2G)/2});2H.1I({\'2D\':"3E","z-14":63,"1D-2I":"2J","-2E-1D-2I":"2J","-3F-1D-2I":"2J","-2E-3G-2K":"0 1E 3H 22(0,0,0,0.5)","-3F-3G-2K":"0 1E 3H 22(0,0,0,0.5)","2f-2K":"0 -1E 1E 22(0,0,0,0.25)","1D-64":"1E 65 22(0,0,0,0.25)"});1o.3I(2H);$(20).o("v").66(0).3I(1o)}6 2C(){$(l.3v.y).o("#1o").67()}',62,380,'|||var|||function|if||||||||str||||this|target|window||msg|find||return|||div||body||col|document||replace|else|indexOf||class||scrollTop||json|span|typeof|myModal_outurl||data|yyyy|MM|false|xs||message_new||url|||html|toString||modal||tooltip|index|hide||dd|HH|startDate|dateFmt|null|success|donecallback|toptooltip|sm|id|size|http|new|val|datetype|month|strDate|bgDiv|type|attr|title|removeClass|error|undefined|getMonth|getDate|row|style|left|href|browser|fixed|border|1px|showPopover|show|addClass|css|getHours|getMinutes|getSeconds|result|length|cancelcallback|true|btn|margin|mobile|documentElement|width|location|evt|param|date|sendData|berthDocument|height|rgba|tipTimeout|Date||getYear|100|mm|ss|byte2Hex|canvasId|canvas||ctx|text|rst|20px|prepend|msgtitle|md|btnconfirm_outurl|one|click|overlay|header|match|iPhone|vdata|pageYOffset|indexj|searchpath|substr|min|max|seperator1|datatype|sdata|ajaxLoadEnd|position|moz|maskWidth|maskHeight|loadingDiv|radius|5px|shadow|original|formatStr|Week|getFullYear|bin2hex|0xff|b64|bin|crc|rpdiv|open|loadMobile|versions|otherScroll|otherScroll2|otherScroll3|Android|android|Mac|iPad|getImUrl|obj|SZUMWS|JSON|code|message|200|visitData|fileinfo|finfo|src|sign|name|lastIndexOf|reg|cancelBubble|stopPropagation|DAY|dp|curDate|currentdate|onsuccess|onfail|showProgress|http_url|ajaxLoading|parent|ie|bdWidth|bdHeight|top|background|color|opacity|85|absolute|webkit|box|2px|append|clearTimeout|toggle|tp|1100|focus|setTimeout|2000|prototype|Format|YYYY|yy|YY|getDay|DD|hh|SS|for|charCodeAt|0x10|getUUID|getContext|fillStyle|FF0000|fillRect|toDataURL|image|png|base64|atob|slice|cconfirm|swal|warning|showCancelButton|confirmButtonColor|3085d6|cancelButtonColor|d33|confirmButtonText|cancelButtonText|confirmButtonClass|cancelButtonClass|danger|buttonsStyling|allowOutsideClick|allowEscapeKey|allowEnterKey|then|value|dismiss|info|gourl|gdurl|dhref|cconfirm2|ftop|navbar|brand|toptitle|onscroll|800|69|160|navigator|userAgent|trident|Trident|presto|Presto|webKit|AppleWebKit|gecko|Gecko|KHTML|Mobile|iphone|ipad|phone|ios|CPU|OS|Linux|webApp|Safari|weixin|MicroMessenger|Object|sysBaseInfo|getSysInfo|action|stringify|succsess|ResponseCode|ResponseMsg|pagevisit|pageVisitNum|uservisit|userVisitNum|phead|httppath|http_relative_path|short|about|GetQueryString|RegExp|decodeURI|event|setTimeFormat|dateType|HOUR|MONTH|TIME|el|minDate|maxDate|WdatePicker|getNowFormatDate|getTime|seperator2|preurl|siteurl|basePath|ecStr|parse|ajax|POST|dataType|100000|fff|90|datagrid|mask|loadimgdiv|alt|10px|80px|loadimg|ddd|align|center|display|block|333|outerWidth|999|bottom|solid|eq|remove'.split('|'),0,{}))
+var tipTimeout = null;
+function showPopover(target, msg, type) {
+
+	clearTimeout(tipTimeout);
+
+	target.attr("data-original-title", msg);
+	$('[data-toggle="tooltip"]').tooltip();
+	var tp = target.tooltip('show');
+
+	$($(document.body).find(".tooltip")[0]).removeClass("success").removeClass(
+			"error");
+	if (typeof (type) != "undefined")
+		$($(document.body).find(".tooltip")[0]).addClass(type);
+
+	$($(document.body).find(".tooltip")[0]).css("z-index", 1100);
+
+	target.focus();
+
+	// 2秒后消失提示框
+	tipTimeout = setTimeout(function() {
+		 target.attr("data-original-title", "");
+		 target.tooltip('hide');
+	}, 2000);
+};
+
+
+
+Date.prototype.Format = function(formatStr)   
+{   
+    var str = formatStr;   
+    var Week = ['日','一','二','三','四','五','六'];  
+  
+    str=str.replace(/yyyy|YYYY/,this.getFullYear());   
+    str=str.replace(/yy|YY/,(this.getYear() % 100)>9?(this.getYear() % 100).toString():'0' + (this.getYear() % 100));   
+  
+    str=str.replace(/MM/,this.getMonth()+1>9?(this.getMonth()+1).toString():'0' + (this.getMonth()+1));   
+    str=str.replace(/M/g,this.getMonth()+1);   
+  
+    str=str.replace(/w|W/g,Week[this.getDay()]);   
+  
+    str=str.replace(/dd|DD/,this.getDate()>9?this.getDate().toString():'0' + this.getDate());   
+    str=str.replace(/d|D/g,this.getDate());   
+  
+    str=str.replace(/hh|HH/,this.getHours()>9?this.getHours().toString():'0' + this.getHours());   
+    str=str.replace(/h|H/g,this.getHours());   
+    str=str.replace(/mm/,this.getMinutes()>9?this.getMinutes().toString():'0' + this.getMinutes());   
+    str=str.replace(/m/g,this.getMinutes());   
+  
+    str=str.replace(/ss|SS/,this.getSeconds()>9?this.getSeconds().toString():'0' + this.getSeconds());   
+    str=str.replace(/s|S/g,this.getSeconds());   
+  
+    return str;   
+} ;  
+
+
+function bin2hex(str) {
+	var result = "";
+	for (i = 0; i < str.length; i++ ) {
+		var c = str.charCodeAt(i);
+		result += byte2Hex(c>>8 & 0xff); // 高字节
+		result += byte2Hex(c & 0xff);	// 低字节
+	}
+	return result;
+};
+function byte2Hex(b) {
+	if(b < 0x10)
+		return "0" + b.toString(16);
+	else
+		return b.toString(16);
+};
+/*通过canvas获取浏览器唯一标识,传入 canvasid*/
+function getUUID(canvasId){
+	
+	var canvas=$("#"+canvasId)[0]; //myCanvas
+	var ctx=canvas.getContext('2d');
+	ctx.fillStyle='#FF0000';
+	ctx.fillRect(0,0,8,10);
+	
+	var b64=canvas.toDataURL().replace("data:image/png;base64,","");
+	var bin=window.atob(b64);
+	var crc=bin2hex(bin.slice(-16,-12));
+	$("#"+canvasId).hide();
+	return crc;
+};
+
+
+
+function cconfirm(msg, donecallback, cancelcallback) {
+	swal({
+		title : '确定执行操作吗？',
+		text : msg,// '你将无法恢复它！',
+		type : 'warning',
+		showCancelButton : true,
+		confirmButtonColor : '#3085d6',
+		cancelButtonColor : '#d33',
+		confirmButtonText : '确定',
+		cancelButtonText : '取消',
+		confirmButtonClass : 'btn btn-success',
+		cancelButtonClass : 'btn btn-danger',
+		buttonsStyling : true,
+		allowOutsideClick : false,// 如果设置为false，用户无法通过点击弹窗外部关闭弹窗。
+		allowEscapeKey : false, // 如果设置为false，用户无法通过按下Escape键关闭弹窗。
+		allowEnterKey : false,
+	}).then(function(rst) {
+
+		if (rst.value) {
+			if (typeof (donecallback) == "function")
+				donecallback();
+		}
+
+		if (rst.dismiss) {
+			if (typeof (cancelcallback) == "function")
+				cancelcallback();
+		}
+
+		/*
+		 * swal( '已删除！', '你的文件已经被删除。'+rst.dismiss, 'success' );
+		 */
+	})
+};
+
+
+
+function success(msg) {
+	/*
+	 * swal({ title: "操作成功", text: msg, timer: 500, type:"success",
+	 * showConfirmButton: false });
+	 * 
+	 * return;
+	 */
+
+	// swal("干得漂亮！", "你点击了按钮！","success")
+	var target = $('<div class="row col-xs-12 toptooltip ">'
+			+ '<span class="col-sm-5 col-xs-4"></span>'
+			+ '<span id="message_new"  class="col-sm-1 col-xs-2" style="margin-left: 20px;"></span>'
+			+ '</div> ');
+	var size = $("body").find(".toptooltip").length;
+	if (size != 0)
+		target = $("#message_new");
+	else {
+		$("body").prepend(target);
+		target = $($(target).find("#message_new")[0]);
+	}
+
+	showPopover($(target), msg, "success");
+};
+
+function msg(msg) {
+	/*
+	 * swal({ title : "提示信息", text : msg, // timer: 1000, type : "info",
+	 * showConfirmButton : true });
+	 * 
+	 * return;
+	 */
+
+	success(msg);
+};
+
+function info(msg) {
+
+	/*
+	 * swal({ title : "提示信息", text : msg, // timer: 1000, type : "info",
+	 * showConfirmButton : true });
+	 * 
+	 * return;
+	 */
+
+	var target = $('<div class="row col-xs-12 toptooltip ">'
+			+ '<span class="col-sm-5 col-xs-4"></span>'
+			+ '<span id="message_new"  class="col-sm-1 col-xs-2" style="margin-left: 20px;"></span>'
+			+ '</div> ');
+	var size = $("body").find(".toptooltip").length;
+	if (size != 0)
+		target = $("#message_new");
+	else {
+		$("body").prepend(target);
+		target = $($(target).find("#message_new")[0]);
+	}
+	;
+
+	showPopover($(target), msg);
+};
+
+function error(msg) {
+	/*
+	 * swal({ title: "操作异常", text: msg, timer: 1000, type:"error",
+	 * showConfirmButton: false });
+	 * 
+	 * return;
+	 */
+
+	var target = $('<div class="row col-xs-12 toptooltip ">'
+			+ '<span class="col-sm-5 col-xs-4"></span>'
+			+ '<span id="message_new"  class="col-sm-1 col-xs-2" style="margin-left: 20px;"></span>'
+			+ '</div> ');
+	var size = $("body").find(".toptooltip").length;
+	if (size != 0)
+		target = $("#message_new");
+	else {
+		$("body").prepend(target);
+		target = $($(target).find("#message_new")[0]);
+	}
+	;
+
+	showPopover($(target), msg, "error");
+};
+
+gourl = function(e) {
+
+	var url = $(e).attr("href");
+
+	var row = $("#rpdiv");
+	$("#myModal_outurl").find(".modal-title").html("操作确认");
+	$("#myModal_outurl").find(".msgtitle-md").html("确认要访问该网站吗？");
+	
+
+	if (url.indexOf("http") > -1) {
+		$("#myModal_outurl").modal("show");
+		$("#btnconfirm_outurl").one("click", function() {
+			$("#myModal_outurl").modal("hide");
+			window.open(url, 'new', "");
+		});
+		return false;
+	} else {
+
+		return false;
+
+	}
+	;
+
+};
+
+
+gdurl = function(e) {
+
+	var url = $(e).attr("dhref");
+
+	var row = $("#rpdiv");
+
+	$("#myModal_outurl").find(".modal-title").html("下载确认");
+	$("#myModal_outurl").find(".msgtitle-md").html("点击确认开始下载~~");
+	
+	
+	if (url.indexOf("http") > -1) {
+		$("#myModal_outurl").modal("show");
+		$("#btnconfirm_outurl").one("click", function() {
+			$("#myModal_outurl").modal("hide");
+			window.open(url, 'new', "");
+		});
+		return false;
+	} else {
+
+		return false;
+
+	}
+	;
+
+};
+
+
+function cconfirm2(msg, donecallback, cancelcallback) {
+	
+		
+		$("#myModal_outurl").find (".msgtitle-md ").html(msg);
+		
+		$("#myModal_outurl").modal("show");
+		$("#btnconfirm_outurl").one("click", function() {
+
+			$("#myModal_outurl").modal("hide");
+			if(typeof(donecallback)=="function")
+				donecallback();
+		});
+		return false;
+	
+}
+
+function loadMobile(browser){
+	
+	
+	
+    var $overlay = $("#ftop");
+    var $header = $(".mobile.navbar-brand.toptitle");
+    
+ 
+    window.onscroll = function(){
+        var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
+        if(!!browser.versions.mobile || $(window).width() < 800){
+ 	       
+	    
+        if(scrollTop >= 69){
+            $overlay.addClass("fixed");
+        }else{
+            $overlay.removeClass("fixed");
+        }
+        if(scrollTop >= 160){
+            $header.removeClass("hide").addClass("fixed");
+        }else{
+            $header.addClass("hide").removeClass("fixed");
+        }
+        }
+        
+        if(typeof(otherScroll)=="function")
+        otherScroll();
+        
+        
+        if(typeof(otherScroll2)=="function")
+        otherScroll2();
+        
+        if(typeof(otherScroll3)=="function")
+            otherScroll3();
+ 
+    };
+}
+var browser =null;
+$(function() {
+
+	browser= {
+		        versions: function() {
+		        var u = window.navigator.userAgent;
+		        return {
+		            trident: u.indexOf('Trident') > -1, //IE内核
+		            presto: u.indexOf('Presto') > -1, //opera内核
+		            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+		            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+		            mobile: !!u.match(/mobile|Mobile|Android|android|iPhone|iphone|ipad|phone/i), //是否为移动终端
+		            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+		            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+		            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+		            iPad: u.indexOf('iPad') > -1, //是否为iPad
+		            webApp: u.indexOf('Safari') == -1 ,//是否为web应用程序，没有头部与底部
+		            weixin: u.indexOf('MicroMessenger') == -1 //是否为微信浏览器
+		            };
+		        }()
+		    };
+	 
+	 loadMobile(browser);
+
+	
+	var http = getImUrl();
+
+	var obj = new Object();
+
+	
+	return;
+	
+	
+	SZUMWS(http + "sysBaseInfo/getSysInfo.action", JSON.stringify(obj),
+			function succsess(json) {
+
+				var code = json.ResponseCode;
+				var message = json.ResponseMsg;
+
+				if (code == 200) {
+
+					if (json.visitData) {
+						var vdata =json.visitData;
+
+						$(".pagevisit").html(vdata.pageVisitNum);
+						$(".uservisit").html(vdata.userVisitNum);
+					}
+
+				
+
+					if (json.fileinfo) {
+						var finfo =json.fileinfo;
+						$(".phead").attr("src",
+								json.httppath + finfo.http_relative_path);
+						
+					}
+					if(json.sign)
+						$(".short-about p").html(json.sign);
+
+				} else {
+					msg(message);
+				}
+
+			}, function error(data) {
+				//("网络异常!");
+
+			}, false, "json"
+
+	);
+});
+
+
+/** kwindow */
+(function(window) {
+
+	window.$w = {
+		scrollTop : function(val) {
+			if (typeof val == 'undefined') {
+				return window.pageYOffset || document.documentElement.scrollTop
+						|| document.body.scrollTop || 0;
+			} else {
+				if (typeof (window.pageYOffset) != 'undefined')
+					window.pageYOffset = val;
+				if (typeof (document.documentElement.scrollTop) != 'undefined')
+					document.documentElement.scrollTop = val;
+				if (typeof (document.body.scrollTop) != 'undefined')
+					document.body.scrollTop = val;
+
+			}
+		}
+
+	};
+
+})(window);
+
+function GetQueryString(name) {
+
+	var index = window.location.href.lastIndexOf("/");
+	var indexj = window.location.href.lastIndexOf("#");
+
+	// 最后一个/开始 截取#前面的，兼容history.js html4 url
+	var searchpath = window.location.href.substr(index + 1);
+	if (indexj > 0)
+		searchpath = window.location.href.substr(index + 1, indexj - index - 1);
+
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$|#)", "i");
+
+	var r = searchpath.substr(1).match(reg);
+
+	if (r != null)
+
+		return decodeURI(r[2]);
+
+	return null;
+}
+
+function cancelBubble(e) {
+	var evt = e ? e : window.event;
+	if (evt.stopPropagation) { // W3C
+		evt.stopPropagation();
+	} else { // IE
+		evt.cancelBubble = true;
+	}
+}
+
+function setTimeFormat(id, min, max) {
+	var datetype = $("#dateType").val();
+
+	var startDate = '%yyyy-%MM-%dd %HH';
+	var dateFmt = 'yyyy-MM-dd HH';
+
+	// startDate = '%HH:%mm';
+	// dateFmt = 'HH:mm';
+
+	datetype = "DAY";
+
+	if (datetype == "HOUR") {
+		startDate = '%yyyy-%MM-%dd %HH';
+		dateFmt = 'yyyy-MM-dd HH';
+	} else if (datetype == "DAY") {
+		startDate = '%yyyy-%MM-%dd';
+		dateFmt = 'yyyy-MM-dd';
+	} else if (datetype == "MONTH") {
+		startDate = '%yyyy-%MM';
+		dateFmt = 'yyyy-MM';
+	} else if (datetype == "TIME") {
+		startDate = '%HH:%mm:%ss';
+		dateFmt = 'HH:mm:ss';
+	}
+
+	var param = {
+		startDate : startDate,
+		dateFmt : dateFmt,
+		el : id
+	};
+	if (min != null)
+		param.minDate = '#F{$dp.$D(\'' + min + '\')}';
+	if (max != null)
+		param.maxDate = '#F{$dp.$D(\'' + max + '\')}';
+
+	WdatePicker(param);
+
+}
+
+function getNowFormatDate() {
+	var curDate = new Date();
+
+	// var date=new Date( curDate.getTime() + 24*60*60*1000);
+	var date = new Date(curDate.getTime());
+	var seperator1 = "-";
+	var seperator2 = ":";
+	var month = date.getMonth() + 1;
+	var strDate = date.getDate();
+	if (month >= 1 && month <= 9) {
+		month = "0" + month;
+	}
+	if (strDate >= 0 && strDate <= 9) {
+		strDate = "0" + strDate;
+	}
+	var currentdate = date.getFullYear() + seperator1 + month + seperator1
+			+ strDate;
+	// + " " + date.getHours() + seperator2 + date.getMinutes()
+	// + seperator2 + date.getSeconds();
+	return currentdate;
+}
+
+var preurl = siteurl;// "https://www.256kb.cn";
+
+function getImUrl() {
+	var http = basePath + "/"; // "${pageContext.request.contextPath}";
+
+	/*
+	 * if (window.location.href.indexOf('58.67.201.8') > 0) http =
+	 * "http://58.67.201.8:8083/gserver/"; else
+	 * if(window.location.href.indexOf('127.0.0.1') > 0)
+	 * http='http://127.0.0.1:8080/kb/';
+	 */
+	return http;
+}
+
+/**
+ * http 非加密测试 同步
+ * 
+ * @param url
+ * @param sendData
+ * @param onsuccess
+ * @param onfail
+ */
+function SZUMWS(url, sendData, onsuccess, onfail, showProgress, datatype) {
+
+	// console.log("sendData: " + sendData);
+	var ecStr = sendData; // window.HMClient.AESEncrypt(sendData);
+	// console.log("ecCrypt result: " + ecStr);
+	// console.log("url: " + url);
+
+	var sdata = {
+		data : sendData
+	};
+
+	if (datatype && datatype == "json")
+		sdata = JSON.parse(sendData);
+
+	var http_url = url; // url.substring(0, url.lastIndexOf('.')) +
+	// '_test.action';
+	if (showProgress)
+		ajaxLoading();
+	$.ajax({
+		type : "POST",
+		url : http_url,
+		// 数据需要Aes加密
+		data : sdata,
+		dataType : "json",
+		success : function(data) {
+
+			ajaxLoadEnd();
+
+			//console.log("ajax return: " + data);
+			// 数据需要Aes解密
+			// var decryData =data.ResponseMsg;//
+			// window.HMClient.AESDeCrypt(data.ResponseMsg);
+			// var json = JSON.parse(decryData);
+			onsuccess(data);
+
+		},
+		error : function(a, b, c) {
+
+			ajaxLoadEnd();
+			//console.log("ajax error: " + a + b);
+			onfail(a);
+			// popupAlert("网络异常!");
+
+		}
+	});
+
+}
+
+function ajaxLoading() {
+	var berthDocument = window.parent.document;
+	// 创建背景层
+	var bgDiv = $("<div id='bgDiv' class='ie'></div>");
+	// 获取当前文档宽度作为背景层宽度
+	var bdWidth = $(berthDocument).width();
+	// 获取当前文档高度作为背景层高度
+	var bdHeight = $(berthDocument).height();
+	// 设置背景层样式
+	bgDiv.css({
+		'width' : bdWidth,
+		'height' : bdHeight,
+		'position' : "fixed",
+		'top' : 0,
+		'left' : 0,
+		"z-index" : 100000,
+		"background-color" : "#fff",
+		"opacity" : "0.85",
+		"-moz-opacity" : "0.85",
+
+		'position' : "absolute"
+
+	});
+
+	var maskWidth = 200;
+	var maskHeight = 90;
+
+	// var loadingDiv = $('<div id="loadingDiv" style="border:1px;"><img
+	// src="'+basePath+'/images/loading.gif" /><br/><a
+	// style="font-size:14px;">正在加载数据，请稍候...</a></div>');
+
+	// var url=getImUrl()+"szhmpt/android/images/loading.gif";
+
+	var loadingDiv = $("<div class=\"datagrid-mask-msg ie \"></div>")
+			.html(
+					"<div class='loadimgdiv'><div src='1'  border='0' alt='' style='margin:10px 80px;' class='loadimg'></div></div><div style='color:#ddd;text-align:center;'>正在处理，请稍候...</div>")
+			.css({
+				display : "block",
+
+				background : '#333',
+				width : maskWidth,
+				height : maskHeight,
+				left : ($(document.body).outerWidth(true) - maskWidth) / 2,
+				top : $(window).scrollTop()+ ($(window).height() - maskHeight) / 2
+			});
+
+	loadingDiv.css({
+
+		'position' : "absolute",
+
+		"z-index" : 999,
+		"border-radius" : "5px",
+		"-moz-border-radius" : "5px",
+		"-webkit-border-radius" : "5px",
+		"-moz-box-shadow" : "0 1px 2px rgba(0,0,0,0.5)",
+		"-webkit-box-shadow" : "0 1px 2px rgba(0,0,0,0.5)",
+		"text-shadow" : "0 -1px 1px rgba(0,0,0,0.25)",
+		"border-bottom" : "1px solid rgba(0,0,0,0.25)"
+
+	});
+	// 将确认框添加到背景层中
+	bgDiv.append(loadingDiv);
+	// 将背景层添加 到页面中
+	$(berthDocument).find("body").eq(0).append(bgDiv);
+}
+
+function ajaxLoadEnd() {
+	$(window.parent.document).find("#bgDiv").remove();
+}

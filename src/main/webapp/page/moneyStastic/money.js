@@ -48,6 +48,7 @@ function initDatePicker(ele, type) {
 		language : "zh-CN",
 		endDate : new Date(),
 		format : fmt,
+		multidate:true,
 		autoclose : true,
 		minViewMode : mMode,
 		defaultDate : new Date(),
@@ -110,6 +111,9 @@ $(function() {
 		ChangeMonthQuery(doSearch_item);
 	});
 	
+	$("#q_house").change(function(){
+		doSearch_item();
+	});
 	
 
 	
@@ -478,6 +482,11 @@ function doSearch_item() {
 	refreshBChart();
 }
 
+function getShowHouse(){
+	var showhouse= $('#q_house').is(":checked")?"true":'false';
+	return showhouse;
+}
+
 //刷新饼图
 function refreshBChart() {
 	var url=getRPath() + "/manager/money/yearMoneyList";
@@ -487,6 +496,7 @@ function refreshBChart() {
 		dataType : 'json',
 		data : {
 			mDate : $("#q_month").val(),
+			showhouse:getShowHouse(),
 		},
 		success : function(response) {
 			if (response) {

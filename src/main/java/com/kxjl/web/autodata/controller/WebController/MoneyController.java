@@ -103,7 +103,11 @@ public class MoneyController {
 		String rst = "";
 		List<Money> moneys = new ArrayList<>();
 
-		Page page = new Page<>(1,20);
+		Page page = new Page<>(1,100);
+		
+		String[] datas=item.getmDate().split(",");
+		item.setmDatelst(datas);
+		
 		moneys = moneyService.selectYearList(item);
 
 		try {
