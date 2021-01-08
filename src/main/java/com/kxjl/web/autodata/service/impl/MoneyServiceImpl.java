@@ -14,6 +14,7 @@ import com.kxjl.tool.utils.DateUtil;
 import com.kxjl.tool.utils.UUIDUtil;
 import com.kxjl.web.autodata.dao.MoneyMapper;
 import com.kxjl.web.autodata.pojo.Money;
+import com.kxjl.web.autodata.pojo.YearMoney;
 import com.kxjl.web.autodata.service.MoneyService;
 
 import java.util.*;
@@ -44,8 +45,30 @@ public class MoneyServiceImpl implements MoneyService {
      * @author zj
      * @date 2019年2月17日
      */
-    public List<Money> selectYearList(Money item){
-    	return itemMapper.selectYearList(item);
+    public List<YearMoney> selectYearList(Money item){
+    	
+    	String[] datas=item.getmDate().split(",");
+		item.setmDatelst(datas);
+		
+		List<YearMoney> yeardatas=new ArrayList<YearMoney>();
+		
+		for (int i = 0; i < datas.length; i++) {
+			Money yearQuery=item;
+			yearQuery.setmDate(datas[i]);
+					
+			List<Money> monyes=itemMapper.selectYearList(yearQuery);
+			
+			YearMoney yMoney=new YearMoney();
+			yMoney.setName(datas[i]);
+			yMoney.setRows(monyes);
+			
+			yeardatas.add(yMoney);
+		}
+    	
+    	
+    	
+    	
+    	return yeardatas;
     }
     
 	

@@ -202,9 +202,9 @@ end
 (
 select  left(m_date,7) m_date, sum(money) money,in_out ,left(m_date,4) year,SUBSTRING(m_date,6,2) month from money c where 1=1
 
-	<!-- <if test=" mDate !=null and mDate !='' ">
+	 <if test=" mDate !=null and mDate !='' ">
 		and c.m_date like concat ('%', #{mDate},'%')
-	</if> -->
+	</if> 
 	
 	<if test=" mDatelst !=null and mDatelst !='' ">
 	AND (

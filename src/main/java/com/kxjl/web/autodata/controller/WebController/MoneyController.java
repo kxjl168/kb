@@ -26,6 +26,7 @@ import com.kxjl.web.system.service.MenuInfoService;
 import com.kxjl.tool.utils.PageUtil;
 import com.kxjl.web.autodata.dao.MoneyMapper;
 import com.kxjl.web.autodata.pojo.Money;
+import com.kxjl.web.autodata.pojo.YearMoney;
 import com.kxjl.web.autodata.service.MoneyService;
 
 import net.sf.json.JSONObject;
@@ -101,12 +102,10 @@ public class MoneyController {
 	public String yearMoneyList( Money item, HttpServletRequest request,PageCondition pageCondition) {
 
 		String rst = "";
-		List<Money> moneys = new ArrayList<>();
+		List<YearMoney> moneys = new ArrayList<>();
 
 		Page page = new Page<>(1,100);
 		
-		String[] datas=item.getmDate().split(",");
-		item.setmDatelst(datas);
 		
 		moneys = moneyService.selectYearList(item);
 

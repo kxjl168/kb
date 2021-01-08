@@ -15,6 +15,7 @@ import net.sf.json.JSONObject;
 import java.util.List;
 
 import com.kxjl.web.autodata.pojo.Money;
+import com.kxjl.web.autodata.pojo.YearMoney;
 
 /**
  * 小区
@@ -71,6 +72,6 @@ public interface MoneyService {
      * @author zj
      * @date 2019年2月17日
      */
-    List<Money> selectYearList(Money item);
+    List<YearMoney> selectYearList(Money item);
     
 }
