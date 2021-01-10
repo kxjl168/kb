@@ -3,3 +3,5 @@
 *.classes
 
 /src/main/webapp/file/siteurl/*
+.classpath
+.setting/

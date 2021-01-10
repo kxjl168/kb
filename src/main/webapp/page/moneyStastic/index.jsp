@@ -162,7 +162,7 @@
 		src="${basePath}/page/moneyStastic/money.js"></script>
 
 		<script
-		src="${basePath}/page/moneyStastic/chart.js"></script>
+		src="${basePath}/page/moneyStastic/chartMuti.js"></script>
 		
 
 	<script type="text/javascript"

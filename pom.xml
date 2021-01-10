@@ -580,7 +580,7 @@
 
 			</properties>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 		</profile>
 		
@@ -589,13 +589,14 @@
 			<!--可本地修改，避免影响其他开发 -->
 			<properties>
 			
-			 <jdbc.url><![CDATA[jdbc:mysql://192.168.31.239:3306/kb?useUnicode=true&characterEncoding=utf-8]]></jdbc.url>
+			 <jdbc.url><![CDATA[jdbc:mysql://192.168.31.142:3306/kb?useUnicode=true&characterEncoding=utf-8]]></jdbc.url>
 			
+			 <jdbc.url2><![CDATA[jdbc:mysql://192.168.31.142:3306/kkg?useUnicode=true&characterEncoding=utf-8]]></jdbc.url2>
 			
 
 			</properties>
 			<activation>
-				<activeByDefault>false</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 			</activation>
 		</profile>
 	</profiles>

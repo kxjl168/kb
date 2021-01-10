@@ -29,7 +29,8 @@ import com.kxjl.web.system.service.MenuInfoService;
  * @author kangyongji
  * 
  */
-@Service(value = "menuService")
+@Service
+//(value = "menuService")
 public class MenuInfoServiceImpl implements MenuInfoService {
 
 	@Autowired

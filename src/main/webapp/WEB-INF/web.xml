@@ -14,8 +14,8 @@
 	<!-- 配置为实际的zteimPhoneSafe.xml位置 -->
 	<context-param>
 		<param-name>CONFIG_FILE_PATH</param-name>
-		 	 <param-value>F:\kxjl\kb\kb\etc\kb-l.xml</param-value>  
-	<!-- <param-value>F:\kxjl\code\kb\etc\kb.xml</param-value> -->
+		 	<!--  <param-value>F:\kxjl\kb\kb\etc\kb-l.xml</param-value>   -->
+	 <param-value>H:\git\kb\etc\kb-l.xml</param-value> 
 		
 	</context-param>
 	
@@ -52,7 +52,7 @@
 	<context-param>
 		<param-name>log4jConfigLocation</param-name>
 		<param-value>/WEB-INF/classes/log4j.properties</param-value>
-	</context-param>
+	</context-param> 
 
 
 	<!-- Spring刷新Log4j配置文件变动的间隔,单位为毫秒 -->
