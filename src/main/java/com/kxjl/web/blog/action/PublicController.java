@@ -74,6 +74,7 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.kxjl.base.aopAspect.NoNeedAuthorization;
 import com.kxjl.tool.common.Config;
 import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.config.ConfigReader;
@@ -382,19 +383,13 @@ public class PublicController extends BaseController {
 		return "/page/burl/index_list";
 	}
 
-	@RequestMapping(value = "/page/burl")
-	public String p_brul(Map<String, Object> maps, HttpSession session, HttpServletRequest request) {
 
-		// maps.putAll(sysService.getSysInfo());
-
-		// List<MenuInfo> leftmenus = menuService.getLeftMenuTree(session, request);
-
-		setLeftUrls(maps, true);
-		return "/page/burl/index";
-	}
 
 	private void setLeftUrls(Map<String, Object> maps, boolean showAll) {
 
+		try {
+			
+		
 		Kurl query = new Kurl();
 		query.setPage(1);
 		query.setPageCount(10000);
@@ -417,9 +412,77 @@ public class PublicController extends BaseController {
 		}
 
 		maps.put("menus", urls);
-
+		} catch (Exception e) {
+			System.out.println("setLeftUrls error:"+e.getMessage());
+		}
 	}
 
+	
+	
+
+	@RequestMapping(value = "/page/{url}")
+	public String p_btype(Map<String, Object> maps, HttpSession session, HttpServletRequest request,
+			@PathVariable(name = "url") String url) {
+
+		if (ConfigReader.getInstance().getProperty("debug", "false").equals("true")) {
+			logger.info("/**********/page/{url} visit************");
+			
+		}
+		
+		maps.putAll(sysService.getSysInfo());
+
+		List<MenuInfo> leftmenus = menuService.getLeftMenuTree(session, request);
+
+		maps.put("menus", leftmenus);
+
+		return "/page/" + url + "/index";
+	}
+
+	@RequestMapping(value = "/pown/{url}")
+	public String pown_btype(Map<String, Object> maps, @PathVariable(name = "url") String url) {
+
+		maps.putAll(sysService.getSysInfo());
+
+		return "/pown/" + url + "/main";
+	}
+	
+	@RequestMapping(value = "/page/burl/")
+	public String p_brul(Map<String, Object> maps, HttpSession session, HttpServletRequest request) {
+
+		// maps.putAll(sysService.getSysInfo());
+
+		// List<MenuInfo> leftmenus = menuService.getLeftMenuTree(session, request);
+		
+	
+		
+		setLeftUrls(maps, true);
+		if (ConfigReader.getInstance().getProperty("debug", "false").equals("true")) {
+			logger.info("/**********/page/burl/ visit************");
+			
+		}
+		//return "/page/burl/index_list";
+		return "/page/burl/index";
+		
+	}
+	
+	
+	@RequestMapping(value = "/page/burl2/")
+	public String p_brul2(Map<String, Object> maps, HttpSession session, HttpServletRequest request) {
+
+		// maps.putAll(sysService.getSysInfo());
+
+		// List<MenuInfo> leftmenus = menuService.getLeftMenuTree(session, request);
+		
+	
+		
+		setLeftUrls(maps, true);
+		if (ConfigReader.getInstance().getProperty("debug", "false").equals("true")) {
+			logger.info("/**********/page/burl2/ visit************");
+			
+		}
+		//return "/page/burl/index_list";
+		return "/page/burl2/test";
+	}
 	/**
 	 * 常用链接-公开
 	 * 
@@ -437,27 +500,6 @@ public class PublicController extends BaseController {
 
 		setLeftUrls(maps, false);
 		return "/pown/url/main";
-	}
-
-	@RequestMapping(value = "/page/{url}")
-	public String p_btype(Map<String, Object> maps, HttpSession session, HttpServletRequest request,
-			@PathVariable(name = "url") String url) {
-
-		maps.putAll(sysService.getSysInfo());
-
-		List<MenuInfo> leftmenus = menuService.getLeftMenuTree(session, request);
-
-		maps.put("menus", leftmenus);
-
-		return "/page/" + url + "/index";
-	}
-
-	@RequestMapping(value = "/pown/{url}")
-	public String pown_btype(Map<String, Object> maps, @PathVariable(name = "url") String url) {
-
-		maps.putAll(sysService.getSysInfo());
-
-		return "/pown/" + url + "/main";
 	}
 
 	@RequestMapping(value = "/public/cat/")

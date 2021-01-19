@@ -101,7 +101,7 @@ public class test {
 	
 	private static void testurl() {
 		
-			String url = "http://192.168.1.194:8081/kb/kg/kurl/searchurl?AccessKeyId=xxxxyyy&random=9aqgfgj4jok&sign_type=HMAC-SHA256&user_name=&sign=2622F28E51D157D2E646A08E77B2C1A78B66DB58A8F178E715392E244303CD0B";
+			String url = "http://www.256kb.cn/kurl/getInfoList.action";
 	//String url = "http://www.256kb.cn/kb/file/apk/202001/3afb1d2c-7e3b-470c-96ed-8cce29be1cd0_orign.jpg";
 
 			// String url =
@@ -123,7 +123,7 @@ public class test {
 					//String tpurl = url + "?data=" + URLEncoder.encode(j.toString());
 					
 
-					String heads = "JSESSIONID=676hkg13l28r6gqubamcsg5s; _ga=GA1.1.1047426687.1574055195; AdminCode=JUqn; _gid=GA1.1.1715164123.1577688926; _gat_gtag_UA_126706596_1=1";
+					String heads = "_ga=GA1.2.926292215.1597997477; __gads=ID=51c59c1c465f56b2-223876fefcc400df:T=1607056106:RT=1607056106:R:S=ALNI_MYsZAZDBkbFglkgbsRORcuhHmwX1g; Hm_lvt_0ddee5c5b53d5de3dea5699fd26da57a=1610680802,1610931416; _gid=GA1.2.593124553.1610931421; JSESSIONID=CE819D4BC01E2247DEA4D0629A659762; ktoken=eab3481c93384538b966c64aa1d15dcd";
 
 					// String heads="JSESSIONID=ef3xmfrnj1q1gj4yozh8x4ao;
 					// _ga=GA1.1.24081232.1577692939; _gid=GA1.1.1115868964.1577692939;
@@ -131,7 +131,7 @@ public class test {
 
 					HashMap<String, String> maps = new HashMap<String, String>();
 					maps.put("Cookie", heads);
-					maps.put("User-Agent", "Mozilla/5.0 baidu (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36");
+					maps.put("User-Agent", "Mozilla/5.0  (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36");
 					
 
 					responsedata = HttpSendPost.sendHttpJSONDataNoSSL(null, false, "", true, url, "", maps, null);
