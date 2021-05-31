@@ -525,7 +525,7 @@ function initReplayModel() {
 	            			authorhtml="<span class='author'>博主</span> ";
 	            			}
 	            		
-						var icon ="https://www.gravatar.com/avatar/"+item.icon+"?s=40&r=pg&d=identicon";//unescape(item.userid);
+						var icon ="//www.256kb.cn/gravatar/"+item.icon+"?s=40&r=pg&d=identicon";//unescape(item.userid);
 						
 						html+='<div class="row col-xs-12 ">'
 						 
@@ -570,7 +570,7 @@ function initReplayModel() {
 			             $.each(item.reback.reverse(),function(iindex,t)
 			            		 {
 			            	 
-			            		var ricon ="https://www.gravatar.com/avatar/"+t.icon+"?s=35&r=pg&d=identicon";//unescape(item.userid);
+			            		var ricon ="//www.256kb.cn/gravatar/"+t.icon+"?s=35&r=pg&d=identicon";//unescape(item.userid);
 			            		var authorhtmlReplay=" ";
 			            		var isauthorReplay=false;
 			            		
