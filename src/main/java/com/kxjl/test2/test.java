@@ -91,13 +91,64 @@ public class test {
 //		log2.debug("info2.debug");
 		
 		
-		testurl();
+		testurl2();
 		
 		
 		//getLinkSpider();
 		
 		//rebuildBlogRelation();
 	}
+	
+	private static void testurl2() {
+		
+		String url = "http://kg.256kb.cn/kb/kg/kurl/searchurl?AccessKeyId=test&random=t78iknnk9c9&sign_type=HMAC-SHA256&url_name=&sign=B9E5493358ACD17F65B8F15ADB133629286F3CAACC9C2ADDE3DD57AF7D441C6C";
+//String url = "http://www.256kb.cn/kb/file/apk/202001/3afb1d2c-7e3b-470c-96ed-8cce29be1cd0_orign.jpg";
+
+		// String url =
+		// "http://10.204.37.192:8080/gserver/version/getVersionInfo.action?type=2";
+
+		String data = "";
+
+		String responsedata = "";
+		try {
+
+			JSONObject j = new JSONObject();
+			j.put("id", "111");
+			j.put("state", "1");
+
+			int num = 2;
+			//for (int i = 0; i < num; i++) {
+				// responsedata = sendHttpData(,"");
+
+				//String tpurl = url + "?data=" + URLEncoder.encode(j.toString());
+				
+
+				String heads = "_ga=GA1.2.926292215.1597997477; __gads=ID=51c59c1c465f56b2-223876fefcc400df:T=1607056106:RT=1607056106:R:S=ALNI_MYsZAZDBkbFglkgbsRORcuhHmwX1g; Hm_lvt_0ddee5c5b53d5de3dea5699fd26da57a=1610680802,1610931416; _gid=GA1.2.593124553.1610931421; JSESSIONID=CE819D4BC01E2247DEA4D0629A659762; ktoken=eab3481c93384538b966c64aa1d15dcd";
+
+				// String heads="JSESSIONID=ef3xmfrnj1q1gj4yozh8x4ao;
+				// _ga=GA1.1.24081232.1577692939; _gid=GA1.1.1115868964.1577692939;
+				// _gat_gtag_UA_126706596_1=1";
+
+				HashMap<String, String> maps = new HashMap<String, String>();
+				maps.put("Cookie", heads);
+				maps.put("User-Agent", "Mozilla/5.0  (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36");
+				
+
+				responsedata = HttpSendPost.sendHttpJSONDataNoSSL(null, false, "", true, url, "", maps, null);
+
+				//System.out.println(i + "返回:" + responsedata);
+		//	}
+
+			//System.out.println("解密:" + out);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println(responsedata);
+}
+
 	
 	private static void testurl() {
 		

@@ -44,11 +44,11 @@
 							<div class="row  form-group margin-bottom-10">
 								<div class="text-warning row">
 									<div class="col-xs-6 col-sm-2 nopaddding   ">本站已关闭访客搜索<br>请输入授权码:</div>
-									<div class="col-xs-6 col-sm-2">
+									<div class="col-xs-6 col-sm-4">
 										<input id="gkey" name="gkey" class=" form-control"
 											type="text">
 									</div>
-									<div class="col-xs-12 col-sm-8 nopaddding padding-top-5   ">
+									<div class="col-xs-12 col-sm-6 nopaddding padding-top-5   ">
 										没有授权码?-->请猛击<a class="text-success" href="javascript:void(0);"
 											onclick="showApply()";>这里</a>
 									</div>
@@ -271,5 +271,7 @@
 
 
 	<script type="text/javascript" src="index.js"></script>
+	<script src="https://cdn.bootcss.com/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+	<script type="text/javascript" src="sha256.js"></script>
 </body>
 </html>

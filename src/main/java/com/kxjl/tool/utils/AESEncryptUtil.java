@@ -9,7 +9,19 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class AESEncryptUtil {
 	
-	public static String crypt(String content, String key) {
+	
+	
+	/**
+	 * 对应node解密
+	 * @param content
+	 * @return
+	 * @author:kxjl
+	 * @date 2021年7月2日
+	 */
+public static String cryptWidthNode(String content) {
+		
+	 String key="abcdabcdabcdabcd";
+		
 		String result = null;
 		try {
 			Cipher c = Cipher.getInstance("AES/ECB/PKCS5Padding");
@@ -22,6 +34,41 @@ public class AESEncryptUtil {
 		}
 		return result;
 	}
+	
+	public static String crypt(String content, String key) {
+		
+		
+		
+		String result = null;
+		try {
+			Cipher c = Cipher.getInstance("AES/ECB/PKCS5Padding");
+			//key = keyToHex(key);
+			SecretKeySpec k = new SecretKeySpec(key.getBytes(), 0, 16, "AES");
+			c.init(Cipher.ENCRYPT_MODE, k);
+			result = Base64.encode(c.doFinal(content.getBytes()));
+		} catch (Exception e) {
+			result = null;
+		}
+		return result;
+	}
+	
+	public static String decrypt(String input, String key) {
+		String result = null;
+		try {
+			byte[] content= Base64.decode(input);
+			Cipher c = Cipher.getInstance("AES/ECB/PKCS5Padding");
+			//key = keyToHex(key);
+			SecretKeySpec k = new SecretKeySpec(key.getBytes("utf-8"), 0, 16, "AES");
+			c.init(Cipher.DECRYPT_MODE, k);
+			System.out.println(c.doFinal(content));
+			result = new String(c.doFinal(content),"utf-8");
+		} catch (Exception e) {
+			result = null;
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	
 	/**
 	 * 解密

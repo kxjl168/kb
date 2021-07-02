@@ -329,9 +329,11 @@ public class PrerenderSeoService {
 		if (!prerenderServiceUrl.endsWith("/")) {
 			prerenderServiceUrl += "/";
 		}
-		
-		
-		return prerenderServiceUrl + url;
+//		
+//		
+//		return prerenderServiceUrl + url;
+		//不在经过prerender,直接返回detail页面，已改写  20210607 z
+		return url;
 	}
 
 	/**

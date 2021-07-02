@@ -108,6 +108,30 @@ function applyKey() {
 	});
 };
 
+
+
+//DES加密
+function encryptByDES(message, key){
+  var keyHex = CryptoJS.enc.Utf8.parse(key);
+  var encrypted = CryptoJS.DES.encrypt(message, keyHex, {
+      mode: CryptoJS.mode.ECB,
+      padding: CryptoJS.pad.Pkcs7
+  });
+  return encrypted.ciphertext.toString();
+}
+//DES解密
+function decryptByDES(ciphertext, key){
+  var keyHex = CryptoJS.enc.Utf8.parse(key);
+  var decrypted = CryptoJS.DES.decrypt({
+      ciphertext: CryptoJS.enc.Hex.parse(ciphertext)
+  }, keyHex, {
+      mode: CryptoJS.mode.ECB,
+      padding: CryptoJS.pad.Pkcs7
+  });
+  var result_value = decrypted.toString(CryptoJS.enc.Utf8);
+  return result_value;
+}
+
 function init() {
 
 	$("#btnApplyitem").click(function() {
@@ -151,6 +175,8 @@ function init() {
 						} else {
 							// msg(url);
 							$scope.stopDefault(e);
+							
+							
 							$scope.search(url);
 						}
 
@@ -235,7 +261,15 @@ function init() {
 					if (typeof (url) == "undefined")
 						obj.keyword = $scope.kwd;
 					else
-						obj.url = url;
+						{
+						
+
+						// var signurl =encryptByDES( url,"kxjl");
+						 
+						 obj.url = signurl;
+						 
+						}
+						
 
 					SZUMWS(http + "search/dosearch.action",
 							JSON.stringify(obj), function succsess(json) {
@@ -271,7 +305,7 @@ function init() {
 										$("#srzt").find("#footcnt").addClass(
 												"hide");
 										$("#srzt").find(".hdtb-msb").addClass(
-												"hide");
+												"hide"); 
 										$("#srzt").find("#hdtb-msb").children()
 												.eq(1).hide();
 

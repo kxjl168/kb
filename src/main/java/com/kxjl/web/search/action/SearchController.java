@@ -60,6 +60,7 @@ import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.tool.prerenderio.PrerenderConfig;
 import com.kxjl.tool.prerenderio.PrerenderSeoService;
 import com.kxjl.tool.sendmail.MailUtil;
+import com.kxjl.tool.utils.AESEncryptUtil;
 import com.kxjl.tool.utils.JEscape;
 import com.kxjl.tool.utils.JsonUtil;
 import com.kxjl.tool.utils.UUIDUtil;
@@ -92,17 +93,28 @@ public class SearchController extends BaseController {
 		return view;
 	}
 
-	String preurl = "http://256kb.cn:13333/";
+	String preurl = "http://google.256kb.cn/";
 	// String searengin = "https://www.baidu.com";
 	String searengin = "https://www.baidu.com";
 
+	/**
+	 * 处理翻页或者直接网页访问
+	 * @param url
+	 * @return
+	 * @author:kxjl
+	 * @date 2021年7月2日
+	 */
 	private String geturl(String url) {
 		String desturl = "";
 		if (url.startsWith("htt")) {
 
-			desturl = preurl + url;
-		} else
-			desturl = preurl + searengin + url;
+			
+			//加密 url 防墙！
+			//AESEncryptUtil.crypt(content, key)
+			String aesurl=AESEncryptUtil.cryptWidthNode(url);
+			desturl = preurl +"/gurl?q="+ aesurl;
+		} else //翻页
+			desturl = preurl  + url;
 
 		return desturl;
 	}
@@ -189,8 +201,11 @@ public class SearchController extends BaseController {
 	}
 
 	public CloseableHttpClient getHttpClient() {
-		HttpClientBuilder builder = HttpClients.custom().setConnectionManager(new PoolingHttpClientConnectionManager())
-				.disableRedirectHandling();
+		HttpClientBuilder builder = HttpClients.custom()
+				.setConnectionManager(new PoolingHttpClientConnectionManager())
+				.disableAutomaticRetries()
+				
+			.setMaxConnTotal(500).setMaxConnPerRoute(10); 
 
 		return builder.build();
 	}
@@ -201,11 +216,28 @@ public class SearchController extends BaseController {
 		CloseableHttpResponse prerenderServerResponse = null;
 		try {
 			final String apiUrl = url;// getFullUrl(request);
-			log.trace(String.format(" send request to:%s", apiUrl));
+			log.info(String.format(" send request to:%s", apiUrl));
 			HttpGet getMethod = new HttpGet(apiUrl);
+			
+			
+			   RequestConfig defaultRequestConfig = RequestConfig.custom()
+	                     .setSocketTimeout(60000)
+	                     .setConnectTimeout(60000)
+	                     
+	                     
+	                     .setConnectionRequestTimeout(60000)
+	                     .build();
+			   
+			   getMethod.setConfig(defaultRequestConfig);
+	
+			   getMethod.setHeader("accept", "*/*");
+			  // getMethod.setHeader("Connection", "close");
+			  
 			// HttpPost getMethod = new HttpPost(apiUrl);
 			// copyRequestHeaders(request, getMethod);
 			// withPrerenderToken(getMethod);
+			   
+		
 
 			prerenderServerResponse = httpClient.execute(getMethod);
 			response.setStatus(prerenderServerResponse.getStatusLine().getStatusCode());
@@ -216,7 +248,7 @@ public class SearchController extends BaseController {
 			if (status == 307 || status == 302 || status == 301 || status == 303) {
 				String redirectURl = "";
 				for (Header head : prerenderServerResponse.getAllHeaders()) {
-					if (head.getName().equals("Location")) {
+					if (head.getName().equals("Location")||head.getName().equals("location")) {
 						redirectURl = head.getValue();
 						break;
 					}
@@ -227,9 +259,14 @@ public class SearchController extends BaseController {
 				return proxyPrerenderedPageResponse(desturl, request, response);
 
 			} else
+			{
 				html = getResponseHtml(prerenderServerResponse);
+				
+				HttpEntity resEntity = prerenderServerResponse.getEntity();
+				EntityUtils.consume(resEntity);
+			}
 		} catch (Exception e) {
-			log.trace(e.getMessage());
+			log.error(e.getMessage());
 			// responseEntity(html, response);
 			// return true;
 		} finally {
@@ -250,6 +287,9 @@ public class SearchController extends BaseController {
 
 	private String getResponseHtml(HttpResponse proxyResponse) throws IOException {
 		HttpEntity entity = proxyResponse.getEntity();
+		
+		
+		
 		return entity != null ? EntityUtils.toString(entity) : "";
 	}
 
@@ -403,25 +443,7 @@ public class SearchController extends BaseController {
 				 searengin=engin;
 			 }
 			 
-			 
-
-			preurl = ConfigReader.getInstance().getProperty("preurl", preurl);
-
-			httpClient = getHttpClient();
-			String desturl = "";
-			if (data != null && !data.equals("")) {
-				if (searengin.contains("baidu.com"))
-					desturl = preurl + searengin + "/s?ie=utf-8&wd=" + URLEncoder.encode(data, "utf-8");
-				else if (searengin.contains("google"))
-					desturl = preurl + searengin + "/search?q=" + URLEncoder.encode(data, "utf-8");
-
-				// 记录搜索关键词
-				saveStaticInfo(request, StasticTypeOne.GSearch.getDesc(), "", data+" key:"+key);
-
-				if(engin==null||engin.equals(""))
-				{//默认检查
-					
-				// 监测是否登录
+			// 监测是否登录
 				// 190728
 				int cansearch = checkCansearch(request,key);
 				if (cansearch<0) {
@@ -436,12 +458,41 @@ public class SearchController extends BaseController {
 					JsonUtil.responseOutWithJson(response, rst);
 					return "";
 				}
+			 
+			 
+
+			preurl = ConfigReader.getInstance().getProperty("preurl", preurl);
+
+			httpClient = getHttpClient();
+			String desturl = "";
+			if (data != null && !data.equals("")) {
+				if (searengin.contains("baidu.com"))
+					desturl = preurl + searengin + "/s?ie=utf-8&wd=" + URLEncoder.encode(data, "utf-8");
+				else if (searengin.contains("google"))
+					desturl = preurl + searengin + "/search?q=" + URLEncoder.encode(data, "utf-8");
+				else //请求 后台 node express ->服务器本地3002/search prerender google
+				{
+					String aeskeystr=AESEncryptUtil.cryptWidthNode( URLEncoder.encode(data, "utf-8"));
+					desturl = preurl  + "/search?q=" +aeskeystr;
+				}
+					
+
+				// 记录搜索关键词
+				saveStaticInfo(request, StasticTypeOne.GSearch.getDesc(), "", data+" key:"+key);
+
+				if(engin==null||engin.equals(""))
+				{//默认检查
+					
+				
 				}
 
 			} else if (url != null && !url.equals("")) {
 				//后续 翻页链接
 				// 替换自动附加的本站链接前缀
 				url = url.replace(ConfigReader.getInstance().getProperty("domainSearch", request.getHeader("Host")), "");
+				
+				//
+				
 				desturl = geturl(url);
 			}
 

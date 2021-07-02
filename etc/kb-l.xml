@@ -133,14 +133,14 @@
 
 	<ConfigItem>
 		<ConfigName>searchEngin</ConfigName>
-		<ConfigValue>https://www.baidu.com</ConfigValue>
+		<ConfigValue>own</ConfigValue>
 		<ConfigDesc></ConfigDesc>
 	</ConfigItem>
 
 
 	<ConfigItem>
 		<ConfigName>preurl</ConfigName>
-		<ConfigValue>http://127.0.0.1:13333/</ConfigValue>
+		<ConfigValue>http://www.256kb.cn:3002</ConfigValue>
 		<ConfigDesc></ConfigDesc>
 	</ConfigItem>
 
@@ -214,7 +214,7 @@
 
 <ConfigItem>
 		<ConfigName>domainSearch</ConfigName>
-		<ConfigValue>http://127.0.0.1:8001</ConfigValue>
+		<ConfigValue>http://127.0.0.1:8081</ConfigValue>
 		<ConfigDesc>查询域名前缀</ConfigDesc>
 	</ConfigItem>
 
@@ -262,6 +262,7 @@
 		<ConfigValue>true</ConfigValue>
 		<ConfigDesc>总是生成html</ConfigDesc>
 	</ConfigItem>
+
 
 <ConfigItem>
 		<ConfigName>rssfreshAll</ConfigName>
