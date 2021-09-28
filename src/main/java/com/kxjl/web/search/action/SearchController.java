@@ -93,7 +93,10 @@ public class SearchController extends BaseController {
 		return view;
 	}
 
-	String preurl = "http://google.256kb.cn/";
+	//express ,香港服务器本地-》prerender
+	String expressurl = "http://google.256kb.cn:3002/";
+	//香港服务器prerender
+	String prerenderurl = "http://google.256kb.cn:13333/";
 	// String searengin = "https://www.baidu.com";
 	String searengin = "https://www.baidu.com";
 
@@ -112,9 +115,9 @@ public class SearchController extends BaseController {
 			//加密 url 防墙！
 			//AESEncryptUtil.crypt(content, key)
 			String aesurl=AESEncryptUtil.cryptWidthNode(url);
-			desturl = preurl +"/gurl?q="+ aesurl;
+			desturl = expressurl +"/gurl?q="+ aesurl;
 		} else //翻页
-			desturl = preurl  + url;
+			desturl = expressurl  + url;
 
 		return desturl;
 	}
@@ -415,6 +418,80 @@ public class SearchController extends BaseController {
 	
 	
 	/**
+	 * 除google外的搜索
+	 * @param engin
+	 * @param data
+	 * @param key
+	 * @param url
+	 * @param request
+	 * @param response
+	 * @return
+	 * @author:kxjl
+	 * @date 2020年10月15日
+	 */
+	public String normalrealSearch(String engin,String data,String key,String url,HttpServletRequest request, HttpServletResponse response) {
+		JSONObject jsonOut = new JSONObject();
+		String rst = "";
+		try {
+
+			
+			// searengin="https://www.google.co.jp";
+			 String searengin = "https://www.baidu.com";
+
+			 searengin = ConfigReader.getInstance().getProperty("searchEngin", searengin);
+			 
+			 if(engin!=null&&!engin.equals(""))
+			 {
+				 //参数输入
+				 searengin=engin;
+			 }
+
+			 prerenderurl = ConfigReader.getInstance().getProperty("prerenderurl", prerenderurl);
+
+			httpClient = getHttpClient();
+			String desturl = "";
+			if (data != null && !data.equals("")) {
+				if (searengin.contains("baidu.com"))
+					desturl = prerenderurl + searengin + "/s?ie=utf-8&wd=" + URLEncoder.encode(data, "utf-8");
+				
+					
+
+				// 记录搜索关键词
+				saveStaticInfo(request, StasticTypeOne.GSearch.getDesc(), "", data+" kg blog search prerender ");
+
+			
+			}
+
+			if (!desturl.equals("")) {
+				String htmldata = proxyPrerenderedPageResponse(desturl, request, response);
+
+				//200204 html前缀问题
+				if(htmldata.startsWith("html"))
+				{
+					htmldata=htmldata.substring(4);
+				}
+
+				jsonOut.put("ResponseCode", "200");
+				jsonOut.put("ResponseMsg", "");
+
+				jsonOut.put("html", htmldata);
+			} else {
+				jsonOut.put("ResponseCode", "201");
+				jsonOut.put("ResponseMsg", "请输入查询关键字");
+
+			}
+
+		} catch (Exception e) {
+
+		} finally {
+			closeQuietly(httpClient);
+		}
+		rst = jsonOut.toString();
+		return rst;
+	}
+	
+	
+	/**
 	 * 
 	 * @param engin
 	 * @param data
@@ -461,19 +538,19 @@ public class SearchController extends BaseController {
 			 
 			 
 
-			preurl = ConfigReader.getInstance().getProperty("preurl", preurl);
+			expressurl = ConfigReader.getInstance().getProperty("preurl", expressurl);
 
 			httpClient = getHttpClient();
 			String desturl = "";
 			if (data != null && !data.equals("")) {
 				if (searengin.contains("baidu.com"))
-					desturl = preurl + searengin + "/s?ie=utf-8&wd=" + URLEncoder.encode(data, "utf-8");
+					desturl = expressurl + searengin + "/s?ie=utf-8&wd=" + URLEncoder.encode(data, "utf-8");
 				else if (searengin.contains("google"))
-					desturl = preurl + searengin + "/search?q=" + URLEncoder.encode(data, "utf-8");
+					desturl = expressurl + searengin + "/search?q=" + URLEncoder.encode(data, "utf-8");
 				else //请求 后台 node express ->服务器本地3002/search prerender google
 				{
 					String aeskeystr=AESEncryptUtil.cryptWidthNode( URLEncoder.encode(data, "utf-8"));
-					desturl = preurl  + "/search?q=" +aeskeystr;
+					desturl = expressurl  + "/search?q=" +aeskeystr;
 				}
 					
 

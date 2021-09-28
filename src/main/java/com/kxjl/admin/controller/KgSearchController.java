@@ -226,7 +226,7 @@ public class KgSearchController {
 
 		WZResponseEntity<String> rst = new WZResponseEntity<>();
 
-		String data = searchController.realSearch("https://www.baidu.com", keyword, key, url, request, response);
+		String data = searchController.normalrealSearch("https://www.baidu.com", keyword, key, url, request, response);
 
 		rst.setIsSuccess(true);
 		rst.setBody(data);
